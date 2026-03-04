@@ -1,0 +1,11 @@
+{
+  "name": "client-strictfood",
+  "org": "neurolia-agency",
+  "client": "StrictFood",
+  "type": "client",
+  "status": "active",
+  "description": "Formulaires et stratégie nutrition StrictFood",
+  "stack": ["HTML", "CSS", "JavaScript"],
+  "access": "core-dev",
+  "kpi": "Formulaires complétés"
+}

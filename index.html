@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audit Plateforme de Marque — StrictFood</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #050810;
+            --bg-surface: #0A0F1A;
+            --bg-card: #111827;
+            --text-primary: #F5F5F5;
+            --text-secondary: #D4D4D4;
+            --text-muted: #737373;
+            --accent: #C45C3B;
+            --border: #1A1F2E;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* HEADER */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 60px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 30px;
+        }
+
+        .logo-container img {
+            max-height: 40px; /* Taille sobre et professionnelle */
+            display: block;
+        }
+
+        .doc-info {
+            text-align: right;
+        }
+
+        .doc-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .client-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        /* INTRO */
+        .intro-box {
+            background-color: var(--bg-surface);
+            padding: 30px;
+            border-radius: 4px;
+            border-left: 4px solid var(--accent);
+            margin-bottom: 50px;
+        }
+
+        .intro-box p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* SECTIONS */
+        section {
+            margin-bottom: 60px;
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 1.25rem;
+            background-color: var(--accent);
+            margin-right: 15px;
+        }
+
+        .section-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            margin-left: 20px;
+            font-style: italic;
+        }
+
+        /* QUESTIONS */
+        .question-block {
+            margin-bottom: 35px;
+            background-color: var(--bg-card);
+            padding: 25px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+        }
+
+        .question-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .question-context {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .input-area {
+            width: 100%;
+            min-height: 80px;
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            color: var(--text-primary);
+            padding: 15px;
+            font-family: inherit;
+            resize: vertical;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .text-input {
+            min-height: auto;
+            height: 46px;
+            resize: none;
+        }
+
+        .input-area:focus {
+            border-color: var(--accent);
+        }
+
+        .input-area::placeholder {
+            color: #525252;
+            font-style: italic;
+            font-size: 0.85rem;
+        }
+
+        /* Mise à jour pour l'alignement des champs */
+        .split-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .split-2 > div {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Pousse la zone de texte vers le bas pour l'aligner avec sa voisine */
+        .split-2 .input-area {
+            margin-top: auto; 
+        }
+
+        /* FOOTER */
+        footer {
+            margin-top: 80px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .form-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .submit-btn {
+            background-color: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            padding: 12px 18px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .submit-btn:hover {
+            opacity: 0.9;
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.65;
+            cursor: wait;
+        }
+
+        .status-message {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+
+        .status-message.success {
+            color: #71d39d;
+        }
+
+        .status-message.error {
+            color: #ff8f8f;
+        }
+
+        /* PRINT STYLES (Ink Saver) */
+        @media print {
+            body {
+                background-color: #fff;
+                color: #000;
+            }
+            .container {
+                max-width: 100%;
+                padding: 0;
+            }
+            header {
+                border-bottom: 2px solid #000;
+            }
+            .doc-title {
+                color: #000;
+            }
+            .intro-box {
+                background-color: #f5f5f5;
+                border-left-color: #000;
+                color: #000;
+            }
+            .intro-box p { color: #333; }
+            h2::before { background-color: #000; }
+            .question-block {
+                background-color: #fff;
+                border: none;
+                padding: 0;
+                margin-bottom: 30px;
+                page-break-inside: avoid;
+            }
+            .question-title { color: #000; }
+            .question-context { color: #555; }
+            .input-area {
+                background-color: #fff;
+                border: 1px solid #ccc;
+                border-bottom: 1px solid #000;
+                min-height: 100px;
+            }
+            .input-area::placeholder {
+                color: #999;
+            }
+            .form-actions {
+                display: none;
+            }
+            footer { border-top-color: #000; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="logo-container">
+            <img src="neurolia.png" alt="Neurolia Logo">
+        </div>
+        <div class="doc-info">
+            <div class="doc-title">Plateforme de Marque</div>
+            <div class="client-name">Projet StrictFood</div>
+        </div>
+    </header>
+
+    <div class="intro-box">
+        <p><strong>Objectif :</strong> Ce document est la fondation de votre future marque. Il servira de référence pour le design, le site web et la communication. Prenez le temps de répondre avec authenticité.</p>
+    </div>
+
+    <form id="brand-form" method="POST" target="submission-frame" accept-charset="UTF-8">
+        <section>
+            <h2>Informations de rendez-vous</h2>
+            <div class="section-subtitle">Champs opérationnels pour le suivi commercial.</div>
+
+            <div class="question-block">
+                <div class="split-2">
+                    <div>
+                        <span class="question-context"><strong>Commercial</strong></span>
+                        <input class="input-area text-input" type="text" name="commercial_name" placeholder="Nom du commercial" required>
+                    </div>
+                    <div>
+                        <span class="question-context"><strong>Entrepreneur</strong></span>
+                        <input class="input-area text-input" type="text" name="entrepreneur_name" placeholder="Nom de l'entrepreneur" required>
+                    </div>
+                </div>
+                <div style="margin-top: 20px;">
+                    <span class="question-context"><strong>Entreprise</strong></span>
+                    <input class="input-area text-input" type="text" name="company_name" placeholder="Nom de l'entreprise" required>
+                </div>
+            </div>
+        </section>
+        <input type="hidden" name="submitted_at" id="submitted-at">
+
+    <!-- SECTION I -->
+    <section>
+        <h2>I. Le "Pourquoi" (ADN & Cœur)</h2>
+        <div class="section-subtitle">L'attachement émotionnel se joue ici.</div>
+
+        <div class="question-block">
+            <div class="question-title">1. La Colère Fondatrice</div>
+            <span class="question-context">Quel problème ou injustice dans la restauration rapide actuelle vous a poussé à créer StrictFood ?</span>
+            <textarea class="input-area" name="q1" placeholder="Ex: 'Je ne supporte pas que manger sain coûte 15€ et n'ait aucun goût. Les chaînes industrielles nous mentent sur la qualité...'"></textarea>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">2. L'Origine du Nom</div>
+            <span class="question-context">Pourquoi "Strict" ? Comment contrebalancer le côté austère ?</span>
+            <textarea class="input-area" name="q2" placeholder="Ex: 'Strict sur la qualité, mais cool sur l'ambiance. On veut montrer que la discipline alimentaire n'est pas une punition.'"></textarea>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">3. La Mission</div>
+            <span class="question-context">Si StrictFood disparaissait demain, qu'est-ce qui manquerait au monde ?</span>
+            <textarea class="input-area" name="q3" placeholder="Ex: 'Les sportifs du quartier n'auraient plus aucun endroit de confiance pour manger. Il n'y aurait plus d'alternative locale aux chaînes.'"></textarea>
+        </div>
+    </section>
+
+    <!-- SECTION II -->
+    <section>
+        <h2>II. Le Héros (Votre Client)</h2>
+        <div class="section-subtitle">Dans une bonne histoire, le héros n'est pas la marque, c'est le client.</div>
+
+        <div class="question-block">
+            <div class="question-title">4. L'Enfer vs Le Paradis</div>
+            <div class="split-2">
+                <div>
+                    <span class="question-context"><strong>Avant (Enfer) :</strong> Comment se sent-il à 12h30 aujourd'hui ?</span>
+                    <textarea class="input-area" name="q4_before" placeholder="Ex: 'Il a faim, il est stressé par le temps, il culpabilise d'avance d'aller au McDo car il sait qu'il aura le coup de barre à 14h.'"></textarea>
+                </div>
+                <div>
+                    <span class="question-context"><strong>Après (Paradis) :</strong> Comment se sent-il après avoir mangé StrictFood ?</span>
+                    <textarea class="input-area" name="q4_after" placeholder="Ex: 'Il est rassasié mais léger. Il a de l'énergie pour bosser. Il est fier de s'être fait du bien.'"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">5. L'Ennemi Commun</div>
+            <span class="question-context">Contre quoi aidez-vous votre client à se battre ? (La malbouffe, le manque de temps...)</span>
+            <textarea class="input-area" name="q5" placeholder="Ex: 'La malbouffe industrielle, les additifs cachés, la fatigue chronique de l'après-midi, la complexité de cuisiner soi-même.'"></textarea>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">6. La Peur Secrète</div>
+            <span class="question-context">Quelle est la principale objection ou peur d'un nouveau client ?</span>
+            <textarea class="input-area" name="q6" placeholder="Ex: 'J'ai peur d'avoir encore faim après', 'J'ai peur que ce soit fade', 'Est-ce que ça vaut vraiment ce prix-là ?'"></textarea>
+        </div>
+    </section>
+
+    <!-- SECTION III -->
+    <section>
+        <h2>III. Le Guide (Votre Offre)</h2>
+        <div class="section-subtitle">Pourquoi vous et pas un autre ?</div>
+
+        <div class="question-block">
+            <div class="question-title">7. La Preuve d'Autorité</div>
+            <span class="question-context">Vos 3 partenaires clés. Pourquoi eux ?</span>
+            <textarea class="input-area" name="q7" placeholder="Ex: 'Boulangerie [Nom] pour le pain (farine locale). Boucher [Nom] pour le steak (haché minute). On les a choisis pour leur traçabilité.'"></textarea>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">8. La "Secret Sauce"</div>
+            <span class="question-context">Ce que vous faites que vos concurrents ne feront jamais.</span>
+            <textarea class="input-area" name="q8" placeholder="Ex: 'On épluche tous nos légumes le matin même. On refuse les sauces industrielles. On cuit à la minute devant le client.'"></textarea>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">9. Le Rituel</div>
+            <span class="question-context">Quelle expérience unique vivez-vous sur place que le digital doit retranscrire ?</span>
+            <textarea class="input-area" name="q9" placeholder="Ex: 'On appelle le client par son prénom. La cuisine ouverte permet de voir la flamme. L'odeur de pain chaud en entrant.'"></textarea>
+        </div>
+    </section>
+
+    <!-- SECTION IV -->
+    <section>
+        <h2>IV. Personnalité & Ton</h2>
+        <div class="section-subtitle">Si StrictFood était une personne.</div>
+
+        <div class="question-block">
+            <div class="question-title">10. Les 3 Adjectifs</div>
+            <span class="question-context">Ex: Exigeant, Encouragent, Brut...</span>
+            <textarea class="input-area" name="q10" placeholder="Ex: 'Transparent, Energique, Brut. Un peu comme un coach sportif bienveillant mais ferme.'"></textarea>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">11. L'Anti-Portrait</div>
+            <span class="question-context">Ce que StrictFood n'est ABSOLUMENT pas.</span>
+            <textarea class="input-area" name="q11" placeholder="Ex: 'On n'est pas un bar à salade pour régime. On n'est pas moralisateur. On n'est pas élitiste/bobo.'"></textarea>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">12. Le Ton Verbal</div>
+            <span class="question-context">Vouvoiement/Tutoiement ? Vocabulaire technique vs gourmand ?</span>
+            <textarea class="input-area" name="q12" placeholder="Ex: 'Tutoiement respectueux. On utilise des mots comme Protéines, Fuel, Performance, mais aussi Plaisir, Goût, Vrai.'"></textarea>
+        </div>
+    </section>
+
+    <!-- SECTION V -->
+    <section>
+        <h2>V. Univers Visuel</h2>
+        <div class="section-subtitle">Validation de l'approche "Dark Food Premium".</div>
+
+        <div class="question-block">
+            <div class="question-title">13. L'Ambiance Visuelle</div>
+            <span class="question-context">Si c'était une marque de vêtements ou de voiture ?</span>
+            <textarea class="input-area" name="q13" placeholder="Ex: 'Une marque comme Under Armour ou Nike Pro. Une voiture type Audi noire matte (sobre, puissant, technique).'"></textarea>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">14. Les Couleurs & Matières</div>
+            <span class="question-context">Matières préférées ? Couleurs interdites ?</span>
+            <textarea class="input-area" name="q14" placeholder="Ex: 'J'aime l'Ardoise, le Bois brûlé, l'Inox. Je déteste le vert pomme cliché du bio et le rose.'"></textarea>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">15. Le curseur "Food Porn"</div>
+            <span class="question-context">Note de 1 à 10 : Baveux/Gourmand vs Clinique/Propre ?</span>
+            <textarea class="input-area" name="q15" placeholder="Ex: '8/10. Il faut que ça donne faim. Le fromage doit couler, la viande doit briller. Pas de photos cliniques type hôpital.'"></textarea>
+        </div>
+    </section>
+
+    <!-- SECTION VI -->
+    <section>
+        <h2>VI. Vision</h2>
+        <div class="section-subtitle">Construire pour scaler.</div>
+
+        <div class="question-block">
+            <div class="question-title">16. L'Ambition Franchise</div>
+            <span class="question-context">Dans 5 ans, à quoi ressemble le réseau ?</span>
+            <textarea class="input-area" name="q16" placeholder="Ex: '10 points de vente en région. Un modèle petites surfaces très rentables. Peut-être une gamme en supermarché ?'"></textarea>
+        </div>
+
+        <div class="question-block">
+            <div class="question-title">17. Le Mantra</div>
+            <span class="question-context">Une phrase à imprimer sur les sacs de livraison.</span>
+            <textarea class="input-area" name="q17" placeholder="Ex: 'Mangez comme vous vous entraînez.' ou 'Le cheat meal qui n'en est pas un.'"></textarea>
+        </div>
+    </section>
+
+    <div class="form-actions">
+        <button type="submit" class="submit-btn" id="submit-btn">Transmettre</button>
+        <div id="status-message" class="status-message"></div>
+    </div>
+    </form>
+
+    <footer>
+        <div>Neurolia — Agence de design web & automatisation</div>
+        <div>Document confidentiel</div>
+    </footer>
+</div>
+<iframe name="submission-frame" id="submission-frame" style="display:none;"></iframe>
+
+<script>
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbz54UozEPl3ByGtY7WvbOMkS_5AVZZJU4VCHU9NJC-ZIQjxm6BCgLwGYyOrRjXHnvrr/exec";
+
+    const form = document.getElementById("brand-form");
+    const submitBtn = document.getElementById("submit-btn");
+    const statusMessage = document.getElementById("status-message");
+    const submissionFrame = document.getElementById("submission-frame");
+    const submittedAtInput = document.getElementById("submitted-at");
+    let pendingSubmission = false;
+    let submissionTimeoutId = null;
+
+    form.action = WEB_APP_URL;
+
+    form.addEventListener("submit", (event) => {
+        if (!WEB_APP_URL) {
+            event.preventDefault();
+            statusMessage.className = "status-message error";
+            statusMessage.textContent = "Ajoute ton URL Apps Script dans WEB_APP_URL pour activer l'enregistrement.";
+            return;
+        }
+
+        pendingSubmission = true;
+        submittedAtInput.value = new Date().toISOString();
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Envoi...";
+        statusMessage.className = "status-message";
+        statusMessage.textContent = "Transmission en cours...";
+
+        if (submissionTimeoutId) {
+            clearTimeout(submissionTimeoutId);
+        }
+        submissionTimeoutId = setTimeout(() => {
+            if (!pendingSubmission) {
+                return;
+            }
+            pendingSubmission = false;
+            statusMessage.className = "status-message error";
+            statusMessage.textContent = "Une erreur est survenue. Veuillez réessayer.";
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Transmettre";
+        }, 12000);
+    });
+
+    submissionFrame.addEventListener("load", () => {
+        if (!pendingSubmission) {
+            return;
+        }
+        pendingSubmission = false;
+        if (submissionTimeoutId) {
+            clearTimeout(submissionTimeoutId);
+            submissionTimeoutId = null;
+        }
+        statusMessage.className = "status-message success";
+        statusMessage.textContent = "Vos réponses ont bien été transmises. Merci.";
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Transmettre";
+        form.reset();
+    });
+</script>
+
+</body>
+</html>

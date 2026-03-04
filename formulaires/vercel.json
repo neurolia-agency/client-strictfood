@@ -1,0 +1,7 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/devis-v2" },
+    { "source": "/devis", "destination": "/devis-v2" }
+  ]
+}

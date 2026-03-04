@@ -1,0 +1,1638 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Devis StrictFood | Neurolia</title>
+  <style>
+    /* ========================================
+       NEUROLIA — Devis Client
+       Usage : Cmd+P → PDF (marges 15mm)
+       ======================================== */
+
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Serif+Display&display=swap');
+
+    :root {
+      --accent: #C45C3B;
+      --accent-light: #F5DDD4;
+      --accent-bg: #FBF0EC;
+      --text: #1a1a1a;
+      --text-muted: #6c757d;
+      --text-light: #999;
+      --border: #e5e7eb;
+      --bg-table-header: #f8f9fa;
+      --bg-callout: #FBF0EC;
+      --bg-callout-strong: #F5DDD4;
+    }
+
+    /* FIX: Force le fond blanc pour éviter le noir du mode sombre lors de l'export PDF */
+    html {
+      background-color: white;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      /* FIX: Force l'impression des couleurs d'arrière-plan (Chrome/Safari/Edge/Firefox) */
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text);
+      background-color: white; /* Sécurité supplémentaire */
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 60px 40px;
+    }
+
+    /* ── HEADER ── */
+
+    .doc-header {
+      margin-bottom: 48px;
+    }
+
+    .doc-logo {
+      margin-bottom: 32px;
+    }
+
+    .doc-logo svg {
+      height: 18px;
+      width: auto;
+    }
+
+    .doc-type {
+      font-size: 12px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .doc-title {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 34px;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 32px;
+      color: var(--text);
+    }
+
+    .doc-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 16px 32px;
+      padding: 20px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .meta-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .meta-value {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    /* ── SECTIONS ── */
+
+    .section {
+      margin-bottom: 48px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .section-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: var(--accent);
+      color: white;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--text);
+    }
+
+    h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin: 28px 0 10px;
+      color: var(--text);
+    }
+
+    p {
+      margin-bottom: 14px;
+    }
+
+    /* ── TABLES ── */
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 8px;
+    }
+
+    thead th {
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-align: left;
+      padding: 10px 14px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    tbody td {
+      padding: 14px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tbody td:last-child {
+      white-space: nowrap;
+    }
+
+    tr.row-total td {
+      font-weight: 600;
+      border-top: 2px solid var(--text);
+      border-bottom: none;
+    }
+
+    tr.row-subtotal td {
+      font-weight: 500;
+      border-top: 1px solid var(--text-muted);
+      background: var(--bg-table-header);
+    }
+
+    td strong {
+      font-weight: 600;
+    }
+
+    td .detail {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+
+    /* ── CALLOUTS ── */
+
+    .callout {
+      background: var(--bg-callout);
+      border-left: 3px solid var(--accent);
+      padding: 16px 20px;
+      margin: 20px 0;
+      border-radius: 0 4px 4px 0;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .callout-strong {
+      background: var(--bg-callout-strong);
+      border-left: 4px solid var(--accent);
+      padding: 18px 22px;
+      font-weight: 500;
+    }
+
+    /* ── HIGHLIGHT BOXES ── */
+
+    .highlights {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .highlights--three {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .highlight-box {
+      background: var(--bg-table-header);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 20px 24px;
+      text-align: center;
+    }
+
+    .highlight-box--accent {
+      background: var(--accent-bg);
+      border-color: var(--accent-light);
+    }
+
+    .highlight-value {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .highlight-value--accent {
+      color: var(--accent);
+    }
+
+    .highlight-label {
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    /* ── LISTES ── */
+
+    ul, ol {
+      margin: 12px 0 20px;
+      padding-left: 24px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    /* ── OFFERT TAG ── */
+
+    .tag-offert {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 3px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    /* ── CONDITIONS LIST ── */
+
+    .conditions-list {
+      margin: 16px 0 24px;
+    }
+
+    .condition-item {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .condition-item:last-child {
+      border-bottom: none;
+    }
+
+    .condition-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .condition-value {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── SIGNATURE ── */
+
+    .signature-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+
+    .signature-party {
+      font-size: 14px;
+    }
+
+    .signature-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .signature-name {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .signature-role {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-bottom: 32px;
+    }
+
+    .signature-line {
+      border-top: 1px solid var(--border);
+      padding-top: 8px;
+      font-size: 12px;
+      color: var(--text-light);
+    }
+
+    /* ── FOOTER ── */
+
+    .doc-footer {
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .doc-footer svg {
+      height: 14px;
+      width: auto;
+      opacity: 0.4;
+    }
+
+    /* ── INTERACTIVE FORM ── */
+
+    .form-acceptance {
+      background: white;
+      border: 2px solid var(--accent-light);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 32px 36px;
+      margin: 28px 0;
+      position: relative;
+    }
+
+    .form-acceptance-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .form-acceptance-header svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--accent);
+      fill: none;
+      flex-shrink: 0;
+    }
+
+    .form-acceptance-header span {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 18px;
+      color: var(--text);
+    }
+
+    .form-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 0 0 24px;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-field label {
+      font-size: 11px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .form-field input {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      padding: 11px 14px;
+      border: 1.5px solid #c5c8cd;
+      border-radius: 6px;
+      background: white;
+      color: var(--text);
+      outline: none;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+
+    .form-field input:focus {
+      border-color: var(--accent);
+      background: white;
+      box-shadow: 0 0 0 3px rgba(196, 92, 59, 0.1);
+    }
+
+    .form-field input::placeholder {
+      color: var(--text-light);
+    }
+
+    .checkbox-field {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 24px;
+      padding: 14px 18px;
+      background: var(--accent-bg);
+      border: 1.5px solid var(--accent-light);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .checkbox-field:hover {
+      border-color: var(--accent);
+    }
+
+    .checkbox-field input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--accent);
+      border-radius: 5px;
+      flex-shrink: 0;
+      cursor: pointer;
+      position: relative;
+      background: white;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+
+    .checkbox-field input[type="checkbox"]:hover {
+      box-shadow: 0 0 0 3px rgba(196, 92, 59, 0.12);
+    }
+
+    .checkbox-field input[type="checkbox"]:checked {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .checkbox-field input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 6px;
+      width: 6px;
+      height: 11px;
+      border: solid white;
+      border-width: 0 2.5px 2.5px 0;
+      transform: rotate(45deg);
+    }
+
+    .checkbox-field span {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .submit-btn {
+      display: block;
+      width: 100%;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 14px 24px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: -0.01em;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+      box-shadow: 0 2px 8px rgba(196, 92, 59, 0.3);
+    }
+
+    .submit-btn:hover:not(:disabled) {
+      background: #b3512f;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(196, 92, 59, 0.35);
+    }
+
+    .submit-btn:active:not(:disabled) {
+      transform: translateY(0);
+      box-shadow: 0 1px 4px rgba(196, 92, 59, 0.3);
+    }
+
+    .submit-btn:disabled {
+      background: #c5c8cd;
+      color: #f5f5f5;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .submit-hint {
+      font-size: 12px;
+      color: var(--text-light);
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .status-message {
+      font-size: 14px;
+      margin-top: 12px;
+      min-height: 20px;
+      text-align: center;
+    }
+
+    .status-message.sending {
+      color: var(--accent);
+    }
+
+    .status-message.success {
+      color: #2d8a56;
+    }
+
+    .status-message.error {
+      color: #c0392b;
+    }
+
+    /* ── CONFIRMATION BLOCK ── */
+
+    .confirmation-block {
+      background: var(--bg-callout-strong);
+      border: 2px solid var(--accent);
+      border-radius: 6px;
+      padding: 28px 32px;
+      margin: 24px 0;
+      text-align: center;
+    }
+
+    .confirmation-block .check-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .confirmation-block .check-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: white;
+      fill: none;
+    }
+
+    .confirmation-block h3 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 20px;
+      font-weight: 400;
+      margin-bottom: 12px;
+      margin-top: 0;
+    }
+
+    .confirmation-details {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px 40px;
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .confirmation-details .detail-item {
+      min-width: 0;
+    }
+
+    .confirmation-details .detail-item .detail-label {
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .confirmation-details .detail-item .detail-value {
+      font-size: 15px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 12px 24px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 16px;
+      transition: opacity 0.2s;
+    }
+
+    .download-btn:hover {
+      opacity: 0.9;
+    }
+
+    .print-signed-values {
+      display: none;
+    }
+
+    /* ── RESPONSIVE MOBILE ── */
+
+    @media (max-width: 768px) {
+      body {
+        padding: 32px 18px;
+      }
+
+      .doc-title {
+        font-size: 24px;
+      }
+
+      .section-title {
+        font-size: 18px;
+      }
+
+      .highlight-value {
+        font-size: 22px;
+      }
+
+      .doc-meta {
+        gap: 12px 24px;
+      }
+
+      .highlights {
+        grid-template-columns: 1fr;
+      }
+
+      .highlights--three {
+        grid-template-columns: 1fr;
+      }
+
+      .form-fields {
+        grid-template-columns: 1fr;
+      }
+
+      .signature-block {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .confirmation-details {
+        gap: 16px 24px;
+      }
+
+      .confirmation-details .detail-item .detail-value {
+        white-space: normal;
+      }
+
+      /* Tables: hide redundant columns */
+      .section:nth-of-type(3) table thead th:nth-child(2),
+      .section:nth-of-type(3) table tbody td:nth-child(2) {
+        display: none;
+      }
+
+      .section:nth-of-type(4) table thead th:nth-child(2),
+      .section:nth-of-type(4) table tbody td:nth-child(2) {
+        display: none;
+      }
+
+      tbody td {
+        padding: 10px 10px;
+      }
+
+      thead th {
+        padding: 10px 10px;
+      }
+
+      tbody td:last-child {
+        white-space: normal;
+      }
+
+      /* Form */
+      .form-acceptance {
+        padding: 20px 18px;
+      }
+
+      .checkbox-field {
+        padding: 12px 14px;
+      }
+
+      .callout {
+        padding: 14px 16px;
+      }
+
+      .callout-strong {
+        padding: 14px 16px;
+      }
+
+      /* Footer */
+      .doc-footer {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+
+      /* Misc */
+      .highlight-box {
+        padding: 16px;
+      }
+
+      .confirmation-block {
+        padding: 20px 18px;
+      }
+    }
+
+    /* ── PRINT ── */
+
+    @media print {
+      body {
+        padding: 0;
+        font-size: 14px;
+        max-width: none;
+      }
+
+      .section {
+        break-inside: avoid;
+      }
+
+      .section-header {
+        break-after: avoid;
+      }
+
+      table {
+        break-inside: avoid;
+      }
+
+      .callout, .callout-strong {
+        break-inside: avoid;
+      }
+
+      .highlights {
+        break-inside: avoid;
+      }
+
+      h3 {
+        break-after: avoid;
+      }
+
+      .conditions-list {
+        break-inside: avoid;
+      }
+
+      .signature-block {
+        break-inside: avoid;
+      }
+
+      .doc-footer {
+        break-before: avoid;
+      }
+
+      .form-acceptance,
+      .submit-btn,
+      .status-message,
+      #devis-form-area {
+        display: none !important;
+      }
+
+      .confirmation-block {
+        display: none !important;
+      }
+
+      .print-signed-values {
+        display: block !important;
+        margin: 24px 0;
+        padding: 20px 0;
+        border-top: 1px solid var(--border);
+      }
+
+      .print-signed-values .print-detail {
+        margin-bottom: 8px;
+        font-size: 14px;
+      }
+
+      .print-signed-values .print-detail strong {
+        font-weight: 600;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════
+       HEADER
+       ════════════════════════════════════════ -->
+
+  <div class="doc-header">
+    <div class="doc-logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 71.06 13.94">
+        <defs><style>.cls-1{fill:#c45c3b;}</style></defs>
+        <path d="M7.78,6.66c.47.7.78,1.22,1.17,1.94-.06-.75-.1-1.5-.1-2.41v-3.71c0-1.07-.03-1.73-.13-2.47h3.47c-.1.73-.13,1.42-.13,2.47v8.65c0,.99.05,1.74.13,2.43h-3.57c-.29-.62-.67-1.22-1.22-2.07l-3.01-4.54c-.44-.65-.72-1.14-1.17-2,.08.73.11,1.63.11,2.43v3.65c0,1.12.03,1.84.13,2.54H0c.1-.63.13-1.35.13-2.56V2.43C.13,1.48.1.75,0,0h3.53c.16.44.52,1.09,1.16,2.04l3.09,4.62Z"/>
+        <path d="M15.99,9.49c.16,1.32.93,2.02,2.21,2.02.65,0,1.22-.21,1.64-.6.24-.23.36-.41.49-.83l2.83.8c-.37.85-.62,1.22-1.07,1.68-.93.91-2.23,1.38-3.84,1.38s-2.85-.46-3.78-1.38c-.96-.98-1.48-2.36-1.48-3.97,0-3.22,2.07-5.36,5.18-5.36,2.54,0,4.31,1.38,4.88,3.81.13.52.2,1.21.24,2.13,0,.07,0,.16.02.33h-7.33ZM20.22,7.25c-.23-1.04-.93-1.6-2.05-1.6s-1.86.52-2.13,1.6h4.18Z"/>
+        <path d="M34.37,3.61c-.1.77-.13,1.45-.13,2.44v5.03c0,1.12.03,1.79.13,2.44h-3.24v-.7c0-.08,0-.33.02-.44-1.07,1.01-2,1.4-3.39,1.4-1.09,0-1.97-.31-2.59-.91-.65-.65-.93-1.45-.93-2.74v-4.09c0-.94-.05-1.76-.13-2.44h3.39c-.1.78-.13,1.46-.13,2.44v3.34c0,.67.06.96.26,1.22.23.29.59.46,1.06.46.9,0,1.81-.64,2.44-1.68v-3.34c0-.91-.03-1.6-.13-2.44h3.37Z"/>
+        <path d="M55.22,0c-.1.68-.13,1.35-.13,2.46v8.63c0,.98.03,1.6.13,2.46h-3.4c.1-.73.13-1.29.13-2.46V2.46c0-1.16-.03-1.84-.13-2.46h3.4Z"/>
+        <path d="M59.42,3.61c-.1.67-.13,1.32-.13,2.46v5.01c0,.88.05,1.76.13,2.46h-3.4c.1-.8.13-1.42.13-2.46v-5.01c0-1.06-.03-1.73-.13-2.46h3.4ZM59.37,0v2.44h-3.3V0h3.3Z"/>
+        <path d="M70.93,5.95c0-1.14.03-1.79.13-2.46h-3.4c.02.15.04.3.05.44-.71-.38-1.52-.61-2.38-.61-2.82,0-5.11,2.29-5.11,5.11s2.29,5.11,5.11,5.11c.87,0,1.67-.24,2.38-.61-.02.16-.03.32-.05.49h3.4c-.08-.7-.13-1.58-.13-2.46v-5.01ZM65.49,11.1c-1.47,0-2.67-1.19-2.67-2.67s1.19-2.67,2.67-2.67,2.67,1.19,2.67,2.67-1.19,2.67-2.67,2.67Z"/>
+        <g>
+          <circle class="cls-1" cx="45.91" cy="8.46" r="1.66"/>
+          <path d="M45.91,3.35c-2.82,0-5.11,2.29-5.11,5.11s2.29,5.11,5.11,5.11,5.11-2.29,5.11-5.11-2.29-5.11-5.11-5.11ZM45.91,11.14c-1.48,0-2.69-1.2-2.69-2.69s1.2-2.69,2.69-2.69,2.69,1.2,2.69,2.69-1.2,2.69-2.69,2.69Z"/>
+        </g>
+        <path d="M38.91,7.11c.36-.45.81-.72,1.37-.83.45-1.15,1.23-2.14,2.24-2.82-.29-.04-.54-.05-.84-.05-1.48,0-2.46.44-3.26,1.48v-1.29h-3.25c.1.7.13,1.27.13,2.46v5.02c0,1.06-.03,1.65-.13,2.46h3.38c-.1-.78-.13-1.4-.13-2.45v-2.54c.07-.72.18-1.06.49-1.45Z"/>
+      </svg>
+    </div>
+    <div class="doc-type">Devis</div>
+    <h1 class="doc-title">StrictFood<br>Accompagnement digital &mdash; Phase 1</h1>
+    <div class="doc-meta">
+      <div>
+        <div class="meta-label">Prestataire</div>
+        <div class="meta-value">Neurolia</div>
+      </div>
+      <div>
+        <div class="meta-label">Client</div>
+        <div class="meta-value">StrictFood, Romain</div>
+      </div>
+      <div>
+        <div class="meta-label">Date</div>
+        <div class="meta-value">2 mars 2026</div>
+      </div>
+      <div>
+        <div class="meta-label">Validit&eacute;</div>
+        <div class="meta-value">30 jours</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       SECTION 1 — PRÉAMBULE
+       ════════════════════════════════════════ -->
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-badge">1</span>
+      <h2 class="section-title">Pr&eacute;ambule</h2>
+    </div>
+
+    <p>Ce devis fait suite &agrave; nos &eacute;changes et &agrave; la recommandation strat&eacute;gique que nous vous avons pr&eacute;sent&eacute;e. Il d&eacute;finit le cadre de la <strong>Phase 1 &mdash; &laquo;&nbsp;Survivre et poser les fondations&nbsp;&raquo;</strong>, d'une dur&eacute;e de <strong>4 mois</strong> (16 semaines).</p>
+
+    <p>L'objectif de cette premi&egrave;re phase est de stopper l'&eacute;rosion du chiffre d'affaires en construisant une image de marque premium coh&eacute;rente, en activant les leviers d'acquisition locale &agrave; impact imm&eacute;diat, et en posant les bases de la collecte de donn&eacute;es clients.</p>
+
+    <div class="callout callout-strong">
+      Ce devis couvre exclusivement la Phase 1. Le passage aux phases suivantes est conditionn&eacute; par un bilan KPI positif r&eacute;alis&eacute; conjointement &agrave; l'issue des 4 mois. Le tarif mensuel est r&eacute;visable &agrave; l'issue de cette phase en fonction des r&eacute;sultats obtenus (cf. section 7 &mdash; Clause de r&eacute;vision tarifaire).
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       SECTION 2 — MISE EN PLACE (S1-S5)
+       ════════════════════════════════════════ -->
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-badge">2</span>
+      <h2 class="section-title">Mise en place (Semaines 1 &agrave; 5)</h2>
+    </div>
+
+    <p>Prestations de construction r&eacute;alis&eacute;es durant les 5 premi&egrave;res semaines. Ces livrables constituent le socle sur lequel repose l'ensemble de l'&eacute;cosyst&egrave;me digital.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 65%;">Prestation</th>
+          <th style="width: 15%;">D&eacute;tail</th>
+          <th style="width: 20%;">Montant</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <strong>Banque de contenus photo</strong>
+            <div class="detail">Tri, d&eacute;tourage et traitement des clich&eacute;s bruts. Kit photo/vid&eacute;o d&eacute;clin&eacute; en 4 formats (produits d&eacute;tour&eacute;s, lifestyle, stories/reels, campagnes pub)</div>
+          </td>
+          <td>S1 &rarr; S2</td>
+          <td>Inclus</td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Audit &amp; Direction Artistique</strong>
+            <div class="detail">Charte DA &laquo;&nbsp;Dark Food Premium&nbsp;&raquo; compl&egrave;te : typographie, palette, style photographique. Applicable &agrave; 100% des livrables</div>
+          </td>
+          <td>S1 &rarr; S2</td>
+          <td>Inclus</td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Optimisation Google Business Profile</strong>
+            <div class="detail">Photos de qualit&eacute;, menu int&eacute;gr&eacute;, lien site web, dispositif QR Code / NFC pour collecte d'avis et de donn&eacute;es</div>
+          </td>
+          <td>S1 &rarr; S2</td>
+          <td>Inclus</td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Architecture r&eacute;seaux sociaux</strong>
+            <div class="detail">Strat&eacute;gie &eacute;ditoriale, gabarits visuels, calendrier de publication, mise en place des outils de programmation (Instagram + TikTok)</div>
+          </td>
+          <td>S1 &rarr; S2</td>
+          <td>Inclus</td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Landing Page Next.js Premium</strong>
+            <div class="detail">Page vitrine conforme &agrave; la DA &laquo;&nbsp;Dark Food Premium&nbsp;&raquo;, CTA d'appel t&eacute;l&eacute;phonique direct, redirection r&eacute;seaux sociaux</div>
+          </td>
+          <td>S2 &rarr; S3</td>
+          <td>Inclus</td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Refonte Uber Eats</strong>
+            <div class="detail">Refonte visuelle compl&egrave;te, optimisation des prix, restructuration du menu et techniques de cross-selling</div>
+          </td>
+          <td>S2 &rarr; S3</td>
+          <td>Inclus</td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Dispositif de capture de donn&eacute;es clients</strong>
+            <div class="detail">Micro-landing page de collecte (pr&eacute;nom + email/t&eacute;l&eacute;phone) avec redirection avis Google. Formulaire d'inscription sur la landing page principale</div>
+          </td>
+          <td>S3 &rarr; S5</td>
+          <td>Inclus</td>
+        </tr>
+        <tr class="row-total">
+          <td><strong>Total mise en place</strong></td>
+          <td></td>
+          <td><strong>0 &euro;</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      L'ensemble des prestations de mise en place est inclus dans l'abonnement mensuel, sans frais suppl&eacute;mentaire. C'est notre investissement dans la r&eacute;ussite du partenariat.
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       SECTION 3 — ABONNEMENT MENSUEL
+       ════════════════════════════════════════ -->
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-badge">3</span>
+      <h2 class="section-title">Abonnement mensuel</h2>
+    </div>
+
+    <p>Prestations r&eacute;currentes sur l'ensemble de la Phase 1 (4 mois).</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 55%;">Prestation</th>
+          <th style="width: 15%;">Fr&eacute;quence</th>
+          <th style="width: 30%;">Montant</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <strong>Gestion Instagram</strong>
+            <div class="detail">6 stories + 2 posts par semaine, cr&eacute;ation des visuels, r&eacute;daction des descriptions, programmation, community management</div>
+          </td>
+          <td>Mensuel</td>
+          <td style="text-align: center; vertical-align: middle; font-size: 13px; color: var(--text-muted);">Inclus ci-dessous</td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Gestion TikTok</strong>
+            <div class="detail">Concepts cr&eacute;atifs, briefs visuels, montage DA &laquo;&nbsp;Dark Food Premium&nbsp;&raquo;, 1 &agrave; 2 publications/semaine</div>
+          </td>
+          <td>Mensuel</td>
+          <td style="text-align: center; vertical-align: middle; font-size: 13px; color: var(--text-muted);">Inclus ci-dessous</td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Suivi Google Business Profile</strong>
+            <div class="detail">Monitoring des avis, mise &agrave; jour des informations, suivi du positionnement local</div>
+          </td>
+          <td>Mensuel</td>
+          <td style="text-align: center; vertical-align: middle; font-size: 13px; color: var(--text-muted);">Inclus ci-dessous</td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Pilotage &amp; reporting KPI</strong>
+            <div class="detail">Tracking hebdomadaire des indicateurs (avis Google, appels, CA, engagement), optimisations it&eacute;ratives, rapport mensuel</div>
+          </td>
+          <td>Mensuel</td>
+          <td style="text-align: center; vertical-align: middle; font-size: 13px; color: var(--text-muted);">Inclus ci-dessous</td>
+        </tr>
+        <tr class="row-total">
+          <td><strong>Total mensuel</strong></td>
+          <td></td>
+          <td><strong>480,00 &euro;</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       SECTION 4 — SYNTHÈSE FINANCIÈRE
+       ════════════════════════════════════════ -->
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-badge">4</span>
+      <h2 class="section-title">Synth&egrave;se financi&egrave;re</h2>
+    </div>
+
+    <div class="highlights">
+      <div class="highlight-box highlight-box--accent">
+        <div class="highlight-value highlight-value--accent">480 &euro;/mois</div>
+        <div class="highlight-label">Abonnement mensuel</div>
+      </div>
+      <div class="highlight-box">
+        <div class="highlight-value">4 mois</div>
+        <div class="highlight-label">Dur&eacute;e Phase 1</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>TVA non applicable</strong>, article 293 B du Code g&eacute;n&eacute;ral des imp&ocirc;ts. Les montants indiqu&eacute;s correspondent aux montants nets encaiss&eacute;s.
+    </div>
+
+    <div class="callout">
+      <strong>Frais externes non inclus :</strong> les shootings vid&eacute;o TikTok (vid&eacute;aste externe, estim&eacute;s &agrave; 150&nbsp;&euro;/shooting, 1 shooting/mois) sont &agrave; la charge du client et factur&eacute;s directement par le prestataire vid&eacute;o.
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       SECTION 5 — CE QUI EST INCLUS
+       ════════════════════════════════════════ -->
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-badge">5</span>
+      <h2 class="section-title">Ce qui est inclus</h2>
+    </div>
+
+    <h3>Direction artistique &amp; identit&eacute; visuelle</h3>
+    <ul>
+      <li>Audit de marque (Brand Audit) et validation du positionnement</li>
+      <li>Charte DA &laquo;&nbsp;Dark Food Premium&nbsp;&raquo; (typographie, palette, style photo)</li>
+      <li>Traitement et sublimation de la banque de contenus photo</li>
+      <li>Templates r&eacute;seaux sociaux conformes &agrave; la DA</li>
+    </ul>
+
+    <h3>Instagram &mdash; Cr&eacute;ation et gestion du contenu</h3>
+    <ul>
+      <li><strong>6 stories par semaine</strong> &mdash; visuels sublim&eacute;s &agrave; partir de vos photos</li>
+      <li><strong>2 posts par semaine</strong> &mdash; cr&eacute;ation des visuels, r&eacute;daction des descriptions</li>
+      <li>Strat&eacute;gie &eacute;ditoriale et calendrier de publication mensuel</li>
+      <li>Programmation et publication</li>
+      <li>Community management (r&eacute;ponses aux commentaires et messages)</li>
+    </ul>
+
+    <h3>TikTok &mdash; Strat&eacute;gie et gestion du contenu</h3>
+    <ul>
+      <li><strong>1 &agrave; 2 publications par semaine</strong></li>
+      <li>Concepts cr&eacute;atifs et briefs visuels pour chaque shooting</li>
+      <li>Montage et post-production conform&eacute;ment &agrave; la DA</li>
+      <li>D&eacute;clinaison des meilleurs clips en Reels Instagram</li>
+    </ul>
+
+    <h3>Google Business Profile</h3>
+    <ul>
+      <li>Optimisation compl&egrave;te de la fiche (photos, informations, horaires, cat&eacute;gories)</li>
+      <li>Int&eacute;gration du menu et lien vers le site</li>
+      <li>Dispositif QR Code / NFC pour collecte d'avis et de donn&eacute;es</li>
+      <li>Suivi du r&eacute;f&eacute;rencement local et monitoring des avis</li>
+    </ul>
+
+    <h3>Landing Page &amp; Pr&eacute;sence web</h3>
+    <ul>
+      <li>D&eacute;veloppement d'une landing page Next.js premium</li>
+      <li>CTA d'appel t&eacute;l&eacute;phonique direct (commandes &agrave; emporter)</li>
+      <li>Formulaire de collecte de donn&eacute;es clients</li>
+      <li>Redirection vers les r&eacute;seaux sociaux</li>
+    </ul>
+
+    <h3>Refonte Uber Eats</h3>
+    <ul>
+      <li>Restructuration compl&egrave;te de la carte (cat&eacute;gories, ordre, mise en avant)</li>
+      <li>Mise &agrave; jour des visuels produits</li>
+      <li>R&eacute;&eacute;criture des descriptions et optimisation des prix</li>
+      <li>Cr&eacute;ation de formules attractives et techniques de cross-selling</li>
+    </ul>
+
+    <h3>Pilotage &amp; reporting</h3>
+    <ul>
+      <li>Tracking hebdomadaire des KPIs (avis Google, appels, CA, engagement)</li>
+      <li>Optimisations it&eacute;ratives bas&eacute;es sur les donn&eacute;es</li>
+      <li>Rapport mensuel de performance</li>
+      <li>Bilan KPI complet &agrave; la fin de la Phase 1</li>
+    </ul>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       SECTION 6 — OBJECTIFS MESURABLES (KPI)
+       ════════════════════════════════════════ -->
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-badge">6</span>
+      <h2 class="section-title">Objectifs mesurables (KPI Phase 1)</h2>
+    </div>
+
+    <p>Les indicateurs ci-dessous constituent la base d'&eacute;valuation de la Phase 1 et servent de r&eacute;f&eacute;rence pour la clause de r&eacute;vision tarifaire (section 7).</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 35%;">Indicateur</th>
+          <th style="width: 25%;">Situation actuelle</th>
+          <th style="width: 40%;">Objectif S16</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Avis Google</strong></td>
+          <td>74 avis</td>
+          <td>200 avis</td>
+        </tr>
+        <tr>
+          <td><strong>Position pack local Google</strong></td>
+          <td>&Agrave; mesurer</td>
+          <td>Top 3 &laquo;&nbsp;restaurant healthy + ville&nbsp;&raquo;</td>
+        </tr>
+        <tr>
+          <td><strong>Base de donn&eacute;es clients</strong></td>
+          <td>0 contact</td>
+          <td>300+ contacts qualifi&eacute;s</td>
+        </tr>
+        <tr>
+          <td><strong>Appels via landing page</strong></td>
+          <td>0</td>
+          <td>30+/mois</td>
+        </tr>
+        <tr>
+          <td><strong>Followers TikTok</strong></td>
+          <td>1 164</td>
+          <td>3 000 abonn&eacute;s</td>
+        </tr>
+        <tr>
+          <td><strong>Followers Instagram</strong></td>
+          <td>1 369</td>
+          <td>2 000 abonn&eacute;s</td>
+        </tr>
+        <tr>
+          <td><strong>CA quotidien moyen</strong></td>
+          <td>200-300 &euro;/jour</td>
+          <td>400 &euro;/jour</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       SECTION 7 — CLAUSE DE RÉVISION TARIFAIRE
+       ════════════════════════════════════════ -->
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-badge">7</span>
+      <h2 class="section-title">Clause de r&eacute;vision tarifaire</h2>
+    </div>
+
+    <p>Conform&eacute;ment aux articles L.441-1 et suivants du Code de commerce, et dans un esprit de partenariat &eacute;quitable, les parties conviennent du m&eacute;canisme de r&eacute;vision suivant :</p>
+
+    <h3>7.1 &mdash; P&eacute;riode d'&eacute;valuation</h3>
+    <p>&Agrave; l'issue de la Phase 1 (semaine 16), un <strong>bilan contradictoire</strong> est r&eacute;alis&eacute; conjointement entre le Prestataire et le Client. Ce bilan porte sur l'atteinte des objectifs mesurables d&eacute;finis &agrave; la section 6.</p>
+
+    <h3>7.2 &mdash; Crit&egrave;res d'&eacute;valuation</h3>
+    <p>Chaque indicateur est qualifi&eacute; selon trois niveaux :</p>
+    <ul>
+      <li><strong>Atteint</strong> : l'objectif cible est atteint ou d&eacute;pass&eacute;.</li>
+      <li><strong>En progression</strong> : une dynamique positive est constat&eacute;e, sans atteindre l'objectif cible (seuil minimal : 60% de l'objectif).</li>
+      <li><strong>Non atteint</strong> : l'objectif est en dessous de 60% de la cible ou aucune progression significative n'est constat&eacute;e.</li>
+    </ul>
+
+    <h3>7.3 &mdash; M&eacute;canisme de r&eacute;vision</h3>
+    <p>En fonction du r&eacute;sultat global du bilan :</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 25%;">R&eacute;sultat global</th>
+          <th style="width: 30%;">Condition</th>
+          <th style="width: 45%;">Cons&eacute;quence</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Objectifs majoritairement atteints</strong></td>
+          <td>5+ indicateurs sur 7 &laquo;&nbsp;Atteint&nbsp;&raquo;</td>
+          <td>Reconduction au tarif initial ou n&eacute;gociation du tarif Phase 2</td>
+        </tr>
+        <tr>
+          <td><strong>Progression insuffisante</strong></td>
+          <td>3+ indicateurs &laquo;&nbsp;Non atteint&nbsp;&raquo;</td>
+          <td>R&eacute;vision du tarif mensuel &agrave; la baisse d'un commun accord, ou r&eacute;siliation sans p&eacute;nalit&eacute;</td>
+        </tr>
+        <tr>
+          <td><strong>R&eacute;sultats interm&eacute;diaires</strong></td>
+          <td>Cas ne relevant d'aucune des deux cat&eacute;gories ci-dessus</td>
+          <td>N&eacute;gociation de bonne foi sur les ajustements (p&eacute;rim&egrave;tre, tarif, dur&eacute;e)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>7.4 &mdash; R&eacute;serve de force majeure</h3>
+    <p>L'&eacute;valuation tient compte des facteurs ext&eacute;rieurs ind&eacute;pendants de la volont&eacute; du Prestataire (fermeture temporaire du restaurant, changement d'algorithme des plateformes, &eacute;v&eacute;nements de force majeure au sens de l'article 1218 du Code civil). Dans ces cas, les objectifs sont r&eacute;&eacute;valu&eacute;s proportionnellement &agrave; la p&eacute;riode affect&eacute;e.</p>
+
+    <h3>7.5 &mdash; Formalisation</h3>
+    <p>Toute r&eacute;vision tarifaire est formalis&eacute;e par un avenant &eacute;crit sign&eacute; par les deux parties, pr&eacute;cisant le nouveau montant, la date d'effet et la dur&eacute;e d'application. En l'absence d'avenant sign&eacute; dans les 15 jours suivant le bilan, le tarif initial continue de s'appliquer.</p>
+
+    <div class="callout callout-strong">
+      Cette clause garantit au Client que le tarif mensuel refl&egrave;te la valeur effectivement d&eacute;livr&eacute;e, et au Prestataire que son investissement initial (mise en place offerte) est prot&eacute;g&eacute; par un engagement minimal de 4 mois.
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       SECTION 8 — CONDITIONS GÉNÉRALES
+       ════════════════════════════════════════ -->
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-badge">8</span>
+      <h2 class="section-title">Conditions g&eacute;n&eacute;rales</h2>
+    </div>
+
+    <div class="conditions-list">
+      <div class="condition-item">
+        <div class="condition-label">Validit&eacute; du devis</div>
+        <div class="condition-value">30 jours &agrave; compter de la date d'&eacute;mission</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-label">Paiement</div>
+        <div class="condition-value">Mensuel, par virement instantan&eacute;, exigible au <strong>25 de chaque mois</strong>. En cas de retard de paiement, des p&eacute;nalit&eacute;s de retard sont appliqu&eacute;es au taux l&eacute;gal en vigueur, conform&eacute;ment &agrave; l'article L.441-10 du Code de commerce. Une indemnit&eacute; forfaitaire de 40&nbsp;&euro; pour frais de recouvrement est due de plein droit (article D.441-5 du Code de commerce).</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-label">Engagement</div>
+        <div class="condition-value">Engagement initial de 4 mois correspondant &agrave; la dur&eacute;e de la Phase 1. &Agrave; l'issue de cette p&eacute;riode, le contrat peut &ecirc;tre reconduit, r&eacute;vis&eacute; (cf. section 7) ou r&eacute;sili&eacute;, sur d&eacute;cision conjointe des parties.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-label">R&eacute;siliation anticip&eacute;e</div>
+        <div class="condition-value">Chaque partie peut r&eacute;silier le contrat en cas de manquement grave de l'autre partie &agrave; ses obligations, apr&egrave;s mise en demeure rest&eacute;e infructueuse pendant 15 jours. En cas de r&eacute;siliation &agrave; l'initiative du Client avant la fin de la Phase 1 sans faute du Prestataire, les mensualit&eacute;s restantes sont dues &agrave; titre d'indemnit&eacute; contractuelle.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-label">D&eacute;marrage</div>
+        <div class="condition-value">Sous 14 jours apr&egrave;s signature du devis</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-label">Propri&eacute;t&eacute; intellectuelle</div>
+        <div class="condition-value">Les cr&eacute;ations graphiques, textes et contenus produits dans le cadre de cette mission sont c&eacute;d&eacute;s au Client &agrave; compter du paiement int&eacute;gral des sommes dues, conform&eacute;ment aux articles L.111-1 et suivants du Code de la propri&eacute;t&eacute; intellectuelle. Le code source de la landing page reste la propri&eacute;t&eacute; du Prestataire jusqu'au paiement int&eacute;gral.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-label">Obligations du Client</div>
+        <div class="condition-value">Fournir dans les d&eacute;lais convenus : photos des produits, du restaurant et des cuisines. Donner acc&egrave;s aux comptes r&eacute;seaux sociaux, Google Business Profile et Uber Eats Manager. R&eacute;pondre aux demandes de validation sous 48h ouvr&eacute;es. Tout retard imputable au Client d&eacute;cale d'autant le calendrier de livraison sans modifier le montant d&ucirc;.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-label">Confidentialit&eacute;</div>
+        <div class="condition-value">Chaque partie s'engage &agrave; ne pas divulguer les informations confidentielles de l'autre partie, notamment les donn&eacute;es commerciales, strat&eacute;giques et financi&egrave;res &eacute;chang&eacute;es dans le cadre de cette collaboration.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-label">Droit applicable et litiges</div>
+        <div class="condition-value">Le pr&eacute;sent contrat est soumis au droit fran&ccedil;ais. En cas de litige, les parties s'engagent &agrave; rechercher une solution amiable. &Agrave; d&eacute;faut, le litige sera port&eacute; devant les tribunaux comp&eacute;tents du ressort du si&egrave;ge social du Prestataire.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       SECTION 9 — PERSPECTIVES (PHASES 2 & 3)
+       ════════════════════════════════════════ -->
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-badge">9</span>
+      <h2 class="section-title">Perspectives (Phases 2 &amp; 3)</h2>
+    </div>
+
+    <p>&Agrave; titre indicatif, la strat&eacute;gie globale pr&eacute;voit deux phases compl&eacute;mentaires dont le p&eacute;rim&egrave;tre et le tarif seront d&eacute;finis par avenant &agrave; l'issue du bilan Phase 1 :</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 12%;">Phase</th>
+          <th style="width: 25%;">Objectif</th>
+          <th style="width: 10%;">Dur&eacute;e</th>
+          <th style="width: 53%;">P&eacute;rim&egrave;tre</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Phase 2</strong></td>
+          <td>Structurer et convertir</td>
+          <td>3 mois</td>
+          <td>Click &amp; Collect, CRM, SEO, publicit&eacute; digitale, partenariats locaux</td>
+        </tr>
+        <tr>
+          <td><strong>Phase 3</strong></td>
+          <td>Scaler et pr&eacute;parer la duplication</td>
+          <td>6 mois</td>
+          <td>Automatisation marketing, scaling pub, playbook franchise, infrastructure multi-points</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      Ces phases ne constituent pas un engagement. Elles sont mentionn&eacute;es &agrave; titre de visibilit&eacute; strat&eacute;gique. Chaque phase fera l'objet d'un devis distinct, conditionn&eacute; par les r&eacute;sultats de la phase pr&eacute;c&eacute;dente.
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       SECTION 10 — ACCEPTATION
+       ════════════════════════════════════════ -->
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-badge">10</span>
+      <h2 class="section-title">Acceptation</h2>
+    </div>
+
+    <p>En signant ce devis, vous acceptez les prestations, les objectifs mesurables, la clause de r&eacute;vision tarifaire et les conditions d&eacute;crites ci-dessus. Ce document vaut engagement contractuel entre les deux parties pour la dur&eacute;e de la Phase 1 (4 mois).</p>
+
+    <!-- Formulaire interactif -->
+    <div id="devis-form-area">
+      <form id="devis-form" method="POST" target="devis-submission-frame" accept-charset="UTF-8">
+        <input type="hidden" name="form_type" value="devis">
+        <input type="hidden" name="submitted_at" id="devis-submitted-at">
+        <input type="hidden" name="option_choisie" value="Accompagnement digital Phase 1 (480 &euro;/mois &times; 4 mois)">
+
+        <div class="form-acceptance">
+          <div class="form-acceptance-header">
+            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            <span>Accepter ce devis</span>
+          </div>
+
+          <div class="form-fields">
+            <div class="form-field">
+              <label for="email_client">Votre email</label>
+              <input type="email" id="email_client" name="email_client" placeholder="votre@email.com" required>
+            </div>
+            <div class="form-field">
+              <label for="nom_client">Nom complet</label>
+              <input type="text" id="nom_client" name="nom_client" value="Romain" required>
+            </div>
+            <div class="form-field">
+              <label for="date_acceptation">Date d'acceptation</label>
+              <input type="date" id="date_acceptation" name="date_acceptation" required>
+            </div>
+          </div>
+
+          <label class="checkbox-field">
+            <input type="checkbox" id="conditions-lues" required>
+            <span>J'ai lu et j'accepte les conditions g&eacute;n&eacute;rales (section 8) et la clause de r&eacute;vision tarifaire (section 7)</span>
+          </label>
+
+          <label class="checkbox-field">
+            <input type="checkbox" id="bon-pour-accord" required>
+            <span>Bon pour accord</span>
+          </label>
+
+          <button type="submit" class="submit-btn" id="devis-submit-btn" disabled>Valider mon acceptation</button>
+          <div class="submit-hint" id="devis-hint">Renseignez votre email et cochez les deux mentions ci-dessus</div>
+          <div id="devis-status" class="status-message"></div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Confirmation (cachée jusqu'à validation) -->
+    <div id="devis-confirmation" style="display: none;">
+      <div class="confirmation-block">
+        <div class="check-icon">
+          <svg viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <h3>Devis accept&eacute;</h3>
+        <div class="confirmation-details">
+          <div class="detail-item">
+            <div class="detail-label">Offre</div>
+            <div class="detail-value">Accompagnement digital &mdash; Phase 1</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Signataire</div>
+            <div class="detail-value" id="confirm-nom"></div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Date</div>
+            <div class="detail-value" id="confirm-date"></div>
+          </div>
+        </div>
+        <button class="download-btn" onclick="window.print()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          T&eacute;l&eacute;charger le PDF sign&eacute;
+        </button>
+      </div>
+    </div>
+
+    <!-- Valeurs signées (print only) -->
+    <div class="print-signed-values" id="print-signed-values">
+      <div class="print-detail"><strong>Offre accept&eacute;e :</strong> Accompagnement digital Phase 1 &mdash; 480 &euro;/mois &times; 4 mois</div>
+      <div class="print-detail"><strong>Signataire :</strong> <span id="print-nom"></span></div>
+      <div class="print-detail"><strong>Date d'acceptation :</strong> <span id="print-date"></span></div>
+      <div class="print-detail"><strong>Mention :</strong> Bon pour accord</div>
+    </div>
+
+    <div class="signature-block">
+      <div class="signature-party">
+        <div class="signature-label">Le prestataire</div>
+        <div class="signature-name">Neurolia</div>
+        <div class="signature-role">Alexis Carrot</div>
+        <div class="signature-line" id="prestataire-signature-line">Date et signature</div>
+      </div>
+      <div class="signature-party">
+        <div class="signature-label">Le client</div>
+        <div class="signature-name">StrictFood</div>
+        <div class="signature-role">Romain</div>
+        <div class="signature-line" id="client-signature-line">Date et signature, pr&eacute;c&eacute;d&eacute;es de la mention &laquo;&nbsp;Bon pour accord&nbsp;&raquo;</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       FOOTER
+       ════════════════════════════════════════ -->
+
+  <div class="doc-footer">
+    <span>Pour toute question : contact@neurolia.work</span>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 71.06 13.94">
+      <path fill="#1a1a1a" d="M7.78,6.66c.47.7.78,1.22,1.17,1.94-.06-.75-.1-1.5-.1-2.41v-3.71c0-1.07-.03-1.73-.13-2.47h3.47c-.1.73-.13,1.42-.13,2.47v8.65c0,.99.05,1.74.13,2.43h-3.57c-.29-.62-.67-1.22-1.22-2.07l-3.01-4.54c-.44-.65-.72-1.14-1.17-2,.08.73.11,1.63.11,2.43v3.65c0,1.12.03,1.84.13,2.54H0c.1-.63.13-1.35.13-2.56V2.43C.13,1.48.1.75,0,0h3.53c.16.44.52,1.09,1.16,2.04l3.09,4.62Z"/>
+      <path fill="#1a1a1a" d="M15.99,9.49c.16,1.32.93,2.02,2.21,2.02.65,0,1.22-.21,1.64-.6.24-.23.36-.41.49-.83l2.83.8c-.37.85-.62,1.22-1.07,1.68-.93.91-2.23,1.38-3.84,1.38s-2.85-.46-3.78-1.38c-.96-.98-1.48-2.36-1.48-3.97,0-3.22,2.07-5.36,5.18-5.36,2.54,0,4.31,1.38,4.88,3.81.13.52.2,1.21.24,2.13,0,.07,0,.16.02.33h-7.33ZM20.22,7.25c-.23-1.04-.93-1.6-2.05-1.6s-1.86.52-2.13,1.6h4.18Z"/>
+      <path fill="#1a1a1a" d="M34.37,3.61c-.1.77-.13,1.45-.13,2.44v5.03c0,1.12.03,1.79.13,2.44h-3.24v-.7c0-.08,0-.33.02-.44-1.07,1.01-2,1.4-3.39,1.4-1.09,0-1.97-.31-2.59-.91-.65-.65-.93-1.45-.93-2.74v-4.09c0-.94-.05-1.76-.13-2.44h3.39c-.1.78-.13,1.46-.13,2.44v3.34c0,.67.06.96.26,1.22.23.29.59.46,1.06.46.9,0,1.81-.64,2.44-1.68v-3.34c0-.91-.03-1.6-.13-2.44h3.37Z"/>
+      <path fill="#1a1a1a" d="M55.22,0c-.1.68-.13,1.35-.13,2.46v8.63c0,.98.03,1.6.13,2.46h-3.4c.1-.73.13-1.29.13-2.46V2.46c0-1.16-.03-1.84-.13-2.46h3.4Z"/>
+      <path fill="#1a1a1a" d="M59.42,3.61c-.1.67-.13,1.32-.13,2.46v5.01c0,.88.05,1.76.13,2.46h-3.4c.1-.8.13-1.42.13-2.46v-5.01c0-1.06-.03-1.73-.13-2.46h3.4ZM59.37,0v2.44h-3.3V0h3.3Z"/>
+      <path fill="#1a1a1a" d="M70.93,5.95c0-1.14.03-1.79.13-2.46h-3.4c.02.15.04.3.05.44-.71-.38-1.52-.61-2.38-.61-2.82,0-5.11,2.29-5.11,5.11s2.29,5.11,5.11,5.11c.87,0,1.67-.24,2.38-.61-.02.16-.03.32-.05.49h3.4c-.08-.7-.13-1.58-.13-2.46v-5.01ZM65.49,11.1c-1.47,0-2.67-1.19-2.67-2.67s1.19-2.67,2.67-2.67,2.67,1.19,2.67,2.67-1.19,2.67-2.67,2.67Z"/>
+      <circle fill="#c45c3b" cx="45.91" cy="8.46" r="1.66"/>
+      <path fill="#1a1a1a" d="M45.91,3.35c-2.82,0-5.11,2.29-5.11,5.11s2.29,5.11,5.11,5.11,5.11-2.29,5.11-5.11-2.29-5.11-5.11-5.11ZM45.91,11.14c-1.48,0-2.69-1.2-2.69-2.69s1.2-2.69,2.69-2.69,2.69,1.2,2.69,2.69-1.2,2.69-2.69,2.69Z"/>
+      <path fill="#1a1a1a" d="M38.91,7.11c.36-.45.81-.72,1.37-.83.45-1.15,1.23-2.14,2.24-2.82-.29-.04-.54-.05-.84-.05-1.48,0-2.46.44-3.26,1.48v-1.29h-3.25c.1.7.13,1.27.13,2.46v5.02c0,1.06-.03,1.65-.13,2.46h3.38c-.1-.78-.13-1.4-.13-2.45v-2.54c.07-.72.18-1.06.49-1.45Z"/>
+    </svg>
+  </div>
+
+<iframe name="devis-submission-frame" id="devis-submission-frame" style="display:none;"></iframe>
+
+<script>
+  (function () {
+    var WEB_APP_URL = "https://script.google.com/macros/s/AKfycbynPKwG7-rmmmYRV3fMpgnd7kOcB4s4u_L7AvQ4WuA7Jsyeo0ZiyfeRZgxyB-JyQfDXZw/exec";
+
+    // --- Signed URL mode (v3 — hash fragment, no query params) ---
+    var hash = window.location.hash || '';
+    if (hash.indexOf('#s/') === 0) {
+      var parts = hash.substring(3).split('/');
+      var nom = decodeURIComponent(parts[0] || '');
+      var y = parseInt(parts[1], 10);
+      var m = parseInt(parts[2], 10);
+      var d = parseInt(parts[3], 10);
+
+      var dateFormatted = '';
+      if (!isNaN(y) && !isNaN(m) && !isNaN(d)) {
+        var dateObj = new Date(y, m - 1, d);
+        if (!isNaN(dateObj.getTime())) {
+          dateFormatted = dateObj.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+        }
+      }
+
+      document.getElementById('devis-form-area').style.display = 'none';
+      document.getElementById('devis-confirmation').style.display = 'block';
+
+      document.getElementById('confirm-nom').textContent = nom;
+      document.getElementById('confirm-date').textContent = dateFormatted;
+
+      document.getElementById('print-nom').textContent = nom;
+      document.getElementById('print-date').textContent = dateFormatted;
+
+      document.getElementById('client-signature-line').textContent =
+        'Bon pour accord \u2014 ' + nom + ' \u2014 ' + dateFormatted;
+
+      document.getElementById('prestataire-signature-line').textContent =
+        'Sign\u00e9 le ' + dateFormatted;
+
+      return;
+    }
+
+    // Pre-fill date
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    document.getElementById('date_acceptation').value = yyyy + '-' + mm + '-' + dd;
+
+    // Form validation
+    var submitBtn = document.getElementById('devis-submit-btn');
+    var emailInput = document.getElementById('email_client');
+    var conditionsInput = document.getElementById('conditions-lues');
+    var checkboxInput = document.getElementById('bon-pour-accord');
+    var hintEl = document.getElementById('devis-hint');
+
+    function updateSubmitState() {
+      var emailFilled = emailInput.value.trim() !== '';
+      var conditionsChecked = conditionsInput.checked;
+      var checkboxChecked = checkboxInput.checked;
+      var ready = emailFilled && conditionsChecked && checkboxChecked;
+      submitBtn.disabled = !ready;
+      hintEl.style.display = ready ? 'none' : 'block';
+    }
+
+    emailInput.addEventListener('input', updateSubmitState);
+    conditionsInput.addEventListener('change', updateSubmitState);
+    checkboxInput.addEventListener('change', updateSubmitState);
+
+    // Submission
+    var form = document.getElementById('devis-form');
+    var statusMessage = document.getElementById('devis-status');
+    var submissionFrame = document.getElementById('devis-submission-frame');
+    var pendingSubmission = false;
+    var submissionTimeoutId = null;
+
+    form.action = WEB_APP_URL;
+
+    form.addEventListener('submit', function (event) {
+      pendingSubmission = true;
+      document.getElementById('devis-submitted-at').value = new Date().toISOString();
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Envoi en cours\u2026';
+      statusMessage.className = 'status-message sending';
+      statusMessage.textContent = 'Enregistrement de votre acceptation\u2026';
+
+      if (submissionTimeoutId) { clearTimeout(submissionTimeoutId); }
+      submissionTimeoutId = setTimeout(function () {
+        if (!pendingSubmission) { return; }
+        pendingSubmission = false;
+        statusMessage.className = 'status-message error';
+        statusMessage.textContent = 'Le d\u00e9lai d\u2019envoi est d\u00e9pass\u00e9. Veuillez r\u00e9essayer.';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Valider mon acceptation';
+      }, 12000);
+    });
+
+    submissionFrame.addEventListener('load', function () {
+      if (!pendingSubmission) { return; }
+      pendingSubmission = false;
+      if (submissionTimeoutId) { clearTimeout(submissionTimeoutId); submissionTimeoutId = null; }
+
+      var nom = document.getElementById('nom_client').value;
+      var dateVal = document.getElementById('date_acceptation').value;
+      var dateParts = dateVal.split('-');
+      var dateObj = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+      var dateFormatted = dateObj.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+
+      document.getElementById('devis-form-area').style.display = 'none';
+      document.getElementById('devis-confirmation').style.display = 'block';
+
+      document.getElementById('confirm-nom').textContent = nom;
+      document.getElementById('confirm-date').textContent = dateFormatted;
+
+      document.getElementById('print-nom').textContent = nom;
+      document.getElementById('print-date').textContent = dateFormatted;
+
+      var clientSignatureLine = document.getElementById('client-signature-line');
+      clientSignatureLine.textContent = 'Bon pour accord \u2014 ' + nom + ' \u2014 ' + dateFormatted;
+
+      document.getElementById('prestataire-signature-line').textContent =
+        'Sign\u00e9 le ' + dateFormatted;
+    });
+  })();
+</script>
+</body>
+</html>
