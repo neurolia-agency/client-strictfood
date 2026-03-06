@@ -1,13 +1,17 @@
 // ============================================
-// Google Apps Script — Devis StrictFood
-// Acceptation de devis en ligne
+// Google Apps Script — Devis StrictFood v2
+// Accompagnement digital — Phase 1
 // ============================================
 
 // --- CONFIG ---
+// SHEET_ID : ID de la Google Sheet cible (onglet "Feuille de calcul" dans l'URL)
+// Remplacez par l'ID de votre spreadsheet si différent
 var SHEET_ID = "1DlRTpwFqoCczjH3yrMiOfjfO7W2XZKKN1EKKxC68PdA";
-var SHEET_TAB = "devis";
+var SHEET_TAB = "devis-phase1";
 var NEUROLIA_EMAIL = "contact@neurolia.work";
-var DEVIS_BASE_URL = "https://formulaire-plateforme-de-marque.vercel.app/devis";
+
+// URL publique du devis v2 (à mettre à jour après déploiement sur Vercel ou hébergement)
+var DEVIS_BASE_URL = "https://devis-strictfood.vercel.app/devis";
 
 var FIELD_KEYS = [
   "submitted_at",
@@ -28,7 +32,7 @@ var COLUMN_HEADERS = [
 // --- ENDPOINTS ---
 
 function doGet() {
-  return jsonOutput_({ ok: true, message: "Devis StrictFood endpoint is running" });
+  return jsonOutput_({ ok: true, message: "Devis StrictFood Phase 1 endpoint is running" });
 }
 
 function doPost(e) {
@@ -55,10 +59,10 @@ function doPost(e) {
 
     sheet.appendRow(row);
     SpreadsheetApp.flush();
-    Logger.log("Devis append OK, row=%s", sheet.getLastRow());
+    Logger.log("Devis Phase 1 append OK, row=%s", sheet.getLastRow());
 
     // 2. Build signed devis URL (hash fragment — no query params)
-    // Format: /devis#s/Nom/YYYY/MM/DD
+    // Format: /devis-v2#s/Nom/YYYY/MM/DD
     var dateFormatted = formatDateFr_(payload.date_acceptation);
     var dateParts = (payload.date_acceptation || "").split("-");
     var signedUrl = DEVIS_BASE_URL +
@@ -70,12 +74,12 @@ function doPost(e) {
     // 3. Email notification Neurolia (HTML)
     MailApp.sendEmail({
       to: NEUROLIA_EMAIL,
-      subject: "Devis accepté — StrictFood — " + (payload.nom_client || ""),
-      body: "Un devis StrictFood vient d'être accepté. Offre : " + payload.option_choisie +
+      subject: "Devis accepté — StrictFood Phase 1 — " + (payload.nom_client || ""),
+      body: "Un devis StrictFood Phase 1 vient d'être accepté. Offre : " + payload.option_choisie +
             " | Client : " + payload.nom_client + " | Email : " + payload.email_client +
             " | Date : " + dateFormatted + " | Lien : " + signedUrl,
       htmlBody: buildNeuroliaMail_(
-        "Devis accepté — StrictFood",
+        "Devis accepté — StrictFood Phase 1",
         "<p style='font-size:16px;margin:0 0 20px;'>Un devis vient d'être accepté en ligne.</p>" +
         "<table style='width:100%;border-collapse:collapse;margin:0 0 24px;'>" +
           mailRow_("Offre", payload.option_choisie) +
@@ -103,6 +107,8 @@ function doPost(e) {
           "<p style='margin:0 0 24px;'>Votre acceptation du devis a bien été enregistrée. Voici le récapitulatif :</p>" +
           "<table style='width:100%;border-collapse:collapse;margin:0 0 24px;'>" +
             mailRow_("Offre", payload.option_choisie) +
+            mailRow_("Engagement", "Phase 1 — 4 mois") +
+            mailRow_("Montant", "480 €/mois (TVA non applicable, art. 293 B du CGI)") +
             mailRow_("Date d'acceptation", dateFormatted) +
             mailRow_("Mention", "Bon pour accord") +
           "</table>" +
@@ -118,7 +124,7 @@ function doPost(e) {
 
     return jsonOutput_({ ok: true });
   } catch (error) {
-    Logger.log("Devis error: " + String(error));
+    Logger.log("Devis Phase 1 error: " + String(error));
     return jsonOutput_({ ok: false, error: String(error) });
   } finally {
     lock.releaseLock();
@@ -170,7 +176,7 @@ function jsonOutput_(payload) {
 // --- EMAIL HELPERS ---
 
 function formatDateFr_(dateStr) {
-  // Input: "2026-02-18" → Output: "18 février 2026"
+  // Input: "2026-03-02" → Output: "2 mars 2026"
   if (!dateStr) return "";
   var parts = dateStr.split("-");
   if (parts.length !== 3) return dateStr;

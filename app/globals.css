@@ -1,0 +1,471 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================
+   DESIGN TOKENS — StrictFood
+   Source: pipeline/output/01-brand/, pipeline/output/02-art-direction/
+   Regenere via colors.csv + typography.csv (ui-ux-pro-max)
+   ============================================ */
+
+:root {
+  /* ---------- Couleurs — Palette OKLCH ---------- */
+
+  /* Accent primaire — Cuivre Braise */
+  --color-cuivre: oklch(0.67 0.15 68);
+  --color-cuivre-hover: oklch(0.75 0.13 70);
+  --color-cuivre-active: oklch(0.55 0.14 65);
+  --color-cuivre-pale: oklch(0.20 0.02 68);
+
+  /* Legacy aliases — B01 components use text-or-braise etc. */
+  --color-or-braise: var(--color-cuivre);
+  --color-or-braise-hover: var(--color-cuivre-hover);
+  --color-or-braise-active: var(--color-cuivre-active);
+  --color-or-braise-pale: var(--color-cuivre-pale);
+
+  /* Accent secondaire — Grenat Fume */
+  --color-grenat: oklch(0.42 0.10 22);
+  --color-grenat-hover: oklch(0.52 0.08 25);
+  --color-grenat-active: oklch(0.34 0.10 20);
+
+  /* Legacy aliases */
+  --color-sauge: var(--color-grenat);
+  --color-sauge-hover: var(--color-grenat-hover);
+  --color-sauge-active: var(--color-grenat-active);
+
+  /* Accent tertiaire — Feuille Grillee (nutrition badges) */
+  --color-feuille: oklch(0.52 0.06 145);
+  --color-feuille-pale: oklch(0.52 0.06 145 / 0.12);
+
+  /* Fonds — Dark Monochrome */
+  --color-charbon: oklch(0.14 0.008 60);
+  --color-ebene: oklch(0.18 0.008 60);
+  --color-fumee: oklch(0.22 0.01 60);
+  --color-cendre: oklch(0.30 0.01 55);
+
+  /* Texte — Creme Warm */
+  --color-creme: oklch(0.96 0.012 85);
+  --color-ivoire: oklch(0.91 0.015 80);
+  --color-sable: oklch(0.73 0.025 75);
+  --color-pierre: oklch(0.58 0.02 70);
+  --color-gres: oklch(0.42 0.02 65);
+
+  /* Semantiques */
+  --color-success: oklch(0.52 0.06 145);
+  --color-error: oklch(0.52 0.16 25);
+  --color-warning: oklch(0.65 0.14 68);
+  --color-info: oklch(0.55 0.06 240);
+
+  /* ---------- Couleurs Semantiques (Tailwind/shadcn) ---------- */
+  --background: oklch(0.14 0.008 60);
+  --foreground: oklch(0.96 0.012 85);
+
+  --card: oklch(0.22 0.01 60);
+  --card-foreground: oklch(0.96 0.012 85);
+
+  --popover: oklch(0.18 0.008 60);
+  --popover-foreground: oklch(0.96 0.012 85);
+
+  --primary: oklch(0.67 0.15 68);
+  --primary-foreground: oklch(0.14 0.008 60);
+
+  --secondary: oklch(0.42 0.10 22);
+  --secondary-foreground: oklch(0.96 0.012 85);
+
+  --muted: oklch(0.22 0.01 60);
+  --muted-foreground: oklch(0.73 0.025 75);
+
+  --accent: oklch(0.67 0.15 68);
+  --accent-foreground: oklch(0.14 0.008 60);
+
+  --destructive: oklch(0.52 0.16 25);
+  --destructive-foreground: oklch(0.96 0.012 85);
+
+  --border: oklch(0.30 0.01 55);
+  --input: oklch(0.30 0.01 55);
+  --ring: oklch(0.75 0.13 70);
+
+  /* ---------- Typographie ---------- */
+  --font-heading: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Oswald', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-body);
+
+  /* Tailles fluides (clamp) */
+  --font-size-h1: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+  --font-size-display: clamp(3.5rem, 8vw + 1rem, 7.5rem);
+  --font-size-h2: clamp(2rem, 3.5vw + 0.5rem, 3rem);
+  --font-size-h3: clamp(1.625rem, 2.5vw + 0.5rem, 2.25rem);
+  --font-size-h4: clamp(1.25rem, 1.5vw + 0.5rem, 1.5rem);
+  --font-size-h5: clamp(1.125rem, 1vw + 0.5rem, 1.25rem);
+  --font-size-body: clamp(1rem, 0.5vw + 0.875rem, 1.125rem);
+  --font-size-body-lg: clamp(1.125rem, 0.75vw + 0.875rem, 1.25rem);
+  --font-size-small: 0.875rem;
+  --font-size-caption: 0.75rem;
+
+  /* Graisse */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Interligne */
+  --line-height-tight: 1.05;
+  --line-height-snug: 1.15;
+  --line-height-normal: 1.4;
+  --line-height-relaxed: 1.6;
+  --line-height-loose: 1.7;
+
+  /* Espacement lettres */
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-display: -0.04em;
+  --letter-spacing-wide: 0.04em;
+  --letter-spacing-uppercase: 0.08em;
+
+  /* ---------- Espacements ---------- */
+  --spacing-section: 10rem;
+  --spacing-section-mobile: 6rem;
+  --spacing-section-padding: 7.5rem;
+  --spacing-section-padding-mobile: 4rem;
+  --spacing-breath: 3rem;
+  --spacing-gap: 2rem;
+  --spacing-gap-tight: 1rem;
+  --spacing-container: clamp(1.5rem, 5vw, 5rem);
+  --spacing-hero-gap: clamp(1.5rem, 3vw, 2.5rem);
+  --max-width-content: 80rem;
+  --max-width-text: 40rem;
+
+  /* ---------- Radius ---------- */
+  --radius: 0.75rem;
+  --radius-standard: 0.75rem;
+  --radius-large: 1rem;
+  --radius-pill: 999px;
+  --radius-input: 0.5rem;
+  --radius-subtle: 0.375rem;
+  --radius-zero: 0px;
+
+  /* ---------- Ombres ---------- */
+  --shadow-subtle: 0 1px 2px rgba(0, 0, 0, 0.3), 0 0 0 1px oklch(0.25 0.01 60);
+  --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 0 1px oklch(0.30 0.01 55);
+  --shadow-elevated: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 20px oklch(0.67 0.15 68 / 0.15);
+
+  /* ---------- Transitions & Easing ---------- */
+  --easing-standard: cubic-bezier(0.22, 1, 0.36, 1);
+  --easing-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 200ms;
+  --duration-normal: 300ms;
+  --duration-reveal: 600ms;
+  --duration-macro: 800ms;
+  --stagger-delay: 100ms;
+  --transition-hover: 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-button: 200ms ease;
+  --transition-reveal: 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-standard: 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-macro: 800ms cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* ---------- Composants (ui-kit.md) ---------- */
+  --button-padding: 1rem 2rem;
+  --button-padding-mobile: 1.125rem 1.5rem;
+  --button-padding-hero: 1.125rem 2.5rem;
+  --button-min-height: 2.75rem;
+  --button-font-size-hero: 1.0625rem;
+  --button-min-height-hero: 3.25rem;
+  --card-padding: 1.5rem;
+  --card-gap: 1rem;
+  --input-padding: 0.75rem 1rem;
+
+  /* ---------- Layout (header, footer, FAB) ---------- */
+  --header-height: 5rem;
+  --fab-size: 3.5rem;
+  --fab-offset: 1.5rem;
+  --stagger-base: 150ms;
+
+  /* ---------- Alias semantiques ---------- */
+  --color-surface: var(--card);
+  --color-foreground-muted: var(--muted-foreground);
+}
+
+/* ============================================
+   THEME INLINE — Mapping vers Tailwind CSS 4
+   ============================================ */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Named colors — new */
+  --color-cuivre: var(--color-cuivre);
+  --color-cuivre-hover: var(--color-cuivre-hover);
+  --color-cuivre-active: var(--color-cuivre-active);
+  --color-grenat: var(--color-grenat);
+  --color-grenat-hover: var(--color-grenat-hover);
+  --color-feuille: var(--color-feuille);
+
+  /* Named colors — legacy B01 compat */
+  --color-or-braise: var(--color-or-braise);
+  --color-or-braise-hover: var(--color-or-braise-hover);
+  --color-or-braise-active: var(--color-or-braise-active);
+  --color-sauge: var(--color-sauge);
+  --color-sauge-hover: var(--color-sauge-hover);
+
+  --color-charbon: var(--color-charbon);
+  --color-ebene: var(--color-ebene);
+  --color-fumee: var(--color-fumee);
+  --color-cendre: var(--color-cendre);
+
+  --color-creme: var(--color-creme);
+  --color-ivoire: var(--color-ivoire);
+  --color-sable: var(--color-sable);
+  --color-pierre: var(--color-pierre);
+  --color-gres: var(--color-gres);
+
+  --color-success: var(--color-success);
+  --color-error: var(--color-error);
+  --color-warning: var(--color-warning);
+  --color-info: var(--color-info);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-surface: var(--color-surface);
+  --color-foreground-muted: var(--color-foreground-muted);
+
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-heading);
+  --font-display: var(--font-display);
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-body);
+    line-height: var(--line-height-relaxed);
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: var(--font-size-h1);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
+    color: var(--color-ivoire);
+  }
+
+  h2 {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-snug);
+    letter-spacing: var(--letter-spacing-tight);
+    color: var(--color-ivoire);
+  }
+
+  h3 {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h3);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-snug);
+    color: var(--color-ivoire);
+  }
+
+  h4 {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h4);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.2;
+    color: var(--color-ivoire);
+  }
+
+  h5 {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h5);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.25;
+    color: var(--color-ivoire);
+  }
+
+  p {
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-sable);
+  }
+}
+
+/* ============================================
+   UTILITIES CUSTOM
+   ============================================ */
+@layer utilities {
+  .container-custom {
+    width: 100%;
+    max-width: var(--max-width-content);
+    margin-inline: auto;
+    padding-inline: var(--spacing-container);
+  }
+
+  .section-padding {
+    padding-block: var(--spacing-section-padding-mobile);
+  }
+
+  @media (min-width: 1024px) {
+    .section-padding {
+      padding-block: var(--spacing-section-padding);
+    }
+  }
+
+  .section-spacing {
+    margin-block: var(--spacing-section-mobile);
+  }
+
+  @media (min-width: 1024px) {
+    .section-spacing {
+      margin-block: var(--spacing-section);
+    }
+  }
+
+  .full-bleed {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .max-w-text {
+    max-width: var(--max-width-text);
+  }
+}
+
+/* ============================================
+   COMPONENT STYLES
+   ============================================ */
+@layer utilities {
+  .hover\:brightness-110:hover {
+    filter: brightness(1.1);
+  }
+}
+
+/* ============================================
+   CTA SHIMMER — reflet cuivre au hover
+   ============================================ */
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.25) 45%,
+    rgba(255, 255, 255, 0.08) 55%,
+    transparent 65%
+  );
+  translate: -100% 0;
+  transition: translate var(--duration-reveal) var(--easing-standard);
+  pointer-events: none;
+}
+
+.btn-shimmer:hover::after {
+  translate: 100% 0;
+}
+
+/* ============================================
+   HEADER BACKDROP
+   ============================================ */
+.header-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: 1px solid transparent;
+  border-radius: 0;
+  box-shadow: none;
+  pointer-events: none;
+  transition:
+    top var(--duration-normal) var(--easing-standard),
+    left var(--duration-normal) var(--easing-standard),
+    right var(--duration-normal) var(--easing-standard),
+    bottom var(--duration-normal) var(--easing-standard),
+    background var(--duration-normal) var(--easing-standard),
+    backdrop-filter var(--duration-normal) var(--easing-standard),
+    -webkit-backdrop-filter var(--duration-normal) var(--easing-standard),
+    border-color var(--duration-normal) var(--easing-standard),
+    border-radius var(--duration-normal) var(--easing-standard),
+    box-shadow var(--duration-normal) var(--easing-standard);
+}
+
+.header-backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0.04) 40%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity var(--duration-normal) var(--easing-standard);
+  pointer-events: none;
+}
+
+.header-backdrop[data-scrolled="true"] {
+  top: 0.375rem;
+  left: clamp(0.75rem, 3vw, 3rem);
+  right: clamp(0.75rem, 3vw, 3rem);
+  bottom: 0.375rem;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px) saturate(180%) brightness(1.15);
+  -webkit-backdrop-filter: blur(12px) saturate(180%) brightness(1.15);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.header-backdrop[data-scrolled="true"]::after {
+  opacity: 1;
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  background: oklch(0.14 0.008 60 / 0.97);
+}
