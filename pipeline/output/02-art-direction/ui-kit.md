@@ -40,8 +40,39 @@
 - **Hover** : background var(--color-surface) oklch(0.22), color var(--color-foreground), 200ms ease
 - **Usage** : Navigation secondaire, liens "en savoir plus", actions tertiaires
 
+### Effet Shimmer (`.btn-shimmer`)
+
+Reflet cuivre horizontal au hover, applique sur le CTA primaire hero.
+
+- **Technique** : pseudo-element `::after` avec gradient translucide (blanc 25% → 8%), translate de -100% a +100% au hover
+- **Transition** : var(--duration-reveal) var(--easing-standard) — 600ms cubic-bezier(0.22, 1, 0.36, 1)
+- **Classe CSS** : `.btn-shimmer` (definie dans globals.css)
+- **Usage** : Ajouter la classe sur tout CTA primaire qui necessite un reflet au hover. Le bouton doit avoir `position: relative; overflow: hidden;`
+- **Fichier source** : `app/globals.css` lignes 379-402
+
+### Liquid Glass (`<LiquidGlassLink>`)
+
+Bouton secondaire hero avec glass morphism avance. Composant React dedie.
+
+- **Composant** : `components/ui/liquid-glass-link.tsx`
+- **Props** : etend `React.AnchorHTMLAttributes<HTMLAnchorElement>` (balise `<a>`)
+- **Apparence** :
+  - Background : rgba(255, 255, 255, 0.08)
+  - Border : 1px solid rgba(255, 255, 255, 0.12)
+  - Box-shadow : inset specular highlight + outer shadow
+  - Specular : gradient top-to-bottom (blanc 22% → 6% → transparent)
+  - Radius : var(--radius-pill)
+  - Couleur texte : var(--color-creme)
+- **Backdrop-filter** :
+  - Chromium : SVG filter custom (`feTurbulence` + `feDisplacementMap` + `feGaussianBlur`) pour un effet liquide organique
+  - Safari/Firefox (fallback) : `blur(4px) saturate(180%) brightness(1.15)`
+  - Detection : `window.chrome` au mount (client-side)
+- **Hover** : background → 0.12, border → 0.2, shadow intensifie
+- **Focus** : ring 2px var(--color-cuivre)
+- **Transitions** : var(--duration-normal) var(--easing-standard) sur background, border-color, box-shadow
+
 > **Interdit** : Aucun autre style de bouton. Si un composant necessite un bouton,
-> il utilise l'une de ces 3 variantes. Pas de bouton custom par section.
+> il utilise l'une de ces 3 variantes + les 2 effets hero ci-dessus. Pas de bouton custom par section.
 
 ## Cards
 

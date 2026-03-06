@@ -96,7 +96,7 @@ npm run dev
 | Background | Charbon — oklch(0.14 0.008 60) / #141210 |
 | Forme / Radius | Standard 12px / Large 16px / Pill 999px / Input 8px |
 | Mouvement | cubic-bezier(0.22, 1, 0.36, 1), 300-800ms, revelations progressives |
-| Typographies | Space Grotesk (titres) + DM Sans (body) |
+| Typographies | Oswald (display/H1) + Space Grotesk (titres H2-H5) + DM Sans (body) |
 | DESIGN_VARIANCE | 5/10 |
 | MOTION_INTENSITY | 6/10 |
 | VISUAL_DENSITY | 3/10 |

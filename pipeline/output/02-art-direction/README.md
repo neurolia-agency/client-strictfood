@@ -18,7 +18,7 @@
 | Structure | Hero > La Promesse > Nos Artisans > L'Experience > Avis & Confiance > Contact |
 | Espace sections | 160px desktop / 96px mobile |
 | Radius | Standard 12px / Large 16px / Pill 999px / Input 8px |
-| Typographies | Space Grotesk (titres) + DM Sans (body) |
+| Typographies | Oswald (display/H1) + Space Grotesk (titres H2-H5) + DM Sans (body) |
 | Texture | Grain subtil sur certaines surfaces, matieres brutes evoquees (bois, metal) |
 
 ## Equation Visuelle
@@ -36,7 +36,7 @@ Athletic Precision = Space Grotesk bold + grille 12col + radius 12px + easing (0
 - [ ] Le fond est sombre (Charbon/Ebene) ?
 - [ ] L'accent est Cuivre Braise et represente moins de 15% de la surface ?
 - [ ] Le produit food est surdimensionne et eclaire dramatiquement ?
-- [ ] La typographie des titres est Space Grotesk bold ?
+- [ ] La typographie H1 est Oswald bold, H2-H5 Space Grotesk bold ?
 - [ ] L'espacement entre sections est >= 120px desktop ?
 - [ ] Le hero n'est PAS centre ?
 - [ ] Les animations utilisent cubic-bezier(0.22, 1, 0.36, 1) ?
