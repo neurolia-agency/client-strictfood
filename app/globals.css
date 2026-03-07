@@ -27,6 +27,7 @@
   --color-grenat: oklch(0.42 0.10 22);
   --color-grenat-hover: oklch(0.52 0.08 25);
   --color-grenat-active: oklch(0.34 0.10 20);
+  --color-grenat-pale: oklch(0.42 0.10 22 / 0.12);
 
   /* Legacy aliases */
   --color-sauge: var(--color-grenat);
@@ -218,6 +219,7 @@
   --color-cuivre-active: var(--color-cuivre-active);
   --color-grenat: var(--color-grenat);
   --color-grenat-hover: var(--color-grenat-hover);
+  --color-grenat-pale: var(--color-grenat-pale);
   --color-feuille: var(--color-feuille);
 
   /* Named colors — legacy B01 compat */
