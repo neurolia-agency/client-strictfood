@@ -72,9 +72,10 @@ function ZeroGauge() {
     if (!isInView) return;
     if (prefersReducedMotion) {
       count.set(0);
-    } else {
-      animate(count, 0, { duration: 0.8, ease: EASE });
+      return;
     }
+    const controls = animate(count, 0, { duration: 0.8, ease: EASE });
+    return () => controls.stop();
   }, [isInView, count, prefersReducedMotion]);
 
   useEffect(() => {
@@ -151,10 +152,10 @@ function NutriBadge({ children }: { children: React.ReactNode }) {
       className="inline-flex items-center relative"
       style={{
         padding: "12px 20px 12px 16px",
-        background: "oklch(0.22 0.01 60 / 0.6)",
-        borderLeft: "2px solid oklch(0.67 0.15 68 / 0.6)",
-        borderBottom: "1px solid oklch(0.30 0.01 55 / 0.4)",
-        borderRight: "1px solid oklch(0.30 0.01 55 / 0.2)",
+        background: "color-mix(in oklch, var(--color-fumee) 60%, transparent)",
+        borderLeft: "2px solid color-mix(in oklch, var(--color-cuivre) 60%, transparent)",
+        borderBottom: "1px solid color-mix(in oklch, var(--color-cendre) 40%, transparent)",
+        borderRight: "1px solid color-mix(in oklch, var(--color-cendre) 20%, transparent)",
         borderTop: "none",
       }}
     >
@@ -169,7 +170,7 @@ function NutriBadge({ children }: { children: React.ReactNode }) {
         }}
         preserveAspectRatio="none"
         viewBox="0 0 120 4"
-        fill="oklch(0.22 0.01 60 / 0.6)"
+        fill="color-mix(in oklch, var(--color-fumee) 60%, transparent)"
         aria-hidden="true"
       >
         <path d="M0 4 L0 2 L3 1.2 L7 2.8 L12 0.8 L18 2.4 L23 1 L28 3 L34 0.5 L40 2.6 L45 1.4 L51 2.9 L56 0.6 L62 2.2 L67 1.1 L73 3.1 L78 0.9 L84 2.5 L89 1.3 L95 2.7 L100 0.7 L106 2.3 L111 1.5 L117 2.8 L120 1.8 L120 4 Z" />
@@ -184,7 +185,7 @@ function NutriBadge({ children }: { children: React.ReactNode }) {
           top: 4,
           bottom: 4,
           width: 1,
-          background: "repeating-linear-gradient(to bottom, oklch(0.67 0.15 68 / 0.25) 0px, oklch(0.67 0.15 68 / 0.25) 3px, transparent 3px, transparent 6px)",
+          background: "repeating-linear-gradient(to bottom, color-mix(in oklch, var(--color-cuivre) 25%, transparent) 0px, color-mix(in oklch, var(--color-cuivre) 25%, transparent) 3px, transparent 3px, transparent 6px)",
         }}
       />
 
@@ -258,7 +259,6 @@ function MacroLens({
             borderRadius: "50%",
             overflow: "hidden",
             flexShrink: 0,
-            willChange: "transform",
             boxShadow: `0 4px 20px rgba(${rawColor}, 0.3), 0 2px 8px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.3)`,
             border: "1px solid rgba(255, 255, 255, 0.1)",
           }}
@@ -399,7 +399,7 @@ export default function LaPromesse() {
   return (
     <section
       id="promesse"
-      className="section-padding overflow-clip"
+      className="section-padding overflow-visible"
       style={{
         background: `
           radial-gradient(ellipse 100% 60% at 50% 0%, oklch(0.67 0.15 68 / 0.15) 0%, transparent 50%),
@@ -451,7 +451,7 @@ export default function LaPromesse() {
 
           {/* Image */}
           <motion.div
-            className="flex items-center justify-center order-first lg:order-first overflow-visible"
+            className="flex items-center justify-center order-first overflow-visible"
             variants={fadeUp}
           >
             <Image
@@ -460,7 +460,7 @@ export default function LaPromesse() {
               width={1000}
               height={1000}
               className="object-contain"
-              style={{ width: "100%", transform: "scaleX(-1) scale(2.5)", willChange: "transform" }}
+              style={{ width: "100%", transform: "scaleX(-1) scale(2.5)" }}
               sizes="(max-width: 1024px) 100vw, 55vw"
             />
           </motion.div>
@@ -468,10 +468,11 @@ export default function LaPromesse() {
 
         {/* ── Bloc 2 — Macros ── */}
         <motion.div
-          className="grid grid-cols-1 lg:grid-cols-[38fr_62fr] items-center mt-32 lg:mt-64"
+          className="grid grid-cols-1 lg:grid-cols-[38fr_62fr] items-center mt-36 lg:mt-48"
           style={{ gap: "var(--spacing-gap)" }}
           variants={stagger}
           {...motionProps}
+          viewport={{ once: true, amount: 0.15 }}
         >
           {/* Texte — left, titre mis en valeur */}
           <motion.div className="flex flex-col gap-6 lg:pr-8" variants={fadeUp}>
@@ -505,17 +506,15 @@ export default function LaPromesse() {
             <div
               className="relative overflow-visible flex items-center justify-center"
             >
-              <div className="overflow-visible">
-                <Image
-                  src="/images/eclate.webp"
-                  alt="STRICT Poulet StrictFood vue éclatée avec macros affichées"
-                  width={1000}
-                  height={1000}
-                  className="object-contain"
-                  style={{ width: "100%", transform: "scale(1.69)", willChange: "transform" }}
-                  sizes="(max-width: 1024px) 100vw, 55vw"
-                />
-              </div>
+              <Image
+                src="/images/eclate.webp"
+                alt="STRICT Poulet StrictFood vue éclatée avec macros affichées"
+                width={1000}
+                height={1000}
+                className="object-contain"
+                style={{ width: "100%", transform: "scale(1.69)" }}
+                sizes="(max-width: 1024px) 100vw, 55vw"
+              />
 
               {/* 3 lentilles-loupes — positionnées sur les ingrédients */}
               {LENS_MACROS.map((macro, i) => (
@@ -548,7 +547,7 @@ export default function LaPromesse() {
             </p>
             <div className="flex flex-col gap-4 lg:hidden">
               {LENS_MACROS.map((macro, i) => (
-                <MacroLens key={macro.label} {...macro} index={i} />
+                <MacroLens key={macro.label} {...macro} textSide="right" index={i} />
               ))}
               <CalorieBadge />
             </div>
