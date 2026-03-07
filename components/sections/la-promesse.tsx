@@ -6,7 +6,6 @@ import {
   useInView,
   useReducedMotion,
   useMotionValue,
-  useTransform,
   animate,
 } from "motion/react";
 import Image from "next/image";
@@ -30,25 +29,27 @@ const stagger = {
 };
 
 /* ── STRICT Poulet — lentilles-loupes sur ingrédients ── */
+const LENS_DIAMETER = 80;
+
 const LENS_MACROS = [
   {
     label: "Protéines", value: "60.5", unit: "g",
     color: "var(--color-feuille)", rawColor: "92, 120, 88",
     bgPos: "70.5% 56%", bgSize: "2500%",
-    position: { top: "50%", right: "9%" },
+    position: { top: "52%", right: "10%" },
     textSide: "right" as const,
   },
   {
     label: "Glucides", value: "45", unit: "g",
     color: "var(--color-sable)", rawColor: "181, 170, 152",
-    bgPos: "27.5% 74%", bgSize: "2500%",
-    position: { bottom: "5%", right: "81%" },
+    bgPos: "27.5% 75%", bgSize: "2500%",
+    position: { bottom: "5%", right: "82%" },
     textSide: "left" as const,
   },
   {
     label: "Lipides", value: "19.4", unit: "g",
     color: "var(--color-pierre)", rawColor: "138, 128, 112",
-    bgPos: "27.5% 49%", bgSize: "2500%",
+    bgPos: "28% 49%", bgSize: "2500%",
     position: { top: "40%", right: "81%" },
     textSide: "left" as const,
   },
@@ -146,7 +147,7 @@ function ZeroGauge() {
 /* ── Badge nutritionnel — "L'Étiquette" label cousu ── */
 function NutriBadge({ children }: { children: React.ReactNode }) {
   return (
-    <motion.span
+    <span
       className="inline-flex items-center relative"
       style={{
         padding: "12px 20px 12px 16px",
@@ -156,10 +157,6 @@ function NutriBadge({ children }: { children: React.ReactNode }) {
         borderRight: "1px solid oklch(0.30 0.01 55 / 0.2)",
         borderTop: "none",
       }}
-      initial={{ opacity: 0, y: 8 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.5 }}
-      transition={{ duration: 0.5, ease: EASE }}
     >
       {/* SVG torn edge — bord déchiré en haut */}
       <svg
@@ -178,8 +175,8 @@ function NutriBadge({ children }: { children: React.ReactNode }) {
         <path d="M0 4 L0 2 L3 1.2 L7 2.8 L12 0.8 L18 2.4 L23 1 L28 3 L34 0.5 L40 2.6 L45 1.4 L51 2.9 L56 0.6 L62 2.2 L67 1.1 L73 3.1 L78 0.9 L84 2.5 L89 1.3 L95 2.7 L100 0.7 L106 2.3 L111 1.5 L117 2.8 L120 1.8 L120 4 Z" />
       </svg>
 
-      {/* Ligne de couture — dashed verticale animée */}
-      <motion.span
+      {/* Ligne de couture */}
+      <span
         aria-hidden="true"
         style={{
           position: "absolute",
@@ -188,12 +185,7 @@ function NutriBadge({ children }: { children: React.ReactNode }) {
           bottom: 4,
           width: 1,
           background: "repeating-linear-gradient(to bottom, oklch(0.67 0.15 68 / 0.25) 0px, oklch(0.67 0.15 68 / 0.25) 3px, transparent 3px, transparent 6px)",
-          transformOrigin: "top",
         }}
-        initial={{ scaleY: 0 }}
-        whileInView={{ scaleY: 1 }}
-        viewport={{ once: true, amount: 0.5 }}
-        transition={{ duration: 0.6, ease: EASE, delay: 0.2 }}
       />
 
       {/* Contenu texte — décalé pour dégager la couture */}
@@ -211,80 +203,28 @@ function NutriBadge({ children }: { children: React.ReactNode }) {
           {children}
         </span>
       </span>
-    </motion.span>
+    </span>
   );
 }
 
-/* ── Caustiques SVG — motifs de lumière réfractée ── */
-function CausticsSVG({ rawColor, index }: { rawColor: string; index: number }) {
+/* ── Caustiques — overlay CSS statique (remplace SVG animé pour perf) ── */
+function CausticsOverlay({ rawColor }: { rawColor: string }) {
   return (
-    <svg
+    <span
       aria-hidden="true"
       style={{
         position: "absolute",
         inset: 0,
-        width: "100%",
-        height: "100%",
         borderRadius: "inherit",
+        background: `radial-gradient(ellipse at 35% 30%, rgba(255,255,255,0.12) 0%, transparent 60%), radial-gradient(ellipse at 60% 65%, rgba(${rawColor},0.08) 0%, transparent 55%)`,
         mixBlendMode: "screen",
         pointerEvents: "none",
       }}
-      viewBox="0 0 80 80"
-    >
-      <motion.ellipse
-        cx={28 + index * 8}
-        cy={25 + index * 5}
-        rx={18}
-        ry={10}
-        fill={`rgba(255, 255, 255, 0.12)`}
-        filter="url(#caustic-blur)"
-        animate={{
-          cx: [28 + index * 8, 35 + index * 6, 24 + index * 10, 28 + index * 8],
-          cy: [25 + index * 5, 32 + index * 3, 20 + index * 7, 25 + index * 5],
-          opacity: [0.12, 0.2, 0.08, 0.12],
-        }}
-        transition={{ duration: 5 + index * 0.8, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.ellipse
-        cx={55 - index * 5}
-        cy={50 + index * 4}
-        rx={14}
-        ry={8}
-        fill={`rgba(${rawColor}, 0.1)`}
-        filter="url(#caustic-blur)"
-        animate={{
-          cx: [55 - index * 5, 48 - index * 3, 60 - index * 7, 55 - index * 5],
-          cy: [50 + index * 4, 44 + index * 6, 55 + index * 2, 50 + index * 4],
-          opacity: [0.1, 0.18, 0.06, 0.1],
-        }}
-        transition={{ duration: 6 + index * 0.5, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.ellipse
-        cx={40}
-        cy={38}
-        rx={22}
-        ry={12}
-        fill="rgba(255, 255, 255, 0.06)"
-        filter="url(#caustic-blur-lg)"
-        animate={{
-          opacity: [0.06, 0.14, 0.04, 0.06],
-          rx: [22, 26, 20, 22],
-        }}
-        transition={{ duration: 4.5 + index * 0.6, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <defs>
-        <filter id="caustic-blur">
-          <feGaussianBlur stdDeviation="4" />
-        </filter>
-        <filter id="caustic-blur-lg">
-          <feGaussianBlur stdDeviation="6" />
-        </filter>
-      </defs>
-    </svg>
+    />
   );
 }
 
-/* ── MacroLens — lentille-loupe sur ingrédient ── */
+/* ── MacroLens — lentille-loupe fixe sur ingrédient ── */
 function MacroLens({
   label,
   value,
@@ -292,7 +232,7 @@ function MacroLens({
   color,
   rawColor,
   bgPos,
-  bgSize = "500%",
+  bgSize,
   index,
   textSide = "right",
 }: {
@@ -302,59 +242,37 @@ function MacroLens({
   color: string;
   rawColor: string;
   bgPos: string;
-  bgSize?: string;
+  bgSize: string;
   index: number;
   textSide?: "left" | "right";
 }) {
-  const prefersReducedMotion = useReducedMotion();
-  const floatY = useMotionValue(0);
-  const inverseY = useTransform(floatY, v => -v);
-
-  useEffect(() => {
-    if (prefersReducedMotion) return;
-    const controls = animate(floatY, [0, -3, 0, 3, 0], {
-      duration: 4 + index * 0.7,
-      repeat: Infinity,
-      ease: "easeInOut",
-    });
-    return () => controls.stop();
-  }, [floatY, index, prefersReducedMotion]);
-
   return (
-    <motion.div
-      initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, scale: 0.85, filter: "blur(8px)" }}
-      whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-      viewport={{ once: true, amount: 0.5 }}
-      transition={{ duration: 0.65, ease: EASE, delay: 0.2 + index * 0.15 }}
-    >
-      {/* Float perpétuel */}
-      <motion.div
-        style={{ y: floatY, position: "relative", width: 80, height: 80 }}
-      >
+    <div>
+      <div style={{ position: "relative", width: LENS_DIAMETER, height: LENS_DIAMETER }}>
         {/* LA LENTILLE */}
         <div
           style={{
             position: "relative",
-            width: 80,
-            height: 80,
+            width: LENS_DIAMETER,
+            height: LENS_DIAMETER,
             borderRadius: "50%",
             overflow: "hidden",
             flexShrink: 0,
+            willChange: "transform",
             boxShadow: `0 4px 20px rgba(${rawColor}, 0.3), 0 2px 8px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.3)`,
             border: "1px solid rgba(255, 255, 255, 0.1)",
           }}
         >
-          {/* Zoomed background — l'effet loupe */}
-          <motion.span
+          {/* Zoomed background — effet loupe */}
+          <span
             aria-hidden="true"
             style={{
               position: "absolute",
-              inset: -6,
+              inset: 0,
               borderRadius: "inherit",
               backgroundImage: "url(/images/eclate.webp)",
               backgroundSize: bgSize,
               backgroundPosition: bgPos,
-              y: inverseY,
             }}
           />
 
@@ -382,11 +300,11 @@ function MacroLens({
           />
 
           {/* Caustiques */}
-          <CausticsSVG rawColor={rawColor} index={index} />
+          <CausticsOverlay rawColor={rawColor} />
         </div>
 
         {/* LES VALEURS — positionnées à gauche ou à droite */}
-        <motion.div
+        <div
           style={{
             position: "absolute",
             top: "50%",
@@ -396,10 +314,6 @@ function MacroLens({
               ? { right: "calc(100% + 12px)", textAlign: "right" as const }
               : { left: "calc(100% + 12px)", textAlign: "left" as const }),
           }}
-          initial={prefersReducedMotion ? {} : { opacity: 0, x: textSide === "left" ? 8 : -8 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.4, ease: EASE, delay: 0.4 + index * 0.15 }}
         >
           <span
             className="font-body uppercase block"
@@ -434,24 +348,16 @@ function MacroLens({
               {unit}
             </span>
           </span>
-        </motion.div>
-      </motion.div>
-    </motion.div>
+        </div>
+      </div>
+    </div>
   );
 }
 
 /* ── CalorieBadge — nombre brut, très gros, sans badge ── */
 function CalorieBadge() {
-  const prefersReducedMotion = useReducedMotion();
-
   return (
-    <motion.div
-      style={{ display: "inline-flex", alignItems: "baseline", gap: 4 }}
-      initial={prefersReducedMotion ? {} : { opacity: 0, y: 12 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.5 }}
-      transition={{ duration: 0.55, ease: EASE, delay: 0.3 }}
-    >
+    <div style={{ display: "inline-flex", alignItems: "baseline", gap: 4 }}>
       <span
         className="font-heading"
         style={{
@@ -474,7 +380,7 @@ function CalorieBadge() {
       >
         {CALORIES.unit}
       </span>
-    </motion.div>
+    </div>
   );
 }
 
@@ -493,7 +399,7 @@ export default function LaPromesse() {
   return (
     <section
       id="promesse"
-      className="section-padding overflow-visible"
+      className="section-padding overflow-clip"
       style={{
         background: `
           radial-gradient(ellipse 100% 60% at 50% 0%, oklch(0.67 0.15 68 / 0.15) 0%, transparent 50%),
@@ -554,7 +460,7 @@ export default function LaPromesse() {
               width={1000}
               height={1000}
               className="object-contain"
-              style={{ width: "100%", transform: "scaleX(-1) scale(2.5)" }}
+              style={{ width: "100%", transform: "scaleX(-1) scale(2.5)", willChange: "transform" }}
               sizes="(max-width: 1024px) 100vw, 55vw"
             />
           </motion.div>
@@ -562,7 +468,7 @@ export default function LaPromesse() {
 
         {/* ── Bloc 2 — Macros ── */}
         <motion.div
-          className="grid grid-cols-1 lg:grid-cols-[38fr_62fr] items-center mt-32 lg:mt-52"
+          className="grid grid-cols-1 lg:grid-cols-[38fr_62fr] items-center mt-32 lg:mt-64"
           style={{ gap: "var(--spacing-gap)" }}
           variants={stagger}
           {...motionProps}
@@ -587,7 +493,7 @@ export default function LaPromesse() {
                 maxWidth: "var(--max-width-text)",
               }}
             >
-              Laisse tomber les calculs compliqués et les mauvaises surprises.<br/> On te donne la composition exacte de ton burger : de l'énergie brute, du vrai goût, et pas une seule goutte d'huile en cuisine.<br/>Savoure, tout simplement.
+              Des ingrédients bruts, un équilibre parfait et des calories transparentes.<br/>Le vrai plaisir, les calculs en moins.
             </p>
           </motion.div>
 
@@ -606,7 +512,7 @@ export default function LaPromesse() {
                   width={1000}
                   height={1000}
                   className="object-contain"
-                  style={{ width: "100%", transform: "scale(1.69)" }}
+                  style={{ width: "100%", transform: "scale(1.69)", willChange: "transform" }}
                   sizes="(max-width: 1024px) 100vw, 55vw"
                 />
               </div>

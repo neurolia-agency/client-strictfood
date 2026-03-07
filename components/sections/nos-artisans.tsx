@@ -160,7 +160,7 @@ export default function NosArtisans() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section id="artisans" style={{ background: "var(--color-charbon)" }}>
+    <section id="artisans" className="relative z-[1]" style={{ background: "var(--color-charbon)" }}>
       {/* Sticky scroll stack — H2 intégré dans le premier panel */}
       <div>
         {ARTISANS.map((artisan, i) => (

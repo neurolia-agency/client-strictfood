@@ -172,7 +172,7 @@ function TestimonialCard({
 }) {
   return (
     <blockquote
-      className="flex flex-col justify-between"
+      className="flex flex-col justify-between h-full"
       style={{
         background: "var(--color-fumee)",
         border: "1px solid var(--color-cendre)",
@@ -268,10 +268,10 @@ export default function AvisConfiance() {
           {...motionProps}
         />
 
-        {/* ── Temoignages — grille asymetrique 2+1 ── */}
+        {/* ── Temoignages — grille 3 colonnes egales ── */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6"
-          style={{ maxWidth: "48rem", margin: "0 auto" }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6"
+          style={{ maxWidth: "56rem", margin: "0 auto" }}
           variants={staggerSlow}
           {...motionProps}
         >
@@ -279,7 +279,7 @@ export default function AvisConfiance() {
             <motion.div
               key={i}
               variants={fadeUp}
-              className={i === 2 ? "md:col-span-2 md:max-w-[65%] md:mx-auto" : ""}
+              className="h-full"
             >
               <TestimonialCard text={t.text} author={t.author} />
             </motion.div>
