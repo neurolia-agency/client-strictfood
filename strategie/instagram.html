@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strategie Instagram | Neurolia x StrictFood</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap">
+  <link rel="stylesheet" href="design-system.css">
+  <style>
+    /* ======================================
+       POST CARDS (editorial calendar)
+       ====================================== */
+    .post-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-bottom: var(--space-2xl);
+    }
+
+    @media (max-width: 768px) {
+      .post-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .post-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      transition: border-color var(--duration-normal), transform var(--duration-normal);
+    }
+
+    .post-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-hover);
+    }
+
+    .post-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: var(--space-md);
+    }
+
+    .post-card-id {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+      background: var(--bg-contrast);
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      white-space: nowrap;
+    }
+
+    .post-card-date {
+      font-size: 13px;
+      color: var(--text-subtle);
+    }
+
+    .post-card-day {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+
+    .post-card-title {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .post-card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: var(--space-md);
+    }
+
+    .post-card-hook {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-style: italic;
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.02);
+      border-left: 2px solid var(--text-subtle);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin-bottom: var(--space-sm);
+    }
+
+    .post-card-objective {
+      font-size: 13px;
+      color: var(--text-subtle);
+      line-height: 1.6;
+    }
+
+    /* Pillar tag colors */
+    .tag-plat       { background: rgba(196, 92, 59, 0.2); color: var(--accent-pale); white-space: nowrap; }
+    .tag-cuisine    { background: rgba(15, 184, 196, 0.2); color: var(--accent-2); white-space: nowrap; }
+    .tag-macros     { background: rgba(139, 92, 246, 0.2); color: var(--accent-3); white-space: nowrap; }
+    .tag-equipe     { background: rgba(16, 185, 129, 0.2); color: var(--accent-4); white-space: nowrap; }
+    .tag-quartier   { background: rgba(245, 158, 11, 0.2); color: var(--accent-5); white-space: nowrap; }
+
+    /* Pillar bar colors */
+    .pillar-plat    { background: var(--accent); }
+    .pillar-cuisine { background: var(--accent-2); }
+    .pillar-macros  { background: var(--accent-3); }
+    .pillar-equipe  { background: var(--accent-4); }
+    .pillar-quartier{ background: var(--accent-5); }
+
+    /* Week label */
+    .week-label {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--text-primary);
+      margin-bottom: var(--space-lg);
+      padding-left: var(--space-md);
+      border-left: 3px solid var(--accent-2);
+    }
+
+    .week-label span {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-left: 12px;
+    }
+
+    /* Placeholder section */
+    .placeholder-notice {
+      background: var(--bg-contrast);
+      border: 1px dashed rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl) var(--space-2xl);
+      text-align: center;
+      margin-bottom: var(--space-2xl);
+    }
+
+    .placeholder-notice p {
+      font-size: 15px;
+      color: var(--text-subtle);
+      font-style: italic;
+    }
+
+    .placeholder-notice .placeholder-label {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+      margin-bottom: var(--space-sm);
+      font-style: normal;
+    }
+
+    /* Subsection title */
+    .subsection-title {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--text-primary);
+      margin-bottom: var(--space-lg);
+      margin-top: var(--space-2xl);
+    }
+
+    /* Calendar type grid */
+    .week-type-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: var(--space-2xl);
+    }
+
+    @media (max-width: 768px) {
+      .week-type-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .week-type-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .week-type-day {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .week-type-pillar {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .week-type-format {
+      font-size: 11px;
+      color: var(--text-subtle);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================
+       NAVIGATION
+       ============================================ -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Neurolia <span>&times;</span> StrictFood</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#overview">Vue d'ensemble</a></li>
+        <li><a href="#periode1">Periode 1</a></li>
+        <li><a href="#periode2">Periode 2</a></li>
+        <li><a href="#periode3">Periode 3</a></li>
+        <li><a href="#vision">Vision</a></li>
+      </ul>
+    </div>
+    <div class="nav-progress" id="navProgress"></div>
+  </nav>
+
+  <!-- ============================================
+       HERO
+       ============================================ -->
+  <section class="hero">
+    <div class="container">
+      <p class="hero-label reveal">Instagram Strategy</p>
+      <h1 class="reveal">Strategie Instagram</h1>
+      <p class="hero-subtitle reveal">@strictfood &middot; 1 368 followers &middot; Dark Food Premium</p>
+
+      <div class="summary-cards">
+        <a href="#periode1" class="summary-card reveal" data-accent="1">
+          <p class="summary-card-label">Periode 1</p>
+          <p class="summary-card-meta">Mars &rarr; debut avril &middot; S1 a S4</p>
+          <p class="summary-card-title">Le Reboot Premium</p>
+          <p>Transformer le feed inactif en vitrine Dark Food Premium credible. Poser le standard visuel.</p>
+        </a>
+        <a href="#periode2" class="summary-card reveal reveal-delay-1" data-accent="2">
+          <p class="summary-card-label">Periode 2</p>
+          <p class="summary-card-meta">Avril &middot; S5 a S8</p>
+          <p class="summary-card-title">Le Rythme & l'Engagement</p>
+          <p>Installer le rythme de croisiere. Diversifier les formats. Construire la relation avec l'audience.</p>
+        </a>
+        <a href="#periode3" class="summary-card reveal reveal-delay-2" data-accent="3">
+          <p class="summary-card-label">Periode 3</p>
+          <p class="summary-card-meta">Mai &middot; S9+</p>
+          <p class="summary-card-title">L'Amplification</p>
+          <p>Capitaliser sur les donnees. Series recurrentes. Premiers UGC. Le compte devient un media.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       VUE D'ENSEMBLE
+       ============================================ -->
+  <section class="section" id="overview" data-accent="1">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-header-top">
+          <div class="section-number">00</div>
+          <div>
+            <h2>Vue d'ensemble</h2>
+            <p class="section-header-subtitle">Architecture editoriale, piliers, calendrier type et guidelines creatives pour l'ensemble de la strategie Instagram StrictFood.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Context banner -->
+      <div class="context-banner reveal">
+        <p><strong>Role d'Instagram dans l'ecosysteme :</strong> Instagram n'est pas le canal d'acquisition principal (c'est Google). Son role est triple :</p>
+        <div class="context-chips">
+          <span class="context-chip">Validation sociale</span>
+          <span class="context-chip">Univers de marque</span>
+          <span class="context-chip">Retention communautaire</span>
+        </div>
+        <p>Le prospect qui decouvre StrictFood via Google verifie l'Instagram. Le feed doit "fermer la vente". On ne court pas apres la viralite. On construit un feed qui convertit la confiance.</p>
+      </div>
+
+      <!-- 5 Piliers -->
+      <h3 class="subsection-title reveal">Les 5 piliers editoriaux</h3>
+      <table class="data-table reveal">
+        <thead>
+          <tr>
+            <th>Pilier</th>
+            <th>%</th>
+            <th>Contenu type</th>
+            <th>Fonction</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tag tag-plat">Le Plat</span></td>
+            <td>35%</td>
+            <td>Hero shots produits, close-ups textures, carrousels carte</td>
+            <td>Stopper le scroll, declencher l'envie, prouver le positionnement premium</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-cuisine">La Cuisine</span></td>
+            <td>25%</td>
+            <td>Carrousels "du brut a l'assiette", Reels preparation, fournisseurs nommes</td>
+            <td>Credibilite "fait maison", storytelling sourcing local</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-macros">Les Macros</span></td>
+            <td>18%</td>
+            <td>Macro breakdowns, comparaisons "notre burger vs classique", tips nutrition</td>
+            <td>Materialiser le "cheat meal qui n'en est pas un", autorite nutrition</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-equipe">L'Equipe</span></td>
+            <td>15%</td>
+            <td>Portraits fondateurs, rush du midi, mini-storytelling quotidien</td>
+            <td>Humaniser la marque, creer l'attachement emotionnel</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-quartier">Le Quartier</span></td>
+            <td>7%</td>
+            <td>Repost clients, partenaires locaux, avis mis en forme</td>
+            <td>Ancrage local, preuve sociale externe</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Calendrier semaine type -->
+      <h3 class="subsection-title reveal">Calendrier semaine type</h3>
+      <div class="week-type-grid reveal">
+        <div class="week-type-card">
+          <div class="week-type-day">Lundi</div>
+          <div class="week-type-pillar"><span class="tag tag-plat">Le Plat</span></div>
+          <div class="week-type-format">Photo hero / carrousel carte</div>
+        </div>
+        <div class="week-type-card">
+          <div class="week-type-day">Mercredi</div>
+          <div class="week-type-pillar"><span class="tag tag-cuisine">La Cuisine</span> / <span class="tag tag-macros">Les Macros</span></div>
+          <div class="week-type-format">Carrousel process / infographie</div>
+        </div>
+        <div class="week-type-card">
+          <div class="week-type-day">Vendredi</div>
+          <div class="week-type-pillar"><span class="tag tag-plat">Le Plat</span> / <span class="tag tag-cuisine">La Cuisine</span></div>
+          <div class="week-type-format">Photo produit / Reel</div>
+        </div>
+        <div class="week-type-card">
+          <div class="week-type-day">Dimanche</div>
+          <div class="week-type-pillar"><span class="tag tag-equipe">L'Equipe</span> / <span class="tag tag-quartier">Le Quartier</span></div>
+          <div class="week-type-format">Portrait / storytelling / repost</div>
+        </div>
+      </div>
+
+      <!-- Guidelines creatives -->
+      <h3 class="subsection-title reveal">Guidelines creatives</h3>
+      <div class="steps-grid reveal">
+        <div class="step-card">
+          <div class="step-card-header">
+            <span class="step-card-number">T</span>
+            <span class="step-card-title">Ton editorial</span>
+          </div>
+          <ul class="step-card-list">
+            <li>Tutoiement (valide par le client)</li>
+            <li>Direct, chaleureux, jamais condescendant</li>
+            <li>Pas de jargon fitness excessif</li>
+            <li>Humour ponctuel, premium dominant</li>
+            <li>Emojis : 1-2 par caption max</li>
+          </ul>
+        </div>
+        <div class="step-card">
+          <div class="step-card-header">
+            <span class="step-card-number">DA</span>
+            <span class="step-card-title">Direction artistique</span>
+          </div>
+          <ul class="step-card-list">
+            <li>Fond sombre (Charbon #141210)</li>
+            <li>Eclairage lateral chaud</li>
+            <li>Cuivre Braise #BF8522 + Grenat Fume #7C3530</li>
+            <li>Typos : Oswald (display) + Space Grotesk (titres) + DM Sans (body)</li>
+            <li>Food Porn Dial : 7/10</li>
+          </ul>
+        </div>
+        <div class="step-card">
+          <div class="step-card-header">
+            <span class="step-card-number">C</span>
+            <span class="step-card-title">Captions</span>
+          </div>
+          <ul class="step-card-list">
+            <li>Hook en premiere ligne (avant le "...voir plus")</li>
+            <li>3-5 lignes pour le food porn, plus long pour education/storytelling</li>
+            <li>CTA en fin de caption quand pertinent</li>
+            <li>10-15 hashtags par post (locaux + niches + specifiques)</li>
+          </ul>
+        </div>
+        <div class="step-card">
+          <div class="step-card-header">
+            <span class="step-card-number">R</span>
+            <span class="step-card-title">Reels</span>
+          </div>
+          <ul class="step-card-list">
+            <li>15-30 secondes ideal, 60s max</li>
+            <li>Musique tendance (verifier droits)</li>
+            <li>Hook visuel dans les 2 premieres secondes</li>
+            <li>Cover coherente avec la grille du feed</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       PERIODE 1 — LE REBOOT PREMIUM (PLACEHOLDER)
+       ============================================ -->
+  <section class="section section-elevated" id="periode1" data-accent="1">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-header-top">
+          <div class="section-number">01</div>
+          <div>
+            <h2>Periode 1 &mdash; Le Reboot Premium</h2>
+            <p class="section-header-subtitle">Mars &rarr; debut avril &middot; Semaines 1 a 4</p>
+            <div class="meta-badges">
+              <span class="meta-badge">16+ posts</span>
+              <span class="meta-badge">4 semaines</span>
+              <span class="meta-badge">Le Plat 60% + La Cuisine 40%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="context-banner reveal">
+        <p><strong>Mission :</strong> Transformer le feed inactif en vitrine Dark Food Premium credible. Poser le standard visuel. Installer le rythme de publication a 4 posts/semaine.</p>
+        <p>Refonte du profil (bio, highlights, photo), publication du "mur visuel" initial (8-10 premiers posts), puis introduction progressive des piliers Macros et Equipe en S3-S4.</p>
+      </div>
+
+      <!-- KPIs cibles P1 -->
+      <h3 class="kpi-section-title reveal">KPIs cibles fin de Periode 1</h3>
+      <div class="kpi-grid reveal">
+        <div class="kpi-card">
+          <div class="kpi-tag">Posts</div>
+          <div class="kpi-value">16+</div>
+          <div class="kpi-label">Posts publies</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-tag">Grille</div>
+          <div class="kpi-value">12+</div>
+          <div class="kpi-label">Posts coherents DA</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-tag">Profil</div>
+          <div class="kpi-value">Complet</div>
+          <div class="kpi-label">Bio + highlights + photo</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-tag">Stories</div>
+          <div class="kpi-value">25+</div>
+          <div class="kpi-label">Sur le mois</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-tag">Followers</div>
+          <div class="kpi-value">1 450+</div>
+          <div class="kpi-label">Objectif fin P1</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-tag">Engagement</div>
+          <div class="kpi-value">Baseline</div>
+          <div class="kpi-label">Mesurer sans cible</div>
+        </div>
+      </div>
+
+      <!-- Placeholder -->
+      <div class="placeholder-notice reveal">
+        <p class="placeholder-label">Contenu a venir</p>
+        <p>Semaines 1-4 : plannings editoriaux detailles a integrer</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       PERIODE 2 — LE RYTHME & L'ENGAGEMENT (COMPLET)
+       ============================================ -->
+  <section class="section" id="periode2" data-accent="2">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-header-top">
+          <div class="section-number">02</div>
+          <div>
+            <h2>Periode 2 &mdash; Le Rythme & l'Engagement</h2>
+            <p class="section-header-subtitle">Avril &middot; Semaines 5 a 8 &middot; Bloc S5-S6 detaille ci-dessous</p>
+            <div class="meta-badges">
+              <span class="meta-badge">8 posts S5-S6</span>
+              <span class="meta-badge">2 Reels</span>
+              <span class="meta-badge">Le Quartier active</span>
+              <span class="meta-badge">Carte quasi-complete</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Context banner -->
+      <div class="context-banner reveal">
+        <p><strong>Mission :</strong> Installer le rythme de croisiere. Diversifier les formats. Construire la relation avec l'audience. Commencer a piloter par la data.</p>
+        <p><strong>Ce qui change depuis P1 :</strong> La credibilite visuelle est acquise &mdash; on passe du mode "installer" au mode "engager". Le ton evolue vers plus de complicite. Les Reels deviennent obligatoires (min. 2). Le pilier Le Quartier s'active en post. Les donnees P1 permettent de piloter les horaires et formats.</p>
+      </div>
+
+      <!-- Timeline bar -->
+      <div class="timeline-bar reveal">
+        <p class="timeline-bar-label">Bloc S5-S6 &middot; 07/04 &rarr; 20/04</p>
+        <div class="timeline-bar-track">
+          <div class="timeline-bar-segment" style="flex: 1; background: var(--accent-2);">S5</div>
+          <div class="timeline-bar-segment" style="flex: 1; background: rgba(15, 184, 196, 0.6);">S6</div>
+        </div>
+        <div class="timeline-bar-ticks">
+          <span>07/04</span>
+          <span>13/04</span>
+          <span>14/04</span>
+          <span>20/04</span>
+        </div>
+      </div>
+
+      <!-- ========== SEMAINE 5 ========== -->
+      <h3 class="week-label reveal">Semaine 5 <span>07/04 &rarr; 13/04 &middot; 4 posts</span></h3>
+
+      <div class="post-cards">
+        <!-- S5-17 -->
+        <div class="post-card reveal">
+          <div class="post-card-header">
+            <span class="post-card-id">S5-17</span>
+            <span class="post-card-date">07/04</span>
+            <span class="post-card-day">Lundi</span>
+          </div>
+          <div class="post-card-title">STRICT Wrap Boeuf</div>
+          <div class="post-card-meta">
+            <span class="tag tag-plat">Le Plat</span>
+            <span class="tag tag-info">Photo 4:5</span>
+          </div>
+          <div class="post-card-hook">"Le meme boeuf Labourde. En wrap."</div>
+          <p class="post-card-objective">Montrer l'etendue de la carte, format alternatif au burger. 566 kcal, 51g prot, 9,99&euro;.</p>
+        </div>
+
+        <!-- S5-18 -->
+        <div class="post-card reveal reveal-delay-1">
+          <div class="post-card-header">
+            <span class="post-card-id">S5-18</span>
+            <span class="post-card-date">09/04</span>
+            <span class="post-card-day">Mercredi</span>
+          </div>
+          <div class="post-card-title">Reel artisan Boucherie Labourde</div>
+          <div class="post-card-meta">
+            <span class="tag tag-cuisine">La Cuisine</span>
+            <span class="tag tag-info">Reel 25-30s</span>
+          </div>
+          <div class="post-card-hook">"Du boucher a ton assiette."</div>
+          <p class="post-card-objective">Credibilite craft, storytelling artisan. Parcours narratif de la viande : reception &rarr; cuisson &rarr; burger fini.</p>
+        </div>
+
+        <!-- S5-19 -->
+        <div class="post-card reveal">
+          <div class="post-card-header">
+            <span class="post-card-id">S5-19</span>
+            <span class="post-card-date">11/04</span>
+            <span class="post-card-day">Vendredi</span>
+          </div>
+          <div class="post-card-title">Tenders STRICT</div>
+          <div class="post-card-meta">
+            <span class="tag tag-plat">Le Plat</span>
+            <span class="tag tag-info">Photo 4:5</span>
+          </div>
+          <div class="post-card-hook">"25g de proteines. C'est un snack."</div>
+          <p class="post-card-objective">Dissonance cognitive, surprise nutrition. 250 kcal, 9g lip, 6,99&euro;. Premier "snack sale" du feed.</p>
+        </div>
+
+        <!-- S5-20 -->
+        <div class="post-card reveal reveal-delay-1">
+          <div class="post-card-header">
+            <span class="post-card-id">S5-20</span>
+            <span class="post-card-date">13/04</span>
+            <span class="post-card-day">Dimanche</span>
+          </div>
+          <div class="post-card-title">"Une journee chez StrictFood"</div>
+          <div class="post-card-meta">
+            <span class="tag tag-equipe">L'Equipe</span>
+            <span class="tag tag-info">Carrousel/Photo</span>
+          </div>
+          <div class="post-card-hook">"5h45. Le reveil sonne."</div>
+          <p class="post-card-objective">Intimite, attachement emotionnel. Storytelling approfondi : du matin a la fermeture.</p>
+        </div>
+      </div>
+
+      <!-- ========== SEMAINE 6 ========== -->
+      <h3 class="week-label reveal">Semaine 6 <span>14/04 &rarr; 20/04 &middot; 4 posts</span></h3>
+
+      <div class="post-cards">
+        <!-- S6-21 -->
+        <div class="post-card reveal">
+          <div class="post-card-header">
+            <span class="post-card-id">S6-21</span>
+            <span class="post-card-date">14/04</span>
+            <span class="post-card-day">Lundi</span>
+          </div>
+          <div class="post-card-title">Frites Patates Douces</div>
+          <div class="post-card-meta">
+            <span class="tag tag-plat">Le Plat</span>
+            <span class="tag tag-info">Photo 4:5</span>
+          </div>
+          <div class="post-card-hook">"Des frites a 5g de lipides."</div>
+          <p class="post-card-objective">Surprise, couleur orange dans la grille. 211 kcal, 3,99&euro;. Contraste chromatique maximal sur fond charbon.</p>
+        </div>
+
+        <!-- S6-22 -->
+        <div class="post-card reveal reveal-delay-1">
+          <div class="post-card-header">
+            <span class="post-card-id">S6-22</span>
+            <span class="post-card-date">16/04</span>
+            <span class="post-card-day">Mercredi</span>
+          </div>
+          <div class="post-card-title">"Nos sides vs les leurs"</div>
+          <div class="post-card-meta">
+            <span class="tag tag-macros">Les Macros</span>
+            <span class="tag tag-info">Carrousel 4 slides</span>
+          </div>
+          <div class="post-card-hook">"Tes nuggets : ~300 kcal..."</div>
+          <p class="post-card-objective">Education par comparaison, confiance. Tenders + Frites vs fast-food classique, chiffres a l'appui.</p>
+        </div>
+
+        <!-- S6-23 -->
+        <div class="post-card reveal">
+          <div class="post-card-header">
+            <span class="post-card-id">S6-23</span>
+            <span class="post-card-date">18/04</span>
+            <span class="post-card-day">Vendredi</span>
+          </div>
+          <div class="post-card-title">Food prep dynamique</div>
+          <div class="post-card-meta">
+            <span class="tag tag-cuisine">La Cuisine</span>
+            <span class="tag tag-info">Reel 15-20s</span>
+          </div>
+          <div class="post-card-hook">"15 secondes. Un burger."</div>
+          <p class="post-card-objective">Food porn en mouvement, arreter le scroll. Montage rapide, plans tres serres, coupes a 1,5-2s.</p>
+        </div>
+
+        <!-- S6-24 -->
+        <div class="post-card reveal reveal-delay-1">
+          <div class="post-card-header">
+            <span class="post-card-id">S6-24</span>
+            <span class="post-card-date">20/04</span>
+            <span class="post-card-day">Dimanche</span>
+          </div>
+          <div class="post-card-title">Avis client / UGC / ancrage local</div>
+          <div class="post-card-meta">
+            <span class="tag tag-quartier">Le Quartier</span>
+            <span class="tag tag-info">Photo/Carrousel</span>
+          </div>
+          <div class="post-card-hook">"On ne le dit pas assez : merci."</div>
+          <p class="post-card-objective">Ancrage local, preuve sociale, communaute. Premier post du pilier Le Quartier dans le feed.</p>
+        </div>
+      </div>
+
+      <!-- Repartition piliers S5-S6 -->
+      <h3 class="subsection-title reveal">Repartition piliers S5-S6</h3>
+      <div class="pillar-bar reveal">
+        <div class="pillar-bar-segment pillar-plat" style="flex: 37.5;">37,5%</div>
+        <div class="pillar-bar-segment pillar-cuisine" style="flex: 25;">25%</div>
+        <div class="pillar-bar-segment pillar-macros" style="flex: 12.5;">12,5%</div>
+        <div class="pillar-bar-segment pillar-equipe" style="flex: 12.5;">12,5%</div>
+        <div class="pillar-bar-segment pillar-quartier" style="flex: 12.5;">12,5%</div>
+      </div>
+      <div class="pillar-bar-legend reveal">
+        <div class="pillar-bar-legend-item">
+          <span class="pillar-bar-legend-dot" style="background: var(--accent);"></span>
+          Le Plat &mdash; 3 posts (37,5%)
+        </div>
+        <div class="pillar-bar-legend-item">
+          <span class="pillar-bar-legend-dot" style="background: var(--accent-2);"></span>
+          La Cuisine &mdash; 2 posts (25%)
+        </div>
+        <div class="pillar-bar-legend-item">
+          <span class="pillar-bar-legend-dot" style="background: var(--accent-3);"></span>
+          Les Macros &mdash; 1 post (12,5%)
+        </div>
+        <div class="pillar-bar-legend-item">
+          <span class="pillar-bar-legend-dot" style="background: var(--accent-4);"></span>
+          L'Equipe &mdash; 1 post (12,5%)
+        </div>
+        <div class="pillar-bar-legend-item">
+          <span class="pillar-bar-legend-dot" style="background: var(--accent-5);"></span>
+          Le Quartier &mdash; 1 post (12,5%)
+        </div>
+      </div>
+
+      <!-- Couverture produits -->
+      <h3 class="subsection-title reveal">Nouveaux produits couverts en S5-S6</h3>
+      <table class="data-table reveal">
+        <thead>
+          <tr>
+            <th>Produit</th>
+            <th>Post</th>
+            <th>Angle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>STRICT Wrap Boeuf</td>
+            <td>S5-17</td>
+            <td>Hero shot food porn &mdash; premiere apparition</td>
+          </tr>
+          <tr>
+            <td>Tenders STRICT</td>
+            <td>S5-19 + S6-22</td>
+            <td>Hero shot + comparaison macros</td>
+          </tr>
+          <tr>
+            <td>Frites Patates Douces</td>
+            <td>S6-21 + S6-22</td>
+            <td>Hero shot + comparaison macros</td>
+          </tr>
+          <tr>
+            <td>Frites classiques</td>
+            <td>S6-22</td>
+            <td>Mention macros dans carrousel</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Strategie Reels -->
+      <h3 class="subsection-title reveal">Strategie Reels S5-S6</h3>
+      <div class="steps-grid reveal">
+        <div class="step-card">
+          <div class="step-card-header">
+            <span class="step-card-number">R1</span>
+            <span class="step-card-title">Reel artisan storytelling</span>
+            <span class="step-card-badge">S5-18 &middot; 25-30s</span>
+          </div>
+          <ul class="step-card-list">
+            <li>Parcours narratif : sac Boucherie Labourde &rarr; cuisson &rarr; burger fini</li>
+            <li>Plans varies (3-4s chacun), rythme modere</li>
+            <li>Musique lo-fi instrumentale</li>
+            <li>Hook : reception viande, geste d'ouverture</li>
+          </ul>
+          <div class="step-card-footer">
+            <p class="step-card-footer-label">Objectif</p>
+            <p>Differenciation artisanale. Montrer ce qu'aucun fast-food ne peut montrer.</p>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-card-header">
+            <span class="step-card-number">R2</span>
+            <span class="step-card-title">Food prep dynamique</span>
+            <span class="step-card-badge">S6-23 &middot; 15-20s</span>
+          </div>
+          <ul class="step-card-list">
+            <li>Montage rapide, coupes a 1,5-2s, 8-12 plans</li>
+            <li>Plans tres serres, food porn en mouvement</li>
+            <li>Beat dynamique/groovy</li>
+            <li>Hook : fromage fondant ou viande sur le gril</li>
+          </ul>
+          <div class="step-card-footer">
+            <p class="step-card-footer-label">Objectif</p>
+            <p>Arreter le scroll. Food porn pur en video, complementaire du Reel narratif.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Strategie engagement -->
+      <h3 class="subsection-title reveal">Strategie d'engagement</h3>
+      <div class="steps-grid reveal">
+        <div class="step-card">
+          <div class="step-card-header">
+            <span class="step-card-number">&uarr;</span>
+            <span class="step-card-title">Engagement sortant (proactif)</span>
+          </div>
+          <ul class="step-card-list">
+            <li>10-15 follows cibles/jour (comptes food/sport Perpignan, salles de gym)</li>
+            <li>5-10 commentaires proactifs/jour sur comptes locaux</li>
+            <li>DM de remerciement a chaque nouveau follower qui interagit</li>
+            <li>Reponse individuelle a chaque reaction stories interactives</li>
+          </ul>
+        </div>
+        <div class="step-card">
+          <div class="step-card-header">
+            <span class="step-card-number">&darr;</span>
+            <span class="step-card-title">Engagement entrant (reactif)</span>
+          </div>
+          <ul class="step-card-list">
+            <li>Reponse commentaires dans les 2h, personnalisee, tutoiement</li>
+            <li>Repost immediat de tout tag @strictfood</li>
+            <li>Tracker les saves (contenu a valeur durable)</li>
+            <li>Observer les partages DM (format a reproduire)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Strategie stories -->
+      <h3 class="subsection-title reveal">Strategie stories</h3>
+      <table class="data-table reveal">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Frequence</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Plat du jour</td>
+            <td>Quotidien</td>
+            <td>Photo du plat, prix, macro rapide</td>
+          </tr>
+          <tr>
+            <td>Coulisses</td>
+            <td>3-4x/sem.</td>
+            <td>Arrivage, preparation, mise en place (+ video courte)</td>
+          </tr>
+          <tr>
+            <td>Teaser post</td>
+            <td>3-4x/sem.</td>
+            <td>Avant et apres chaque post du feed</td>
+          </tr>
+          <tr>
+            <td>Interactif</td>
+            <td>2x/sem. min.</td>
+            <td>Sondage, quiz, slider + reponse DM systematique</td>
+          </tr>
+          <tr>
+            <td>Reel teaser/BTS</td>
+            <td>2-3x/sem.</td>
+            <td>Extraits et coulisses des 2 Reels du feed</td>
+          </tr>
+          <tr>
+            <td>Educatif rapide</td>
+            <td>1-2x/sem.</td>
+            <td>Micro-info nutrition, zoom ingredient</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- KPIs S5-S6 -->
+      <h3 class="kpi-section-title reveal">KPIs fin de bloc S5-S6</h3>
+      <div class="kpi-grid reveal">
+        <div class="kpi-card">
+          <div class="kpi-tag">Cumule</div>
+          <div class="kpi-value">24+</div>
+          <div class="kpi-label">Posts publies</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-tag">S5-S6</div>
+          <div class="kpi-value">2</div>
+          <div class="kpi-label">Reels publies</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-tag">Objectif</div>
+          <div class="kpi-value">1 525+</div>
+          <div class="kpi-label">Followers</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-tag">Engagement</div>
+          <div class="kpi-value">&uarr;</div>
+          <div class="kpi-label">Progression vs P1</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-tag">Stories</div>
+          <div class="kpi-value">28+</div>
+          <div class="kpi-label">Sur 2 semaines</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-tag">Pilier</div>
+          <div class="kpi-value">1</div>
+          <div class="kpi-label">Le Quartier active</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       PERIODE 3 — L'AMPLIFICATION (PLACEHOLDER)
+       ============================================ -->
+  <section class="section section-elevated" id="periode3" data-accent="3">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-header-top">
+          <div class="section-number">03</div>
+          <div>
+            <h2>Periode 3 &mdash; L'Amplification</h2>
+            <p class="section-header-subtitle">Mai &middot; Semaines 9+</p>
+            <div class="meta-badges">
+              <span class="meta-badge">16-18 posts</span>
+              <span class="meta-badge">6+ Reels</span>
+              <span class="meta-badge">Series recurrentes</span>
+              <span class="meta-badge">UGC active</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="context-banner reveal">
+        <p><strong>Mission :</strong> Capitaliser sur les donnees du mois 2. Installer des series recurrentes. Activer le premier UGC. Le compte passe de "on publie du contenu" a "on a un media avec des rendez-vous".</p>
+        <p>Lancement de 2-3 series recurrentes basees sur les contenus les plus performants. Activation UGC legere. Optimisation calendrier selon la data. Montee en puissance des Reels (6+ sur le mois).</p>
+      </div>
+
+      <!-- KPIs cibles P3 -->
+      <h3 class="kpi-section-title reveal">KPIs cibles fin de Periode 3</h3>
+      <div class="kpi-grid reveal">
+        <div class="kpi-card">
+          <div class="kpi-tag">Posts</div>
+          <div class="kpi-value">16-18</div>
+          <div class="kpi-label">Posts publies</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-tag">Reels</div>
+          <div class="kpi-value">6+</div>
+          <div class="kpi-label">Reels publies</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-tag">Followers</div>
+          <div class="kpi-value">1 800 &ndash; 2 000</div>
+          <div class="kpi-label">Objectif fin P3</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-tag">Engagement</div>
+          <div class="kpi-value">3-5%</div>
+          <div class="kpi-label">Maintenu ou en hausse</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-tag">Series</div>
+          <div class="kpi-value">2-3</div>
+          <div class="kpi-label">Installees et identifiables</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-tag">UGC</div>
+          <div class="kpi-value">3-5</div>
+          <div class="kpi-label">Premiers contenus client</div>
+        </div>
+      </div>
+
+      <!-- Placeholder -->
+      <div class="placeholder-notice reveal">
+        <p class="placeholder-label">Contenu a venir</p>
+        <p>Semaines 9+ : plannings editoriaux detailles a integrer</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       VISION
+       ============================================ -->
+  <section class="section" id="vision" data-accent="4">
+    <div class="container">
+      <div class="section-header-centered reveal">
+        <h2>Vision</h2>
+        <p>De compte inactif a vitrine premium vivante</p>
+      </div>
+
+      <!-- Objectif consolide -->
+      <div class="context-banner reveal">
+        <p><strong>Objectif consolide a 3 mois :</strong> Passer de "compte inactif a 1 368 followers" a "vitrine premium vivante a ~2 000 followers, avec un systeme de publication rode, des series installees, et un workflow creatif semi-autonome".</p>
+        <p>Le compte remplit sa mission strategique : quand un prospect arrive depuis Google, il voit un feed vivant, coherent, premium, qui confirme que StrictFood est un lieu serieux et desirable.</p>
+      </div>
+
+      <!-- Flow nodes vision -->
+      <div class="flow-row reveal">
+        <div class="flow-node" data-accent="4">
+          <p class="flow-node-label">6 mois</p>
+          <p class="flow-node-title">3 000</p>
+          <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">followers</p>
+        </div>
+        <span class="flow-arrow">&#8594;</span>
+        <div class="flow-node" data-accent="4">
+          <p class="flow-node-label">12 mois</p>
+          <p class="flow-node-title">5 000+</p>
+          <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">followers</p>
+        </div>
+      </div>
+
+      <!-- Vision details -->
+      <div class="steps-grid reveal">
+        <div class="step-card">
+          <div class="step-card-header">
+            <span class="step-card-number">6</span>
+            <span class="step-card-title">Vision 6 mois</span>
+            <span class="step-card-badge">Fin Phase 1</span>
+          </div>
+          <ul class="step-card-list">
+            <li>Systeme editorial en regime de croisiere : 3-4h/semaine max</li>
+            <li>2 500 &ndash; 3 000 followers avec noyau d'engages</li>
+            <li>Reels qui drivent du reach significatif (&gt;2x posts photo)</li>
+            <li>Premiers ambassadeurs naturels</li>
+            <li>Templates et workflows industrialises (&lt;30min par post)</li>
+          </ul>
+        </div>
+        <div class="step-card">
+          <div class="step-card-header">
+            <span class="step-card-number">12</span>
+            <span class="step-card-title">Vision 12 mois</span>
+            <span class="step-card-badge">Mi-Phase 3</span>
+          </div>
+          <ul class="step-card-list">
+            <li>Instagram comme canal de retention actif et levier preuve sociale franchise</li>
+            <li>UGC = 20-30% du calendrier editorial</li>
+            <li>Programme ambassadeurs qui alimente le compte</li>
+            <li>Feed reproductible dans le playbook franchise</li>
+            <li>5 000+ followers avec engagement qualifie et local</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="flow-text reveal">
+        Phase 1 pose l'image et installe le rythme. Phase 2 engage et diversifie. Phase 3 capitalise et amplifie. Le feed devient un actif de marque documenté et duplicable.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-brand">Neurolia</p>
+      <p class="footer-tagline">Un business qui respire.</p>
+      <p class="footer-date">Mars 2026 &middot; Confidentiel</p>
+    </div>
+  </footer>
+
+  <!-- ============================================
+       JAVASCRIPT
+       ============================================ -->
+  <script>
+    // =========================================
+    // SCROLL PROGRESS BAR
+    // =========================================
+    const progressBar = document.getElementById('navProgress');
+
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = progress + '%';
+    }
+
+    // =========================================
+    // ACTIVE NAV LINK
+    // =========================================
+    const sections = document.querySelectorAll('section[id]');
+    const navLinksAll = document.querySelectorAll('.nav-links a');
+
+    function updateActiveNav() {
+      const scrollPos = window.scrollY + 120;
+
+      sections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        const id = section.getAttribute('id');
+
+        if (scrollPos >= top && scrollPos < top + height) {
+          navLinksAll.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + id) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }
+
+    // =========================================
+    // SCROLL REVEAL (IntersectionObserver)
+    // =========================================
+    const revealElements = document.querySelectorAll('.reveal');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // =========================================
+    // MOBILE NAV TOGGLE
+    // =========================================
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+      });
+    });
+
+    // =========================================
+    // COMBINED SCROLL HANDLER
+    // =========================================
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateProgress();
+          updateActiveNav();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // Initial call
+    updateProgress();
+    updateActiveNav();
+  </script>
+</body>
+</html>
