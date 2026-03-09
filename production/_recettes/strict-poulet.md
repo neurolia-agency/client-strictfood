@@ -26,7 +26,10 @@
 
 ## Photo référence
 
-`⚠️ PLACEHOLDER — pas de photo DA dark-bg disponible`
+`public/images/photos-references/produits-source/strict-poulet.png`
+
+> Variantes disponibles : `strict-poulet-plongee.png`, `strict-poulet-contre-plongee.png`, `strict-poulet-vue-dessus.png`, `black-strict-poulet.webp` (fond noir).
+> Dark-bg DA : `dark-bg/burger-poulet-roti-dark-bg.jpg`.
 
 ## Notes
 

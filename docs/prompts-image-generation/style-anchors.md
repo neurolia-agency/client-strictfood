@@ -72,7 +72,7 @@ Pain brioche artisanal dore, steak boeuf avec croute Maillard rugueuse, mache ve
 2. Lire la recette du produit → identifier les swaps d'ingredients vs l'ancre
 3. Adapter le template (templates/sublimation-[categorie].md) avec les swaps uniquement
 4. Appeler nano-banana-pro avec --input-image [style-anchor] + prompt adapte
-5. Valider → si OK, sauver dans produits-detoures/
+5. Valider → si OK, sauver dans photos-references/produits-source/
 ```
 
 ## Exemple concret : STRICT Poulet

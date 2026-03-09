@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planning Periode 1 | Neurolia x StrictFood</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap">
+  <link rel="stylesheet" href="design-system.css">
+  <style>
+    /* ======================================
+       PILLAR TAG COLORS
+       ====================================== */
+    .tag-plat       { background: rgba(196, 92, 59, 0.2); color: var(--accent-pale); white-space: nowrap; }
+    .tag-cuisine    { background: rgba(15, 184, 196, 0.2); color: var(--accent-2); white-space: nowrap; }
+    .tag-macros     { background: rgba(139, 92, 246, 0.2); color: var(--accent-3); white-space: nowrap; }
+    .tag-equipe     { background: rgba(16, 185, 129, 0.2); color: var(--accent-4); white-space: nowrap; }
+    .tag-quartier   { background: rgba(245, 158, 11, 0.2); color: var(--accent-5); white-space: nowrap; }
+
+    /* Pillar bar colors */
+    .pillar-plat    { background: var(--accent); }
+    .pillar-cuisine { background: var(--accent-2); }
+    .pillar-macros  { background: var(--accent-3); }
+    .pillar-equipe  { background: var(--accent-4); }
+    .pillar-quartier{ background: var(--accent-5); }
+
+    /* ======================================
+       WEEK LABEL
+       ====================================== */
+    .week-label {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--text-primary);
+      margin-bottom: var(--space-lg);
+      padding-left: var(--space-md);
+      border-left: 3px solid var(--accent);
+    }
+
+    .week-label span {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-left: 12px;
+    }
+
+    /* ======================================
+       SUBSECTION TITLE
+       ====================================== */
+    .subsection-title {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--text-primary);
+      margin-bottom: var(--space-lg);
+      margin-top: var(--space-2xl);
+    }
+
+    /* ======================================
+       POST DETAIL CARDS
+       ====================================== */
+    .post-detail {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      margin-bottom: 24px;
+      transition: border-color var(--duration-normal);
+    }
+
+    .post-detail:hover {
+      border-color: var(--border-hover);
+    }
+
+    .post-detail-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .post-detail-id {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      background: var(--bg-contrast);
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+    }
+
+    .post-detail-date {
+      font-size: 14px;
+      color: var(--text-subtle);
+    }
+
+    .post-detail-day {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+
+    .post-detail-title {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+
+    .post-detail-brief {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      padding: 16px 20px;
+      background: rgba(255,255,255,0.02);
+      border-left: 2px solid var(--accent);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin-bottom: 16px;
+    }
+
+    .post-detail-photo {
+      font-size: 12px;
+      color: var(--text-subtle);
+      font-family: 'Satoshi', sans-serif;
+      margin-bottom: 16px;
+    }
+
+    .post-detail-photo code {
+      background: var(--bg-contrast);
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-size: 11px;
+    }
+
+    .post-detail-grille {
+      font-size: 12px;
+      color: var(--text-subtle);
+      font-style: italic;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ======================================
+       SLIDES TABLE
+       ====================================== */
+    .slides-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-size: 13px;
+    }
+
+    .slides-table th {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-subtle);
+      text-align: left;
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .slides-table td {
+      padding: 8px 12px;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    /* ======================================
+       REEL SCENARIO TABLE
+       ====================================== */
+    .reel-scenario {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-size: 13px;
+    }
+
+    .reel-scenario th {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-subtle);
+      text-align: left;
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .reel-scenario td {
+      padding: 8px 12px;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    /* ======================================
+       STORY DAY
+       ====================================== */
+    .story-day {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-top: 24px;
+      margin-bottom: 12px;
+    }
+
+    .story-day:first-child {
+      margin-top: 0;
+    }
+
+    /* ======================================
+       STORY WEEK CARD
+       ====================================== */
+    .story-week-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+
+    .story-week-card h4 {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: var(--space-md);
+      padding-bottom: var(--space-sm);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ======================================
+       CHECKLIST
+       ====================================== */
+    .checklist {
+      list-style: none;
+    }
+
+    .checklist li {
+      font-size: 14px;
+      color: var(--text-muted);
+      padding: 6px 0;
+      padding-left: 28px;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .checklist li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 12px;
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--accent);
+      border-radius: 4px;
+      opacity: 0.5;
+    }
+
+    .checklist li strong {
+      color: var(--text-secondary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================
+       NAVIGATION
+       ============================================ -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Neurolia <span>&times;</span> StrictFood</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#s0">S0 Profil</a></li>
+        <li><a href="#s1">S1</a></li>
+        <li><a href="#s2">S2</a></li>
+        <li><a href="#s3">S3</a></li>
+        <li><a href="#s4">S4</a></li>
+        <li><a href="#stories">Stories</a></li>
+        <li><a href="#recap">Recap</a></li>
+      </ul>
+    </div>
+    <div class="nav-progress" id="navProgress"></div>
+  </nav>
+
+  <!-- ============================================
+       HERO
+       ============================================ -->
+  <section class="hero">
+    <div class="container">
+      <p class="hero-label reveal">Planning Editorial</p>
+      <h1 class="reveal">Periode 1 &mdash; Le Reboot Premium</h1>
+      <p class="hero-subtitle reveal">@strictfood &middot; S0-S4 &middot; 10 mars &rarr; 6 avril 2026</p>
+
+      <div class="summary-cards">
+        <div class="summary-card reveal" data-accent="1">
+          <p class="summary-card-label">Duree</p>
+          <p class="summary-card-meta">5 semaines &middot; S0 &rarr; S4</p>
+          <p class="summary-card-title">16 posts</p>
+          <p>4 posts par semaine, du lundi au dimanche. Refonte profil en S0.</p>
+        </div>
+        <div class="summary-card reveal reveal-delay-1" data-accent="2">
+          <p class="summary-card-label">Formats</p>
+          <p class="summary-card-meta">Photo &middot; Carrousel &middot; Reel</p>
+          <p class="summary-card-title">Mix progressif</p>
+          <p>Photos hero dominantes. 4 carrousels. Premier Reel en S3.</p>
+        </div>
+        <div class="summary-card reveal reveal-delay-2" data-accent="3">
+          <p class="summary-card-label">Stories</p>
+          <p class="summary-card-meta">2-4 par jour &middot; 7j/7</p>
+          <p class="summary-card-title">~80 stories</p>
+          <p>Teasers, plat du jour, coulisses, sondages, educatif.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       S0 — REFONTE PROFIL
+       ============================================ -->
+  <section class="section" id="s0" data-accent="1">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-header-top">
+          <div class="section-number">S0</div>
+          <div>
+            <h2>Refonte Profil</h2>
+            <p class="section-header-subtitle">Avant le premier post : optimiser chaque element du profil Instagram pour une premiere impression premium.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="context-banner reveal">
+        <p><strong>Objectif :</strong> Quand un prospect arrive sur @strictfood (depuis Google, un tag, ou l'Explorer), chaque element du profil doit confirmer le positionnement premium. Zero friction, zero doute.</p>
+      </div>
+
+      <h3 class="subsection-title reveal">Checklist profil</h3>
+      <div class="post-detail reveal">
+        <ul class="checklist">
+          <li><strong>Photo de profil :</strong> Logo DA sur fond Charbon (#141210)</li>
+          <li><strong>Nom affiche :</strong> StrictFood's &middot; Perpignan</li>
+          <li><strong>Bio reecrite :</strong> Positionnement clair, tagline, localisation, CTA</li>
+          <li><strong>Bouton &laquo; Appeler &raquo; :</strong> tel:+33611745944</li>
+          <li><strong>Lien bio :</strong> Google Maps ou landing page</li>
+          <li><strong>Profil en Professionnel :</strong> Categorie &laquo; Restaurant &raquo;</li>
+          <li><strong>Anciens posts :</strong> Archiver tous les posts existants</li>
+        </ul>
+      </div>
+
+      <h3 class="subsection-title reveal">6 covers Highlights</h3>
+      <table class="data-table reveal">
+        <thead>
+          <tr>
+            <th>Highlight</th>
+            <th>Style</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>LA CARTE</td><td>Fond #141210 + texte Oswald en #BF8522</td></tr>
+          <tr><td>NOS ARTISANS</td><td>Fond #141210 + texte Oswald en #BF8522</td></tr>
+          <tr><td>COULISSES</td><td>Fond #141210 + texte Oswald en #BF8522</td></tr>
+          <tr><td>L'EQUIPE</td><td>Fond #141210 + texte Oswald en #BF8522</td></tr>
+          <tr><td>AVIS</td><td>Fond #141210 + texte Oswald en #BF8522</td></tr>
+          <tr><td>NOUS TROUVER</td><td>Fond #141210 + texte Oswald en #BF8522</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================================
+       S1 — SEMAINE 1
+       ============================================ -->
+  <section class="section section-elevated" id="s1" data-accent="1">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-header-top">
+          <div class="section-number">S1</div>
+          <div>
+            <h2>Semaine 1</h2>
+            <p class="section-header-subtitle">Les 4 premiers posts du feed. La fondation visuelle. Chaque image compte triple.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="week-label reveal">Semaine 1 <span>10/03 &rarr; 16/03 &middot; 4 posts</span></h3>
+
+      <!-- POST S1-01 -->
+      <div class="post-detail reveal">
+        <div class="post-detail-header">
+          <span class="post-detail-id">S1-01</span>
+          <span class="post-detail-date">10/03</span>
+          <span class="tag tag-plat">Le Plat</span>
+          <span class="tag tag-info">Photo 4:5</span>
+          <span class="post-detail-day">Lundi</span>
+        </div>
+        <div class="post-detail-title">STRICT Boeuf</div>
+        <div class="post-detail-brief">
+          Hero shot angle 3/4, eclairage lateral chaud sur fond sombre. Burger domine le cadre (60-70%), texture visible : viande grillee, fromage fondant, crudites fraiches.
+        </div>
+        <div class="post-detail-photo">Photo : <code>2025-11-22_17-18-46_UTC_1.jpg</code> &mdash; double burger boeuf, angle 3/4, logo visible</div>
+        <div class="post-detail-grille">Premier post du feed &mdash; bas a droite de la grille, doit etre visuellement irreprochable.</div>
+      </div>
+
+      <!-- POST S1-02 -->
+      <div class="post-detail reveal reveal-delay-1">
+        <div class="post-detail-header">
+          <span class="post-detail-id">S1-02</span>
+          <span class="post-detail-date">12/03</span>
+          <span class="tag tag-cuisine">La Cuisine</span>
+          <span class="tag tag-info">Carrousel 5 slides</span>
+          <span class="post-detail-day">Mercredi</span>
+        </div>
+        <div class="post-detail-title">&laquo; Du boucher a l'assiette &raquo; &mdash; parcours de la viande</div>
+        <div class="post-detail-brief">
+          Carrousel narratif. Chaque slide est une etape de la transformation. 5 slides du sourcing au hero shot final.
+        </div>
+        <table class="slides-table">
+          <thead>
+            <tr><th>Slide</th><th>Contenu</th><th>Photo</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Cover &laquo; De la Boucherie Labourde a ton assiette. &raquo; (fond #141210, typo Oswald)</td><td>&mdash;</td></tr>
+            <tr><td>2</td><td>Viande crue sur planche</td><td><code>2025-10-03_15-57-14_UTC_2.jpg</code></td></tr>
+            <tr><td>3</td><td>Assemblage burger</td><td><code>2025-10-03_15-57-14_UTC_1.jpg</code></td></tr>
+            <tr><td>4</td><td>Ajout verdure</td><td><code>2025-11-24_17-18-14_UTC.jpg</code></td></tr>
+            <tr><td>5</td><td>Burger fini hero shot</td><td><code>2025-11-22_17-18-46_UTC_2.jpg</code></td></tr>
+          </tbody>
+        </table>
+        <div class="post-detail-grille">Cover sombre avec texte &mdash; contraste avec le S1-01 dore.</div>
+      </div>
+
+      <!-- POST S1-03 -->
+      <div class="post-detail reveal">
+        <div class="post-detail-header">
+          <span class="post-detail-id">S1-03</span>
+          <span class="post-detail-date">14/03</span>
+          <span class="tag tag-plat">Le Plat</span>
+          <span class="tag tag-info">Photo 4:5</span>
+          <span class="post-detail-day">Vendredi</span>
+        </div>
+        <div class="post-detail-title">Tiramisu proteine (Plan B : STRICT Poulet)</div>
+        <div class="post-detail-brief">
+          Focus desserts. Hero shot Tiramisu proteine. Eclairage dramatique, textures visibles (couches).
+        </div>
+        <div class="post-detail-photo">Photo : <code>2025-10-07_12-15-07_UTC_2.jpg</code> (cookies proteines) si pas mieux. Plan B : <code>2025-11-26_17-43-44_UTC_1.jpg</code></div>
+        <div class="post-detail-grille">Variation chromatique (tons clairs/creme vs burgers dores).</div>
+      </div>
+
+      <!-- POST S1-04 -->
+      <div class="post-detail reveal reveal-delay-1">
+        <div class="post-detail-header">
+          <span class="post-detail-id">S1-04</span>
+          <span class="post-detail-date">16/03</span>
+          <span class="tag tag-equipe">L'Equipe</span>
+          <span class="tag tag-info">Photo 4:5</span>
+          <span class="post-detail-day">Dimanche</span>
+        </div>
+        <div class="post-detail-title">Romain et Dorian &mdash; les fondateurs</div>
+        <div class="post-detail-brief">
+          Photo ensemble dans le restaurant. Mur vegetal + enseigne neon en arriere-plan. En situation, sourire naturel.
+        </div>
+        <div class="post-detail-photo">Photo : <code>2025-10-25_15-59-21_UTC.jpg</code> &mdash; Romain et Dorian devant mur vegetal + enseigne neon</div>
+        <div class="post-detail-grille">Tons chauds, mur vegetal vert, neon. Contrepoint humain.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       S2 — SEMAINE 2
+       ============================================ -->
+  <section class="section" id="s2" data-accent="1">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-header-top">
+          <div class="section-number">S2</div>
+          <div>
+            <h2>Semaine 2</h2>
+            <p class="section-header-subtitle">Elargir la carte, introduire la nutrition, couvrir les 3 artisans.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="week-label reveal">Semaine 2 <span>17/03 &rarr; 23/03 &middot; 4 posts</span></h3>
+
+      <!-- POST S2-05 -->
+      <div class="post-detail reveal">
+        <div class="post-detail-header">
+          <span class="post-detail-id">S2-05</span>
+          <span class="post-detail-date">17/03</span>
+          <span class="tag tag-plat">Le Plat</span>
+          <span class="tag tag-info">Photo 4:5</span>
+          <span class="post-detail-day">Lundi</span>
+        </div>
+        <div class="post-detail-title">STRICT Poulet (Plan B : STRICT MAX Boeuf)</div>
+        <div class="post-detail-brief">
+          Hero shot STRICT Poulet, angle different du S1-01. Texture poulet grille visible, verdure eclatante.
+        </div>
+        <div class="post-detail-photo">Photo : <code>2025-11-26_17-43-44_UTC_1.jpg</code> &mdash; burger poulet</div>
+      </div>
+
+      <!-- POST S2-06 -->
+      <div class="post-detail reveal reveal-delay-1">
+        <div class="post-detail-header">
+          <span class="post-detail-id">S2-06</span>
+          <span class="post-detail-date">19/03</span>
+          <span class="tag tag-macros">Les Macros</span>
+          <span class="tag tag-info">Carrousel 3-4 slides</span>
+          <span class="post-detail-day">Mercredi</span>
+        </div>
+        <div class="post-detail-title">Comparaison &laquo; STRICT Boeuf vs burger fast-food classique &raquo;</div>
+        <div class="post-detail-brief">
+          Premier post nutrition. Carrousel infographique. Fond Charbon, typo DA, chiffres lisibles.
+        </div>
+        <table class="slides-table">
+          <thead>
+            <tr><th>Slide</th><th>Contenu</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>&laquo; Ton burger vs notre burger. &raquo;</td></tr>
+            <tr><td>2</td><td>Comparaison chiffree (800-1000 kcal vs 596 kcal)</td></tr>
+            <tr><td>3</td><td>3 differences cles</td></tr>
+            <tr><td>4</td><td>Conclusion + tagline</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- POST S2-07 -->
+      <div class="post-detail reveal">
+        <div class="post-detail-header">
+          <span class="post-detail-id">S2-07</span>
+          <span class="post-detail-date">21/03</span>
+          <span class="tag tag-cuisine">La Cuisine</span>
+          <span class="tag tag-info">Photo</span>
+          <span class="post-detail-day">Vendredi</span>
+        </div>
+        <div class="post-detail-title">Focus artisan Myfitcheese</div>
+        <div class="post-detail-brief">
+          Plan serre fromage en cours d'utilisation. Mains gantees noires, texture cremee/fondante.
+        </div>
+        <div class="post-detail-photo">Photo : <code>2025-10-07_12-15-07_UTC_1.jpg</code> &mdash; main pressant fromage frais</div>
+      </div>
+
+      <!-- POST S2-08 -->
+      <div class="post-detail reveal reveal-delay-1">
+        <div class="post-detail-header">
+          <span class="post-detail-id">S2-08</span>
+          <span class="post-detail-date">23/03</span>
+          <span class="tag tag-plat">Le Plat</span>
+          <span class="tag tag-info">Photo 4:5</span>
+          <span class="post-detail-day">Dimanche</span>
+        </div>
+        <div class="post-detail-title">Wrap Poulet</div>
+        <div class="post-detail-brief">
+          Hero shot Wrap Poulet, tenu en main (gantee) ou pose sur papier brande.
+        </div>
+        <div class="post-detail-photo">Photo : <code>2025-11-20_17-34-35_UTC.jpg</code></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       S3 — SEMAINE 3
+       ============================================ -->
+  <section class="section section-elevated" id="s3" data-accent="1">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-header-top">
+          <div class="section-number">S3</div>
+          <div>
+            <h2>Semaine 3</h2>
+            <p class="section-header-subtitle">Premier produit vegetarien, macros extremes, premier Reel, equipe en action.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="week-label reveal">Semaine 3 <span>24/03 &rarr; 30/03 &middot; 4 posts &middot; 1er Reel</span></h3>
+
+      <!-- POST S3-09 -->
+      <div class="post-detail reveal">
+        <div class="post-detail-header">
+          <span class="post-detail-id">S3-09</span>
+          <span class="post-detail-date">24/03</span>
+          <span class="tag tag-plat">Le Plat</span>
+          <span class="tag tag-info">Photo 4:5</span>
+          <span class="post-detail-day">Lundi</span>
+        </div>
+        <div class="post-detail-title">STRICT Vege Falafel</div>
+        <div class="post-detail-brief">
+          Premier produit vegetarien. Falafel dore et croustillant, herbes fraiches. Contraste dore/vert sur fond charbon.
+        </div>
+        <div class="post-detail-photo">Photo : A produire (brief photo fourni)</div>
+      </div>
+
+      <!-- POST S3-10 -->
+      <div class="post-detail reveal reveal-delay-1">
+        <div class="post-detail-header">
+          <span class="post-detail-id">S3-10</span>
+          <span class="post-detail-date">26/03</span>
+          <span class="tag tag-macros">Les Macros</span>
+          <span class="tag tag-info">Carrousel 4 slides</span>
+          <span class="post-detail-day">Mercredi</span>
+        </div>
+        <div class="post-detail-title">Macro breakdown STRICT MAX Poulet &mdash; &laquo; 112g de proteines &raquo;</div>
+        <div class="post-detail-brief">
+          Breakdown solo d'un produit extreme. Chiffres chocs en ouverture, decomposition visuelle.
+        </div>
+        <table class="slides-table">
+          <thead>
+            <tr><th>Slide</th><th>Contenu</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>&laquo; 112g de proteines. C'est un burger. &raquo;</td></tr>
+            <tr><td>2</td><td>Macro breakdown visuel</td></tr>
+            <tr><td>3</td><td>3 ingredients cles</td></tr>
+            <tr><td>4</td><td>Conclusion + tagline</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- POST S3-11 -->
+      <div class="post-detail reveal">
+        <div class="post-detail-header">
+          <span class="post-detail-id">S3-11</span>
+          <span class="post-detail-date">28/03</span>
+          <span class="tag tag-cuisine">La Cuisine</span>
+          <span class="tag tag-info">Reel 20-25s</span>
+          <span class="post-detail-day">Vendredi</span>
+        </div>
+        <div class="post-detail-title">&laquo; 30 secondes en cuisine &raquo; &mdash; assemblage burger</div>
+        <div class="post-detail-brief">
+          Premier Reel du compte. 8-10 plans courts (2-3s). Hook : fromage fondant plan 1. Musique lo-fi instrumentale.
+        </div>
+        <table class="reel-scenario">
+          <thead>
+            <tr><th>Plan</th><th>Contenu</th><th>Duree</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Hook &mdash; fromage fondant gros plan</td><td>2-3s</td></tr>
+            <tr><td>2</td><td>Pain artisanal coupe</td><td>2s</td></tr>
+            <tr><td>3</td><td>Viande sur le gril, chaleur pulsee</td><td>2-3s</td></tr>
+            <tr><td>4</td><td>Ajout crudites fraiches</td><td>2s</td></tr>
+            <tr><td>5</td><td>Fromage pose sur viande chaude</td><td>2s</td></tr>
+            <tr><td>6</td><td>Assemblage final</td><td>2-3s</td></tr>
+            <tr><td>7</td><td>Burger fini &mdash; hero shot</td><td>2s</td></tr>
+            <tr><td>8</td><td>Service au comptoir</td><td>2s</td></tr>
+            <tr><td>9</td><td>Logo / end card</td><td>1-2s</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- POST S3-12 -->
+      <div class="post-detail reveal reveal-delay-1">
+        <div class="post-detail-header">
+          <span class="post-detail-id">S3-12</span>
+          <span class="post-detail-date">30/03</span>
+          <span class="tag tag-equipe">L'Equipe</span>
+          <span class="tag tag-info">Photo</span>
+          <span class="post-detail-day">Dimanche</span>
+        </div>
+        <div class="post-detail-title">Rush du midi &mdash; equipe en action</div>
+        <div class="post-detail-brief">
+          Equipe en plein rush. Mains au travail, concentration, 3 personnes. Photo non posee.
+        </div>
+        <div class="post-detail-photo">Photo : <code>2025-10-08_09-21-14_UTC.jpg</code> ou <code>2025-10-03_15-57-14_UTC_6.jpg</code></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       S4 — SEMAINE 4
+       ============================================ -->
+  <section class="section" id="s4" data-accent="1">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-header-top">
+          <div class="section-number">S4</div>
+          <div>
+            <h2>Semaine 4</h2>
+            <p class="section-header-subtitle">Desserts, dernier artisan, gamme complete. Fermer la boucle Periode 1.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="week-label reveal">Semaine 4 <span>31/03 &rarr; 06/04 &middot; 4 posts</span></h3>
+
+      <!-- POST S4-13 -->
+      <div class="post-detail reveal">
+        <div class="post-detail-header">
+          <span class="post-detail-id">S4-13</span>
+          <span class="post-detail-date">31/03</span>
+          <span class="tag tag-plat">Le Plat</span>
+          <span class="tag tag-info">Photo 4:5</span>
+          <span class="post-detail-day">Lundi</span>
+        </div>
+        <div class="post-detail-title">Cookie proteine</div>
+        <div class="post-detail-brief">
+          Texture visible : craquelures, coeur moelleux. 1-2 cookies empiles. Tons dores et bruns.
+        </div>
+        <div class="post-detail-photo">Photo : <code>2025-10-07_12-15-07_UTC_2.jpg</code></div>
+      </div>
+
+      <!-- POST S4-14 -->
+      <div class="post-detail reveal reveal-delay-1">
+        <div class="post-detail-header">
+          <span class="post-detail-id">S4-14</span>
+          <span class="post-detail-date">02/04</span>
+          <span class="tag tag-cuisine">La Cuisine</span>
+          <span class="tag tag-info">Photo</span>
+          <span class="post-detail-day">Mercredi</span>
+        </div>
+        <div class="post-detail-title">Focus artisan Pains du Soleil (couverture 3/3)</div>
+        <div class="post-detail-brief">
+          Pain artisanal en hero. Plans serres croute, texture mie, pain frais.
+        </div>
+        <div class="post-detail-photo">Photo : <code>2025-10-14_09-12-16_UTC_7.jpg</code></div>
+      </div>
+
+      <!-- POST S4-15 -->
+      <div class="post-detail reveal">
+        <div class="post-detail-header">
+          <span class="post-detail-id">S4-15</span>
+          <span class="post-detail-date">04/04</span>
+          <span class="tag tag-macros">Les Macros</span>
+          <span class="tag tag-info">Carrousel 4 slides</span>
+          <span class="post-detail-day">Vendredi</span>
+        </div>
+        <div class="post-detail-title">&laquo; Nos desserts ont plus de proteines que tes plats &raquo;</div>
+        <div class="post-detail-brief">
+          Gamme desserts proteines en comparaison. Chiffres chocs, gamme complete, conclusion + prix.
+        </div>
+        <table class="slides-table">
+          <thead>
+            <tr><th>Slide</th><th>Contenu</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Enumeration chiffres chocs</td></tr>
+            <tr><td>2</td><td>Cookie vs cookie classique</td></tr>
+            <tr><td>3</td><td>Gamme complete (Cookie / Tiramisu / Overnight / Milkshake)</td></tr>
+            <tr><td>4</td><td>Conclusion + prix</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- POST S4-16 -->
+      <div class="post-detail reveal reveal-delay-1">
+        <div class="post-detail-header">
+          <span class="post-detail-id">S4-16</span>
+          <span class="post-detail-date">06/04</span>
+          <span class="tag tag-plat">Le Plat</span>
+          <span class="tag tag-info">Photo 4:5</span>
+          <span class="post-detail-day">Dimanche</span>
+        </div>
+        <div class="post-detail-title">Overnight STRICT</div>
+        <div class="post-detail-brief">
+          Pot transparent/bol avec couches visibles (avoine, fruits, topping). Eclairage legerement plus lumineux. Textures : granola, fruits, cremee.
+        </div>
+        <div class="post-detail-photo">Photo : A produire</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       STORIES
+       ============================================ -->
+  <section class="section section-elevated" id="stories" data-accent="1">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-header-top">
+          <div class="section-number">ST</div>
+          <div>
+            <h2>Calendrier Stories</h2>
+            <p class="section-header-subtitle">2-4 stories par jour, 7 jours sur 7. Teasers, plats du jour, coulisses, sondages, educatif.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- STORIES S1 -->
+      <div class="story-week-card reveal">
+        <h4>Stories Semaine 1 &mdash; 10/03 &rarr; 16/03</h4>
+        <table class="data-table">
+          <thead>
+            <tr><th>Jour</th><th>Contenu</th><th>Type</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Lundi</td><td>Teaser S1-01 &middot; Plat du jour &middot; Story post-pub &laquo; Premier post est la &raquo;</td><td>Teaser + Photo + CTA</td></tr>
+            <tr><td>Mardi</td><td>Arrivage video &middot; Sondage &laquo; boeuf ou poulet ? &raquo; &middot; Plat du jour</td><td>Video + Sondage + Photo</td></tr>
+            <tr><td>Mercredi</td><td>Teaser carrousel S1-02 &middot; Story cuisine service &middot; Plat du jour</td><td>Teaser + Coulisses + Photo</td></tr>
+            <tr><td>Jeudi</td><td>Plat du jour &middot; Story educative chaleur pulsee &middot; Photo restaurant localisation</td><td>Photo + Educatif + Localisation</td></tr>
+            <tr><td>Vendredi</td><td>Teaser S1-03 &middot; Rush vendredi &middot; Plat du jour</td><td>Teaser + Coulisses + Photo</td></tr>
+            <tr><td>Samedi</td><td>Best-of semaine &middot; Dernier service CTA</td><td>Recap + CTA</td></tr>
+            <tr><td>Dimanche</td><td>Video fondateurs face camera 15-30s</td><td>Video storytelling</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- STORIES S2 -->
+      <div class="story-week-card reveal reveal-delay-1">
+        <h4>Stories Semaine 2 &mdash; 17/03 &rarr; 23/03</h4>
+        <table class="data-table">
+          <thead>
+            <tr><th>Jour</th><th>Contenu</th><th>Type</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Lundi</td><td>Teaser S2-05 &middot; Plat du jour &middot; Mini-story artisan Labourde</td><td>Teaser + Photo + Artisan</td></tr>
+            <tr><td>Mardi</td><td>Preparation matin &middot; Quiz proteines &middot; Plat du jour</td><td>Coulisses + Quiz + Photo</td></tr>
+            <tr><td>Mercredi</td><td>Teaser S2-06 &middot; Plat du jour &middot; Story post-pub swipe</td><td>Teaser + Photo + CTA</td></tr>
+            <tr><td>Jeudi</td><td>Plat du jour &middot; Pain frais Pains du Soleil &middot; Question ouverte</td><td>Photo + Artisan + Interactif</td></tr>
+            <tr><td>Vendredi</td><td>Teaser S2-07 &middot; Rush vendredi &middot; Plat du jour</td><td>Teaser + Coulisses + Photo</td></tr>
+            <tr><td>Samedi</td><td>Best-of &middot; Dernier service &middot; Recap 8 posts</td><td>Recap + CTA + Milestone</td></tr>
+            <tr><td>Dimanche</td><td>Teaser S2-08 &middot; Story detendue equipe</td><td>Teaser + Equipe</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- STORIES S3 -->
+      <div class="story-week-card reveal">
+        <h4>Stories Semaine 3 &mdash; 24/03 &rarr; 30/03</h4>
+        <table class="data-table">
+          <thead>
+            <tr><th>Jour</th><th>Contenu</th><th>Type</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Lundi</td><td>Teaser mystere falafel &middot; Plat du jour &middot; Story post-pub falafel</td><td>Teaser + Photo + CTA</td></tr>
+            <tr><td>Mardi</td><td>Arrivage video &middot; Sondage boeuf/falafel &middot; Plat du jour</td><td>Video + Sondage + Photo</td></tr>
+            <tr><td>Mercredi</td><td>Teaser 112g proteines &middot; Plat du jour &middot; Story post-pub swipe</td><td>Teaser + Photo + CTA</td></tr>
+            <tr><td>Jeudi</td><td>Plat du jour &middot; Educatif cookie proteines &middot; Mini-Reel 10-15s</td><td>Photo + Educatif + Video</td></tr>
+            <tr><td>Vendredi</td><td>Teaser premier Reel &middot; Rush vendredi &middot; Plat du jour</td><td>Teaser + Coulisses + Photo</td></tr>
+            <tr><td>Samedi</td><td>Best-of &middot; Dernier service &middot; Quiz MAX Poulet</td><td>Recap + CTA + Quiz</td></tr>
+            <tr><td>Dimanche</td><td>Video equipe action &middot; Story post-pub equipe</td><td>Video + CTA</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- STORIES S4 -->
+      <div class="story-week-card reveal reveal-delay-1">
+        <h4>Stories Semaine 4 &mdash; 31/03 &rarr; 06/04</h4>
+        <table class="data-table">
+          <thead>
+            <tr><th>Jour</th><th>Contenu</th><th>Type</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Lundi</td><td>Teaser cookie &middot; Plat du jour &middot; Story post-pub cookie</td><td>Teaser + Photo + CTA</td></tr>
+            <tr><td>Mardi</td><td>Mise en place &middot; Sondage cookie/tiramisu &middot; Plat du jour</td><td>Coulisses + Sondage + Photo</td></tr>
+            <tr><td>Mercredi</td><td>Teaser artisan &middot; Story artisan video &middot; Plat du jour</td><td>Teaser + Artisan + Photo</td></tr>
+            <tr><td>Jeudi</td><td>Plat du jour &middot; Mini-Reel assemblage &middot; Question ouverte produit</td><td>Photo + Video + Interactif</td></tr>
+            <tr><td>Vendredi</td><td>Teaser desserts &middot; Rush vendredi &middot; Plat du jour</td><td>Teaser + Coulisses + Photo</td></tr>
+            <tr><td>Samedi</td><td>Best-of &middot; Dernier service &middot; Recap P1 &laquo; 4 semaines. 16 posts. &raquo;</td><td>Recap + CTA + Milestone</td></tr>
+            <tr><td>Dimanche</td><td>Teaser overnight &middot; Story post-pub overnight</td><td>Teaser + CTA</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       RECAP
+       ============================================ -->
+  <section class="section" id="recap" data-accent="1">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-header-top">
+          <div class="section-number">R</div>
+          <div>
+            <h2>Recap Periode 1</h2>
+            <p class="section-header-subtitle">16 posts, 4 semaines, 5 piliers, 3 artisans, 1 Reel. Vue d'ensemble et metriques de couverture.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Full posts table -->
+      <h3 class="subsection-title reveal">Tableau complet S1-S4</h3>
+      <table class="data-table reveal">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Date</th>
+            <th>Jour</th>
+            <th>Pilier</th>
+            <th>Produit / Sujet</th>
+            <th>Format</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>S1-01</td><td>10/03</td><td>Lundi</td><td><span class="tag tag-plat">Le Plat</span></td><td>STRICT Boeuf</td><td>Photo 4:5</td></tr>
+          <tr><td>S1-02</td><td>12/03</td><td>Mercredi</td><td><span class="tag tag-cuisine">La Cuisine</span></td><td>Du boucher a l'assiette</td><td>Carrousel 5 slides</td></tr>
+          <tr><td>S1-03</td><td>14/03</td><td>Vendredi</td><td><span class="tag tag-plat">Le Plat</span></td><td>Tiramisu proteine</td><td>Photo 4:5</td></tr>
+          <tr><td>S1-04</td><td>16/03</td><td>Dimanche</td><td><span class="tag tag-equipe">L'Equipe</span></td><td>Fondateurs Romain &amp; Dorian</td><td>Photo 4:5</td></tr>
+          <tr><td>S2-05</td><td>17/03</td><td>Lundi</td><td><span class="tag tag-plat">Le Plat</span></td><td>STRICT Poulet</td><td>Photo 4:5</td></tr>
+          <tr><td>S2-06</td><td>19/03</td><td>Mercredi</td><td><span class="tag tag-macros">Les Macros</span></td><td>STRICT Boeuf vs fast-food</td><td>Carrousel 3-4 slides</td></tr>
+          <tr><td>S2-07</td><td>21/03</td><td>Vendredi</td><td><span class="tag tag-cuisine">La Cuisine</span></td><td>Focus Myfitcheese</td><td>Photo</td></tr>
+          <tr><td>S2-08</td><td>23/03</td><td>Dimanche</td><td><span class="tag tag-plat">Le Plat</span></td><td>Wrap Poulet</td><td>Photo 4:5</td></tr>
+          <tr><td>S3-09</td><td>24/03</td><td>Lundi</td><td><span class="tag tag-plat">Le Plat</span></td><td>STRICT Vege Falafel</td><td>Photo 4:5</td></tr>
+          <tr><td>S3-10</td><td>26/03</td><td>Mercredi</td><td><span class="tag tag-macros">Les Macros</span></td><td>Macro STRICT MAX Poulet</td><td>Carrousel 4 slides</td></tr>
+          <tr><td>S3-11</td><td>28/03</td><td>Vendredi</td><td><span class="tag tag-cuisine">La Cuisine</span></td><td>30 secondes en cuisine</td><td>Reel 20-25s</td></tr>
+          <tr><td>S3-12</td><td>30/03</td><td>Dimanche</td><td><span class="tag tag-equipe">L'Equipe</span></td><td>Rush du midi</td><td>Photo</td></tr>
+          <tr><td>S4-13</td><td>31/03</td><td>Lundi</td><td><span class="tag tag-plat">Le Plat</span></td><td>Cookie proteine</td><td>Photo 4:5</td></tr>
+          <tr><td>S4-14</td><td>02/04</td><td>Mercredi</td><td><span class="tag tag-cuisine">La Cuisine</span></td><td>Focus Pains du Soleil</td><td>Photo</td></tr>
+          <tr><td>S4-15</td><td>04/04</td><td>Vendredi</td><td><span class="tag tag-macros">Les Macros</span></td><td>Desserts vs plats</td><td>Carrousel 4 slides</td></tr>
+          <tr><td>S4-16</td><td>06/04</td><td>Dimanche</td><td><span class="tag tag-plat">Le Plat</span></td><td>Overnight STRICT</td><td>Photo 4:5</td></tr>
+        </tbody>
+      </table>
+
+      <!-- Pillar distribution -->
+      <h3 class="subsection-title reveal">Repartition piliers &mdash; cumule P1</h3>
+      <div class="pillar-bar reveal">
+        <div class="pillar-bar-segment pillar-plat" style="flex: 43.75;">43,75%</div>
+        <div class="pillar-bar-segment pillar-cuisine" style="flex: 25;">25%</div>
+        <div class="pillar-bar-segment pillar-macros" style="flex: 18.75;">18,75%</div>
+        <div class="pillar-bar-segment pillar-equipe" style="flex: 12.5;">12,5%</div>
+      </div>
+      <div class="pillar-bar-legend reveal">
+        <div class="pillar-bar-legend-item">
+          <span class="pillar-bar-legend-dot" style="background: var(--accent);"></span>
+          Le Plat &mdash; 7 posts (43,75%)
+        </div>
+        <div class="pillar-bar-legend-item">
+          <span class="pillar-bar-legend-dot" style="background: var(--accent-2);"></span>
+          La Cuisine &mdash; 4 posts (25%)
+        </div>
+        <div class="pillar-bar-legend-item">
+          <span class="pillar-bar-legend-dot" style="background: var(--accent-3);"></span>
+          Les Macros &mdash; 3 posts (18,75%)
+        </div>
+        <div class="pillar-bar-legend-item">
+          <span class="pillar-bar-legend-dot" style="background: var(--accent-4);"></span>
+          L'Equipe &mdash; 2 posts (12,5%)
+        </div>
+      </div>
+
+      <!-- Product coverage -->
+      <h3 class="subsection-title reveal">Couverture produits</h3>
+      <table class="data-table reveal">
+        <thead>
+          <tr><th>Produit</th><th>Post(s)</th><th>Angle</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>STRICT Boeuf</td><td>S1-01, S2-06</td><td>Hero shot + comparaison macros</td></tr>
+          <tr><td>STRICT Poulet</td><td>S2-05</td><td>Hero shot</td></tr>
+          <tr><td>STRICT Vege Falafel</td><td>S3-09</td><td>Hero shot (premier vege)</td></tr>
+          <tr><td>STRICT MAX Poulet</td><td>S3-10</td><td>Macro breakdown</td></tr>
+          <tr><td>Wrap Poulet</td><td>S2-08</td><td>Hero shot (format alternatif)</td></tr>
+          <tr><td>Tiramisu proteine</td><td>S1-03, S4-15</td><td>Hero shot + comparaison desserts</td></tr>
+          <tr><td>Cookie proteine</td><td>S4-13, S4-15</td><td>Hero shot + comparaison desserts</td></tr>
+          <tr><td>Overnight STRICT</td><td>S4-16, S4-15</td><td>Hero shot + comparaison desserts</td></tr>
+        </tbody>
+      </table>
+
+      <!-- Artisan coverage -->
+      <h3 class="subsection-title reveal">Couverture artisans</h3>
+      <table class="data-table reveal">
+        <thead>
+          <tr><th>Artisan</th><th>Post(s) dedies</th><th>Mentions</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Boucherie Labourde</td><td>S1-02</td><td>S1-01, S2-05, S2-06, S3-10, S3-11</td></tr>
+          <tr><td>Myfitcheese</td><td>S2-07</td><td>S1-01, S1-02, S3-09, S3-10, S3-11</td></tr>
+          <tr><td>Pains du Soleil</td><td>S4-14</td><td>S1-01, S1-02, S2-05, S2-06, S3-10, S3-11</td></tr>
+        </tbody>
+      </table>
+
+      <!-- Stories count -->
+      <h3 class="subsection-title reveal">Volume stories</h3>
+      <table class="data-table reveal">
+        <thead>
+          <tr><th>Semaine</th><th>Stories estimees</th><th>Types dominants</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>S1</td><td>~18</td><td>Teasers, plat du jour, coulisses, educatif</td></tr>
+          <tr><td>S2</td><td>~18</td><td>Teasers, quiz, artisans, recap</td></tr>
+          <tr><td>S3</td><td>~20</td><td>Teasers, sondages, mini-Reels, educatif</td></tr>
+          <tr><td>S4</td><td>~18</td><td>Teasers, sondages, artisans, recap P1</td></tr>
+        </tbody>
+      </table>
+
+      <!-- Launch checklist -->
+      <h3 class="subsection-title reveal">Checklist de lancement</h3>
+      <div class="steps-grid reveal">
+        <div class="step-card">
+          <div class="step-card-header">
+            <span class="step-card-number">1</span>
+            <span class="step-card-title">Profil optimise (S0)</span>
+            <span class="step-card-badge">Avant 10/03</span>
+          </div>
+          <ul class="step-card-list">
+            <li>Photo de profil DA</li>
+            <li>Bio reecrite</li>
+            <li>6 covers Highlights</li>
+            <li>Bouton Appeler + lien bio</li>
+            <li>Anciens posts archives</li>
+          </ul>
+        </div>
+        <div class="step-card">
+          <div class="step-card-header">
+            <span class="step-card-number">2</span>
+            <span class="step-card-title">Contenu S1 prepare</span>
+            <span class="step-card-badge">Avant 10/03</span>
+          </div>
+          <ul class="step-card-list">
+            <li>4 visuels valides (retouche DA)</li>
+            <li>4 captions relues</li>
+            <li>Cover carrousel S1-02 produite</li>
+            <li>Hashtags verifies</li>
+          </ul>
+        </div>
+        <div class="step-card">
+          <div class="step-card-header">
+            <span class="step-card-number">3</span>
+            <span class="step-card-title">Stories kit</span>
+            <span class="step-card-badge">Avant 10/03</span>
+          </div>
+          <ul class="step-card-list">
+            <li>Templates stories crees (Canva/Figma)</li>
+            <li>Calendrier stories S1 imprime</li>
+            <li>Stickers/sondages prepares</li>
+          </ul>
+        </div>
+        <div class="step-card">
+          <div class="step-card-header">
+            <span class="step-card-number">4</span>
+            <span class="step-card-title">Photos a produire</span>
+            <span class="step-card-badge">S3-S4</span>
+          </div>
+          <ul class="step-card-list">
+            <li>STRICT Vege Falafel (S3-09)</li>
+            <li>Overnight STRICT (S4-16)</li>
+            <li>Brief photo fourni, shooting a planifier</li>
+          </ul>
+        </div>
+        <div class="step-card">
+          <div class="step-card-header">
+            <span class="step-card-number">5</span>
+            <span class="step-card-title">Reel S3-11 planifie</span>
+            <span class="step-card-badge">Avant 28/03</span>
+          </div>
+          <ul class="step-card-list">
+            <li>Scenario 9 plans valide</li>
+            <li>Musique lo-fi selectionnee</li>
+            <li>Tournage planifie (service midi)</li>
+            <li>Montage 20-25s</li>
+          </ul>
+        </div>
+        <div class="step-card">
+          <div class="step-card-header">
+            <span class="step-card-number">6</span>
+            <span class="step-card-title">Publication &amp; suivi</span>
+            <span class="step-card-badge">Continu</span>
+          </div>
+          <ul class="step-card-list">
+            <li>Publication Lun/Mer/Ven/Dim</li>
+            <li>Stories quotidiennes 2-4/jour</li>
+            <li>Reponse commentaires &lt;2h</li>
+            <li>Tracking saves + partages</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-brand">Neurolia</p>
+      <p class="footer-tagline">Un business qui respire.</p>
+      <p class="footer-date">Mars 2026 &middot; Confidentiel</p>
+    </div>
+  </footer>
+
+  <!-- ============================================
+       JAVASCRIPT
+       ============================================ -->
+  <script>
+    // =========================================
+    // SCROLL PROGRESS BAR
+    // =========================================
+    const progressBar = document.getElementById('navProgress');
+
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = progress + '%';
+    }
+
+    // =========================================
+    // ACTIVE NAV LINK
+    // =========================================
+    const sections = document.querySelectorAll('section[id]');
+    const navLinksAll = document.querySelectorAll('.nav-links a');
+
+    function updateActiveNav() {
+      const scrollPos = window.scrollY + 120;
+
+      sections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        const id = section.getAttribute('id');
+
+        if (scrollPos >= top && scrollPos < top + height) {
+          navLinksAll.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + id) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }
+
+    // =========================================
+    // SCROLL REVEAL (IntersectionObserver)
+    // =========================================
+    const revealElements = document.querySelectorAll('.reveal');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // =========================================
+    // MOBILE NAV TOGGLE
+    // =========================================
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+      });
+    });
+
+    // =========================================
+    // COMBINED SCROLL HANDLER
+    // =========================================
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateProgress();
+          updateActiveNav();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // Initial call
+    updateProgress();
+    updateActiveNav();
+  </script>
+</body>
+</html>

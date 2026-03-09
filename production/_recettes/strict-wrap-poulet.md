@@ -25,9 +25,9 @@
 
 ## Photo référence
 
-`⚠️ PLACEHOLDER — pas de photo DA dark-bg disponible`
+`public/images/photos-references/produits-source/strict-wrap-poulet.png`
 
-> Photos brutes disponibles : `public/images/photos-brutes/produits-seuls/wraps/wrap-poulet-cut.jpeg`, `wrap-poulet-cut-hand.jpeg`.
+> Photos brutes supplementaires : `public/images/photos-brutes/produits-seuls/wraps/wrap-poulet-cut.jpeg`, `wrap-poulet-cut-hand.jpeg`.
 
 ## Notes
 

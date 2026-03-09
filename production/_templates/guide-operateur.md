@@ -156,11 +156,12 @@ Le pipeline détecte automatiquement que le slide nécessite du texte → bascul
 
 ### Photo PLACEHOLDER (pas de photo DA disponible)
 
-Le checkpoint t'affichera un warning :
+> Note : depuis mars 2026, tous les produits de la carte ont au moins une photo dans `photos-references/produits-source/`. Ce cas ne devrait plus se presenter pour les produits existants.
+
+Si un nouveau produit n'a pas encore de photo, le checkpoint t'affichera un warning :
 
 ```
-⚠️ PLACEHOLDER — pas de photo DA dark-bg disponible pour [produit]
-Alternatives brutes : [liste]
+⚠️ PLACEHOLDER — pas de photo disponible pour [produit]
 ```
 
 Tes options :

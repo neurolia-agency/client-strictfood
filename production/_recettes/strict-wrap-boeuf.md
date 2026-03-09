@@ -25,9 +25,9 @@
 
 ## Photo référence
 
-`⚠️ PLACEHOLDER — pas de photo DA dark-bg disponible`
+`public/images/photos-references/produits-source/strict-wrap-boeuf.png`
 
-> Photos brutes disponibles : `public/images/photos-brutes/produits-seuls/wraps/wrap-boeuf-cut.jpeg` et variantes.
+> Photos brutes supplementaires : `public/images/photos-brutes/produits-seuls/wraps/wrap-boeuf-cut.jpeg` et variantes.
 
 ## Notes
 

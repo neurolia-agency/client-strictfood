@@ -56,6 +56,8 @@ npm run dev
 | Stack & dependances | `pipeline/workflow/` |
 | Custom subagents | `.claude/agents/` (5 agents) |
 | Selection photos | `pipeline/input/assets/photo-selection.md` |
+| Photos references produits | `public/images/photos-references/` (dark-bg + produits-source + contexte) |
+| Catalogue photos | `production/_config/photo-references.md` (mapping produit -> photos) |
 | Logo SVG | `public/logo/2025-09-14_15-27-20_UTC.svg` |
 
 ## Contexte Projet

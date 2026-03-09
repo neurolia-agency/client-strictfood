@@ -20,10 +20,10 @@
 
 ## Photo référence
 
-`⚠️ PLACEHOLDER — photos dark-bg disponibles montrent un burger avec tenders, pas les tenders seuls`
+`public/images/photos-references/produits-source/tenders-strict.png`
 
-> Photos brutes tenders seuls : `public/images/photos-brutes/produits-seuls/snacks/tenders.jpeg`, `tenders-2.jpeg`
-> Photos dark-bg (burger tenders) : `public/images/photos-references/dark-bg/burger-tenders-dark-bg.jpg`, `burger-tenders-poulet-dark-bg.png`
+> Dark-bg (burger avec tenders) : `dark-bg/burger-tenders-dark-bg.jpg`, `burger-tenders-poulet-dark-bg.png`.
+> Photos brutes tenders seuls : `public/images/photos-brutes/produits-seuls/snacks/tenders.jpeg`, `tenders-2.jpeg`.
 
 ## Notes
 

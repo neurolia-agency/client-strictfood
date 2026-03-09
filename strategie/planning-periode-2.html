@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planning Periode 2 — S5-S6 | Neurolia x StrictFood</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap">
+  <link rel="stylesheet" href="design-system.css">
+  <style>
+    /* ======================================
+       POST DETAIL CARDS
+       ====================================== */
+    .post-detail {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+
+    .post-detail-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .post-detail-id {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      background: var(--bg-contrast);
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+    }
+
+    .post-detail-date {
+      font-size: 14px;
+      color: var(--text-subtle);
+    }
+
+    .post-detail-day {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+
+    .post-detail-title {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+
+    .post-detail-brief {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      padding: 16px 20px;
+      background: rgba(255,255,255,0.02);
+      border-left: 2px solid;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin-bottom: 16px;
+    }
+
+    .section[data-accent="2"] .post-detail-brief {
+      border-left-color: var(--accent-2);
+    }
+
+    .post-detail-photo {
+      font-size: 12px;
+      color: var(--text-subtle);
+      font-family: 'Satoshi', sans-serif;
+      margin-bottom: 16px;
+    }
+
+    .post-detail-photo code {
+      background: var(--bg-contrast);
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-size: 11px;
+    }
+
+    .post-detail-grille {
+      font-size: 12px;
+      color: var(--text-subtle);
+      font-style: italic;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ======================================
+       REEL SCENARIO TABLE
+       ====================================== */
+    .reel-scenario {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-size: 13px;
+    }
+
+    .reel-scenario th {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-subtle);
+      text-align: left;
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .reel-scenario td {
+      padding: 8px 12px;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    /* ======================================
+       SLIDES TABLE (CARROUSEL)
+       ====================================== */
+    .slides-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-size: 13px;
+    }
+
+    .slides-table th {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-subtle);
+      text-align: left;
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .slides-table td {
+      padding: 8px 12px;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    /* ======================================
+       STORY CALENDAR
+       ====================================== */
+    .story-day {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-top: 24px;
+      margin-bottom: 12px;
+    }
+
+    .story-day:first-child {
+      margin-top: 0;
+    }
+
+    /* ======================================
+       PILLAR TAG COLORS
+       ====================================== */
+    .tag-plat       { background: rgba(196, 92, 59, 0.2); color: var(--accent-pale); white-space: nowrap; }
+    .tag-cuisine    { background: rgba(15, 184, 196, 0.2); color: var(--accent-2); white-space: nowrap; }
+    .tag-macros     { background: rgba(139, 92, 246, 0.2); color: var(--accent-3); white-space: nowrap; }
+    .tag-equipe     { background: rgba(16, 185, 129, 0.2); color: var(--accent-4); white-space: nowrap; }
+    .tag-quartier   { background: rgba(245, 158, 11, 0.2); color: var(--accent-5); white-space: nowrap; }
+
+    /* ======================================
+       PILLAR BAR COLORS
+       ====================================== */
+    .pillar-plat    { background: var(--accent); }
+    .pillar-cuisine { background: var(--accent-2); }
+    .pillar-macros  { background: var(--accent-3); }
+    .pillar-equipe  { background: var(--accent-4); }
+    .pillar-quartier{ background: var(--accent-5); }
+
+    /* ======================================
+       WEEK LABEL
+       ====================================== */
+    .week-label {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--text-primary);
+      margin-bottom: var(--space-lg);
+      padding-left: var(--space-md);
+      border-left: 3px solid var(--accent-2);
+    }
+
+    .week-label span {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-left: 12px;
+    }
+
+    /* ======================================
+       PLACEHOLDER SECTION
+       ====================================== */
+    .placeholder-notice {
+      background: var(--bg-contrast);
+      border: 1px dashed rgba(255,255,255,0.12);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl) var(--space-2xl);
+      text-align: center;
+      margin-bottom: var(--space-2xl);
+    }
+
+    .placeholder-notice p {
+      font-size: 15px;
+      color: var(--text-subtle);
+      font-style: italic;
+    }
+
+    .placeholder-notice .placeholder-label {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+      margin-bottom: var(--space-sm);
+      font-style: normal;
+    }
+
+    /* ======================================
+       SUBSECTION TITLE
+       ====================================== */
+    .subsection-title {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--text-primary);
+      margin-bottom: var(--space-lg);
+      margin-top: var(--space-2xl);
+    }
+
+    /* ======================================
+       POST DETAIL META
+       ====================================== */
+    .post-detail-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: var(--space-md);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================
+       NAVIGATION
+       ============================================ -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Neurolia <span>&times;</span> StrictFood</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#s5">S5</a></li>
+        <li><a href="#s6">S6</a></li>
+        <li><a href="#stories">Stories</a></li>
+        <li><a href="#recap">Recap</a></li>
+      </ul>
+    </div>
+    <div class="nav-progress" id="navProgress"></div>
+  </nav>
+
+  <!-- ============================================
+       HERO
+       ============================================ -->
+  <section class="hero">
+    <div class="container">
+      <p class="hero-label reveal">Planning Editorial</p>
+      <h1 class="reveal">Periode 2 &mdash; Le Rythme &amp; l'Engagement</h1>
+      <p class="hero-subtitle reveal">@strictfood &middot; S5-S6 &middot; 7 avril &rarr; 20 avril 2026</p>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SEMAINE 5
+       ============================================ -->
+  <section class="section" id="s5" data-accent="2">
+    <div class="container">
+      <h3 class="week-label reveal">Semaine 5 <span>07/04 &rarr; 13/04 &middot; 4 posts</span></h3>
+
+      <!-- ========== POST S5-17 ========== -->
+      <div class="post-detail reveal">
+        <div class="post-detail-header">
+          <span class="post-detail-id">S5-17</span>
+          <span class="post-detail-date">07/04</span>
+          <span class="tag tag-plat">Le Plat</span>
+          <span class="tag tag-info">Photo 4:5</span>
+          <span class="post-detail-day">Lundi</span>
+        </div>
+        <div class="post-detail-title">STRICT Wrap Boeuf</div>
+
+        <p class="post-detail-brief">Premier wrap boeuf du feed. Coupe en deux ou tenu ouvert. Viande Labourde, crudites, Myfitcheese. Texture tortilla, jus viande, couleurs legumes. Fond sombre, eclairage lateral chaud.</p>
+
+        <p class="post-detail-photo">Source photo : <code>A produire</code> &mdash; Plan B : STRICT MAX Boeuf angle inedit.</p>
+
+        <p class="post-detail-grille">Grille : Tons bruns/verts contrastent avec Overnight S4-16 adjacent.</p>
+      </div>
+
+      <!-- ========== POST S5-18 ========== -->
+      <div class="post-detail reveal">
+        <div class="post-detail-header">
+          <span class="post-detail-id">S5-18</span>
+          <span class="post-detail-date">09/04</span>
+          <span class="tag tag-cuisine">La Cuisine</span>
+          <span class="tag tag-info">Reel 25-30s</span>
+          <span class="post-detail-day">Mercredi</span>
+        </div>
+        <div class="post-detail-title">&laquo; Du boucher a ton burger &raquo; &mdash; parcours artisan Boucherie Labourde</div>
+
+        <p class="post-detail-brief">Reel narratif/storytelling. Rythme modere, plans 3-4s. De la reception viande au burger fini. Musique lo-fi / chill instrumental. Texte ecran : "Boucherie Labourde" &rarr; "Chaleur pulsee" &rarr; "Myfitcheese" &rarr; "Pains du Soleil". Cover : frame plan 5 ou plan 8.</p>
+
+        <h4 class="subsection-title" style="margin-top: var(--space-md); font-size: 14px;">Scenario &mdash; 8 plans</h4>
+        <table class="reel-scenario">
+          <thead>
+            <tr>
+              <th>Plan</th>
+              <th>Duree</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>3s</td><td>Sac Boucherie Labourde, mains qui l'ouvrent</td></tr>
+            <tr><td>2</td><td>3s</td><td>Viande sortie, texture brute sur planche</td></tr>
+            <tr><td>3</td><td>3s</td><td>Preparation / assaisonnement</td></tr>
+            <tr><td>4</td><td>3s</td><td>Viande sur gril, vapeur</td></tr>
+            <tr><td>5</td><td>3s</td><td>Fromage Myfitcheese pose, debut fonte</td></tr>
+            <tr><td>6</td><td>3s</td><td>Pain Pains du Soleil ouvert, ingredients frais</td></tr>
+            <tr><td>7</td><td>3s</td><td>Assemblage final, fermeture burger</td></tr>
+            <tr><td>8</td><td>4s</td><td>Burger fini pousse vers comptoir</td></tr>
+          </tbody>
+        </table>
+
+      </div>
+
+      <!-- ========== POST S5-19 ========== -->
+      <div class="post-detail reveal">
+        <div class="post-detail-header">
+          <span class="post-detail-id">S5-19</span>
+          <span class="post-detail-date">11/04</span>
+          <span class="tag tag-plat">Le Plat</span>
+          <span class="tag tag-info">Photo 4:5</span>
+          <span class="post-detail-day">Vendredi</span>
+        </div>
+        <div class="post-detail-title">Tenders STRICT</div>
+
+        <p class="post-detail-brief">Premier snack sale du feed. Tenders sur ardoise ou papier kraft. Croustillant du panage : dore, craquelures. Fond sombre, eclairage lateral.</p>
+
+        <p class="post-detail-photo">Source photo : <code>A produire</code></p>
+
+      </div>
+
+      <!-- ========== POST S5-20 ========== -->
+      <div class="post-detail reveal">
+        <div class="post-detail-header">
+          <span class="post-detail-id">S5-20</span>
+          <span class="post-detail-date">13/04</span>
+          <span class="tag tag-equipe">L'Equipe</span>
+          <span class="tag tag-info">Carrousel / Photo</span>
+          <span class="post-detail-day">Dimanche</span>
+        </div>
+        <div class="post-detail-title">&laquo; Une journee chez StrictFood &raquo; &mdash; storytelling approfondi</div>
+
+        <p class="post-detail-brief">Option A : carrousel 5 slides (matin &rarr; rush &rarr; fin de service). Option B : photo unique avec caption longue. Storytelling emotionnel.</p>
+
+        <h4 class="subsection-title" style="margin-top: var(--space-md); font-size: 14px;">Slides &mdash; Option A (carrousel 5 slides)</h4>
+        <table class="slides-table">
+          <thead>
+            <tr>
+              <th>Slide</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>&laquo; 5h45. On commence. &raquo; &mdash; equipe devant resto ferme</td></tr>
+            <tr><td>2</td><td>Mise en place produits</td></tr>
+            <tr><td>3</td><td>Rush midi</td></tr>
+            <tr><td>4</td><td>Fin service, sourire equipe</td></tr>
+            <tr><td>5</td><td>Exterieur lumieres eteintes</td></tr>
+          </tbody>
+        </table>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+       SEMAINE 6
+       ============================================ -->
+  <section class="section section-elevated" id="s6" data-accent="2">
+    <div class="container">
+      <h3 class="week-label reveal">Semaine 6 <span>14/04 &rarr; 20/04 &middot; 4 posts</span></h3>
+
+      <!-- ========== POST S6-21 ========== -->
+      <div class="post-detail reveal">
+        <div class="post-detail-header">
+          <span class="post-detail-id">S6-21</span>
+          <span class="post-detail-date">14/04</span>
+          <span class="tag tag-plat">Le Plat</span>
+          <span class="tag tag-info">Photo 4:5</span>
+          <span class="post-detail-day">Lundi</span>
+        </div>
+        <div class="post-detail-title">Frites Patates Douces</div>
+
+        <p class="post-detail-brief">Couleur orange = sujet. Cornet ou barquette. Sel visible, texture ridee. Contraste orange/noir maximal. Fond sombre.</p>
+
+      </div>
+
+      <!-- ========== POST S6-22 ========== -->
+      <div class="post-detail reveal">
+        <div class="post-detail-header">
+          <span class="post-detail-id">S6-22</span>
+          <span class="post-detail-date">16/04</span>
+          <span class="tag tag-macros">Les Macros</span>
+          <span class="tag tag-info">Carrousel 4 slides</span>
+          <span class="post-detail-day">Mercredi</span>
+        </div>
+        <div class="post-detail-title">&laquo; Nos sides vs les leurs &raquo;</div>
+
+        <p class="post-detail-brief">Carrousel comparatif. Slide 1 = hook "Leurs sides vs les notres." Slide 2 = tenders comparison. Slide 3 = frites comparison. Slide 4 = synthese + prix.</p>
+
+        <h4 class="subsection-title" style="margin-top: var(--space-md); font-size: 14px;">Slides &mdash; 4 slides</h4>
+        <table class="slides-table">
+          <thead>
+            <tr>
+              <th>Slide</th>
+              <th>Contenu</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>&laquo; Leurs sides vs les notres. &raquo;</td></tr>
+            <tr><td>2</td><td>Tenders : comparaison classique vs STRICT</td></tr>
+            <tr><td>3</td><td>Frites : comparaison classique vs patates douces STRICT</td></tr>
+            <tr><td>4</td><td>Synthese + prix</td></tr>
+          </tbody>
+        </table>
+
+      </div>
+
+      <!-- ========== POST S6-23 ========== -->
+      <div class="post-detail reveal">
+        <div class="post-detail-header">
+          <span class="post-detail-id">S6-23</span>
+          <span class="post-detail-date">18/04</span>
+          <span class="tag tag-cuisine">La Cuisine</span>
+          <span class="tag tag-info">Reel 15-20s</span>
+          <span class="post-detail-day">Vendredi</span>
+        </div>
+        <div class="post-detail-title">Food prep dynamique</div>
+
+        <p class="post-detail-brief">Tout va vite. Coupes 1.5-2s, plans tres serres, mouvement permanent. Food porn video. Musique beat dynamique/groovy. Fromage fondant = hook.</p>
+
+        <h4 class="subsection-title" style="margin-top: var(--space-md); font-size: 14px;">Scenario &mdash; 9 plans</h4>
+        <table class="reel-scenario">
+          <thead>
+            <tr>
+              <th>Plan</th>
+              <th>Duree</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>1.5s</td><td>Fromage Myfitcheese fondant (hook)</td></tr>
+            <tr><td>2</td><td>2s</td><td>Decoupage crudites, gros plan</td></tr>
+            <tr><td>3</td><td>1.5s</td><td>Viande sur le gril, flammes</td></tr>
+            <tr><td>4</td><td>2s</td><td>Pain ouvert, garniture deposee</td></tr>
+            <tr><td>5</td><td>1.5s</td><td>Sauce versee</td></tr>
+            <tr><td>6</td><td>2s</td><td>Assemblage rapide</td></tr>
+            <tr><td>7</td><td>1.5s</td><td>Fermeture burger</td></tr>
+            <tr><td>8</td><td>2s</td><td>Coupe transversale, interieur visible</td></tr>
+            <tr><td>9</td><td>2s</td><td>Burger fini, plan large</td></tr>
+          </tbody>
+        </table>
+
+      </div>
+
+      <!-- ========== POST S6-24 ========== -->
+      <div class="post-detail reveal">
+        <div class="post-detail-header">
+          <span class="post-detail-id">S6-24</span>
+          <span class="post-detail-date">20/04</span>
+          <span class="tag tag-quartier">Le Quartier</span>
+          <span class="tag tag-info">Photo / Carrousel</span>
+          <span class="post-detail-day">Dimanche</span>
+        </div>
+        <div class="post-detail-title">Premier post Le Quartier</div>
+
+        <p class="post-detail-brief">3 options : (A) Avis clients mis en forme (carrousel cover + 2 avis + invitation). (B) Premier UGC repost client. (C) Ancrage local (facade restaurant, enseigne neon). Choix final selon les contenus disponibles.</p>
+
+        <h4 class="subsection-title" style="margin-top: var(--space-md); font-size: 14px;">Slides &mdash; Option A (carrousel avis)</h4>
+        <table class="slides-table">
+          <thead>
+            <tr>
+              <th>Slide</th>
+              <th>Contenu</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Cover : &laquo; Vos mots &raquo;</td></tr>
+            <tr><td>2</td><td>Avis client #1 mis en forme</td></tr>
+            <tr><td>3</td><td>Avis client #2 mis en forme</td></tr>
+            <tr><td>4</td><td>Invitation a laisser un avis</td></tr>
+          </tbody>
+        </table>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+       STORIES
+       ============================================ -->
+  <section class="section" id="stories" data-accent="2">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-header-top">
+          <div class="section-number">ST</div>
+          <div>
+            <h2>Calendrier Stories</h2>
+            <p class="section-header-subtitle">Planning stories S5-S6. Teaser, plat du jour, post-pub, educatif, sondage.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== STORIES S5 ========== -->
+      <h3 class="subsection-title reveal">Stories Semaine 5 &mdash; 07/04 &rarr; 13/04</h3>
+
+      <table class="data-table reveal">
+        <thead>
+          <tr>
+            <th>Jour</th>
+            <th>Stories</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Lundi 07/04</td>
+            <td>Teaser wrap boeuf &middot; Plat du jour &middot; Story post-pub &middot; Photo wrap en situation</td>
+          </tr>
+          <tr>
+            <td>Mardi 08/04</td>
+            <td>Arrivage video Labourde &middot; Sondage burger/wrap &middot; Plat du jour</td>
+          </tr>
+          <tr>
+            <td>Mercredi 09/04</td>
+            <td>Teaser Reel 1 &middot; Plat du jour &middot; Story post-pub Reel &middot; Extrait BTS</td>
+          </tr>
+          <tr>
+            <td>Jeudi 10/04</td>
+            <td>Plat du jour &middot; Educatif tenders proteines &middot; Photo cuisine matin</td>
+          </tr>
+          <tr>
+            <td>Vendredi 11/04</td>
+            <td>Teaser snack &middot; Rush vendredi &middot; Plat du jour &middot; Story post-pub tenders</td>
+          </tr>
+          <tr>
+            <td>Samedi 12/04</td>
+            <td>Best-of &middot; Dernier service &middot; Question &laquo; quel produit en Reel ? &raquo;</td>
+          </tr>
+          <tr>
+            <td>Dimanche 13/04</td>
+            <td>Teaser equipe &middot; Video Romain/Dorian face camera merci</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ========== STORIES S6 ========== -->
+      <h3 class="subsection-title reveal">Stories Semaine 6 &mdash; 14/04 &rarr; 20/04</h3>
+
+      <table class="data-table reveal">
+        <thead>
+          <tr>
+            <th>Jour</th>
+            <th>Stories</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Lundi 14/04</td>
+            <td>Teaser &laquo; truc orange &raquo; &middot; Plat du jour &middot; Story post-pub frites PD</td>
+          </tr>
+          <tr>
+            <td>Mardi 15/04</td>
+            <td>Preparation frites &middot; Quiz lipides &middot; Plat du jour</td>
+          </tr>
+          <tr>
+            <td>Mercredi 16/04</td>
+            <td>Teaser macros sides &middot; Plat du jour &middot; Story post-pub swipe</td>
+          </tr>
+          <tr>
+            <td>Jeudi 17/04</td>
+            <td>Plat du jour &middot; Educatif chaleur pulsee &middot; Repost/avis</td>
+          </tr>
+          <tr>
+            <td>Vendredi 18/04</td>
+            <td>Teaser Reel 2 &middot; Rush vendredi &middot; Plat du jour &middot; Story post-pub Reel 2</td>
+          </tr>
+          <tr>
+            <td>Samedi 19/04</td>
+            <td>Best-of &middot; Dernier service &middot; Sondage contenu local</td>
+          </tr>
+          <tr>
+            <td>Dimanche 20/04</td>
+            <td>Teaser quartier &middot; Story post-pub quartier &middot; Photo restaurant exterieur</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+       RECAP
+       ============================================ -->
+  <section class="section section-elevated" id="recap" data-accent="2">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-header-top">
+          <div class="section-number">R</div>
+          <div>
+            <h2>Recap S5-S6</h2>
+            <p class="section-header-subtitle">Vue synthetique de la Periode 2 : posts, piliers, produits couverts, artisans, stories et checklist de lancement.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== Posts S5-S6 table ========== -->
+      <h3 class="subsection-title reveal">Posts S5-S6</h3>
+      <table class="data-table reveal">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Jour</th>
+            <th>Pilier</th>
+            <th>Format</th>
+            <th>Sujet</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>S5-17</td>
+            <td>07/04</td>
+            <td>Lundi</td>
+            <td><span class="tag tag-plat">Le Plat</span></td>
+            <td>Photo 4:5</td>
+            <td>STRICT Wrap Boeuf</td>
+          </tr>
+          <tr>
+            <td>S5-18</td>
+            <td>09/04</td>
+            <td>Mercredi</td>
+            <td><span class="tag tag-cuisine">La Cuisine</span></td>
+            <td>Reel 25-30s</td>
+            <td>Du boucher a ton burger</td>
+          </tr>
+          <tr>
+            <td>S5-19</td>
+            <td>11/04</td>
+            <td>Vendredi</td>
+            <td><span class="tag tag-plat">Le Plat</span></td>
+            <td>Photo 4:5</td>
+            <td>Tenders STRICT</td>
+          </tr>
+          <tr>
+            <td>S5-20</td>
+            <td>13/04</td>
+            <td>Dimanche</td>
+            <td><span class="tag tag-equipe">L'Equipe</span></td>
+            <td>Carrousel / Photo</td>
+            <td>Une journee chez StrictFood</td>
+          </tr>
+          <tr>
+            <td>S6-21</td>
+            <td>14/04</td>
+            <td>Lundi</td>
+            <td><span class="tag tag-plat">Le Plat</span></td>
+            <td>Photo 4:5</td>
+            <td>Frites Patates Douces</td>
+          </tr>
+          <tr>
+            <td>S6-22</td>
+            <td>16/04</td>
+            <td>Mercredi</td>
+            <td><span class="tag tag-macros">Les Macros</span></td>
+            <td>Carrousel 4 slides</td>
+            <td>Nos sides vs les leurs</td>
+          </tr>
+          <tr>
+            <td>S6-23</td>
+            <td>18/04</td>
+            <td>Vendredi</td>
+            <td><span class="tag tag-cuisine">La Cuisine</span></td>
+            <td>Reel 15-20s</td>
+            <td>Food prep dynamique</td>
+          </tr>
+          <tr>
+            <td>S6-24</td>
+            <td>20/04</td>
+            <td>Dimanche</td>
+            <td><span class="tag tag-quartier">Le Quartier</span></td>
+            <td>Photo / Carrousel</td>
+            <td>Premier post Le Quartier</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ========== Pillar distribution ========== -->
+      <h3 class="subsection-title reveal">Distribution piliers S5-S6</h3>
+      <div class="pillar-bar reveal">
+        <div class="pillar-bar-segment pillar-plat" style="flex: 3;">37.5%</div>
+        <div class="pillar-bar-segment pillar-cuisine" style="flex: 2;">25%</div>
+        <div class="pillar-bar-segment pillar-macros" style="flex: 1;">12.5%</div>
+        <div class="pillar-bar-segment pillar-equipe" style="flex: 1;">12.5%</div>
+        <div class="pillar-bar-segment pillar-quartier" style="flex: 1;">12.5%</div>
+      </div>
+      <div class="pillar-bar-legend reveal">
+        <span class="pillar-bar-legend-item"><span class="pillar-bar-legend-dot" style="background: var(--accent);"></span> Le Plat &mdash; 37.5% (3 posts)</span>
+        <span class="pillar-bar-legend-item"><span class="pillar-bar-legend-dot" style="background: var(--accent-2);"></span> La Cuisine &mdash; 25% (2 posts)</span>
+        <span class="pillar-bar-legend-item"><span class="pillar-bar-legend-dot" style="background: var(--accent-3);"></span> Les Macros &mdash; 12.5% (1 post)</span>
+        <span class="pillar-bar-legend-item"><span class="pillar-bar-legend-dot" style="background: var(--accent-4);"></span> L'Equipe &mdash; 12.5% (1 post)</span>
+        <span class="pillar-bar-legend-item"><span class="pillar-bar-legend-dot" style="background: var(--accent-5);"></span> Le Quartier &mdash; 12.5% (1 post)</span>
+      </div>
+
+      <!-- ========== Product coverage ========== -->
+      <h3 class="subsection-title reveal">Couverture produits &mdash; Nouveaux en S5-S6</h3>
+      <table class="data-table reveal">
+        <thead>
+          <tr>
+            <th>Produit</th>
+            <th>Post</th>
+            <th>Type</th>
+            <th>Statut</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>STRICT Wrap Boeuf</td>
+            <td>S5-17</td>
+            <td>Hero shot</td>
+            <td><span class="tag tag-success">Nouveau</span></td>
+          </tr>
+          <tr>
+            <td>Tenders STRICT</td>
+            <td>S5-19</td>
+            <td>Hero shot</td>
+            <td><span class="tag tag-success">Nouveau</span></td>
+          </tr>
+          <tr>
+            <td>Frites Patates Douces</td>
+            <td>S6-21</td>
+            <td>Hero shot</td>
+            <td><span class="tag tag-success">Nouveau</span></td>
+          </tr>
+          <tr>
+            <td>Frites classiques</td>
+            <td>S6-22</td>
+            <td>Mention comparaison</td>
+            <td><span class="tag tag-info">Mention</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ========== Artisan coverage cumule ========== -->
+      <h3 class="subsection-title reveal">Couverture artisans &mdash; Cumule P1 + P2</h3>
+      <table class="data-table reveal">
+        <thead>
+          <tr>
+            <th>Artisan</th>
+            <th>Mentions P1</th>
+            <th>Mentions S5-S6</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Boucherie Labourde</td>
+            <td>Multiples (S1-S4)</td>
+            <td>S5-17, S5-18, S5-19, S5-20, S6-23</td>
+            <td><span class="tag tag-success">Forte</span></td>
+          </tr>
+          <tr>
+            <td>Pains du Soleil</td>
+            <td>Multiples (S1-S4)</td>
+            <td>S5-18, S5-20, S6-23</td>
+            <td><span class="tag tag-success">Forte</span></td>
+          </tr>
+          <tr>
+            <td>Myfitcheese</td>
+            <td>Multiples (S1-S4)</td>
+            <td>S5-17, S5-18, S6-23</td>
+            <td><span class="tag tag-success">Forte</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ========== Stories count ========== -->
+      <h3 class="subsection-title reveal">Volume stories</h3>
+      <table class="data-table reveal">
+        <thead>
+          <tr>
+            <th>Semaine</th>
+            <th>Jours actifs</th>
+            <th>Stories estimees</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>S5 (07/04 &rarr; 13/04)</td>
+            <td>7/7</td>
+            <td>~22 stories</td>
+          </tr>
+          <tr>
+            <td>S6 (14/04 &rarr; 20/04)</td>
+            <td>7/7</td>
+            <td>~21 stories</td>
+          </tr>
+          <tr>
+            <td><strong>Total S5-S6</strong></td>
+            <td><strong>14 jours</strong></td>
+            <td><strong>~43 stories</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ========== Checklist de lancement ========== -->
+      <h3 class="subsection-title reveal">Checklist de lancement</h3>
+      <div class="steps-grid reveal">
+        <div class="step-card">
+          <div class="step-card-header">
+            <span class="step-card-number">1</span>
+            <span class="step-card-title">Shooting photos</span>
+            <span class="step-card-badge">Avant le 05/04</span>
+          </div>
+          <ul class="step-card-list">
+            <li>Photo Wrap Boeuf (S5-17)</li>
+            <li>Photo Tenders STRICT (S5-19)</li>
+            <li>Photo Frites Patates Douces (S6-21)</li>
+            <li>Photos equipe journee (S5-20)</li>
+          </ul>
+        </div>
+        <div class="step-card">
+          <div class="step-card-header">
+            <span class="step-card-number">2</span>
+            <span class="step-card-title">Tournage Reels</span>
+            <span class="step-card-badge">Avant le 07/04</span>
+          </div>
+          <ul class="step-card-list">
+            <li>Reel narratif artisan Labourde (S5-18)</li>
+            <li>Reel food prep dynamique (S6-23)</li>
+            <li>Rushes stories BTS</li>
+          </ul>
+        </div>
+        <div class="step-card">
+          <div class="step-card-header">
+            <span class="step-card-number">3</span>
+            <span class="step-card-title">Graphisme</span>
+            <span class="step-card-badge">Avant le 07/04</span>
+          </div>
+          <ul class="step-card-list">
+            <li>Slides carrousel macros (S6-22)</li>
+            <li>Slides avis clients (S6-24)</li>
+            <li>Covers Reels S5-18 et S6-23</li>
+          </ul>
+        </div>
+        <div class="step-card">
+          <div class="step-card-header">
+            <span class="step-card-number">4</span>
+            <span class="step-card-title">Programmation</span>
+            <span class="step-card-badge">Avant le 06/04</span>
+          </div>
+          <ul class="step-card-list">
+            <li>Programmer posts S5 dans Creator Studio</li>
+            <li>Programmer posts S6 dans Creator Studio</li>
+            <li>Verifier horaires selon Insights P1</li>
+            <li>Preparer stories templates</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+       S7-S8 PLACEHOLDER
+       ============================================ -->
+  <section class="section section-elevated" id="s7s8" data-accent="2">
+    <div class="container">
+      <div class="placeholder-notice reveal">
+        <p class="placeholder-label">Bloc S7-S8 &middot; a venir</p>
+        <p>Semaines 7-8 (21/04 &rarr; 04/05) : planning editorial a construire a partir des donnees de performance S5-S6.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-brand">Neurolia &times; StrictFood</p>
+      <p class="footer-tagline">Un business qui respire.</p>
+      <p class="footer-date">Avril 2026 &middot; Confidentiel</p>
+    </div>
+  </footer>
+
+  <!-- ============================================
+       JAVASCRIPT
+       ============================================ -->
+  <script>
+    // =========================================
+    // SCROLL PROGRESS BAR
+    // =========================================
+    const progressBar = document.getElementById('navProgress');
+
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = progress + '%';
+    }
+
+    // =========================================
+    // ACTIVE NAV LINK
+    // =========================================
+    const sections = document.querySelectorAll('section[id]');
+    const navLinksAll = document.querySelectorAll('.nav-links a');
+
+    function updateActiveNav() {
+      const scrollPos = window.scrollY + 120;
+
+      sections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        const id = section.getAttribute('id');
+
+        if (scrollPos >= top && scrollPos < top + height) {
+          navLinksAll.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + id) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }
+
+    // =========================================
+    // SCROLL REVEAL (IntersectionObserver)
+    // =========================================
+    const revealElements = document.querySelectorAll('.reveal');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // =========================================
+    // MOBILE NAV TOGGLE
+    // =========================================
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+      });
+    });
+
+    // =========================================
+    // COMBINED SCROLL HANDLER
+    // =========================================
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateProgress();
+          updateActiveNav();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // Initial call
+    updateProgress();
+    updateActiveNav();
+  </script>
+</body>
+</html>

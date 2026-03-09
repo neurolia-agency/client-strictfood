@@ -10,98 +10,6 @@
   <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap">
   <link rel="stylesheet" href="design-system.css">
   <style>
-    /* ======================================
-       POST CARDS (editorial calendar)
-       ====================================== */
-    .post-cards {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      margin-bottom: var(--space-2xl);
-    }
-
-    @media (max-width: 768px) {
-      .post-cards {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .post-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 24px;
-      transition: border-color var(--duration-normal), transform var(--duration-normal);
-    }
-
-    .post-card:hover {
-      transform: translateY(-2px);
-      border-color: var(--border-hover);
-    }
-
-    .post-card-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: var(--space-md);
-    }
-
-    .post-card-id {
-      font-family: 'Satoshi', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text-primary);
-      background: var(--bg-contrast);
-      padding: 4px 10px;
-      border-radius: var(--radius-sm);
-      white-space: nowrap;
-    }
-
-    .post-card-date {
-      font-size: 13px;
-      color: var(--text-subtle);
-    }
-
-    .post-card-day {
-      font-family: 'Satoshi', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-muted);
-      margin-left: auto;
-    }
-
-    .post-card-title {
-      font-family: 'Satoshi', sans-serif;
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 6px;
-    }
-
-    .post-card-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: var(--space-md);
-    }
-
-    .post-card-hook {
-      font-size: 14px;
-      color: var(--text-muted);
-      font-style: italic;
-      padding: 10px 14px;
-      background: rgba(255, 255, 255, 0.02);
-      border-left: 2px solid var(--text-subtle);
-      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-      margin-bottom: var(--space-sm);
-    }
-
-    .post-card-objective {
-      font-size: 13px;
-      color: var(--text-subtle);
-      line-height: 1.6;
-    }
-
     /* Pillar tag colors */
     .tag-plat       { background: rgba(196, 92, 59, 0.2); color: var(--accent-pale); white-space: nowrap; }
     .tag-cuisine    { background: rgba(15, 184, 196, 0.2); color: var(--accent-2); white-space: nowrap; }
@@ -115,61 +23,6 @@
     .pillar-macros  { background: var(--accent-3); }
     .pillar-equipe  { background: var(--accent-4); }
     .pillar-quartier{ background: var(--accent-5); }
-
-    /* Week label */
-    .week-label {
-      font-family: 'Satoshi', sans-serif;
-      font-size: 20px;
-      font-weight: 900;
-      color: var(--text-primary);
-      margin-bottom: var(--space-lg);
-      padding-left: var(--space-md);
-      border-left: 3px solid var(--accent-2);
-    }
-
-    .week-label span {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text-muted);
-      margin-left: 12px;
-    }
-
-    /* Placeholder section */
-    .placeholder-notice {
-      background: var(--bg-contrast);
-      border: 1px dashed rgba(255, 255, 255, 0.12);
-      border-radius: var(--radius-lg);
-      padding: var(--space-xl) var(--space-2xl);
-      text-align: center;
-      margin-bottom: var(--space-2xl);
-    }
-
-    .placeholder-notice p {
-      font-size: 15px;
-      color: var(--text-subtle);
-      font-style: italic;
-    }
-
-    .placeholder-notice .placeholder-label {
-      font-family: 'Satoshi', sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--text-subtle);
-      margin-bottom: var(--space-sm);
-      font-style: normal;
-    }
-
-    /* Subsection title */
-    .subsection-title {
-      font-family: 'Satoshi', sans-serif;
-      font-weight: 700;
-      font-size: 18px;
-      color: var(--text-primary);
-      margin-bottom: var(--space-lg);
-      margin-top: var(--space-2xl);
-    }
 
     /* Calendar type grid */
     .week-type-grid {
@@ -211,6 +64,137 @@
       font-size: 11px;
       color: var(--text-subtle);
     }
+
+    /* Subsection title */
+    .subsection-title {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--text-primary);
+      margin-bottom: var(--space-lg);
+      margin-top: var(--space-2xl);
+    }
+
+    /* Diagnostic stat */
+    .diag-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: var(--space-2xl);
+    }
+
+    @media (max-width: 768px) {
+      .diag-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .diag-stat {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .diag-stat-value {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .diag-stat-label {
+      font-size: 12px;
+      color: var(--text-subtle);
+    }
+
+    /* Phase period cards */
+    .period-detail {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-xl) 28px;
+      margin-bottom: var(--space-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .period-detail::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 3px;
+    }
+
+    .period-detail[data-accent="1"]::before { background: var(--accent); }
+    .period-detail[data-accent="2"]::before { background: var(--accent-2); }
+    .period-detail[data-accent="3"]::before { background: var(--accent-3); }
+
+    .period-detail-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: var(--space-md);
+      gap: var(--space-md);
+    }
+
+    .period-detail-title {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--text-primary);
+    }
+
+    .period-detail-timing {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-subtle);
+      background: var(--bg-contrast);
+      padding: 4px 12px;
+      border-radius: var(--radius-sm);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .period-detail-mission {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: var(--space-lg);
+    }
+
+    .period-detail-actions {
+      list-style: none;
+      margin-bottom: var(--space-lg);
+    }
+
+    .period-detail-actions li {
+      font-size: 14px;
+      color: var(--text-muted);
+      padding: 5px 0;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .period-detail-actions li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 12px;
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      opacity: 0.5;
+    }
+
+    .period-detail[data-accent="1"] .period-detail-actions li::before { background: var(--accent); }
+    .period-detail[data-accent="2"] .period-detail-actions li::before { background: var(--accent-2); }
+    .period-detail[data-accent="3"] .period-detail-actions li::before { background: var(--accent-3); }
   </style>
 </head>
 <body>
@@ -229,10 +213,10 @@
         </svg>
       </button>
       <ul class="nav-links" id="navLinks">
-        <li><a href="#overview">Vue d'ensemble</a></li>
-        <li><a href="#periode1">Periode 1</a></li>
-        <li><a href="#periode2">Periode 2</a></li>
-        <li><a href="#periode3">Periode 3</a></li>
+        <li><a href="#diagnostic">Diagnostic</a></li>
+        <li><a href="#mission">Mission</a></li>
+        <li><a href="#architecture">Architecture</a></li>
+        <li><a href="#feuille-de-route">Feuille de route</a></li>
         <li><a href="#vision">Vision</a></li>
       </ul>
     </div>
@@ -244,57 +228,145 @@
        ============================================ -->
   <section class="hero">
     <div class="container">
-      <p class="hero-label reveal">Instagram Strategy</p>
-      <h1 class="reveal">Strategie Instagram</h1>
-      <p class="hero-subtitle reveal">@strictfood &middot; 1 368 followers &middot; Dark Food Premium</p>
+      <p class="hero-label reveal">Strategie Instagram</p>
+      <h1 class="reveal">Construire une vitrine<br>qui convertit la confiance</h1>
+      <p class="hero-subtitle reveal">@strictfood &middot; Dark Food Premium &middot; Perpignan</p>
 
       <div class="summary-cards">
-        <a href="#periode1" class="summary-card reveal" data-accent="1">
-          <p class="summary-card-label">Periode 1</p>
-          <p class="summary-card-meta">Mars &rarr; debut avril &middot; S1 a S4</p>
-          <p class="summary-card-title">Le Reboot Premium</p>
-          <p>Transformer le feed inactif en vitrine Dark Food Premium credible. Poser le standard visuel.</p>
+        <a href="#architecture" class="summary-card reveal" data-accent="1">
+          <p class="summary-card-label">Architecture</p>
+          <p class="summary-card-title">5 piliers editoriaux</p>
+          <p>Une grille editoriale structuree qui couvre l'ensemble du positionnement : produit, craft, nutrition, humain, local.</p>
         </a>
-        <a href="#periode2" class="summary-card reveal reveal-delay-1" data-accent="2">
-          <p class="summary-card-label">Periode 2</p>
-          <p class="summary-card-meta">Avril &middot; S5 a S8</p>
-          <p class="summary-card-title">Le Rythme & l'Engagement</p>
-          <p>Installer le rythme de croisiere. Diversifier les formats. Construire la relation avec l'audience.</p>
+        <a href="#feuille-de-route" class="summary-card reveal reveal-delay-1" data-accent="2">
+          <p class="summary-card-label">Feuille de route</p>
+          <p class="summary-card-title">3 periodes en 3 mois</p>
+          <p>Du reboot visuel a l'amplification, une montee en puissance progressive et mesurable.</p>
         </a>
-        <a href="#periode3" class="summary-card reveal reveal-delay-2" data-accent="3">
-          <p class="summary-card-label">Periode 3</p>
-          <p class="summary-card-meta">Mai &middot; S9+</p>
-          <p class="summary-card-title">L'Amplification</p>
-          <p>Capitaliser sur les donnees. Series recurrentes. Premiers UGC. Le compte devient un media.</p>
+        <a href="#valeur" class="summary-card reveal reveal-delay-2" data-accent="4">
+          <p class="summary-card-label">Approche</p>
+          <p class="summary-card-title">IA + Systeme</p>
+          <p>Un workflow creatif semi-autonome, alimente par l'IA et calibre sur la data.</p>
         </a>
       </div>
     </div>
   </section>
 
   <!-- ============================================
-       VUE D'ENSEMBLE
+       DIAGNOSTIC
        ============================================ -->
-  <section class="section" id="overview" data-accent="1">
+  <section class="section" id="diagnostic" data-accent="1">
     <div class="container">
       <div class="section-header reveal">
         <div class="section-header-top">
-          <div class="section-number">00</div>
+          <div class="section-number">01</div>
           <div>
-            <h2>Vue d'ensemble</h2>
-            <p class="section-header-subtitle">Architecture editoriale, piliers, calendrier type et guidelines creatives pour l'ensemble de la strategie Instagram StrictFood.</p>
+            <h2>Le diagnostic</h2>
+            <p class="section-header-subtitle">Ou en est le compte Instagram de StrictFood, et pourquoi il faut agir maintenant.</p>
           </div>
         </div>
       </div>
 
-      <!-- Context banner -->
-      <div class="context-banner reveal">
-        <p><strong>Role d'Instagram dans l'ecosysteme :</strong> Instagram n'est pas le canal d'acquisition principal (c'est Google). Son role est triple :</p>
-        <div class="context-chips">
-          <span class="context-chip">Validation sociale</span>
-          <span class="context-chip">Univers de marque</span>
-          <span class="context-chip">Retention communautaire</span>
+      <!-- Stats actuelles -->
+      <div class="diag-stats reveal">
+        <div class="diag-stat">
+          <div class="diag-stat-value">1 368</div>
+          <div class="diag-stat-label">Followers actuels</div>
         </div>
-        <p>Le prospect qui decouvre StrictFood via Google verifie l'Instagram. Le feed doit "fermer la vente". On ne court pas apres la viralite. On construit un feed qui convertit la confiance.</p>
+        <div class="diag-stat">
+          <div class="diag-stat-value">~0</div>
+          <div class="diag-stat-label">Posts recents</div>
+        </div>
+        <div class="diag-stat">
+          <div class="diag-stat-value">0</div>
+          <div class="diag-stat-label">Direction artistique</div>
+        </div>
+        <div class="diag-stat">
+          <div class="diag-stat-value">0</div>
+          <div class="diag-stat-label">Strategie editoriale</div>
+        </div>
+      </div>
+
+      <div class="context-banner reveal">
+        <p><strong>Le constat :</strong> Le compte Instagram de StrictFood est quasi inactif. Pas de direction artistique, pas de ligne editoriale, pas de rythme de publication. Le positionnement premium de StrictFood &mdash; "Le cheat meal qui n'en est pas un" &mdash; n'est visible nulle part sur le digital.</p>
+        <p><strong>L'opportunite :</strong> StrictFood a deja 1 368 followers et un concept fort. La matiere premiere existe (produits, histoire, valeurs). Il manque le systeme pour la transformer en vitrine premium credible.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       MISSION INSTAGRAM
+       ============================================ -->
+  <section class="section section-elevated" id="mission" data-accent="2">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-header-top">
+          <div class="section-number">02</div>
+          <div>
+            <h2>Le role d'Instagram</h2>
+            <p class="section-header-subtitle">Instagram n'est pas le canal d'acquisition principal. C'est Google. Le role d'Instagram est different &mdash; et tout aussi critique.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="steps-grid reveal">
+        <div class="step-card">
+          <div class="step-card-header">
+            <span class="step-card-number">1</span>
+            <span class="step-card-title">Validation sociale</span>
+          </div>
+          <ul class="step-card-list">
+            <li>Le prospect decouvre StrictFood via Google</li>
+            <li>Il verifie l'Instagram avant de se deplacer</li>
+            <li>Le feed doit "fermer la vente" &mdash; confirmer la credibilite</li>
+            <li>Un compte inactif ou incoherent = un client perdu</li>
+          </ul>
+        </div>
+        <div class="step-card">
+          <div class="step-card-header">
+            <span class="step-card-number">2</span>
+            <span class="step-card-title">Univers de marque</span>
+          </div>
+          <ul class="step-card-list">
+            <li>Le Dark Food Premium vit visuellement sur Instagram</li>
+            <li>Le seul canal ou l'esthetique de marque se deploie pleinement</li>
+            <li>Le feed EST la carte de visite digitale de StrictFood</li>
+            <li>Plus que sur tout autre canal, c'est ici que le positionnement premium se prouve</li>
+          </ul>
+        </div>
+        <div class="step-card">
+          <div class="step-card-header">
+            <span class="step-card-number">3</span>
+            <span class="step-card-title">Retention communautaire</span>
+          </div>
+          <ul class="step-card-list">
+            <li>Les clients existants restent connectes entre deux visites</li>
+            <li>Les stories et posts maintiennent le lien</li>
+            <li>La communaute devient prescriptrice (UGC, avis, partages)</li>
+            <li>Effet compose : chaque post renforce la preuve sociale</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="context-banner reveal">
+        <p><strong>Choix strategique :</strong> On ne court pas apres la viralite. On construit un feed qui convertit la confiance. Chaque publication est pensee pour confirmer le positionnement premium de StrictFood aupres de prospects deja en phase de decision.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       ARCHITECTURE EDITORIALE
+       ============================================ -->
+  <section class="section" id="architecture" data-accent="3">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-header-top">
+          <div class="section-number">03</div>
+          <div>
+            <h2>Architecture editoriale</h2>
+            <p class="section-header-subtitle">Les choix structurants qui guident l'ensemble de la creation de contenu : 5 piliers, un calendrier, une identite.</p>
+          </div>
+        </div>
       </div>
 
       <!-- 5 Piliers -->
@@ -305,7 +377,7 @@
             <th>Pilier</th>
             <th>%</th>
             <th>Contenu type</th>
-            <th>Fonction</th>
+            <th>Fonction strategique</th>
           </tr>
         </thead>
         <tbody>
@@ -319,28 +391,59 @@
             <td><span class="tag tag-cuisine">La Cuisine</span></td>
             <td>25%</td>
             <td>Carrousels "du brut a l'assiette", Reels preparation, fournisseurs nommes</td>
-            <td>Credibilite "fait maison", storytelling sourcing local</td>
+            <td>Credibilite "fait maison", storytelling sourcing local &mdash; ce que les fast-foods ne peuvent pas copier</td>
           </tr>
           <tr>
             <td><span class="tag tag-macros">Les Macros</span></td>
             <td>18%</td>
             <td>Macro breakdowns, comparaisons "notre burger vs classique", tips nutrition</td>
-            <td>Materialiser le "cheat meal qui n'en est pas un", autorite nutrition</td>
+            <td>Materialiser le "cheat meal qui n'en est pas un", autorite nutrition aupres du persona sportif</td>
           </tr>
           <tr>
             <td><span class="tag tag-equipe">L'Equipe</span></td>
             <td>15%</td>
             <td>Portraits fondateurs, rush du midi, mini-storytelling quotidien</td>
-            <td>Humaniser la marque, creer l'attachement emotionnel</td>
+            <td>Humaniser la marque, creer l'attachement emotionnel &mdash; les gens achetent a des gens</td>
           </tr>
           <tr>
             <td><span class="tag tag-quartier">Le Quartier</span></td>
             <td>7%</td>
             <td>Repost clients, partenaires locaux, avis mis en forme</td>
-            <td>Ancrage local, preuve sociale externe</td>
+            <td>Ancrage local, preuve sociale externe &mdash; grandit naturellement avec l'UGC</td>
           </tr>
         </tbody>
       </table>
+
+      <!-- Repartition cible -->
+      <div class="pillar-bar reveal">
+        <div class="pillar-bar-segment pillar-plat" style="flex: 35;">35%</div>
+        <div class="pillar-bar-segment pillar-cuisine" style="flex: 25;">25%</div>
+        <div class="pillar-bar-segment pillar-macros" style="flex: 18;">18%</div>
+        <div class="pillar-bar-segment pillar-equipe" style="flex: 15;">15%</div>
+        <div class="pillar-bar-segment pillar-quartier" style="flex: 7;">7%</div>
+      </div>
+      <div class="pillar-bar-legend reveal">
+        <div class="pillar-bar-legend-item">
+          <span class="pillar-bar-legend-dot" style="background: var(--accent);"></span>
+          Le Plat &mdash; 35%
+        </div>
+        <div class="pillar-bar-legend-item">
+          <span class="pillar-bar-legend-dot" style="background: var(--accent-2);"></span>
+          La Cuisine &mdash; 25%
+        </div>
+        <div class="pillar-bar-legend-item">
+          <span class="pillar-bar-legend-dot" style="background: var(--accent-3);"></span>
+          Les Macros &mdash; 18%
+        </div>
+        <div class="pillar-bar-legend-item">
+          <span class="pillar-bar-legend-dot" style="background: var(--accent-4);"></span>
+          L'Equipe &mdash; 15%
+        </div>
+        <div class="pillar-bar-legend-item">
+          <span class="pillar-bar-legend-dot" style="background: var(--accent-5);"></span>
+          Le Quartier &mdash; 7%
+        </div>
+      </div>
 
       <!-- Calendrier semaine type -->
       <h3 class="subsection-title reveal">Calendrier semaine type</h3>
@@ -367,9 +470,22 @@
         </div>
       </div>
 
-      <!-- Guidelines creatives -->
-      <h3 class="subsection-title reveal">Guidelines creatives</h3>
+      <!-- Direction artistique -->
+      <h3 class="subsection-title reveal">Direction artistique adoptee</h3>
       <div class="steps-grid reveal">
+        <div class="step-card">
+          <div class="step-card-header">
+            <span class="step-card-number">DA</span>
+            <span class="step-card-title">Identite visuelle</span>
+          </div>
+          <ul class="step-card-list">
+            <li>Fond sombre "Charbon" #141210 &mdash; esthetique Dark Food Premium</li>
+            <li>Eclairage lateral chaud &mdash; mise en valeur des textures</li>
+            <li>Cuivre Braise #BF8522 + Grenat Fume #7C3530</li>
+            <li>Typographies : Oswald (display) + Space Grotesk (titres) + DM Sans (body)</li>
+            <li>Food Porn Dial : 7/10 &mdash; gourmand et desirable sans exces</li>
+          </ul>
+        </div>
         <div class="step-card">
           <div class="step-card-header">
             <span class="step-card-number">T</span>
@@ -383,575 +499,124 @@
             <li>Emojis : 1-2 par caption max</li>
           </ul>
         </div>
-        <div class="step-card">
-          <div class="step-card-header">
-            <span class="step-card-number">DA</span>
-            <span class="step-card-title">Direction artistique</span>
-          </div>
-          <ul class="step-card-list">
-            <li>Fond sombre (Charbon #141210)</li>
-            <li>Eclairage lateral chaud</li>
-            <li>Cuivre Braise #BF8522 + Grenat Fume #7C3530</li>
-            <li>Typos : Oswald (display) + Space Grotesk (titres) + DM Sans (body)</li>
-            <li>Food Porn Dial : 7/10</li>
-          </ul>
-        </div>
-        <div class="step-card">
-          <div class="step-card-header">
-            <span class="step-card-number">C</span>
-            <span class="step-card-title">Captions</span>
-          </div>
-          <ul class="step-card-list">
-            <li>Hook en premiere ligne (avant le "...voir plus")</li>
-            <li>3-5 lignes pour le food porn, plus long pour education/storytelling</li>
-            <li>CTA en fin de caption quand pertinent</li>
-            <li>10-15 hashtags par post (locaux + niches + specifiques)</li>
-          </ul>
-        </div>
-        <div class="step-card">
-          <div class="step-card-header">
-            <span class="step-card-number">R</span>
-            <span class="step-card-title">Reels</span>
-          </div>
-          <ul class="step-card-list">
-            <li>15-30 secondes ideal, 60s max</li>
-            <li>Musique tendance (verifier droits)</li>
-            <li>Hook visuel dans les 2 premieres secondes</li>
-            <li>Cover coherente avec la grille du feed</li>
-          </ul>
-        </div>
       </div>
     </div>
   </section>
 
   <!-- ============================================
-       PERIODE 1 — LE REBOOT PREMIUM (PLACEHOLDER)
+       FEUILLE DE ROUTE — LES 3 PERIODES
        ============================================ -->
-  <section class="section section-elevated" id="periode1" data-accent="1">
+  <section class="section section-elevated" id="feuille-de-route" data-accent="1">
     <div class="container">
       <div class="section-header reveal">
         <div class="section-header-top">
-          <div class="section-number">01</div>
+          <div class="section-number">04</div>
           <div>
-            <h2>Periode 1 &mdash; Le Reboot Premium</h2>
-            <p class="section-header-subtitle">Mars &rarr; debut avril &middot; Semaines 1 a 4</p>
-            <div class="meta-badges">
-              <span class="meta-badge">16+ posts</span>
-              <span class="meta-badge">4 semaines</span>
-              <span class="meta-badge">Le Plat 60% + La Cuisine 40%</span>
-            </div>
+            <h2>Feuille de route</h2>
+            <p class="section-header-subtitle">Une montee en puissance en 3 periodes. Chaque periode a une mission claire, des choix strategiques propres et des KPIs mesurables.</p>
           </div>
         </div>
       </div>
 
-      <div class="context-banner reveal">
-        <p><strong>Mission :</strong> Transformer le feed inactif en vitrine Dark Food Premium credible. Poser le standard visuel. Installer le rythme de publication a 4 posts/semaine.</p>
-        <p>Refonte du profil (bio, highlights, photo), publication du "mur visuel" initial (8-10 premiers posts), puis introduction progressive des piliers Macros et Equipe en S3-S4.</p>
-      </div>
-
-      <!-- KPIs cibles P1 -->
-      <h3 class="kpi-section-title reveal">KPIs cibles fin de Periode 1</h3>
-      <div class="kpi-grid reveal">
-        <div class="kpi-card">
-          <div class="kpi-tag">Posts</div>
-          <div class="kpi-value">16+</div>
-          <div class="kpi-label">Posts publies</div>
+      <!-- PERIODE 1 -->
+      <div class="period-detail reveal" data-accent="1">
+        <div class="period-detail-header">
+          <div class="period-detail-title">Periode 1 &mdash; Le Reboot Premium</div>
+          <span class="period-detail-timing">Mars &rarr; debut avril &middot; 4 semaines</span>
         </div>
-        <div class="kpi-card">
-          <div class="kpi-tag">Grille</div>
-          <div class="kpi-value">12+</div>
-          <div class="kpi-label">Posts coherents DA</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-tag">Profil</div>
-          <div class="kpi-value">Complet</div>
-          <div class="kpi-label">Bio + highlights + photo</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-tag">Stories</div>
-          <div class="kpi-value">25+</div>
-          <div class="kpi-label">Sur le mois</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-tag">Followers</div>
-          <div class="kpi-value">1 450+</div>
-          <div class="kpi-label">Objectif fin P1</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-tag">Engagement</div>
-          <div class="kpi-value">Baseline</div>
-          <div class="kpi-label">Mesurer sans cible</div>
-        </div>
-      </div>
-
-      <!-- Placeholder -->
-      <div class="placeholder-notice reveal">
-        <p class="placeholder-label">Contenu a venir</p>
-        <p>Semaines 1-4 : plannings editoriaux detailles a integrer</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================
-       PERIODE 2 — LE RYTHME & L'ENGAGEMENT (COMPLET)
-       ============================================ -->
-  <section class="section" id="periode2" data-accent="2">
-    <div class="container">
-      <div class="section-header reveal">
-        <div class="section-header-top">
-          <div class="section-number">02</div>
-          <div>
-            <h2>Periode 2 &mdash; Le Rythme & l'Engagement</h2>
-            <p class="section-header-subtitle">Avril &middot; Semaines 5 a 8 &middot; Bloc S5-S6 detaille ci-dessous</p>
-            <div class="meta-badges">
-              <span class="meta-badge">8 posts S5-S6</span>
-              <span class="meta-badge">2 Reels</span>
-              <span class="meta-badge">Le Quartier active</span>
-              <span class="meta-badge">Carte quasi-complete</span>
-            </div>
+        <p class="period-detail-mission">Transformer le feed inactif en vitrine Dark Food Premium credible. Poser le standard visuel. Installer le rythme de publication a 4 posts/semaine.</p>
+        <ul class="period-detail-actions">
+          <li>Refonte complete du profil : bio, photo, highlights, archivage des anciens posts</li>
+          <li>Publication du "mur visuel" initial &mdash; 8 a 10 premiers posts qui definissent la grille</li>
+          <li>Priorite aux piliers Le Plat (60%) et La Cuisine (40%) pour installer le food porn premium</li>
+          <li>Introduction progressive des piliers Macros et Equipe en semaines 3-4</li>
+          <li>Premier Reel pour tester le format et mesurer le reach</li>
+          <li>Stories quotidiennes en regime de croisiere</li>
+        </ul>
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-tag">Posts</div>
+            <div class="kpi-value">16+</div>
+            <div class="kpi-label">Publies</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-tag">Profil</div>
+            <div class="kpi-value">Complet</div>
+            <div class="kpi-label">Bio + highlights + photo</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-tag">Followers</div>
+            <div class="kpi-value">1 450+</div>
+            <div class="kpi-label">Objectif fin P1</div>
           </div>
         </div>
       </div>
 
-      <!-- Context banner -->
-      <div class="context-banner reveal">
-        <p><strong>Mission :</strong> Installer le rythme de croisiere. Diversifier les formats. Construire la relation avec l'audience. Commencer a piloter par la data.</p>
-        <p><strong>Ce qui change depuis P1 :</strong> La credibilite visuelle est acquise &mdash; on passe du mode "installer" au mode "engager". Le ton evolue vers plus de complicite. Les Reels deviennent obligatoires (min. 2). Le pilier Le Quartier s'active en post. Les donnees P1 permettent de piloter les horaires et formats.</p>
-      </div>
-
-      <!-- Timeline bar -->
-      <div class="timeline-bar reveal">
-        <p class="timeline-bar-label">Bloc S5-S6 &middot; 07/04 &rarr; 20/04</p>
-        <div class="timeline-bar-track">
-          <div class="timeline-bar-segment" style="flex: 1; background: var(--accent-2);">S5</div>
-          <div class="timeline-bar-segment" style="flex: 1; background: rgba(15, 184, 196, 0.6);">S6</div>
+      <!-- PERIODE 2 -->
+      <div class="period-detail reveal" data-accent="2">
+        <div class="period-detail-header">
+          <div class="period-detail-title">Periode 2 &mdash; Le Rythme & l'Engagement</div>
+          <span class="period-detail-timing">Avril &middot; 4 semaines</span>
         </div>
-        <div class="timeline-bar-ticks">
-          <span>07/04</span>
-          <span>13/04</span>
-          <span>14/04</span>
-          <span>20/04</span>
-        </div>
-      </div>
-
-      <!-- ========== SEMAINE 5 ========== -->
-      <h3 class="week-label reveal">Semaine 5 <span>07/04 &rarr; 13/04 &middot; 4 posts</span></h3>
-
-      <div class="post-cards">
-        <!-- S5-17 -->
-        <div class="post-card reveal">
-          <div class="post-card-header">
-            <span class="post-card-id">S5-17</span>
-            <span class="post-card-date">07/04</span>
-            <span class="post-card-day">Lundi</span>
+        <p class="period-detail-mission">La credibilite visuelle est acquise &mdash; on passe du mode "installer" au mode "engager". Diversifier les formats, construire la relation avec l'audience, commencer a piloter par la data.</p>
+        <ul class="period-detail-actions">
+          <li>Les Reels deviennent obligatoires &mdash; minimum 4 sur le mois</li>
+          <li>Activation du pilier Le Quartier dans le feed (premiere preuve sociale externe)</li>
+          <li>Engagement proactif : follows cibles, commentaires sur comptes locaux, reponse systematique</li>
+          <li>Couverture quasi-complete de la carte produits</li>
+          <li>Debut d'analyse data : meilleurs piliers, horaires, formats</li>
+          <li>Le ton evolue vers plus de complicite avec la communaute</li>
+        </ul>
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-tag">Reels</div>
+            <div class="kpi-value">4+</div>
+            <div class="kpi-label">Publies</div>
           </div>
-          <div class="post-card-title">STRICT Wrap Boeuf</div>
-          <div class="post-card-meta">
-            <span class="tag tag-plat">Le Plat</span>
-            <span class="tag tag-info">Photo 4:5</span>
+          <div class="kpi-card">
+            <div class="kpi-tag">Engagement</div>
+            <div class="kpi-value">3-5%</div>
+            <div class="kpi-label">Taux moyen par post</div>
           </div>
-          <div class="post-card-hook">"Le meme boeuf Labourde. En wrap."</div>
-          <p class="post-card-objective">Montrer l'etendue de la carte, format alternatif au burger. 566 kcal, 51g prot, 9,99&euro;.</p>
-        </div>
-
-        <!-- S5-18 -->
-        <div class="post-card reveal reveal-delay-1">
-          <div class="post-card-header">
-            <span class="post-card-id">S5-18</span>
-            <span class="post-card-date">09/04</span>
-            <span class="post-card-day">Mercredi</span>
-          </div>
-          <div class="post-card-title">Reel artisan Boucherie Labourde</div>
-          <div class="post-card-meta">
-            <span class="tag tag-cuisine">La Cuisine</span>
-            <span class="tag tag-info">Reel 25-30s</span>
-          </div>
-          <div class="post-card-hook">"Du boucher a ton assiette."</div>
-          <p class="post-card-objective">Credibilite craft, storytelling artisan. Parcours narratif de la viande : reception &rarr; cuisson &rarr; burger fini.</p>
-        </div>
-
-        <!-- S5-19 -->
-        <div class="post-card reveal">
-          <div class="post-card-header">
-            <span class="post-card-id">S5-19</span>
-            <span class="post-card-date">11/04</span>
-            <span class="post-card-day">Vendredi</span>
-          </div>
-          <div class="post-card-title">Tenders STRICT</div>
-          <div class="post-card-meta">
-            <span class="tag tag-plat">Le Plat</span>
-            <span class="tag tag-info">Photo 4:5</span>
-          </div>
-          <div class="post-card-hook">"25g de proteines. C'est un snack."</div>
-          <p class="post-card-objective">Dissonance cognitive, surprise nutrition. 250 kcal, 9g lip, 6,99&euro;. Premier "snack sale" du feed.</p>
-        </div>
-
-        <!-- S5-20 -->
-        <div class="post-card reveal reveal-delay-1">
-          <div class="post-card-header">
-            <span class="post-card-id">S5-20</span>
-            <span class="post-card-date">13/04</span>
-            <span class="post-card-day">Dimanche</span>
-          </div>
-          <div class="post-card-title">"Une journee chez StrictFood"</div>
-          <div class="post-card-meta">
-            <span class="tag tag-equipe">L'Equipe</span>
-            <span class="tag tag-info">Carrousel/Photo</span>
-          </div>
-          <div class="post-card-hook">"5h45. Le reveil sonne."</div>
-          <p class="post-card-objective">Intimite, attachement emotionnel. Storytelling approfondi : du matin a la fermeture.</p>
-        </div>
-      </div>
-
-      <!-- ========== SEMAINE 6 ========== -->
-      <h3 class="week-label reveal">Semaine 6 <span>14/04 &rarr; 20/04 &middot; 4 posts</span></h3>
-
-      <div class="post-cards">
-        <!-- S6-21 -->
-        <div class="post-card reveal">
-          <div class="post-card-header">
-            <span class="post-card-id">S6-21</span>
-            <span class="post-card-date">14/04</span>
-            <span class="post-card-day">Lundi</span>
-          </div>
-          <div class="post-card-title">Frites Patates Douces</div>
-          <div class="post-card-meta">
-            <span class="tag tag-plat">Le Plat</span>
-            <span class="tag tag-info">Photo 4:5</span>
-          </div>
-          <div class="post-card-hook">"Des frites a 5g de lipides."</div>
-          <p class="post-card-objective">Surprise, couleur orange dans la grille. 211 kcal, 3,99&euro;. Contraste chromatique maximal sur fond charbon.</p>
-        </div>
-
-        <!-- S6-22 -->
-        <div class="post-card reveal reveal-delay-1">
-          <div class="post-card-header">
-            <span class="post-card-id">S6-22</span>
-            <span class="post-card-date">16/04</span>
-            <span class="post-card-day">Mercredi</span>
-          </div>
-          <div class="post-card-title">"Nos sides vs les leurs"</div>
-          <div class="post-card-meta">
-            <span class="tag tag-macros">Les Macros</span>
-            <span class="tag tag-info">Carrousel 4 slides</span>
-          </div>
-          <div class="post-card-hook">"Tes nuggets : ~300 kcal..."</div>
-          <p class="post-card-objective">Education par comparaison, confiance. Tenders + Frites vs fast-food classique, chiffres a l'appui.</p>
-        </div>
-
-        <!-- S6-23 -->
-        <div class="post-card reveal">
-          <div class="post-card-header">
-            <span class="post-card-id">S6-23</span>
-            <span class="post-card-date">18/04</span>
-            <span class="post-card-day">Vendredi</span>
-          </div>
-          <div class="post-card-title">Food prep dynamique</div>
-          <div class="post-card-meta">
-            <span class="tag tag-cuisine">La Cuisine</span>
-            <span class="tag tag-info">Reel 15-20s</span>
-          </div>
-          <div class="post-card-hook">"15 secondes. Un burger."</div>
-          <p class="post-card-objective">Food porn en mouvement, arreter le scroll. Montage rapide, plans tres serres, coupes a 1,5-2s.</p>
-        </div>
-
-        <!-- S6-24 -->
-        <div class="post-card reveal reveal-delay-1">
-          <div class="post-card-header">
-            <span class="post-card-id">S6-24</span>
-            <span class="post-card-date">20/04</span>
-            <span class="post-card-day">Dimanche</span>
-          </div>
-          <div class="post-card-title">Avis client / UGC / ancrage local</div>
-          <div class="post-card-meta">
-            <span class="tag tag-quartier">Le Quartier</span>
-            <span class="tag tag-info">Photo/Carrousel</span>
-          </div>
-          <div class="post-card-hook">"On ne le dit pas assez : merci."</div>
-          <p class="post-card-objective">Ancrage local, preuve sociale, communaute. Premier post du pilier Le Quartier dans le feed.</p>
-        </div>
-      </div>
-
-      <!-- Repartition piliers S5-S6 -->
-      <h3 class="subsection-title reveal">Repartition piliers S5-S6</h3>
-      <div class="pillar-bar reveal">
-        <div class="pillar-bar-segment pillar-plat" style="flex: 37.5;">37,5%</div>
-        <div class="pillar-bar-segment pillar-cuisine" style="flex: 25;">25%</div>
-        <div class="pillar-bar-segment pillar-macros" style="flex: 12.5;">12,5%</div>
-        <div class="pillar-bar-segment pillar-equipe" style="flex: 12.5;">12,5%</div>
-        <div class="pillar-bar-segment pillar-quartier" style="flex: 12.5;">12,5%</div>
-      </div>
-      <div class="pillar-bar-legend reveal">
-        <div class="pillar-bar-legend-item">
-          <span class="pillar-bar-legend-dot" style="background: var(--accent);"></span>
-          Le Plat &mdash; 3 posts (37,5%)
-        </div>
-        <div class="pillar-bar-legend-item">
-          <span class="pillar-bar-legend-dot" style="background: var(--accent-2);"></span>
-          La Cuisine &mdash; 2 posts (25%)
-        </div>
-        <div class="pillar-bar-legend-item">
-          <span class="pillar-bar-legend-dot" style="background: var(--accent-3);"></span>
-          Les Macros &mdash; 1 post (12,5%)
-        </div>
-        <div class="pillar-bar-legend-item">
-          <span class="pillar-bar-legend-dot" style="background: var(--accent-4);"></span>
-          L'Equipe &mdash; 1 post (12,5%)
-        </div>
-        <div class="pillar-bar-legend-item">
-          <span class="pillar-bar-legend-dot" style="background: var(--accent-5);"></span>
-          Le Quartier &mdash; 1 post (12,5%)
-        </div>
-      </div>
-
-      <!-- Couverture produits -->
-      <h3 class="subsection-title reveal">Nouveaux produits couverts en S5-S6</h3>
-      <table class="data-table reveal">
-        <thead>
-          <tr>
-            <th>Produit</th>
-            <th>Post</th>
-            <th>Angle</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>STRICT Wrap Boeuf</td>
-            <td>S5-17</td>
-            <td>Hero shot food porn &mdash; premiere apparition</td>
-          </tr>
-          <tr>
-            <td>Tenders STRICT</td>
-            <td>S5-19 + S6-22</td>
-            <td>Hero shot + comparaison macros</td>
-          </tr>
-          <tr>
-            <td>Frites Patates Douces</td>
-            <td>S6-21 + S6-22</td>
-            <td>Hero shot + comparaison macros</td>
-          </tr>
-          <tr>
-            <td>Frites classiques</td>
-            <td>S6-22</td>
-            <td>Mention macros dans carrousel</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!-- Strategie Reels -->
-      <h3 class="subsection-title reveal">Strategie Reels S5-S6</h3>
-      <div class="steps-grid reveal">
-        <div class="step-card">
-          <div class="step-card-header">
-            <span class="step-card-number">R1</span>
-            <span class="step-card-title">Reel artisan storytelling</span>
-            <span class="step-card-badge">S5-18 &middot; 25-30s</span>
-          </div>
-          <ul class="step-card-list">
-            <li>Parcours narratif : sac Boucherie Labourde &rarr; cuisson &rarr; burger fini</li>
-            <li>Plans varies (3-4s chacun), rythme modere</li>
-            <li>Musique lo-fi instrumentale</li>
-            <li>Hook : reception viande, geste d'ouverture</li>
-          </ul>
-          <div class="step-card-footer">
-            <p class="step-card-footer-label">Objectif</p>
-            <p>Differenciation artisanale. Montrer ce qu'aucun fast-food ne peut montrer.</p>
-          </div>
-        </div>
-        <div class="step-card">
-          <div class="step-card-header">
-            <span class="step-card-number">R2</span>
-            <span class="step-card-title">Food prep dynamique</span>
-            <span class="step-card-badge">S6-23 &middot; 15-20s</span>
-          </div>
-          <ul class="step-card-list">
-            <li>Montage rapide, coupes a 1,5-2s, 8-12 plans</li>
-            <li>Plans tres serres, food porn en mouvement</li>
-            <li>Beat dynamique/groovy</li>
-            <li>Hook : fromage fondant ou viande sur le gril</li>
-          </ul>
-          <div class="step-card-footer">
-            <p class="step-card-footer-label">Objectif</p>
-            <p>Arreter le scroll. Food porn pur en video, complementaire du Reel narratif.</p>
+          <div class="kpi-card">
+            <div class="kpi-tag">Followers</div>
+            <div class="kpi-value">1 600+</div>
+            <div class="kpi-label">Objectif fin P2</div>
           </div>
         </div>
       </div>
 
-      <!-- Strategie engagement -->
-      <h3 class="subsection-title reveal">Strategie d'engagement</h3>
-      <div class="steps-grid reveal">
-        <div class="step-card">
-          <div class="step-card-header">
-            <span class="step-card-number">&uarr;</span>
-            <span class="step-card-title">Engagement sortant (proactif)</span>
+      <!-- PERIODE 3 -->
+      <div class="period-detail reveal" data-accent="3">
+        <div class="period-detail-header">
+          <div class="period-detail-title">Periode 3 &mdash; L'Amplification</div>
+          <span class="period-detail-timing">Mai &middot; 4+ semaines</span>
+        </div>
+        <p class="period-detail-mission">Capitaliser sur les donnees. Installer des series recurrentes. Activer le premier UGC. Le compte passe de "on publie du contenu" a "on a un media avec des rendez-vous".</p>
+        <ul class="period-detail-actions">
+          <li>Lancement de 2-3 series recurrentes basees sur les contenus les plus performants</li>
+          <li>Activation UGC : encourager les clients a taguer @strictfood, repost systematique</li>
+          <li>Optimisation calendrier selon la data accumulee (jours, heures, formats)</li>
+          <li>Montee en puissance des Reels (6+ sur le mois)</li>
+          <li>Le systeme de publication est rode et quasi-autonome</li>
+        </ul>
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-tag">Followers</div>
+            <div class="kpi-value">~2 000</div>
+            <div class="kpi-label">Objectif fin P3</div>
           </div>
-          <ul class="step-card-list">
-            <li>10-15 follows cibles/jour (comptes food/sport Perpignan, salles de gym)</li>
-            <li>5-10 commentaires proactifs/jour sur comptes locaux</li>
-            <li>DM de remerciement a chaque nouveau follower qui interagit</li>
-            <li>Reponse individuelle a chaque reaction stories interactives</li>
-          </ul>
-        </div>
-        <div class="step-card">
-          <div class="step-card-header">
-            <span class="step-card-number">&darr;</span>
-            <span class="step-card-title">Engagement entrant (reactif)</span>
+          <div class="kpi-card">
+            <div class="kpi-tag">Series</div>
+            <div class="kpi-value">2-3</div>
+            <div class="kpi-label">Installees</div>
           </div>
-          <ul class="step-card-list">
-            <li>Reponse commentaires dans les 2h, personnalisee, tutoiement</li>
-            <li>Repost immediat de tout tag @strictfood</li>
-            <li>Tracker les saves (contenu a valeur durable)</li>
-            <li>Observer les partages DM (format a reproduire)</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Strategie stories -->
-      <h3 class="subsection-title reveal">Strategie stories</h3>
-      <table class="data-table reveal">
-        <thead>
-          <tr>
-            <th>Type</th>
-            <th>Frequence</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Plat du jour</td>
-            <td>Quotidien</td>
-            <td>Photo du plat, prix, macro rapide</td>
-          </tr>
-          <tr>
-            <td>Coulisses</td>
-            <td>3-4x/sem.</td>
-            <td>Arrivage, preparation, mise en place (+ video courte)</td>
-          </tr>
-          <tr>
-            <td>Teaser post</td>
-            <td>3-4x/sem.</td>
-            <td>Avant et apres chaque post du feed</td>
-          </tr>
-          <tr>
-            <td>Interactif</td>
-            <td>2x/sem. min.</td>
-            <td>Sondage, quiz, slider + reponse DM systematique</td>
-          </tr>
-          <tr>
-            <td>Reel teaser/BTS</td>
-            <td>2-3x/sem.</td>
-            <td>Extraits et coulisses des 2 Reels du feed</td>
-          </tr>
-          <tr>
-            <td>Educatif rapide</td>
-            <td>1-2x/sem.</td>
-            <td>Micro-info nutrition, zoom ingredient</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!-- KPIs S5-S6 -->
-      <h3 class="kpi-section-title reveal">KPIs fin de bloc S5-S6</h3>
-      <div class="kpi-grid reveal">
-        <div class="kpi-card">
-          <div class="kpi-tag">Cumule</div>
-          <div class="kpi-value">24+</div>
-          <div class="kpi-label">Posts publies</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-tag">S5-S6</div>
-          <div class="kpi-value">2</div>
-          <div class="kpi-label">Reels publies</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-tag">Objectif</div>
-          <div class="kpi-value">1 525+</div>
-          <div class="kpi-label">Followers</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-tag">Engagement</div>
-          <div class="kpi-value">&uarr;</div>
-          <div class="kpi-label">Progression vs P1</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-tag">Stories</div>
-          <div class="kpi-value">28+</div>
-          <div class="kpi-label">Sur 2 semaines</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-tag">Pilier</div>
-          <div class="kpi-value">1</div>
-          <div class="kpi-label">Le Quartier active</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================
-       PERIODE 3 — L'AMPLIFICATION (PLACEHOLDER)
-       ============================================ -->
-  <section class="section section-elevated" id="periode3" data-accent="3">
-    <div class="container">
-      <div class="section-header reveal">
-        <div class="section-header-top">
-          <div class="section-number">03</div>
-          <div>
-            <h2>Periode 3 &mdash; L'Amplification</h2>
-            <p class="section-header-subtitle">Mai &middot; Semaines 9+</p>
-            <div class="meta-badges">
-              <span class="meta-badge">16-18 posts</span>
-              <span class="meta-badge">6+ Reels</span>
-              <span class="meta-badge">Series recurrentes</span>
-              <span class="meta-badge">UGC active</span>
-            </div>
+          <div class="kpi-card">
+            <div class="kpi-tag">UGC</div>
+            <div class="kpi-value">3-5</div>
+            <div class="kpi-label">Premiers contenus client</div>
           </div>
         </div>
-      </div>
-
-      <div class="context-banner reveal">
-        <p><strong>Mission :</strong> Capitaliser sur les donnees du mois 2. Installer des series recurrentes. Activer le premier UGC. Le compte passe de "on publie du contenu" a "on a un media avec des rendez-vous".</p>
-        <p>Lancement de 2-3 series recurrentes basees sur les contenus les plus performants. Activation UGC legere. Optimisation calendrier selon la data. Montee en puissance des Reels (6+ sur le mois).</p>
-      </div>
-
-      <!-- KPIs cibles P3 -->
-      <h3 class="kpi-section-title reveal">KPIs cibles fin de Periode 3</h3>
-      <div class="kpi-grid reveal">
-        <div class="kpi-card">
-          <div class="kpi-tag">Posts</div>
-          <div class="kpi-value">16-18</div>
-          <div class="kpi-label">Posts publies</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-tag">Reels</div>
-          <div class="kpi-value">6+</div>
-          <div class="kpi-label">Reels publies</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-tag">Followers</div>
-          <div class="kpi-value">1 800 &ndash; 2 000</div>
-          <div class="kpi-label">Objectif fin P3</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-tag">Engagement</div>
-          <div class="kpi-value">3-5%</div>
-          <div class="kpi-label">Maintenu ou en hausse</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-tag">Series</div>
-          <div class="kpi-value">2-3</div>
-          <div class="kpi-label">Installees et identifiables</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-tag">UGC</div>
-          <div class="kpi-value">3-5</div>
-          <div class="kpi-label">Premiers contenus client</div>
-        </div>
-      </div>
-
-      <!-- Placeholder -->
-      <div class="placeholder-notice reveal">
-        <p class="placeholder-label">Contenu a venir</p>
-        <p>Semaines 9+ : plannings editoriaux detailles a integrer</p>
       </div>
     </div>
   </section>
@@ -963,41 +628,43 @@
     <div class="container">
       <div class="section-header-centered reveal">
         <h2>Vision</h2>
-        <p>De compte inactif a vitrine premium vivante</p>
+        <p>De compte inactif a actif de marque duplicable</p>
       </div>
 
-      <!-- Objectif consolide -->
       <div class="context-banner reveal">
-        <p><strong>Objectif consolide a 3 mois :</strong> Passer de "compte inactif a 1 368 followers" a "vitrine premium vivante a ~2 000 followers, avec un systeme de publication rode, des series installees, et un workflow creatif semi-autonome".</p>
+        <p><strong>Objectif a 3 mois :</strong> Passer de "compte inactif a 1 368 followers" a "vitrine premium vivante a ~2 000 followers, avec un systeme de publication rode, des series installees, et un workflow creatif semi-autonome".</p>
         <p>Le compte remplit sa mission strategique : quand un prospect arrive depuis Google, il voit un feed vivant, coherent, premium, qui confirme que StrictFood est un lieu serieux et desirable.</p>
       </div>
 
       <!-- Flow nodes vision -->
       <div class="flow-row reveal">
         <div class="flow-node" data-accent="4">
+          <p class="flow-node-label">3 mois</p>
+          <p class="flow-node-title">~2 000</p>
+          <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">followers &middot; systeme rode</p>
+        </div>
+        <span class="flow-arrow">&#8594;</span>
+        <div class="flow-node" data-accent="4">
           <p class="flow-node-label">6 mois</p>
           <p class="flow-node-title">3 000</p>
-          <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">followers</p>
+          <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">followers &middot; regime de croisiere</p>
         </div>
         <span class="flow-arrow">&#8594;</span>
         <div class="flow-node" data-accent="4">
           <p class="flow-node-label">12 mois</p>
           <p class="flow-node-title">5 000+</p>
-          <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">followers</p>
+          <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">followers &middot; actif franchise</p>
         </div>
       </div>
 
-      <!-- Vision details -->
       <div class="steps-grid reveal">
         <div class="step-card">
           <div class="step-card-header">
             <span class="step-card-number">6</span>
-            <span class="step-card-title">Vision 6 mois</span>
-            <span class="step-card-badge">Fin Phase 1</span>
+            <span class="step-card-title">Horizon 6 mois</span>
           </div>
           <ul class="step-card-list">
             <li>Systeme editorial en regime de croisiere : 3-4h/semaine max</li>
-            <li>2 500 &ndash; 3 000 followers avec noyau d'engages</li>
             <li>Reels qui drivent du reach significatif (&gt;2x posts photo)</li>
             <li>Premiers ambassadeurs naturels</li>
             <li>Templates et workflows industrialises (&lt;30min par post)</li>
@@ -1006,22 +673,16 @@
         <div class="step-card">
           <div class="step-card-header">
             <span class="step-card-number">12</span>
-            <span class="step-card-title">Vision 12 mois</span>
-            <span class="step-card-badge">Mi-Phase 3</span>
+            <span class="step-card-title">Horizon 12 mois</span>
           </div>
           <ul class="step-card-list">
-            <li>Instagram comme canal de retention actif et levier preuve sociale franchise</li>
+            <li>Instagram = canal de retention actif + levier preuve sociale franchise</li>
             <li>UGC = 20-30% du calendrier editorial</li>
             <li>Programme ambassadeurs qui alimente le compte</li>
             <li>Feed reproductible dans le playbook franchise</li>
-            <li>5 000+ followers avec engagement qualifie et local</li>
           </ul>
         </div>
       </div>
-
-      <p class="flow-text reveal">
-        Phase 1 pose l'image et installe le rythme. Phase 2 engage et diversifie. Phase 3 capitalise et amplifie. Le feed devient un actif de marque documenté et duplicable.
-      </p>
     </div>
   </section>
 

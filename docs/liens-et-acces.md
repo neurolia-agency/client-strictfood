@@ -8,9 +8,12 @@
 
 | Page | URL | Root dir | Statut |
 |------|-----|----------|--------|
-| Devis | https://devis-strictfood.vercel.app | `formulaires/` | Actif |
-| Plateforme de Marque | https://plateforme-marque-strictfood.vercel.app | `formulaires/formulaire-plateforme/` | Actif |
-| Stratégie | https://strictfood-strategie.vercel.app | `strategie/` | Actif |
+| Devis | https://devis-strictfood-one.vercel.app | `formulaires/` | Actif |
+| Plateforme de Marque | https://plateforme-marque-strictfood-eight.vercel.app | `formulaires/formulaire-plateforme/` | Actif |
+| Stratégie Instagram | https://strictfood-instagram.vercel.app/instagram.html | `strategie/` | Actif |
+| Stratégie Globale | https://strictfood-instagram.vercel.app/strategie-globale.html | `strategie/` | Actif |
+| Planning Période 1 | https://strictfood-instagram.vercel.app/planning-periode-1.html | `strategie/` | Actif |
+| Planning Période 2 | https://strictfood-instagram.vercel.app/planning-periode-2.html | `strategie/` | Actif |
 
 **Vercel Dashboard :** https://vercel.com/neurolia-agency
 
@@ -91,4 +94,4 @@
 
 ---
 
-*Dernière mise à jour : 2026-03-05*
+*Dernière mise à jour : 2026-03-09*
