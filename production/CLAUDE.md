@@ -39,7 +39,7 @@ L'orchestrateur enchaine toutes les etapes automatiquement. Toujours preferer l'
 |-------|-------|-------|-------------|------------|
 | Orchestration | `instagram-producer` | Projet | `production/.claude/skills/instagram-producer/` | `/instagram-producer YYYY-MM-DD` |
 | Art Direction | `social-media-art-director` | Production | `production/.claude/skills/social-media-art-director/` | `/social-media-art-director` |
-| Prompt Engineering | `image-prompt-engineer` | Global | `~/.claude/skills/image-prompt-engineer/` | `/image-prompt-engineer` (Mode B) |
+| Prompt Engineering | `image-prompt-engineer` | Production | `production/.claude/skills/image-prompt-engineer/` | `/image-prompt-engineer` (Mode B) |
 | Generation image | `nano-banana-pro` | Production | `production/.claude/skills/nano-banana-pro/` | `/nano-banana-pro --resolution 4K` |
 
 ### Agent
