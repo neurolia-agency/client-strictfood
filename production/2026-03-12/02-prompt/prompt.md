@@ -85,7 +85,7 @@ uv run ~/.claude/skills/nano-banana-pro/scripts/generate_image.py \
   --filename "slide2-decoupe-4x5.png" \
   --input-image "public/contenu-instagram/2025-10-03_15-57-14_UTC_2.jpg" \
   --resolution 4K \
-  --api-key "***"
+  --api-key "$GEMINI_API_KEY"
 ```
 
 ---
@@ -129,7 +129,7 @@ uv run ~/.claude/skills/nano-banana-pro/scripts/generate_image.py \
   --filename "slide3-assemblage-4x5.png" \
   --input-image "public/contenu-instagram/2025-10-03_15-57-14_UTC_1.jpg" \
   --resolution 4K \
-  --api-key "***"
+  --api-key "$GEMINI_API_KEY"
 ```
 
 ---
@@ -174,7 +174,7 @@ uv run ~/.claude/skills/nano-banana-pro/scripts/generate_image.py \
   --filename "slide4-finitions-4x5.png" \
   --input-image "public/contenu-instagram/2025-11-24_17-18-14_UTC.jpg" \
   --resolution 4K \
-  --api-key "***"
+  --api-key "$GEMINI_API_KEY"
 ```
 
 ---
@@ -225,7 +225,7 @@ uv run ~/.claude/skills/nano-banana-pro/scripts/generate_image.py \
   --filename "slide5-burger-fini-4x5.png" \
   --input-image "public/contenu-instagram/2025-11-22_17-18-46_UTC_2.jpg" \
   --resolution 4K \
-  --api-key "***"
+  --api-key "$GEMINI_API_KEY"
 ```
 
 ---

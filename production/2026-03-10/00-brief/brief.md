@@ -1,3 +1,5 @@
+> **POST V1 — NE PAS UTILISER COMME TEMPLATE.** Ce brief a été produit avant le pipeline v2. Utiliser `production/_templates/brief-v2.md` pour les nouveaux posts.
+
 # Brief — Post 1 (Lundi 10 mars 2026)
 
 ## Stratégie
@@ -18,7 +20,7 @@ Premier post du reboot Instagram. Installer le standard visuel Dark Food Premium
 
 **STRICT Bœuf** — Burger signature.
 Recette détaillée : `production/_recettes/strict-boeuf.md`
-Photo référence : `public/images/dark-bg/burger-simple-boeuf-dark-bg-2.png`
+Photo référence : `public/images/photos-references/dark-bg/burger-simple-boeuf-dark-bg-2.png`
 
 ## Caption
 

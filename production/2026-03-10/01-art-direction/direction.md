@@ -19,7 +19,7 @@
 
 **Type** : Photo (sublimation de la photo référence existante)
 **Dimensions** : 4:5
-**Photo source** : `public/images/dark-bg/burger-simple-boeuf-dark-bg-2.png` — à sublimer via image-prompt-engineer
+**Photo source** : `public/images/photos-references/dark-bg/burger-simple-boeuf-dark-bg-2.png` — à sublimer via image-prompt-engineer
 
 ### Recette / Produit (à transmettre tel quel au prompt engineer)
 
@@ -101,6 +101,6 @@
 
 ## Prochaine étape
 
-→ Transmettre cette fiche + la recette (`production/_recettes/strict-boeuf.md`) + la photo référence (`public/images/dark-bg/burger-simple-boeuf-dark-bg-2.png`) au skill `image-prompt-engineer`
+→ Transmettre cette fiche + la recette (`production/_recettes/strict-boeuf.md`) + la photo référence (`public/images/photos-references/dark-bg/burger-simple-boeuf-dark-bg-2.png`) au skill `image-prompt-engineer`
 → Le prompt engineer fusionne la direction créative (le COMMENT) avec la photo référence (le QUOI) et la recette (la FIDÉLITÉ) pour produire le prompt final
 → Output attendu dans `production/2026-03-10/02-prompt/prompt.md`

@@ -6,7 +6,7 @@
 |-------|--------|
 | Modèle | Gemini (Nanobanana Pro) |
 | Mode | Image-to-image (sublimation) |
-| Input image | `public/images/dark-bg/burger-simple-boeuf-dark-bg-2.png` |
+| Input image | `public/images/photos-references/dark-bg/burger-simple-boeuf-dark-bg-2.png` |
 | Résolution | 4K |
 | Dimensions | 4:5 |
 | Source DA | `production/2026-03-10/01-art-direction/direction.md` |
@@ -32,9 +32,9 @@ The entire palette is burnished gold, warm copper, and deep amber tones against 
 uv run ~/.claude/skills/nano-banana-pro/scripts/generate_image.py \
   --prompt "<prompt ci-dessus>" \
   --filename "2026-03-10-strict-boeuf-hero-4x5.png" \
-  --input-image "public/images/dark-bg/burger-simple-boeuf-dark-bg-2.png" \
+  --input-image "public/images/photos-references/dark-bg/burger-simple-boeuf-dark-bg-2.png" \
   --resolution 4K \
-  --api-key "***"
+  --api-key "$GEMINI_API_KEY"
 ```
 
 ## Prochaine étape

@@ -1,15 +1,19 @@
 # Configuration Pipeline
 
-## Photos référence par produit
+## Photos Référence
 
-Les photos référence sont les versions sublimées DA des produits.
-Elles servent d'input image pour Nanobanana/GPT au moment de la génération.
+→ Voir `production/_config/photo-references.md` (mapping centralisé produit → photos avec descriptions textuelles)
 
-| Produit | Photo référence | Chemin |
-|---------|----------------|--------|
-| STRICT Bœuf | Burger simple bœuf, fond sombre DA | `public/images/dark-bg/burger-simple-boeuf-dark-bg-2.png` |
+## Agent Input-Mapper
 
-> Compléter ce tableau au fur et à mesure que les photos sublimées des autres produits sont disponibles.
+| Champ | Valeur |
+|-------|--------|
+| Agent | `.claude/agents/input-mapper.md` |
+| Modèle | Haiku (tâche déterministe) |
+| Déclenchement | Après validation de `01-art-direction/direction.md` |
+| Input | Chemin du dossier post (ex: `production/2026-03-10/`) |
+| Output | `[dossier-post]/00-input/input.md` |
+| Consulte | `_config/photo-references.md` + `_recettes/[slug].md` |
 
 ## DA Référence
 

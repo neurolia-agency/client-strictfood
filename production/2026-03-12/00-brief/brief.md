@@ -1,3 +1,5 @@
+> **POST V1 — NE PAS UTILISER COMME TEMPLATE.** Ce brief a été produit avant le pipeline v2. Utiliser `production/_templates/brief-v2.md` pour les nouveaux posts.
+
 # Brief — Post 2 (Mercredi 12 mars 2026)
 
 ## Stratégie

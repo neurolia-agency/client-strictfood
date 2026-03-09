@@ -26,7 +26,7 @@
 
 ## Photo référence
 
-`[PLACEHOLDER — photo poulet à ajouter]`
+`⚠️ PLACEHOLDER — pas de photo DA dark-bg disponible`
 
 ## Notes
 

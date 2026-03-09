@@ -26,7 +26,7 @@
 
 ## Photo référence
 
-`public/images/dark-bg/burger-simple-boeuf-dark-bg-2.png`
+`public/images/photos-references/dark-bg/burger-simple-boeuf-dark-bg-2.png`
 
 ## Notes
 
