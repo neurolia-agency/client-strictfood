@@ -8,7 +8,7 @@
 
 | Champ | Valeur |
 |-------|--------|
-| Agent | `.claude/agents/input-mapper.md` |
+| Agent | `production/.claude/agents/input-mapper.md` |
 | Modèle | Haiku (tâche déterministe) |
 | Déclenchement | Après validation de `01-art-direction/direction.md` |
 | Input | Chemin du dossier post (ex: `production/2026-03-10/`) |

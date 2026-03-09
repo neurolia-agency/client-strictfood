@@ -106,7 +106,7 @@ Pour chaque visuel, assembler et afficher la commande prête à exécuter :
 
 **Pour Gemini (Nanobanana Pro)** :
 ```bash
-uv run ~/.claude/skills/nano-banana-pro/scripts/generate_image.py \
+uv run production/.claude/skills/nano-banana-pro/scripts/generate_image.py \
   --prompt "[prompt exact depuis prompt.md]" \
   --filename "[date]-[slug]-[role]-4x5.png" \
   --input-image "[chemin photo référence depuis input.md]" \

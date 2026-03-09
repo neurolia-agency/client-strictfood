@@ -37,16 +37,16 @@ L'orchestrateur enchaine toutes les etapes automatiquement. Toujours preferer l'
 
 | Etape | Skill | Scope | Emplacement | Invocation |
 |-------|-------|-------|-------------|------------|
-| Orchestration | `instagram-producer` | Projet | `.claude/skills/instagram-producer/` | `/instagram-producer YYYY-MM-DD` |
-| Art Direction | `social-media-art-director` | Workspace | `neurolia-agency/.claude/skills/social-media-art-director/` | `/social-media-art-director` |
+| Orchestration | `instagram-producer` | Projet | `production/.claude/skills/instagram-producer/` | `/instagram-producer YYYY-MM-DD` |
+| Art Direction | `social-media-art-director` | Production | `production/.claude/skills/social-media-art-director/` | `/social-media-art-director` |
 | Prompt Engineering | `image-prompt-engineer` | Global | `~/.claude/skills/image-prompt-engineer/` | `/image-prompt-engineer` (Mode B) |
-| Generation image | `nano-banana-pro` | Global | `~/.claude/skills/nano-banana-pro/` | `/nano-banana-pro --resolution 4K` |
+| Generation image | `nano-banana-pro` | Production | `production/.claude/skills/nano-banana-pro/` | `/nano-banana-pro --resolution 4K` |
 
 ### Agent
 
 | Etape | Agent | Modele | Emplacement | Outils |
 |-------|-------|--------|-------------|--------|
-| Input Mapping | `input-mapper` | Haiku | `.claude/agents/input-mapper.md` | Read, Glob, Grep, Write |
+| Input Mapping | `input-mapper` | Haiku | `production/.claude/agents/input-mapper.md` | Read, Glob, Grep, Write |
 
 ## Separation des responsabilites
 

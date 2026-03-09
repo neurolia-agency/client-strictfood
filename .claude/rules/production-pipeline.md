@@ -32,7 +32,7 @@ Nanobanana Pro / GPT Images
 |-------|-------|------------|
 | Orchestration | Skill | `/instagram-producer` — enchaîne toutes les étapes |
 | Art Direction | Skill | `/social-media-art-director` — NE PAS écrire la direction à la main |
-| Input Mapping | Agent | `.claude/agents/input-mapper.md` — modèle Haiku |
+| Input Mapping | Agent | `production/.claude/agents/input-mapper.md` — modèle Haiku |
 | Prompt Engineering | Skill | `/image-prompt-engineer` en Mode B — NE PAS écrire le prompt à la main |
 
 ## Séparation des responsabilités
