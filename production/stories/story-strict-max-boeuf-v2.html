@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080">
+  <title>Story — STRICT MAX Boeuf</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Oswald:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 1080px;
+      height: 1920px;
+      background: #141210;
+      overflow: hidden;
+      position: relative;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    /* ===== BACKGROUND IMAGE (zoomed crop — texture/relief) ===== */
+    .bg-image {
+      position: absolute;
+      top: -60px;
+      right: -100px;
+      width: 2800px;
+      height: 1100px;
+      object-fit: cover;
+      object-position: 75% 30%;
+      opacity: 0.4;
+      mask-image: linear-gradient(to left, rgba(0,0,0,1) 15%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 65%),
+                  linear-gradient(to top, transparent 0%, rgba(0,0,0,1) 20%, rgba(0,0,0,1) 80%, rgba(0,0,0,0.5) 100%);
+      -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 15%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 65%),
+                          linear-gradient(to top, transparent 0%, rgba(0,0,0,1) 20%, rgba(0,0,0,1) 80%, rgba(0,0,0,0.5) 100%);
+      mask-composite: intersect;
+      -webkit-mask-composite: source-in;
+    }
+
+    /* ===== BURGER IMAGE (entier — hero, bien visible) ===== */
+    .burger-image {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 1400px;
+      height: 980px;
+      object-fit: cover;
+      object-position: 60% 35%;
+      z-index: 5;
+      filter: drop-shadow(-30px -20px 60px rgba(0,0,0,0.5));
+    }
+
+    /* ===== GRADIENT OVERLAYS ===== */
+    .gradient-top {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 350px;
+      background: linear-gradient(to bottom, #141210 0%, #14121099 55%, transparent 100%);
+      z-index: 3;
+    }
+
+    .gradient-bottom {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 380px;
+      background: linear-gradient(to top, #141210 0%, #141210cc 50%, transparent 100%);
+      z-index: 3;
+    }
+
+    .gradient-left {
+      position: absolute;
+      top: 0; bottom: 0; left: 0;
+      width: 650px;
+      background: linear-gradient(to right, #141210 0%, #141210ee 50%, transparent 100%);
+      z-index: 3;
+    }
+
+    /* ===== CONTENT ===== */
+    .content {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      padding: 80px 70px;
+    }
+
+    /* ===== LOGO ===== */
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 60px;
+    }
+
+    .logo-container svg {
+      width: 280px;
+      height: auto;
+      opacity: 0.9;
+    }
+
+    /* ===== PRODUCT NAME ===== */
+    .product-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 42px;
+      color: #BF8522;
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      margin-bottom: 10px;
+    }
+
+    .product-subtitle {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 28px;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 2px;
+      margin-bottom: 80px;
+    }
+
+    /* ===== CALORIES BLOCK ===== */
+    .calories-block {
+      margin-bottom: 50px;
+    }
+
+    .calories-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 24px;
+      color: rgba(255,255,255,0.45);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin-bottom: 0;
+    }
+
+    .calories-number {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 170px;
+      color: #fff;
+      line-height: 0.85;
+      letter-spacing: -4px;
+    }
+
+    .calories-unit {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 500;
+      font-size: 48px;
+      color: #BF8522;
+      text-transform: uppercase;
+      letter-spacing: 10px;
+      margin-top: -3px;
+    }
+
+    /* ===== MACROS BAR ===== */
+    .macros-bar {
+      display: flex;
+      gap: 40px;
+      margin-bottom: 70px;
+      padding: 30px 0;
+      border-top: none;
+      border-bottom: none;
+    }
+
+    .macro-item {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .macro-value {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 64px;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .macro-value span {
+      font-size: 36px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .macro-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 22px;
+      color: rgba(255,255,255,0.45);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-top: 4px;
+    }
+
+    .macro-highlight .macro-value {
+      color: #BF8522;
+    }
+
+    .macro-highlight .macro-label {
+      color: rgba(191, 133, 34, 0.7);
+    }
+
+    /* ===== BENEFITS ===== */
+    .benefits {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      margin-bottom: auto;
+    }
+
+    .benefit-item {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .benefit-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: rgba(191, 133, 34, 0.12);
+      border: 1.5px solid rgba(191, 133, 34, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .benefit-icon svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .benefit-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 30px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.3;
+    }
+
+    .benefit-text strong {
+      color: #BF8522;
+      font-weight: 700;
+    }
+
+    /* ===== BOTTOM TAGLINE ===== */
+    .bottom-section {
+      position: absolute;
+      bottom: 30px;
+      left: 70px;
+      right: 70px;
+      z-index: 10;
+      text-align: center;
+    }
+
+    .tagline {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 40px;
+      color: #fff;
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+
+    .tagline em {
+      font-style: italic;
+      color: #BF8522;
+    }
+
+    .swipe-up {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 22px;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin-top: 20px;
+    }
+
+    .swipe-up .arrow {
+      display: block;
+      margin: 10px auto 0;
+      width: 30px;
+      height: 30px;
+      border-left: 2.5px solid rgba(191, 133, 34, 0.5);
+      border-top: 2.5px solid rgba(191, 133, 34, 0.5);
+      transform: rotate(45deg);
+    }
+
+    /* ===== DECORATIVE LINE ===== */
+    .accent-line {
+      position: absolute;
+      left: 70px;
+      top: 280px;
+      width: 4px;
+      height: 900px;
+      background: linear-gradient(to bottom, transparent, rgba(191,133,34,0.3) 20%, rgba(191,133,34,0.15) 80%, transparent);
+      z-index: 5;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background image (dimmed) -->
+  <img class="bg-image" src="2026-03-10-black-strict-max-boeuf-wide.png" alt="">
+
+  <!-- Foreground burger -->
+  <img class="burger-image" src="2026-03-10-black-strict-max-boeuf-wide.png" alt="STRICT MAX Boeuf">
+
+  <!-- Gradient overlays -->
+  <div class="gradient-top"></div>
+  <div class="gradient-bottom"></div>
+  <div class="gradient-left"></div>
+
+  <!-- Decorative accent line -->
+  <div class="accent-line"></div>
+
+  <!-- Main content -->
+  <div class="content">
+
+    <!-- Logo -->
+    <div class="logo-container">
+      <svg viewBox="0 0 450.01 52.75" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#fff" d="M28.91,18.07c-1.33-1-2.75-1.86-4.24-2.58-1.5-.72-2.94-1.29-4.32-1.7-1.39-.41-2.6-.62-3.65-.62-1.19,0-2.14.27-2.86.82-.72.55-1.08,1.39-1.08,2.52s.35,2.06,1.05,2.78c.7.72,1.65,1.32,2.84,1.8,1.19.48,2.5.96,3.94,1.44,1.44.48,2.86,1.05,4.27,1.7,1.4.65,2.7,1.49,3.89,2.52,1.19,1.03,2.14,2.34,2.86,3.96.72,1.61,1.08,3.62,1.08,6.02,0,3.1-.68,5.7-2.05,7.82-1.37,2.11-3.21,3.71-5.51,4.77-2.31,1.07-4.86,1.6-7.67,1.6-2.13,0-4.24-.29-6.35-.88-2.11-.59-4.11-1.44-6-2.55s-3.59-2.43-5.11-3.96l3.84-9.22c1.3,1.4,2.76,2.62,4.38,3.66,1.62,1.05,3.26,1.86,4.92,2.45,1.66.59,3.13.88,4.43.88,1.48,0,2.64-.34,3.48-1.01.85-.68,1.27-1.67,1.27-2.98,0-1.13-.36-2.06-1.08-2.78-.72-.72-1.67-1.32-2.86-1.8-1.19-.48-2.49-.95-3.92-1.41-1.42-.46-2.85-1-4.27-1.64-1.42-.63-2.73-1.44-3.92-2.42-1.19-.98-2.13-2.26-2.84-3.83-.7-1.57-1.05-3.53-1.05-5.89,0-2.83.62-5.31,1.86-7.42,1.24-2.11,3.01-3.75,5.29-4.91,2.29-1.15,4.94-1.73,7.97-1.73,2.77,0,5.49.48,8.16,1.44,2.67.96,4.99,2.2,6.97,3.73l-3.73,9.42Z"/>
+        <path fill="#fff" d="M34.26,3.48h32v10.31h-11v37.11h-10V13.79h-11V3.48Z"/>
+        <path fill="#fff" d="M80.26,31.99l-.07,18.9-9.93.04V3.48h15.67c4.64,0,8.22,1.44,10.74,4.33,2.52,2.89,4.59,7.02,3.78,12.18-2.37,15.06-20.19,12-20.19,12ZM80.26,12.53l.06,12.67c13.13,0,12.91-12.67-.06-12.67ZM79.25,30.81l11.63-.99,16.82,21.09h-13.47s-14.98-20.1-14.98-20.1Z"/>
+        <path fill="#fff" d="M110.26,3.48h10v47.42h-10V3.48Z"/>
+        <path fill="#fff" d="M158.8,38.29c-12.49,5.4-23.52-.88-23.56-11.1.04-10.21,11.07-16.5,23.55-11.1l4.46-8.69s-11.6-7.97-26.37-1.17c-12.2,5.62-12.62,19.18-12.62,20.87h0s-.4,15.05,12.62,21.05c14.78,6.81,26.38-1.17,26.38-1.17l-4.46-8.7Z"/>
+        <path fill="#fff" d="M165.26,3.48h32v10.31h-11v37.11h-10V13.79h-11V3.48Z"/>
+        <path fill="#fff" d="M217.26,3.48h27l-.05,11.1-16.95-.08v9.16l15,.07.09,9.01-15.09-.02v18.19h-10V3.48Z"/>
+        <path fill="#fff" d="M289.65,14.65c-1.89-3.55-4.53-6.3-7.92-8.25-3.4-1.95-7.36-2.92-11.91-2.92s-8.51.97-11.91,2.92c-3.4,1.95-6.02,4.7-7.89,8.25-1.86,3.55-2.8,7.7-2.8,12.46s.93,8.92,2.8,12.5c1.86,3.58,4.49,6.36,7.89,8.33,3.39,1.98,7.36,2.96,11.91,2.96s8.51-.99,11.91-2.96c3.39-1.98,6.04-4.75,7.92-8.33,1.89-3.58,2.83-7.74,2.83-12.5s-.94-8.9-2.83-12.46ZM269.86,40.63c-6.55,0-11.86-6.01-11.86-13.43s5.31-13.43,11.86-13.43,11.86,6.01,11.86,13.43-5.31,13.43-11.86,13.43Z"/>
+        <path fill="#fff" d="M377.41,3.48c2.96,0,5.66.58,8.1,1.73,2.44,1.15,4.55,2.77,6.31,4.87s3.13,4.59,4.09,7.48c.96,2.89,1.44,6.09,1.44,9.61s-.49,6.79-1.47,9.67c-.98,2.89-2.36,5.39-4.15,7.51-1.78,2.12-3.92,3.74-6.42,4.87s-5.26,1.69-8.29,1.69h-15.78V3.48h16.15ZM371.26,14.52v26.93c19.33,0,19.93-26.93,0-26.93Z"/>
+        <path fill="#fff" d="M414.73,8.53c-.41-2.85-3.03-5.04-6.21-5.04-3.46,0-6.27,2.6-6.27,5.81,0,2.69,1.97,4.95,4.65,5.61l-3.98,6.5,2.49,2.38s6.31-5.56,8.17-9.9c1.42-3.3,1.2-4.59,1.2-4.59,0-.26-.02-.52-.05-.77Z"/>
+        <path fill="#fff" d="M446.23,18.07c-1.33-1-2.75-1.86-4.24-2.58-1.5-.72-2.94-1.29-4.32-1.7-1.39-.41-2.6-.62-3.65-.62-1.19,0-2.14.27-2.86.82-.72.55-1.08,1.39-1.08,2.52s.35,2.06,1.05,2.78c.7.72,1.65,1.32,2.84,1.8,1.19.48,2.5.96,3.94,1.44,1.44.48,2.86,1.05,4.27,1.7,1.4.65,2.7,1.49,3.89,2.52,1.19,1.03,2.14,2.34,2.86,3.96.72,1.61,1.08,3.62,1.08,6.02,0,3.1-.68,5.7-2.05,7.82-1.37,2.11-3.21,3.71-5.51,4.77-2.31,1.07-4.86,1.6-7.67,1.6-2.13,0-4.24-.29-6.35-.88-2.11-.59-4.11-1.44-6-2.55s-3.59-2.43-5.11-3.96l3.84-9.22c1.3,1.4,2.76,2.62,4.38,3.66,1.62,1.05,3.26,1.86,4.92,2.45,1.66.59,3.13.88,4.43.88,1.48,0,2.64-.34,3.48-1.01.85-.68,1.27-1.67,1.27-2.98,0-1.13-.36-2.06-1.08-2.78-.72-.72-1.67-1.32-2.86-1.8-1.19-.48-2.49-.95-3.92-1.41-1.42-.46-2.85-1-4.27-1.64-1.42-.63-2.73-1.44-3.92-2.42-1.19-.98-2.13-2.26-2.84-3.83-.7-1.57-1.05-3.53-1.05-5.89,0-2.83.62-5.31,1.86-7.42,1.24-2.11,3.01-3.75,5.29-4.91,2.29-1.15,4.94-1.73,7.97-1.73,2.77,0,5.49.48,8.16,1.44,2.67.96,4.99,2.2,6.97,3.73l-3.73,9.42Z"/>
+        <g>
+          <path fill="#fff" d="M301.14,27.2s23.15-7.06,48.17-6.88c9.57.07-2.47-22.65-27.13-20.12-.26.03-.53.07-.79.12-22.86,4.79-23.62,19.86-23.62,19.86,0,0-2.25,8.21,3.37,7.02Z"/>
+          <path fill="#fff" d="M328.32,35.59c-17.57,3.75-2-2.84,15.01-3.21,8.42-.18,6.69-3.05-2.32-2.69-47.3,1.94.58-3.37,9.16-4.11,1.12-.1,2.05-2.69-1.21-2.84,0,0-29.98-.18-45.5,8-17.38,9.16,19.68.42,21.33,1.58,0,0-13.48,2.74-20.26,6.71-5.93,3.47,30.72-3.81,49.17-2.81,9,.49-3.71-5.25-25.38-.63Z"/>
+          <path fill="#fff" d="M301.55,49.28c5.53,3.9,42.86,7.27,51.08-6.11,4.37-10.48-60.87-1.63-51.08,6.11Z"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Product name -->
+    <div class="product-name">Strict Max Boeuf</div>
+    <div class="product-subtitle">Double steak artisanal</div>
+
+    <!-- Calories -->
+    <div class="calories-block">
+      <div class="calories-label">Seulement</div>
+      <div class="calories-number">942</div>
+      <div class="calories-unit">Calories</div>
+    </div>
+
+    <!-- Macros -->
+    <div class="macros-bar">
+      <div class="macro-item macro-highlight">
+        <div class="macro-value">97<span>g</span></div>
+        <div class="macro-label">Proteines</div>
+      </div>
+      <div class="macro-item">
+        <div class="macro-value">45<span>g</span></div>
+        <div class="macro-label">Glucides</div>
+      </div>
+      <div class="macro-item">
+        <div class="macro-value">39<span>g</span></div>
+        <div class="macro-label">Lipides</div>
+      </div>
+    </div>
+
+    <!-- Benefits -->
+    <div class="benefits">
+      <div class="benefit-item">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#BF8522" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <div class="benefit-text">Cuisson <strong>zero huile</strong></div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#BF8522" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <div class="benefit-text"><strong>100% artisans</strong> locaux</div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#BF8522" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <div class="benefit-text">Chaleur pulsée <strong>zero compromis</strong></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom tagline -->
+  <div class="bottom-section">
+    <div class="tagline">Le cheat meal<br>qui <em>n'en est pas un.</em></div>
+  </div>
+
+</body>
+</html>
