@@ -16,14 +16,14 @@
 
 | Ordre | Ingrédient | Forme exacte | Fournisseur |
 |-------|-----------|--------------|-------------|
-| 1 | Pain brioche (base) | Bun rond, surface lisse dorée, légèrement brillante | Pains du Soleil |
+| 1 | Pain noir au sésame (base) | Bun rond noir, surface texturée recouverte de graines de sésame dorées | Pains du Soleil |
 | 2 | Steak haché de bœuf (1) | Steak épais, viande de grison, croûte Maillard visible, cuisson chaleur pulsée (zéro huile) | Boucherie Labourde |
 | 3 | Steak haché de bœuf (2) | Deuxième steak identique, empilé sur le premier — double épaisseur de viande | Boucherie Labourde |
 | 4 | Parmesan | En miettes — petits fragments irréguliers, poudreux. PAS en copeaux, PAS en lamelles, PAS en tranches. | Myfitcheese |
 | 5 | Oignons rouges | En tranches fines — rondelles avec anneaux concentriques visibles. PAS émincés, PAS en dés. | — |
 | 6 | Mâche | Feuilles entières — petites feuilles rondes vertes en bouquet. PAS de roquette, PAS de laitue. | — |
 | 7 | Sauce poivron | Couleur jaune-orangé subtil — sauce lisse, pas épaisse. PAS rouge, PAS blanche. | Fait maison |
-| 8 | Pain brioche (chapeau) | Identique à la base, surface dorée brillante avec légères craquelures naturelles | Pains du Soleil |
+| 8 | Pain noir au sésame (chapeau) | Identique à la base, surface noire texturée avec graines de sésame dorées | Pains du Soleil |
 
 ## Photo référence
 

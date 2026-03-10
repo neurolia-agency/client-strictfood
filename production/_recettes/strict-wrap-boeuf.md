@@ -31,8 +31,8 @@
 
 ## Notes
 
-- Même garniture que le STRICT Bœuf burger, mais en tortilla au lieu de bun brioche
+- Même garniture que le STRICT Bœuf burger, mais en tortilla au lieu de bun noir au sésame
 - Cuisson à chaleur pulsée (zéro huile)
 - Le wrap est coupé en diagonale pour présentation — l'intérieur est visible
-- Moins calorique que le burger (-30 kcal) grâce à la tortilla vs bun brioche
+- Moins calorique que le burger (-30 kcal) grâce à la tortilla vs bun noir au sésame
 - Le parmesan en miettes reste le marqueur visuel distinctif

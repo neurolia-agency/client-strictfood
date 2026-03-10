@@ -16,13 +16,13 @@
 
 | Ordre | Ingrédient | Forme exacte | Fournisseur |
 |-------|-----------|--------------|-------------|
-| 1 | Pain brioche (base) | Bun rond, surface lisse dorée, légèrement brillante | Pains du Soleil |
+| 1 | Pain noir au sésame (base) | Bun rond noir, surface texturée recouverte de graines de sésame dorées | Pains du Soleil |
 | 2 | Galettes de falafel | Galettes rondes épaisses, croûte croustillante dorée, intérieur vert visible en coupe, cuisson chaleur pulsée (zéro huile) | — |
 | 3 | Parmesan | En miettes — petits fragments irréguliers, poudreux. PAS en copeaux, PAS en lamelles, PAS en tranches. | Myfitcheese |
 | 4 | Oignons rouges | En tranches fines — rondelles avec anneaux concentriques visibles. PAS émincés, PAS en dés. | — |
 | 5 | Mâche | Feuilles entières — petites feuilles rondes vertes en bouquet. PAS de roquette, PAS de laitue. | — |
 | 6 | Sauce poivron | Couleur jaune-orangé subtil — sauce lisse, pas épaisse. PAS rouge, PAS blanche. | Fait maison |
-| 7 | Pain brioche (chapeau) | Identique à la base, surface dorée brillante avec légères craquelures naturelles | Pains du Soleil |
+| 7 | Pain noir au sésame (chapeau) | Identique à la base, surface noire texturée avec graines de sésame dorées | Pains du Soleil |
 
 ## Photo référence
 

@@ -17,7 +17,7 @@
 | Ordre | Ingrédient | Forme exacte | Fournisseur |
 |-------|-----------|--------------|-------------|
 | 1 | Tortilla | Galette de blé souple, enroulée serrée, surface légèrement grillée/toastée | — |
-| 2 | Filet de poulet | Filet épais, croûte Maillard visible, cuisson chaleur pulsée (zéro huile) | — |
+| 2 | Poulet rôti | En lamelles — tranches fines irrégulières, croûte Maillard visible, cuisson chaleur pulsée (zéro huile). PAS en cubes, PAS en dés, PAS en filet entier. | — |
 | 3 | Parmesan | En miettes — petits fragments irréguliers, poudreux. PAS en copeaux, PAS en lamelles, PAS en tranches. | Myfitcheese |
 | 4 | Oignons rouges | En tranches fines — rondelles avec anneaux concentriques visibles. PAS émincés, PAS en dés. | — |
 | 5 | Mâche | Feuilles entières — petites feuilles rondes vertes en bouquet. PAS de roquette, PAS de laitue. | — |
@@ -31,7 +31,7 @@
 
 ## Notes
 
-- Même garniture que le STRICT Poulet burger, mais en tortilla au lieu de bun brioche
+- Même garniture que le STRICT Poulet burger, mais en tortilla au lieu de bun noir au sésame
 - Cuisson à chaleur pulsée (zéro huile)
 - Le wrap est coupé en diagonale pour présentation — l'intérieur est visible
 - 60,5g de protéines — meilleur ratio protéines/prix de la carte (8,99€)
