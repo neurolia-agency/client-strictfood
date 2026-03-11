@@ -11,7 +11,7 @@
 | Agent | `production/.claude/agents/input-mapper.md` |
 | Modèle | Haiku (tâche déterministe) |
 | Déclenchement | Après validation de `01-art-direction/direction.md` |
-| Input | Chemin du dossier post (ex: `production/2026-03-10/`) |
+| Input | Chemin du dossier post (ex: `production/post-stories/posts/periode-1/S1/2026-03-14/`) |
 | Output | `[dossier-post]/00-input/input.md` |
 | Consulte | `_config/photo-references.md` + `_recettes/[slug].md` |
 
@@ -31,13 +31,19 @@
 
 | Document | Chemin |
 |----------|--------|
-| Stratégie globale | `strategie/strategie.md` |
+| Stratégie globale | `strategie/strategie-globale.md` |
 | Stratégie Instagram | `strategie/instagram-strategie.md` |
-| Calendrier S0+S1 | `strategie/instagram-S0-S1.md` |
 
 ## Résolution
 
 **Toujours 4K** — pas de draft, pas d'intermédiaire.
+
+## Brand Props
+
+| Élément | Valeur | Source |
+|---------|--------|--------|
+| Catalogue props | Descriptions packaging brandé | `production/_config/brand-props.md` |
+| Dial BRAND_PRESENCE | 4/10 (~30-40% des posts) | `production/_config/brand-props.md` |
 
 ## Modèle par défaut
 

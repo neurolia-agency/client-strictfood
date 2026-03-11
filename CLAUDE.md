@@ -1,64 +1,58 @@
 # StrictFood - Site Web
 
-Site vitrine "Dark Food Premium" pour StrictFood (RD FITNESS), fast-good healthy a Perpignan.
+Landing page "Dark Food Premium" pour StrictFood (RD FITNESS), fast-good healthy a Perpignan.
 
 ## Statut Pipeline
 
-### Phase A : Architecture (Markdown uniquement)
+### Phase A : Architecture ✅
 
-| Etape | Stage | Status | Output |
+Tous les stages A01-A06 sont termines. Artifacts dans `pipeline/output/`.
+
+### Phase B : Vibe Coding
+
+| Etape | Stage | Status | Detail |
 |-------|-------|--------|--------|
-| A01 | Init | ✅ | `pipeline/output/00-brief.md` |
-| A02 | Brand | ✅ | `pipeline/output/01-brand/` (8 fichiers) |
-| A03 | Art Direction | ✅ | `pipeline/output/02-art-direction/` (7 fichiers) |
-| A04 | Structure | ✅ | `pipeline/output/03-sitemap.md` |
-| A05 | Wireframes | ✅ | `pipeline/output/03.5-wireframes/` (3 fichiers) |
-| A06 | Design Tokens | ✅ | `app/globals.css` |
-
-### Phase B : Design / Vibe Coding (Circuit d'Agents)
-
-| Etape | Stage | Status | Output |
-|-------|-------|--------|--------|
-| B01 | Layout | ✅ | `components/layout/` |
-| B02 | Homepage | ⬜ | `components/sections/` + `app/page.tsx` |
-| B03 | Pages | ⬜ | `app/[pages]/` |
+| B01 | Layout | ✅ | `header.tsx`, `footer.tsx`, `mobile-menu.tsx` |
+| B02 | Homepage | 🔶 5/6 | Manque : Contact & Horaires (Section 6) |
+| B03 | Pages | 🔶 | `/la-carte` creee, mentions-legales a faire |
 | B04 | Polish | ⬜ | Animations + SEO + coherence |
 | B05 | Validate | ⬜ | `pipeline/output/07-validation.md` |
 | B06 | Deploy | ⬜ | `pipeline/output/08-deploy.md` |
 
+**Sections homepage codees :**
+`hero` · `la-promesse` · `nos-artisans` · `experience` · `avis-confiance` · `carte-menu`
+
 ## Commandes
 
 ```bash
-# Phase A — /apex -a -s executer [AXX]-[nom] depuis pipeline/stages/[AXX]-[nom].md
-# Phase B — "Code le Hero de la homepage" → section-builder orchestre le circuit d'agents
-npm run dev
+npm run dev          # Dev (Turbopack)
+npm run build        # Build production
+npm run lint         # ESLint
 ```
+
+**Phase B** : "Code la section Contact & Horaires" → `/section-builder` orchestre le circuit d'agents.
 
 ## Sources de Verite
 
-| Domaine | Source unique |
-|---------|---------------|
-| Statut pipeline | Ce fichier (CLAUDE.md) |
-| Donnees client | `pipeline/input/` (brief + forms + assets) |
-| Brief strategique | `docs/brief-client.md` (original) |
-| Analyse interne | `docs/analyse-interne.md` |
-| Strategie globale | `strategie/strategie.md` |
+| Domaine | Source |
+|---------|--------|
+| Statut pipeline | Ce fichier |
+| Brief client | `pipeline/input/brief-client.md` |
+| Analyse interne | `pipeline/input/content/analyse-interne.md` |
+| Strategie globale | `strategie/strategie-globale.md` |
 | Liens et acces | `docs/liens-et-acces.md` |
+| Carte produit | `pipeline/input/content/carte.md` (16 produits, 5 categories) |
+| Wireframes | `pipeline/output/03.5-wireframes/` |
+| Tokens CSS | `app/globals.css` (source unique) |
 | Contraintes design | `pipeline/output/02-art-direction/constraints.md` |
 | Vocabulaire visuel | `pipeline/output/02-art-direction/visual-vocabulary.md` |
 | Calibration dials | `pipeline/output/02-art-direction/project-dials.md` |
 | Composants UI | `pipeline/output/02-art-direction/ui-kit.md` |
 | Emotions par section | `pipeline/output/02-art-direction/emotion-map.md` |
 | Contenu brand | `pipeline/output/01-brand/` |
-| Donnees design (palettes, typo) | `.claude/skills/ui-ux-pro-max/data/` (CSVs — lookup systematique A02) |
-| Wireframes | `pipeline/output/03.5-wireframes/` |
-| Tokens CSS | `app/globals.css` |
-| Stack & dependances | `pipeline/workflow/` |
-| Custom subagents | `.claude/agents/` (5 agents) |
-| Selection photos | `pipeline/input/assets/photo-selection.md` |
-| Photos references produits | `public/images/photos-references/` (dark-bg + produits-source + contexte) |
-| Catalogue photos | `production/_config/photo-references.md` (mapping produit -> photos) |
 | Logo SVG | `public/logo/2025-09-14_15-27-20_UTC.svg` |
+| Photos references | `public/images/photos-references/` |
+| Production Instagram | `production/CLAUDE.md` |
 
 ## Contexte Projet
 
@@ -70,42 +64,30 @@ npm run dev
 | Type | Landing page vitrine Premium |
 | Secteur | Restauration rapide saine (Fast-Good) |
 | Localisation | 88 Chemin de la Roseraie, Perpignan (Chateau Roussillon) |
-| Tagline seed | "Le cheat meal qui n'en est pas un" |
-| Stack | Next.js 15+ / Tailwind CSS 4 / Motion / Lenis |
-| Couleurs | OKLCH |
-| DA | "Dark Food Premium" |
+| Tagline | "Le cheat meal qui n'en est pas un" |
 
-## Input disponible
+## Stack
 
-| Source | Fichier | Type |
-|--------|---------|------|
-| Brief strategique | `pipeline/input/brief-client.md` | Obligatoire |
-| Formulaire plateforme de marque | `pipeline/input/forms/brand-platform-responses.csv` | Optionnel (CSV) |
-| Manifest formulaire | `pipeline/input/forms/brand-platform-manifest.md` | Manifest |
-| Analyse interne | `pipeline/input/content/analyse-interne.md` | Complementaire |
-| Strategie 3 phases | `strategie/strategie.md` | Contexte strategique |
-| Selection photos Instagram | `pipeline/input/assets/photo-selection.md` | Photos pour B02 |
-| Logo SVG | `public/logo/2025-09-14_15-27-20_UTC.svg` | Integre header/footer |
-| Carte produit | `pipeline/input/content/carte.md` | Disponible (16 produits, 5 categories) |
+- **Framework** : Next.js 15.3 / React 19.1 / TypeScript 5.8
+- **Styling** : Tailwind CSS 4.1 (OKLCH tokens dans globals.css)
+- **Animations** : Motion 12.6 + Lenis 1.2
+- **Forms** : React Hook Form + Zod
+- **Icons** : Lucide React
+- **Deploy** : Vercel
 
-## ADN Visuel & Dials
+## ADN Visuel
 
 | Aspect | Valeur |
 |--------|--------|
-| Couleur signature | Cuivre Braise — oklch(0.67 0.15 68) / #BF8522 |
-| Couleur secondaire | Grenat Fume — oklch(0.42 0.10 22) / #7C3530 |
-| Accent nutrition | Feuille Grillee — oklch(0.52 0.06 145) / #5C7858 |
-| Background | Charbon — oklch(0.14 0.008 60) / #141210 |
-| Forme / Radius | Standard 12px / Large 16px / Pill 999px / Input 8px |
-| Mouvement | cubic-bezier(0.22, 1, 0.36, 1), 300-800ms, revelations progressives |
-| Typographies | Oswald (display/H1) + Space Grotesk (titres H2-H5) + DM Sans (body) |
+| Couleur signature | Cuivre Braise — `oklch(0.67 0.15 68)` |
+| Secondaire | Grenat Fume — `oklch(0.42 0.10 22)` |
+| Accent nutrition | Feuille Grillee — `oklch(0.52 0.06 145)` |
+| Background | Charbon — `oklch(0.14 0.008 60)` |
+| Typographies | Oswald (H1) + Space Grotesk (H2-H5) + DM Sans (body) |
 | DESIGN_VARIANCE | 5/10 |
 | MOTION_INTENSITY | 6/10 |
 | VISUAL_DENSITY | 3/10 |
-| Curseur Food Porn | 7/10 (formulaire) |
-
-<!-- Details flux Phase A/B dans .claude/rules/phase-b-circuit.md -->
-<!-- Arborescence complete dans .claude/rules/pipeline-structure.md -->
+| Food Porn | 7/10 |
 
 ## Contraintes
 
@@ -113,18 +95,60 @@ npm run dev
 - **Responsive** : Mobile-first
 - **Accessibilite** : WCAG AA
 - **Ton** : Tutoiement (valide par le client)
-- **Tokens** : Pas de valeurs hardcodees (couleurs, spacing, durees → globals.css)
-- **Composants** : Conformes a ui-kit.md
-- **Livrable Phase 1** : Landing page uniquement (pas de Click & Collect — prevu Phase 2)
+- **Tokens** : Pas de valeurs hardcodees — tout dans `globals.css`
+- **Composants** : Conformes a `ui-kit.md`
+- **Scope Phase 1** : Landing page uniquement (Click & Collect prevu Phase 2)
+- **NEVER** : Ecrire un composant UI sans passer par le circuit d'agents (cf. `.claude/rules/phase-b-circuit.md`)
+
+## Architecture
+
+```
+app/                          # Pages Next.js
+  globals.css                 # Tokens CSS (source unique)
+  layout.tsx                  # Root layout (3 fonts, Lenis, Header/Footer)
+  page.tsx                    # Homepage
+  la-carte/page.tsx           # Page carte
+components/
+  layout/                     # Header, Footer, MobileMenu
+  sections/                   # Sections homepage (6 fichiers)
+  ui/                         # Primitives (LiquidGlassLink, MagneticButton)
+  providers/                  # SmoothScrollProvider
+pipeline/                     # Workflow design (input/, output/, stages/)
+_preflight/                   # Contexte pre-coding (genere par agents)
+production/                   # Pipeline Instagram (voir production/CLAUDE.md)
+strategie/                    # Strategie social + planning
+formulaires/                  # Formulaires deployes separement
+public/images/                # Photos references (dark-bg, produits-source, contexte)
+```
+
+## Agents & Skills
+
+| Outil | Type | Scope | Usage |
+|-------|------|-------|-------|
+| `/section-builder` | Skill | Phase B | Orchestre le circuit pour chaque section |
+| `/frontend-design2` | Skill | Phase B | Comportement UI du codeur |
+| `/instagram-producer` | Skill | Production | Orchestre le pipeline Instagram |
+| `context-assembler` | Agent (Haiku) | Phase B | Resout le contexte wireframe → context block |
+| `aesthetic-director` | Agent (Opus) | Phase B | Direction creative sensorielle |
+| `constraint-validator` | Agent (Haiku) | Phase B | Valide code vs regles |
+| `wireframe-validator` | Agent (Haiku) | Phase A | Valide wireframes |
+| `token-auditor` | Agent (Haiku) | Phase A | Audite tokens CSS |
+
+## Deploiements Vercel
+
+| URL | Root dir |
+|-----|----------|
+| strictfood-strategie.vercel.app | `/` (site principal) |
+| devis-strictfood.vercel.app | `formulaires/` |
+| plateforme-marque-strictfood.vercel.app | `formulaires/formulaire-plateforme/` |
 
 ## Contexte Business
 
 - CA actuel : 200-300EUR/jour (objectif 500EUR/jour)
 - Budget mensuel : 780EUR (290EUR Web + 490EUR Social)
-- Partenaires locaux : Boucherie Labourde, Pains du Soleil, Myfitcheese
+- Partenaires : Boucherie Labourde, Pains du Soleil, Myfitcheese
 - Ambition : 4-5 points de vente dans 5 ans (franchise)
-- Concurrent : Fast-foods classiques (pas de concurrent direct "fast-good" identifie)
 
----
-
-*Derniere mise a jour : 05/03/2026*
+<!-- Detail circuit Phase B : .claude/rules/phase-b-circuit.md -->
+<!-- Arborescence pipeline : .claude/rules/pipeline-structure.md -->
+<!-- Pipeline Instagram : .claude/rules/production-pipeline.md + production/CLAUDE.md -->

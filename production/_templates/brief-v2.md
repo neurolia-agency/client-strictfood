@@ -34,6 +34,7 @@ Slug recette : `[slug-kebab-case]`
 - [Contrainte 2]
 - DA : Dark Food Premium (fond Charbon, tons Cuivre Braisé)
 - Food Porn Dial : [X]/10
+- Brand props : [oui (l'art director choisit) / non (pas de branding) / forcé: wrapper-burger]
 
 ## Étape suivante
 

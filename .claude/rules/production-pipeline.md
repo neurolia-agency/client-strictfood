@@ -57,6 +57,10 @@ Nanobanana Pro / GPT Images
 - **Résolution** : toujours 4K
 - **API key** : `$GEMINI_API_KEY` (variable d'environnement), jamais en dur
 
+## Structure des posts
+
+Les posts sont organisés dans `production/post-stories/posts/periode-[N]/S[X]/YYYY-MM-DD/`.
+
 ## Posts v1
 
 Les posts `2026-03-10/` et `2026-03-12/` sont des posts v1 (pre-pipeline). Ne PAS les utiliser comme template.

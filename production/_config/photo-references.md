@@ -117,6 +117,46 @@ public/images/photos-references/
 
 ---
 
+## BURGERS BLACK BUN
+
+Photos source avec le nouveau pain noir au sésame (black bun). Fond noir, éclairage studio.
+
+### STRICT Bœuf (black)
+
+| # | Chemin | Description |
+|---|--------|-------------|
+| 1 | `public/images/photos-references/produits-source/burgers-black/strict-boeuf.png` | STRICT Bœuf, single patty bœuf, black bun sésame, fond noir, vue de face, haute résolution. |
+| 2 | `public/images/photos-references/produits-source/burgers-black/simple-boeuf-black.png` | Burger simple bœuf, black bun, fond noir. |
+
+### STRICT MAX Bœuf (black)
+
+| # | Chemin | Description |
+|---|--------|-------------|
+| 1 | `public/images/photos-references/produits-source/burgers-black/strict-max-boeuf-black-1.png` | STRICT MAX Bœuf, double steak bœuf, black bun sésame, fond noir. |
+
+### STRICT Poulet (black)
+
+| # | Chemin | Description |
+|---|--------|-------------|
+| 1 | `public/images/photos-references/produits-source/burgers-black/strict-poulet-black-1.png` | STRICT Poulet, lamelles poulet, black bun sésame, fond noir, variante 1. |
+| 2 | `public/images/photos-references/produits-source/burgers-black/strict-poulet-black-2.png` | STRICT Poulet, lamelles poulet, black bun sésame, fond noir, variante 2. |
+
+### STRICT MAX Poulet (black)
+
+| # | Chemin | Description |
+|---|--------|-------------|
+| 1 | `public/images/photos-references/produits-source/burgers-black/strict-max-poulet-black-1.png` | STRICT MAX Poulet, double lamelles poulet, black bun sésame, fond noir, variante 1. |
+| 2 | `public/images/photos-references/produits-source/burgers-black/strict-max-poulet-black.png` | STRICT MAX Poulet, double lamelles poulet, black bun sésame, fond noir. |
+
+### STRICT Végé Falafel (black)
+
+| # | Chemin | Description |
+|---|--------|-------------|
+| 1 | `public/images/photos-references/produits-source/burgers-black/strict-vege-falafel-black-1.png` | STRICT Végé Falafel, galette falafel entière, black bun sésame, fond noir, variante 1. |
+| 2 | `public/images/photos-references/produits-source/burgers-black/strict-vege-falafel-black-2.png` | STRICT Végé Falafel, galette falafel entière, black bun sésame, fond noir, variante 2. |
+
+---
+
 ## WRAPS
 
 ### STRICT Wrap Boeuf

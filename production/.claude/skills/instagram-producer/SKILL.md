@@ -14,18 +14,21 @@ Tu es l'orchestrateur du pipeline de production de visuels Instagram StrictFood.
 
 ## Input
 
-L'opérateur fournit un **chemin de dossier post** (ex: `production/2026-03-15/`) ou une date (ex: `2026-03-15`).
+L'opérateur fournit :
+- Un **chemin complet** (ex: `production/post-stories/posts/periode-1/S2/2026-03-19/`)
+- OU une **date seule** (ex: `2026-03-19`)
 
-Si seule une date est fournie, le dossier est `production/YYYY-MM-DD/`.
+**Résolution du chemin** : si seule une date est fournie, chercher le dossier existant via `production/post-stories/posts/**/YYYY-MM-DD/`. Si aucun dossier trouvé, demander à l'opérateur dans quelle période/semaine le créer.
 
 ## Exécution séquentielle — RESPECTER CET ORDRE EXACT
 
 ### ÉTAPE 0 — Vérification
 
-1. Lire `production/YYYY-MM-DD/00-brief/brief.md`
-2. Vérifier que le brief existe et contient au minimum : Pilier, Format, Objectif, Produit, Caption
-3. Vérifier qu'il ne contient PAS de lien direct vers une photo (violation v2)
-4. Si le brief n'existe pas → STOP, demander à l'opérateur de créer le brief d'abord (template : `production/_templates/brief-v2.md`)
+1. **Résoudre le chemin** : à partir de l'input (chemin complet ou date), déterminer `[dossier-post]`
+2. Lire `[dossier-post]/00-brief/brief.md`
+3. Vérifier que le brief existe et contient au minimum : Pilier, Format, Objectif, Produit, Caption
+4. Vérifier qu'il ne contient PAS de lien direct vers une photo (violation v2)
+5. Si le brief n'existe pas → STOP, demander à l'opérateur de créer le brief d'abord (template : `production/_templates/brief-v2.md`)
 
 **Si OK → passer automatiquement à l'étape 1.**
 
@@ -39,7 +42,7 @@ Si seule une date est fournie, le dossier est `production/YYYY-MM-DD/`.
    Skill: social-media-art-director
    ```
    Passer en contexte : le brief + la recette + la config DA.
-   L'output DOIT être écrit dans `production/YYYY-MM-DD/01-art-direction/direction.md`
+   L'output DOIT être écrit dans `[dossier-post]/01-art-direction/direction.md`
 5. Après écriture de `direction.md`, afficher un résumé à l'opérateur :
    - Produit(s) verrouillé(s)
    - Angle / Éclairage / Mood choisis
@@ -54,7 +57,7 @@ Si seule une date est fournie, le dossier est `production/YYYY-MM-DD/`.
 1. **SPAWNER L'AGENT** via le Agent tool :
    ```
    Agent: input-mapper
-   Prompt: "Exécute le mapping pour production/YYYY-MM-DD/"
+   Prompt: "Exécute le mapping pour [dossier-post]"
    ```
    L'agent lit `direction.md`, consulte `_config/photo-references.md` et `_recettes/`, et écrit `00-input/input.md`.
 2. Après écriture de `input.md`, afficher le mapping à l'opérateur :
@@ -83,14 +86,14 @@ Recette : [chemin]
 
 ### ÉTAPE 3 — Prompt Engineering (skill obligatoire)
 
-1. Lire `production/YYYY-MM-DD/01-art-direction/direction.md`
-2. Lire `production/YYYY-MM-DD/00-input/input.md`
+1. Lire `[dossier-post]/01-art-direction/direction.md`
+2. Lire `[dossier-post]/00-input/input.md`
 3. **APPELER LE SKILL** via le Skill tool :
    ```
    Skill: image-prompt-engineer
    ```
    Passer en contexte : la direction créative + l'input mapping. Le skill détecte automatiquement le Mode B.
-   L'output DOIT être écrit dans `production/YYYY-MM-DD/02-prompt/prompt.md`
+   L'output DOIT être écrit dans `[dossier-post]/02-prompt/prompt.md`
 4. Après écriture de `prompt.md`, afficher un résumé :
    - Modèle choisi (Gemini / GPT Images) et pourquoi
    - Nombre de prompts générés

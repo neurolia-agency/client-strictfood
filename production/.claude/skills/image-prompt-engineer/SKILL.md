@@ -144,14 +144,24 @@ Chaque prompt Mode B est accompagné d'une **photo référence** du produit rée
 
 Cette instruction est **obligatoire** et ne doit jamais être omise, même si le reste du prompt est très détaillé.
 
+#### 4. Brand props — fidélité packaging
+Si la direction créative inclut un brand prop, le prompt DOIT :
+- Décrire le matériau exact (papier kraft noir mat, carton recyclé sombre, etc.)
+- Spécifier le logo "STRICTFOOD" en majuscules, typographie condensée bold
+- Utiliser la couleur exacte : Cuivre Braisé (#BF8522) sur fond sombre OU noir mat sur kraft clair
+- Intégrer le prop comme élément d'environnement/setting, JAMAIS comme sujet principal
+- L'éclairage sur le prop suit l'éclairage global (pas de spotlight dédié)
+- **Fournir le logo en image référence secondaire** : `public/logo/strictfood-logo-reference.png` — à passer en input image à Nanobanana/GPT en plus de la photo produit, avec l'instruction : "Match the exact logo design shown in the logo reference image for any branded packaging elements."
+
 ---
 
 ### Step 1 — Lire les inputs
 
 **Fichiers à lire (dans cet ordre) :**
-1. `production/YYYY-MM-DD/01-art-direction/direction.md` — La fiche de direction créative
+1. `[dossier-post]/01-art-direction/direction.md` — La fiche de direction créative
 2. `production/_recettes/[produit].md` — La recette avec ingrédients et formes exactes
 3. `production/_config/pipeline.md` — Le chemin de la photo référence + config DA
+4. `production/_config/brand-props.md` — Si la direction créative mentionne un brand prop (champ "Brand props"), lire la description détaillée dans ce catalogue et l'intégrer au prompt.
 
 **Extraire pour chaque visuel :**
 - **Composition** → mapper vers Element 5 (angle, lens, framing)
@@ -211,7 +221,7 @@ Pour chaque visuel, fournir :
 
 Si le brief contient un carrousel de N slides, livrer N prompts dans l'ordre, chacun avec son bloc formaté.
 
-**Écrire l'output** dans `production/YYYY-MM-DD/02-prompt/prompt.md`
+**Écrire l'output** dans `[dossier-post]/02-prompt/prompt.md`
 
 ---
 
@@ -235,6 +245,7 @@ Si le brief contient un carrousel de N slides, livrer N prompts dans l'ordre, ch
 | Texture à mettre en valeur | Subject / Sensory | Utiliser le vocabulaire de `food-photography.md` |
 | Mouvement | Subject / Action | "fromage qui file" → "stretching melted cheese" |
 | Zone de respiration | Composition / Framing | "tiers supérieur dégagé" → "generous negative space in the upper third" |
+| Brand props (ID + placement) | Setting / Environment | Lire description dans brand-props.md, traduire matériaux/textures/logo en prompt. Élément de Setting, pas de Subject. |
 
 ---
 
