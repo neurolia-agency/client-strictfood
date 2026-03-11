@@ -1,48 +1,55 @@
-# Brief Stories — S1 Mercredi (2026-03-12)
+# Brief Stories — S1 Mercredi (2026-03-11)
 
 ---
 
-## Story 1 — Teaser carrousel S1-02
+## Story 1 — Educatif : cuisson sans huile
 
 | Champ | Valeur |
 |-------|--------|
-| Type | Teaser |
-| Highlight | — |
-| Qui produit | Pipeline (Joris) |
-| Template | `teaser-post.html` |
-
-### Objectif
-
-Teaser le carrousel "Du boucher a l'assiette" qui montre le process de fabrication du STRICT Boeuf. Inciter au swipe.
-
-### Contenu
-
-Post tease : `production/posts-stories/posts/periode-1/S1/2026-03-12/` (STRICT Boeuf — carrousel 5 slides process artisan)
-Hook : `Swipe le post pour voir le parcours d'un <em>burger</em>`
-Date de publication : `Aujourd'hui`
-Sous-texte : `Du boucher a l'assiette. 5 etapes, 0 compromis.`
-Image de fond : `aucune`
-
----
-
-## Story 2 — En cuisine pendant le service
-
-| Champ | Valeur |
-|-------|--------|
-| Type | Coulisse |
+| Type | Educatif |
 | Highlight | COULISSES |
-| Qui produit | Romain/Dorian |
-| Template | — (capture terrain) |
+| Qui produit | Pipeline (Joris) |
+| Template | `educatif.html` |
 
 ### Objectif
 
-Montrer l'envers du decor en plein service : energie, precision, authenticite.
+Eduquer sur le principal differenciateur technique de StrictFood : la cuisson a chaleur pulsee sans huile. Transformer un argument technique en benefice concret (moins de gras).
 
 ### Contenu
 
-> **Ce type n'est PAS automatisable.** Capture terrain par Romain/Dorian.
+Titre : `Cuisson sans huile ?`
+Chiffre cle : `57` + `% de gras en moins`
+Explication : `Nos burgers sont cuits par <strong>chaleur pulsee</strong>, sans aucune goutte d'huile. Resultat : un STRICT Boeuf a seulement <strong>21,5g de lipides</strong> contre 50g pour un burger classique.`
 
-Description du contenu attendu : `Plan rapide de l'assemblage d'un burger en cuisine pendant le service`
-Moment : `service midi`
-Duree estimee : `video 10-15s`
-Stickers Instagram recommandes : `musique`
+Comparaison VS : oui
+- Strict Food's : `21,5` `g lipides`
+- Classique : `Burger fast-food` `50` `g lipides`
+
+Image de fond : `public/images/photos-references/contexte/cuisine/air-fryers-pro.jpeg`
+Tagline : `Le cheat meal qui n'en est pas un`
+
+---
+
+## Story 2 — Nous trouver : Chateau Roussillon
+
+| Champ | Valeur |
+|-------|--------|
+| Type | Lieu |
+| Highlight | NOUS TROUVER |
+| Qui produit | Pipeline (Joris) |
+| Template | `annonce.html` |
+
+### Objectif
+
+Ancrer la marque dans son lieu physique. Rappeler la localisation a Chateau Roussillon.
+
+### Contenu
+
+Badge : `NOUS TROUVER`
+Headline : `Chateau <em>Roussillon</em>`
+Body : `88 Chemin de la Roseraie, Perpignan. Ouvert du <strong>mardi au samedi</strong>, service midi et soir.`
+CTA : `aucun`
+Image de fond : `public/images/photos-references/contexte/exterieur/devanture.jpeg`
+Tagline : `Le cheat meal qui n'en est pas un`
+
+> **Note publication** : Ajouter le sticker localisation "Chateau Roussillon, Perpignan" a la story Instagram.

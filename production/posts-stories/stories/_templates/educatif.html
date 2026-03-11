@@ -43,9 +43,10 @@
       font-family: 'Oswald', sans-serif;
       font-weight: 700;
       font-size: 200px;
-      color: #BF8522;
+      color: var(--accent);
       line-height: 0.85;
       letter-spacing: -6px;
+      filter: brightness(1.2);
     }
 
     .fact-unit {
@@ -88,8 +89,8 @@
     }
 
     .vs-item.ours {
-      background: rgba(191,133,34,0.12);
-      border: 2px solid rgba(191,133,34,0.3);
+      background: rgba(var(--accent-rgb),0.12);
+      border: 2px solid rgba(var(--accent-rgb),0.3);
     }
 
     .vs-item.theirs {
@@ -106,7 +107,7 @@
       margin-bottom: 15px;
     }
 
-    .vs-item.ours .vs-label { color: rgba(191,133,34,0.7); }
+    .vs-item.ours .vs-label { color: rgba(var(--accent-rgb),0.7); }
 
     .vs-item .vs-value {
       font-family: 'Oswald', sans-serif;
@@ -116,7 +117,7 @@
       margin-bottom: 8px;
     }
 
-    .vs-item.ours .vs-value { color: #BF8522; }
+    .vs-item.ours .vs-value { color: var(--accent); filter: brightness(1.2); }
     .vs-item.theirs .vs-value { color: rgba(255,255,255,0.5); }
 
     .vs-item .vs-unit {
@@ -136,7 +137,7 @@
     }
   </style>
 </head>
-<body>
+<body class="{{MOOD_CLASS}} {{IMG_CLASS}}">
 
   <!-- Optional background image -->
   <img class="bg-image" src="{{BG_IMAGE_PATH}}" alt="" style="display: {{SHOW_BG}}">
@@ -159,7 +160,7 @@
 
     <div class="edu-label">Le savais-tu ?</div>
 
-    <div class="edu-title">{{TITLE}}</div>
+    <div class="edu-title text-depth">{{TITLE}}</div>
 
     <!-- Grand chiffre -->
     <div class="fact-block">
@@ -168,7 +169,7 @@
     </div>
 
     <!-- Explication -->
-    <div class="explanation">{{EXPLANATION}}</div>
+    <div class="explanation text-depth mark-tape">{{EXPLANATION}}</div>
 
     <!-- Bloc VS (optionnel — masquer si non utilise) -->
     <div class="vs-block" style="display: {{SHOW_VS}}">
@@ -186,6 +187,12 @@
     </div>
 
   </div>
+
+  <!-- Zone blend (transition bg → product-hero, visible only if hero present) -->
+  <div class="zone-blend" style="display: {{SHOW_HERO}}"></div>
+
+  <!-- Product hero (optional — dual-image pattern for visual richness) -->
+  <img class="product-hero" src="{{HERO_IMAGE_PATH}}" alt="" style="display: {{SHOW_HERO}}">
 
   <!-- Bottom -->
   <div class="bottom-section">

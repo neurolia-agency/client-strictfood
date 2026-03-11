@@ -35,15 +35,16 @@
     }
 
     .question-text em {
-      color: #BF8522;
+      color: var(--accent);
       font-style: normal;
+      filter: brightness(1.2);
     }
 
     /* Zone reservee au sticker Instagram */
     .sticker-zone {
       width: 900px;
       height: 300px;
-      border: 3px dashed rgba(191,133,34,0.3);
+      border: 3px dashed rgba(var(--accent-rgb),0.3);
       border-radius: 24px;
       display: flex;
       align-items: center;
@@ -95,7 +96,7 @@
     }
   </style>
 </head>
-<body>
+<body class="{{MOOD_CLASS}} {{IMG_CLASS}}">
 
   <!-- Optional product image (dimmed) -->
   <img class="hero-image" src="{{BG_IMAGE_PATH}}" alt="" style="display: {{SHOW_IMAGE}}">
@@ -114,7 +115,7 @@
 
     <div class="question-label">Ton avis</div>
 
-    <div class="question-text">{{QUESTION}}</div>
+    <div class="question-text text-depth">{{QUESTION}}</div>
 
     <!-- Options preview (le vrai sondage sera via sticker Instagram) -->
     <div class="option-preview">

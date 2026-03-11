@@ -1,17 +1,27 @@
-# Story 01 — Data Mapping
+# Story 02 — Educatif : 3 artisans locaux
+
+## Données mappées
 
 | Placeholder | Valeur |
-|---|---|
-| `{{TITLE}}` | Cuisson sans huile ? |
-| `{{FACT_NUMBER}}` | 57 |
-| `{{FACT_UNIT}}` | % de gras en moins |
-| `{{EXPLANATION}}` | Nos burgers sont cuits par <strong>chaleur pulsée</strong>, sans aucune goutte d'huile. Résultat : un STRICT Bœuf à seulement <strong>21,5g de lipides</strong> contre 50g pour un burger classique. |
+|-------------|--------|
+| `{{TITLE}}` | 3 artisans dans chaque burger |
+| `{{FACT_NUMBER}}` | 3 |
+| `{{FACT_UNIT}}` | artisans perpignanais |
+| `{{EXPLANATION}}` | La viande vient de la <strong>Boucherie Labourde</strong>. Le pain, des <strong>Pains du Soleil</strong>. Le fromage, de <strong>Myfitcheese</strong>. Tout est local, tout est tracé. |
 | `{{SHOW_VS}}` | flex |
-| `{{VS_OURS_VALUE}}` | 21,5 |
-| `{{VS_OURS_UNIT}}` | g lipides |
-| `{{VS_THEIRS_LABEL}}` | Burger fast-food |
-| `{{VS_THEIRS_VALUE}}` | 50 |
-| `{{VS_THEIRS_UNIT}}` | g lipides |
+| `{{VS_OURS_VALUE}}` | 3 |
+| `{{VS_OURS_UNIT}}` | fournisseurs locaux |
+| `{{VS_THEIRS_LABEL}}` | Fast-food |
+| `{{VS_THEIRS_VALUE}}` | 0 |
+| `{{VS_THEIRS_UNIT}}` | fournisseur identifiable |
+| `{{BG_IMAGE_PATH}}` | /Users/dorian.gz/dev/Neurolia Agency/client-strictfood/public/images/photos-references/dark-bg/burger-simple-boeuf-dark-bg.png |
 | `{{SHOW_BG}}` | block |
-| `{{BG_IMAGE_PATH}}` | /Users/dorian.gz/dev/Neurolia Agency/client-strictfood/public/images/photos-references/contexte/cuisine/air-fryers-pro.jpeg |
+| `{{SHOW_HERO}}` | none |
+| `{{HERO_IMAGE_PATH}}` | |
 | `{{TAGLINE}}` | Le cheat meal qui n'en est pas un |
+
+## Source
+
+- Brief : `production/posts-stories/stories/S1/jeudi/brief-story.md` — Story 2
+- Template : `educatif.html`
+- Type : Éducatif (données artisans, pas de fiche produit)

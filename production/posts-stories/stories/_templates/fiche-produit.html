@@ -13,10 +13,11 @@
       font-family: 'Space Grotesk', sans-serif;
       font-weight: 700;
       font-size: 42px;
-      color: #BF8522;
+      color: var(--accent);
       text-transform: uppercase;
       letter-spacing: 6px;
       margin-bottom: 10px;
+      filter: brightness(1.2);
     }
     .product-subtitle {
       font-family: 'DM Sans', sans-serif;
@@ -45,16 +46,17 @@
       font-family: 'Oswald', sans-serif;
       font-weight: 500;
       font-size: 48px;
-      color: #BF8522;
+      color: var(--accent);
       text-transform: uppercase;
       letter-spacing: 10px;
       margin-top: -3px;
+      filter: brightness(1.2);
     }
     .macros-bar { margin-bottom: 70px; }
     .benefits { margin-bottom: auto; }
   </style>
 </head>
-<body>
+<body class="{{MOOD_CLASS}} {{IMG_CLASS}}">
 
   <!-- Background image (dimmed) -->
   <img class="bg-image" src="{{HERO_IMAGE_PATH}}" alt="">
@@ -85,7 +87,7 @@
     <!-- Calories -->
     <div class="calories-block">
       <div class="calories-label">Seulement</div>
-      <div class="calories-number">{{CALORIES}}</div>
+      <div class="calories-number text-depth">{{CALORIES}}</div>
       <div class="calories-unit">Calories</div>
     </div>
 
@@ -109,7 +111,7 @@
     <div class="benefits">
       <div class="benefit-item">
         <div class="benefit-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#BF8522" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
             <path d="m9 12 2 2 4-4"/>
           </svg>
@@ -118,7 +120,7 @@
       </div>
       <div class="benefit-item">
         <div class="benefit-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#BF8522" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
             <path d="m9 12 2 2 4-4"/>
           </svg>
@@ -127,7 +129,7 @@
       </div>
       <div class="benefit-item">
         <div class="benefit-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#BF8522" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
             <path d="m9 12 2 2 4-4"/>
           </svg>

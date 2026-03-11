@@ -15,14 +15,14 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.25;
-      filter: blur(20px) saturate(0.6);
+      opacity: var(--img-opacity);
+      filter: blur(6px) brightness(var(--img-brightness)) sepia(var(--img-sepia)) saturate(var(--img-saturate));
     }
 
     .gradient-center {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(ellipse at center, rgba(20,18,16,0.3) 0%, rgba(20,18,16,0.95) 70%);
+      background: radial-gradient(ellipse at center, rgba(var(--bg-rgb),0.25) 0%, rgba(var(--bg-rgb),0.9) 70%);
       z-index: 3;
     }
 
@@ -53,17 +53,19 @@
     }
 
     .teaser-hook em {
-      color: #BF8522;
+      color: var(--accent);
       font-style: normal;
+      filter: brightness(1.2);
     }
 
     .teaser-date {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 36px;
       font-weight: 600;
-      color: #BF8522;
+      color: var(--accent);
       letter-spacing: 4px;
       margin-bottom: 30px;
+      filter: brightness(1.2);
     }
 
     .teaser-subtext {
@@ -77,13 +79,13 @@
     .divider {
       width: 80px;
       height: 4px;
-      background: linear-gradient(to right, transparent, #BF8522, transparent);
+      background: linear-gradient(to right, transparent, var(--accent), transparent);
       margin: 40px auto;
       border-radius: 2px;
     }
   </style>
 </head>
-<body>
+<body class="{{MOOD_CLASS}} {{IMG_CLASS}}">
 
   <!-- Optional blurred background image -->
   <img class="teaser-bg" src="{{BG_IMAGE_PATH}}" alt="">
@@ -101,13 +103,13 @@
 
     <div class="teaser-label">Bientot</div>
 
-    <div class="teaser-hook">{{TEASER_HOOK}}</div>
+    <div class="teaser-hook text-depth">{{TEASER_HOOK}}</div>
 
     <div class="divider"></div>
 
     <div class="teaser-date">{{TEASER_DATE}}</div>
 
-    <div class="teaser-subtext">{{TEASER_SUBTEXT}}</div>
+    <div class="teaser-subtext text-depth mark-tape">{{TEASER_SUBTEXT}}</div>
 
   </div>
 

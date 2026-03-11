@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planning Stories S1–S2 — StrictFood</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@600;700&family=Oswald:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #BF8522;
+    --accent-dim: rgba(191,133,34,.15);
+    --accent-border: rgba(191,133,34,.25);
+    --bg: #141210;
+    --card: #1a1816;
+    --border: rgba(255,255,255,.06);
+    --t1: #fff;
+    --t2: rgba(255,255,255,.55);
+    --t3: rgba(255,255,255,.35);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg);
+    color: var(--t1);
+    font-family: 'DM Sans', sans-serif;
+    padding: 48px 40px 64px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  header { margin-bottom: 48px; }
+  header h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -1px;
+  }
+  header h1 em { font-style: normal; color: var(--accent); }
+  header p { color: var(--t2); font-size: 15px; margin-top: 6px; }
+
+  .stats {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 40px;
+  }
+  .stat {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 24px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .stat-val {
+    font-family: 'Oswald', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .stat-label { color: var(--t2); font-size: 14px; }
+
+  .week { margin-bottom: 44px; }
+  .week-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: var(--t2);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .day {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .day:last-child { border-bottom: none; }
+  .day-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--t2);
+    padding: 18px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .day-label .date { font-family: 'DM Sans'; font-size: 12px; color: var(--t3); letter-spacing: 0; text-transform: none; }
+  .day-label .closed { font-family: 'DM Sans'; font-size: 11px; color: rgba(244,63,94,.4); letter-spacing: 0; text-transform: none; }
+  .stories { display: flex; flex-direction: column; gap: 0; }
+
+  .story {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+  }
+  .story + .story { border-top: 1px solid rgba(255,255,255,.03); }
+
+  .badge {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    width: 100px;
+    text-align: center;
+  }
+  .badge-teaser    { background: rgba(96,165,250,.12); color: #60a5fa; border: 1px solid rgba(96,165,250,.2); }
+  .badge-fiche     { background: var(--accent-dim); color: var(--accent); border: 1px solid var(--accent-border); }
+  .badge-interactif{ background: rgba(168,85,247,.12); color: #a855f7; border: 1px solid rgba(168,85,247,.2); }
+  .badge-educatif  { background: rgba(34,197,94,.12); color: #22c55e; border: 1px solid rgba(34,197,94,.2); }
+  .badge-annonce   { background: rgba(251,191,36,.1); color: #fbbf24; border: 1px solid rgba(251,191,36,.2); }
+  .badge-lieu      { background: rgba(251,191,36,.1); color: #fbbf24; border: 1px solid rgba(251,191,36,.2); }
+  .badge-coulisse  { background: rgba(244,63,94,.1); color: #f43f5e; border: 1px solid rgba(244,63,94,.2); }
+  .badge-cta       { background: rgba(244,63,94,.1); color: #f43f5e; border: 1px solid rgba(244,63,94,.2); }
+  .badge-recap     { background: rgba(255,255,255,.06); color: var(--t2); border: 1px solid var(--border); }
+
+  .story-title {
+    font-size: 15px;
+    font-weight: 500;
+    flex: 1;
+  }
+  .story-title em { font-style: normal; color: var(--accent); }
+
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Stories <em>S1–S2</em></h1>
+  <p>Periode 1 — 11 au 23 mars 2026</p>
+</header>
+
+<div class="stats">
+  <div class="stat"><span class="stat-val">26</span><span class="stat-label">stories</span></div>
+  <div class="stat"><span class="stat-val">13</span><span class="stat-label">jours</span></div>
+</div>
+
+<!-- ==================== S1 ==================== -->
+<section class="week">
+  <h2 class="week-title">Semaine 1 — mer 11 → lun 16 mars</h2>
+
+  <div class="day">
+    <div class="day-label">Mercredi<span class="date">11/03</span></div>
+    <div class="stories">
+      <div class="story">
+        <span class="badge badge-educatif">Educatif</span>
+        <span class="story-title">Cuisson sans huile — <em>57% de gras en moins</em></span>
+
+      </div>
+      <div class="story">
+        <span class="badge badge-lieu">Lieu</span>
+        <span class="story-title">Devanture <em>Chateau Roussillon</em></span>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="day-label">Jeudi<span class="date">12/03</span></div>
+    <div class="stories">
+      <div class="story">
+        <span class="badge badge-teaser">Teaser</span>
+        <span class="story-title">Teaser carrousel <em>process artisan</em></span>
+
+      </div>
+      <div class="story">
+        <span class="badge badge-coulisse">Coulisse</span>
+        <span class="story-title">Assemblage burger en service</span>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="day-label">Vendredi<span class="date">13/03</span></div>
+    <div class="stories">
+      <div class="story">
+        <span class="badge badge-coulisse">Coulisse</span>
+        <span class="story-title">Arrivage produits frais</span>
+
+      </div>
+      <div class="story">
+        <span class="badge badge-interactif">Interactif</span>
+        <span class="story-title">Sondage <em>boeuf</em> vs <em>poulet</em></span>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="day-label">Samedi<span class="date">14/03</span></div>
+    <div class="stories">
+      <div class="story">
+        <span class="badge badge-teaser">Teaser</span>
+        <span class="story-title">Teaser post <em>tiramisu / poulet</em></span>
+
+      </div>
+      <div class="story">
+        <span class="badge badge-coulisse">Coulisse</span>
+        <span class="story-title">Rush du samedi midi</span>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="day-label">Dimanche<span class="date">15/03</span><span class="closed">ferme</span></div>
+    <div class="stories">
+      <div class="story">
+        <span class="badge badge-recap">Recap</span>
+        <span class="story-title">Repost best-of de la semaine</span>
+
+      </div>
+      <div class="story">
+        <span class="badge badge-annonce">Annonce</span>
+        <span class="story-title">Teaser <em>equipe</em> — post demain</span>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="day-label">Lundi<span class="date">16/03</span><span class="closed">ferme</span></div>
+    <div class="stories">
+      <div class="story">
+        <span class="badge badge-teaser">Teaser</span>
+        <span class="story-title">Teaser post <em>fondateurs</em></span>
+
+      </div>
+      <div class="story">
+        <span class="badge badge-interactif">Interactif</span>
+        <span class="story-title">Quiz <em>combien de prot</em> dans un STRICT ?</span>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== S2 ==================== -->
+<section class="week">
+  <h2 class="week-title">Semaine 2 — mar 17 → lun 23 mars</h2>
+
+  <div class="day">
+    <div class="day-label">Mardi<span class="date">17/03</span></div>
+    <div class="stories">
+      <div class="story">
+        <span class="badge badge-teaser">Teaser</span>
+        <span class="story-title">Teaser post <em>STRICT Poulet</em></span>
+
+      </div>
+      <div class="story">
+        <span class="badge badge-fiche">Fiche</span>
+        <span class="story-title">Fiche produit <em>STRICT Poulet</em> — 53g prot</span>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="day-label">Mercredi<span class="date">18/03</span></div>
+    <div class="stories">
+      <div class="story">
+        <span class="badge badge-annonce">Ambiance</span>
+        <span class="story-title">Salle restaurant — <em>bienvenue chez nous</em></span>
+
+      </div>
+      <div class="story">
+        <span class="badge badge-interactif">Interactif</span>
+        <span class="story-title">Sondage <em>burger</em> vs <em>wrap</em></span>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="day-label">Jeudi<span class="date">19/03</span></div>
+    <div class="stories">
+      <div class="story">
+        <span class="badge badge-teaser">Teaser</span>
+        <span class="story-title">Teaser infographie <em>macros</em></span>
+
+      </div>
+      <div class="story">
+        <span class="badge badge-coulisse">Coulisse</span>
+        <span class="story-title">Preparation sauce poivron maison</span>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="day-label">Vendredi<span class="date">20/03</span></div>
+    <div class="stories">
+      <div class="story">
+        <span class="badge badge-educatif">Educatif</span>
+        <span class="story-title"><em>53g</em> de proteines dans un burger</span>
+
+      </div>
+      <div class="story">
+        <span class="badge badge-lieu">Lieu</span>
+        <span class="story-title">Salle restaurant — <em>Chateau Roussillon</em></span>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="day-label">Samedi<span class="date">21/03</span></div>
+    <div class="stories">
+      <div class="story">
+        <span class="badge badge-teaser">Teaser</span>
+        <span class="story-title">Teaser post <em>Myfitcheese</em></span>
+
+      </div>
+      <div class="story">
+        <span class="badge badge-coulisse">Coulisse</span>
+        <span class="story-title">Livraison parmesan artisan</span>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="day-label">Dimanche<span class="date">22/03</span><span class="closed">ferme</span></div>
+    <div class="stories">
+      <div class="story">
+        <span class="badge badge-fiche">Fiche</span>
+        <span class="story-title">Fiche produit <em>STRICT Wrap Poulet</em> — 60g prot</span>
+
+      </div>
+      <div class="story">
+        <span class="badge badge-annonce">Annonce</span>
+        <span class="story-title">Teaser <em>wrap</em> — post demain</span>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="day-label">Lundi<span class="date">23/03</span><span class="closed">ferme</span></div>
+    <div class="stories">
+      <div class="story">
+        <span class="badge badge-teaser">Teaser</span>
+        <span class="story-title">Teaser post <em>STRICT Wrap Poulet</em></span>
+
+      </div>
+      <div class="story">
+        <span class="badge badge-recap">Recap</span>
+        <span class="story-title">Repost best-of de la semaine</span>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+</body>
+</html>

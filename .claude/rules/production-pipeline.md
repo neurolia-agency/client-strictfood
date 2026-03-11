@@ -81,21 +81,32 @@ Les posts `2026-03-10/` et `2026-03-12/` sont des posts v1 (pre-pipeline). Ne PA
 ```
 brief-story.md
     ↓
-[1] Lecture brief + Étape 1b (vérification bibliothèque)
+[1] Lecture brief + vérification photos existent
     ↓
-[2] Agent: story-data-mapper (Haiku)
+[2] Agent: story-data-mapper (Haiku) → story-NN-data.md
     ↓
 🔒 Validation opérateur
     ↓
-Template fill + Puppeteer render → story-NN.png (1080×1920)
+[3] Template fill + Puppeteer render → story-NN.png (1080×1920)
     ↓
-[Final] Génération document Demande Photos (si stories non automatisables)
+[Final] Génération document Demande Photos (si photos manquantes)
 ```
 
-### Types automatisables
+### Types de stories
 
-Fiche Produit, Teaser, Interactif, Éducatif, Annonce → templates HTML paramétrés dans `posts-stories/stories/_templates/`.
-Coulisse, Lieu, Ambiance → vérification bibliothèque (Étape 1b) : reclassables en Pipeline si photo disponible. CTA, Récap → captures terrain (Romain/Dorian).
+Toutes les stories sont produites par le pipeline (photos statiques, pas de vidéo). Seul le Recap est semi-manuel (repost par l'opérateur).
+
+| Type | Template | Pipeline |
+|------|----------|----------|
+| Fiche Produit | `fiche-produit.html` | Oui |
+| Teaser | `teaser-post.html` | Oui |
+| Interactif | `interactif.html` | Oui |
+| Éducatif | `educatif.html` | Oui |
+| Annonce | `annonce.html` | Oui |
+| Lieu / Ambiance | `annonce.html` | Oui |
+| Recap | — (repost) | Semi-manuel |
+
+> Si une photo manque dans la bibliothèque, le pipeline génère une entrée Demande Photos.
 
 ### Conventions stories
 

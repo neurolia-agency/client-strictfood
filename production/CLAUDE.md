@@ -123,6 +123,7 @@ posts-stories/posts/periode-1/S[n]/YYYY-MM-DD/
 
 | Domaine | Source |
 |---------|--------|
+| Strategie editoriale | `../strategie/strategie-globale.md` (piliers, planning, objectifs — consulter pour redaction briefs) |
 | Photos produits | `_config/photo-references.md` (descriptions texte, jamais d'images) |
 | Accessoires marque | `_config/brand-props.md` (BRAND_PRESENCE = 4/10) |
 | Configuration DA | `_config/pipeline.md` |
@@ -160,7 +161,7 @@ posts-stories/posts/periode-1/S[n]/YYYY-MM-DD/
 ```
 brief-story.md
     ↓
-[1] Lecture brief + Etape 1b (verification bibliotheque)
+[1] Lecture brief + verification photos existent
     ↓
 [2] Agent: story-data-mapper (Haiku) → story-NN-data.md
     ↓
@@ -168,20 +169,22 @@ brief-story.md
     ↓
 [3] Template fill + Puppeteer render → story-NN.html + story-NN.png/jpg
     ↓
-[Final] Generation document Demande Photos (si stories non automatisables)
+[Final] Generation document Demande Photos (si photos manquantes)
 ```
 
 ### Types de stories
 
-| Type | Template | Pipeline | Qui |
-|------|----------|----------|-----|
-| Fiche Produit | `fiche-produit.html` | Oui | Pipeline |
-| Teaser | `teaser-post.html` | Oui | Pipeline |
-| Interactif | `interactif.html` | Oui | Pipeline |
-| Educatif | `educatif.html` | Oui | Pipeline |
-| Annonce | `annonce.html` | Oui | Pipeline |
-| Coulisse / Lieu / Ambiance | — ou `annonce.html` | Partiel (verif bib — Etape 1b) | Pipeline ou Romain/Dorian |
-| CTA / Recap | — | Non | Romain/Dorian |
+| Type | Template | Pipeline |
+|------|----------|----------|
+| Fiche Produit | `fiche-produit.html` | Oui |
+| Teaser | `teaser-post.html` | Oui |
+| Interactif | `interactif.html` | Oui |
+| Educatif | `educatif.html` | Oui |
+| Annonce | `annonce.html` | Oui |
+| Lieu / Ambiance | `annonce.html` | Oui |
+| Recap | — (repost) | Semi-manuel (operateur) |
+
+> Toutes les stories sont produites par le pipeline (photos statiques uniquement, pas de video). Si une photo manque dans la bibliotheque, le pipeline genere une Demande Photos.
 
 ### Skills et agents du pipeline stories
 

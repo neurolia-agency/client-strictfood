@@ -3,13 +3,50 @@
 
 :root {
   --accent: #BF8522;
-  --accent-light: rgba(191, 133, 34, 0.7);
-  --accent-bg: rgba(191, 133, 34, 0.12);
-  --accent-border: rgba(191, 133, 34, 0.25);
+  --accent-rgb: 191,133,34;
+  --accent-light: rgba(var(--accent-rgb), 0.7);
+  --accent-bg: rgba(var(--accent-rgb), 0.12);
+  --accent-border: rgba(var(--accent-rgb), 0.25);
   --bg: #141210;
+  --bg-rgb: 20,18,16;
   --text-primary: #ffffff;
   --text-secondary: rgba(255,255,255,0.5);
   --text-muted: rgba(255,255,255,0.45);
+
+  /* Image visibility (overridden by .img-discret / .img-hero) */
+  --img-opacity: 0.60;
+  --img-brightness: 1.15;
+  --img-sepia: 0.12;
+  --img-saturate: 0.90;
+
+  /* Gradient strengths (overridden by moods if needed) */
+  --grad-top: 0.55;
+  --grad-bottom: 0.75;
+  --grad-left: 0.80;
+}
+
+/* ===== MOOD VARIANTS ===== */
+body.mood-grenat {
+  --accent: #A04035;
+  --accent-rgb: 160,64,53;
+  --bg: #1A1210;
+  --bg-rgb: 26,18,16;
+}
+
+body.mood-feuille {
+  --accent: #6B8A5E;
+  --accent-rgb: 107,138,94;
+  --bg: #121413;
+  --bg-rgb: 18,20,19;
+}
+
+/* ===== IMAGE VISIBILITY ===== */
+body.img-discret {
+  --img-opacity: 0.45;
+}
+
+body.img-hero {
+  --img-opacity: 0.75;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,7 +66,7 @@ body {
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 350px;
-  background: linear-gradient(to bottom, var(--bg) 0%, rgba(20,18,16,0.6) 55%, transparent 100%);
+  background: linear-gradient(to bottom, var(--bg) 0%, rgba(var(--bg-rgb),var(--grad-top)) 55%, transparent 100%);
   z-index: 3;
 }
 
@@ -37,7 +74,7 @@ body {
   position: absolute;
   bottom: 0; left: 0; right: 0;
   height: 380px;
-  background: linear-gradient(to top, var(--bg) 0%, rgba(20,18,16,0.8) 50%, transparent 100%);
+  background: linear-gradient(to top, var(--bg) 0%, rgba(var(--bg-rgb),var(--grad-bottom)) 50%, transparent 100%);
   z-index: 3;
 }
 
@@ -45,7 +82,7 @@ body {
   position: absolute;
   top: 0; bottom: 0; left: 0;
   width: 650px;
-  background: linear-gradient(to right, var(--bg) 0%, rgba(20,18,16,0.93) 50%, transparent 100%);
+  background: linear-gradient(to right, var(--bg) 0%, rgba(var(--bg-rgb),var(--grad-left)) 50%, transparent 100%);
   z-index: 3;
 }
 
@@ -122,6 +159,37 @@ body {
   color: rgba(255,255,255,0.85);
 }
 
+/* ===== TEXT ENHANCEMENT SYSTEM ===== */
+/* Identity markers — street food / dark premium branding.       */
+/* 2 marqueurs valides : mark-stamp + mark-tape.                 */
+
+/* --- Tape — bande inclinee derriere le texte, style etiquette collee --- */
+.mark-tape {
+  position: relative;
+  display: inline-block;
+  padding: 4px 22px;
+}
+.mark-tape::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -14px;
+  right: -14px;
+  bottom: -4px;
+  background: rgba(var(--accent-rgb), 0.14);
+  border-top: 4px solid rgba(var(--accent-rgb), 0.5);
+  border-bottom: 4px solid rgba(var(--accent-rgb), 0.5);
+  transform: rotate(1.5deg);
+  z-index: -1;
+}
+
+/* Text depth — multi-layer shadow for readability on any background */
+.text-depth {
+  text-shadow:
+    0 2px 6px rgba(0,0,0,0.5),
+    0 4px 16px rgba(0,0,0,0.2);
+}
+
 /* ===== ACCENT LINE ===== */
 .accent-line {
   position: absolute;
@@ -129,7 +197,7 @@ body {
   top: 280px;
   width: 4px;
   height: 900px;
-  background: linear-gradient(to bottom, transparent, rgba(191,133,34,0.3) 20%, rgba(191,133,34,0.15) 80%, transparent);
+  background: linear-gradient(to bottom, transparent, rgba(var(--accent-rgb),0.3) 20%, rgba(var(--accent-rgb),0.15) 80%, transparent);
   z-index: 5;
   border-radius: 2px;
 }
@@ -172,8 +240,8 @@ body {
   margin: 10px auto 0;
   width: 30px;
   height: 30px;
-  border-left: 2.5px solid rgba(191, 133, 34, 0.5);
-  border-top: 2.5px solid rgba(191, 133, 34, 0.5);
+  border-left: 2.5px solid rgba(var(--accent-rgb), 0.5);
+  border-top: 2.5px solid rgba(var(--accent-rgb), 0.5);
   transform: rotate(45deg);
 }
 
@@ -259,6 +327,13 @@ body {
 .macro-highlight .macro-value { color: var(--accent); }
 .macro-highlight .macro-label { color: var(--accent-light); }
 
+/*
+ * ===== COLOR HARMONIZATION =====
+ * Toutes les images story partagent le meme filtre warm pour
+ * s'harmoniser avec la DA Dark Food Premium (tons cuivre/charbon).
+ * Variables : --img-sepia, --img-saturate appliques a bg-image ET product-hero.
+ */
+
 /* ===== BACKGROUND IMAGE ===== */
 .bg-image {
   position: absolute;
@@ -268,16 +343,17 @@ body {
   height: 1100px;
   object-fit: cover;
   object-position: 75% 30%;
-  opacity: 0.4;
-  mask-image: linear-gradient(to left, rgba(0,0,0,1) 15%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 65%),
+  opacity: var(--img-opacity);
+  filter: brightness(var(--img-brightness)) sepia(var(--img-sepia)) saturate(var(--img-saturate));
+  mask-image: linear-gradient(to left, rgba(0,0,0,1) 15%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 65%),
               linear-gradient(to top, transparent 0%, rgba(0,0,0,1) 20%, rgba(0,0,0,1) 80%, rgba(0,0,0,0.5) 100%);
-  -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 15%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 65%),
+  -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 15%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 65%),
                       linear-gradient(to top, transparent 0%, rgba(0,0,0,1) 20%, rgba(0,0,0,1) 80%, rgba(0,0,0,0.5) 100%);
   mask-composite: intersect;
   -webkit-mask-composite: source-in;
 }
 
-/* ===== HERO IMAGE ===== */
+/* ===== HERO IMAGE (right-aligned, fiche-produit) ===== */
 .hero-image {
   position: absolute;
   bottom: 0;
@@ -287,5 +363,47 @@ body {
   object-fit: cover;
   object-position: 60% 35%;
   z-index: 5;
-  filter: drop-shadow(-30px -20px 60px rgba(0,0,0,0.5));
+  filter: drop-shadow(-30px -20px 60px rgba(0,0,0,0.5)) sepia(var(--img-sepia)) saturate(var(--img-saturate));
+}
+
+/* ===== PRODUCT HERO (centered bottom, dual-image pattern) ===== */
+.product-hero {
+  position: absolute;
+  bottom: -325px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1200px;
+  height: 1200px;
+  object-fit: contain;
+  object-position: center top;
+  z-index: 6;
+  filter: drop-shadow(0 -10px 40px rgba(0,0,0,0.5)) sepia(var(--img-sepia)) saturate(var(--img-saturate)) brightness(0.9);
+  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,1) 8%, rgba(0,0,0,1) 25%, rgba(0,0,0,0.5) 55%, transparent 78%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,1) 8%, rgba(0,0,0,1) 25%, rgba(0,0,0,0.5) 55%, transparent 78%);
+}
+
+/* ===== ZONE BLEND (transition between bg-image and product-hero) ===== */
+/* Gradient charbon + backdrop-blur pour fondre la jonction entre les deux images */
+.zone-blend {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 700px;
+  height: 500px;
+  z-index: 5;
+  background: linear-gradient(to bottom, transparent 0%, var(--bg) 30%, var(--bg) 70%, transparent 100%);
+}
+
+/* Couche de blur dans la zone de transition — adoucit les bords des deux images */
+.zone-blend::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
 }

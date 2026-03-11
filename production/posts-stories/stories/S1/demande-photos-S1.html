@@ -85,6 +85,28 @@
       padding: 32px 24px 64px;
     }
 
+    .empty-state {
+      text-align: center;
+      padding: 80px 24px;
+    }
+
+    .empty-state .icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .empty-state p {
+      font-size: 18px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .empty-state .note {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 16px;
+    }
+
     /* Day section */
     .day-section {
       margin-bottom: 40px;
@@ -139,6 +161,13 @@
       background: var(--accent);
       margin-right: 10px;
       vertical-align: middle;
+    }
+
+    .photo-card .context {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      font-style: italic;
     }
 
     /* Checklist */
@@ -240,102 +269,20 @@
   <div class="header">
     <div class="header-logo">Strict Food's</div>
     <h1>Photos a fournir</h1>
-    <div class="subtitle">Semaine du 10 mars au 15 mars 2026</div>
-    <div class="count">4 photos demandees</div>
+    <div class="subtitle">Semaine du 10 mars au 16 mars 2026</div>
+    <div class="count">0 photo demandee</div>
   </div>
 
   <div class="content">
-    <div class="day-section">
-      <div class="day-header">
-        <span class="day-name">Mardi</span>
-        <span class="day-date">11 mars</span>
-      </div>
-      <div class="photo-card">
-        <h3>Arrivage produits frais</h3>
-        <ul class="checklist">
-          <li>Video rapide des caisses de viande deballees a l'arrivage du matin</li>
-          <li>Telephone vertical</li>
-          <li>Gros plan sur les cagettes/cartons</li>
-          <li>Produits bruts visibles (viande crue)</li>
-          <li>Lumiere naturelle preferee</li>
-          <li>Moment : matin (avant service)</li>
-        </ul>
-        <div class="reference">
-          <div class="reference-label">Exemple</div>
-          <img src="file:///Users/dorian.gz/dev/Neurolia%20Agency/client-strictfood/public/contenu-instagram/2025-10-03_15-57-14_UTC_2.jpg" alt="Exemple">
-        </div>
-      </div>
-    </div>
-
-    <div class="day-section">
-      <div class="day-header">
-        <span class="day-name">Mercredi</span>
-        <span class="day-date">12 mars</span>
-      </div>
-      <div class="photo-card">
-        <h3>En cuisine pendant le service</h3>
-        <ul class="checklist">
-          <li>Plan rapide de l'assemblage d'un burger en cuisine pendant le service</li>
-          <li>Telephone vertical</li>
-          <li>Montrer les mains en action (assemblage)</li>
-          <li>Arriere-plan cuisine visible</li>
-          <li>Video 10-15 secondes max</li>
-          <li>Moment : service midi</li>
-        </ul>
-        <div class="reference">
-          <div class="reference-label">Exemple</div>
-          <img src="file:///Users/dorian.gz/dev/Neurolia%20Agency/client-strictfood/public/contenu-instagram/2025-10-03_15-57-14_UTC_3.jpg" alt="Exemple">
-        </div>
-      </div>
-    </div>
-
-    <div class="day-section">
-      <div class="day-header">
-        <span class="day-name">Vendredi</span>
-        <span class="day-date">14 mars</span>
-      </div>
-      <div class="photo-card">
-        <h3>Rush du vendredi midi</h3>
-        <ul class="checklist">
-          <li>Video rapide de l'ambiance service vendredi midi : commandes, assemblage, energie</li>
-          <li>Telephone vertical</li>
-          <li>Capturer le mouvement et l'energie</li>
-          <li>Montrer plusieurs commandes en cours</li>
-          <li>Video 10-15 secondes max</li>
-          <li>Moment : service midi (rush)</li>
-        </ul>
-        <div class="reference">
-          <div class="reference-label">Exemple</div>
-          <img src="file:///Users/dorian.gz/dev/Neurolia%20Agency/client-strictfood/public/contenu-instagram/2025-11-24_17-18-14_UTC.jpg" alt="Exemple">
-        </div>
-      </div>
-    </div>
-
-    <div class="day-section">
-      <div class="day-header">
-        <span class="day-name">Samedi</span>
-        <span class="day-date">15 mars</span>
-      </div>
-      <div class="photo-card">
-        <h3>Dernier service de la semaine</h3>
-        <ul class="checklist">
-          <li>Photo d'un plat avec texte "Dernier service de la semaine"</li>
-          <li>Telephone vertical</li>
-          <li>Plat fini bien presente</li>
-          <li>Cadrage serre sur le produit</li>
-          <li>Lumiere chaude du restaurant</li>
-          <li>Moment : service midi (samedi)</li>
-        </ul>
-        <div class="reference">
-          <div class="reference-label">Exemple</div>
-          <img src="file:///Users/dorian.gz/dev/Neurolia%20Agency/client-strictfood/public/contenu-instagram/2025-10-14_09-12-16_UTC_14.jpg" alt="Exemple">
-        </div>
-      </div>
+    <div class="empty-state">
+      <div class="icon">✅</div>
+      <p>Aucune photo supplementaire necessaire pour cette semaine.</p>
+      <p class="note">La bibliotheque photo couvre tous les besoins des stories S1.<br>Ce document sera mis a jour si de nouvelles stories necessitent des photos specifiques.</p>
     </div>
   </div>
 
   <div class="footer">
-    <p>Envoyez les photos a <strong>Joris</strong> au fil de la semaine,<br>idealement <strong>avant 15h</strong> le jour concerne.</p>
+    <p>Si vous avez des photos spontanees (cuisine, service, ambiance),<br>envoyez-les a <strong>Joris</strong> — elles enrichiront la bibliotheque.</p>
   </div>
 
 </body>
