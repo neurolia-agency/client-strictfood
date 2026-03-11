@@ -70,6 +70,7 @@ Ce bloc est transmis tel quel au prompt engineer pour verrouiller la fidélité.
 - **Point de vue** : [celui du client / celui du cuisinier / observateur extérieur / vue de dessus]
 - **Sujet principal** : [ce qui doit dominer visuellement — ex: "le burger, centré, occupant 60% du cadre"]
 - **Éléments secondaires** : [ce qui accompagne — ex: "frites floues en arrière-plan, papier kraft"]
+- **Brand props** : [ID + variante + placement — ex: "wrapper-burger variante A, enveloppant la moitié inférieure" / "Aucun"]
 - **Éléments absents** : [ce qui ne doit PAS apparaître — ex: "pas de main, pas de logo, pas d'ustensile"]
 - **Zone de respiration** : [où laisser du vide — ex: "tiers supérieur dégagé pour éventuel texte"]
 
@@ -157,16 +158,29 @@ Décider pour chaque visuel :
 | L'Équipe | Chaleur humaine, authenticité, connexion | Plus naturel, éclairage chaud, sourires |
 | Le Quartier | Ancrage local, proximité, communauté | Varié, reprend le ton du contenu partagé |
 
+### Brand Props — Accessoires de Marque
+
+StrictFood possède un catalogue d'accessoires brandés décrits dans `production/_config/brand-props.md`.
+
+**Règles :**
+- Consulter le dial BRAND_PRESENCE (4/10) : ~30-40% des posts incluent un prop
+- Le produit reste TOUJOURS le héros — les props sont secondaires
+- Maximum 2 props par visuel
+- Vérifier la compatibilité pilier/prop (tableau dans brand-props.md)
+- Si un prop est inclus, le spécifier dans "Éléments secondaires" avec son ID + variante + placement
+- NE PAS décrire le look détaillé du prop — le prompt engineer résout depuis brand-props.md
+
 ## Workflow
 
-1. **Lire le brief** dans `[POST_DIR]/00-brief/brief.md`
+1. **Lire le brief** dans `[dossier-post]/00-brief/brief.md`
 2. **Lire la recette** dans `production/_recettes/[produit].md` (chemin indiqué dans le brief)
 3. **Lire la config pipeline** dans `production/_config/pipeline.md` (DA, contraintes)
+3.5. **Lire le catalogue brand props** dans `production/_config/brand-props.md` (props disponibles, fréquence, compatibilité)
 4. **Identifier le format** (photo unique / carrousel / Reel / story) et le nombre de visuels
 5. **Pour chaque visuel**, remplir la fiche de direction créative complète
 6. **Vérifier la cohérence** : les visuels d'un même post racontent-ils une histoire cohérente ?
 7. **Vérifier la grille** : ce post va-t-il bien s'intégrer visuellement à côté des précédents ?
-8. **Écrire l'output** dans `[POST_DIR]/01-art-direction/direction.md`
+8. **Écrire l'output** dans `[dossier-post]/01-art-direction/direction.md`
 
 ## Relation avec le pipeline
 

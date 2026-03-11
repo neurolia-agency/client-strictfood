@@ -25,7 +25,7 @@ Comment produire un post Instagram de A à Z. Tes interventions sont marquées `
 ### 👤 TOI — Créer le dossier et le brief
 
 ```bash
-mkdir -p production/posts-stories/posts/periode-1/SX/YYYY-MM-DD/00-brief
+mkdir -p production/post-stories/posts/periode-[N]/S[X]/YYYY-MM-DD/00-brief
 ```
 
 Copier le template `_templates/brief-v2.md` dans `00-brief/brief.md` et remplir :
@@ -102,7 +102,7 @@ Recette : production/_recettes/strict-boeuf.md
 Après ta validation, Claude produit le prompt et t'affiche la commande prête :
 
 ```bash
-uv run ~/.claude/skills/nano-banana-pro/scripts/generate_image.py \
+uv run production/.claude/skills/nano-banana-pro/scripts/generate_image.py \
   --prompt "Premium dark food photography of a gourmet artisan burger..." \
   --filename "2026-03-15-strict-boeuf-hero-4x5.png" \
   --input-image "public/images/photos-references/dark-bg/burger-simple-boeuf-dark-bg-2.png" \
@@ -118,7 +118,7 @@ uv run ~/.claude/skills/nano-banana-pro/scripts/generate_image.py \
 | `Montre-moi le prompt d'abord` | Claude affiche le prompt complet avant de lancer |
 | `Ajuste le prompt : [modification]` | Claude modifie et te re-propose |
 
-Le visuel final atterrit dans `[POST_DIR]/03-output/`.
+Le visuel final atterrit dans `[dossier-post]/03-output/`.
 
 ---
 

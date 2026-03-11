@@ -2,33 +2,15 @@
 
 > S'applique quand on travaille dans `production/`
 
-## Arborescence
+## Commande principale
 
 ```
-production/
-  _config/              ← Config partagée (DA, photos, pipeline)
-  _recettes/            ← Fiches produit
-  _templates/           ← Templates brief (post + story)
-  .claude/skills/       ← Skills du pipeline (orchestrateurs, DA, prompt, generation)
-  .claude/agents/       ← Agent input-mapper
-  posts-stories/
-    posts/periode-X/SX/YYYY-MM-DD/   ← Posts Instagram (pipeline IA)
-    stories/SX/[jour]/                ← Stories Instagram (pipeline template)
-    stories/_templates/               ← Templates HTML paramétrés
-    stories/_scripts/                 ← Puppeteer render
-```
-
-## Pipeline Posts
-
-### Commande principale
-
-```
-/instagram-producer S1 2026-03-15
+/instagram-producer YYYY-MM-DD
 ```
 
 L'orchestrateur enchaîne TOUTES les étapes automatiquement. Toujours préférer l'orchestrateur aux commandes manuelles.
 
-### Flux séquentiel
+## Flux séquentiel (exécuté par l'orchestrateur)
 
 ```
 00-brief/brief.md
@@ -44,7 +26,7 @@ Skill: /image-prompt-engineer en Mode B (obligatoire)
 Nanobanana Pro / GPT Images
 ```
 
-### Skills et agents obligatoires
+## Skills et agents obligatoires
 
 | Étape | Outil | Invocation |
 |-------|-------|------------|
@@ -53,7 +35,7 @@ Nanobanana Pro / GPT Images
 | Input Mapping | Agent | `production/.claude/agents/input-mapper.md` — modèle Haiku |
 | Prompt Engineering | Skill | `/image-prompt-engineer` en Mode B — NE PAS écrire le prompt à la main |
 
-### Séparation des responsabilités
+## Séparation des responsabilités
 
 | Agent | Brief | Docs DA | Recettes | Photos | Direction créative |
 |-------|-------|---------|----------|--------|--------------------|
@@ -61,10 +43,13 @@ Nanobanana Pro / GPT Images
 | Input Mapper | ❌ | ❌ | ✅ | ✅ (descriptions) | ✅ (lit) |
 | Prompt Engineer | ❌ | ❌ | ✅ | ✅ | ✅ |
 
-### Conventions posts
+- L'art director lit les recettes pour les formes exactes des ingrédients, mais NE voit PAS les photos
+- L'input mapper NE voit PAS le brief — il lit seulement la direction créative pour identifier les produits
+- Le prompt engineer reçoit tout via input.md + direction.md
 
-- **Dossiers** : `posts-stories/posts/periode-X/SX/YYYY-MM-DD/`
-- **Dates** : format ISO `YYYY-MM-DD`
+## Conventions
+
+- **Dates** : format ISO `YYYY-MM-DD` pour les dossiers post
 - **Recettes** : slug kebab-case (`strict-boeuf.md`, `strict-max-poulet.md`)
 - **Photos** : mapping centralisé dans `_config/photo-references.md` — jamais dans le brief, jamais dans la direction
 - **Le brief ne contient PAS de liens vers photos/recettes** — c'est l'input mapper qui résout
@@ -72,7 +57,11 @@ Nanobanana Pro / GPT Images
 - **Résolution** : toujours 4K
 - **API key** : `$GEMINI_API_KEY` (variable d'environnement), jamais en dur
 
-### Posts v1
+## Structure des posts
+
+Les posts sont organisés dans `production/posts-stories/posts/periode-[N]/S[X]/YYYY-MM-DD/`.
+
+## Posts v1
 
 Les posts `2026-03-10/` et `2026-03-12/` sont des posts v1 (pre-pipeline). Ne PAS les utiliser comme template.
 
@@ -92,11 +81,15 @@ Les posts `2026-03-10/` et `2026-03-12/` sont des posts v1 (pre-pipeline). Ne PA
 ```
 brief-story.md
     ↓
-Agent: story-data-mapper (Haiku)
+[1] Lecture brief + Étape 1b (vérification bibliothèque)
+    ↓
+[2] Agent: story-data-mapper (Haiku)
     ↓
 🔒 Validation opérateur
     ↓
 Template fill + Puppeteer render → story-NN.png (1080×1920)
+    ↓
+[Final] Génération document Demande Photos (si stories non automatisables)
 ```
 
 ### Types automatisables

@@ -2,88 +2,147 @@
 
 Pipeline de production de visuels pour le compte @strictfood.
 
-## Commande principale — Posts
+## Commande principale
 
 ```
-/instagram-producer S1 2026-03-15
+/instagram-producer YYYY-MM-DD
 ```
 
-L'orchestrateur enchaine toutes les etapes automatiquement. Toujours preferer l'orchestrateur aux commandes manuelles.
+**ALWAYS** utiliser l'orchestrateur. **NEVER** ecrire direction/prompt a la main.
 
-## Pipeline Posts — Flux sequentiel
+## Pipeline — Flux sequentiel
 
 ```
-00-brief/brief.md
-    |
-    v
+00-brief/brief.md           ← Operateur (template: _templates/brief-v2.md)
+    ↓
 [1] /social-media-art-director  →  01-art-direction/direction.md
-    |
-    v
+    ↓
 [2] Agent: input-mapper          →  00-input/input.md
-    |
-    v
- CHECKPOINT — Validation operateur
-    |
-    v
-[3] /image-prompt-engineer        →  02-prompt/prompt.md
-    |
-    v
-[4] /nano-banana-pro              →  03-output/*.png
+    ↓
+ 🔒 CHECKPOINT — Validation operateur
+    ↓
+[3] /image-prompt-engineer       →  02-prompt/prompt.md
+    ↓
+[4] /nano-banana-pro             →  03-output/*.png (4K)
 ```
-
-## Skills et agents du pipeline posts
-
-### Skills
-
-| Etape | Skill | Emplacement | Invocation |
-|-------|-------|-------------|------------|
-| Orchestration | `instagram-producer` | `production/.claude/skills/instagram-producer/` | `/instagram-producer S1 YYYY-MM-DD` |
-| Art Direction | `social-media-art-director` | `production/.claude/skills/social-media-art-director/` | `/social-media-art-director` |
-| Prompt Engineering | `image-prompt-engineer` | `production/.claude/skills/image-prompt-engineer/` | `/image-prompt-engineer` (Mode B) |
-| Generation image | `nano-banana-pro` | `production/.claude/skills/nano-banana-pro/` | `/nano-banana-pro --resolution 4K` |
-
-### Agent
-
-| Etape | Agent | Modele | Emplacement | Outils |
-|-------|-------|--------|-------------|--------|
-| Input Mapping | `input-mapper` | Haiku | `production/.claude/agents/input-mapper.md` | Read, Glob, Grep, Write |
 
 ## Separation des responsabilites
 
 | Etape | Voit | Ne voit PAS |
 |-------|------|-------------|
-| Art Director (skill) | Brief, Recette (formes), DA | Photos |
-| Input Mapper (agent) | Direction creative, Photos (descriptions), Recettes | Brief |
-| Prompt Engineer (skill) | Direction + Input (tout) | Brief original |
+| Art Director | Brief, Recette (formes), DA config | Photos |
+| Input Mapper | Direction creative, Photos (descriptions), Recettes | Brief |
+| Prompt Engineer | Direction + Input (tout) | Brief original |
+
+## Skills & Agents
+
+| Etape | Outil | Type | Modele | Invocation |
+|-------|-------|------|--------|------------|
+| Orchestration | `instagram-producer` | Skill | — | `/instagram-producer YYYY-MM-DD` |
+| Art Direction | `social-media-art-director` | Skill | — | `/social-media-art-director` |
+| Input Mapping | `input-mapper` | Agent | Haiku | Auto (via orchestrateur) |
+| Prompt | `image-prompt-engineer` | Skill | — | `/image-prompt-engineer` (Mode B) |
+| Generation | `nano-banana-pro` | Skill | Gemini 3 Pro | `/nano-banana-pro --resolution 4K` |
+
+## Architecture
+
+```
+production/
+├── CLAUDE.md                  # Ce fichier
+├── idees-posts.md             # Idees de posts futurs
+│
+├── _config/                   # Configuration partagee
+│   ├── pipeline.md            # DA, agents, modeles, resolution
+│   ├── photo-references.md    # Mapping produit → photos (descriptions texte)
+│   └── brand-props.md         # Catalogue accessoires marque (wrapper, cup, etc.)
+│
+├── _recettes/                 # Fiches produit (8 fiches, slug kebab-case)
+│
+├── _templates/                # Templates operateur
+│   ├── brief-v2.md            # Template brief standard
+│   ├── brief-story.md         # Template brief story
+│   ├── guide-operateur.md     # Guide pas-a-pas complet
+│   └── sublimation-burger.md  # Template carousel sublimation
+│
+├── .claude/
+│   ├── agents/
+│   │   └── input-mapper.md    # Mappe produit → photos + recettes
+│   └── skills/
+│       ├── instagram-producer/       # Orchestrateur posts
+│       ├── story-producer/           # Orchestrateur stories
+│       ├── social-media-art-director/ # Direction creative
+│       ├── image-prompt-engineer/     # Prompts (+ references/)
+│       └── nano-banana-pro/           # Generation image (+ scripts/)
+│
+└── posts-stories/             # Output production
+    ├── posts/
+    │   └── periode-1/
+    │       ├── S1/            # Semaine 1
+    │       │   └── YYYY-MM-DD/
+    │       └── S2/            # Semaine 2
+    │           └── YYYY-MM-DD/
+    └── stories/
+        ├── _templates/        # Templates HTML parametres (5 types + demande-photos)
+        ├── _scripts/          # Puppeteer render (1080x1920)
+        ├── S1/{lundi..samedi}/ # Briefs + output stories
+        └── S2/{lundi..dimanche}/
+```
 
 ## Structure d'un post
 
 ```
-production/posts-stories/posts/periode-1/S1/YYYY-MM-DD/
-  00-brief/brief.md         ← Brief operateur (template: _templates/brief-v2.md)
-  00-input/input.md          ← Genere par input-mapper
-  01-art-direction/direction.md  ← Genere par /social-media-art-director
-  02-prompt/prompt.md        ← Genere par /image-prompt-engineer
-  03-output/*.png            ← Genere par /nano-banana-pro (4K)
+posts-stories/posts/periode-1/S[n]/YYYY-MM-DD/
+├── 00-brief/brief.md              ← Operateur
+├── 00-input/input.md              ← input-mapper (auto)
+├── 01-art-direction/direction.md  ← /social-media-art-director (auto)
+├── 02-prompt/prompt.md            ← /image-prompt-engineer (auto)
+└── 03-output/*.png                ← /nano-banana-pro (4K)
 ```
 
-## Ressources partagees
+## Statut Posts — Periode 1
 
-| Dossier | Contenu |
-|---------|---------|
-| `_config/pipeline.md` | Configuration DA du pipeline |
-| `_config/photo-references.md` | Mapping centralise produit → photo |
-| `_recettes/` | Fiches recettes par produit (slug kebab-case) |
-| `_templates/brief-v2.md` | Template de brief post |
-| `_templates/brief-story.md` | Template de brief story |
+### S1
 
-## Regles
+| Date | Brief | Direction | Input | Prompt | Output | Note |
+|------|-------|-----------|-------|--------|--------|------|
+| 2026-03-10 | ✅ | ✅ | ✅ | ✅ | ✅ 3 PNG | v1 (pre-pipeline) |
+| 2026-03-12 | ✅ | ✅ | ✅ | ⬜ | ⬜ | |
+| 2026-03-14 | ✅ | ✅ | ✅ | ✅ | ✅ 1 PNG | |
+| 2026-03-16 | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | |
+
+### S2
+
+| Date | Brief | Direction | Input | Prompt | Output | Note |
+|------|-------|-----------|-------|--------|--------|------|
+| 2026-03-17 | ✅ | ✅ | ✅ | ✅ | ⬜ | |
+| 2026-03-19 | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | |
+| 2026-03-21 | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | |
+| 2026-03-23 | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | |
+
+## Sources de verite
+
+| Domaine | Source |
+|---------|--------|
+| Photos produits | `_config/photo-references.md` (descriptions texte, jamais d'images) |
+| Accessoires marque | `_config/brand-props.md` (BRAND_PRESENCE = 4/10) |
+| Configuration DA | `_config/pipeline.md` |
+| Recettes | `_recettes/[slug].md` (formes exactes ingredients + fournisseurs) |
+| Template brief post | `_templates/brief-v2.md` |
+| Template brief story | `_templates/brief-story.md` |
+| Guide operateur | `_templates/guide-operateur.md` |
+| Photos fichiers | `../public/images/photos-references/` (dark-bg, produits-source, contexte) |
+| Tokens CSS | `../app/globals.css` |
+
+## Regles Posts
 
 - **Dates** : format ISO `YYYY-MM-DD` pour les dossiers post
-- **Resolution** : toujours 4K en production
-- **API key** : `$GEMINI_API_KEY` (variable d'environnement, jamais en dur)
-- **Le brief ne contient PAS de liens vers photos/recettes** — c'est l'input mapper qui resout
-- **Ne JAMAIS ecrire direction/prompt a la main** — toujours via les skills dedies
+- **Resolution** : **ALWAYS** 4K, jamais de draft
+- **API key** : `$GEMINI_API_KEY` (variable d'environnement, **NEVER** en dur)
+- **Brief** : ne contient PAS de liens vers photos/recettes — l'input mapper resout
+- **Modele** : Gemini (photo sans texte) / GPT Images (texte on-image)
+- **Brand props** : max 2 par visuel, produit toujours hero (60-70% attention)
+- **Rotation** : l'input mapper alterne les variantes photo pour eviter la repetition
+- **Posts v1** : `2026-03-10/` et `2026-03-12/` sont pre-pipeline — ne PAS utiliser comme template
 
 ---
 
@@ -100,18 +159,17 @@ production/posts-stories/posts/periode-1/S1/YYYY-MM-DD/
 
 ```
 brief-story.md
-    |
-    v
-[1] Agent: story-data-mapper    →  story-NN-data.md  (si donnees produit)
-    |
-    v
- CHECKPOINT — Validation operateur
-    |
-    v
-[2] Template fill + render       →  story-NN.html + story-NN.png/jpg
+    ↓
+[1] Lecture brief + Etape 1b (verification bibliotheque)
+    ↓
+[2] Agent: story-data-mapper (Haiku) → story-NN-data.md
+    ↓
+ 🔒 Validation operateur
+    ↓
+[3] Template fill + Puppeteer render → story-NN.html + story-NN.png/jpg
+    ↓
+[Final] Generation document Demande Photos (si stories non automatisables)
 ```
-
-Pipeline plus leger que les posts : pas d'art direction ni de generation IA. Les stories utilisent des **templates HTML parametres** rendus en PNG via Puppeteer.
 
 ### Types de stories
 
@@ -122,8 +180,8 @@ Pipeline plus leger que les posts : pas d'art direction ni de generation IA. Les
 | Interactif | `interactif.html` | Oui | Pipeline |
 | Educatif | `educatif.html` | Oui | Pipeline |
 | Annonce | `annonce.html` | Oui | Pipeline |
-| Coulisse / Lieu / Ambiance | — ou `annonce.html` | Partiel (vérif bib — Étape 1b) | Pipeline ou Romain/Dorian |
-| CTA / Récap | — | Non | Romain/Dorian |
+| Coulisse / Lieu / Ambiance | — ou `annonce.html` | Partiel (verif bib — Etape 1b) | Pipeline ou Romain/Dorian |
+| CTA / Recap | — | Non | Romain/Dorian |
 
 ### Skills et agents du pipeline stories
 
@@ -131,46 +189,6 @@ Pipeline plus leger que les posts : pas d'art direction ni de generation IA. Les
 |-------|-------|-------------|
 | Orchestration | Skill `story-producer` | `production/.claude/skills/story-producer/` |
 | Data Mapping | Agent `story-data-mapper` (Haiku) | `production/posts-stories/stories/.claude/agents/story-data-mapper.md` |
-| Templates HTML | 5 templates parametres | `production/posts-stories/stories/_templates/` |
+| Templates HTML | 5 templates parametres + demande-photos | `production/posts-stories/stories/_templates/` |
 | CSS partage | Base + logo | `production/posts-stories/stories/_templates/_base/` |
 | Rendu | Script Puppeteer | `production/posts-stories/stories/_scripts/render-story.js` |
-
-### Structure d'un jour (multi-story)
-
-```
-production/posts-stories/stories/S1/lundi/
-  brief-story.md            ← Brief operateur (toutes les stories du jour)
-  story-01-data.md          ← Donnees Story 1
-  story-01.html             ← Template rempli Story 1
-  story-01.png / .jpg       ← Rendu final Story 1 (1080x1920)
-  story-03-data.md          ← Donnees Story 3 (la 2 est capture terrain)
-  story-03.html / .png / .jpg
-```
-
-### Ressources stories
-
-| Dossier | Contenu |
-|---------|---------|
-| `posts-stories/stories/_templates/` | 5 templates HTML parametres |
-| `posts-stories/stories/_templates/_base/` | CSS partage + logo SVG |
-| `posts-stories/stories/_scripts/render-story.js` | Rendu Puppeteer 1080x1920 |
-| `_templates/brief-story.md` | Template de brief story |
-| `_recettes/` | Fiches recettes (source de donnees pour story-data-mapper) |
-
----
-
-## Arborescence posts-stories
-
-```
-production/posts-stories/
-  posts/
-    periode-1/S1/YYYY-MM-DD/...   ← Posts Instagram (pipeline IA)
-    periode-1/S2/YYYY-MM-DD/...
-    periode-2/S5-S8/...
-    periode-3/S9-S12/...
-  stories/
-    _templates/                     ← Templates HTML parametres
-    _scripts/                       ← Puppeteer render
-    S1/{lundi..samedi}/             ← Briefs + output stories
-    S2/{lundi..dimanche}/
-```

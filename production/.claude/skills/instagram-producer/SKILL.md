@@ -15,19 +15,20 @@ Tu es l'orchestrateur du pipeline de production de visuels Instagram StrictFood.
 ## Input
 
 L'opérateur fournit :
-- Un **chemin complet** : `posts-stories/posts/periode-1/S1/2026-03-15/`
-- Ou un **raccourci** : `S1 2026-03-15` (résolu en `production/posts-stories/posts/periode-1/S1/2026-03-15/`)
+- Un **chemin complet** (ex: `production/posts-stories/posts/periode-1/S2/2026-03-19/`)
+- OU une **date seule** (ex: `2026-03-19`)
 
-Résolution du raccourci : `production/posts-stories/posts/periode-1/[SEMAINE]/YYYY-MM-DD/` (periode-1 par défaut sauf indication contraire).
+**Résolution du chemin** : si seule une date est fournie, chercher le dossier existant via `production/posts-stories/posts/**/YYYY-MM-DD/`. Si aucun dossier trouvé, demander à l'opérateur dans quelle période/semaine le créer.
 
 ## Exécution séquentielle — RESPECTER CET ORDRE EXACT
 
 ### ÉTAPE 0 — Vérification
 
-1. Lire `[POST_DIR]/00-brief/brief.md`
-2. Vérifier que le brief existe et contient au minimum : Pilier, Format, Objectif, Produit, Caption
-3. Vérifier qu'il ne contient PAS de lien direct vers une photo (violation v2)
-4. Si le brief n'existe pas → STOP, demander à l'opérateur de créer le brief d'abord (template : `production/_templates/brief-v2.md`)
+1. **Résoudre le chemin** : à partir de l'input (chemin complet ou date), déterminer `[dossier-post]`
+2. Lire `[dossier-post]/00-brief/brief.md`
+3. Vérifier que le brief existe et contient au minimum : Pilier, Format, Objectif, Produit, Caption
+4. Vérifier qu'il ne contient PAS de lien direct vers une photo (violation v2)
+5. Si le brief n'existe pas → STOP, demander à l'opérateur de créer le brief d'abord (template : `production/_templates/brief-v2.md`)
 
 **Si OK → passer automatiquement à l'étape 1.**
 
@@ -41,7 +42,7 @@ Résolution du raccourci : `production/posts-stories/posts/periode-1/[SEMAINE]/Y
    Skill: social-media-art-director
    ```
    Passer en contexte : le brief + la recette + la config DA.
-   L'output DOIT être écrit dans `[POST_DIR]/01-art-direction/direction.md`
+   L'output DOIT être écrit dans `[dossier-post]/01-art-direction/direction.md`
 5. Après écriture de `direction.md`, afficher un résumé à l'opérateur :
    - Produit(s) verrouillé(s)
    - Angle / Éclairage / Mood choisis
@@ -56,7 +57,7 @@ Résolution du raccourci : `production/posts-stories/posts/periode-1/[SEMAINE]/Y
 1. **SPAWNER L'AGENT** via le Agent tool :
    ```
    Agent: input-mapper
-   Prompt: "Exécute le mapping pour [POST_DIR]/"
+   Prompt: "Exécute le mapping pour [dossier-post]"
    ```
    L'agent lit `direction.md`, consulte `_config/photo-references.md` et `_recettes/`, et écrit `00-input/input.md`.
 2. Après écriture de `input.md`, afficher le mapping à l'opérateur :
@@ -65,17 +66,6 @@ Résolution du raccourci : `production/posts-stories/posts/periode-1/[SEMAINE]/Y
    - Éventuels PLACEHOLDER ou RECETTE MANQUANTE
 
 **⚠️ INTERDIT** : Ne JAMAIS résoudre les liens produit→photo manuellement. L'agent DOIT être spawné.
-
-### ÉTAPE 2.5 — Validation des chemins photos (automatique)
-
-Après que l'input-mapper a écrit `input.md`, **vérifier automatiquement** que chaque chemin photo référencé existe :
-
-1. Extraire tous les chemins de photos depuis `input.md` (lignes contenant `public/`)
-2. Pour chaque chemin, vérifier l'existence du fichier via Glob
-3. Si un fichier n'existe pas :
-   - Chercher un fichier au nom similaire dans le même dossier
-   - Si trouvé, proposer la correction à l'opérateur
-   - Si introuvable, marquer `❌ FICHIER INTROUVABLE` dans le checkpoint
 
 ### 🔒 CHECKPOINT — Validation opérateur
 
@@ -87,7 +77,6 @@ Après que l'input-mapper a écrit `input.md`, **vérifier automatiquement** que
 Produit : [nom]
 Photo sélectionnée : [chemin] — [justification]
 Recette : [chemin]
-Validation fichiers : ✅ tous les fichiers existent / ❌ fichier(s) manquant(s)
 
 ✅ Valider et continuer vers le prompt engineering ?
 ✏️ Modifier (préciser quoi) ?
@@ -97,14 +86,14 @@ Validation fichiers : ✅ tous les fichiers existent / ❌ fichier(s) manquant(s
 
 ### ÉTAPE 3 — Prompt Engineering (skill obligatoire)
 
-1. Lire `[POST_DIR]/01-art-direction/direction.md`
-2. Lire `[POST_DIR]/00-input/input.md`
+1. Lire `[dossier-post]/01-art-direction/direction.md`
+2. Lire `[dossier-post]/00-input/input.md`
 3. **APPELER LE SKILL** via le Skill tool :
    ```
    Skill: image-prompt-engineer
    ```
    Passer en contexte : la direction créative + l'input mapping. Le skill détecte automatiquement le Mode B.
-   L'output DOIT être écrit dans `[POST_DIR]/02-prompt/prompt.md`
+   L'output DOIT être écrit dans `[dossier-post]/02-prompt/prompt.md`
 4. Après écriture de `prompt.md`, afficher un résumé :
    - Modèle choisi (Gemini / GPT Images) et pourquoi
    - Nombre de prompts générés
