@@ -33,17 +33,18 @@ production/
 ├── _config/
 │   ├── pipeline.md               # Configuration générale (DA, stratégie, résolution, modèles)
 │   └── photo-references.md       # Mapping centralisé produit → photos + descriptions textuelles
-├── YYYY-MM-DD/                   # Un dossier par post, nommé par date de publication
-│   ├── 00-brief/
-│   │   └── brief.md              # Brief stratégique (pilier, objectif, message, caption)
-│   ├── 01-art-direction/
-│   │   └── direction.md          # Direction créative (composition, éclairage, mood, produits verrouillés)
-│   ├── 00-input/
-│   │   └── input.md              # Mapping produit → recette + photo (généré par input-mapper)
-│   ├── 02-prompt/
-│   │   └── prompt.md             # Prompt Nanobanana/GPT (output prompt engineer)
-│   └── 03-output/
-│       └── [visuels finaux]      # Images générées
+├── posts-stories/
+│   ├── posts/
+│   │   └── periode-X/SX/YYYY-MM-DD/  # Un dossier par post
+│   │       ├── 00-brief/brief.md      # Brief stratégique
+│   │       ├── 01-art-direction/direction.md
+│   │       ├── 00-input/input.md      # Mapping produit → recette + photo
+│   │       ├── 02-prompt/prompt.md    # Prompt Nanobanana/GPT
+│   │       └── 03-output/*.png        # Visuels générés
+│   └── stories/
+│       ├── _templates/                # 5 templates HTML paramétrés
+│       ├── _scripts/render-story.js   # Rendu Puppeteer 1080×1920
+│       └── SX/[jour]/                 # brief-story.md + story-NN.html/png
 ```
 
 ## Flux séquentiel
@@ -75,7 +76,7 @@ Output → 03-output/
 
 ```bash
 # Pipeline complet — une seule commande
-/instagram-producer 2026-03-15
+/instagram-producer S1 2026-03-15
 
 # L'orchestrateur enchaîne automatiquement :
 # 1. Vérifie le brief
@@ -90,17 +91,18 @@ Output → 03-output/
 
 ```bash
 # Étape 1 — Brief → Art Direction
-"Lis production/YYYY-MM-DD/00-brief/brief.md puis exécute le skill social-media-art-director.
+"Lis [POST_DIR]/00-brief/brief.md puis exécute le skill social-media-art-director.
 Écris l'output dans 01-art-direction/direction.md"
 
 # Étape 1bis — Art Direction → Input Mapping (automatique)
-"Exécute l'agent input-mapper sur production/YYYY-MM-DD/"
+"Exécute l'agent input-mapper sur [POST_DIR]/"
 
 # Étape 2 — Direction + Input → Prompt
-"Lis production/YYYY-MM-DD/01-art-direction/direction.md et 00-input/input.md.
+"Lis [POST_DIR]/01-art-direction/direction.md et 00-input/input.md.
 Exécute le skill image-prompt-engineer en Mode B.
 Écris l'output dans 02-prompt/prompt.md"
 
+# [POST_DIR] = posts-stories/posts/periode-X/SX/YYYY-MM-DD
 # Le prompt est ensuite copié dans Nanobanana/GPT Images avec la photo référence
 ```
 

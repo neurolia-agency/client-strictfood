@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080">
+  <title>Story Teaser — {{TEASER_HOOK}}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Oswald:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_base/base.css">
+  <style>
+    .teaser-bg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.25;
+      filter: blur(20px) saturate(0.6);
+    }
+
+    .gradient-center {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at center, rgba(20,18,16,0.3) 0%, rgba(20,18,16,0.95) 70%);
+      z-index: 3;
+    }
+
+    .content {
+      padding: 0 80px;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .teaser-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 26px;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      letter-spacing: 8px;
+      margin-bottom: 50px;
+    }
+
+    .teaser-hook {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 80px;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 50px;
+      text-transform: uppercase;
+    }
+
+    .teaser-hook em {
+      color: #BF8522;
+      font-style: normal;
+    }
+
+    .teaser-date {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 36px;
+      font-weight: 600;
+      color: #BF8522;
+      letter-spacing: 4px;
+      margin-bottom: 30px;
+    }
+
+    .teaser-subtext {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 30px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.5;
+      max-width: 700px;
+    }
+
+    .divider {
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(to right, transparent, #BF8522, transparent);
+      margin: 40px auto;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Optional blurred background image -->
+  <img class="teaser-bg" src="{{BG_IMAGE_PATH}}" alt="">
+
+  <!-- Gradient overlay -->
+  <div class="gradient-center"></div>
+
+  <!-- Main content -->
+  <div class="content">
+
+    <!-- Logo -->
+    <div class="logo-container" style="margin-bottom: 80px;">
+      <img src="_base/logo.svg" alt="STRICT FOOD'S">
+    </div>
+
+    <div class="teaser-label">Bientot</div>
+
+    <div class="teaser-hook">{{TEASER_HOOK}}</div>
+
+    <div class="divider"></div>
+
+    <div class="teaser-date">{{TEASER_DATE}}</div>
+
+    <div class="teaser-subtext">{{TEASER_SUBTEXT}}</div>
+
+  </div>
+
+  <!-- Bottom -->
+  <div class="bottom-section">
+    <div class="swipe-up">
+      Reste connecte
+      <span class="arrow"></span>
+    </div>
+  </div>
+
+</body>
+</html>

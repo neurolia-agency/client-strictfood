@@ -25,7 +25,7 @@ Comment produire un post Instagram de A à Z. Tes interventions sont marquées `
 ### 👤 TOI — Créer le dossier et le brief
 
 ```bash
-mkdir -p production/YYYY-MM-DD/00-brief
+mkdir -p production/posts-stories/posts/periode-1/SX/YYYY-MM-DD/00-brief
 ```
 
 Copier le template `_templates/brief-v2.md` dans `00-brief/brief.md` et remplir :
@@ -118,7 +118,7 @@ uv run ~/.claude/skills/nano-banana-pro/scripts/generate_image.py \
 | `Montre-moi le prompt d'abord` | Claude affiche le prompt complet avant de lancer |
 | `Ajuste le prompt : [modification]` | Claude modifie et te re-propose |
 
-Le visuel final atterrit dans `production/YYYY-MM-DD/03-output/`.
+Le visuel final atterrit dans `[POST_DIR]/03-output/`.
 
 ---
 

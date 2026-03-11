@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080">
+  <title>Story Interactive — {{QUESTION}}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Oswald:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_base/base.css">
+  <style>
+    .content {
+      padding: 200px 70px 0;
+      align-items: flex-start;
+    }
+
+    .question-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 24px;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      margin-bottom: 30px;
+    }
+
+    .question-text {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 72px;
+      color: #fff;
+      line-height: 1.15;
+      text-transform: uppercase;
+      margin-bottom: 60px;
+      max-width: 900px;
+    }
+
+    .question-text em {
+      color: #BF8522;
+      font-style: normal;
+    }
+
+    /* Zone reservee au sticker Instagram */
+    .sticker-zone {
+      width: 900px;
+      height: 300px;
+      border: 3px dashed rgba(191,133,34,0.3);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 60px;
+    }
+
+    .sticker-zone-text {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 24px;
+      color: rgba(255,255,255,0.25);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+    }
+
+    .option-preview {
+      display: flex;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .option-card {
+      flex: 1;
+      padding: 35px 30px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.05);
+      border: 2px solid rgba(255,255,255,0.1);
+      text-align: center;
+    }
+
+    .option-card .emoji {
+      font-size: 60px;
+      margin-bottom: 15px;
+    }
+
+    .option-card .option-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 30px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .hero-image {
+      width: 800px;
+      height: 600px;
+      right: 140px;
+      bottom: 200px;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Optional product image (dimmed) -->
+  <img class="hero-image" src="{{BG_IMAGE_PATH}}" alt="" style="display: {{SHOW_IMAGE}}">
+
+  <!-- Gradient overlays -->
+  <div class="gradient-top"></div>
+  <div class="gradient-bottom"></div>
+
+  <!-- Main content -->
+  <div class="content">
+
+    <!-- Logo -->
+    <div class="logo-container">
+      <img src="_base/logo.svg" alt="STRICT FOOD'S">
+    </div>
+
+    <div class="question-label">Ton avis</div>
+
+    <div class="question-text">{{QUESTION}}</div>
+
+    <!-- Options preview (le vrai sondage sera via sticker Instagram) -->
+    <div class="option-preview">
+      <div class="option-card">
+        <div class="emoji">{{OPTION_A_EMOJI}}</div>
+        <div class="option-text">{{OPTION_A}}</div>
+      </div>
+      <div class="option-card">
+        <div class="emoji">{{OPTION_B_EMOJI}}</div>
+        <div class="option-text">{{OPTION_B}}</div>
+      </div>
+    </div>
+
+    <!-- Zone ou l'operateur placera le sticker Instagram -->
+    <div class="sticker-zone">
+      <div class="sticker-zone-text">Zone sticker sondage</div>
+    </div>
+
+  </div>
+
+  <!-- Bottom -->
+  <div class="bottom-section">
+    <div class="tagline">{{TAGLINE}}</div>
+  </div>
+
+</body>
+</html>

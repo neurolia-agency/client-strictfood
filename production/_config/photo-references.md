@@ -298,3 +298,186 @@ Photos de contexte pour les piliers "La Cuisine", "Le Lieu", "Le Client". Utiles
 | **Total** | **60** | |
 
 Tous les produits de la carte ont au moins une photo dans `produits-source/`. Les burgers ont en plus des variantes dark-bg (DA studio) et des vues multi-angles (plongee, contre-plongee, vue dessus).
+
+---
+
+## CONTENU INSTAGRAM (Archives)
+
+Photos et visuels issus du compte Instagram existant (`public/contenu-instagram/`). Utiles comme references de **process cuisine**, **ambiance restaurant**, **produits en situation reelle**, et **lifestyle fondateurs**. Qualite smartphone (pas studio), mais authenticite elevee.
+
+> **Dossier source** : `public/contenu-instagram/`
+
+### Serie 2025-10-03 — Process decoupe viande & assemblage burger
+
+Carrousel process "du boucher a l'assiette". **Reference ideale pour le pilier La Cuisine.**
+
+| # | Chemin | Description | Tags |
+|---|--------|-------------|------|
+| 1 | `public/contenu-instagram/2025-10-03_15-57-14_UTC_1.jpg` | Decoupe viande crue sur planche bois, mains gantees noires, couteau visible, vue laterale 3/4, cuisine ouverte en fond. | process, viande-crue, decoupe, gants-noirs, planche-bois |
+| 2 | `public/contenu-instagram/2025-10-03_15-57-14_UTC_2.jpg` | Decoupe viande crue sur planche bois, mains gantees noires, vue plongee 3/4 (~45°), morceaux de boeuf visibles, plan de travail inox. **Photo process cle — reference ideale pour scenes de decoupe artisanale.** | process, viande-crue, decoupe, gants-noirs, planche-bois, plongee |
+| 3 | `public/contenu-instagram/2025-10-03_15-57-14_UTC_3.jpg` | Assemblage burger poulet ouvert, main gantee noire posant bun chapeau, mache visible, vue face plan serre, fond sombre bokeh. **Photo process cle — reference ideale pour scenes d'assemblage.** | process, assemblage, burger-poulet, gants-noirs, face |
+| 4 | `public/contenu-instagram/2025-10-03_15-57-14_UTC_4.jpg` | Assemblage burger poulet ouvert, main gantee ajoutant toppings verdure, vue 3/4 surelevee, sac kraft en fond. | process, assemblage, burger-poulet, gants-noirs, 3/4 |
+| 5 | `public/contenu-instagram/2025-10-03_15-57-14_UTC_5.jpg` | Burger poulet fini sur papier, vue face plan moyen, cuisine en arriere-plan, verdure depassant, eclairage ambiance chaud. | burger-poulet, fini, face, ambiance-cuisine |
+| 6 | `public/contenu-instagram/2025-10-03_15-57-14_UTC_6.jpg` | Fondateur derriere comptoir, pose biceps, gants noirs, mur vegetal visible, pots whey Per4m, cuisine ouverte. | fondateur, lifestyle, cuisine, comptoir |
+| 7 | `public/contenu-instagram/2025-10-03_15-57-14_UTC_7.jpg` | Main gantee noire emiettant parmesan/fromage au-dessus du burger, plan macro tres serre, fond sombre flou. **Reference ideale pour geste de finition.** | process, parmesan, geste, macro, gants-noirs |
+
+### Serie 2025-10-07 — Cookies proteines
+
+| # | Chemin | Description | Tags |
+|---|--------|-------------|------|
+| 1 | `public/contenu-instagram/2025-10-07_12-15-07_UTC_1.jpg` | Cookies proteines sur plateau blanc, plongee ~30°, toppings varies (oreo, granola, chocolat, creme), plan serre. | cookie, dessert, plongee, plateau |
+| 2 | `public/contenu-instagram/2025-10-07_12-15-07_UTC_2.jpg` | Cookies proteines vue plongee ~60°, plan large, plateau complet en preparation, ingredients et ustensiles visibles. | cookie, dessert, plongee, process, cuisine |
+| 3 | `public/contenu-instagram/2025-10-07_12-15-07_UTC_3.jpg` | Cookie proteine granola tenu a la main gantee, fond mur vegetal neon STRICT FOOD'S, vue face contre-plongee. | cookie, dessert, face, neon, mur-vegetal |
+| 4 | `public/contenu-instagram/2025-10-07_12-15-07_UTC_4.jpg` | Cookie proteine oreo tenu a la main gantee, fond mur vegetal neon STRICT FOOD'S, vue face contre-plongee. | cookie, dessert, face, neon, mur-vegetal, oreo |
+| 5 | `public/contenu-instagram/2025-10-07_12-15-07_UTC_5.jpg` | Cookie proteine chocolat tenu a la main gantee, fond mur vegetal neon STRICT FOOD'S complet, vue face. | cookie, dessert, face, neon, mur-vegetal, chocolat |
+| 6 | `public/contenu-instagram/2025-10-07_12-15-07_UTC_6.jpg` | Preparation cookies en cuisine, mains gantees saupoudrant toppings, plan moyen, contexte backstage. | cookie, dessert, process, cuisine, gants-noirs |
+
+### Serie 2025-10-08 — Equipe
+
+| # | Chemin | Description | Tags |
+|---|--------|-------------|------|
+| 1 | `public/contenu-instagram/2025-10-08_09-21-14_UTC.jpg` | Trois personnes (equipe) debout dans la salle du restaurant, sous-titres visibles, parquet bois, ambiance decontractee. | equipe, salle, lifestyle |
+
+### Serie 2025-10-11 — Partenariat Alpha Gym
+
+| # | Chemin | Description | Tags |
+|---|--------|-------------|------|
+| 1 | `public/contenu-instagram/2025-10-11_14-17-17_UTC_1.jpg` | Trois personnes posant dans salle Alpha Gym, statue Broly geante au-dessus, flyers au sol, ambiance sombre. | partenariat, gym, lifestyle |
+| 2 | `public/contenu-instagram/2025-10-11_14-17-17_UTC_2.jpg` | Memes trois personnes tenant des flyers Alpha Gym, statue Broly en fond, plan plus serre. | partenariat, gym, lifestyle |
+
+### Serie 2025-10-14 — Assemblage burger boeuf step-by-step (16 photos)
+
+Carrousel complet montrant chaque etape d'empilement d'un STRICT Boeuf. **Reference process la plus detaillee disponible.** Photographiees sur papier STRICT FOOD'S, plan de travail granite.
+
+| # | Chemin | Description | Tags |
+|---|--------|-------------|------|
+| 1 | `public/contenu-instagram/2025-10-14_09-12-16_UTC_1.jpg` | Bun sesame entier ferme, vue face 3/4, papier STRICT FOOD'S. | bun, ingredient, face, strict-boeuf |
+| 2 | `public/contenu-instagram/2025-10-14_09-12-16_UTC_2.jpg` | Bun ouvert coupe, vue 3/4, interieur mie visible. | bun, ingredient, coupe, 3/4 |
+| 3 | `public/contenu-instagram/2025-10-14_09-12-16_UTC_3.jpg` | Bun ouvert, vue plongee top-down ~90°, deux moities visibles. | bun, ingredient, top-down |
+| 5 | `public/contenu-instagram/2025-10-14_09-12-16_UTC_5.jpg` | Bun ouvert top-down, moitie droite avec fromage fondu. | bun, fromage, ingredient, top-down |
+| 6 | `public/contenu-instagram/2025-10-14_09-12-16_UTC_6.jpg` | Bun + mache + oignons rouges, vue 3/4 rapprochee. **Reference ingredients frais.** | assemblage, mache, oignons-rouges, 3/4 |
+| 7 | `public/contenu-instagram/2025-10-14_09-12-16_UTC_7.jpg` | Bun + mache + oignons rouges, vue plongee top-down. | assemblage, mache, oignons-rouges, top-down |
+| 8 | `public/contenu-instagram/2025-10-14_09-12-16_UTC_8.jpg` | Steak boeuf cuit pose sur garniture, vue 3/4 laterale. Croute Maillard visible. | assemblage, steak, cuit, maillard, 3/4 |
+| 9 | `public/contenu-instagram/2025-10-14_09-12-16_UTC_9.jpg` | Steak boeuf cuit sur garniture, vue plongee top-down. | assemblage, steak, cuit, top-down |
+| 10 | `public/contenu-instagram/2025-10-14_09-12-16_UTC_10.jpg` | Steak + bresaola ajoutee, vue 3/4 laterale. | assemblage, steak, bresaola, 3/4 |
+| 11 | `public/contenu-instagram/2025-10-14_09-12-16_UTC_11.jpg` | Steak + bresaola, vue plongee top-down. | assemblage, steak, bresaola, top-down |
+| 12 | `public/contenu-instagram/2025-10-14_09-12-16_UTC_12.jpg` | Steak + bresaola + sauce, vue 3/4 laterale. | assemblage, steak, bresaola, sauce, 3/4 |
+| 13 | `public/contenu-instagram/2025-10-14_09-12-16_UTC_13.jpg` | Steak + bresaola + sauce, vue plongee top-down. | assemblage, steak, bresaola, sauce, top-down |
+| 14 | `public/contenu-instagram/2025-10-14_09-12-16_UTC_14.jpg` | Burger boeuf ferme fini, vue face, bun sesame dore brillant, papier STRICT FOOD'S. **Hero shot contexte reel.** | strict-boeuf, fini, face, hero |
+| 15 | `public/contenu-instagram/2025-10-14_09-12-16_UTC_15.jpg` | Burger boeuf coupe en deux, vue face, interieur couches visibles (steak, verdure, bresaola), papier STRICT FOOD'S. **Reference coupe interieure.** | strict-boeuf, coupe, face, interieur |
+| 16 | `public/contenu-instagram/2025-10-14_09-12-16_UTC_16.jpg` | Burger boeuf coupe, vue plongee ~45°, interieur visible. | strict-boeuf, coupe, plongee |
+
+### Serie 2025-10-25 — Fondateurs
+
+| # | Chemin | Description | Tags |
+|---|--------|-------------|------|
+| 1 | `public/contenu-instagram/2025-10-25_15-59-21_UTC.jpg` | Selfie deux fondateurs (Romain + Dorian) devant mur vegetal neon STRICT FOOD'S, tenues sportswear. | fondateurs, selfie, neon, mur-vegetal |
+
+### Serie 2025-11-02 — Uber Eats
+
+| # | Chemin | Description | Tags |
+|---|--------|-------------|------|
+| 1 | `public/contenu-instagram/2025-11-02_17-14-03_UTC.jpg` | Deux fondateurs tenant tablettes Uber Eats devant mur vegetal neon STRICT FOOD'S, tenues sport. | fondateurs, uber-eats, partenariat, neon |
+
+### Serie 2025-11-05 — Tiramisu proteine
+
+| # | Chemin | Description | Tags |
+|---|--------|-------------|------|
+| 1 | `public/contenu-instagram/2025-11-05_18-05-52_UTC.jpg` | Tiramisu proteine dans pot transparent avec couvercle, couches visibles (creme + base chocolat + toppings), pose sur serviette, vitrine eclairee en fond, ambiance sombre premium. **Seule photo tiramisu en contexte reel.** | tiramisu, dessert, face, ambiance-sombre |
+
+### Serie 2025-11-18 — Visuel marketing
+
+| # | Chemin | Description | Tags |
+|---|--------|-------------|------|
+| 1 | `public/contenu-instagram/2025-11-18_10-29-59_UTC.jpg` | Visuel graphique "Menu STRICT MAX Poulet", montage photo burger poulet + frites + Monster, prix 18.99€, 115g proteines, adresse. | visuel, marketing, max-poulet, menu, prix |
+
+### Serie 2025-11-20 — Wrap avec macros
+
+| # | Chemin | Description | Tags |
+|---|--------|-------------|------|
+| 1 | `public/contenu-instagram/2025-11-20_17-34-35_UTC.jpg` | Wrap tenu en main gantee noire, emballage papier STRICT, annotations macros (598 kcal, 60.5g prot, 39g gluc, 20.4g lip, 8.99€), format story. | wrap, macros, main, gants-noirs |
+
+### Serie 2025-11-22 — STRICT MAX Boeuf
+
+| # | Chemin | Description | Tags |
+|---|--------|-------------|------|
+| 1 | `public/contenu-instagram/2025-11-22_17-18-46_UTC_1.jpg` | STRICT MAX Boeuf (double steak), vue face, parmesan et mache visibles, papier STRICT FOOD'S, menu noir en fond. **Hero shot MAX Boeuf en contexte reel.** | strict-max-boeuf, face, hero, restaurant |
+| 2 | `public/contenu-instagram/2025-11-22_17-18-46_UTC_2.jpg` | STRICT MAX Boeuf, vue 3/4 rapprochee, double steak bien visible, mache et parmesan, fond flou. | strict-max-boeuf, 3/4, gros-plan |
+
+### Serie 2025-11-24 — Process assemblage MAX Boeuf
+
+| # | Chemin | Description | Tags |
+|---|--------|-------------|------|
+| 1 | `public/contenu-instagram/2025-11-24_17-18-14_UTC.jpg` | Assemblage STRICT MAX Boeuf, main gantee deposant mache sur double steak, burger ouvert, bun avec sauces visible a gauche, plan serre cuisine. | process, assemblage, strict-max-boeuf, gants-noirs |
+
+### Serie 2025-11-26 — STRICT Poulet
+
+| # | Chemin | Description | Tags |
+|---|--------|-------------|------|
+| 1 | `public/contenu-instagram/2025-11-26_17-43-44_UTC_1.jpg` | STRICT Poulet, vue 3/4 rapprochee, poulet grille visible en morceaux, mache, bresaola, sauce, fond menu flou. **Reference poulet en contexte reel.** | strict-poulet, 3/4, gros-plan, restaurant |
+| 2 | `public/contenu-instagram/2025-11-26_17-43-44_UTC_2.jpg` | STRICT Poulet, vue face 3/4, ambiance table restaurant bois, menu en fond. | strict-poulet, face, restaurant, ambiance |
+
+### Serie 2025-11-30 — Equipe salle de sport
+
+| # | Chemin | Description | Tags |
+|---|--------|-------------|------|
+| 1 | `public/contenu-instagram/2025-11-30_19-15-58_UTC.jpg` | Trois personnes dans salle de sport sombre (Basic-Fit?), graphismes orange en fond, ambiance fitness. | equipe, lifestyle, gym, sport |
+
+### Serie 2025-12-17 — Partenariat Gymshark
+
+| # | Chemin | Description | Tags |
+|---|--------|-------------|------|
+| 1 | `public/contenu-instagram/2025-12-17_16-52-44_UTC_1.jpg` | Visuel graphique "STRICT FOOD'S x GYMSHARK", fond sombre premium, logos, date 25.12.25. | visuel, partenariat, gymshark, graphique |
+| 2 | `public/contenu-instagram/2025-12-17_16-52-44_UTC_2.jpg` | Fondateur (Romain) face camera, selfie devant mur vegetal neon, sous-titres. | fondateur, selfie, neon |
+| 3 | `public/contenu-instagram/2025-12-17_16-52-44_UTC_3.jpg` | Fondateur de dos, veste Gymshark noire visible, devant mur vegetal neon. | fondateur, gymshark, dos, neon |
+| 4 | `public/contenu-instagram/2025-12-17_16-52-44_UTC_4.jpg` | Fondateur (Dorian) assis avec paquets Gymshark, bureau restaurant. | fondateur, gymshark, unboxing |
+| 5 | `public/contenu-instagram/2025-12-17_16-52-44_UTC_5.jpg` | Pots whey Per4m + paquets Gymshark sur tapis STRICT FOOD'S, flat lay. | whey, gymshark, flat-lay, supplements |
+
+### Resume inventaire contenu-instagram
+
+| Categorie | Nombre de photos | Series |
+|-----------|-----------------|--------|
+| Process cuisine (decoupe, assemblage) | 25 | 2025-10-03, 2025-10-14, 2025-11-24 |
+| Produits finis en contexte reel | 8 | 2025-10-14, 2025-11-22, 2025-11-26 |
+| Cookies / desserts | 7 | 2025-10-07, 2025-11-05 |
+| Fondateurs / equipe / lifestyle | 7 | 2025-10-08, 2025-10-25, 2025-11-02, 2025-11-30 |
+| Partenariats (Alpha Gym, Gymshark) | 7 | 2025-10-11, 2025-12-17 |
+| Visuels marketing | 2 | 2025-11-18, 2025-11-20 |
+| **Total JPG** | **51** | |
+
+> **Videos** (12 fichiers MP4) : non cataloguees ici — a traiter separement si besoin pour les reels.
+
+### Photos a forte valeur de reference (candidats migration vers photos-references/)
+
+Ces photos meritent d'etre copiees dans `photos-references/` si un shooting studio equivalent n'est pas prevu :
+
+| Photo | Interet | Dossier cible suggere |
+|-------|---------|----------------------|
+| `2025-10-03_*_UTC_2.jpg` | Decoupe viande crue plongee — aucun equivalent dans photos-references | `produits-source/process/` |
+| `2025-10-03_*_UTC_3.jpg` | Assemblage burger mains gantees — aucun equivalent | `produits-source/process/` |
+| `2025-10-03_*_UTC_7.jpg` | Geste parmesan macro — aucun equivalent | `produits-source/process/` |
+| `2025-10-14_*_UTC_14.jpg` | STRICT Boeuf hero shot contexte reel | `contexte/produits-in-situ/` |
+| `2025-10-14_*_UTC_15.jpg` | Burger coupe interieur visible | `contexte/produits-in-situ/` |
+| `2025-11-05_*_UTC.jpg` | Tiramisu en contexte ambiance sombre | `contexte/produits-in-situ/` |
+| `2025-11-22_*_UTC_1.jpg` | STRICT MAX Boeuf hero contexte | `contexte/produits-in-situ/` |
+| `2025-11-26_*_UTC_1.jpg` | STRICT Poulet gros plan contexte | `contexte/produits-in-situ/` |
+
+---
+
+## MAPPING TYPES STORIES → PHOTOS CANDIDATES
+
+| Type story | Reclassifiable | Photos candidates | Conditions |
+|------------|---------------|-------------------|------------|
+| Lieu | OUI | contexte/exterieur/*, contexte/salle-restaurant/* | Rotation hebdomadaire |
+| Ambiance | OUI | contexte/salle-restaurant/*, contexte/cuisine/* | Rotation hebdomadaire |
+| Coulisse | PARTIEL | contenu-instagram/process/* | Si photo disponible, pas de repetition |
+| CTA / Recap | NON | — | Contextuel / selection manuelle |
+
+## ROTATION PHOTOS LIEU (par semaine)
+
+| Semaine | Photo | Description |
+|---------|-------|-------------|
+| S1, S5, S9 | contexte/exterieur/devanture.jpeg | Facade |
+| S2, S6, S10 | contexte/salle-restaurant/salle1.jpeg | Salle avec logo |
+| S3, S7, S11 | contexte/salle-restaurant/accueil.jpeg | Comptoir/accueil |
+| S4, S8, S12 | contexte/salle-restaurant/salle3.jpeg | Salle angle alternatif |

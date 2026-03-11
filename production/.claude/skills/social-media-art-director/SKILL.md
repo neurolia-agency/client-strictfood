@@ -159,14 +159,14 @@ Décider pour chaque visuel :
 
 ## Workflow
 
-1. **Lire le brief** dans `production/YYYY-MM-DD/00-brief/brief.md`
+1. **Lire le brief** dans `[POST_DIR]/00-brief/brief.md`
 2. **Lire la recette** dans `production/_recettes/[produit].md` (chemin indiqué dans le brief)
 3. **Lire la config pipeline** dans `production/_config/pipeline.md` (DA, contraintes)
 4. **Identifier le format** (photo unique / carrousel / Reel / story) et le nombre de visuels
 5. **Pour chaque visuel**, remplir la fiche de direction créative complète
 6. **Vérifier la cohérence** : les visuels d'un même post racontent-ils une histoire cohérente ?
 7. **Vérifier la grille** : ce post va-t-il bien s'intégrer visuellement à côté des précédents ?
-8. **Écrire l'output** dans `production/YYYY-MM-DD/01-art-direction/direction.md`
+8. **Écrire l'output** dans `[POST_DIR]/01-art-direction/direction.md`
 
 ## Relation avec le pipeline
 

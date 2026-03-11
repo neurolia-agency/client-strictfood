@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080">
+  <title>Story — {{PRODUCT_NAME}}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Oswald:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_base/base.css">
+  <style>
+    .product-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 42px;
+      color: #BF8522;
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      margin-bottom: 10px;
+    }
+    .product-subtitle {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 28px;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 2px;
+      margin-bottom: 80px;
+    }
+    .calories-block { margin-bottom: 50px; }
+    .calories-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 24px;
+      color: rgba(255,255,255,0.45);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+    }
+    .calories-number {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 170px;
+      color: #fff;
+      line-height: 0.85;
+      letter-spacing: -4px;
+    }
+    .calories-unit {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 500;
+      font-size: 48px;
+      color: #BF8522;
+      text-transform: uppercase;
+      letter-spacing: 10px;
+      margin-top: -3px;
+    }
+    .macros-bar { margin-bottom: 70px; }
+    .benefits { margin-bottom: auto; }
+  </style>
+</head>
+<body>
+
+  <!-- Background image (dimmed) -->
+  <img class="bg-image" src="{{HERO_IMAGE_PATH}}" alt="">
+
+  <!-- Foreground hero product -->
+  <img class="hero-image" src="{{HERO_IMAGE_PATH}}" alt="{{PRODUCT_NAME}}">
+
+  <!-- Gradient overlays -->
+  <div class="gradient-top"></div>
+  <div class="gradient-bottom"></div>
+  <div class="gradient-left"></div>
+
+  <!-- Decorative accent line -->
+  <div class="accent-line"></div>
+
+  <!-- Main content -->
+  <div class="content">
+
+    <!-- Logo -->
+    <div class="logo-container">
+      <img src="_base/logo.svg" alt="STRICT FOOD'S">
+    </div>
+
+    <!-- Product name -->
+    <div class="product-name">{{PRODUCT_NAME}}</div>
+    <div class="product-subtitle">{{PRODUCT_SUBTITLE}}</div>
+
+    <!-- Calories -->
+    <div class="calories-block">
+      <div class="calories-label">Seulement</div>
+      <div class="calories-number">{{CALORIES}}</div>
+      <div class="calories-unit">Calories</div>
+    </div>
+
+    <!-- Macros -->
+    <div class="macros-bar">
+      <div class="macro-item macro-highlight">
+        <div class="macro-value">{{PROTEIN}}<span>g</span></div>
+        <div class="macro-label">Proteines</div>
+      </div>
+      <div class="macro-item">
+        <div class="macro-value">{{CARBS}}<span>g</span></div>
+        <div class="macro-label">Glucides</div>
+      </div>
+      <div class="macro-item">
+        <div class="macro-value">{{FAT}}<span>g</span></div>
+        <div class="macro-label">Lipides</div>
+      </div>
+    </div>
+
+    <!-- Benefits -->
+    <div class="benefits">
+      <div class="benefit-item">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#BF8522" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <div class="benefit-text">{{BENEFIT_1}}</div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#BF8522" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <div class="benefit-text">{{BENEFIT_2}}</div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#BF8522" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <div class="benefit-text">{{BENEFIT_3}}</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom tagline -->
+  <div class="bottom-section">
+    <div class="tagline">{{TAGLINE}}</div>
+  </div>
+
+</body>
+</html>

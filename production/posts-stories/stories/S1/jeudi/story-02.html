@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080">
+  <title>Story Educative — Cuisson sans huile ?</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Oswald:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="file:///Users/dorian.gz/dev/Neurolia%20Agency/client-strictfood/production/posts-stories/stories/_templates/_base/base.css">
+  <style>
+    .content {
+      padding: 200px 70px 0;
+      align-items: flex-start;
+    }
+
+    .edu-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 24px;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      margin-bottom: 30px;
+    }
+
+    .edu-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 48px;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 60px;
+      max-width: 800px;
+    }
+
+    /* Grand chiffre / fait */
+    .fact-block {
+      margin-bottom: 50px;
+    }
+
+    .fact-number {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 200px;
+      color: #BF8522;
+      line-height: 0.85;
+      letter-spacing: -6px;
+    }
+
+    .fact-unit {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 500;
+      font-size: 60px;
+      color: rgba(255,255,255,0.7);
+      text-transform: uppercase;
+      letter-spacing: 6px;
+    }
+
+    /* Explication */
+    .explanation {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 34px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.6;
+      max-width: 750px;
+      margin-bottom: 60px;
+    }
+
+    .explanation strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* Comparaison VS (optionnel) */
+    .vs-block {
+      display: flex;
+      gap: 30px;
+      width: 100%;
+      margin-bottom: 50px;
+    }
+
+    .vs-item {
+      flex: 1;
+      padding: 35px;
+      border-radius: 20px;
+      text-align: center;
+    }
+
+    .vs-item.ours {
+      background: rgba(191,133,34,0.12);
+      border: 2px solid rgba(191,133,34,0.3);
+    }
+
+    .vs-item.theirs {
+      background: rgba(255,255,255,0.04);
+      border: 2px solid rgba(255,255,255,0.1);
+    }
+
+    .vs-item .vs-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 22px;
+      color: rgba(255,255,255,0.45);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 15px;
+    }
+
+    .vs-item.ours .vs-label { color: rgba(191,133,34,0.7); }
+
+    .vs-item .vs-value {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 80px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .vs-item.ours .vs-value { color: #BF8522; }
+    .vs-item.theirs .vs-value { color: rgba(255,255,255,0.5); }
+
+    .vs-item .vs-unit {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 24px;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .vs-separator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Oswald', sans-serif;
+      font-size: 36px;
+      color: rgba(255,255,255,0.3);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Optional background image -->
+  <img class="bg-image" src="file:///Users/dorian.gz/dev/Neurolia%20Agency/client-strictfood/public/images/photos-references/contexte/cuisine/air-fryers-pro.jpeg" alt="" style="display: block">
+
+  <!-- Gradient overlays -->
+  <div class="gradient-top"></div>
+  <div class="gradient-bottom"></div>
+  <div class="gradient-left"></div>
+
+  <!-- Decorative accent line -->
+  <div class="accent-line"></div>
+
+  <!-- Main content -->
+  <div class="content">
+
+    <!-- Logo -->
+    <div class="logo-container">
+      <img src="file:///Users/dorian.gz/dev/Neurolia%20Agency/client-strictfood/production/posts-stories/stories/_templates/_base/logo.svg" alt="STRICT FOOD'S">
+    </div>
+
+    <div class="edu-label">Le savais-tu ?</div>
+
+    <div class="edu-title">Cuisson sans huile ?</div>
+
+    <!-- Grand chiffre -->
+    <div class="fact-block">
+      <div class="fact-number">57</div>
+      <div class="fact-unit">% de gras en moins</div>
+    </div>
+
+    <!-- Explication -->
+    <div class="explanation">Nos burgers sont cuits par <strong>chaleur pulsée</strong>, sans aucune goutte d'huile. Résultat : un STRICT Bœuf à seulement <strong>21,5g de lipides</strong> contre 50g pour un burger classique.</div>
+
+    <!-- Bloc VS -->
+    <div class="vs-block" style="display: flex">
+      <div class="vs-item ours">
+        <div class="vs-label">Strict Food's</div>
+        <div class="vs-value">21,5</div>
+        <div class="vs-unit">g lipides</div>
+      </div>
+      <div class="vs-separator">VS</div>
+      <div class="vs-item theirs">
+        <div class="vs-label">Burger fast-food</div>
+        <div class="vs-value">50</div>
+        <div class="vs-unit">g lipides</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom -->
+  <div class="bottom-section">
+    <div class="tagline">Le cheat meal qui n'en est pas un</div>
+  </div>
+
+</body>
+</html>

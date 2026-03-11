@@ -149,7 +149,7 @@ Cette instruction est **obligatoire** et ne doit jamais être omise, même si le
 ### Step 1 — Lire les inputs
 
 **Fichiers à lire (dans cet ordre) :**
-1. `production/YYYY-MM-DD/01-art-direction/direction.md` — La fiche de direction créative
+1. `[POST_DIR]/01-art-direction/direction.md` — La fiche de direction créative
 2. `production/_recettes/[produit].md` — La recette avec ingrédients et formes exactes
 3. `production/_config/pipeline.md` — Le chemin de la photo référence + config DA
 
@@ -211,7 +211,7 @@ Pour chaque visuel, fournir :
 
 Si le brief contient un carrousel de N slides, livrer N prompts dans l'ordre, chacun avec son bloc formaté.
 
-**Écrire l'output** dans `production/YYYY-MM-DD/02-prompt/prompt.md`
+**Écrire l'output** dans `[POST_DIR]/02-prompt/prompt.md`
 
 ---
 
