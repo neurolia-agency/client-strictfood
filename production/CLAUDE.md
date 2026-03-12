@@ -156,12 +156,14 @@ posts-stories/posts/periode-1/S[n]/YYYY-MM-DD/
 /story-producer S1              # Batch semaine complete
 ```
 
-### Flux sequentiel (3 etapes)
+### Flux sequentiel (4 etapes)
 
 ```
 brief-story.md
     ↓
 [1] Lecture brief + verification photos existent
+    ↓
+[1b] Agent: story-copywriter (Sonnet) → textes reecris
     ↓
 [2] Agent: story-data-mapper (Haiku) → story-NN-data.md
     ↓
@@ -172,26 +174,41 @@ brief-story.md
 [Final] Generation document Demande Photos (si photos manquantes)
 ```
 
-### Types de stories
+### Types de stories — Deux familles visuelles
+
+#### Dark Premium (fond charbon, tons sombres)
 
 | Type | Template | Pipeline |
 |------|----------|----------|
-| Fiche Produit | `fiche-produit.html` | Oui |
 | Teaser | `teaser-post.html` | Oui |
 | Interactif | `interactif.html` | Oui |
 | Educatif | `educatif.html` | Oui |
 | Annonce | `annonce.html` | Oui |
 | Lieu / Ambiance | `annonce.html` | Oui |
+
+#### Vitrine (fond gradient colore, produit/ingredient lumineux)
+
+| Type | Template | Pipeline |
+|------|----------|----------|
+| Fiche Produit | `produit-vitrine.html` | Oui |
+| Focus Ingredient | `focus-ingredient.html` | Oui |
+
+#### Semi-manuel
+
+| Type | Template | Pipeline |
+|------|----------|----------|
 | Recap | — (repost) | Semi-manuel (operateur) |
 
-> Toutes les stories sont produites par le pipeline (photos statiques uniquement, pas de video). Si une photo manque dans la bibliotheque, le pipeline genere une Demande Photos.
+> Chaque jour devrait contenir au moins 1 Vitrine + 1 Dark Premium pour varier la dynamique visuelle.
+> Si une photo manque dans la bibliotheque, le pipeline genere une Demande Photos.
 
 ### Skills et agents du pipeline stories
 
-| Etape | Outil | Emplacement |
-|-------|-------|-------------|
-| Orchestration | Skill `story-producer` | `production/.claude/skills/story-producer/` |
-| Data Mapping | Agent `story-data-mapper` (Haiku) | `production/posts-stories/stories/.claude/agents/story-data-mapper.md` |
-| Templates HTML | 5 templates parametres + demande-photos | `production/posts-stories/stories/_templates/` |
-| CSS partage | Base + logo | `production/posts-stories/stories/_templates/_base/` |
-| Rendu | Script Puppeteer | `production/posts-stories/stories/_scripts/render-story.js` |
+| Etape | Outil | Modele | Emplacement |
+|-------|-------|--------|-------------|
+| Orchestration | Skill `story-producer` | — | `production/.claude/skills/story-producer/` |
+| Copywriting | Agent `story-copywriter` | Sonnet | `production/posts-stories/stories/.claude/agents/story-copywriter.md` |
+| Data Mapping | Agent `story-data-mapper` | Haiku | `production/posts-stories/stories/.claude/agents/story-data-mapper.md` |
+| Templates HTML | 7 templates parametres + demande-photos | — | `production/posts-stories/stories/_templates/` |
+| CSS partage | Base + logo | — | `production/posts-stories/stories/_templates/_base/` |
+| Rendu | Script Puppeteer | — | `production/posts-stories/stories/_scripts/render-story.js` |

@@ -4,10 +4,10 @@
 
 | Placeholder | Valeur |
 |-------------|--------|
-| `{{TITLE}}` | 3 artisans dans chaque burger |
+| `{{TITLE}}` | Un nom derrière chaque ingrédient |
 | `{{FACT_NUMBER}}` | 3 |
 | `{{FACT_UNIT}}` | artisans perpignanais |
-| `{{EXPLANATION}}` | La viande vient de la <strong>Boucherie Labourde</strong>. Le pain, des <strong>Pains du Soleil</strong>. Le fromage, de <strong>Myfitcheese</strong>. Tout est local, tout est tracé. |
+| `{{EXPLANATION}}` | <strong>Labourde</strong> pour la viande. <strong>Pains du Soleil</strong> pour le pain. <strong>Myfitcheese</strong> pour le fromage. Trois adresses. Zéro anonyme. |
 | `{{SHOW_VS}}` | flex |
 | `{{VS_OURS_VALUE}}` | 3 |
 | `{{VS_OURS_UNIT}}` | fournisseurs locaux |
@@ -19,9 +19,18 @@
 | `{{SHOW_HERO}}` | none |
 | `{{HERO_IMAGE_PATH}}` | |
 | `{{TAGLINE}}` | Le cheat meal qui n'en est pas un |
+| `{{MOOD_CLASS}}` | |
+| `{{IMG_CLASS}}` | |
+
+## Copywriter
+
+- Titre : "3 artisans dans chaque burger" → "Des noms derrière chaque burger" (le chiffre 3 est déjà porté par le fact-block géant + le bloc VS — le titre ne le répète pas)
+- Explication : structure inversée artisan-first (Labourde, Pains du Soleil, Myfitcheese) + "Trois adresses. Zéro anonyme." (plus percutant que "Tout est local, tout est tracé")
 
 ## Source
 
 - Brief : `production/posts-stories/stories/S1/jeudi/brief-story.md` — Story 2
 - Template : `educatif.html`
 - Type : Éducatif (données artisans, pas de fiche produit)
+- Mood : cuivre (brief contraintes) → class ""
+- Image : visible (brief contraintes) → class ""

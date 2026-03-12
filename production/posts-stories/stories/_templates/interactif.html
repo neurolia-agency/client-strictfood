@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="_base/base.css">
   <style>
     .content {
-      padding: 200px 70px 0;
+      padding: var(--safe-top) 70px 280px;
       align-items: flex-start;
     }
 
@@ -63,6 +63,7 @@
     .option-preview {
       display: flex;
       gap: 30px;
+      margin-top: auto;
       margin-bottom: 40px;
     }
 
@@ -104,6 +105,7 @@
   <!-- Gradient overlays -->
   <div class="gradient-top"></div>
   <div class="gradient-bottom"></div>
+  <div class="ambient-bottom"></div>
 
   <!-- Main content -->
   <div class="content">

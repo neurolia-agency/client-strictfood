@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080">
+  <title>Story — STRICT BOEUF</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Oswald:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_base/base.css">
+  <style>
+    :root { --vibrant-bg-top: #1a1108; --vibrant-bg-bottom: #3a2510; --vibrant-bg-center: #4a3820; }
+    body.mood-grenat { --vibrant-bg-top: #1a0d0c; --vibrant-bg-bottom: #4a1510; --vibrant-bg-center: #5a2018; }
+    body.mood-feuille { --vibrant-bg-top: #0d1a12; --vibrant-bg-bottom: #1a3a25; --vibrant-bg-center: #1e4a30; }
+    body { background: radial-gradient(circle at 50% 35%, var(--vibrant-bg-center) 0%, var(--vibrant-bg-top) 25%, var(--vibrant-bg-bottom) 100%); position: relative; }
+    .gradient-top, .gradient-bottom, .gradient-left, .accent-line, .zone-blend { display: none; }
+    .content { padding: 0; display: flex; flex-direction: column; height: 100%; }
+    .header-zone { position: absolute; top: 60px; left: 70px; right: 70px; z-index: 20; }
+    .logo-container { margin-bottom: 0; }
+    .logo-container img { width: 220px; height: auto; opacity: 0.95; }
+    .hero-zone { position: absolute; top: 120px; left: 0; right: 0; height: 960px; z-index: 10; overflow: hidden; }
+    .product-image { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; filter: brightness(1.05) saturate(1.15); mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 65%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 65%, transparent 100%); }
+    .info-zone { position: absolute; top: 1020px; bottom: 0; left: 0; right: 0; z-index: 15; display: flex; flex-direction: column; padding: 0 70px; background: linear-gradient(to top, rgba(26,17,8,0.98) 0%, rgba(26,17,8,0.95) 25%, rgba(26,17,8,0.7) 60%, transparent 100%); }
+    .product-name { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 78px; color: #ffffff; line-height: 0.95; letter-spacing: -2px; text-transform: uppercase; text-shadow: 0 4px 12px rgba(0,0,0,0.4); margin-bottom: 12px; }
+    .product-subtitle { font-family: 'DM Sans', sans-serif; font-size: 32px; color: rgba(255,255,255,0.7); letter-spacing: 1px; margin-bottom: 30px; }
+    .stats-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 40px; }
+    .macro-star { display: flex; align-items: baseline; gap: 12px; }
+    .macro-star-value { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 90px; color: var(--accent); line-height: 0.85; filter: brightness(1.2); }
+    .macro-star-unit { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 28px; color: rgba(255,255,255,0.8); letter-spacing: 1px; text-transform: uppercase; }
+    .badge-secondary { display: inline-block; padding: 16px 28px; background: rgba(var(--accent-rgb), 0.18); border: 2px solid var(--accent); border-radius: 10px; font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 26px; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; filter: brightness(1.15); flex-shrink: 0; }
+    .bottom-tagline { text-align: center; margin-top: auto; padding: 0 0 30px; }
+    .divider-line { width: 100px; height: 3px; background: var(--accent); margin-bottom: 30px; border-radius: 2px; opacity: 0.8; }
+    .tagline-vitrine { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 38px; color: #ffffff; line-height: 1.4; letter-spacing: 1px; text-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+    .tagline-vitrine em { color: var(--accent); font-style: italic; filter: brightness(1.15); }
+    .footer-logo { text-align: center; padding-bottom: 60px; }
+    .footer-logo img { width: 140px; height: auto; opacity: 0.35; }
+  </style>
+</head>
+<body class="">
+  <div class="content">
+    <div class="header-zone">
+      <div class="logo-container"><img src="_base/logo.svg" alt="STRICT FOOD'S"></div>
+    </div>
+    <div class="hero-zone">
+      <img class="product-image" src="/Users/dorian.gz/dev/Neurolia Agency/client-strictfood/public/images/photos-references/dark-bg/strict-boeuf-contre-plongee.png" alt="STRICT BOEUF">
+    </div>
+    <div class="info-zone">
+      <div class="product-name">STRICT BOEUF</div>
+      <div class="product-subtitle">Le burger qui muscle ton assiette</div>
+      <div class="stats-row">
+        <div class="macro-star">
+          <div class="macro-star-value">53</div>
+          <div class="macro-star-unit">g protéines</div>
+        </div>
+        <div class="badge-secondary">SANS HUILE</div>
+      </div>
+      <div class="bottom-tagline">
+        <div class="divider-line" style="margin: 0 auto 30px;"></div>
+        <div class="tagline-vitrine">Le cheat meal <em>qui n'en est pas un.</em></div>
+      </div>
+      <div class="footer-logo">
+        <img src="_base/logo.svg" alt="STRICT FOOD'S">
+      </div>
+    </div>
+  </div>
+</body>
+</html>

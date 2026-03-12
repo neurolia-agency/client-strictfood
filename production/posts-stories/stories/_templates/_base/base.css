@@ -13,6 +13,11 @@
   --text-secondary: rgba(255,255,255,0.5);
   --text-muted: rgba(255,255,255,0.45);
 
+  /* Instagram safe zones (1080x1920) — no text/logo in these areas */
+  --safe-top: 250px;     /* IG overlay: username, timestamp, close button */
+  --safe-bottom: 250px;  /* IG overlay: reply bar, reactions, share */
+  --safe-side: 65px;     /* Device cropping margin */
+
   /* Image visibility (overridden by .img-discret / .img-hero) */
   --img-opacity: 0.60;
   --img-brightness: 1.15;
@@ -87,6 +92,7 @@ body {
 }
 
 /* ===== CONTENT CONTAINER ===== */
+/* padding-top = --safe-top (250px) to clear Instagram's top overlay */
 .content {
   position: absolute;
   top: 0; left: 0;
@@ -95,7 +101,7 @@ body {
   z-index: 10;
   display: flex;
   flex-direction: column;
-  padding: 200px 70px 0;
+  padding: var(--safe-top) 70px 0;
 }
 
 /* ===== LOGO ===== */
@@ -196,20 +202,33 @@ body {
   left: 70px;
   top: 280px;
   width: 4px;
-  height: 900px;
-  background: linear-gradient(to bottom, transparent, rgba(var(--accent-rgb),0.3) 20%, rgba(var(--accent-rgb),0.15) 80%, transparent);
+  height: 1400px;
+  background: linear-gradient(to bottom, transparent, rgba(var(--accent-rgb),0.3) 15%, rgba(var(--accent-rgb),0.15) 60%, rgba(var(--accent-rgb),0.06) 85%, transparent);
   z-index: 5;
   border-radius: 2px;
 }
 
+/* ===== AMBIENT BOTTOM (prevents flat black void in lower third) ===== */
+.ambient-bottom {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 700px;
+  background: radial-gradient(ellipse 120% 100% at 50% 100%, rgba(var(--accent-rgb), 0.06) 0%, rgba(var(--accent-rgb), 0.02) 40%, transparent 70%);
+  z-index: 2;
+  pointer-events: none;
+}
+
 /* ===== BOTTOM SECTION ===== */
+/* padding-bottom = --safe-bottom (250px) to keep text above Instagram's reply bar */
 .bottom-section {
   position: absolute;
-  bottom: 30px;
+  bottom: 0;
   left: 70px;
   right: 70px;
   z-index: 10;
   text-align: center;
+  padding: 100px 0 var(--safe-bottom);
+  background: linear-gradient(to bottom, transparent, rgba(var(--bg-rgb), 0.6) 40%, rgba(var(--bg-rgb), 0.8) 100%);
 }
 
 .tagline {
@@ -340,15 +359,15 @@ body {
   top: -60px;
   right: -100px;
   width: 2800px;
-  height: 1100px;
+  height: 1500px;
   object-fit: cover;
   object-position: 75% 30%;
   opacity: var(--img-opacity);
   filter: brightness(var(--img-brightness)) sepia(var(--img-sepia)) saturate(var(--img-saturate));
   mask-image: linear-gradient(to left, rgba(0,0,0,1) 15%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 65%),
-              linear-gradient(to top, transparent 0%, rgba(0,0,0,1) 20%, rgba(0,0,0,1) 80%, rgba(0,0,0,0.5) 100%);
+              linear-gradient(to top, transparent 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 75%, rgba(0,0,0,0.5) 100%);
   -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 15%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 65%),
-                      linear-gradient(to top, transparent 0%, rgba(0,0,0,1) 20%, rgba(0,0,0,1) 80%, rgba(0,0,0,0.5) 100%);
+                      linear-gradient(to top, transparent 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 75%, rgba(0,0,0,0.5) 100%);
   mask-composite: intersect;
   -webkit-mask-composite: source-in;
 }

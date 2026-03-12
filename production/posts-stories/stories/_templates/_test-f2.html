@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080">
+  <title>Story — VIANDE BOEUF</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Oswald:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_base/base.css">
+  <style>
+    :root { --vibrant-bg-top: #1a1108; --vibrant-bg-bottom: #3a2510; --vibrant-bg-center: #4a3820; }
+    body.mood-grenat { --vibrant-bg-top: #1a0d0c; --vibrant-bg-bottom: #4a1510; --vibrant-bg-center: #5a2018; }
+    body.mood-feuille { --vibrant-bg-top: #0d1a12; --vibrant-bg-bottom: #1a3a25; --vibrant-bg-center: #1e4a30; }
+    body { background: radial-gradient(circle at 50% 35%, var(--vibrant-bg-center) 0%, var(--vibrant-bg-top) 25%, var(--vibrant-bg-bottom) 100%); position: relative; }
+    .gradient-top, .gradient-bottom, .gradient-left, .accent-line, .zone-blend { display: none; }
+    .content { padding: 0; display: flex; flex-direction: column; height: 100%; }
+    .artisan-badge { position: absolute; top: 220px; left: 70px; right: 70px; display: flex; flex-direction: column; align-items: center; gap: 6px; z-index: 18; }
+    .artisan-name { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 19px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 4px; }
+    .artisan-name::before { content: '— '; color: var(--accent); opacity: 0.6; }
+    .artisan-name::after { content: ' —'; color: var(--accent); opacity: 0.6; }
+    .artisan-locality { font-family: 'DM Sans', sans-serif; font-size: 16px; color: rgba(255,255,255,0.35); letter-spacing: 1px; text-transform: uppercase; }
+    .artisan-desc { font-family: 'DM Sans', sans-serif; font-size: 18px; color: rgba(255,255,255,0.35); letter-spacing: 0.5px; margin-top: 2px; }
+    .hero-zone { position: absolute; top: 0; left: 0; right: 0; height: 1080px; z-index: 10; overflow: hidden; }
+    .ingredient-image { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; filter: brightness(1.05) saturate(1.15); mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 60%, transparent 95%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 60%, transparent 95%); }
+    .bottom-zone { position: absolute; top: 1020px; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(26,17,8,0.98) 0%, rgba(26,17,8,0.95) 40%, rgba(26,17,8,0.7) 70%, transparent 100%); z-index: 12; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; padding: 60px 70px 200px; text-align: center; }
+    .ingredient-name { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 72px; color: #ffffff; line-height: 1.1; letter-spacing: -2px; text-transform: uppercase; text-shadow: 0 4px 12px rgba(0,0,0,0.4); margin-bottom: 16px; }
+    .key-fact { font-family: 'DM Sans', sans-serif; font-size: 28px; color: rgba(255,255,255,0.85); letter-spacing: 1px; line-height: 1.6; margin-bottom: 20px; }
+    .key-fact strong { color: var(--accent); font-weight: 600; }
+    .in-product { font-family: 'DM Sans', sans-serif; font-size: 24px; color: rgba(255,255,255,0.6); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 24px; }
+    .divider-line { width: 100px; height: 3px; background: var(--accent); margin-bottom: 24px; border-radius: 2px; opacity: 0.8; }
+    .tagline-focus { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 38px; color: #ffffff; line-height: 1.4; letter-spacing: 1px; text-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+    .tagline-focus em { color: var(--accent); font-style: italic; filter: brightness(1.15); }
+    .footer-logo { margin-top: 24px; }
+    .footer-logo img { width: 160px; height: auto; opacity: 0.6; }
+  </style>
+</head>
+<body class="">
+  <div class="content">
+    <div class="artisan-badge">
+      <div class="artisan-name">Boucherie Labourde</div>
+      <div class="artisan-locality">Perpignan</div>
+      <div class="artisan-desc">Boucher artisanal, viande locale plein air</div>
+    </div>
+    <div class="hero-zone">
+      <img class="ingredient-image" src="/Users/dorian.gz/dev/Neurolia Agency/client-strictfood/public/images/photos-references/produits-source/burgers-black/strict-boeuf.png" alt="VIANDE BOEUF">
+    </div>
+    <div class="bottom-zone">
+      <div class="ingredient-name">VIANDE<br>BOEUF</div>
+      <div class="key-fact">Boeuf <strong>100% local</strong> — élevé en plein air dans les Pyrénées</div>
+      <div class="in-product">DANS LE STRICT BOEUF</div>
+      <div class="divider-line"></div>
+      <div class="tagline-focus">Derrière chaque burger, <em>un artisan.</em></div>
+      <div class="footer-logo">
+        <img src="_base/logo.svg" alt="STRICT FOOD'S">
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -11,12 +11,13 @@
 
 | Champ | Valeur |
 |-------|--------|
-| Type | [Fiche Produit / Teaser / Interactif / Éducatif / Annonce / Lieu / Recap] |
+| Type | [Fiche Produit / Teaser / Interactif / Éducatif / Annonce / Lieu / Focus Ingrédient / Recap] |
 | Highlight | [LA CARTE / COULISSES / NOS ARTISANS / NOUS TROUVER / L'ÉQUIPE / —] |
 | Qui produit | Pipeline |
 | Template | `[template].html` |
 | Mood | [cuivre / grenat / feuille — optionnel, herite du mood jour] |
 | Image | [discret / visible / hero — optionnel, herite de la valeur jour] |
+| Brand props | [ID prop depuis `_config/brand-props.md` — ex: "wrapper-burger" / "cup-branded" / "auto" / "aucun" — optionnel, defaut: "auto"] |
 
 ### Objectif
 
@@ -24,7 +25,7 @@
 
 ### Contenu
 
-#### Si type = Fiche Produit
+#### Si type = Fiche Produit (template: `produit-vitrine.html`)
 
 **Produit** : [NOM PRODUIT]
 Slug recette : `[slug-kebab-case]`
@@ -32,25 +33,41 @@ Slug recette : `[slug-kebab-case]`
 > Le story-data-mapper résout automatiquement les données nutritionnelles depuis `_recettes/[slug].md`.
 > Ne PAS copier les macros ici — c'est le rôle de l'agent.
 
+Accroche : `[1 phrase punchy — ex: "Le burger qui bat tes macros"]`
+Macro star : `[la macro la plus impressionnante — ex: "53g protéines"]`
+Badge : `[argument différenciateur court — ex: "SANS HUILE" / "ARTISANAL" / "LOCAL"]`
+Prix : `[prix — ex: "8,90€"]`
 Tagline : `[texte tagline bottom]`
-Bénéfices à mettre en avant :
-1. [Bénéfice 1 — ex: "Cuisson sans huile"]
-2. [Bénéfice 2 — ex: "Artisans locaux"]
-3. [Bénéfice 3 — ex: "Protéines premium"]
 
-Image de fond : `[chemin vers photo pertinente OU "aucune" — préférer une image contextuelle]`
-Alignement photo : `[element horizontal de reference — ex: "enseigne STRICT FOOD'S" / "comptoir" / "—"]`
+Image hero : `[chemin vers photo produit détourée sur fond sombre — OBLIGATOIRE]`
 
-#### Si type = Teaser
+> **Note** : Ce template utilise le style Vitrine (fond gradient coloré, produit lumineux en hero). Pas de photo de fond contextuelle — le produit EST le visuel.
+
+#### Si type = Focus Ingrédient (template: `focus-ingredient.html`)
+
+**Ingrédient** : [NOM INGRÉDIENT — ex: "Parmesan protéiné"]
+Artisan : `[nom fournisseur — ex: "Myfitcheese"]`
+Localité : `[ville — ex: "Perpignan"]`
+Fait clé : `[1 phrase ou chiffre impactant — ex: "28g de protéines pour 100g" / "Pétri chaque matin à 4h"]`
+Dans le : `[produit qui utilise cet ingrédient — ex: "STRICT Boeuf"]`
+Tagline : `[texte tagline bottom]`
+
+Image hero : `[chemin vers photo ingrédient en gros plan — OBLIGATOIRE]`
+
+> **Note** : Ce template utilise le style Vitrine. L'ingrédient est en hero plein cadre, lumineux, sans filtre.
+> **Highlight recommandé** : NOS ARTISANS
+
+#### Si type = Teaser (template: `teaser-post.html`)
 
 Post teasé : `production/posts-stories/posts/[periode]/[SX]/YYYY-MM-DD/` (ou description)
-Hook : `[Phrase d'accroche — ex: "Ça arrive aujourd'hui..."]`
+Label : `[mot-clé haut de story — ex: "EXCLU" / "SPOILER" / "BIENTÔT" — éviter la redondance avec le hook]`
+Hook : `[Phrase d'accroche — ex: "On casse les codes."]`
 Date de publication du post : `[JJ/MM ou "Aujourd'hui" ou "Demain"]`
 Sous-texte : `[Texte complémentaire]`
 Image de fond : `[chemin vers photo pertinente OU "aucune" — préférer une image contextuelle]`
 Alignement photo : `[element horizontal de reference — ex: "enseigne STRICT FOOD'S" / "comptoir" / "—"]`
 
-#### Si type = Interactif
+#### Si type = Interactif (template: `interactif.html`)
 
 Format sticker : [Sondage 2 choix / Quiz / Slider / Question ouverte]
 Question : `[Texte de la question]`
@@ -62,7 +79,7 @@ Image de fond : `[chemin vers photo pertinente OU "aucune" — préférer une im
 Alignement photo : `[element horizontal de reference — ex: "enseigne STRICT FOOD'S" / "comptoir" / "—"]`
 Tagline : `[texte ou "—"]`
 
-#### Si type = Éducatif
+#### Si type = Éducatif (template: `educatif.html`)
 
 Titre : `[Question éducative — ex: "Cuisson sans huile ?"]`
 Chiffre clé : `[nombre]` + `[unité — ex: "grammes de lipides en moins"]`
@@ -76,7 +93,7 @@ Image de fond : `[chemin vers photo contextuelle — cuisine, restaurant, etc.]`
 Alignement photo : `[element horizontal de reference — ex: "enseigne STRICT FOOD'S" / "comptoir" / "—"]`
 Image produit (optionnel) : `[chemin vers photo produit pour le pattern dual-image, OU "aucune"]`
 
-#### Si type = Annonce / Lieu
+#### Si type = Annonce / Lieu (template: `annonce.html`)
 
 Badge : `[texte badge — ex: "NOUVEAU" / "NOUS TROUVER"]`
 Headline : `[Titre principal — accepte <em> pour l'accent couleur]`
@@ -97,11 +114,24 @@ Texte overlay recommandé : `[texte]`
 
 ## Contraintes
 
-- DA : Dark Food Premium
+- DA : Dark Food Premium (templates dark) / Vitrine (Fiche Produit + Focus Ingrédient)
 - Mood : [cuivre / grenat / feuille] — cuivre = standard, grenat = intense/passion, feuille = nutrition/fraicheur
 - Image : [discret / visible / hero] — visible = defaut, hero = photo dominante
 - Sublimation : les templates appliquent automatiquement `text-depth` (headlines), `mark-tape` (body/info), `brightness(1.2)` (accents). Aucune action manuelle requise.
 - [Contrainte specifique si applicable]
+
+## Logique de variation de template
+
+| Type | Template | Style |
+|------|----------|-------|
+| Fiche Produit | `produit-vitrine.html` | **Vitrine** (coloré, produit hero) |
+| Focus Ingrédient | `focus-ingredient.html` | **Vitrine** (coloré, ingrédient hero) |
+| Teaser | `teaser-post.html` | Dark Premium |
+| Éducatif | `educatif.html` | Dark Premium |
+| Interactif | `interactif.html` | Dark Premium |
+| Annonce / Lieu | `annonce.html` | Dark Premium |
+
+> **Objectif** : alterner systématiquement Dark Premium et Vitrine dans la séquence du jour pour casser la monotonie visuelle. Chaque jour devrait avoir au moins 1 story Vitrine.
 
 ## Étape suivante
 

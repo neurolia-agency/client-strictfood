@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=1080">
-  <title>Story Educative — {{TITLE}}</title>
+  <title>Story Educative — Un nom derrière chaque ingrédient</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Oswald:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="_base/base.css">
+  <link rel="stylesheet" href="file:///Users/dorian.gz/dev/Neurolia%20Agency/client-strictfood/production/posts-stories/stories/_templates/_base/base.css">
   <style>
     .content {
-      padding: var(--safe-top) 70px 280px;
+      padding: 120px 70px 100px;
       align-items: flex-start;
+      justify-content: center;
     }
 
     .edu-label {
@@ -58,14 +59,13 @@
       letter-spacing: 6px;
     }
 
-    /* Explication — margin-top: auto splits content into top group (title+fact) and bottom group (explanation+VS) */
+    /* Explication */
     .explanation {
       font-family: 'DM Sans', sans-serif;
       font-size: 34px;
       color: rgba(255,255,255,0.75);
       line-height: 1.6;
       max-width: 750px;
-      margin-top: auto;
       margin-bottom: 60px;
     }
 
@@ -138,16 +138,15 @@
     }
   </style>
 </head>
-<body class="{{MOOD_CLASS}} {{IMG_CLASS}}">
+<body class="">
 
   <!-- Optional background image -->
-  <img class="bg-image" src="{{BG_IMAGE_PATH}}" alt="" style="display: {{SHOW_BG}}">
+  <img class="bg-image" src="file:///Users/dorian.gz/dev/Neurolia%20Agency/client-strictfood/public/images/photos-references/dark-bg/burger-simple-boeuf-dark-bg.png" alt="" style="display: block; opacity: 0.80; filter: brightness(1.35) sepia(0.12) saturate(0.90)">
 
   <!-- Gradient overlays -->
   <div class="gradient-top"></div>
   <div class="gradient-bottom"></div>
   <div class="gradient-left"></div>
-  <div class="ambient-bottom"></div>
 
   <!-- Decorative accent line -->
   <div class="accent-line"></div>
@@ -157,48 +156,48 @@
 
     <!-- Logo -->
     <div class="logo-container">
-      <img src="_base/logo.svg" alt="STRICT FOOD'S">
+      <img src="file:///Users/dorian.gz/dev/Neurolia%20Agency/client-strictfood/production/posts-stories/stories/_templates/_base/logo.svg" alt="STRICT FOOD'S">
     </div>
 
     <div class="edu-label">Le savais-tu ?</div>
 
-    <div class="edu-title text-depth">{{TITLE}}</div>
+    <div class="edu-title text-depth">Un nom derrière chaque ingrédient</div>
 
     <!-- Grand chiffre -->
     <div class="fact-block">
-      <div class="fact-number">{{FACT_NUMBER}}</div>
-      <div class="fact-unit">{{FACT_UNIT}}</div>
+      <div class="fact-number">3</div>
+      <div class="fact-unit">artisans perpignanais</div>
     </div>
 
     <!-- Explication -->
-    <div class="explanation text-depth mark-tape">{{EXPLANATION}}</div>
+    <div class="explanation text-depth mark-tape"><strong>Labourde</strong> pour la viande.<br><strong>Pains du Soleil</strong> pour le pain.<br><strong>Myfitcheese</strong> pour le fromage.<br>Des produits frais et locaux.</div>
 
-    <!-- Bloc VS (optionnel — masquer si non utilise) -->
-    <div class="vs-block" style="display: {{SHOW_VS}}">
+    <!-- Bloc VS -->
+    <div class="vs-block" style="display: flex">
       <div class="vs-item ours">
         <div class="vs-label">Strict Food's</div>
-        <div class="vs-value">{{VS_OURS_VALUE}}</div>
-        <div class="vs-unit">{{VS_OURS_UNIT}}</div>
+        <div class="vs-value">3</div>
+        <div class="vs-unit">fournisseurs locaux</div>
       </div>
       <div class="vs-separator">VS</div>
       <div class="vs-item theirs">
-        <div class="vs-label">{{VS_THEIRS_LABEL}}</div>
-        <div class="vs-value">{{VS_THEIRS_VALUE}}</div>
-        <div class="vs-unit">{{VS_THEIRS_UNIT}}</div>
+        <div class="vs-label">Fast-food</div>
+        <div class="vs-value">0</div>
+        <div class="vs-unit">fournisseur identifiable</div>
       </div>
     </div>
 
   </div>
 
   <!-- Zone blend (transition bg → product-hero, visible only if hero present) -->
-  <div class="zone-blend" style="display: {{SHOW_HERO}}"></div>
+  <div class="zone-blend" style="display: none"></div>
 
   <!-- Product hero (optional — dual-image pattern for visual richness) -->
-  <img class="product-hero" src="{{HERO_IMAGE_PATH}}" alt="" style="display: {{SHOW_HERO}}">
+  <img class="product-hero" src="" alt="" style="display: none">
 
   <!-- Bottom -->
   <div class="bottom-section">
-    <div class="tagline">{{TAGLINE}}</div>
+    <div class="tagline">Le cheat meal qui n'en est pas un</div>
   </div>
 
 </body>

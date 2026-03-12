@@ -22,7 +22,7 @@
     .gradient-center {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(ellipse at center, rgba(var(--bg-rgb),0.25) 0%, rgba(var(--bg-rgb),0.9) 70%);
+      background: radial-gradient(ellipse at center, rgba(var(--bg-rgb),0.25) 0%, rgba(var(--bg-rgb),0.75) 60%, rgba(var(--bg-rgb),0.88) 80%);
       z-index: 3;
     }
 
@@ -92,6 +92,7 @@
 
   <!-- Gradient overlay -->
   <div class="gradient-center"></div>
+  <div class="ambient-bottom"></div>
 
   <!-- Main content -->
   <div class="content">
@@ -101,7 +102,7 @@
       <img src="_base/logo.svg" alt="STRICT FOOD'S">
     </div>
 
-    <div class="teaser-label">Bientot</div>
+    <div class="teaser-label">{{TEASER_LABEL}}</div>
 
     <div class="teaser-hook text-depth">{{TEASER_HOOK}}</div>
 
