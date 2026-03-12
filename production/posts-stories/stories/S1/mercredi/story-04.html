@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080">
+  <title>Story 04 — STRICT MAX Boeuf (Visuel Produit)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Oswald:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="file:///Users/jorisgustiez/Dev/Claude/neurolia-agency/client-strictfood/production/posts-stories/stories/_templates/_base/base.css">
+  <style>
+    /* === FULL-SCREEN PRODUCT VISUAL === */
+    /* Story purement visuelle : le burger est le hero absolu */
+
+    /* Burger image — plein cadre, centré verticalement */
+    .product-fullscreen {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -52%);
+      width: 1100px;
+      height: 1100px;
+      object-fit: contain;
+      z-index: 4;
+      filter:
+        drop-shadow(0 20px 80px rgba(0,0,0,0.7))
+        drop-shadow(0 0 120px rgba(191,133,34,0.08))
+        sepia(var(--img-sepia)) saturate(var(--img-saturate));
+    }
+
+    /* Ambient glow derriere le burger — halo chaud */
+    .ambient-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px;
+      height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(191,133,34,0.08) 0%, rgba(191,133,34,0.03) 40%, transparent 70%);
+      z-index: 2;
+      filter: blur(60px);
+    }
+
+    /* Smoke / atmosphere overlay en bas */
+    .smoke-gradient {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 600px;
+      background: linear-gradient(to top, var(--bg) 0%, rgba(var(--bg-rgb),0.85) 25%, rgba(var(--bg-rgb),0.4) 55%, transparent 100%);
+      z-index: 5;
+    }
+
+    /* Gradient top — pour le logo */
+    .top-fade {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 400px;
+      background: linear-gradient(to bottom, rgba(var(--bg-rgb),0.7) 0%, rgba(var(--bg-rgb),0.3) 50%, transparent 100%);
+      z-index: 5;
+    }
+
+    /* Logo en haut centre */
+    .logo-top {
+      position: absolute;
+      top: 160px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+    }
+
+    .logo-top img {
+      width: 220px;
+      height: auto;
+      opacity: 0.85;
+    }
+
+    /* Mention fournisseur sous le logo */
+    .sourcing-badge {
+      position: absolute;
+      top: 255px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 30px;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .sourcing-badge strong {
+      color: var(--accent);
+      font-weight: 600;
+      filter: brightness(1.15);
+    }
+
+    /* Nom produit — en grand, centré sous le burger */
+    .product-label {
+      position: absolute;
+      bottom: 220px;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      text-align: center;
+    }
+
+    .product-label .name {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 72px;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 8px;
+      line-height: 1;
+      text-shadow:
+        0 2px 8px rgba(0,0,0,0.6),
+        0 4px 24px rgba(0,0,0,0.3);
+    }
+
+    .product-label .name em {
+      color: var(--accent);
+      font-style: normal;
+      filter: brightness(1.2);
+    }
+
+    .product-label .sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 28px;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      margin-top: 12px;
+    }
+
+    /* Prix — badge discret */
+    .price-badge {
+      position: absolute;
+      bottom: 140px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 4px;
+      padding: 10px 32px;
+      border-radius: 999px;
+      background: rgba(var(--accent-rgb), 0.15);
+      border: 2px solid rgba(var(--accent-rgb), 0.35);
+    }
+
+    .price-badge .amount {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 38px;
+      color: var(--accent);
+      filter: brightness(1.15);
+    }
+
+    .price-badge .currency {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 22px;
+      color: rgba(var(--accent-rgb), 0.7);
+      font-weight: 600;
+    }
+
+    /* Tagline tout en bas */
+    .bottom-section {
+      bottom: 40px;
+    }
+
+    .bottom-section .tagline {
+      font-size: 32px;
+      color: rgba(255,255,255,0.35);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient glow behind product -->
+  <div class="ambient-glow"></div>
+
+  <!-- Product hero — full screen -->
+  <img class="product-fullscreen" src="file:///Users/jorisgustiez/Dev/Claude/neurolia-agency/client-strictfood/public/images/visuels/black-strict-max-boeuf.png" alt="STRICT MAX Boeuf">
+
+  <!-- Gradient overlays -->
+  <div class="top-fade"></div>
+  <div class="smoke-gradient"></div>
+
+  <!-- Logo -->
+  <div class="logo-top">
+    <img src="file:///Users/jorisgustiez/Dev/Claude/neurolia-agency/client-strictfood/production/posts-stories/stories/_templates/_base/logo.svg" alt="STRICT FOOD'S">
+  </div>
+
+  <!-- Sourcing badge -->
+  <div class="sourcing-badge">Viande de grison &middot; <strong>Boucherie Labourde</strong></div>
+
+  <!-- Product name -->
+  <div class="product-label">
+    <div class="name">STRICT <em>MAX</em> Boeuf</div>
+    <div class="sub">Double steak &middot; Pain s&eacute;same artisanal</div>
+  </div>
+
+  <!-- Tagline -->
+  <div class="bottom-section">
+    <div class="tagline">Le cheat meal qui n'en est pas un</div>
+  </div>
+
+</body>
+</html>

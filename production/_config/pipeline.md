@@ -45,6 +45,20 @@
 | Catalogue props | Descriptions packaging brandé | `production/_config/brand-props.md` |
 | Dial BRAND_PRESENCE | 4/10 (~30-40% des posts) | `production/_config/brand-props.md` |
 
+## Vocabulaire ingrédients — Traductions verrouillées (FR → EN prompt)
+
+Certains ingrédients ont un rendu visuel problématique si mal traduits. Ces traductions sont **obligatoires** dans tous les prompts Gemini/GPT.
+
+| Ingrédient (FR) | Traduction prompt (EN) | INTERDIT en prompt |
+|------------------|------------------------|---------------------|
+| Parmesan en miettes / poudreux | "finely grated parmesan dust, tiny powdery granules scattered like sand" | "crumbles", "chunks", "shavings", "shaved", "slices" |
+| Mâche (feuilles entières) | "lamb's lettuce (mâche) — small, round, spoon-shaped whole leaves" | "arugula", "rocket", "lettuce", "spinach" |
+| Oignons rouges en tranches fines | "thin-sliced red onion rings with visible concentric layers" | "diced", "chopped", "minced" |
+| Sauce poivron | "a thin delicate drizzle of yellow-orange pepper sauce — a single fine thread" | "ketchup", "mustard", "mayo", "thick sauce" |
+| Croûte Maillard (chaleur pulsée) | "uniform golden-brown Maillard crust, smooth caramelized surface (oven-seared)" | "grill marks", "char lines", "blackened" |
+
+> **Règle** : le prompt engineer DOIT consulter ce tableau avant d'écrire tout prompt contenant ces ingrédients. Si un terme INTERDIT apparaît dans un prompt, c'est un bug.
+
 ## Modèle par défaut
 
 - Photo sans texte → **Gemini (Nanobanana Pro)**
