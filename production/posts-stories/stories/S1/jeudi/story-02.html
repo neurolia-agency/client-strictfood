@@ -3,19 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=1080">
-  <title>Story Educative — Un nom derrière chaque ingrédient</title>
+  <title>Story Interactive — T'es de quelle team ?</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Oswald:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="file:///Users/dorian.gz/dev/Neurolia%20Agency/client-strictfood/production/posts-stories/stories/_templates/_base/base.css">
+  <link rel="stylesheet" href="/Users/dorian.gz/dev/Neurolia Agency/client-strictfood/production/posts-stories/stories/_templates/_base/base.css">
   <style>
     .content {
-      padding: 120px 70px 100px;
+      padding: var(--safe-top) 70px 280px;
       align-items: flex-start;
-      justify-content: center;
     }
 
-    .edu-label {
+    .question-label {
       font-family: 'DM Sans', sans-serif;
       font-size: 24px;
       color: rgba(255,255,255,0.4);
@@ -24,180 +23,171 @@
       margin-bottom: 30px;
     }
 
-    .edu-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 48px;
-      color: #fff;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      margin-bottom: 60px;
-      max-width: 800px;
-    }
-
-    /* Grand chiffre / fait */
-    .fact-block {
-      margin-bottom: 50px;
-    }
-
-    .fact-number {
+    .question-text {
       font-family: 'Oswald', sans-serif;
       font-weight: 700;
-      font-size: 200px;
+      font-size: 72px;
+      color: #fff;
+      line-height: 1.15;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+      max-width: 900px;
+    }
+
+    .question-text em {
       color: var(--accent);
-      line-height: 0.85;
-      letter-spacing: -6px;
+      font-style: normal;
       filter: brightness(1.2);
     }
 
-    .fact-unit {
-      font-family: 'Oswald', sans-serif;
-      font-weight: 500;
-      font-size: 60px;
-      color: rgba(255,255,255,0.7);
-      text-transform: uppercase;
-      letter-spacing: 6px;
-    }
-
-    /* Explication */
-    .explanation {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 34px;
-      color: rgba(255,255,255,0.75);
-      line-height: 1.6;
-      max-width: 750px;
-      margin-bottom: 60px;
-    }
-
-    .explanation strong {
-      color: #fff;
-      font-weight: 600;
-    }
-
-    /* Comparaison VS (optionnel) */
-    .vs-block {
-      display: flex;
-      gap: 30px;
-      width: 100%;
-      margin-bottom: 50px;
-    }
-
-    .vs-item {
-      flex: 1;
-      padding: 35px;
-      border-radius: 20px;
-      text-align: center;
-    }
-
-    .vs-item.ours {
-      background: rgba(var(--accent-rgb),0.12);
-      border: 2px solid rgba(var(--accent-rgb),0.3);
-    }
-
-    .vs-item.theirs {
-      background: rgba(255,255,255,0.04);
-      border: 2px solid rgba(255,255,255,0.1);
-    }
-
-    .vs-item .vs-label {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 22px;
-      color: rgba(255,255,255,0.45);
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      margin-bottom: 15px;
-    }
-
-    .vs-item.ours .vs-label { color: rgba(var(--accent-rgb),0.7); }
-
-    .vs-item .vs-value {
-      font-family: 'Oswald', sans-serif;
-      font-weight: 700;
-      font-size: 80px;
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-
-    .vs-item.ours .vs-value { color: var(--accent); filter: brightness(1.2); }
-    .vs-item.theirs .vs-value { color: rgba(255,255,255,0.5); }
-
-    .vs-item .vs-unit {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 24px;
-      color: rgba(255,255,255,0.45);
-    }
-
-    .vs-separator {
+    /* Zone reservee au sticker Instagram */
+    .sticker-zone {
+      position: absolute;
+      width: 900px;
+      height: 300px;
+      border: 3px dashed rgba(var(--accent-rgb),0.3);
+      border-radius: 24px;
       display: flex;
       align-items: center;
       justify-content: center;
+      left: 90px;
+      bottom: 670px;
+      z-index: 12;
+    }
+
+    .sticker-zone-text {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 24px;
+      color: rgba(255,255,255,0.25);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+    }
+
+    .option-preview {
+      display: flex;
+      gap: 30px;
+      margin-top: auto;
+      margin-bottom: 40px;
+      width: 100%;
+    }
+
+    .option-card {
+      flex: 1;
+      padding: 35px 30px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.05);
+      border: 2px solid rgba(255,255,255,0.1);
+      text-align: center;
+    }
+
+    .option-card .emoji {
+      font-size: 60px;
+      margin-bottom: 15px;
+    }
+
+    .option-card .option-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 30px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* ===== VS TYPOGRAPHIC BLOCK ===== */
+    .vs-typo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      width: 100%;
+      margin-bottom: 0;
+    }
+
+    .vs-name {
       font-family: 'Oswald', sans-serif;
-      font-size: 36px;
-      color: rgba(255,255,255,0.3);
       font-weight: 700;
+      font-size: 90px;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.5), 0 4px 16px rgba(0,0,0,0.2);
+    }
+
+    .vs-separator {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 60px;
+      color: var(--accent);
+      filter: brightness(1.2);
+      letter-spacing: 2px;
+    }
+
+    /* ===== DUAL PRODUCT IMAGES ===== */
+    .product-left,
+    .product-right {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      object-fit: cover;
+      z-index: 4;
+      opacity: 0.60;
+      filter: brightness(1.1) sepia(var(--img-sepia)) saturate(var(--img-saturate));
+    }
+
+    .product-left {
+      left: -80px;
+      bottom: 280px;
+      mask-image: radial-gradient(ellipse 85% 85% at 40% 50%, rgba(0,0,0,1) 20%, rgba(0,0,0,0.3) 55%, transparent 72%);
+      -webkit-mask-image: radial-gradient(ellipse 85% 85% at 40% 50%, rgba(0,0,0,1) 20%, rgba(0,0,0,0.3) 55%, transparent 72%);
+    }
+
+    .product-right {
+      right: -80px;
+      bottom: 260px;
+      mask-image: radial-gradient(ellipse 85% 85% at 60% 50%, rgba(0,0,0,1) 20%, rgba(0,0,0,0.3) 55%, transparent 72%);
+      -webkit-mask-image: radial-gradient(ellipse 85% 85% at 60% 50%, rgba(0,0,0,1) 20%, rgba(0,0,0,0.3) 55%, transparent 72%);
     }
   </style>
 </head>
-<body class="">
+<body class=" ">
 
-  <!-- Optional background image -->
-  <img class="bg-image" src="file:///Users/dorian.gz/dev/Neurolia%20Agency/client-strictfood/public/images/photos-references/dark-bg/burger-simple-boeuf-dark-bg.png" alt="" style="display: block; opacity: 0.80; filter: brightness(1.35) sepia(0.12) saturate(0.90)">
+  <!-- Dual product images -->
+  <img class="product-left" src="/Users/dorian.gz/dev/Neurolia Agency/client-strictfood/public/images/photos-references/produits-source/wraps/strict-wrap-boeuf.png" alt="Wrap">
+  <img class="product-right" src="/Users/dorian.gz/dev/Neurolia Agency/client-strictfood/public/images/photos-references/produits-source/burgers-black/strict-boeuf.png" alt="Burger">
 
   <!-- Gradient overlays -->
   <div class="gradient-top"></div>
   <div class="gradient-bottom"></div>
-  <div class="gradient-left"></div>
-
-  <!-- Decorative accent line -->
-  <div class="accent-line"></div>
+  <div class="ambient-bottom"></div>
 
   <!-- Main content -->
   <div class="content">
 
     <!-- Logo -->
     <div class="logo-container">
-      <img src="file:///Users/dorian.gz/dev/Neurolia%20Agency/client-strictfood/production/posts-stories/stories/_templates/_base/logo.svg" alt="STRICT FOOD'S">
+      <img src="/Users/dorian.gz/dev/Neurolia Agency/client-strictfood/production/posts-stories/stories/_templates/_base/logo.svg" alt="STRICT FOOD'S">
     </div>
 
-    <div class="edu-label">Le savais-tu ?</div>
+    <div class="question-label">Ton avis</div>
 
-    <div class="edu-title text-depth">Un nom derrière chaque ingrédient</div>
+    <div class="question-text text-depth">T'es de quelle team ?</div>
 
-    <!-- Grand chiffre -->
-    <div class="fact-block">
-      <div class="fact-number">3</div>
-      <div class="fact-unit">artisans perpignanais</div>
-    </div>
-
-    <!-- Explication -->
-    <div class="explanation text-depth mark-tape"><strong>Labourde</strong> pour la viande.<br><strong>Pains du Soleil</strong> pour le pain.<br><strong>Myfitcheese</strong> pour le fromage.<br>Des produits frais et locaux.</div>
-
-    <!-- Bloc VS -->
-    <div class="vs-block" style="display: flex">
-      <div class="vs-item ours">
-        <div class="vs-label">Strict Food's</div>
-        <div class="vs-value">3</div>
-        <div class="vs-unit">fournisseurs locaux</div>
-      </div>
+    <!-- Bloc VS typographique -->
+    <div class="vs-typo text-depth">
+      <div class="vs-name">Wrap</div>
       <div class="vs-separator">VS</div>
-      <div class="vs-item theirs">
-        <div class="vs-label">Fast-food</div>
-        <div class="vs-value">0</div>
-        <div class="vs-unit">fournisseur identifiable</div>
-      </div>
+      <div class="vs-name">Burger</div>
+    </div>
+
+    <!-- Zone ou l'operateur placera le sticker Instagram -->
+    <div class="sticker-zone">
+      <div class="sticker-zone-text">Zone sticker sondage</div>
     </div>
 
   </div>
 
-  <!-- Zone blend (transition bg → product-hero, visible only if hero present) -->
-  <div class="zone-blend" style="display: none"></div>
-
-  <!-- Product hero (optional — dual-image pattern for visual richness) -->
-  <img class="product-hero" src="" alt="" style="display: none">
-
   <!-- Bottom -->
-  <div class="bottom-section">
-    <div class="tagline">Le cheat meal qui n'en est pas un</div>
+  <div class="bottom-section" style="padding-top: 40px; padding-bottom: 180px;">
+    <div class="tagline">Le cheat meal qui n'en est pas un.</div>
   </div>
 
 </body>
