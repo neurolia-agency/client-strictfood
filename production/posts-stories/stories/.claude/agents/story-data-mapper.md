@@ -155,6 +155,70 @@ Ce champ est **informatif** (pour le checkpoint opérateur). Il ne correspond pa
 | `{{PHOTO_TRANSFORM}}` | [CSS transform correctif ou "none"] |
 ```
 
+### Interactif (template: `interactif.html`)
+
+Le template interactif supporte **deux modes** :
+
+**Mode Single** — question générale (ex: "Après ton burger, tu prends quoi ?") avec une image de fond atmosphérique :
+
+```markdown
+# Story [NN] — Data Mapping (Interactif — Single)
+
+| Placeholder | Valeur |
+|---|---|
+| `{{MOOD_CLASS}}` | [classe CSS mood] |
+| `{{IMG_CLASS}}` | [classe CSS image] |
+| `{{VS_CLASS}}` | `` |
+| `{{QUESTION}}` | [texte question — accepte <em>] |
+| `{{SHOW_IMAGE}}` | block |
+| `{{BG_IMAGE_PATH}}` | [chemin absolu photo de fond] |
+| `{{SHOW_VS}}` | none |
+| `{{PRODUCT_A_IMAGE}}` | `` |
+| `{{PRODUCT_B_IMAGE}}` | `` |
+| `{{PRODUCT_A_LABEL}}` | `` |
+| `{{PRODUCT_B_LABEL}}` | `` |
+| `{{TAGLINE}}` | [tagline bottom] |
+| `{{BRAND_PROP}}` | [prop visible ou "aucun"] |
+```
+
+**Mode VS** — choix entre deux produits (ex: "Wrap ou Burger ?") avec dual-image et bloc typographique VS :
+
+```markdown
+# Story [NN] — Data Mapping (Interactif — VS)
+
+| Placeholder | Valeur |
+|---|---|
+| `{{MOOD_CLASS}}` | [classe CSS mood] |
+| `{{IMG_CLASS}}` | [classe CSS image] |
+| `{{VS_CLASS}}` | vs-mode |
+| `{{QUESTION}}` | [texte question — accepte <em>] |
+| `{{SHOW_IMAGE}}` | none |
+| `{{BG_IMAGE_PATH}}` | `` |
+| `{{SHOW_VS}}` | flex |
+| `{{PRODUCT_A_IMAGE}}` | [chemin absolu photo produit A] |
+| `{{PRODUCT_B_IMAGE}}` | [chemin absolu photo produit B] |
+| `{{PRODUCT_A_LABEL}}` | [nom court produit A — ex: "Wrap"] |
+| `{{PRODUCT_B_LABEL}}` | [nom court produit B — ex: "Burger"] |
+| `{{TAGLINE}}` | [tagline bottom] |
+| `{{BRAND_PROP}}` | [prop visible ou "aucun"] |
+```
+
+**Quand utiliser le mode VS :**
+- Le brief propose un choix entre **deux produits identifiables** de la carte (burger vs wrap, boeuf vs poulet, etc.)
+- Les deux produits ont une **photo produit disponible** dans la bibliothèque
+- La question porte sur une **préférence produit** (pas une question d'opinion générale)
+
+**Quand rester en mode Single :**
+- La question est générale ("Tu préfères manger midi ou soir ?", "Après ton burger, tu prends quoi ?")
+- Les options ne sont pas des produits photographiables de la carte
+- Une seule image de fond suffit à porter le visuel
+
+**Résolution des images VS :**
+- Produit A = image gauche, Produit B = image droite
+- Préférer les photos `produits-source/` (fond transparent ou détouré) pour un meilleur rendu avec les masques radiaux
+- Les photos `dark-bg/` fonctionnent aussi mais le masque peut révéler les bords du fond
+- Les labels doivent être **courts** (1 mot idéalement, max 2) car ils s'affichent en 90px Oswald
+
 ## Alignement photo — Correction de rotation
 
 Si le brief contient un champ `Alignement photo` avec un element de reference (ex: "enseigne STRICT FOOD'S") :

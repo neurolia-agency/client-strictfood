@@ -11,7 +11,7 @@
 
 | Champ | Valeur |
 |-------|--------|
-| Type | [Fiche Produit / Teaser / Interactif / Éducatif / Annonce / Lieu / Focus Ingrédient / Recap] |
+| Type | [Fiche Produit / Interactif / Éducatif / Annonce / Lieu / Focus Ingrédient / Recap] |
 | Highlight | [LA CARTE / COULISSES / NOS ARTISANS / NOUS TROUVER / L'ÉQUIPE / —] |
 | Qui produit | Pipeline |
 | Template | `[template].html` |
@@ -57,27 +57,25 @@ Image hero : `[chemin vers photo ingrédient en gros plan — OBLIGATOIRE]`
 > **Note** : Ce template utilise le style Vitrine. L'ingrédient est en hero plein cadre, lumineux, sans filtre.
 > **Highlight recommandé** : NOS ARTISANS
 
-#### Si type = Teaser (template: `teaser-post.html`)
-
-Post teasé : `production/posts-stories/posts/[periode]/[SX]/YYYY-MM-DD/` (ou description)
-Label : `[mot-clé haut de story — ex: "EXCLU" / "SPOILER" / "BIENTÔT" — éviter la redondance avec le hook]`
-Hook : `[Phrase d'accroche — ex: "On casse les codes."]`
-Date de publication du post : `[JJ/MM ou "Aujourd'hui" ou "Demain"]`
-Sous-texte : `[Texte complémentaire]`
-Image de fond : `[chemin vers photo pertinente OU "aucune" — préférer une image contextuelle]`
-Alignement photo : `[element horizontal de reference — ex: "enseigne STRICT FOOD'S" / "comptoir" / "—"]`
-
 #### Si type = Interactif (template: `interactif.html`)
 
 Format sticker : [Sondage 2 choix / Quiz / Slider / Question ouverte]
 Question : `[Texte de la question]`
 Option A : `[texte]`
-Option A Emoji : `[emoji]`
 Option B : `[texte]`
-Option B Emoji : `[emoji]`
-Image de fond : `[chemin vers photo pertinente OU "aucune" — préférer une image contextuelle]`
-Alignement photo : `[element horizontal de reference — ex: "enseigne STRICT FOOD'S" / "comptoir" / "—"]`
 Tagline : `[texte ou "—"]`
+
+**Mode visuel** : [Single / VS]
+
+**Si Single** (question générale, pas de comparaison produit) :
+Image de fond : `[chemin vers photo pertinente OU "aucune"]`
+
+**Si VS** (choix entre deux produits identifiables) :
+Produit A : `[nom court — ex: "Wrap"]` — image : `[chemin vers photo produit A]`
+Produit B : `[nom court — ex: "Burger"]` — image : `[chemin vers photo produit B]`
+
+> **Quand utiliser VS** : dès que les deux options sont des produits de la carte avec photos disponibles (burger vs wrap, boeuf vs poulet, etc.). Le template affiche les deux images en split + un bloc typographique "A VS B".
+> **Quand rester en Single** : question d'opinion générale, options abstraites, ou un seul produit en fond.
 
 #### Si type = Éducatif (template: `educatif.html`)
 
@@ -126,12 +124,12 @@ Texte overlay recommandé : `[texte]`
 |------|----------|-------|
 | Fiche Produit | `produit-vitrine.html` | **Vitrine** (coloré, produit hero) |
 | Focus Ingrédient | `focus-ingredient.html` | **Vitrine** (coloré, ingrédient hero) |
-| Teaser | `teaser-post.html` | Dark Premium |
 | Éducatif | `educatif.html` | Dark Premium |
 | Interactif | `interactif.html` | Dark Premium |
 | Annonce / Lieu | `annonce.html` | Dark Premium |
 
 > **Objectif** : alterner systématiquement Dark Premium et Vitrine dans la séquence du jour pour casser la monotonie visuelle. Chaque jour devrait avoir au moins 1 story Vitrine.
+> **Interactifs** : 2-3 par semaine (max 3). Quand un slot Dark Premium est disponible, prioriser Interactif — c'est le type qui génère le plus de rétention (action mesurable : tap, vote, réponse).
 
 ## Étape suivante
 

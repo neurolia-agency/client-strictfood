@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="_base/base.css">
   <style>
     .content {
-      padding: var(--safe-top) 70px 280px;
+      padding: var(--safe-top) 70px 0;
       align-items: flex-start;
     }
 
@@ -30,7 +30,7 @@
       color: #fff;
       line-height: 1.15;
       text-transform: uppercase;
-      margin-bottom: 60px;
+      margin-bottom: 50px;
       max-width: 900px;
     }
 
@@ -40,16 +40,15 @@
       filter: brightness(1.2);
     }
 
-    /* Zone reservee au sticker Instagram */
+    /* Zone reservee au sticker Instagram (sondage/quiz/slider) */
     .sticker-zone {
       width: 900px;
-      height: 300px;
+      height: 260px;
       border: 3px dashed rgba(var(--accent-rgb),0.3);
       border-radius: 24px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 60px;
     }
 
     .sticker-zone-text {
@@ -60,47 +59,82 @@
       letter-spacing: 4px;
     }
 
-    .option-preview {
-      display: flex;
-      gap: 30px;
-      margin-top: auto;
-      margin-bottom: 40px;
-    }
-
-    .option-card {
-      flex: 1;
-      padding: 35px 30px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.05);
-      border: 2px solid rgba(255,255,255,0.1);
-      text-align: center;
-    }
-
-    .option-card .emoji {
-      font-size: 60px;
-      margin-bottom: 15px;
-    }
-
-    .option-card .option-text {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 30px;
-      font-weight: 600;
-      color: rgba(255,255,255,0.8);
-    }
-
+    /* ===== MODE SINGLE — hero image unique (questions generales) ===== */
     .hero-image {
-      width: 800px;
-      height: 600px;
-      right: 140px;
-      bottom: 200px;
-      opacity: 0.6;
+      width: 950px;
+      height: 650px;
+      right: 65px;
+      bottom: 320px;
+      opacity: 0.5;
+    }
+
+    /* ===== MODE VS — dual product images (choix A vs B) ===== */
+    .vs-typo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      width: 100%;
+      margin-bottom: 30px;
+    }
+
+    .vs-name {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 90px;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+    }
+
+    .vs-separator {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 60px;
+      color: var(--accent);
+      filter: brightness(1.2);
+      letter-spacing: 2px;
+    }
+
+    .product-left,
+    .product-right {
+      position: absolute;
+      width: 620px;
+      height: 620px;
+      object-fit: cover;
+      z-index: 4;
+      opacity: 0.88;
+      filter: brightness(1.05) saturate(1.1);
+    }
+
+    .product-left {
+      left: -40px;
+      bottom: 270px;
+      mask-image: radial-gradient(ellipse 90% 90% at 45% 50%, rgba(0,0,0,1) 30%, rgba(0,0,0,0.5) 60%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 90% 90% at 45% 50%, rgba(0,0,0,1) 30%, rgba(0,0,0,0.5) 60%, transparent 80%);
+    }
+
+    .product-right {
+      right: -40px;
+      bottom: 250px;
+      mask-image: radial-gradient(ellipse 90% 90% at 55% 50%, rgba(0,0,0,1) 30%, rgba(0,0,0,0.5) 60%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 90% 90% at 55% 50%, rgba(0,0,0,1) 30%, rgba(0,0,0,0.5) 60%, transparent 80%);
+    }
+
+    /* Ajustements en mode VS */
+    body.vs-mode .question-text {
+      margin-bottom: 20px;
     }
   </style>
 </head>
-<body class="{{MOOD_CLASS}} {{IMG_CLASS}}">
+<body class="{{MOOD_CLASS}} {{IMG_CLASS}} {{VS_CLASS}}">
 
-  <!-- Optional product image (dimmed) -->
+  <!-- Mode single : hero image unique (questions generales) -->
   <img class="hero-image" src="{{BG_IMAGE_PATH}}" alt="" style="display: {{SHOW_IMAGE}}">
+
+  <!-- Mode VS : dual product images (choix produit A vs B) -->
+  <img class="product-left" src="{{PRODUCT_A_IMAGE}}" alt="" style="display: {{SHOW_VS}}">
+  <img class="product-right" src="{{PRODUCT_B_IMAGE}}" alt="" style="display: {{SHOW_VS}}">
 
   <!-- Gradient overlays -->
   <div class="gradient-top"></div>
@@ -119,19 +153,14 @@
 
     <div class="question-text text-depth">{{QUESTION}}</div>
 
-    <!-- Options preview (le vrai sondage sera via sticker Instagram) -->
-    <div class="option-preview">
-      <div class="option-card">
-        <div class="emoji">{{OPTION_A_EMOJI}}</div>
-        <div class="option-text">{{OPTION_A}}</div>
-      </div>
-      <div class="option-card">
-        <div class="emoji">{{OPTION_B_EMOJI}}</div>
-        <div class="option-text">{{OPTION_B}}</div>
-      </div>
+    <!-- Bloc VS typographique (mode VS uniquement) -->
+    <div class="vs-typo text-depth" style="display: {{SHOW_VS}}">
+      <div class="vs-name">{{PRODUCT_A_LABEL}}</div>
+      <div class="vs-separator">VS</div>
+      <div class="vs-name">{{PRODUCT_B_LABEL}}</div>
     </div>
 
-    <!-- Zone ou l'operateur placera le sticker Instagram -->
+    <!-- Zone ou l'operateur placera le sticker Instagram (sondage/quiz/slider) -->
     <div class="sticker-zone">
       <div class="sticker-zone-text">Zone sticker sondage</div>
     </div>
