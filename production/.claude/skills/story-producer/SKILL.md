@@ -434,6 +434,11 @@ Les templates intègrent ces valeurs via les variables CSS `--safe-top` et `--sa
 7. **Vérifier que les fichiers image existent** avant de générer le HTML. Si image manquante → warning dans le checkpoint + entrée dans Demande Photos.
 8. **Pas de vidéo** — le pipeline ne produit que des images statiques (PNG/JPG 1080×1920).
 9. **Variation quotidienne** — signaler à l'opérateur si un jour n'a que des stories Dark Premium sans aucune Vitrine.
+10. **Style v2 — Réalisme** : les principes de réalisme documentaire du pipeline Posts s'appliquent aussi aux stories. Concrètement :
+    - Le **data mapper** doit privilégier les photos du produit réel (same-product priority, pas de cross-product)
+    - Le **copywriter** doit utiliser un langage fidèle (pas de sur-promesse sur les portions/garnitures)
+    - Au **checkpoint**, vérifier que la photo sélectionnée montre des proportions réalistes et un black bun
+    - Si le logo STRICT FOOD'S est visible dans la photo sélectionnée, vérifier qu'il est lisible et fidèle (icône burger dans le O)
 
 ## Gestion d'erreurs
 

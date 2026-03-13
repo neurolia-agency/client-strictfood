@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080">
+  <title>Story Interactive — T'es de quelle team ?</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Oswald:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/Users/jorisgustiez/Dev/Claude/neurolia-agency/client-strictfood/production/posts-stories/stories/_templates/_base/base.css">
+  <style>
+    .content {
+      padding: var(--safe-top) 70px 280px;
+      align-items: flex-start;
+    }
+
+    .question-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 24px;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      margin-bottom: 30px;
+    }
+
+    .question-text {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 72px;
+      color: #fff;
+      line-height: 1.15;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+      max-width: 900px;
+    }
+
+    .question-text em {
+      color: var(--accent);
+      font-style: normal;
+      filter: brightness(1.2);
+    }
+
+    /* Zone reservee au sticker Instagram */
+    .sticker-zone {
+      position: absolute;
+      width: 900px;
+      height: 300px;
+      border: 3px dashed rgba(var(--accent-rgb),0.3);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      left: 90px;
+      bottom: 850px;
+      z-index: 12;
+    }
+
+    .sticker-zone-text {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 24px;
+      color: rgba(255,255,255,0.25);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+    }
+
+    /* ===== VS TYPOGRAPHIC BLOCK ===== */
+    .vs-typo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      width: 100%;
+      margin-bottom: 0;
+    }
+
+    .vs-name {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 90px;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.5), 0 4px 16px rgba(0,0,0,0.2);
+    }
+
+    .vs-separator {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 60px;
+      color: var(--accent);
+      filter: brightness(1.2);
+      letter-spacing: 2px;
+    }
+
+    /* ===== PRODUCT SCENE IMAGE ===== */
+    .product-scene {
+      position: absolute;
+      width: 1080px;
+      left: 0;
+      bottom: 200px;
+      z-index: 4;
+      object-fit: cover;
+      mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 80%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 80%, transparent 100%);
+    }
+  </style>
+</head>
+<body class=" ">
+
+  <!-- Product scene (single generated image — wrap boeuf + burger poulet) -->
+  <img class="product-scene" src="/Users/jorisgustiez/Dev/Claude/neurolia-agency/client-strictfood/production/posts-stories/stories/S1/jeudi/wrap-vs-poulet-scene.png" alt="Wrap vs Burger Poulet">
+
+  <!-- Gradient overlays -->
+  <div class="gradient-top"></div>
+  <div class="gradient-bottom"></div>
+  <div class="ambient-bottom"></div>
+
+  <!-- Main content -->
+  <div class="content">
+
+    <!-- Logo -->
+    <div class="logo-container">
+      <img src="/Users/jorisgustiez/Dev/Claude/neurolia-agency/client-strictfood/production/posts-stories/stories/_templates/_base/logo.svg" alt="STRICT FOOD'S">
+    </div>
+
+    <div class="question-label">Ton avis</div>
+
+    <div class="question-text text-depth">T'es de quelle team ?</div>
+
+    <!-- Bloc VS typographique -->
+    <div class="vs-typo text-depth mark-tape">
+      <div class="vs-name">Wrap</div>
+      <div class="vs-separator">VS</div>
+      <div class="vs-name">Burger</div>
+    </div>
+
+    <!-- Zone ou l'operateur placera le sticker Instagram -->
+    <div class="sticker-zone">
+      <div class="sticker-zone-text">Zone sticker sondage</div>
+    </div>
+
+  </div>
+
+  <!-- Bottom -->
+  <div class="bottom-section" style="padding-top: 40px; padding-bottom: 180px;">
+    <div class="tagline">Le cheat meal qui n'en est pas un.</div>
+  </div>
+
+</body>
+</html>

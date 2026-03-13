@@ -38,6 +38,23 @@
 
 **Toujours 4K** — pas de draft, pas d'intermédiaire.
 
+## Style v2 — Réalisme documentaire
+
+Principes visuels obligatoires pour toutes les générations de visuels Instagram :
+
+| Principe | Règle | Interdit |
+|----------|-------|----------|
+| Réalisme > Perfection | Documentary-style food photography, imperfections naturelles (miettes tombées, asymétrie, plis du papier, feuille égarée) | Stock photo parfaite, symétrie artificielle, propreté irréaliste |
+| Proportions fidèles | Burger compact et dense comme le vrai produit | Burger towering/magazine, proportions exagérées |
+| Garnitures réalistes | Mâche : max 3-5 petites feuilles, certaines pliées/naturelles | Bouquet luxuriant, couronne de salade, gouttelettes parfaites |
+| Sauce | Filet unique irrégulier, subtil | Spirale parfaite, nappe épaisse, drizzle graphique |
+| Ambiance | Cuisine réelle en arrière-plan (inox, surfaces sombres, flou) | Fond studio void pur noir, fond uni numérique |
+| Grain et couleur | Film-like natural color, léger grain, tons chauds naturels | HDR, surexposition, post-traitement saturé |
+| Photo input | TOUJOURS la photo du produit réel (strict-boeuf.png pour un boeuf) | Cross-product transform (poulet→boeuf) sauf si aucune photo du produit réel n'existe |
+| Logo sur props | Fournir `public/logo/strictfood-logo-reference.png` via `--reference-image` | Décrire le logo uniquement en texte sans référence visuelle |
+
+> Ces règles s'appliquent à tous les agents et skills du pipeline. L'art director, le prompt engineer et l'opérateur doivent les respecter.
+
 ## Brand Props
 
 | Élément | Valeur | Source |

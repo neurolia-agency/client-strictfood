@@ -29,12 +29,17 @@ L'orchestrateur te passe le chemin d'un dossier post (ex: `production/posts-stor
 5. **Pour un carrousel**, crée une entrée par slide.
 6. **Ne modifie RIEN d'autre** que le fichier `00-input/input.md`. Tu ne touches pas à la direction créative.
 
+## Règle de priorité — Same-product first
+
+**TOUJOURS utiliser la photo du produit réel en priorité.** Pour un post sur le STRICT Boeuf, utiliser une photo du STRICT Boeuf. Le cross-product (ex: photo poulet → transformer en boeuf via le prompt) est un **DERNIER RECOURS**, uniquement si aucune photo du produit réel n'existe dans le catalogue. Si un cross-product est utilisé, le justifier explicitement avec `⚠️ CROSS-PRODUCT — [raison]`.
+
 ## Règle de priorité — Burgers Black Bun
 
 Pour tout produit de type **burger** (STRICT Boeuf, STRICT Poulet, STRICT MAX Boeuf, STRICT MAX Poulet, STRICT Végé Falafel) :
 
-1. **Chercher EN PRIORITÉ** dans la section `## BURGERS BLACK BUN` de `photo-references.md`
+1. **Chercher EN PRIORITÉ** dans la section `## BURGERS BLACK BUN` de `photo-references.md` pour le produit exact demandé
 2. Ne fallback sur les sections BURGERS classiques ou Dark-bg que si le produit n'a PAS d'entrée dans BURGERS BLACK BUN
+3. Ne fallback sur un cross-product (autre burger du même type) qu'en dernier recours
 
 Pour tout **autre produit** (desserts, wraps, snacks, boissons) :
 - Chercher normalement dans `produits-source/` (pas de contrainte burgers-black)

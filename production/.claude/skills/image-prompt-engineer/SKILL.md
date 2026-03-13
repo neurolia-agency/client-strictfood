@@ -147,11 +147,30 @@ Cette instruction est **obligatoire** et ne doit jamais être omise, même si le
 #### 4. Brand props — fidélité packaging
 Si la direction créative inclut un brand prop, le prompt DOIT :
 - Décrire le matériau exact (papier kraft noir mat, carton recyclé sombre, etc.)
-- Spécifier le logo "STRICTFOOD" en majuscules, typographie condensée bold
-- Utiliser la couleur exacte : Cuivre Braisé (#BF8522) sur fond sombre OU noir mat sur kraft clair
+- Spécifier le logo "STRICT FOOD'S" en majuscules condensées bold — **le second O de FOOD est une icône burger stylisée** (cercle avec 3 lignes ondulées = couches burger, base plate = bun bas). L'apostrophe-S fait partie du nom.
+- Utiliser la couleur exacte : Cuivre Braisé (#BF8522) sur fond sombre OU blanc sur fond sombre OU noir mat sur kraft clair
 - Intégrer le prop comme élément d'environnement/setting, JAMAIS comme sujet principal
 - L'éclairage sur le prop suit l'éclairage global (pas de spotlight dédié)
-- **Fournir le logo en image référence secondaire** : `public/logo/strictfood-logo-reference.png` — à passer en input image à Nanobanana/GPT en plus de la photo produit, avec l'instruction : "Match the exact logo design shown in the logo reference image for any branded packaging elements."
+- **OBLIGATOIRE — Fournir le logo en image référence secondaire** : `public/logo/strictfood-logo-reference.png` via `--reference-image` dans la commande de génération. Le prompt DOIT contenir : "Reproduce the exact STRICT FOOD'S logo shown in the second reference image on the branded packaging — especially the burger icon replacing the O."
+
+#### 5. Style v2 — Réalisme documentaire
+
+Chaque prompt Mode B DOIT intégrer des marqueurs de réalisme. Ces règles sont **non négociables** :
+
+| Aspect | Obligation | Interdit |
+|--------|-----------|----------|
+| Imperfections | Au moins 2 par prompt : miettes tombées, pli du papier, feuille égarée, asymétrie, grain naturel | Perfection symétrique, propreté irréaliste |
+| Garnitures | Quantités réalistes : mâche = max 3-5 petites feuilles (certaines pliées/naturelles) | Bouquets luxuriants, couronnes de verdure, grappes parfaites |
+| Sauce | Filet unique irrégulier, subtil | Spirale parfaite, nappe épaisse, drizzle graphique |
+| Proportions | Burger compact/dense comme le vrai produit | Towering, exagéré, style magazine food |
+| Ambiance fond | Cuisine réelle en arrière-plan (inox, surfaces sombres, flou) | Fond studio void noir pur, fond uni numérique |
+| Couleur/grain | Film-like natural color, léger grain, tons chauds naturels | HDR, surexposition, post-traitement saturé |
+| Photo input | TOUJOURS la photo du produit réel (strict-boeuf.png pour un boeuf) | Cross-product (photo poulet → transformer en boeuf) sauf dernier recours |
+
+**Template d'instructions de réalisme** à intégrer en fin de prompt :
+```
+The overall feel should be documentary-style food photography — real, slightly imperfect, authentic. NOT a stock photo. Slight natural film grain.
+```
 
 ---
 

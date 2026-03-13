@@ -4,12 +4,26 @@
 
 | Element | Valeur |
 |---------|--------|
-| Logo | "STRICTFOOD" — majuscules, typographie condensee bold (style Oswald) |
-| Couleur logo | Cuivre Braise (#BF8522 / oklch(0.67 0.15 68)) sur fond sombre OU noir mat sur kraft clair |
+| Logo | "STRICT FOOD'S" — deux mots, majuscules, typographie condensee bold (style Oswald). **Le second O de FOOD est remplace par une icone burger stylisee** : un cercle contenant 3 lignes ondulees horizontales (couches du burger) avec une base plate (bun du bas). L'apostrophe-S ('S) fait partie du nom de marque. |
+| Couleur logo | Cuivre Braise (#BF8522 / oklch(0.67 0.15 68)) sur fond sombre OU blanc sur fond sombre OU noir mat sur kraft clair |
 | Materiaux dominants | Papier kraft noir mat, carton recycle sombre, kraft naturel |
 | Finition | Toujours mat, jamais brillant ni plastifie |
 | Logo reference PNG (cuivre) | `public/logo/strictfood-logo-reference.png` (2200x608, Cuivre Braise sur Charbon) |
 | Logo reference PNG (blanc) | `public/logo/strictfood-logo-white-reference.png` (2200x608, Blanc sur Charbon) |
+
+### Logo description pour prompts (EN) — A copier dans tout prompt contenant un prop brande
+
+```
+The logo reads "STRICT FOOD'S" in bold condensed uppercase. The second O in FOOD is replaced by a stylized burger icon — a circle containing 3 wavy horizontal lines representing burger layers, with a flat base representing the bottom bun. The apostrophe-S is part of the brand name. The entire logo including the burger icon is rendered in warm matte copper-gold tone.
+```
+
+### Regle de reference visuelle logo
+
+**OBLIGATOIRE** : Quand un visuel contient un prop avec logo, fournir `public/logo/strictfood-logo-reference.png` via le parametre `--reference-image` du script de generation. Le modele recoit ainsi :
+- `--input-image` = photo produit (fidelite burger)
+- `--reference-image` = logo PNG (fidelite logo)
+
+Le prompt doit inclure : "Reproduce the exact STRICT FOOD'S logo shown in the second reference image on the branded packaging — especially the burger icon replacing the O."
 
 ## Dial BRAND_PRESENCE
 

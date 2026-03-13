@@ -196,6 +196,16 @@ Pour chaque concept récurrent, **tu DOIS piocher dans la banque de variantes ci
 
 **Si le brief contient déjà "zéro X"** dans son texte source, tu DOIS le reformuler avec une variante. Le brief est un brouillon — ton rôle est justement d'élever le texte au-dessus des tics.
 
+### 11. Réalisme — langage fidèle au produit
+
+Le copy doit refléter ce que le client reçoit réellement :
+
+- **Proportions** : ne jamais décrire un burger comme "imposant", "towering", "géant". Vocabulaire correct : "généreux", "dense", "compact", "bien garni".
+- **Garnitures** : ne pas exagérer les quantités. Si la recette dit "mâche", écrire "mâche" sans l'enrober de "lit de verdure" ou "bouquet généreux".
+- **Sauce** : "filet de sauce poivron", pas "nappe", pas "cascade".
+- **Promesses** : ne rien promettre qui n'est pas dans la fiche recette. Pas de "triple steak" si c'est un simple, pas de "cheddar fondant" si le fromage est Myfitcheese.
+- **Photos** : si le copy mentionne un ingrédient, il doit être dans la recette. Zéro invention.
+
 ## Format de sortie
 
 Tu retournes un markdown structuré avec :

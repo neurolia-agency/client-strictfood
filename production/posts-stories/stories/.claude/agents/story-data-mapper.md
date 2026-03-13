@@ -93,6 +93,19 @@ Ce champ est **informatif** (pour le checkpoint opérateur). Il ne correspond pa
 
 **Pain noir obligatoire** : tous les burgers StrictFood sont au pain noir (black bun). Ne JAMAIS sélectionner une photo de burger au pain blanc/classique. Si la seule photo disponible montre un pain blanc → signaler `⚠️ PHOTO NON CONFORME — burger pain blanc` et chercher une alternative dans `burgers-black/` ou `dark-bg/`.
 
+## Règles de réalisme — Sélection photo (Style v2)
+
+Ces règles alignent la sélection photo des stories avec les principes de réalisme du pipeline Posts :
+
+### Same-product priority
+Pour une story sur le STRICT Boeuf, utiliser EN PRIORITÉ une photo du STRICT Boeuf — pas une photo d'un autre burger. Le cross-product (ex: photo poulet pour illustrer un boeuf) est un **DERNIER RECOURS**, uniquement si aucune photo du produit réel n'existe. Si utilisé, justifier avec `⚠️ CROSS-PRODUCT — [raison]`.
+
+### Proportions réalistes
+Privilégier les photos montrant le produit avec des **proportions compactes et fidèles** (fast-good, pas gourmet magazine). Éviter les photos où le burger paraît artificiellement haut ou les garnitures débordent de manière irréaliste.
+
+### Logo STRICT FOOD'S
+Quand un brand prop est visible dans la photo sélectionnée, noter la fidélité du logo dans le data mapping. Le logo correct lit "STRICT FOOD'S" avec une icône burger stylisée remplaçant le second O de FOOD. Si le logo dans la photo est tronqué ou illisible, le signaler : `⚠️ LOGO — [description du problème]`.
+
 ## Format de sortie
 
 ### Fiche Produit (template: `produit-vitrine.html`)

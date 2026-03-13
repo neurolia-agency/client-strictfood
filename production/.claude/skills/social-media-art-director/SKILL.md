@@ -158,6 +158,16 @@ Décider pour chaque visuel :
 | L'Équipe | Chaleur humaine, authenticité, connexion | Plus naturel, éclairage chaud, sourires |
 | Le Quartier | Ancrage local, proximité, communauté | Varié, reprend le ton du contenu partagé |
 
+### Style v2 — Garde-fous réalisme
+
+Ces règles s'appliquent à **toutes** les fiches de direction créative :
+
+1. **Garnitures réalistes** : toujours spécifier des quantités réalistes dans la fiche. Mâche = "3-5 petites feuilles, certaines pliées ou chevauchées naturellement". JAMAIS "bouquet", "couronne", "lit de verdure".
+2. **Imperfections obligatoires** : chaque fiche doit mentionner au moins 2 imperfections naturelles dans la section Texture/Composition : miettes tombées sur le papier, pli du packaging, feuille égarée hors du burger, asymétrie de l'empilement, grain de parmesan sur la surface.
+3. **Ambiance backstage** : privilégier "cuisine réelle en arrière-plan (inox, surfaces sombres, équipements flous)" plutôt que "fond studio noir". Le fond doit raconter un lieu, pas un vide.
+4. **Proportions réalistes** : le burger est compact et dense (fast-good), pas un towering gourmet stack de magazine.
+5. **Logo STRICT FOOD'S** : quand un prop est mentionné, décrire le logo avec précision — "STRICT FOOD'S, le O de FOOD remplacé par une icône burger stylisée, en Cuivre Braisé mat".
+
 ### Brand Props — Accessoires de Marque
 
 StrictFood possède un catalogue d'accessoires brandés décrits dans `production/_config/brand-props.md`.

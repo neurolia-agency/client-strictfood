@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080">
+  <title>Story Annonce — Fermeture Exceptionnelle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Oswald:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/Users/jorisgustiez/Dev/Claude/neurolia-agency/client-strictfood/production/posts-stories/stories/_templates/_base/base.css">
+  <style>
+    .content {
+      padding: 0 80px;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .annonce-badge {
+      display: inline-block;
+      padding: 14px 36px;
+      border-radius: 999px;
+      background: rgba(var(--accent-rgb),0.22);
+      border: 3px solid rgba(var(--accent-rgb),0.5);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      margin-bottom: 50px;
+      filter: brightness(1.15);
+    }
+
+    .annonce-headline {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 82px;
+      color: #fff;
+      line-height: 1.05;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+      max-width: 900px;
+    }
+
+    .annonce-headline em {
+      color: var(--accent);
+      font-style: normal;
+      filter: brightness(1.2);
+    }
+
+    .divider {
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(to right, transparent, var(--accent), transparent);
+      margin: 0 auto 40px;
+      border-radius: 2px;
+    }
+
+    .annonce-body {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 34px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.6;
+      max-width: 800px;
+      margin-bottom: 60px;
+    }
+
+    .annonce-body strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .annonce-cta {
+      display: inline-block;
+      padding: 22px 50px;
+      border-radius: 999px;
+      background: var(--accent);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #141210;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    .annonce-bg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: var(--img-opacity);
+      filter: brightness(var(--img-brightness)) sepia(var(--img-sepia)) saturate(var(--img-saturate));
+    }
+
+    .gradient-center {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at center, rgba(var(--bg-rgb),0.3) 0%, rgba(var(--bg-rgb),0.78) 55%, rgba(var(--bg-rgb),0.90) 80%);
+      z-index: 3;
+    }
+  </style>
+</head>
+<body class="img-visible">
+
+  <!-- Background image -->
+  <img class="annonce-bg" src="/Users/jorisgustiez/Dev/Claude/neurolia-agency/client-strictfood/production/posts-stories/stories/S1/jeudi/falafel-annonce.png" alt="">
+
+  <!-- Gradient overlay -->
+  <div class="gradient-center"></div>
+  <div class="ambient-bottom"></div>
+
+  <!-- Main content -->
+  <div class="content">
+
+    <!-- Logo -->
+    <div class="logo-container" style="margin-bottom: 60px;">
+      <img src="/Users/jorisgustiez/Dev/Claude/neurolia-agency/client-strictfood/production/posts-stories/stories/_templates/_base/logo.svg" alt="STRICT FOOD'S">
+    </div>
+
+    <div class="annonce-badge">Fermeture exceptionnelle</div>
+
+    <div class="annonce-headline text-depth">On est <em>fermés</em> ce soir</div>
+
+    <div class="divider"></div>
+
+    <div class="annonce-body text-depth mark-tape">Mais demain, <strong>nous et le Falafel</strong>, on t'attend.<br/> Et crois-nous, il vaut le détour.</div>
+
+    <div class="annonce-cta">Demain dès 11h30</div>
+
+  </div>
+
+  <!-- Bottom -->
+  <div class="bottom-section">
+    <div class="tagline">Le cheat meal qui <em>n'en est pas un</em></div>
+  </div>
+
+</body>
+</html>
