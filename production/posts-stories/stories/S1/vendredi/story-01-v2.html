@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080">
+  <title>Story — STRICT Poulet (V2 Variante)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Oswald:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="file:///Users/dorian.gz/dev/Neurolia%20Agency/client-strictfood/production/posts-stories/stories/_templates/_base/base.css">
+  <style>
+    /* ===== VIBRANT MOOD VARIANTS ===== */
+    :root {
+      --vibrant-bg-top: #1a1108;
+      --vibrant-bg-bottom: #3a2510;
+      --vibrant-bg-center: #4a3820;
+    }
+
+    body.mood-grenat {
+      --vibrant-bg-top: #1a0d0c;
+      --vibrant-bg-bottom: #4a1510;
+      --vibrant-bg-center: #5a2018;
+    }
+
+    body.mood-feuille {
+      --vibrant-bg-top: #0d1a12;
+      --vibrant-bg-bottom: #1a3a25;
+      --vibrant-bg-center: #1e4a30;
+    }
+
+    /* ===== BODY — RADIAL GRADIENT BACKGROUND ===== */
+    body {
+      background: radial-gradient(circle at 50% 35%, var(--vibrant-bg-center) 0%, var(--vibrant-bg-top) 25%, var(--vibrant-bg-bottom) 100%);
+      position: relative;
+    }
+
+    /* Remove default gradient overlays */
+    .gradient-top,
+    .gradient-bottom,
+    .gradient-left,
+    .accent-line,
+    .zone-blend {
+      display: none;
+    }
+
+    /* ===== CONTENT LAYOUT ===== */
+    .content {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    /* ===== HERO PRODUCT IMAGE (full-width, vertical fade) ===== */
+    .hero-zone {
+      position: absolute;
+      top: 50px;
+      left: 0;
+      right: 0;
+      height: 1080px;
+      z-index: 10;
+      overflow: hidden;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+      filter: brightness(1.05) saturate(1.15);
+      mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 60%, transparent 95%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 60%, transparent 95%);
+    }
+
+    /* ===== INFO ZONE ===== */
+    .info-zone {
+      position: absolute;
+      top: 1070px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 15;
+      display: flex;
+      flex-direction: column;
+      padding: 0 70px 150px;
+      background: linear-gradient(to top, rgba(26, 17, 8, 0.98) 0%, rgba(26, 17, 8, 0.95) 25%, rgba(26, 17, 8, 0.7) 60%, transparent 100%);
+    }
+
+    /* ===== PRODUCT NAME ===== */
+    .product-name {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 94px;
+      color: #ffffff;
+      line-height: 0.95;
+      letter-spacing: -2px;
+      text-transform: uppercase;
+      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      margin-bottom: 12px;
+    }
+
+    /* ===== PRODUCT SUBTITLE ===== */
+    .product-subtitle {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 32px;
+      color: rgba(255, 255, 255, 0.7);
+      letter-spacing: 1px;
+      margin-bottom: 30px;
+    }
+
+    /* ===== MACROS BAR ===== */
+    .macros-bar {
+      display: inline-flex;
+      align-self: flex-start;
+      gap: 40px;
+      margin-top: 50px;
+      margin-bottom: 28px;
+    }
+
+    .macro-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .macro-item-value {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 58px;
+      color: #ffffff;
+      line-height: 1;
+      text-shadow:
+        0 2px 6px rgba(0,0,0,0.5),
+        0 4px 16px rgba(0,0,0,0.2);
+    }
+
+    .macro-item-value.accent {
+      color: var(--accent);
+      filter: brightness(1.2);
+    }
+
+    .macro-item-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 17px;
+      color: rgba(255, 255, 255, 0.45);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-top: 9px;
+    }
+
+    /* ===== BADGE LABEL ===== */
+    .badge-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 19px;
+      color: rgba(255, 255, 255, 0.5);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin-bottom: 28px;
+    }
+
+    .badge-label::before {
+      content: '— ';
+      color: var(--accent);
+      opacity: 0.6;
+    }
+
+    .badge-label::after {
+      content: ' —';
+      color: var(--accent);
+      opacity: 0.6;
+    }
+
+    /* ===== BOTTOM TAGLINE ===== */
+    .bottom-tagline {
+      text-align: center;
+      margin-top: auto;
+      padding: 0 0 24px;
+    }
+
+    /* ===== FOOTER LOGO ===== */
+    .footer-logo {
+      text-align: center;
+    }
+
+    .footer-logo img {
+      width: 160px;
+      height: auto;
+      opacity: 0.6;
+    }
+
+    /* ===== DIVIDER LINE ===== */
+    .divider-line {
+      width: 100px;
+      height: 3px;
+      background: var(--accent);
+      margin-bottom: 30px;
+      border-radius: 2px;
+      opacity: 0.8;
+    }
+
+    /* ===== TAGLINE TEXT ===== */
+    .tagline-vitrine {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 38px;
+      color: #ffffff;
+      line-height: 1.4;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .tagline-vitrine em {
+      color: var(--accent);
+      font-style: italic;
+      filter: brightness(1.15);
+    }
+  </style>
+</head>
+<body class="">
+
+  <!-- Main content wrapper -->
+  <div class="content">
+
+    <!-- HERO: Product Photo (VARIANTE IA — angle-34-gauche) -->
+    <div class="hero-zone">
+      <img class="product-image" src="file:///Users/dorian.gz/dev/Neurolia%20Agency/client-strictfood/public/images/photos-references/produits-generes/strict-poulet/strict-poulet-angle-34-gauche-v2.png" alt="STRICT Poulet">
+    </div>
+
+    <!-- INFO ZONE -->
+    <div class="info-zone">
+      <div class="product-name">STRICT Poulet</div>
+      <div class="product-subtitle">Pain noir. Poulet rôti. Parmesan Myfitcheese. Sauce poivron.</div>
+
+      <div class="macros-bar mark-tape">
+        <div class="macro-item">
+          <div class="macro-item-value accent">53g</div>
+          <div class="macro-item-label">Protéines</div>
+        </div>
+        <div class="macro-item">
+          <div class="macro-item-value">21,5g</div>
+          <div class="macro-item-label">Lipides</div>
+        </div>
+        <div class="macro-item">
+          <div class="macro-item-value">45g</div>
+          <div class="macro-item-label">Glucides</div>
+        </div>
+        <div class="macro-item">
+          <div class="macro-item-value">596</div>
+          <div class="macro-item-label">kcal</div>
+        </div>
+      </div>
+
+      <div class="bottom-tagline">
+        <div class="divider-line" style="margin: 0 auto 30px;"></div>
+        <div class="tagline-vitrine">Le cheat meal qui n'en est pas un</div>
+      </div>
+
+      <div class="footer-logo">
+        <img src="file:///Users/dorian.gz/dev/Neurolia%20Agency/client-strictfood/production/posts-stories/stories/_templates/_base/logo.svg" alt="STRICT FOOD'S">
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

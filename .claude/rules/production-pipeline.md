@@ -76,12 +76,14 @@ Les posts `2026-03-10/` et `2026-03-12/` sont des posts v1 (pre-pipeline). Ne PA
 /story-producer S1              # Batch semaine complète
 ```
 
-### Flux séquentiel (3 étapes)
+### Flux séquentiel (4 étapes)
 
 ```
 brief-story.md
     ↓
 [1] Lecture brief + vérification photos existent
+    ↓
+[1b] Agent: story-copywriter (Sonnet) → textes réécrits (punch, zéro redondance)
     ↓
 [2] Agent: story-data-mapper (Haiku) → story-NN-data.md
     ↓
@@ -92,20 +94,31 @@ brief-story.md
 [Final] Génération document Demande Photos (si photos manquantes)
 ```
 
-### Types de stories
+### Types de stories — Deux familles visuelles
 
-Toutes les stories sont produites par le pipeline (photos statiques, pas de vidéo). Seul le Recap est semi-manuel (repost par l'opérateur).
+**Dark Premium** (fond charbon, tons sombres) :
 
 | Type | Template | Pipeline |
 |------|----------|----------|
-| Fiche Produit | `fiche-produit.html` | Oui |
-| Teaser | `teaser-post.html` | Oui |
 | Interactif | `interactif.html` | Oui |
 | Éducatif | `educatif.html` | Oui |
 | Annonce | `annonce.html` | Oui |
 | Lieu / Ambiance | `annonce.html` | Oui |
+
+> **Interactifs** : 2-3 par semaine (max 3). Prioriser quand un slot Dark Premium est disponible.
+
+**Vitrine** (fond gradient coloré, produit/ingrédient lumineux) :
+
+| Type | Template | Pipeline |
+|------|----------|----------|
+| Fiche Produit | `produit-vitrine.html` | Oui |
+| Focus Ingrédient | `focus-ingredient.html` | Oui |
+
+| Type | Template | Pipeline |
+|------|----------|----------|
 | Recap | — (repost) | Semi-manuel |
 
+> Chaque jour devrait avoir au moins 1 Vitrine + 1 Dark Premium.
 > Si une photo manque dans la bibliothèque, le pipeline génère une entrée Demande Photos.
 
 ### Conventions stories

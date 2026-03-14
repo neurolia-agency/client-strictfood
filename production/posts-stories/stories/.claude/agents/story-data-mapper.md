@@ -44,13 +44,24 @@ L'orchestrateur te passe le chemin d'un brief story (ex: `production/posts-stori
 
 ## Résolution des photos
 
-Consulter `production/_config/photo-references.md` pour mapper les images nécessaires.
+Consulter **deux sources** pour mapper les images nécessaires :
+1. `production/_config/photo-references.md` — photos references (source de verite)
+2. `production/_config/product-variants.md` — variantes generees par IA (angles/eclairages alternatifs)
 
 **Principe : pertinence avant tout.** Le choix de photo dépend du concept de la story, du thème, et de l'espace visuel à remplir — pas d'une hiérarchie fixe. Toute la bibliothèque est disponible :
 - Photos produits (`dark-bg/`, `produits-source/`, `burgers-black/`)
+- **Variantes generees** (`produits-generes/{slug}/`) — angles et eclairages alternatifs, fideles au produit reel
 - Photos contexte (`contexte/cuisine/*`, `contexte/salle-restaurant/*`, `contexte/exterieur/*`, `contexte/facade/*`)
 - Photos contenu Instagram (`contenu-instagram/`)
 - Toute autre photo pertinente dans la bibliothèque
+
+### Priorite de selection produit (anti-repetition)
+
+Quand un produit a des variantes generees disponibles, appliquer cette logique :
+1. **Lister toutes les photos disponibles** pour ce produit : references + generees
+2. **Exclure** celles deja utilisees dans la meme semaine (verifier les autres `story-NN-data.md` du meme dossier semaine)
+3. **Preferer une variante generee** si la photo reference a deja ete utilisee recemment
+4. **Si aucune variante disponible** → utiliser la photo reference et signaler : `💡 VARIANTE RECOMMANDEE — lancer product-variant-generator pour {slug}`
 
 ## Résolution des brand props
 
@@ -89,7 +100,7 @@ Ce champ est **informatif** (pour le checkpoint opérateur). Il ne correspond pa
 
 **Pour le dual-image** : la deuxième image (`.product-hero`) n'est pas forcément un burger. C'est la photo la plus pertinente pour compléter le visuel : produit, contexte, façade, cuisine, etc. Le choix se fait en fonction du concept de la story et de ce qui manque visuellement.
 
-**Rotation** : si plusieurs variantes existent pour un même sujet, alterner entre les stories de la même semaine pour éviter la répétition.
+**Rotation** : si plusieurs variantes existent pour un même sujet (references + generees), alterner entre les stories de la même semaine pour éviter la répétition. Ne JAMAIS utiliser la meme photo produit sur deux stories de la meme semaine.
 
 **Pain noir obligatoire** : tous les burgers StrictFood sont au pain noir (black bun). Ne JAMAIS sélectionner une photo de burger au pain blanc/classique. Si la seule photo disponible montre un pain blanc → signaler `⚠️ PHOTO NON CONFORME — burger pain blanc` et chercher une alternative dans `burgers-black/` ou `dark-bg/`.
 

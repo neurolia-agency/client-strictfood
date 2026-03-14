@@ -1,55 +1,87 @@
-# Brief Stories — S1 Mercredi (2026-03-11)
+# Brief Stories — S1 Mercredi (2026-03-12)
+
+> **Pilier du jour** : La Cuisine — Post S1-02 publié aujourd'hui (Carrousel "Du boucher à l'assiette")
+> **Objectif stratégique** : Jour 1 des stories S1. Installer la présence story quotidienne et présenter le produit star en format Vitrine pour capitaliser sur le hero shot de lundi.
+> **Persona cible** : Actifs pressés
+> **Ref stratégie** : Phase 1 §3.1 — "Installer le Dark Food Premium comme signature reconnaissable en 4-5 posts"
 
 ---
 
-## Story 1 — Educatif : cuisson sans huile
+## Story 1 — STRICT Boeuf
 
 | Champ | Valeur |
 |-------|--------|
-| Type | Educatif |
-| Highlight | COULISSES |
-| Qui produit | Pipeline (Joris) |
-| Template | `educatif.html` |
+| Type | Fiche Produit |
+| Highlight | LA CARTE |
+| Qui produit | Pipeline |
+| Template | `produit-vitrine.html` |
+| Mood | cuivre |
+| Image | hero |
+| Brand props | aucun |
 
 ### Objectif
 
-Eduquer sur le principal differenciateur technique de StrictFood : la cuisson a chaleur pulsee sans huile. Transformer un argument technique en benefice concret (moins de gras).
+Présenter le burger signature en format story Vitrine. Le post du lundi (S1-01) a introduit le STRICT Boeuf en photo — cette story le met en fiche produit avec macros et prix, pour ceux qui ont raté le post ou veulent les détails rapides.
 
 ### Contenu
 
-Titre : `Cuisson sans huile ?`
-Chiffre cle : `57` + `% de gras en moins`
-Explication : `Nos burgers sont cuits par <strong>chaleur pulsee</strong>, sans aucune goutte d'huile. Resultat : un STRICT Boeuf a seulement <strong>21,5g de lipides</strong> contre 50g pour un burger classique.`
+**Produit** : STRICT Boeuf
+Slug recette : `strict-boeuf`
 
-Comparaison VS : oui
-- Strict Food's : `21,5` `g lipides`
-- Classique : `Burger fast-food` `50` `g lipides`
+Accroche : `Le burger qui bat tes macros`
+Macro star : `53g protéines`
+Badge : `ARTISANAL`
+Prix : `12,99€`
+Tagline : `Le cheat meal qui n'en est pas un.`
 
-Image de fond : `public/images/photos-references/contexte/cuisine/air-fryers-pro.jpeg`
-Tagline : `Le cheat meal qui n'en est pas un`
+Image hero : `public/images/photos-references/produits-source/burgers-black/strict-boeuf.png`
 
 ---
 
-## Story 2 — Nous trouver : Chateau Roussillon
+## Story 2 — Boeuf ou Poulet ?
 
 | Champ | Valeur |
 |-------|--------|
-| Type | Lieu |
-| Highlight | NOUS TROUVER |
-| Qui produit | Pipeline (Joris) |
-| Template | `annonce.html` |
+| Type | Interactif |
+| Highlight | — |
+| Qui produit | Pipeline |
+| Template | `interactif.html` |
+| Mood | cuivre |
+| Image | visible |
+| Brand props | aucun |
 
 ### Objectif
 
-Ancrer la marque dans son lieu physique. Rappeler la localisation a Chateau Roussillon.
+Premier interactif de la semaine. Engager l'audience sur la préférence viande — question simple, universelle, qui pousse au tap. Alimente aussi le Highlight LA CARTE indirectement en montrant qu'il y a du choix.
 
 ### Contenu
 
-Badge : `NOUS TROUVER`
-Headline : `Chateau <em>Roussillon</em>`
-Body : `88 Chemin de la Roseraie, Perpignan. Ouvert du <strong>mardi au samedi</strong>, service midi et soir.`
-CTA : `aucun`
-Image de fond : `public/images/photos-references/contexte/exterieur/devanture.jpeg`
-Tagline : `Le cheat meal qui n'en est pas un`
+Format sticker : Sondage 2 choix
+Question : `Team Boeuf ou Team Poulet ?`
+Option A : `Boeuf`
+Option A Emoji : `🥩`
+Option B : `Poulet`
+Option B Emoji : `🍗`
+Image de fond : `public/images/photos-references/contexte/cuisine/cuisine-full.jpeg`
+Alignement photo : `—`
+Tagline : `Le cheat meal qui n'en est pas un.`
 
-> **Note publication** : Ajouter le sticker localisation "Chateau Roussillon, Perpignan" a la story Instagram.
+---
+
+## Contraintes
+
+- DA : Vitrine (Story 1) + Dark Food Premium (Story 2)
+- Mood : cuivre — standard, première semaine, on installe l'identité
+- Image : hero pour la Fiche Produit (produit plein cadre), visible pour l'Interactif
+- Sublimation : les templates appliquent automatiquement `text-depth` (headlines), `mark-tape` (body/info), `brightness(1.2)` (accents). Aucune action manuelle requise.
+
+## Logique de variation de template
+
+| Type | Template | Style |
+|------|----------|-------|
+| Fiche Produit | `produit-vitrine.html` | **Vitrine** (coloré, produit hero) |
+| Interactif | `interactif.html` | Dark Premium |
+
+## Étape suivante
+
+> Exécuter `/story-producer S1 mercredi` pour produire ces stories.

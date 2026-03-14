@@ -43,6 +43,7 @@ Pipeline de production de visuels pour le compte @strictfood.
 | Input Mapping | `input-mapper` | Agent | Haiku | Auto (via orchestrateur) |
 | Prompt | `image-prompt-engineer` | Skill | — | `/image-prompt-engineer` (Mode B) |
 | Generation | `nano-banana-pro` | Skill | Gemini 3 Pro | `/nano-banana-pro --resolution 4K` |
+| Variantes produit | `product-variant-generator` | Agent | Sonnet | Manuel ou pre-batch semaine |
 
 ## Architecture
 
@@ -54,6 +55,7 @@ production/
 ├── _config/                   # Configuration partagee
 │   ├── pipeline.md            # DA, agents, modeles, resolution
 │   ├── photo-references.md    # Mapping produit → photos (descriptions texte)
+│   ├── product-variants.md    # Registre variantes generees par IA (angles/eclairages)
 │   └── brand-props.md         # Catalogue accessoires marque (wrapper, cup, etc.)
 │
 ├── _recettes/                 # Fiches produit (8 fiches, slug kebab-case)
@@ -125,6 +127,7 @@ posts-stories/posts/periode-1/S[n]/YYYY-MM-DD/
 |---------|--------|
 | Strategie editoriale | `../strategie/strategie-globale.md` (piliers, planning, objectifs — consulter pour redaction briefs) |
 | Photos produits | `_config/photo-references.md` (descriptions texte, jamais d'images) |
+| Variantes produit IA | `_config/product-variants.md` (registre des variantes generees) |
 | Accessoires marque | `_config/brand-props.md` (BRAND_PRESENCE = 4/10) |
 | Configuration DA | `_config/pipeline.md` |
 | Recettes | `_recettes/[slug].md` (formes exactes ingredients + fournisseurs) |
@@ -180,11 +183,12 @@ brief-story.md
 
 | Type | Template | Pipeline |
 |------|----------|----------|
-| Teaser | `teaser-post.html` | Oui |
 | Interactif | `interactif.html` | Oui |
 | Educatif | `educatif.html` | Oui |
 | Annonce | `annonce.html` | Oui |
 | Lieu / Ambiance | `annonce.html` | Oui |
+
+> **Interactifs** : 2-3 par semaine (max 3). Prioriser quand un slot Dark Premium est disponible.
 
 #### Vitrine (fond gradient colore, produit/ingredient lumineux)
 
