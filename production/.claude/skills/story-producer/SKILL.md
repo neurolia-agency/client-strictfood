@@ -52,6 +52,7 @@ Deux familles visuelles coexistent pour varier la dynamique du feed stories :
 | Éducatif | `educatif.html` | Oui |
 | Annonce | `annonce.html` | Oui |
 | Lieu / Ambiance | `annonce.html` | Oui |
+| **IRL** | `irl-story.html` | **Oui** |
 
 ### Templates Vitrine (fond gradient coloré, produit/ingrédient lumineux en hero)
 
@@ -60,10 +61,11 @@ Deux familles visuelles coexistent pour varier la dynamique du feed stories :
 | Fiche Produit | `produit-vitrine.html` | Oui |
 | Focus Ingrédient | `focus-ingredient.html` | Oui |
 
-### Semi-manuel
+### Formats spéciaux
 
 | Type | Template HTML | Pipeline |
 |------|---------------|----------|
+| **Séquence (N/M)** | Template existant (éducatif, annonce, etc.) | **Oui** |
 | Récap | — (repost) | Semi-manuel (opérateur) |
 
 > **Objectif de variation** : chaque jour devrait contenir au moins 1 story Vitrine et 1 story Dark Premium pour casser la monotonie visuelle. Le brief doit le planifier.
@@ -88,8 +90,8 @@ Chaque `brief-story.md` contient **plusieurs stories numérotées** pour un mêm
 Le pipeline itère sur chaque `## Story N` et les traite séquentiellement. Les fichiers de sortie sont numérotés :
 
 ```
-story-01-data.md / story-01.html / story-01.png   (Story 1)
-story-02-data.md / story-02.html / story-02.png   (Story 2)
+story-01-data.md / story-01.html / story-01.png  (Story 1)
+story-02-data.md / story-02.html / story-02.png  (Story 2)
 ```
 
 Les stories Recap (semi-manuelles) sont listées dans le récap mais ne produisent aucun fichier.
@@ -101,7 +103,7 @@ Les stories Recap (semi-manuelles) sont listées dans le récap mais ne produise
 1. Lire `production/posts-stories/stories/[semaine]/[jour]/brief-story.md`
 2. Parser chaque section `## Story N` et extraire :
    - **Numéro** (N)
-   - **Type** : Fiche Produit / Teaser / Interactif / Éducatif / Annonce / Lieu / Ambiance / Focus Ingrédient / Récap
+   - **Type** : Fiche Produit / Teaser / Interactif / Éducatif / Annonce / Lieu / Ambiance / Focus Ingrédient / IRL / Séquence / Récap
    - **Produit** (si applicable) : slug recette
    - **Ingrédient** (si Focus Ingrédient) : nom + artisan
    - **Template HTML** correspondant (voir table ci-dessus)
@@ -120,6 +122,9 @@ Les stories Recap (semi-manuelles) sont listées dans le récap mais ne produise
         | Interactif | cuivre | visible |
         | Annonce | cuivre | visible |
         | Lieu | cuivre | hero |
+        | IRL | cuivre | hero |
+        | Séquence | (hérite du template) | (hérite du template) |
+   - Si type = **Séquence** : extraire `Position dans la séquence` (ex: "1/3") et `Titre séquence`
    - **Résolution en classes CSS** :
      - `cuivre` → `""`, `grenat` → `"mood-grenat"`, `feuille` → `"mood-feuille"`
      - `visible` → `""`, `discret` → `"img-discret"`, `hero` → `"img-hero"`
@@ -181,6 +186,8 @@ Pour chaque story automatisable identifiée à l'étape 1 :
 | Éducatif | Titre → `{{TITLE}}`, Chiffre → `{{FACT_NUMBER}}`, Unité → `{{FACT_UNIT}}`, Explication → `{{EXPLANATION}}`, VS données → `{{VS_*}}`, Image fond → `{{BG_IMAGE_PATH}}`, Image produit → `{{HERO_IMAGE_PATH}}` |
 | Fiche Produit (Vitrine) | Produit → `{{PRODUCT_NAME}}`, Accroche → `{{PRODUCT_SUBTITLE}}`, Macro star → `{{MACRO_STAR_VALUE}}` + `{{MACRO_STAR_UNIT}}`, Badge → `{{BADGE_TEXT}}`, Prix → `{{PRICE}}`, Image hero → `{{HERO_IMAGE_PATH}}`, Tagline → `{{TAGLINE}}` |
 | Focus Ingrédient | Ingrédient → `{{INGREDIENT_NAME}}`, Artisan → `{{ARTISAN_NAME}}`, Localité → `{{ARTISAN_LOCALITY}}`, Fait clé → `{{KEY_FACT}}`, Dans le → `{{IN_PRODUCT}}`, Image → `{{HERO_IMAGE_PATH}}`, Tagline → `{{TAGLINE}}` |
+| IRL | Photo → `{{BG_IMAGE_PATH}}`, Texte overlay → `{{IRL_TEXT}}`, Position texte → `{{IRL_TEXT_POSITION}}`, Filtre → `{{IRL_FILTER}}` |
+| Séquence | Position → `{{SEQUENCE_POSITION}}` (ex: "1/3"), Titre séquence → `{{SEQUENCE_TITLE}}`, + champs du template sous-jacent |
 
 ### 🔒 CHECKPOINT — Validation opérateur
 
@@ -229,9 +236,7 @@ Pour chaque story validée :
    ```bash
    node production/posts-stories/stories/_scripts/render-story.js \
      --input production/posts-stories/stories/[semaine]/[jour]/story-[NN].html \
-     --output production/posts-stories/stories/[semaine]/[jour]/story-[NN].png \
-     --format both \
-     --quality 92
+     --output production/posts-stories/stories/[semaine]/[jour]/story-[NN].png
    ```
 
 5. **Contrôle anti-vide bas** : après chaque render, **ouvrir le PNG** et vérifier visuellement le tiers inférieur (zone en dessous de ~1280px). Si cette zone est majoritairement noire/charbon sans texte, image, ou élément visuel (hors tagline bottom) :
@@ -244,9 +249,9 @@ Pour chaque story validée :
    ✅ Stories générées — [semaine]/[jour]
 
    Story 01 (Teaser) [DARK PREMIUM] :
-     📄 story-01.html  📸 story-01.png  📸 story-01.jpg
+     📄 story-01.html  📸 story-01.png
    Story 02 (Fiche Produit) [VITRINE] :
-     📄 story-02.html  📸 story-02.png  📸 story-02.jpg
+     📄 story-02.html  📸 story-02.png
 
    📋 Semi-manuel :
      Story 03 (Recap) — repost meilleur post de la semaine
@@ -371,11 +376,9 @@ production/posts-stories/stories/S1/lundi/
   story-01-data.md          ← Données Story 1 (généré par pipeline ou data-mapper)
   story-01.html             ← Template rempli Story 1
   story-01.png              ← Rendu final Story 1 (1080×1920)
-  story-01.jpg              ← Rendu final Story 1 (compressé)
   story-02-data.md          ← Données Story 2
   story-02.html             ← Template rempli Story 2
   story-02.png              ← Rendu final Story 2
-  story-02.jpg              ← Rendu final Story 2
 ```
 
 ## Correction photo — Alignement horizontal et lisibilité
@@ -432,7 +435,7 @@ Les templates intègrent ces valeurs via les variables CSS `--safe-top` et `--sa
 5. **Les chemins doivent être absolus** dans le HTML rempli pour que Puppeteer fonctionne.
 6. **Les backgrounds doivent être visibles** — pas de fond noir uniforme (Dark Premium) ou gradient trop sombre (Vitrine).
 7. **Vérifier que les fichiers image existent** avant de générer le HTML. Si image manquante → warning dans le checkpoint + entrée dans Demande Photos.
-8. **Pas de vidéo** — le pipeline ne produit que des images statiques (PNG/JPG 1080×1920).
+8. **Pas de vidéo** — le pipeline ne produit que des images statiques (PNG 1080×1920).
 9. **Variation quotidienne** — signaler à l'opérateur si un jour n'a que des stories Dark Premium sans aucune Vitrine.
 10. **Style v2 — Réalisme** : les principes de réalisme documentaire du pipeline Posts s'appliquent aussi aux stories. Concrètement :
     - Le **data mapper** doit privilégier les photos du produit réel (same-product priority, pas de cross-product)

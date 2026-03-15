@@ -1,4 +1,28 @@
-# Configuration Pipeline
+# Configuration Pipeline v3
+
+## Modes de création
+
+Le pipeline supporte 5 modes de création. Le mode est spécifié dans le brief (champ `Mode`).
+
+| Mode | Description | Pipeline | API |
+|------|-------------|----------|-----|
+| `full-ia` | Gemini génère tout (produit + scène) | Art Direction → Input Mapping → Prompt → Gemini 4K | Gemini |
+| `irl-sublimation` | Photo réelle sublimée pour aligner DA | Photo source → Sublimation prompt → GPT Images | GPT Images |
+| `compositing-irl` | 2 photos réelles mixées (produit + lieu) | Photo produit + Photo lieu → Compositing → GPT Images | GPT Images |
+| `compositing-ia` | Photo produit réelle dans scène IA | Art Direction scène → Input Mapping → Prompt → Gemini 4K | Gemini |
+| `template` | Carrousels, infographies (HTML → Puppeteer) | Data mapping → Template HTML → Puppeteer | Aucune |
+
+### Quand utiliser quel mode
+
+| Pilier | Modes typiques | Justification |
+|--------|----------------|---------------|
+| Le Plat | `full-ia`, `compositing-ia` | Food porn premium, scènes élaborées |
+| La Cuisine | `irl-sublimation`, `compositing-irl` | Authenticité, photos réelles du process |
+| Les Macros | `template`, `full-ia` | Infographies, données visuelles |
+| L'Équipe | `irl-sublimation`, `compositing-irl` | Portraits réels, humanisation |
+| Le Quartier | `irl-sublimation`, `compositing-irl` | Lieu réel, communauté |
+
+> Aucun mode n'est réservé à un pilier. Un post "Le Plat" peut être en `irl-sublimation` (photo prise en cuisine) et un post "L'Équipe" peut être en `compositing-ia` (portrait dans une scène imaginée).
 
 ## Photos Référence
 
@@ -10,10 +34,19 @@
 |-------|--------|
 | Agent | `production/.claude/agents/input-mapper.md` |
 | Modèle | Haiku (tâche déterministe) |
-| Déclenchement | Après validation de `01-art-direction/direction.md` |
-| Input | Chemin du dossier post (ex: `production/post-stories/posts/periode-1/S1/2026-03-14/`) |
+| Déclenchement | Après validation de `01-art-direction/direction.md` (modes `full-ia` et `compositing-ia`) |
+| Input | Chemin du dossier post (ex: `production/posts-stories/posts/periode-1/S3/2026-03-24/`) |
 | Output | `[dossier-post]/00-input/input.md` |
 | Consulte | `_config/photo-references.md` + `_recettes/[slug].md` |
+
+## Caption Writer
+
+| Champ | Valeur |
+|-------|--------|
+| Skill | `production/.claude/skills/caption-writer/SKILL.md` |
+| Déclenchement | APRÈS la génération de l'image (tous les modes) |
+| Input | Brief (Direction Caption) + Image produite (vision) + 15 dernières captions |
+| Output | `[dossier-post]/04-caption/caption.md` |
 
 ## DA Référence
 
@@ -51,7 +84,6 @@ Principes visuels obligatoires pour toutes les générations de visuels Instagra
 | Ambiance | Cuisine réelle en arrière-plan (inox, surfaces sombres, flou) | Fond studio void pur noir, fond uni numérique |
 | Grain et couleur | Film-like natural color, léger grain, tons chauds naturels | HDR, surexposition, post-traitement saturé |
 | Photo input | TOUJOURS la photo du produit réel (strict-boeuf.png pour un boeuf) | Cross-product transform (poulet→boeuf) sauf si aucune photo du produit réel n'existe |
-| Logo sur props | Fournir `public/logo/strictfood-logo-reference.png` via `--reference-image` | Décrire le logo uniquement en texte sans référence visuelle |
 
 > Ces règles s'appliquent à tous les agents et skills du pipeline. L'art director, le prompt engineer et l'opérateur doivent les respecter.
 
@@ -78,6 +110,14 @@ Certains ingrédients ont un rendu visuel problématique si mal traduits. Ces tr
 
 ## Modèle par défaut
 
-- Photo sans texte → **Gemini (Nanobanana Pro)**
-- Photo avec texte on-image → **GPT Images (gpt-image-1.5)**
-- Infographie / template → **GPT Images**
+| Mode | Modèle | Usage |
+|------|--------|-------|
+| `full-ia` | Gemini (Nanobanana Pro) | Génération complète produit + scène |
+| `irl-sublimation` | GPT Images (gpt-image-1) | Retouche/sublimation photo réelle |
+| `compositing-irl` | GPT Images (gpt-image-1) | Mixage 2 photos réelles |
+| `compositing-ia` | Gemini (Nanobanana Pro) | Intégration produit réel dans scène IA |
+| `template` | Aucun (Puppeteer) | Rendu HTML en PNG |
+
+**Fallbacks** :
+- Si Gemini échoue sur `full-ia` / `compositing-ia` → basculer sur GPT Images
+- Si le mode nécessite du texte on-image → forcer GPT Images quel que soit le mode

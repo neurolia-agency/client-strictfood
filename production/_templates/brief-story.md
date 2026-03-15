@@ -11,7 +11,7 @@
 
 | Champ | Valeur |
 |-------|--------|
-| Type | [Fiche Produit / Interactif / Éducatif / Annonce / Lieu / Focus Ingrédient / Recap] |
+| Type | [Fiche Produit / Interactif / Éducatif / Annonce / Lieu / Focus Ingrédient / IRL / Séquence / Recap] |
 | Highlight | [LA CARTE / COULISSES / NOS ARTISANS / NOUS TROUVER / L'ÉQUIPE / —] |
 | Qui produit | Pipeline |
 | Template | `[template].html` |
@@ -101,6 +101,29 @@ Image de fond : `[chemin vers photo pertinente OU "aucune" — préférer une im
 Alignement photo : `[element horizontal de reference — ex: "enseigne STRICT FOOD'S" / "comptoir" / "—"]`
 Tagline : `[texte tagline]`
 
+#### Si type = IRL (template: `irl-story.html`)
+
+> **Nouveau.** Photo brute prise par l'équipe (coulisses, rush, ambiance) avec overlay DA minimal.
+
+Photo : `[chemin vers la photo brute]`
+Texte overlay : `[1 phrase courte — ex: "Derrière le comptoir" / "Rush du midi" / "—"]`
+Position texte : [bas / centre / haut — défaut: bas]
+Filtre : [léger / moyen / fort — défaut: léger]
+
+> **Quand utiliser** : contenu authentique du quotidien (coulisses cuisine, ambiance, arrivages, équipe en action). Le pipeline applique un overlay DA minimal (logo + texte optionnel + filtre warm léger) sans dénaturer l'authenticité de la photo.
+
+#### Si type = Séquence (N/M)
+
+> **Multi-stories liées visuellement.** Pour les process en étapes, avant/après, séries éducatives.
+
+Position dans la séquence : `[N/M — ex: 1/3]`
+Titre séquence : `[Nom commun — ex: "Du brut à l'assiette"]`
+Template : `[template existant — educatif.html, annonce.html, etc.]`
+
+> Chaque story de la séquence est un `## Story N` séparé dans le brief, avec le champ `Position dans la séquence` rempli. Le pipeline ajoute un indicateur visuel (ex: "1/3") sur chaque story. Toutes les stories d'une séquence utilisent le même mood et la même famille visuelle pour la cohérence.
+
+[Remplir les champs du template choisi ci-dessus — Éducatif, Annonce, etc.]
+
 #### Si type = Recap
 
 > **Semi-manuel.** L'opérateur sélectionne le post le plus performant et le reposte en story.
@@ -127,6 +150,8 @@ Texte overlay recommandé : `[texte]`
 | Éducatif | `educatif.html` | Dark Premium |
 | Interactif | `interactif.html` | Dark Premium |
 | Annonce / Lieu | `annonce.html` | Dark Premium |
+| **IRL** | `irl-story.html` | **Dark Premium** (overlay DA minimal) |
+| **Séquence** | template existant | Variable (même famille sur toute la séquence) |
 
 > **Objectif** : alterner systématiquement Dark Premium et Vitrine dans la séquence du jour pour casser la monotonie visuelle. Chaque jour devrait avoir au moins 1 story Vitrine.
 > **Interactifs** : 2-3 par semaine (max 3). Quand un slot Dark Premium est disponible, prioriser Interactif — c'est le type qui génère le plus de rétention (action mesurable : tap, vote, réponse).

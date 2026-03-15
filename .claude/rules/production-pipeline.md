@@ -1,4 +1,4 @@
-# Production Pipeline Instagram — Règles v2
+# Production Pipeline Instagram — Règles v3
 
 > S'applique quand on travaille dans `production/`
 
@@ -8,62 +8,90 @@
 /instagram-producer YYYY-MM-DD
 ```
 
-L'orchestrateur enchaîne TOUTES les étapes automatiquement. Toujours préférer l'orchestrateur aux commandes manuelles.
+L'orchestrateur détecte le **mode** dans le brief et route vers le bon sous-pipeline. Toujours préférer l'orchestrateur aux commandes manuelles.
 
-## Flux séquentiel (exécuté par l'orchestrateur)
+## 5 modes de création
+
+| Mode | Pipeline | API |
+|------|----------|-----|
+| `full-ia` | Art Direction → Input Mapping → Prompt → Gemini 4K | Gemini |
+| `irl-sublimation` | Photo source → Sublimation → GPT Images | GPT Images |
+| `compositing-irl` | Photo produit + Photo lieu → Compositing → GPT Images | GPT Images |
+| `compositing-ia` | Art Direction scène → Input Mapping → Prompt → Gemini 4K | Gemini |
+| `template` | Data mapping → Template HTML → Puppeteer | Aucune |
+
+## Workflow de planification
 
 ```
-00-brief/brief.md
-    ↓
-Skill: /social-media-art-director (obligatoire)
-    ↓
-Agent: input-mapper (automatique, Haiku)
-    ↓
-🔒 Validation opérateur
-    ↓
-Skill: /image-prompt-engineer en Mode B (obligatoire)
-    ↓
-Nanobanana Pro / GPT Images
+1. Planning semaine (planning-SX.md) — distribuer piliers, modes, sujets
+2. Briefs individuels (brief-v3.md) — à partir du planning validé
+3. Production — /instagram-producer pour chaque post
 ```
+
+**ALWAYS** rédiger le planning AVANT les briefs.
+
+## Caption après image
+
+La caption est générée par `/caption-writer` **APRÈS** l'image. Le brief contient une **Direction Caption** (angle, ton, CTA), PAS la caption complète.
 
 ## Skills et agents obligatoires
 
-| Étape | Outil | Invocation |
-|-------|-------|------------|
-| Orchestration | Skill | `/instagram-producer` — enchaîne toutes les étapes |
-| Art Direction | Skill | `/social-media-art-director` — NE PAS écrire la direction à la main |
-| Input Mapping | Agent | `production/.claude/agents/input-mapper.md` — modèle Haiku |
-| Prompt Engineering | Skill | `/image-prompt-engineer` en Mode B — NE PAS écrire le prompt à la main |
+| Étape | Outil | Modes concernés |
+|-------|-------|-----------------|
+| Orchestration | Skill `/instagram-producer` | Tous |
+| Art Direction | Skill `/social-media-art-director` | `full-ia`, `compositing-ia` |
+| Input Mapping | Agent `input-mapper` (Haiku) | `full-ia`, `compositing-ia` |
+| Prompt Engineering | Skill `/image-prompt-engineer` (Mode B) | `full-ia`, `compositing-ia` |
+| Caption | Skill `/caption-writer` | **Tous** |
 
 ## Séparation des responsabilités
 
-| Agent | Brief | Docs DA | Recettes | Photos | Direction créative |
-|-------|-------|---------|----------|--------|--------------------|
-| Art Director | ✅ | ✅ | ✅ (formes) | ❌ | 📝 (produit) |
-| Input Mapper | ❌ | ❌ | ✅ | ✅ (descriptions) | ✅ (lit) |
-| Prompt Engineer | ❌ | ❌ | ✅ | ✅ | ✅ |
-
-- L'art director lit les recettes pour les formes exactes des ingrédients, mais NE voit PAS les photos
-- L'input mapper NE voit PAS le brief — il lit seulement la direction créative pour identifier les produits
-- Le prompt engineer reçoit tout via input.md + direction.md
+| Agent | Brief | Docs DA | Recettes | Photos | Direction créative | Image produite |
+|-------|-------|---------|----------|--------|--------------------|----------------|
+| Art Director | ✅ | ✅ | ✅ (formes) | ❌ | 📝 (produit) | ❌ |
+| Input Mapper | ❌ | ❌ | ✅ | ✅ (descriptions) | ✅ (lit) | ❌ |
+| Prompt Engineer | ❌ | ❌ | ✅ | ✅ | ✅ | ❌ |
+| Caption Writer | ✅ (Direction) | ❌ | ❌ | ❌ | ❌ | ✅ (vision) |
 
 ## Conventions
 
 - **Dates** : format ISO `YYYY-MM-DD` pour les dossiers post
 - **Recettes** : slug kebab-case (`strict-boeuf.md`, `strict-max-poulet.md`)
-- **Photos** : mapping centralisé dans `_config/photo-references.md` — jamais dans le brief, jamais dans la direction
-- **Le brief ne contient PAS de liens vers photos/recettes** — c'est l'input mapper qui résout
-- **Template** : utiliser `_templates/brief-v2.md` pour les nouveaux posts
-- **Résolution** : toujours 4K
+- **Photos** : mapping centralisé dans `_config/photo-references.md`
+- **Le brief ne contient PAS la caption** — seulement la Direction Caption
+- **Le brief ne contient PAS de liens photos** (sauf modes IRL/compositing où la photo source est requise)
+- **Template planning** : utiliser `_templates/planning-semaine.md`
+- **Template brief** : utiliser `_templates/brief-v3.md`
+- **Résolution** : toujours 4K pour full-ia et compositing-ia
 - **API key** : `$GEMINI_API_KEY` (variable d'environnement), jamais en dur
 
-## Structure des posts
+## Structure des posts (v3)
 
-Les posts sont organisés dans `production/posts-stories/posts/periode-[N]/S[X]/YYYY-MM-DD/`.
+```
+posts-stories/posts/periode-[N]/S[X]/YYYY-MM-DD/
+├── 00-brief/brief.md              ← Opérateur (brief v3)
+├── 00-input/input.md              ← input-mapper / data mapping
+├── 01-art-direction/direction.md  ← (full-ia, compositing-ia uniquement)
+├── 02-prompt/prompt.md            ← (full-ia, compositing-ia uniquement)
+├── 03-output/*.png                ← Image(s) produite(s)
+└── 04-caption/caption.md          ← /caption-writer (TOUS modes)
+```
 
-## Posts v1
+## Brief v2 legacy
 
-Les posts `2026-03-10/` et `2026-03-12/` sont des posts v1 (pre-pipeline). Ne PAS les utiliser comme template.
+Les briefs S1-S2 sont au format v2 (caption dans le brief, pas de mode). Ils fonctionnent en mode `full-ia` par défaut. Ne PAS les migrer — les nouvelles semaines utilisent brief-v3.
+
+## Distribution piliers
+
+| Pilier | Cible | Note |
+|--------|-------|------|
+| Le Plat | 35% | Food porn premium |
+| La Cuisine | 25% | Process, coulisses, fournisseurs |
+| Les Macros | 18% | Nutrition, comparaisons, éducation |
+| L'Équipe | 15% | Portraits, storytelling, humain |
+| Le Quartier | 7% | Communauté, local, partenaires |
+
+> Vérifier mensuellement. La distribution par semaine peut varier, c'est la moyenne qui compte.
 
 ---
 
@@ -76,55 +104,21 @@ Les posts `2026-03-10/` et `2026-03-12/` sont des posts v1 (pre-pipeline). Ne PA
 /story-producer S1              # Batch semaine complète
 ```
 
-### Flux séquentiel (4 étapes)
+### Types de stories (v3)
 
-```
-brief-story.md
-    ↓
-[1] Lecture brief + vérification photos existent
-    ↓
-[1b] Agent: story-copywriter (Sonnet) → textes réécrits (punch, zéro redondance)
-    ↓
-[2] Agent: story-data-mapper (Haiku) → story-NN-data.md
-    ↓
-🔒 Validation opérateur
-    ↓
-[3] Template fill + Puppeteer render → story-NN.png (1080×1920)
-    ↓
-[Final] Génération document Demande Photos (si photos manquantes)
-```
+**Dark Premium** : Interactif, Éducatif, Annonce, Lieu, **IRL** (nouveau)
+**Vitrine** : Fiche Produit, Focus Ingrédient
+**Spéciaux** : Teaser, **Séquence N/M** (nouveau), Recap (semi-manuel)
 
-### Types de stories — Deux familles visuelles
-
-**Dark Premium** (fond charbon, tons sombres) :
-
-| Type | Template | Pipeline |
-|------|----------|----------|
-| Interactif | `interactif.html` | Oui |
-| Éducatif | `educatif.html` | Oui |
-| Annonce | `annonce.html` | Oui |
-| Lieu / Ambiance | `annonce.html` | Oui |
-
-> **Interactifs** : 2-3 par semaine (max 3). Prioriser quand un slot Dark Premium est disponible.
-
-**Vitrine** (fond gradient coloré, produit/ingrédient lumineux) :
-
-| Type | Template | Pipeline |
-|------|----------|----------|
-| Fiche Produit | `produit-vitrine.html` | Oui |
-| Focus Ingrédient | `focus-ingredient.html` | Oui |
-
-| Type | Template | Pipeline |
-|------|----------|----------|
-| Recap | — (repost) | Semi-manuel |
-
-> Chaque jour devrait avoir au moins 1 Vitrine + 1 Dark Premium.
-> Si une photo manque dans la bibliothèque, le pipeline génère une entrée Demande Photos.
+> **IRL** : photo brute + overlay DA minimal. Coulisses, rush, ambiance.
+> **Séquence** : multi-stories liées visuellement (process, éducatif).
+> **Interactifs** : max 3/semaine.
+> Chaque jour : au moins 1 Vitrine + 1 Dark Premium.
 
 ### Conventions stories
 
-- **Dossiers** : `posts-stories/stories/S[X]/[jour]/` (lundi, mardi, etc.)
+- **Dossiers** : `posts-stories/stories/S[X]/[jour]/`
 - **Brief** : `brief-story.md` (template : `_templates/brief-story.md`)
-- **Templates** : `posts-stories/stories/_templates/[type].html` — NE JAMAIS modifier, uniquement copier et remplir
-- **Rendu** : `posts-stories/stories/_scripts/render-story.js` — Puppeteer, 1080×1920, PNG + JPG
-- **Chemins absolus** : obligatoires dans le HTML rempli pour que Puppeteer charge les assets en `file://`
+- **Templates** : `_templates/[type].html` — NE JAMAIS modifier, uniquement copier et remplir
+- **Rendu** : `_scripts/render-story.js` — Puppeteer, 1080×1920, PNG
+- **Chemins absolus** : obligatoires dans le HTML rempli

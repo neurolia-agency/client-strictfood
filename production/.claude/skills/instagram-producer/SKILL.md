@@ -1,153 +1,295 @@
 ---
 name: instagram-producer
 description: >
-  Orchestrateur du pipeline Instagram StrictFood v2. Enchaîne automatiquement toutes les étapes
-  de production d'un post — du brief à la commande NanoBanana — en appelant les skills et agents
-  obligatoires dans l'ordre, avec pause de validation opérateur entre chaque étape critique.
+  Orchestrateur du pipeline Instagram StrictFood v3. Détecte le mode de création (full-ia,
+  irl-sublimation, compositing-irl, compositing-ia, template) et route vers le sous-pipeline
+  adapté. Génère la caption après l'image via /caption-writer. Supporte tous les piliers et formats.
   Triggers : "produis le post", "lance le pipeline", "instagram producer", "pipeline post",
   "génère le post", "lance la production".
 ---
 
-# Instagram Producer — Orchestrateur Pipeline v2
+# Instagram Producer — Orchestrateur Pipeline v3
 
-Tu es l'orchestrateur du pipeline de production de visuels Instagram StrictFood. Tu enchaînes **automatiquement** toutes les étapes, en appelant les skills et agents obligatoires via les outils dédiés (Skill tool, Agent tool). L'opérateur n'a plus qu'à valider les checkpoints.
+Tu es l'orchestrateur du pipeline de production de visuels Instagram StrictFood. Tu détectes le **mode de création** dans le brief et routes vers le sous-pipeline adapté.
 
 ## Input
 
 L'opérateur fournit :
-- Un **chemin complet** (ex: `production/posts-stories/posts/periode-1/S2/2026-03-19/`)
-- OU une **date seule** (ex: `2026-03-19`)
+- Un **chemin complet** (ex: `production/posts-stories/posts/periode-1/S3/2026-03-24/`)
+- OU une **date seule** (ex: `2026-03-24`)
 
 **Résolution du chemin** : si seule une date est fournie, chercher le dossier existant via `production/posts-stories/posts/**/YYYY-MM-DD/`. Si aucun dossier trouvé, demander à l'opérateur dans quelle période/semaine le créer.
 
-## Exécution séquentielle — RESPECTER CET ORDRE EXACT
+## Exécution — RESPECTER CET ORDRE EXACT
 
-### ÉTAPE 0 — Vérification
+### ÉTAPE 0 — Vérification et routage
 
-1. **Résoudre le chemin** : à partir de l'input (chemin complet ou date), déterminer `[dossier-post]`
+1. **Résoudre le chemin** → déterminer `[dossier-post]`
 2. Lire `[dossier-post]/00-brief/brief.md`
-3. Vérifier que le brief existe et contient au minimum : Pilier, Format, Objectif, Produit, Caption
-4. Vérifier qu'il ne contient PAS de lien direct vers une photo (violation v2)
-5. Si le brief n'existe pas → STOP, demander à l'opérateur de créer le brief d'abord (template : `production/_templates/brief-v2.md`)
+3. Vérifier que le brief existe et contient au minimum : Pilier, Format, Objectif, Produit, **Mode**, Direction Caption
+4. **Extraire le mode** : champ `Mode` dans la table Stratégie
+5. **Router** vers le sous-pipeline correspondant (voir ci-dessous)
 
-**Si OK → passer automatiquement à l'étape 1.**
+Si le brief utilise l'ancien format v2 (pas de champ Mode, caption brute) → traiter comme `full-ia` par défaut et WARN l'opérateur.
 
-### ÉTAPE 1 — Art Direction (skill obligatoire)
+---
 
-1. Identifier le slug recette mentionné dans le brief (champ "Slug recette" ou "Recette détaillée")
-2. Lire la fiche recette `production/_recettes/[slug].md`
-3. Lire la config DA `production/_config/pipeline.md`
-4. **APPELER LE SKILL** via le Skill tool :
-   ```
-   Skill: social-media-art-director
-   ```
-   Passer en contexte : le brief + la recette + la config DA.
-   L'output DOIT être écrit dans `[dossier-post]/01-art-direction/direction.md`
-5. Après écriture de `direction.md`, afficher un résumé à l'opérateur :
-   - Produit(s) verrouillé(s)
-   - Angle / Éclairage / Mood choisis
-   - Nombre de visuels
+## SOUS-PIPELINE A — `full-ia` (génération IA complète)
 
-**⚠️ INTERDIT** : Ne JAMAIS écrire la direction créative à la main. Le skill DOIT être invoqué.
-
-**→ Passer automatiquement à l'étape 2.**
-
-### ÉTAPE 2 — Input Mapping (agent obligatoire)
-
-1. **SPAWNER L'AGENT** via le Agent tool :
-   ```
-   Agent: input-mapper
-   Prompt: "Exécute le mapping pour [dossier-post]"
-   ```
-   L'agent lit `direction.md`, consulte `_config/photo-references.md` et `_recettes/`, et écrit `00-input/input.md`.
-2. Après écriture de `input.md`, afficher le mapping à l'opérateur :
-   - Produit → Photo sélectionnée + justification
-   - Recette liée
-   - Éventuels PLACEHOLDER ou RECETTE MANQUANTE
-
-**⚠️ INTERDIT** : Ne JAMAIS résoudre les liens produit→photo manuellement. L'agent DOIT être spawné.
-
-### 🔒 CHECKPOINT — Validation opérateur
-
-**STOP ICI.** Afficher à l'opérateur :
+Gemini génère tout (produit + scène) à partir d'un prompt.
 
 ```
-📋 CHECKPOINT — Validation Input Mapping
-
-Produit : [nom]
-Photo sélectionnée : [chemin] — [justification]
-Recette : [chemin]
-
-✅ Valider et continuer vers le prompt engineering ?
-✏️ Modifier (préciser quoi) ?
+Brief → Art Direction → Input Mapping → 🔒 CHECKPOINT → Prompt → Gemini 4K → Caption
 ```
 
-**Attendre la réponse de l'opérateur.** Ne PAS continuer sans validation explicite.
+### A1 — Art Direction (skill obligatoire)
 
-### ÉTAPE 3 — Prompt Engineering (skill obligatoire)
+1. Lire la fiche recette `production/_recettes/[slug].md`
+2. Lire la config DA `production/_config/pipeline.md`
+3. **APPELER LE SKILL** : `social-media-art-director`
+   - Contexte : brief + recette + config DA
+   - Output : `[dossier-post]/01-art-direction/direction.md`
 
-1. Lire `[dossier-post]/01-art-direction/direction.md`
-2. Lire `[dossier-post]/00-input/input.md`
-3. **APPELER LE SKILL** via le Skill tool :
-   ```
-   Skill: image-prompt-engineer
-   ```
-   Passer en contexte : la direction créative + l'input mapping. Le skill détecte automatiquement le Mode B.
-   L'output DOIT être écrit dans `[dossier-post]/02-prompt/prompt.md`
-4. Après écriture de `prompt.md`, afficher un résumé :
-   - Modèle choisi (Gemini / GPT Images) et pourquoi
-   - Nombre de prompts générés
-   - Longueur approximative
+### A2 — Input Mapping (agent obligatoire)
 
-**⚠️ INTERDIT** : Ne JAMAIS écrire le prompt image à la main. Le skill DOIT être invoqué.
+1. **SPAWNER L'AGENT** : `input-mapper`
+   - Prompt : "Exécute le mapping pour [dossier-post]"
+   - L'agent lit `direction.md`, consulte `_config/photo-references.md` et `_recettes/`
+   - Output : `[dossier-post]/00-input/input.md`
 
-**→ Passer automatiquement à l'étape 4.**
+### 🔒 CHECKPOINT A
 
-### ÉTAPE 4 — Commande de génération
+Afficher le mapping à l'opérateur. Attendre validation.
 
-Pour chaque visuel, assembler et afficher la commande prête à exécuter :
+### A3 — Prompt Engineering (skill obligatoire)
 
-**Pour Gemini (Nanobanana Pro)** :
+1. **APPELER LE SKILL** : `image-prompt-engineer` (Mode B)
+   - Contexte : direction.md + input.md
+   - Output : `[dossier-post]/02-prompt/prompt.md`
+
+### A4 — Génération image
+
+Assembler et afficher la commande Gemini (Nanobanana Pro) :
 ```bash
 uv run production/.claude/skills/nano-banana-pro/scripts/generate_image.py \
-  --prompt "[prompt exact depuis prompt.md]" \
-  --filename "[date]-[slug]-[role]-4x5.png" \
-  --input-image "[chemin photo référence depuis input.md]" \
-  --resolution 4K \
-  --api-key "$GEMINI_API_KEY"
+  --prompt "[prompt]" --filename "[date]-[slug]-4x5.png" \
+  --input-image "[photo ref]" --resolution 4K --api-key "$GEMINI_API_KEY"
 ```
 
-**Pour GPT Images** :
+Output dans `[dossier-post]/03-output/`.
+
+---
+
+## SOUS-PIPELINE B — `irl-sublimation` (photo réelle sublimée)
+
+Photo réelle → retouche/sublimation pour aligner avec la DA.
+
 ```
-Modèle : GPT Images (gpt-image-1.5)
-Prompt : [prompt exact]
-Résolution : 1024×1536 (crop 4:5 après)
+Brief → Vérification photo → 🔒 CHECKPOINT → Sublimation GPT Images → Caption
 ```
 
-Demander à l'opérateur s'il veut lancer la génération.
+### B1 — Vérification photo source
 
-## Règles non négociables
+1. Lire le champ `Photo source` dans le brief
+2. Vérifier que le fichier existe (Glob)
+3. **Ouvrir et analyser la photo** : identifier le sujet, la luminosité, les problèmes à corriger
 
-1. **Chaque skill/agent est invoqué via l'outil dédié** — Skill tool pour les skills, Agent tool pour les agents. Pas d'exécution "à la main".
-2. **Un seul checkpoint** : après l'input mapping (étape 2). Les autres étapes s'enchaînent.
-3. **L'API key est TOUJOURS `$GEMINI_API_KEY`** — jamais de valeur en dur.
-4. **Résolution TOUJOURS 4K** en production.
-5. **Si un skill n'est pas invocable** (erreur au Skill tool), STOP et informer l'opérateur du problème technique. Ne PAS contourner en écrivant l'output à la main.
+### 🔒 CHECKPOINT B
+
+Afficher à l'opérateur :
+```
+📋 CHECKPOINT — Sublimation IRL
+
+Photo source : [chemin]
+Sujet identifié : [description]
+Direction sublimation : [depuis le brief]
+Corrections prévues : [alignement couleurs DA, contraste, fond, etc.]
+
+✅ Valider et sublimer ?
+✏️ Modifier la direction ?
+```
+
+### B2 — Sublimation via GPT Images
+
+1. Construire le prompt de sublimation :
+   - Instruction : retouche légère, aligner avec la DA Dark Food Premium
+   - Direction depuis le brief (champ `Direction sublimation`)
+   - Contraintes : ne pas dénaturer le produit, garder le réalisme documentaire
+   - Palette : tons charbon, cuivre braisé, grenat fumé
+2. Exécuter via GPT Images (gpt-image-1) en mode edit :
+   - Input : photo source
+   - Prompt : instructions sublimation
+   - Output dans `[dossier-post]/03-output/`
+
+---
+
+## SOUS-PIPELINE C — `compositing-irl` (2 photos réelles mixées)
+
+Photo produit + photo lieu → composition réaliste.
+
+```
+Brief → Vérification photos → 🔒 CHECKPOINT → Compositing GPT Images → Caption
+```
+
+### C1 — Vérification des deux photos
+
+1. Lire `Photo produit` et `Photo lieu` depuis le brief
+2. Vérifier que les deux fichiers existent
+3. Analyser la compatibilité : éclairage, perspective, échelle
+
+### 🔒 CHECKPOINT C
+
+Afficher les deux photos et l'intention de compositing. Attendre validation.
+
+### C2 — Compositing via GPT Images
+
+1. Construire le prompt compositing en s'appuyant sur le skill `/photo-compositor` (5 piliers) :
+   - **Éclairage** : harmoniser les sources lumineuses des deux photos
+   - **Ombres** : ombres portées cohérentes avec la lumière du lieu
+   - **Perspective** : aligner les lignes de fuite et l'angle de vue
+   - **Bords** : intégration naturelle, pas de découpe visible
+   - **Couleur** : unifier la température et la saturation (DA Dark Food Premium)
+2. Exécuter via GPT Images en mode edit avec les 2 images
+   - Output dans `[dossier-post]/03-output/`
+
+---
+
+## SOUS-PIPELINE D — `compositing-ia` (photo réelle + scène IA)
+
+Photo produit réelle (ou variante) intégrée dans une scène générée par l'IA.
+
+```
+Brief → Art Direction scène → Input Mapping → 🔒 CHECKPOINT → Prompt → Gemini 4K → Caption
+```
+
+### D1 — Art Direction scène
+
+1. Lire le champ `Scène imaginée` dans le brief
+2. **APPELER LE SKILL** : `social-media-art-director`
+   - Contexte : brief + recette + description de la scène souhaitée
+   - Output : `[dossier-post]/01-art-direction/direction.md`
+   - Note : la direction porte sur la SCÈNE, pas sur le produit (le produit est la photo réelle)
+
+### D2 — Input Mapping
+
+1. **SPAWNER L'AGENT** : `input-mapper`
+   - Résout la photo produit depuis le brief (champ `Photo produit`) ou via `photo-references.md`
+   - Output : `[dossier-post]/00-input/input.md`
+
+### 🔒 CHECKPOINT D
+
+Afficher la direction scène + la photo produit sélectionnée. Attendre validation.
+
+### D3 — Prompt Engineering
+
+1. **APPELER LE SKILL** : `image-prompt-engineer` (Mode B)
+   - Contexte spécial : la direction décrit la scène, l'input fournit la photo produit à intégrer
+   - Le prompt doit instruire Gemini d'intégrer le produit réel dans la scène imaginée
+   - Output : `[dossier-post]/02-prompt/prompt.md`
+
+### D4 — Génération image
+
+Commande Gemini avec `--input-image` pointant vers la photo produit réelle.
+Output dans `[dossier-post]/03-output/`.
+
+---
+
+## SOUS-PIPELINE E — `template` (carrousel/infographie HTML)
+
+Contenu graphique généré via templates HTML + Puppeteer.
+
+```
+Brief → Data Mapping → 🔒 CHECKPOINT → Template Fill → Puppeteer → Caption
+```
+
+### E1 — Data Mapping
+
+1. Lire les données par slide depuis le brief (section `Données slides`)
+2. Résoudre les données produit depuis `_recettes/[slug].md` si nécessaire
+3. Écrire `[dossier-post]/00-input/input.md` avec le mapping placeholder → valeur pour chaque slide
+
+### 🔒 CHECKPOINT E
+
+Afficher le mapping de chaque slide. Attendre validation.
+
+### E2 — Template Fill + Render
+
+Pour chaque slide :
+1. Lire le template HTML dans `production/posts-stories/posts/_templates/[type].html`
+2. Remplacer les `{{PLACEHOLDER}}` par les valeurs
+3. Résoudre les chemins en absolu
+4. Rendre via Puppeteer :
+   ```bash
+   node production/posts-stories/stories/_scripts/render-story.js \
+     --input [slide].html --output [slide].png
+   ```
+   Note : le script render fonctionne pour tout format, pas seulement les stories.
+
+Output : `[dossier-post]/03-output/slide-01.png`, `slide-02.png`, etc.
+
+---
+
+## ÉTAPE FINALE — Génération Caption (tous les modes)
+
+**Après** la production de l'image, pour TOUS les modes :
+
+1. **APPELER LE SKILL** : `caption-writer`
+   - Contexte : le brief (Direction Caption) + l'image produite (vision)
+   - Output : `[dossier-post]/04-caption/caption.md`
+
+2. Afficher la caption à l'opérateur :
+   ```
+   📝 CAPTION GÉNÉRÉE
+
+   [caption]
+
+   ✅ Valider ?
+   ✏️ Modifier ?
+   🔄 Régénérer ?
+   ```
+
+---
+
+## Structure des dossiers post (v3)
+
+```
+[dossier-post]/
+├── 00-brief/brief.md              ← Opérateur (brief v3)
+├── 00-input/input.md              ← input-mapper OU data mapping (selon mode)
+├── 01-art-direction/direction.md  ← Art Director (modes full-ia et compositing-ia uniquement)
+├── 02-prompt/prompt.md            ← Prompt Engineer (modes full-ia et compositing-ia uniquement)
+├── 03-output/*.png                ← Image(s) produite(s)
+└── 04-caption/caption.md          ← Caption Writer (tous les modes)
+```
+
+Note : les sous-dossiers 01 et 02 n'existent pas pour les modes `irl-sublimation`, `compositing-irl` et `template`.
 
 ## Séparation des responsabilités
 
 | Étape | Agent/Skill | Voit | Ne voit PAS |
 |-------|------------|------|-------------|
-| 1 | Art Director (skill) | Brief, Recette (formes), DA | Photos |
-| 2 | Input Mapper (agent) | Direction créative, Photos (descriptions), Recettes | Brief |
-| 3 | Prompt Engineer (skill) | Direction + Input (tout) | Brief original |
+| Art Direction | Skill | Brief, Recette (formes), DA | Photos |
+| Input Mapping | Agent | Direction créative, Photos (descriptions), Recettes | Brief |
+| Prompt Engineer | Skill | Direction + Input (tout) | Brief original |
+| Caption Writer | Skill | Brief (Direction Caption), Image (vision), Dernières captions | Prompt, Direction créative |
 
 ## Gestion d'erreurs
 
 | Erreur | Action |
 |--------|--------|
-| Brief absent | STOP → demander création via template `_templates/brief-v2.md` |
-| Brief contient un chemin photo | WARN → signaler violation v2, continuer |
-| Skill non invocable | STOP → informer opérateur, ne PAS contourner |
-| Photo PLACEHOLDER | WARN dans le checkpoint → opérateur décide |
-| Recette manquante | STOP → demander création de la fiche recette |
+| Brief absent | STOP → demander création via template `_templates/brief-v3.md` |
+| Brief v2 détecté (pas de Mode) | WARN → traiter comme `full-ia`, suggérer migration |
+| Mode inconnu | STOP → lister les 5 modes valides |
+| Photo source manquante (IRL/compositing) | STOP → demander le chemin |
+| Skill non invocable | STOP → informer opérateur |
+| Recette manquante | STOP → demander création |
+| Template HTML manquant (mode template) | STOP → signaler |
+
+## Règles non négociables
+
+1. **Le mode détermine le pipeline** — ne JAMAIS exécuter un sous-pipeline qui ne correspond pas au mode
+2. **Caption TOUJOURS après l'image** — ne JAMAIS écrire la caption avant la génération visuelle
+3. **Un seul checkpoint par mode** — avant la génération/sublimation/compositing/render
+4. **Résolution TOUJOURS 4K** pour les modes full-ia et compositing-ia
+5. **API key TOUJOURS `$GEMINI_API_KEY`** — jamais en dur
+6. **Skills/agents via outils dédiés** — Skill tool et Agent tool, pas d'exécution manuelle
