@@ -7,23 +7,45 @@
 
 ## Étape 0 — Analyse des semaines précédentes (OBLIGATOIRE)
 
-**Avant de planifier**, lire `production/_config/historique-production.md` et analyser :
+**Avant de planifier**, lire `production/_config/historique-production.md` (posts ET stories) et analyser :
 
-1. **Produits déjà couverts** : ne pas refaire un post sur un produit traité les 2 dernières semaines (sauf angle radicalement différent)
+### Analyse posts
+
+1. **Produits déjà couverts en post** : ne pas refaire un post sur un produit traité les 2 dernières semaines (sauf angle radicalement différent)
 2. **Piliers en retard** : identifier les piliers sous-représentés vs la cible et les prioriser
-3. **Modes en retard** : identifier les modes jamais ou peu utilisés et les forcer dans le planning
-4. **Photos déjà utilisées** : ne pas réutiliser la même photo qu'une semaine récente
-5. **Angles éditoriaux** : varier les angles (pas 2 hero shots du même style consécutifs)
+3. **Modes en retard** : identifier les modes jamais ou peu utilisés et les forcer
+4. **Angles éditoriaux** : varier (pas 2 hero shots du même style consécutifs)
+
+### Analyse stories
+
+5. **Produits déjà couverts en story** : ne pas refaire une fiche produit sur un produit qui a eu une fiche les 2 dernières semaines
+6. **Artisans/ingrédients déjà couverts** : alterner les focus ingrédients (ne pas refaire le même artisan 2 semaines de suite)
+7. **Axes interactifs déjà utilisés** : ne pas réutiliser un axe de sondage récent (consulter l'historique des interactifs)
+8. **Modes stories en retard** : identifier les modes peu utilisés en story et les forcer
+
+### Analyse symbiose posts ↔ stories
+
+9. **Cohérence thématique** : les stories de la semaine doivent **compléter** les posts, pas les répéter
+   - Un post "Le Plat" sur le Poulet → la story du même jour fait une fiche produit Poulet + un éducatif sur ses macros
+   - Un post "La Cuisine" sur le process → les stories de la semaine incluent un IRL coulisses + un focus ingrédient
+   - Un post "L'Équipe" sur Romain → une story IRL de Romain en cuisine le même jour
+10. **Pas de doublon sujet** : si un post traite les macros du STRICT Bœuf, les stories ne font PAS un éducatif macros Bœuf la même semaine — elles traitent un autre produit ou un autre angle nutrition
+11. **Photos partagées** : les photos utilisées en post ne doivent PAS être réutilisées en story la même semaine (varier les angles/variantes)
 
 ### Résumé des semaines précédentes (à remplir)
 
-| Constat | Action pour cette semaine |
-|---------|--------------------------|
-| Pilier [X] à 0% (cible [Y]%) | Placer [N] posts sur ce pilier |
-| Mode [X] jamais utilisé | Forcer [N] posts/stories en mode [X] |
-| Produit [X] fait S[N-1] | Ne pas le refaire cette semaine |
-| Produit [X] jamais couvert | Le planifier cette semaine |
-| Photo [X] utilisée 2 fois | Utiliser une variante ou un autre angle |
+| Source | Constat | Action pour cette semaine |
+|--------|---------|--------------------------|
+| Posts | Pilier [X] à [N]% (cible [Y]%) | Placer [N] posts sur ce pilier |
+| Posts | Mode [X] à [N]% (cible [Y]%) | Forcer [N] posts en mode [X] |
+| Posts | Produit [X] fait S[N-1] | Ne pas le refaire en post |
+| Posts | Produit [X] jamais couvert | Le planifier en post |
+| Stories | Fiche produit [X] faite S[N-1] | Varier le produit en fiche |
+| Stories | Artisan [X] couvert S[N-1] | Focus un autre artisan |
+| Stories | Axe interactif [X] utilisé S[N-1] | Choisir un autre axe |
+| Stories | Mode [X] sous-représenté | Forcer des stories en mode [X] |
+| Symbiose | Post [sujet] prévu → | Stories complémentaires à planifier |
+| Symbiose | Photo [X] utilisée en post → | Ne pas réutiliser en story |
 
 ---
 
@@ -62,6 +84,12 @@ Le planning assure le **relief visuel** du feed et des stories. Chaque contenu a
 - Au moins 1 story non-template par jour (irl, sublimation, compositing ou full-ia)
 - Max 3 interactifs/semaine
 - Alterner Vitrine et Dark Premium chaque jour
+
+**Symbiose post ↔ story** :
+- Les jours de post, les stories **complètent** le post (fiche produit, éducatif lié, IRL coulisses)
+- Les jours sans post, les stories couvrent d'**autres sujets** que le post de la veille/du lendemain
+- Un produit couvert en post cette semaine ne refait PAS une fiche produit story la même semaine (sauf si c'est le jour du post)
+- Les photos utilisées en post ne sont PAS réutilisées en story la même semaine
 
 ### Piliers — Distribution posts (cible mensuelle)
 

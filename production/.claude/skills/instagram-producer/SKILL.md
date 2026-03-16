@@ -22,13 +22,18 @@ L'opérateur fournit :
 
 ## Exécution — RESPECTER CET ORDRE EXACT
 
-### ÉTAPE 0 — Vérification et routage
+### ÉTAPE 0 — Vérification, historique et routage
 
 1. **Résoudre le chemin** → déterminer `[dossier-post]`
 2. Lire `[dossier-post]/00-brief/brief.md`
 3. Vérifier que le brief existe et contient au minimum : Pilier, Format, Objectif, Produit, **Mode**, Direction Caption
-4. **Extraire le mode** : champ `Mode` dans la table Stratégie
-5. **Router** vers le sous-pipeline correspondant (voir ci-dessous)
+4. **Lire l'historique** : `production/_config/historique-production.md`
+   - Vérifier que ce produit n'a pas été traité en post les 2 dernières semaines (sauf angle différent)
+   - Vérifier que les photos prévues n'ont pas été utilisées récemment (en post OU en story)
+   - Identifier les stories prévues/produites cette semaine pour vérifier la cohérence (symbiose)
+   - Si doublon détecté → WARN à l'opérateur
+5. **Extraire le mode** : champ `Mode` dans la table Stratégie
+6. **Router** vers le sous-pipeline correspondant (voir ci-dessous)
 
 Si le brief utilise l'ancien format v2 (pas de champ Mode, caption brute) → traiter comme `full-ia` par défaut et WARN l'opérateur.
 

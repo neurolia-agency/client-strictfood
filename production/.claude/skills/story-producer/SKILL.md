@@ -39,14 +39,30 @@ Chaque template a un cadre fixe avec des positions absolues. **TOUJOURS consulte
 - Les **presets photo** (`photo-centre`, `photo-droite`, `photo-gauche`, `photo-haut`, `photo-large`, `photo-portrait`) — classes CSS sur le `<body>`
 - Les **forces de gradient** (`gradient-light`, `gradient-medium`, `gradient-strong`) — classes CSS sur le `<body>`
 
-## Étape 0 — Contexte stratégique (avant toute exécution)
+## Étape 0 — Contexte stratégique + historique (avant toute exécution)
+
+### 0a. Lire l'historique de production
+
+Lire `production/_config/historique-production.md` pour :
+- Identifier les **produits déjà couverts en story** récemment (pas de fiche produit doublon sur 2 semaines)
+- Identifier les **posts de la semaine en cours** (les stories doivent les compléter, pas les répéter)
+- Vérifier les **photos déjà utilisées** (en post ET en story) pour ne pas les réutiliser
+- Identifier les **artisans/ingrédients** déjà couverts en focus (alterner)
+- Identifier les **axes interactifs** déjà utilisés (ne pas répéter)
+
+### 0b. Lire la stratégie
 
 Lire `strategie/strategie-globale.md` (chemin depuis la racine du projet) pour :
-- Identifier le **pilier éditorial** du jour (Food Porn, Éducation, Confiance, Engagement)
+- Identifier le **pilier éditorial** du jour
 - Vérifier la **cohérence** du brief avec le calendrier thématique de la semaine
-- S'assurer que le **ton et les objectifs** du brief alignent avec la stratégie globale
 
-Si incohérence détectée → WARN à l'opérateur avant de continuer (ex: "Le brief mardi est un Éducatif mais la stratégie prévoit un pilier Engagement ce jour-là").
+### 0c. Vérifier la symbiose post ↔ story
+
+- Si un **post est publié ce jour** : les stories doivent le compléter (fiche produit du même produit + éducatif lié + IRL coulisses)
+- Si **aucun post ce jour** : les stories couvrent des sujets différents du post de la veille/du lendemain
+- Si le **même produit** apparaît dans un post et dans une story fiche produit la même semaine (hors jour du post) → WARN
+
+Si incohérence détectée → WARN à l'opérateur avant de continuer.
 
 ## Types de stories et templates
 
