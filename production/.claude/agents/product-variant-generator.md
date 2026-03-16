@@ -46,26 +46,56 @@ Prendre la **vue de face** comme reference primaire — c'est la plus fidele au 
 
 ### 2. Construire le prompt de variation
 
-Chaque variante combine une **instruction de fidelite** + un **concept photo**. Le prompt suit cette structure :
+Chaque variante combine **2 blocs obligatoires** dans cet ordre :
 
 ```
-[INSTRUCTION DE FIDELITE adaptee au produit] + [CONCEPT PHOTO] + [CONTRAINTE TECHNIQUE]
+[BLOC 1 — INGREDIENTS VIVANTS] + [BLOC 2 — CONCEPT PHOTO]
 ```
 
-**Instruction de fidelite (adaptee selon le type de produit) :**
+Le realisme n'est PAS un bloc separe ajoute a la fin — il est **integre dans la description meme des ingredients**. Chaque ingredient est decrit tel qu'il apparait dans un vrai burger fait main : avec du mouvement, de la gravite, de l'interaction entre les couches.
 
-| Type | Instruction de fidelite |
-|------|------------------------|
-| Burger (black bun) | `Keep this exact same burger with its exact same ingredients — same black sesame bun, same patties, same cheese, same greens, same proportions, same colors.` |
-| Burger (white bun) | `Keep this exact same burger with its exact same ingredients — same sesame bun, same patties, same cheese, same greens, same proportions, same colors.` |
-| Wrap | `Keep this exact same wrap with its exact same filling — same tortilla, same ingredients visible, same proportions, same colors.` |
-| Frites | `Keep these exact same fries — same cut, same color, same portion size.` |
-| Tenders | `Keep these exact same chicken tenders — same breading, same golden color, same portion.` |
-| Cookie | `Keep this exact same cookie — same toppings, same texture, same size, same color.` |
-| Overnight | `Keep this exact same overnight oats — same layers, same toppings, same container, same colors.` |
-| Tiramisu | `Keep this exact same tiramisu — same layers, same toppings, same container, same presentation.` |
-| Milkshake | `Keep this exact same milkshake — same cup, same color, same toppings, same straw.` |
-| Boisson | `Keep this exact same drink — same can/bottle, same label, same colors.` |
+#### Bloc 1 — Ingredients vivants
+
+**OBLIGATOIRE** : lister chaque ingredient dans sa forme exacte (via `_recettes/{slug}.md`) MAIS le decrire **en situation** — pas pose proprement, mais comme dans un vrai burger juste assemble a la main. La description de chaque ingredient doit inclure son **comportement physique** (coule, deborde, s'affaisse, fond, colle, pend, glisse).
+
+**Principes cles — Style "Food Porn Realiste" :**
+
+1. **La sauce est un personnage principal, pas un figurant.** JAMAIS "a subtle drizzle" ou "a thin drizzle". La sauce est EPAISSE, BRILLANTE, GENEREUSE. Elle COULE en grosses gouttes le long du bun, elle POOL sur la surface en bas, elle S'ETALE sur les ingredients adjacents, elle BRILLE sous la lumiere. Elle est visible sur PLUSIEURS couches (entre steak et bun, sur la salade, qui coule a l'exterieur).
+
+2. **Les ingredients DEBORDENT du bun.** Rien n'est contenu proprement a l'interieur. La mache depasse de 2-3cm sur les cotes, les oignons pendent, le fromage coule sur le bord. Le bun ne "contient" pas les ingredients — il les comprime et ils s'echappent.
+
+3. **La gravite agit.** Le burger est pose, il s'affaisse legerement. Le steak compresse les ingredients du dessous. La sauce coule vers le bas. Le chapeau presse la salade qui jaillit sur les cotes.
+
+4. **Les ingredients INTERAGISSENT entre eux.** La sauce se retrouve SUR la salade (pas juste en dessous). Le parmesan colle a la sauce humide. Les oignons sont pris dans le fromage fondu. Les feuilles de mache sont brillantes parce que la sauce les a touchees.
+
+5. **Surface brillante / wet look.** L'ensemble degage un aspect JUTEUX et HUMIDE — surfaces glistening sous l'eclairage, sauce et jus qui brillent, textures humides.
+
+6. **Debris au sol = preuve de vie.** Gouttes de sauce sur la surface, feuille de mache tombee, miettes de parmesan, grain de sesame detache du bun. Pas 1-2 elements poses — un vrai chaos de table.
+
+**Exemple pour STRICT Boeuf :**
+```
+This burger built from bottom to top: black sesame bun base (round, dark, densely covered in golden sesame seeds) with a THICK GLOSSY SMEAR of yellow-orange pepper sauce across its entire inner surface, pooling visibly on one side. A thick beef steak with uniform Maillard crust (no grill marks), its juices glistening, pressing down into the sauced bun so the sauce squeezes out and DRIPS in fat glossy drops down the side of the bottom bun. Parmesan crumbles (small irregular powdery fragments, NOT shavings) scattered generously — some stuck to the wet sauce on the steak, a visible cluster on one side, sparse on the other, some fallen onto the surface below. Red onion ring slices with visible concentric rings — NOT neatly stacked but overlapping at random angles, one ring sliding off the edge, another half-hanging off the side. Mâche leaves (small round green leaves, NOT arugula, NOT lettuce) BURSTING OUT past the bun edges by 2-3cm on multiple sides, not a neat crown but an unruly asymmetric explosion of greens, some leaves glossy from sauce contact. Black sesame bun cap sitting slightly off-center, pressing the greens down so they shoot out sideways. The whole burger looks JUICY, WET, GENEROUS — like it was just assembled by hand 10 seconds ago.
+```
+
+**Template par type de produit :**
+
+| Type | Methode |
+|------|---------|
+| Burger | Lire `_recettes/{slug}.md` → decrire chaque ingredient avec son comportement physique (coule, deborde, fond, colle, pend). Sauce = personnage principal, toujours epaisse et visible. Ingredients = debordent du bun. |
+| Wrap | Idem — ingredients qui sortent de la tortilla, sauce visible au bord de la coupe, textures humides. |
+| Snack / Dessert / Boisson | Decrire forme, couleur, texture avec wet look et imperfections naturelles. |
+
+**INTERDIT dans les prompts :**
+
+| Formulation INTERDITE | Remplacement OBLIGATOIRE |
+|----------------------|-------------------------|
+| `a subtle drizzle of sauce` | `a THICK GLOSSY SMEAR of sauce, pooling and dripping` |
+| `scattered parmesan` (seul) | `parmesan crumbles scattered generously — clustered on one side, some stuck to the wet sauce, some fallen below` |
+| `mâche leaves in a bouquet` | `mâche leaves BURSTING OUT past the bun edges, asymmetric, some glossy from sauce` |
+| `red onion ring slices` (seul) | `red onion rings overlapping at random angles, one sliding off the edge, another half-hanging` |
+| `matching bun cap on top` | `bun cap sitting slightly off-center, pressing ingredients so they squeeze out sideways` |
+| `same proportions` | INTERDIT — chaque generation doit avoir des proportions DIFFERENTES de la reference |
+| `professional food photography` (seul) | `real editorial food photography, juicy wet look, appetizing mess` |
 
 ### 3. Banque de variations — Concepts photo
 

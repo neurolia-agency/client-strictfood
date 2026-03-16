@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=1080">
-  <title>Story — {{INGREDIENT_NAME}}</title>
+  <title>Story — Pain noir au sésame</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Oswald:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="_base/base.css">
+  <link rel="stylesheet" href="/Users/dorian.gz/dev/Neurolia Agency/client-strictfood/production/posts-stories/stories/_templates/_base/base.css">
   <style>
     /* ===== VIBRANT MOOD VARIANTS ===== */
-    /* Override base.css with warm, energetic gradients (same as produit-vitrine) */
     :root {
       --vibrant-bg-top: #1a1108;
       --vibrant-bg-bottom: #3a2510;
@@ -53,7 +52,6 @@
     }
 
     /* ===== ARTISAN BADGE (subtle, distinguished) ===== */
-    /* top: 260px clears Instagram's top overlay (250px safe zone) */
     .artisan-badge {
       position: absolute;
       top: 260px;
@@ -103,7 +101,7 @@
       margin-top: 2px;
     }
 
-    /* ===== INGREDIENT HERO IMAGE (full-width, vertical fade) ===== */
+    /* ===== INGREDIENT HERO IMAGE ===== */
     .hero-zone {
       position: absolute;
       top: 0;
@@ -125,7 +123,7 @@
       -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 60%, transparent 95%);
     }
 
-    /* ===== BLUR ZONE (transition between image and text) ===== */
+    /* ===== BLUR ZONE (transition entre image et texte) ===== */
     .blur-zone {
       position: absolute;
       top: 1050px;
@@ -139,8 +137,7 @@
       -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 70%, transparent 100%);
     }
 
-    /* ===== BOTTOM TEXT ZONE (Frosted Glass Panel) ===== */
-    /* padding-bottom: 270px keeps footer-logo above Instagram's bottom overlay (250px safe zone) */
+    /* ===== BOTTOM TEXT ZONE ===== */
     .bottom-zone {
       position: absolute;
       top: 1320px;
@@ -153,7 +150,7 @@
       flex-direction: column;
       justify-content: flex-end;
       align-items: center;
-      padding: 60px 70px 150px;
+      padding: 60px 70px 270px;
       text-align: center;
     }
 
@@ -168,7 +165,7 @@
       opacity: 0.6;
     }
 
-    /* ===== INGREDIENT NAME (Oswald, bold, large) ===== */
+    /* ===== INGREDIENT NAME ===== */
     .ingredient-name {
       font-family: 'Oswald', sans-serif;
       font-weight: 700;
@@ -181,7 +178,7 @@
       margin-bottom: 16px;
     }
 
-    /* ===== KEY FACT (Educational, compelling) ===== */
+    /* ===== KEY FACT ===== */
     .key-fact {
       font-family: 'DM Sans', sans-serif;
       font-size: 32px;
@@ -202,7 +199,7 @@
       filter: brightness(1.4);
     }
 
-    /* ===== IN-PRODUCT LINK (Subtle reference) ===== */
+    /* ===== IN-PRODUCT LINK ===== */
     .in-product {
       font-family: 'DM Sans', sans-serif;
       font-size: 24px;
@@ -239,61 +236,42 @@
       font-style: italic;
       filter: brightness(1.15);
     }
-
-    /* ===== RESPONSIVE TWEAKS FOR 1080x1920 ===== */
-    @media (max-width: 1080px) {
-      .ingredient-name {
-        font-size: 78px;
-      }
-
-      .key-fact {
-        font-size: 30px;
-      }
-
-      .artisan-name {
-        font-size: 17px;
-      }
-
-      .tagline-focus {
-        font-size: 36px;
-      }
-    }
   </style>
 </head>
-<body class="{{MOOD_CLASS}}">
+<body class="mood-feuille">
 
   <!-- Main content wrapper -->
   <div class="content">
 
-    <!-- ARTISAN BADGE: Supplier name + city + description -->
-    <div class="artisan-badge">
-      <div class="artisan-name">{{ARTISAN_NAME}}</div>
-      <div class="artisan-locality">{{ARTISAN_CITY}}</div>
-      <div class="artisan-desc">{{ARTISAN_DESC}}</div>
+    <!-- ARTISAN BADGE (masqué) -->
+    <div class="artisan-badge" style="display: none;">
+      <div class="artisan-name">Pains du Soleil</div>
+      <div class="artisan-locality">Perpignan</div>
+      <div class="artisan-desc">Boulangerie artisanale, livraison quotidienne à l'aube</div>
     </div>
 
-    <!-- HERO: Large, Luminous Ingredient Photo -->
+    <!-- HERO: Ingredient Photo -->
     <div class="hero-zone">
-      <img class="ingredient-image" src="{{HERO_IMAGE_PATH}}" alt="{{INGREDIENT_NAME}}">
+      <img class="ingredient-image" src="/Users/dorian.gz/dev/Neurolia Agency/client-strictfood/public/images/photos-references/produits-generes/strict-max-boeuf/black-bun-ctrict-boeuf.png" alt="Pain noir au sésame">
     </div>
 
-    <!-- BLUR ZONE: Transition between image and text -->
+    <!-- BLUR ZONE -->
     <div class="blur-zone"></div>
 
-    <!-- BOTTOM ZONE: Frosted Glass Panel with Details -->
+    <!-- BOTTOM ZONE -->
     <div class="bottom-zone">
-      <div class="ingredient-name">{{INGREDIENT_NAME}}</div>
+      <div class="ingredient-name">Pain noir au sésame</div>
 
-      <div class="key-fact">{{KEY_FACT}}</div>
+      <div class="key-fact"><strong>Brioché. Noir.</strong> Graines de sésame torréfiées.<br>Livré chaque matin par <em style="color: var(--accent); font-style: italic;">Les Pains du Soleil</em>.<br>Un burger qui a de la gueule.</div>
 
-      <div class="in-product">{{IN_PRODUCT}}</div>
+      <div class="in-product">Dans tous nos burgers</div>
 
       <div class="divider-line"></div>
 
-      <div class="tagline-focus">{{TAGLINE}}</div>
+      <div class="tagline-focus">Le cheat meal qui n'en est pas un</div>
 
       <div class="footer-logo">
-        <img src="_base/logo.svg" alt="STRICT FOOD'S">
+        <img src="/Users/dorian.gz/dev/Neurolia Agency/client-strictfood/production/posts-stories/stories/_templates/_base/logo.svg" alt="STRICT FOOD'S">
       </div>
     </div>
 

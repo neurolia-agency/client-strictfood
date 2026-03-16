@@ -1,17 +1,14 @@
 #!/usr/bin/env node
 
 /**
- * render-story.js — Renders HTML story templates to PNG/JPG (1080×1920)
+ * render-story.js — Renders HTML story templates to PNG (1080×1920)
  *
  * Usage:
  *   node render-story.js --input path/to/story.html --output path/to/story.png
- *   node render-story.js --input story.html --output story.png --format both --quality 90
  *
  * Options:
  *   --input    Path to filled HTML template
- *   --output   Output path (extension determines format, or use --format)
- *   --format   png | jpg | both (default: derived from output extension)
- *   --quality  JPG quality 1-100 (default: 92)
+ *   --output   Output path (.png)
  *   --timeout  Font loading timeout in ms (default: 10000)
  */
 
@@ -23,8 +20,6 @@ async function renderStory(options) {
   const {
     input,
     output,
-    format = 'png',
-    quality = 92,
     timeout = 10000
   } = options;
 
@@ -68,31 +63,13 @@ async function renderStory(options) {
       fs.mkdirSync(outputDir, { recursive: true });
     }
 
-    const baseName = outputPath.replace(/\.(png|jpg|jpeg)$/i, '');
-    const formats = format === 'both' ? ['png', 'jpg'] : [format];
-
-    for (const fmt of formats) {
-      const filePath = `${baseName}.${fmt}`;
-
-      if (fmt === 'png') {
-        await page.screenshot({
-          path: filePath,
-          type: 'png',
-          fullPage: false,
-          clip: { x: 0, y: 0, width: 1080, height: 1920 }
-        });
-        console.log(`PNG saved: ${filePath}`);
-      } else {
-        await page.screenshot({
-          path: filePath,
-          type: 'jpeg',
-          quality: quality,
-          fullPage: false,
-          clip: { x: 0, y: 0, width: 1080, height: 1920 }
-        });
-        console.log(`JPG saved: ${filePath} (quality: ${quality})`);
-      }
-    }
+    await page.screenshot({
+      path: outputPath,
+      type: 'png',
+      fullPage: false,
+      clip: { x: 0, y: 0, width: 1080, height: 1920 }
+    });
+    console.log(`PNG saved: ${outputPath}`);
 
   } finally {
     await browser.close();
@@ -112,12 +89,6 @@ function parseArgs() {
       case '--output':
         options.output = args[++i];
         break;
-      case '--format':
-        options.format = args[++i];
-        break;
-      case '--quality':
-        options.quality = parseInt(args[++i], 10);
-        break;
       case '--timeout':
         options.timeout = parseInt(args[++i], 10);
         break;
@@ -128,14 +99,8 @@ function parseArgs() {
   }
 
   if (!options.input || !options.output) {
-    console.error('Usage: node render-story.js --input <html> --output <png|jpg>');
+    console.error('Usage: node render-story.js --input <html> --output <png>');
     process.exit(1);
-  }
-
-  // Derive format from output extension if not specified
-  if (!options.format) {
-    const ext = path.extname(options.output).slice(1).toLowerCase();
-    options.format = ext === 'jpg' || ext === 'jpeg' ? 'jpg' : 'png';
   }
 
   return options;

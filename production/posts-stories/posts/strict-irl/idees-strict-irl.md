@@ -6,6 +6,161 @@
 
 Style Burger King FR : hyper-texture, sensory-focused, authenticity over perfection. Cadrage lifestyle, lumiere naturelle, personnages en situation reelle.
 
+---
+
+## Regles anti-empreinte IA — Prompt Engineering Photorealiste
+
+> Ces regles sont OBLIGATOIRES pour toute generation STRICT IRL. Elles s'ajoutent aux regles de `feedback_strict_irl_photo_rules.md`. L'objectif est de produire des photos indiscernables de vrais cliches.
+
+### Principe fondamental
+
+**Decrire comme un photographe, pas comme un developpeur.** Les modeles repondent aux descriptions narratives (direction photo) bien mieux qu'aux listes de mots-cles. Prompt optimal : 100-150 mots, langage naturel.
+
+### 1. Ancrage photographique (OBLIGATOIRE dans chaque prompt)
+
+Toujours inclure ces 5 elements techniques :
+
+| Element | Valeurs recommandees STRICT IRL |
+|---------|--------------------------------|
+| **Objectif** | `50mm f/1.8` (lifestyle plein cadre), `85mm f/2.8` (portrait + food), `35mm f/2` (scene de groupe) |
+| **Boitier** | `shot on Canon EOS R5` ou `Sony A7R IV` ou `Fujifilm X-T5` |
+| **Film stock** | `Kodak Portra 400` (chaleur + grain organique automatiques) |
+| **Temperature couleur** | `daylight white balance 5200-5600K` (exterieur) ou `warm tungsten 3200K` (interieur soir) |
+| **Profondeur de champ** | `shallow depth of field, creamy bokeh background` |
+
+### 2. Eclairage — 80% du realisme vient de la
+
+L'eclairage plat et uniforme = signature IA immediate. Toujours specifier :
+
+| Situation | Instruction eclairage |
+|-----------|----------------------|
+| **Exterieur jour** | `natural sunlight, soft shadows, golden hour side-lighting` |
+| **Exterieur sunset** | `warm golden backlight creating rim-light on subject, lens flare` |
+| **Interieur naturel** | `natural window side-light at 45 degrees, soft diffused shadows` |
+| **Interieur soir** | `warm ambient tungsten light, practical light sources visible, slight underexposure in corners` |
+| **Salle de sport** | `harsh overhead fluorescent mixed with natural light from windows, unflattering but authentic` |
+| **Nuit urbaine** | `streetlamp sodium glow, warm-cold contrast, subtle rim light from neon signs` |
+
+**Ajouter systematiquement :** `minor uneven exposure, natural light falloff` — brise la perfection IA.
+
+### 3. Anti peau plastique — La regle critique
+
+Les modeles IA surllissent la peau. C'est l'artefact le plus detectable.
+
+**Mots INTERDITS dans les prompts :**
+- ~~smooth skin~~, ~~flawless~~, ~~perfect skin~~, ~~beautiful~~, ~~stunning~~, ~~poreless~~
+
+**Mots OBLIGATOIRES :**
+```
+natural skin texture with visible pores preserved,
+uneven skin tone, subtle freckles, realistic complexion,
+no airbrushed finish, no plastic appearance
+```
+
+**Technique avancee :** Specifier `subsurface scattering on skin` — signal de realisme avance qui force la translucidite naturelle de la peau sous la lumiere.
+
+### 4. Posing et expressions anti uncanny valley
+
+| Artefact | Solution |
+|----------|----------|
+| Sourire fige/artificiel | `candid mid-laugh`, `genuine unguarded moment`, `caught mid-sentence` |
+| Regard camera mort | `subject NOT looking at camera`, `looking at food`, `looking at companion` |
+| Pose statique | `dynamic body language, slightly leaning, body in oblique angle, natural slouch` |
+| Symetrie faciale | `natural facial asymmetry, slight tilt of head, relaxed expression` |
+| Mains deformees | `hands partially hidden by food/wrapper`, `one hand in pocket`, `hands naturally gripping burger` |
+
+### 5. Food realisme — Anti glossy / anti perfection
+
+| Artefact | Solution prompt |
+|----------|----------------|
+| Burger trop parfait | `burger slightly tilted, sauce dripping naturally, lettuce slightly off-center, imperfect and appetizing` |
+| Fromage plastique | `natural cheese melt with organic drips, not artificially glossy, realistic surface tension` |
+| Taille irrealiste | `realistic burger size proportional to human hand, not oversized` |
+| Surface trop brillante | `matte finish on bread, glossy only where sauce naturally catches light` |
+| Ingredients flottants | `ingredients settled naturally, proper contact between layers, realistic stacking` |
+| Absence de texture | `visible crumb texture on bun, natural browning variation, uneven caramelization, char marks` |
+
+### 6. Packaging kraft — Authenticite materiau
+
+```
+black matte kraft paper wrapper naturally crumpled and used-looking,
+not pristine or stiff, visible creases and folds from handling,
+slightly grease-stained, plain dark surface
+```
+
+### 7. Imperfections volontaires — Signal de realisme
+
+Le cerveau humain detecte la perfection comme artificielle. Ajouter au moins 3 de ces elements :
+
+- `subtle film grain` (le grain analogique casse le rendu digital)
+- `minor uneven exposure` (surexposition ou sous-exposition partielle)
+- `slight lens vignetting` (bords legerement assombris)
+- `natural motion blur on secondary elements` (leger flou de mouvement)
+- `small dust particles visible in light beam` (poussiere dans la lumiere)
+- `slightly overblown highlights on reflective surfaces` (hautes lumieres clamees)
+- `bokeh with slight chromatic aberration` (bokeh avec aberration chromatique)
+- `authentic environmental noise` (elements parasites naturels dans le decor)
+
+### 8. Mots-cles par categorie
+
+#### Realisme obligatoire
+`documentary-style` · `photojournalistic authenticity` · `editorial lifestyle photography` · `Kodak Portra 400` · `natural imperfections`
+
+#### Anti-IA obligatoire
+`no artificial shine` · `no plastic appearance` · `no airbrushed finish` · `no oversaturation` · `no symmetrical composition` · `no studio-perfect lighting`
+
+#### A BANNIR (declenchent le look IA)
+~~masterpiece~~ · ~~incredible detail~~ · ~~8K ultra-detailed~~ · ~~cinematic~~ · ~~flawless~~ · ~~perfect~~ · ~~hyper-realistic~~ · ~~stunning~~ · ~~beautiful lighting~~
+
+### 9. Structure de prompt type STRICT IRL
+
+```
+Documentary-style lifestyle photography of [SCENE/ACTION DETAILLEE].
+[DESCRIPTION PERSONNAGE(S) : age, physique, tenue, expression candide].
+[PRODUIT STRICTFOOD visible : taille realiste, details emballage kraft froisse].
+[DECOR/LIEU precis avec details atmospheriques].
+Natural [TYPE] light [DIRECTION et ANGLE], creating [EFFET sur les textures].
+Shot on [BOITIER], [FOCAL]mm f/[OUVERTURE], shallow depth of field
+with creamy bokeh. Kodak Portra 400 color grade, subtle film grain,
+natural skin texture with visible pores preserved.
+Subject not looking at camera, candid unguarded moment, dynamic body language.
+Burger slightly tilted with sauce dripping, realistic proportions.
+No artificial shine, no plastic skin, no oversaturation, no perfect symmetry.
+```
+
+### 10. Reflets et limitations — Ce qu'il faut eviter
+
+Ces elements restent non resolus par les modeles IA en 2025. Les **cadrer hors-champ** :
+
+- Miroirs et surfaces reflechissantes
+- Lunettes de soleil (reflets incoherents)
+- Flaques d'eau et reflets au sol
+- Vitres de voiture (reflets complexes)
+- Surfaces metalliques tres polies
+
+Si la scene en necessite (ex: salle de sport avec miroirs), specifier `mirrors blurred in deep background, not reflecting subject`.
+
+### 11. Post-processing recommande
+
+Apres generation, appliquer si necessaire :
+
+1. **Grain film** : ajouter en post (Lightroom/Photoshop) — les modeles de diffusion traitent le grain comme du bruit a supprimer
+2. **Color grading** : profil Kodak Portra ou Fujifilm — casse l'uniformite digitale
+3. **Vignettage** : subtil, ajoute de la profondeur naturelle
+4. **Texture peau** : si trop lisse, reduire opacite du lissage a 30-40% et rajouter du grain
+
+### 12. Choix du modele par type de visuel
+
+| Type de visuel | Modele recommande | Raison |
+|----------------|-------------------|--------|
+| Lifestyle humain sans texte | **Gemini (Nano Banana Pro)** | Meilleure texture peau, pores realistes, eclairage naturel |
+| Food gros plan sans texte | **Gemini (Nano Banana Pro)** | Texture food superieure, 4K natif |
+| Visuel avec branding lisible | **GPT-4o (gpt-image-1.5)** | Seul a rendre du texte lisible et precis |
+| Iteration / exploration rapide | **GPT-4o** | Raffinement conversationnel multi-turn |
+| Scene complexe multi-personnages | **Gemini** | Meilleure coherence anatomique en groupe |
+
+---
+
 ## Statut
 
 | # | Statut | Fichier output |
