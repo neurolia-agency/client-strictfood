@@ -10,406 +10,383 @@
 | Je veux... | Aller à |
 |------------|---------|
 | Planifier une semaine de contenu | [1. Planifier une semaine](#1-planifier-une-semaine) |
-| Créer un post Instagram | [2. Créer un post](#2-créer-un-post) |
-| Créer des stories Instagram | [3. Créer des stories](#3-créer-des-stories) |
-| Savoir quel mode choisir pour un post | [4. Choisir le bon mode](#4-choisir-le-bon-mode-de-création) |
-| Savoir quel type de story utiliser | [5. Choisir le type de story](#5-choisir-le-type-de-story) |
-| Comprendre comment fonctionne le pipeline | [6. Comprendre le système](#6-comprendre-le-système) |
+| Produire un post prévu au planning | [2. Produire un post](#2-produire-un-post) |
+| Produire les stories d'un jour/semaine | [3. Produire des stories](#3-produire-des-stories) |
+| Créer un post ou une story hors planning (idée spontanée) | [4. Production hors planning](#4-production-hors-planning) |
+| Comprendre les modes de création | [5. Les modes de création](#5-les-modes-de-création) |
+| Comprendre les types de stories | [6. Les types de stories](#6-les-types-de-stories) |
+| Comprendre comment le système fonctionne | [7. Comprendre le système](#7-comprendre-le-système) |
 
 ---
 
 ## 1. Planifier une semaine
 
 > **Quand** : Chaque semaine, avant de créer les briefs.
-> **Durée** : 15-20 min.
-> **Pourquoi** : Sans planning, on fait 100% de food porn. Le planning force la variété des piliers, des modes et des stories.
+> **Durée** : 15-20 min avec Claude.
+> **Pourquoi** : Le planning décide de TOUT — piliers, modes, types de stories. Pas de décision à prendre post-planning.
 
-### Étapes
-
-**1.1** Demande à Claude :
+### Comment faire
 
 ```
 Créons le planning de la semaine S[X] (du [date] au [date]).
 ```
 
-Claude va créer le fichier à partir du template `_templates/planning-semaine.md`. Tu remplis ensemble :
+Claude crée le fichier, applique les règles de distribution automatiquement, et te propose un planning équilibré. Tu ajustes et valides.
 
-**1.2** Distribuer les **posts** (3-4/semaine) :
+### Ce que le planning décide
 
-Pour chaque post, décider :
-- **Quel jour** publier
-- **Quel pilier** (voir [grille piliers](#les-5-piliers))
-- **Quel mode** de création (voir [arbre de décision mode](#4-choisir-le-bon-mode-de-création))
-- **Quel produit ou sujet**
+| Dimension | Décidé dans le planning | Tu n'as plus à y penser après |
+|-----------|------------------------|-------------------------------|
+| **Piliers** | Quel pilier pour chaque post | Distribution équilibrée sur le mois |
+| **Modes posts** | Quel mode pour chaque post | Variété garantie (jamais 2x le même consécutif) |
+| **Modes stories** | Quel mode pour chaque story | Mix template + IRL + sublimation + compositing |
+| **Types stories** | Quel type (teaser, fiche, éducatif...) | Alternance Dark Premium / Vitrine |
+| **Photos IRL** | Quelles photos prendre cette semaine | Liste claire pour Romain/Dorian |
 
-**1.3** Distribuer les **stories** (3-4/jour) :
+### Règles de distribution (appliquées automatiquement)
 
-Pour chaque jour, prévoir :
-- Au moins **1 Vitrine** (fiche produit ou focus ingrédient) + **1 Dark Premium**
-- Un **Teaser** avant chaque jour de publication post
-- Max **3 Interactifs** sur la semaine
-- Les **photos IRL** nécessaires (à prendre AVANT la semaine)
+**Posts** :
+- Jamais 2 posts consécutifs avec le même mode
+- Au moins 3 modes différents par semaine
+- Au moins 3 piliers différents par semaine
 
-**1.4** Vérifier la distribution piliers en bas du planning.
-
-**1.5** Valider le planning. Tu es prêt à rédiger les briefs.
+**Stories** :
+- Chaque jour a au moins 2 modes différents
+- Au moins 1 story non-template par jour (IRL, sublimation, compositing ou full-ia)
+- Max 3 interactifs par semaine
+- Alternance Vitrine / Dark Premium quotidienne
 
 ### Les 5 piliers
 
-| Pilier | Part | Ce que c'est | Exemples |
-|--------|------|--------------|----------|
-| **Le Plat** | 35% | Food porn premium, hero shots produits | Burger DA, close-up texture, carrousel carte |
-| **La Cuisine** | 25% | Coulisses, process, fournisseurs | Romain qui assemble, arrivage ingrédients, grill en action |
-| **Les Macros** | 18% | Nutrition, éducation, comparaisons | Infographie macros, "notre burger vs Big Mac", tips |
-| **L'Équipe** | 15% | Portraits, storytelling, humain | Romain/Dorian en situation, anecdote du jour |
-| **Le Quartier** | 7% | Communauté, local, partenaires | Client qui tagge, partenaire mis en avant, Perpignan |
-
-> La distribution exacte par semaine peut varier. C'est la **moyenne mensuelle** qui compte. Sur 4 semaines, chaque pilier doit apparaître au moins une fois.
+| Pilier | Cible mois | Ce que c'est |
+|--------|------------|--------------|
+| **Le Plat** | 35% | Food porn premium, hero shots produits |
+| **La Cuisine** | 25% | Coulisses, process, fournisseurs |
+| **Les Macros** | 18% | Nutrition, éducation, comparaisons |
+| **L'Équipe** | 15% | Portraits, storytelling, humain |
+| **Le Quartier** | 7% | Communauté, local, partenaires |
 
 ---
 
-## 2. Créer un post
+## 2. Produire un post
 
-> **Prérequis** : Le planning de la semaine est validé.
+> **Prérequis** : Le planning de la semaine est validé. Le mode est déjà décidé.
 
 ### Étape par étape
 
-**2.1** Dis à Claude ce que tu veux faire. Exemples :
+**2.1** Dis à Claude :
 
 ```
-Créons le brief du post de lundi (2026-03-24), STRICT Max Bœuf en full-ia.
+Produis le post du [jour] [date].
 ```
 
-```
-J'ai une photo de Romain en cuisine, je veux en faire un post "La Cuisine" en irl-sublimation.
-```
-
-```
-Je veux faire un carrousel comparaison macros notre burger vs Big Mac.
-```
-
-Claude va créer le dossier et le brief v3. Tu remplis ensemble les champs.
-
-**2.2** Ce que tu fournis dépend du mode :
-
-| Mode | Ce que tu dois préparer | Ce que le pipeline fait |
-|------|------------------------|------------------------|
-| `full-ia` | Juste le produit + slug | Tout : art direction, photo, prompt, image IA, caption |
-| `irl-sublimation` | La photo réelle + ce que tu veux améliorer | Sublime la photo pour aligner DA + caption |
-| `compositing-irl` | 2 photos (produit + lieu) + comment les mixer | Compose les 2 photos + caption |
-| `compositing-ia` | Photo produit + description de la scène imaginée | Crée la scène IA autour du produit + caption |
-| `template` | Les données de chaque slide | Génère les slides HTML + caption |
-
-**2.3** Pour la **Direction Caption**, tu donnes :
-- L'**angle** (l'idée principale — ex: "générosité double steak")
-- Le **ton** (direct, chaleureux, provocateur, éducatif, storytelling)
-- Le **CTA** (tag un pote, viens goûter, lien en bio, aucun)
-- Si tu veux mentionner le **prix**, les **macros**, les **fournisseurs**
-
-> Tu ne rédiges PAS la caption. Le skill `/caption-writer` la génère après l'image en analysant visuellement ce qu'il voit.
-
-**2.4** Lance le pipeline :
+ou directement :
 
 ```
 /instagram-producer 2026-03-24
 ```
 
-**2.5** Valide le checkpoint quand il s'affiche, puis vérifie l'image et la caption.
+**2.2** Claude lit le planning, crée le brief v3 avec le mode déjà défini, et lance le pipeline adapté. Tu n'as rien à décider sur le mode — c'est fait.
+
+**2.3** Ce que tu fournis dépend du mode (décidé au planning) :
+
+| Mode | Ce que tu dois préparer |
+|------|------------------------|
+| `full-ia` | Rien de plus. Produit et slug suffisent. |
+| `irl-sublimation` | Fournir la photo réelle |
+| `compositing-irl` | Fournir 2 photos (produit + lieu) |
+| `compositing-ia` | Fournir la photo produit |
+| `template` | Valider les données des slides |
+
+**2.4** Valide le checkpoint, puis vérifie l'image et la caption générée.
 
 ---
 
-## 3. Créer des stories
+## 3. Produire des stories
 
-> **Prérequis** : Le planning de la semaine indique les stories par jour.
+> **Prérequis** : Le planning de la semaine est validé. Les modes de chaque story sont déjà décidés.
 
-### Story par story ou batch semaine
-
-**Option A — Un jour à la fois** :
+### Un jour ou toute la semaine
 
 ```
-Créons les stories de lundi S3, puis /story-producer S3 lundi
+/story-producer S3 lundi        # Un jour
+/story-producer S3              # Toute la semaine
 ```
 
-**Option B — Toute la semaine d'un coup** :
+### Ce qui se passe selon le mode de la story
 
-```
-/story-producer S3
-```
+| Mode story | Ce que le pipeline fait |
+|------------|------------------------|
+| `template` | Copywriter → Data Mapper → Template HTML → Puppeteer → PNG |
+| `irl` | Photo brute → `irl-story.html` overlay DA minimal → Puppeteer → PNG |
+| `irl-sublimation` | Photo → Sublimation GPT Images (format 9:16) → PNG |
+| `compositing-irl` | 2 photos → Compositing GPT Images (format 9:16) → PNG |
+| `full-ia` | Prompt → Gemini (format 9:16) → PNG |
 
-### Étape par étape
+> Les stories non-template (`irl-sublimation`, `compositing-irl`, `full-ia`) produisent une image plein cadre. Un overlay léger (logo + texte optionnel) est ajouté via le template `irl-story.html`.
 
-**3.1** Rédiger le brief story du jour (ou demander à Claude de le rédiger à partir du planning).
-
-**3.2** Le pipeline enchaîne automatiquement :
-1. Le **copywriter** (Sonnet) réécrit les textes pour plus de punch
-2. Le **data mapper** (Haiku) résout les données (macros, prix, photos)
-3. **Template fill** : remplace les placeholders dans le HTML
-4. **Puppeteer** : rend le HTML en PNG 1080x1920
-
-**3.3** Tu valides au checkpoint (toutes les stories du jour affichées d'un coup).
-
-**3.4** Tu vérifies les PNG générés.
+### Tu valides au checkpoint, puis vérifies les PNG.
 
 ---
 
-## 4. Choisir le bon mode de création
+## 4. Production hors planning
 
-> **Utilise cet arbre de décision** quand tu rédiges le planning ou le brief d'un post.
+> **Quand** : Tu as une idée spontanée, une action ponctuelle, une actualité, un contenu opportuniste.
+> **Principe** : Tu invoques directement l'agent ou le skill que tu veux, sans passer par le planning.
+
+### Post hors planning
 
 ```
-Tu as des photos réelles du sujet ?
-│
-├── NON → Le sujet est un produit de la carte ?
-│         │
-│         ├── OUI → MODE: full-ia
-│         │         (Gemini génère le produit + la scène)
-│         │
-│         └── NON → C'est un contenu data/macros/infographie ?
-│                   │
-│                   ├── OUI → MODE: template
-│                   │         (Carrousel HTML, infographie, comparaison)
-│                   │
-│                   └── NON → MODE: full-ia
-│                             (Scène imaginée par l'IA)
-│
-└── OUI → Tu veux mixer la photo avec un lieu réel ?
-          │
-          ├── OUI → MODE: compositing-irl
-          │         (Photo produit + photo salle/devanture → GPT Images mixe les deux)
-          │
-          └── NON → Tu veux placer le produit dans une scène imaginée ?
-                    │
-                    ├── OUI → MODE: compositing-ia
-                    │         (Photo produit réelle + scène IA Gemini)
-                    │
-                    └── NON → MODE: irl-sublimation
-                              (Photo réelle sublimée pour aligner avec la DA)
+Je veux créer un post hors planning : [décris ce que tu veux]
 ```
 
-### Exemples concrets
+Exemples :
 
-| Je veux publier... | Mode | Pourquoi |
-|---------------------|------|----------|
-| Un hero shot du STRICT Bœuf, food porn | `full-ia` | Pas besoin de photo réelle, Gemini gère |
-| Une photo de Romain qui assemble un burger | `irl-sublimation` | Photo réelle + retouche DA |
-| Le burger posé sur le comptoir du restaurant | `compositing-irl` | Photo burger + photo comptoir → mix |
-| Le burger dans une cuisine industrielle dramatique | `compositing-ia` | Photo burger réelle + scène IA |
-| Un carrousel "notre burger vs Big Mac" en chiffres | `template` | Infographie HTML, pas de photo IA |
-| Un portrait de Dorian devant la devanture | `compositing-irl` | Photo portrait + photo devanture → mix |
-| L'arrivage du pain artisanal du matin | `irl-sublimation` | Photo brute sublimée |
-| Un nouveau produit pas encore photographié | `full-ia` | Gemini imagine le produit |
+```
+J'ai une super photo du burger de ce midi, je veux en faire un post IRL-sublimation maintenant.
+```
 
-### Résumé des modes
+```
+Un client a posté un avis incroyable, je veux faire un post "Le Quartier" avec un visuel full-ia.
+```
 
-| Mode | Input photos | API | Résultat |
-|------|-------------|-----|----------|
-| `full-ia` | Aucune (résolu auto) | Gemini 4K | Image 100% IA |
-| `irl-sublimation` | 1 photo réelle | GPT Images | Photo retouchée DA |
-| `compositing-irl` | 2 photos réelles | GPT Images | Montage réaliste |
-| `compositing-ia` | 1 photo réelle | Gemini 4K | Photo dans scène IA |
-| `template` | Optionnelles | Aucune (Puppeteer) | Infographie/carrousel |
+```
+Il fait beau, Romain est devant la devanture, on compose un portrait pour Instagram.
+```
+
+Le pipeline crée le dossier dans `posts-stories/posts/hors-planning/YYYY-MM-DD/` et exécute normalement. Le post est tagué hors-planning et n'affecte pas les compteurs de distribution du planning.
+
+### Story hors planning
+
+```
+J'ai une photo de l'arrivage de ce matin, fais-moi une story IRL avec.
+```
+
+```
+On a un événement ce soir, crée une story annonce vite.
+```
+
+Le pipeline crée dans `posts-stories/stories/hors-planning/YYYY-MM-DD/`.
+
+### Invoquer un agent directement
+
+Tu peux aussi appeler n'importe quel skill ou agent de la chaîne indépendamment :
+
+| Tu veux... | Commande / Demande |
+|------------|-------------------|
+| Juste sublimer une photo | `/nano-banana-pro` ou demande une sublimation GPT Images |
+| Juste générer une caption | `/caption-writer` sur une image existante |
+| Juste créer une art direction | `/social-media-art-director` |
+| Juste un prompt image | `/image-prompt-engineer` |
+| Juste rendre un template story | `/story-producer` sur un brief ponctuel |
+| Générer une variante produit | Invoke l'agent `product-variant-generator` |
+
+> Hors planning = liberté totale. Aucune contrainte de mode ou de pilier. Tu fais ce que tu veux, quand tu veux.
 
 ---
 
-## 5. Choisir le type de story
+## 5. Les modes de création
 
-> **Utilise ce guide** quand tu planifies les stories dans le planning semaine.
+> Les modes sont décidés **dans le planning**. Ce qui suit est une référence pour comprendre chaque mode.
 
-### Arbre de décision
+### Les 5 modes
 
-```
-C'est un jour de publication post ?
-│
-├── OUI → Story 1 : TEASER (teaser-post.html)
-│         "Créer l'anticipation pour le post à venir"
-│         │
-│         └── + Story 2 : FICHE PRODUIT du produit du post (produit-vitrine.html)
-│             "Donner les macros et le prix"
-│
-└── NON → (continuer ci-dessous)
+| Mode | En une phrase | Input | API | Output |
+|------|---------------|-------|-----|--------|
+| `full-ia` | L'IA imagine tout | Aucune photo | Gemini 4K | Image 100% IA |
+| `irl-sublimation` | Photo réelle embellie DA | 1 photo réelle | GPT Images | Photo retouchée |
+| `compositing-irl` | 2 photos réelles fusionnées | 2 photos réelles | GPT Images | Montage réaliste |
+| `compositing-ia` | Produit réel dans scène imaginée | 1 photo réelle | Gemini 4K | Photo dans scène IA |
+| `template` | Infographie / carrousel HTML | Données | Puppeteer | Slides PNG |
 
-Tu veux montrer un contenu authentique/coulisses ?
-│
-├── OUI → IRL (irl-story.html)
-│         "Photo brute avec overlay DA minimal"
-│
-└── NON → (continuer)
+### Quand chaque mode brille
 
-Tu veux éduquer ou comparer ?
-│
-├── OUI → ÉDUCATIF (educatif.html)
-│         "Chiffre clé + explication + comparaison VS"
-│         │
-│         └── Besoin de plusieurs stories pour expliquer ? → SÉQUENCE (1/N, 2/N...)
-│
-└── NON → (continuer)
+| Mode | Le plus efficace pour | Exemples |
+|------|----------------------|----------|
+| `full-ia` | Visuels food porn élaborés, nouveau produit sans photo, scènes impossible à shooter | Hero shot burger vapeur dramatique, dessert lévitation |
+| `irl-sublimation` | Authenticité + qualité DA, contenu humain, coulisses | Romain qui assemble, arrivage ingrédients, portrait équipe |
+| `compositing-irl` | Produit in situ sans shooting studio | Burger sur comptoir, tenders devant la devanture |
+| `compositing-ia` | Ambiance cinématique autour d'un vrai produit | Burger dans cuisine industrielle vapeur, produit extérieur nuit |
+| `template` | Données chiffrées, comparaisons, éducation | Carrousel macros, "nous vs classique", tips nutrition |
 
-Tu veux engager l'audience (vote, quiz) ?
-│
-├── OUI → INTERACTIF (interactif.html) ⚠️ Max 3/semaine
-│         "Sondage, quiz, slider, question ouverte"
-│
-└── NON → (continuer)
+### Distribution cible
 
-Tu veux mettre en avant un ingrédient/fournisseur ?
-│
-├── OUI → FOCUS INGRÉDIENT (focus-ingredient.html)
-│         "Artisan + fait clé + dans quel produit"
-│
-└── NON → (continuer)
+**Posts (mensuelle)** : full-ia 30% · irl-sublimation 25% · compositing-irl 20% · compositing-ia 15% · template 10%
 
-Tu veux annoncer quelque chose (horaires, nouveau produit, lieu) ?
-│
-├── OUI → ANNONCE (annonce.html)
-│         "Badge + headline + body + CTA"
-│
-└── NON → FICHE PRODUIT d'un produit pas encore couvert (produit-vitrine.html)
-```
-
-### Récap des types
-
-| Type | Famille | Quand | Fréquence |
-|------|---------|-------|-----------|
-| **Teaser** | Dark Premium | Avant chaque post | 3-4/semaine |
-| **Fiche Produit** | Vitrine | Après un post produit, ou standalone | 4-5/semaine |
-| **Interactif** | Dark Premium | Engagement, fun | Max 3/semaine |
-| **Éducatif** | Dark Premium | Nutrition, process, tips | 2-3/semaine |
-| **Focus Ingrédient** | Vitrine | Fournisseurs, qualité | 1-2/semaine |
-| **Annonce** | Dark Premium | Nouveautés, horaires, lieu | 1-2/semaine |
-| **IRL** | Dark Premium | Coulisses, rush, ambiance | 2-3/semaine |
-| **Séquence** | Variable | Process en étapes, avant/après | 1/semaine max |
-| **Recap** | Semi-manuel | Meilleur post de la semaine | 1/semaine |
-
-### Règles de mix quotidien
-
-- **Minimum** : 1 Vitrine + 1 Dark Premium par jour
-- **Idéal** : 3-4 stories/jour
-- **Maximum** : 5-7 stories/jour (ne pas noyer le viewer)
-- Les Teasers sont toujours **avant** le post
-- Les Fiches Produit sont **après** le post (ou standalone les jours sans post)
+**Stories (hebdo)** : template 50% · irl 20% · irl-sublimation 15% · compositing-irl 10% · full-ia 5%
 
 ---
 
-## 6. Comprendre le système
+## 6. Les types de stories
+
+> Le type est décidé **dans le planning**, en même temps que le mode.
+
+### Type × Mode — Combinaisons possibles
+
+Chaque type de story peut utiliser différents modes. Le planning choisit la combinaison.
+
+| Type | Modes possibles | Mode par défaut |
+|------|----------------|-----------------|
+| Teaser | template, full-ia | template |
+| Fiche Produit | template, irl-sublimation | template |
+| Focus Ingrédient | template, irl-sublimation | template |
+| Éducatif | template | template |
+| Interactif | template | template |
+| Annonce | template, full-ia | template |
+| IRL | irl | irl |
+| Séquence | template, irl-sublimation | template |
+| Produit DA | irl-sublimation, compositing-irl, compositing-ia, full-ia | irl-sublimation |
+| Produit en situation | compositing-irl, compositing-ia | compositing-irl |
+| Visuel IA | full-ia | full-ia |
+| Recap | — (semi-manuel) | — |
+
+> **Produit DA**, **Produit en situation** et **Visuel IA** sont de nouveaux types de stories visuelles (pas template). Ils produisent une image plein cadre avec overlay logo optionnel.
+
+### Familles visuelles
+
+| Famille | Templates / Modes | Fond | Contenu |
+|---------|------------------|------|---------|
+| **Dark Premium** | template (éducatif, interactif, annonce, teaser), irl | Charbon | Information, engagement |
+| **Vitrine** | template (fiche produit, focus ingrédient) | Gradient coloré | Appétit, showcase |
+| **Visuel plein cadre** | irl-sublimation, compositing-irl, compositing-ia, full-ia | Image plein cadre | Impact visuel |
+
+### Fréquences
+
+| Type | Par semaine |
+|------|------------|
+| Teaser | 3-4 (1 par jour de post) |
+| Fiche Produit | 4-5 |
+| IRL | 4-5 |
+| Éducatif | 2-3 |
+| Focus Ingrédient | 1-2 |
+| Interactif | 2-3 (max 3) |
+| Annonce | 1-2 |
+| Produit DA / en situation / Visuel IA | 3-5 (mix des stories visuelles) |
+| Séquence | 0-1 |
+| Recap | 1 |
+
+---
+
+## 7. Comprendre le système
 
 ### Architecture globale
 
 ```
-                    PLANNING SEMAINE
-                    (planning-SX.md)
-                          │
-              ┌───────────┼───────────┐
-              ▼                       ▼
-         POSTS (brief-v3.md)    STORIES (brief-story.md)
-              │                       │
-              ▼                       ▼
-    /instagram-producer         /story-producer
-              │                       │
-     ┌────┬───┼───┬────┐        ┌─────┼─────┐
-     ▼    ▼   ▼   ▼    ▼        ▼     ▼     ▼
-   full  irl  c-  c-  templ   copy   data  template
-   -ia   sub  irl  ia  ate    write  map    fill
-     │    │    │   │    │        │     │     │
-     ▼    ▼    ▼   ▼    ▼        └─────┼─────┘
-     IMAGE PRODUITE (03-output/)       ▼
-              │                   STORY PNG (1080×1920)
-              ▼
-      /caption-writer
-              │
-              ▼
-     CAPTION (04-caption/)
+           ┌─────────────────────────────────┐
+           │      PLANNING SEMAINE           │
+           │  (piliers + modes + types)       │
+           │  Toutes les décisions ici.       │
+           └──────────┬──────────────────────┘
+                      │
+         ┌────────────┼────────────┐
+         ▼                         ▼
+    POSTS                     STORIES
+  (brief-v3.md)           (brief-story.md)
+    mode = X                 mode = X
+         │                         │
+         ▼                         ▼
+  /instagram-producer       /story-producer
+    route par mode            route par mode
+         │                         │
+    ┌────┼────┐              ┌─────┼─────┐
+    ▼    ▼    ▼              ▼     ▼     ▼
+  full  irl  comp          templ  irl   visual
+  -ia   sub  osit          ate    brut  (sub/comp/ia)
+    │    │    │              │     │     │
+    ▼    ▼    ▼              ▼     ▼     ▼
+  IMAGE PRODUITE          STORY PNG (1080×1920)
+         │
+         ▼
+  /caption-writer
+         │
+         ▼
+    CAPTION
+```
+
+```
+           ┌─────────────────────────────────┐
+           │      HORS PLANNING              │
+           │  Liberté totale.                 │
+           │  Tout agent invocable à la carte.│
+           └──────────┬──────────────────────┘
+                      │
+              N'importe quel skill/agent
+              → posts-stories/[type]/hors-planning/
 ```
 
 ### Fichiers clés
 
-| Fichier | Rôle | Quand le consulter |
-|---------|------|-------------------|
-| `PLAYBOOK.md` | **Ce fichier** — guide pas à pas | Toujours, c'est le point d'entrée |
-| `CLAUDE.md` | Statut pipeline + référence technique | Pour voir l'avancement des posts |
-| `_templates/planning-semaine.md` | Template planning | Pour créer un planning |
-| `_templates/brief-v3.md` | Template brief post | Pour créer un brief post |
-| `_templates/brief-story.md` | Template brief story | Pour créer un brief story |
-| `_config/pipeline.md` | Config modes, DA, modèles | Pour comprendre un mode |
-| `_config/photo-references.md` | Catalogue photos existantes | Pour choisir une photo |
-| `_config/brand-props.md` | Accessoires marque | Pour savoir quels props inclure |
-| `_recettes/[slug].md` | Fiches produit | Pour les données d'un produit |
-| `strategie/instagram-strategie.md` | Stratégie Instagram | Pour la vision d'ensemble |
+| Fichier | Rôle |
+|---------|------|
+| `PLAYBOOK.md` | **Ce fichier** — point d'entrée, guide par intention |
+| `CLAUDE.md` | Statut pipeline + référence technique |
+| `_templates/planning-semaine.md` | Template planning (règles de distribution intégrées) |
+| `_templates/brief-v3.md` | Template brief post |
+| `_templates/brief-story.md` | Template brief story |
+| `_config/pipeline.md` | Config modes, DA, modèles |
+| `_config/photo-references.md` | Catalogue photos existantes |
+| `_config/brand-props.md` | Accessoires marque |
+| `_recettes/[slug].md` | Fiches produit |
 
 ### Commandes
 
 | Commande | Ce qu'elle fait |
 |----------|----------------|
-| `/instagram-producer YYYY-MM-DD` | Lance le pipeline post (détecte le mode automatiquement) |
-| `/story-producer S[X] [jour]` | Lance le pipeline story pour un jour |
-| `/story-producer S[X]` | Lance le pipeline story pour toute la semaine |
+| `/instagram-producer YYYY-MM-DD` | Produit un post (mode lu depuis le brief) |
+| `/story-producer S[X] [jour]` | Produit les stories d'un jour |
+| `/story-producer S[X]` | Produit toutes les stories de la semaine |
 
-### Dossiers de travail
+### Dossiers
 
 ```
 production/posts-stories/
-├── posts/periode-1/
-│   ├── planning-S1.md          ← Planning semaine
-│   ├── S1/
-│   │   └── 2026-03-10/
-│   │       ├── 00-brief/       ← Ton brief
-│   │       ├── 00-input/       ← Mapping auto
-│   │       ├── 01-art-direction/ ← Direction créative (full-ia, compositing-ia)
-│   │       ├── 02-prompt/      ← Prompt image (full-ia, compositing-ia)
-│   │       ├── 03-output/      ← Image(s) finale(s)
-│   │       └── 04-caption/     ← Caption générée
-│   └── S2/
-│       └── ...
+├── posts/
+│   ├── periode-1/
+│   │   ├── planning-S1.md
+│   │   ├── S1/2026-03-10/...
+│   │   └── S2/2026-03-17/...
+│   └── hors-planning/             ← Posts spontanés
+│       └── YYYY-MM-DD/...
 └── stories/
-    ├── S1/
-    │   ├── lundi/
-    │   │   ├── brief-story.md  ← Ton brief stories du jour
-    │   │   ├── story-01.html   ← HTML rempli
-    │   │   ├── story-01.png    ← PNG final
-    │   │   └── ...
-    │   ├── mardi/
-    │   └── ...
-    └── S2/
+    ├── S1/lundi/...
+    ├── S2/mardi/...
+    └── hors-planning/             ← Stories spontanées
+        └── YYYY-MM-DD/...
 ```
 
 ---
 
 ## Annexes
 
-### A. Checklist avant publication d'un post
+### A. Checklist post
 
-- [ ] L'image est fidèle au produit (ingrédients corrects, proportions réalistes)
-- [ ] La DA est respectée (fond charbon, tons cuivre braisé, pas de couleur parasite)
-- [ ] Pas d'artefacts IA visibles (mains, textures, logos déformés)
-- [ ] La caption a un hook fort en première ligne
-- [ ] Le ton est cohérent avec le pilier
-- [ ] Les données (prix, macros) sont correctes si mentionnées
-- [ ] Les hashtags sont pertinents (mix local + niche + marque)
-- [ ] Le post ne fait pas doublon avec un récent (angle, produit, hook)
+- [ ] Image fidèle au produit
+- [ ] DA respectée
+- [ ] Pas d'artefacts IA
+- [ ] Caption avec hook fort
+- [ ] Hashtags pertinents
+- [ ] Pas de doublon avec un post récent
 
-### B. Checklist avant publication d'une story
+### B. Checklist story
 
-- [ ] Les textes sont dans la zone safe (pas sous le username ni la barre de réponse)
-- [ ] Le fond n'est pas un bloc noir vide (surtout le tiers inférieur)
-- [ ] Le logo n'est pas en doublon avec l'enseigne visible dans la photo
-- [ ] Les photos utilisent le bon produit (pain noir, pas pain blanc)
-- [ ] Les données nutritionnelles correspondent à la fiche recette
-- [ ] Le jour alterne bien Vitrine et Dark Premium
+- [ ] Textes dans la zone safe Instagram
+- [ ] Pas de zone basse vide
+- [ ] Pas de doublon logo
+- [ ] Bon produit (pain noir)
+- [ ] Mix Vitrine / Dark Premium / Visuel sur la journée
 
 ### C. Glossaire
 
 | Terme | Définition |
 |-------|------------|
-| **Brief** | Document qui décrit ce que tu veux produire (post ou story) |
-| **Mode** | La méthode de création visuelle (full-ia, irl-sublimation, compositing-irl, compositing-ia, template) |
-| **Pilier** | La catégorie éditoriale du post (Le Plat, La Cuisine, Les Macros, L'Équipe, Le Quartier) |
-| **DA** | Direction Artistique — le style visuel "Dark Food Premium" |
-| **Checkpoint** | Le moment où le pipeline s'arrête pour que tu valides avant de continuer |
-| **Direction Caption** | Les instructions pour la génération automatique de la caption (angle, ton, CTA) |
-| **Sublimation** | Retouche IA d'une photo réelle pour l'aligner avec la DA |
-| **Compositing** | Fusion de 2 images (produit + lieu ou produit + scène IA) |
-| **Template** | Modèle HTML paramétré, rempli avec des données et rendu en image par Puppeteer |
-| **Dark Premium** | Famille visuelle stories : fond charbon, tons sombres, contenu informatif |
-| **Vitrine** | Famille visuelle stories : fond gradient coloré, produit lumineux en hero |
-| **Séquence** | Multi-stories liées (1/3, 2/3, 3/3) pour raconter un process ou comparer |
-| **IRL** | Story à partir d'une photo brute avec overlay DA minimal |
-| **Food Porn Dial** | Curseur 0-10 qui contrôle le niveau de "food porn" dans le visuel |
+| **Planning** | Document hebdomadaire qui décide piliers, modes et types pour chaque contenu |
+| **Mode** | Méthode de création visuelle (full-ia, irl-sublimation, compositing-irl, compositing-ia, template) |
+| **Pilier** | Catégorie éditoriale (Le Plat, La Cuisine, Les Macros, L'Équipe, Le Quartier) |
+| **Hors planning** | Contenu spontané créé en dehors du planning, sans contrainte de distribution |
+| **DA** | Direction Artistique "Dark Food Premium" |
+| **Template** | Modèle HTML paramétré rendu en image par Puppeteer |
+| **Sublimation** | Retouche IA d'une photo réelle pour aligner avec la DA |
+| **Compositing** | Fusion de 2 images en un montage réaliste |
+| **Vitrine** | Famille visuelle : fond gradient coloré, produit lumineux |
+| **Dark Premium** | Famille visuelle : fond charbon, contenu informatif |
+| **Visuel plein cadre** | Story non-template : image générée/sublimée en 1080×1920 |

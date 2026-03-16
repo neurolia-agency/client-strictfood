@@ -23,12 +23,24 @@ L'orchestrateur détecte le **mode** dans le brief et route vers le bon sous-pip
 ## Workflow de planification
 
 ```
-1. Planning semaine (planning-SX.md) — distribuer piliers, modes, sujets
-2. Briefs individuels (brief-v3.md) — à partir du planning validé
-3. Production — /instagram-producer pour chaque post
+1. Planning semaine (planning-SX.md) — distribuer piliers, modes (posts ET stories), sujets
+2. Briefs individuels (brief-v3.md / brief-story.md) — à partir du planning validé
+3. Production — /instagram-producer pour posts, /story-producer pour stories
 ```
 
-**ALWAYS** rédiger le planning AVANT les briefs.
+**ALWAYS** rédiger le planning AVANT les briefs. Le mode est décidé AU PLANNING, pas au brief.
+
+### Règles de distribution (appliquées au planning)
+
+**Posts** : jamais 2 consécutifs même mode · ≥3 modes/semaine · ≥3 piliers/semaine
+**Stories** : ≥2 modes/jour · ≥1 story non-template/jour · max 3 interactifs/semaine
+
+### Production hors planning
+
+Pour les contenus spontanés :
+- Posts → `posts-stories/posts/hors-planning/YYYY-MM-DD/`
+- Stories → `posts-stories/stories/hors-planning/YYYY-MM-DD/`
+- Liberté totale, tout agent invocable directement, pas de contrainte de distribution
 
 ## Caption après image
 
@@ -106,14 +118,13 @@ Les briefs S1-S2 sont au format v2 (caption dans le brief, pas de mode). Ils fon
 
 ### Types de stories (v3)
 
-**Dark Premium** : Interactif, Éducatif, Annonce, Lieu, **IRL** (nouveau)
-**Vitrine** : Fiche Produit, Focus Ingrédient
-**Spéciaux** : Teaser, **Séquence N/M** (nouveau), Recap (semi-manuel)
+Les stories utilisent les mêmes 5 modes que les posts. Le mode est décidé au planning.
 
-> **IRL** : photo brute + overlay DA minimal. Coulisses, rush, ambiance.
-> **Séquence** : multi-stories liées visuellement (process, éducatif).
-> **Interactifs** : max 3/semaine.
-> Chaque jour : au moins 1 Vitrine + 1 Dark Premium.
+**Template** (~50%) : Fiche Produit, Focus Ingrédient, Interactif, Éducatif, Annonce, Teaser
+**IRL** (~20%) : Photo brute + overlay DA minimal
+**Visuelles** (~30%) : irl-sublimation, compositing-irl, compositing-ia, full-ia → image plein cadre + overlay logo
+
+> **Contrainte** : ≥2 modes/jour, ≥1 story non-template/jour, max 3 interactifs/semaine
 
 ### Conventions stories
 

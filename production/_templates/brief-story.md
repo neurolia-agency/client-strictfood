@@ -11,13 +11,16 @@
 
 | Champ | Valeur |
 |-------|--------|
-| Type | [Fiche Produit / Interactif / Éducatif / Annonce / Lieu / Focus Ingrédient / IRL / Séquence / Recap] |
+| Type | [Fiche Produit / Interactif / Éducatif / Annonce / Lieu / Focus Ingrédient / IRL / Produit DA / Produit en situation / Visuel IA / Séquence / Recap] |
+| Mode | [template / irl / irl-sublimation / compositing-irl / compositing-ia / full-ia] |
 | Highlight | [LA CARTE / COULISSES / NOS ARTISANS / NOUS TROUVER / L'ÉQUIPE / —] |
 | Qui produit | Pipeline |
-| Template | `[template].html` |
+| Template | `[template].html` (si mode=template ou irl) |
 | Mood | [cuivre / grenat / feuille — optionnel, herite du mood jour] |
 | Image | [discret / visible / hero — optionnel, herite de la valeur jour] |
 | Brand props | [ID prop depuis `_config/brand-props.md` — ex: "wrapper-burger" / "cup-branded" / "auto" / "aucun" — optionnel, defaut: "auto"] |
+
+> Le **Mode** est défini dans le planning semaine. Ne pas le changer dans le brief sauf hors-planning.
 
 ### Objectif
 
@@ -112,6 +115,41 @@ Filtre : [léger / moyen / fort — défaut: léger]
 
 > **Quand utiliser** : contenu authentique du quotidien (coulisses cuisine, ambiance, arrivages, équipe en action). Le pipeline applique un overlay DA minimal (logo + texte optionnel + filtre warm léger) sans dénaturer l'authenticité de la photo.
 
+#### Si type = Produit DA (mode: `irl-sublimation`)
+
+> **Story visuelle.** Photo produit sublimée en plein cadre 1080×1920.
+
+Photo source : `[chemin vers la photo du produit]`
+Direction sublimation : `[ce qu'on veut améliorer — ex: "renforcer ambiance DA, ombres plus dramatiques"]`
+Texte overlay : `[optionnel — 1 phrase ou "—"]`
+
+> Le pipeline sublime la photo via GPT Images en format 9:16, puis ajoute un overlay logo + texte optionnel via `irl-story.html`.
+
+#### Si type = Produit en situation (mode: `compositing-irl` ou `compositing-ia`)
+
+> **Story visuelle.** Produit intégré dans un lieu réel ou une scène IA, plein cadre 1080×1920.
+
+**Si compositing-irl** :
+Photo produit : `[chemin vers la photo du produit]`
+Photo lieu : `[chemin vers la photo du lieu]`
+Intention compositing : `[ex: "burger posé sur le comptoir, lumière naturelle fenêtre"]`
+
+**Si compositing-ia** :
+Photo produit : `[chemin vers la photo du produit]`
+Scène imaginée : `[ex: "comptoir cuisine industrielle, vapeur, éclairage dramatique"]`
+
+Texte overlay : `[optionnel — 1 phrase ou "—"]`
+
+#### Si type = Visuel IA (mode: `full-ia`)
+
+> **Story visuelle.** Image entièrement générée par l'IA en plein cadre 1080×1920.
+
+Sujet : `[description du visuel — ex: "STRICT Bœuf en close-up macro, vapeur, fond charbon"]`
+Direction artistique : `[ambiance, éclairage, style — ex: "cinématique, contre-jour, grain film"]`
+Texte overlay : `[optionnel — 1 phrase ou "—"]`
+
+> Utiliser pour les stories d'impact visuel : teasers spéciaux, lancements, visuels impossibles à photographier.
+
 #### Si type = Séquence (N/M)
 
 > **Multi-stories liées visuellement.** Pour les process en étapes, avant/après, séries éducatives.
@@ -145,16 +183,41 @@ Texte overlay recommandé : `[texte]`
 
 | Type | Template | Style |
 |------|----------|-------|
-| Fiche Produit | `produit-vitrine.html` | **Vitrine** (coloré, produit hero) |
-| Focus Ingrédient | `focus-ingredient.html` | **Vitrine** (coloré, ingrédient hero) |
+### Stories template (mode `template`)
+
+| Type | Template | Famille |
+|------|----------|---------|
+| Fiche Produit | `produit-vitrine.html` | **Vitrine** |
+| Focus Ingrédient | `focus-ingredient.html` | **Vitrine** |
 | Éducatif | `educatif.html` | Dark Premium |
 | Interactif | `interactif.html` | Dark Premium |
 | Annonce / Lieu | `annonce.html` | Dark Premium |
-| **IRL** | `irl-story.html` | **Dark Premium** (overlay DA minimal) |
-| **Séquence** | template existant | Variable (même famille sur toute la séquence) |
+| Teaser | `teaser-post.html` | Dark Premium |
 
-> **Objectif** : alterner systématiquement Dark Premium et Vitrine dans la séquence du jour pour casser la monotonie visuelle. Chaque jour devrait avoir au moins 1 story Vitrine.
-> **Interactifs** : 2-3 par semaine (max 3). Quand un slot Dark Premium est disponible, prioriser Interactif — c'est le type qui génère le plus de rétention (action mesurable : tap, vote, réponse).
+### Stories IRL (mode `irl`)
+
+| Type | Template | Famille |
+|------|----------|---------|
+| IRL | `irl-story.html` | Dark Premium (overlay minimal) |
+
+### Stories visuelles (modes `irl-sublimation`, `compositing-irl`, `compositing-ia`, `full-ia`)
+
+| Type | Mode | Famille |
+|------|------|---------|
+| Produit DA | `irl-sublimation` | Visuel plein cadre |
+| Produit en situation | `compositing-irl` / `compositing-ia` | Visuel plein cadre |
+| Visuel IA | `full-ia` | Visuel plein cadre |
+
+> Les stories visuelles produisent une image plein cadre 1080×1920. Un overlay logo + texte optionnel est ajouté via `irl-story.html`.
+
+### Séquence
+
+| Type | Mode | Famille |
+|------|------|---------|
+| Séquence (N/M) | Selon la story | Variable (même famille sur toute la séquence) |
+
+> **Mix quotidien** : alterner template, IRL et visuelles dans la journée. Chaque jour doit avoir au moins 2 modes différents et au moins 1 story non-template.
+> **Interactifs** : max 3/semaine.
 
 ## Étape suivante
 

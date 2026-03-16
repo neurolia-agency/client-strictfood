@@ -1,7 +1,57 @@
 # Planning S[X] — [DATE_DEBUT] → [DATE_FIN]
 
 > **Période** : [Période N — Nom]
-> **Objectifs semaine** : [1-2 phrases — ex: "Compléter le mur visuel. Introduire le pilier Macros."]
+> **Objectifs semaine** : [1-2 phrases]
+
+---
+
+## Règles de distribution
+
+Le planning assure le **relief visuel** du feed et des stories. Chaque contenu a un pilier, un mode de production et un type. Les règles ci-dessous garantissent la variété.
+
+### Posts — Distribution modes (cible mensuelle)
+
+| Mode | Cible | Rôle dans le mix |
+|------|-------|-----------------|
+| `full-ia` | ~30% | Food porn pur, scènes élaborées, nouveau produit |
+| `irl-sublimation` | ~25% | Authenticité, coulisses, portraits réels |
+| `compositing-irl` | ~20% | Produit immergé dans le lieu réel |
+| `compositing-ia` | ~15% | Produit réel dans ambiance cinématique IA |
+| `template` | ~10% | Infographies, carrousels data, comparaisons |
+
+**Contraintes posts** :
+- Jamais 2 posts consécutifs avec le même mode
+- Au moins 3 modes différents par semaine (sur 4 posts)
+- Au moins 3 piliers différents par semaine
+
+### Stories — Distribution modes (cible hebdomadaire, ~25 stories)
+
+| Mode | Cible | Count/sem | Rôle dans le mix |
+|------|-------|-----------|-----------------|
+| `template` | ~50% | ~12-13 | Fiches produit, éducatifs, interactifs, annonces |
+| `irl` | ~20% | ~5 | Photo brute overlay minimal (rush, coulisses, ambiance) |
+| `irl-sublimation` | ~15% | ~3-4 | Photo sublimée DA en 9:16 (beau plat IRL, portrait) |
+| `compositing-irl` | ~10% | ~2-3 | Produit dans le lieu (comptoir, salle, devanture) |
+| `full-ia` | ~5% | ~1 | Visuel IA impactant en story (teaser spécial, lancement) |
+
+**Contraintes stories** :
+- Chaque jour a au moins 2 modes différents parmi ses stories
+- Pas plus de 3 stories template consécutives dans une journée
+- Au moins 1 story non-template par jour (irl, sublimation, compositing ou full-ia)
+- Max 3 interactifs/semaine
+- Alterner Vitrine et Dark Premium chaque jour
+
+### Piliers — Distribution posts (cible mensuelle)
+
+| Pilier | Cible | Modes naturels (pas exclusifs) |
+|--------|-------|-------------------------------|
+| Le Plat | 35% | full-ia, compositing-ia, irl-sublimation |
+| La Cuisine | 25% | irl-sublimation, compositing-irl, irl |
+| Les Macros | 18% | template, full-ia |
+| L'Équipe | 15% | irl-sublimation, compositing-irl |
+| Le Quartier | 7% | irl-sublimation, compositing-irl |
+
+> Tout pilier peut utiliser tout mode. Les "modes naturels" sont des affinités, pas des obligations.
 
 ---
 
@@ -9,84 +59,127 @@
 
 | # | Jour | Pilier | Mode | Produit / Sujet | Format | Note |
 |---|------|--------|------|-----------------|--------|------|
-| 1 | Lun | Le Plat | full-ia | [Produit] | Photo unique | [angle, intention] |
-| 2 | Mer | Les Macros | template | [Sujet comparaison] | Carrousel 3 slides | [infographie] |
-| 3 | Ven | La Cuisine | irl-sublimation | [Process / sujet] | Photo unique | [photo par Romain/Dorian] |
-| 4 | Dim | L'Équipe | compositing-irl | [Sujet portrait] | Photo unique | [portrait + devanture] |
-
-### Modes disponibles
-
-| Mode | Description | Pipeline |
-|------|-------------|----------|
-| `full-ia` | Gemini génère tout (produit + scène) | Art Direction → Input Mapping → Prompt → Gemini 4K |
-| `irl-sublimation` | Photo réelle sublimée pour aligner DA | Photo source → Sublimation → GPT Images |
-| `compositing-irl` | 2 photos réelles mixées (produit + lieu) | Photo produit + Photo lieu → Compositing → GPT Images |
-| `compositing-ia` | Photo produit réelle dans scène IA | Photo produit → Art Direction scène → Prompt → Gemini 4K |
-| `template` | Carrousels, infographies (HTML → Puppeteer) | Data mapping → Template HTML → Puppeteer |
+| 1 | Lun | | | | | |
+| 2 | Mer | | | | | |
+| 3 | Ven | | | | | |
+| 4 | Dim | | | | | |
 
 ---
 
-## Stories (objectif : 3-4/jour)
+## Stories
 
-| Jour | # | Type | Template / Mode | Sujet | Lien post |
-|------|---|------|-----------------|-------|-----------|
-| Lun | 1 | Teaser | `teaser-post.html` | Teaser post du jour | Post #1 |
-| Lun | 2 | Fiche Produit | `produit-vitrine.html` | [Produit] | Post #1 |
-| Lun | 3 | Interactif | `interactif.html` | [Question] | — |
-| Mar | 1 | Éducatif | `educatif.html` | [Sujet nutrition] | — |
-| Mar | 2 | Focus Ingrédient | `focus-ingredient.html` | [Ingrédient] | — |
-| Mer | 1 | Teaser | `teaser-post.html` | Teaser carrousel | Post #2 |
-| Mer | 2 | Séquence (1/2) | `educatif.html` | [Étape 1 du process] | Post #2 |
-| Mer | 3 | Séquence (2/2) | `educatif.html` | [Étape 2 du process] | Post #2 |
-| Jeu | 1 | IRL | irl-story | Coulisses cuisine | — |
-| Jeu | 2 | Fiche Produit | `produit-vitrine.html` | [Produit] | — |
-| Ven | 1 | Teaser | `teaser-post.html` | Teaser post cuisine | Post #3 |
-| Ven | 2 | Annonce | `annonce.html` | Horaires week-end | — |
-| Sam | 1 | Interactif | `interactif.html` | [Question fun] | — |
-| Sam | 2 | Recap | — (repost) | Meilleur post semaine | — |
-| Dim | 1 | IRL | irl-story | Ambiance dimanche | — |
-| Dim | 2 | Fiche Produit | `produit-vitrine.html` | [Produit] | — |
+| Jour | # | Type | Mode | Sujet | Lien post |
+|------|---|------|------|-------|-----------|
+| Lun | 1 | Teaser | template | Teaser post du jour | Post #1 |
+| Lun | 2 | Fiche Produit | template | [Produit] | Post #1 |
+| Lun | 3 | IRL | irl | Coulisses préparation | — |
+| Mar | 1 | Éducatif | template | [Sujet nutrition] | — |
+| Mar | 2 | Focus Ingrédient | irl-sublimation | [Photo ingrédient sublimée] | — |
+| Mar | 3 | Annonce | template | [Horaires/Nouveauté] | — |
+| Mer | 1 | Teaser | template | Teaser post du jour | Post #2 |
+| Mer | 2 | Fiche Produit | template | [Produit] | Post #2 |
+| Mer | 3 | IRL | irl | Rush du midi | — |
+| Jeu | 1 | Produit DA | irl-sublimation | [Beau plat sublimé en story] | — |
+| Jeu | 2 | Interactif | template | [Question] | — |
+| Jeu | 3 | Produit en situation | compositing-irl | [Produit sur comptoir] | — |
+| Ven | 1 | Teaser | template | Teaser post du jour | Post #3 |
+| Ven | 2 | IRL | irl | Ambiance vendredi soir | — |
+| Ven | 3 | Focus Ingrédient | template | [Ingrédient] | — |
+| Sam | 1 | Interactif | template | [Question fun] | — |
+| Sam | 2 | Produit DA | compositing-irl | [Produit + devanture] | — |
+| Sam | 3 | Recap | — | Meilleur post semaine | — |
+| Dim | 1 | IRL | irl | Ambiance dimanche | — |
+| Dim | 2 | Fiche Produit | template | [Produit] | — |
+| Dim | 3 | Visuel IA | full-ia | [Teaser ou lancement spécial] | — |
 
-### Types de stories
+### Modes stories — Ce que chaque mode produit
 
-| Type | Template | Famille | Note |
-|------|----------|---------|------|
-| Fiche Produit | `produit-vitrine.html` | Vitrine | Données auto depuis `_recettes/` |
-| Focus Ingrédient | `focus-ingredient.html` | Vitrine | Fournisseur + fait clé |
-| Interactif | `interactif.html` | Dark Premium | Max 3/semaine |
-| Éducatif | `educatif.html` | Dark Premium | Nutrition, comparaisons |
-| Annonce | `annonce.html` | Dark Premium | Horaires, nouveautés, lieu |
-| Teaser | `teaser-post.html` | Dark Premium | Avant chaque post |
-| **IRL** | `irl-story.html` | Dark Premium | **Photo brute + overlay DA minimal** |
-| **Séquence** | template existant | Variable | **Multi-stories liées (1/N, 2/N...)** |
-| Recap | — | Semi-manuel | Repost meilleur post |
+| Mode story | Pipeline | Output |
+|------------|----------|--------|
+| `template` | Brief → Copywriter → Data Mapper → HTML fill → Puppeteer | PNG 1080×1920 (template DA) |
+| `irl` | Photo brute → `irl-story.html` overlay → Puppeteer | PNG 1080×1920 (photo + overlay minimal) |
+| `irl-sublimation` | Photo → Sublimation GPT Images (9:16) | PNG 1080×1920 (photo sublimée DA) |
+| `compositing-irl` | 2 photos → Compositing GPT Images (9:16) | PNG 1080×1920 (montage réaliste) |
+| `full-ia` | Prompt → Gemini (9:16) | PNG 1080×1920 (visuel IA) |
 
----
-
-## Distribution piliers (vérification)
-
-| Pilier | Cible stratégie | Cette semaine | OK ? |
-|--------|-----------------|---------------|------|
-| Le Plat | 35% | /4 (%) | |
-| La Cuisine | 25% | /4 (%) | |
-| Les Macros | 18% | /4 (%) | |
-| L'Équipe | 15% | /4 (%) | |
-| Le Quartier | 7% | /4 (%) | |
-
-> **Règle** : sur 4 semaines, chaque pilier doit être représenté au moins une fois.
-> La distribution exacte par semaine peut varier, c'est la moyenne mensuelle qui compte.
+> Les stories `irl-sublimation`, `compositing-irl` et `full-ia` produisent une image plein cadre sans template HTML. Le logo et un éventuel texte court peuvent être ajoutés en overlay via `irl-story.html`.
 
 ---
 
-## Checklist avant briefs
+## Vérification distribution (à remplir après le planning)
 
-- [ ] Chaque post a un mode de création assigné
-- [ ] Les photos IRL nécessaires sont identifiées (à fournir par l'équipe)
-- [ ] Les posts template ont un sujet et un nombre de slides définis
-- [ ] Les stories alternent Dark Premium et Vitrine chaque jour
-- [ ] Max 3 stories interactives sur la semaine
-- [ ] Chaque jour de post a un Teaser story associé
+### Posts — Modes cette semaine
+
+| Mode | Count | Contrainte | OK ? |
+|------|-------|------------|------|
+| full-ia | /4 | Pas 2 consécutifs | |
+| irl-sublimation | /4 | | |
+| compositing-irl | /4 | | |
+| compositing-ia | /4 | | |
+| template | /4 | | |
+| **Total modes différents** | | ≥ 3 | |
+
+### Posts — Piliers cette semaine
+
+| Pilier | Count | Cible mois |
+|--------|-------|------------|
+| Le Plat | /4 | 35% |
+| La Cuisine | /4 | 25% |
+| Les Macros | /4 | 18% |
+| L'Équipe | /4 | 15% |
+| Le Quartier | /4 | 7% |
+| **Total piliers différents** | | ≥ 3 |
+
+### Stories — Modes cette semaine
+
+| Mode | Count | Cible |
+|------|-------|-------|
+| template | /~21 | ~50% |
+| irl | /~21 | ~20% |
+| irl-sublimation | /~21 | ~15% |
+| compositing-irl | /~21 | ~10% |
+| full-ia | /~21 | ~5% |
+
+### Stories — Mix quotidien
+
+| Jour | Modes utilisés | ≥2 modes ? | Vitrine + Dark ? |
+|------|---------------|------------|-----------------|
+| Lun | | | |
+| Mar | | | |
+| Mer | | | |
+| Jeu | | | |
+| Ven | | | |
+| Sam | | | |
+| Dim | | | |
+
+---
+
+## Photos IRL à fournir cette semaine
+
+> Lister ici les photos que Romain/Dorian doivent prendre AVANT la semaine.
+
+| # | Sujet | Pour quel contenu | Cadrage souhaité | Priorité |
+|---|-------|-------------------|------------------|----------|
+| 1 | | | | |
+| 2 | | | | |
+| 3 | | | | |
+
+---
+
+## Checklist finale
+
+- [ ] Chaque post et chaque story a un mode assigné
+- [ ] Jamais 2 posts consécutifs avec le même mode
+- [ ] Au moins 3 modes différents dans les posts de la semaine
+- [ ] Au moins 3 piliers différents dans les posts de la semaine
+- [ ] Chaque jour de stories a au moins 2 modes différents
+- [ ] Au moins 1 story non-template par jour
+- [ ] Max 3 interactifs sur la semaine
+- [ ] Chaque jour de post a un Teaser associé
+- [ ] Les photos IRL nécessaires sont listées et demandées
+- [ ] La distribution piliers est cohérente avec la cible mensuelle
 
 ## Étape suivante
 
-> Valider ce planning avec l'opérateur, puis créer les briefs individuels (`brief-v3.md` pour les posts, `brief-story.md` pour les stories).
+> Valider ce planning, puis créer les briefs individuels.
+> Le mode de chaque brief est **déjà décidé** — le brief le reprend sans le remettre en question.

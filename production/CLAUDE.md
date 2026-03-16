@@ -12,9 +12,9 @@ Pipeline de production de visuels et captions pour le compte @strictfood.
 
 ## Pipeline v3 — Multi-mode
 
-Le pipeline détecte le **mode de création** dans le brief et route automatiquement.
+Le **planning semaine** décide du mode de chaque post et chaque story. L'orchestrateur lit le mode et route automatiquement.
 
-### 5 modes de création
+### 5 modes de création (posts ET stories)
 
 | Mode | Description | API | Usage type |
 |------|-------------|-----|------------|
@@ -22,7 +22,9 @@ Le pipeline détecte le **mode de création** dans le brief et route automatique
 | `irl-sublimation` | Photo réelle sublimée DA | GPT Images | Coulisses, équipe, quartier |
 | `compositing-irl` | 2 photos réelles mixées | GPT Images | Produit + salle/devanture |
 | `compositing-ia` | Photo produit dans scène IA | Gemini 4K | Produit réel + ambiance imaginée |
-| `template` | HTML → Puppeteer | Aucune | Carrousels, infographies, macros |
+| `template` | HTML → Puppeteer | Aucune | Carrousels, infographies, fiches |
+
+> Les stories utilisent les mêmes modes que les posts. Une story non-template produit une image plein cadre 1080×1920 avec overlay logo optionnel via `irl-story.html`.
 
 ### Flux par mode
 
@@ -134,18 +136,32 @@ posts-stories/posts/periode-[N]/S[X]/YYYY-MM-DD/
 
 ```
 1. Planning semaine (planning-SX.md)
-   → Distribuer piliers, modes, sujets, stories
-   → Vérifier la distribution piliers
+   → Distribuer piliers, modes (posts ET stories), sujets
+   → Appliquer les règles de distribution automatiques
    → Identifier les photos IRL nécessaires
    → Valider avec l'opérateur
 
 2. Briefs individuels (brief-v3.md par post, brief-story.md par jour)
    → Rédiger à partir du planning validé
+   → Le mode est DÉJÀ DÉCIDÉ — le brief le reprend tel quel
 
 3. Production (par post/jour)
    → /instagram-producer YYYY-MM-DD (posts)
    → /story-producer SX jour (stories)
 ```
+
+### Règles de distribution (appliquées au planning)
+
+**Posts** : jamais 2 consécutifs même mode · ≥3 modes/semaine · ≥3 piliers/semaine
+**Stories** : ≥2 modes/jour · ≥1 story non-template/jour · max 3 interactifs/semaine
+
+### Production hors planning
+
+Pour les idées spontanées, actions ponctuelles, actualités :
+- Posts → `posts-stories/posts/hors-planning/YYYY-MM-DD/`
+- Stories → `posts-stories/stories/hors-planning/YYYY-MM-DD/`
+- Liberté totale : n'importe quel mode, pilier, agent invocable directement
+- N'affecte pas les compteurs de distribution du planning
 
 ## Statut Posts — Période 1
 
@@ -213,35 +229,45 @@ posts-stories/posts/periode-[N]/S[X]/YYYY-MM-DD/
 
 ### Types de stories (v3)
 
-#### Dark Premium (fond charbon, tons sombres)
+Les stories utilisent les mêmes 5 modes que les posts. Le mode est décidé au planning.
 
-| Type | Template | Pipeline |
-|------|----------|----------|
-| Interactif | `interactif.html` | Oui |
-| Éducatif | `educatif.html` | Oui |
-| Annonce | `annonce.html` | Oui |
-| Lieu / Ambiance | `annonce.html` | Oui |
-| **IRL** | `irl-story.html` | **Oui (NOUVEAU v3)** |
+#### Stories template (mode `template`)
 
-#### Vitrine (fond gradient coloré)
+| Type | Template HTML | Famille |
+|------|---------------|---------|
+| Fiche Produit | `produit-vitrine.html` | Vitrine |
+| Focus Ingrédient | `focus-ingredient.html` | Vitrine |
+| Interactif | `interactif.html` | Dark Premium |
+| Éducatif | `educatif.html` | Dark Premium |
+| Annonce | `annonce.html` | Dark Premium |
+| Teaser | `teaser-post.html` | Dark Premium |
 
-| Type | Template | Pipeline |
-|------|----------|----------|
-| Fiche Produit | `produit-vitrine.html` | Oui |
-| Focus Ingrédient | `focus-ingredient.html` | Oui |
+#### Stories IRL (mode `irl`)
+
+| Type | Template HTML | Famille |
+|------|---------------|---------|
+| IRL | `irl-story.html` | Dark Premium (overlay minimal) |
+
+#### Stories visuelles (modes `irl-sublimation`, `compositing-irl`, `compositing-ia`, `full-ia`)
+
+| Type | Mode | Output |
+|------|------|--------|
+| Produit DA | irl-sublimation | Photo sublimée 1080×1920 + overlay logo |
+| Produit en situation | compositing-irl | Montage 1080×1920 + overlay logo |
+| Visuel IA | full-ia | Image IA 1080×1920 + overlay logo |
+| Scène imaginée | compositing-ia | Produit réel + scène IA 1080×1920 |
+
+> Les stories visuelles produisent une image plein cadre. Le logo et un texte optionnel sont ajoutés via `irl-story.html`.
 
 #### Formats spéciaux
 
-| Type | Template | Pipeline |
-|------|----------|----------|
-| **Séquence (N/M)** | template existant | **Oui (NOUVEAU v3)** |
-| Teaser | `teaser-post.html` | Oui |
-| Recap | — (repost) | Semi-manuel |
+| Type | Pipeline |
+|------|----------|
+| Séquence (N/M) | Selon le mode de chaque story |
+| Recap | Semi-manuel (repost) |
 
-> **Interactifs** : 2-3 par semaine (max 3).
-> **IRL** : photo brute + overlay DA minimal. Pour les coulisses, rush, ambiance.
-> **Séquence** : multi-stories liées (1/3, 2/3, 3/3) pour process, éducatif, avant/après.
-> Chaque jour : au moins 1 Vitrine + 1 Dark Premium.
+> **Distribution** : ~50% template, ~20% irl, ~15% sublimation, ~10% compositing, ~5% full-ia
+> **Contrainte** : au moins 1 story non-template par jour, ≥2 modes différents par jour
 
 ### Flux séquentiel stories
 
