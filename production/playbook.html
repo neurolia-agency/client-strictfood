@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Playbook Production — StrictFood</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@500;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0e0d0b;
+  --surface: #1a1816;
+  --surface-2: #222019;
+  --surface-3: #2a2722;
+  --border: rgba(191,133,34,0.15);
+  --border-strong: rgba(191,133,34,0.35);
+  --accent: #BF8522;
+  --accent-light: #d4a54a;
+  --accent-bg: rgba(191,133,34,0.08);
+  --accent-bg-strong: rgba(191,133,34,0.15);
+  --text: #f0ece4;
+  --text-2: rgba(240,236,228,0.65);
+  --text-3: rgba(240,236,228,0.4);
+  --green: #5C7858;
+  --green-bg: rgba(92,120,88,0.12);
+  --red: #A04035;
+  --red-bg: rgba(160,64,53,0.12);
+  --blue: #4a7a9b;
+  --blue-bg: rgba(74,122,155,0.12);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ===== HEADER ===== */
+.header {
+  padding: 60px 40px 40px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(to bottom, rgba(191,133,34,0.04), transparent);
+}
+.header h1 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 42px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: var(--text);
+}
+.header h1 span { color: var(--accent); }
+.header p {
+  font-size: 16px;
+  color: var(--text-2);
+  margin-top: 12px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===== NAV TABS ===== */
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  padding: 0 20px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav button {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-3);
+  background: none;
+  border: none;
+  padding: 18px 28px;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.nav button:hover { color: var(--text-2); }
+.nav button.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* ===== CONTENT ===== */
+.content { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+.tab-content { display: none; padding: 48px 0 80px; }
+.tab-content.active { display: block; }
+
+/* ===== SECTION TITLES ===== */
+.section-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+}
+.section-subtitle {
+  font-size: 16px;
+  color: var(--text-2);
+  margin-bottom: 40px;
+  line-height: 1.5;
+}
+
+/* ===== STEP FLOW ===== */
+.steps { display: flex; flex-direction: column; gap: 24px; margin: 32px 0; }
+.step {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+.step-num {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  border-radius: 50%;
+  background: var(--accent-bg-strong);
+  border: 2px solid var(--border-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent);
+}
+.step-content { flex: 1; }
+.step-content h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.step-content p { color: var(--text-2); font-size: 15px; }
+.step-content code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  background: var(--surface-2);
+  padding: 2px 8px;
+  border-radius: 6px;
+  color: var(--accent-light);
+}
+
+/* ===== COMMAND BOX ===== */
+.cmd {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  margin: 16px 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  color: var(--accent-light);
+  position: relative;
+}
+.cmd::before {
+  content: '>';
+  color: var(--text-3);
+  margin-right: 10px;
+}
+
+/* ===== CARDS ===== */
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin: 24px 0; }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  transition: border-color 0.2s;
+}
+.card:hover { border-color: var(--border-strong); }
+.card-icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+  display: block;
+}
+.card h4 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.card p { color: var(--text-2); font-size: 14px; line-height: 1.5; }
+.card .tag {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 12px;
+}
+.tag-ia { background: var(--accent-bg-strong); color: var(--accent); border: 1px solid var(--border-strong); }
+.tag-irl { background: var(--green-bg); color: var(--green); border: 1px solid rgba(92,120,88,0.3); }
+.tag-comp { background: var(--blue-bg); color: var(--blue); border: 1px solid rgba(74,122,155,0.3); }
+.tag-tmpl { background: rgba(255,255,255,0.05); color: var(--text-2); border: 1px solid rgba(255,255,255,0.1); }
+
+/* ===== PILLAR BAR ===== */
+.pillar-bar { display: flex; gap: 2px; margin: 24px 0; border-radius: 8px; overflow: hidden; height: 40px; }
+.pillar-seg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(0,0,0,0.7);
+}
+
+/* ===== TABLE ===== */
+.table-wrap { overflow-x: auto; margin: 24px 0; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+th {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-3);
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-strong);
+}
+td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-2);
+}
+td:first-child { color: var(--text); font-weight: 500; }
+tr:hover td { background: var(--accent-bg); }
+
+/* ===== INFO BOX ===== */
+.info {
+  background: var(--accent-bg);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 16px 20px;
+  margin: 24px 0;
+  font-size: 14px;
+  color: var(--text-2);
+}
+.info strong { color: var(--accent-light); }
+
+/* ===== FLOW DIAGRAM ===== */
+.flow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  margin: 32px 0;
+}
+.flow-node {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 28px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  min-width: 220px;
+}
+.flow-node.highlight {
+  background: var(--accent-bg-strong);
+  border-color: var(--border-strong);
+  color: var(--accent-light);
+}
+.flow-arrow {
+  width: 2px;
+  height: 24px;
+  background: var(--border-strong);
+  position: relative;
+}
+.flow-arrow::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: -4px;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--border-strong);
+  border-bottom: 2px solid var(--border-strong);
+  transform: rotate(45deg);
+}
+.flow-label {
+  font-size: 12px;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 4px 0;
+}
+.flow-branch {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.flow-branch .flow-node { font-size: 13px; padding: 10px 18px; min-width: auto; }
+
+/* ===== DIVIDER ===== */
+.divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border-strong), transparent);
+  margin: 48px 0;
+}
+
+/* ===== TOGGLE / COLLAPSIBLE ===== */
+details {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin: 16px 0;
+}
+summary {
+  padding: 16px 20px;
+  cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+summary::before {
+  content: '+';
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 18px;
+  color: var(--accent);
+  width: 24px;
+  text-align: center;
+}
+details[open] summary::before { content: '−'; }
+details .detail-body { padding: 0 20px 20px; }
+
+/* ===== CHECKLIST ===== */
+.checklist { list-style: none; padding: 0; }
+.checklist li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  color: var(--text-2);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.checklist li::before {
+  content: '';
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  border: 2px solid var(--border-strong);
+  border-radius: 4px;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 40px;
+  text-align: center;
+  color: var(--text-3);
+  font-size: 13px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 640px) {
+  .header { padding: 40px 20px 30px; }
+  .header h1 { font-size: 28px; }
+  .nav button { padding: 14px 16px; font-size: 12px; letter-spacing: 1px; }
+  .cards { grid-template-columns: 1fr; }
+  .flow-branch { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Playbook <span>Production</span></h1>
+  <p>Guide interactif pour la production de contenu Instagram StrictFood. Choisis ce que tu veux faire.</p>
+</div>
+
+<nav class="nav">
+  <button class="active" onclick="showTab('planning')">Planning</button>
+  <button onclick="showTab('posts')">Posts</button>
+  <button onclick="showTab('stories')">Stories</button>
+  <button onclick="showTab('systeme')">Systeme</button>
+</nav>
+
+<div class="content">
+
+<!-- ==================== TAB: PLANNING ==================== -->
+<div id="tab-planning" class="tab-content active">
+
+  <div class="section-title">Planifier une semaine</div>
+  <div class="section-subtitle">Le planning decide de tout : piliers, modes, types de stories. Une fois valide, il n'y a plus de decision a prendre.</div>
+
+  <div class="cmd">Creons le planning de la semaine S3 (du 24-03-2026 au 30-03-2026).</div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h3>Scan automatique</h3>
+        <p>Claude scanne les dossiers de production et regenere l'historique. Un PNG dans <code>final/</code> = le contenu existe. Un fichier supprime = il disparait.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h3>Analyse croisee posts + stories</h3>
+        <p>Identification des produits, piliers et modes en retard. Verification de la symbiose : les stories completent les posts, pas de doublon sujet ou photo.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h3>Proposition de planning</h3>
+        <p>Claude propose un planning equilibre qui compense les manques. Tu ajustes et valides. Chaque post et chaque story a son pilier, son mode et son type deja decides.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h3>Liste photos IRL</h3>
+        <p>Les photos que Romain et Dorian doivent prendre AVANT la semaine sont listees avec le cadrage souhaite.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h3 style="font-family:'Space Grotesk';font-size:18px;font-weight:700;margin-bottom:16px;text-transform:uppercase;letter-spacing:2px;">Les 5 piliers editoriaux</h3>
+
+  <div class="pillar-bar">
+    <div class="pillar-seg" style="flex:35;background:#BF8522;">Le Plat 35%</div>
+    <div class="pillar-seg" style="flex:25;background:#8B6914;">La Cuisine 25%</div>
+    <div class="pillar-seg" style="flex:18;background:#5C7858;">Macros 18%</div>
+    <div class="pillar-seg" style="flex:15;background:#A04035;color:rgba(255,255,255,0.8);">Equipe 15%</div>
+    <div class="pillar-seg" style="flex:7;background:#4a7a9b;color:rgba(255,255,255,0.8);">7%</div>
+  </div>
+
+  <div class="info">
+    <strong>Regle cle :</strong> sur 4 semaines, chaque pilier doit apparaitre au moins une fois. La distribution exacte par semaine peut varier — c'est la moyenne mensuelle qui compte.
+  </div>
+
+  <div class="divider"></div>
+
+  <h3 style="font-family:'Space Grotesk';font-size:18px;font-weight:700;margin-bottom:16px;text-transform:uppercase;letter-spacing:2px;">Regles automatiques</h3>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">📌</div>
+      <h4>Posts</h4>
+      <p>Jamais 2 posts consecutifs avec le meme mode. Au moins 3 modes et 3 piliers differents par semaine.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📱</div>
+      <h4>Stories</h4>
+      <p>Au moins 2 modes differents par jour. Au moins 1 story non-template par jour. Max 3 interactifs par semaine.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔗</div>
+      <h4>Symbiose</h4>
+      <p>Les stories completent les posts du jour. Pas de doublon produit/photo entre posts et stories la meme semaine.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ==================== TAB: POSTS ==================== -->
+<div id="tab-posts" class="tab-content">
+
+  <div class="section-title">Produire un post</div>
+  <div class="section-subtitle">Le mode est deja decide dans le planning. Tu lances la commande, le pipeline fait le reste.</div>
+
+  <div class="cmd">/instagram-producer 24-03-2026</div>
+
+  <div class="flow">
+    <div class="flow-node highlight">Brief (mode deja defini)</div>
+    <div class="flow-arrow"></div>
+    <div class="flow-label">routage par mode</div>
+    <div class="flow-arrow"></div>
+    <div class="flow-branch">
+      <div class="flow-node">Full IA</div>
+      <div class="flow-node">IRL Sublim.</div>
+      <div class="flow-node">Compositing</div>
+      <div class="flow-node">Template</div>
+    </div>
+    <div class="flow-arrow"></div>
+    <div class="flow-node">🔒 Checkpoint — Validation</div>
+    <div class="flow-arrow"></div>
+    <div class="flow-node">Generation image → <code>final/</code></div>
+    <div class="flow-arrow"></div>
+    <div class="flow-node highlight">Caption Writer (analyse l'image)</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h3 style="font-family:'Space Grotesk';font-size:18px;font-weight:700;margin-bottom:16px;text-transform:uppercase;letter-spacing:2px;">Les 5 modes de creation</h3>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">🤖</div>
+      <h4>Full IA</h4>
+      <p>Gemini genere tout : produit + scene. Ideal pour le food porn elabore et les produits sans photo.</p>
+      <span class="tag tag-ia">Gemini 4K</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">📸</div>
+      <h4>IRL Sublimation</h4>
+      <p>Photo reelle embellie pour aligner avec la DA. Authenticite + qualite. Coulisses, equipe, portraits.</p>
+      <span class="tag tag-irl">GPT Images</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏪</div>
+      <h4>Compositing IRL</h4>
+      <p>2 photos reelles fusionnees. Produit immerge dans la salle, devant la devanture, sur le comptoir.</p>
+      <span class="tag tag-comp">GPT Images</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎬</div>
+      <h4>Compositing IA</h4>
+      <p>Photo produit reelle dans une scene imaginee par l'IA. Ambiance cinematique, vapeur, nuit.</p>
+      <span class="tag tag-ia">Gemini 4K</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">📊</div>
+      <h4>Template</h4>
+      <p>Carrousels, infographies, comparaisons macros. HTML rendu en PNG par Puppeteer.</p>
+      <span class="tag tag-tmpl">Puppeteer</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h3 style="font-family:'Space Grotesk';font-size:18px;font-weight:700;margin-bottom:16px;text-transform:uppercase;letter-spacing:2px;">Ce que tu fournis par mode</h3>
+
+  <div class="table-wrap">
+  <table>
+    <tr><th>Mode</th><th>Ce que tu prepares</th></tr>
+    <tr><td>full-ia</td><td>Rien. Produit et slug suffisent.</td></tr>
+    <tr><td>irl-sublimation</td><td>La photo reelle a sublimer</td></tr>
+    <tr><td>compositing-irl</td><td>2 photos : produit + lieu</td></tr>
+    <tr><td>compositing-ia</td><td>La photo produit</td></tr>
+    <tr><td>template</td><td>Les donnees de chaque slide</td></tr>
+  </table>
+  </div>
+
+  <div class="divider"></div>
+
+  <details>
+    <summary>Distribution cible (mensuelle)</summary>
+    <div class="detail-body">
+      <p style="color:var(--text-2);font-size:14px;margin-top:8px;">
+        full-ia <strong>30%</strong> · irl-sublimation <strong>25%</strong> · compositing-irl <strong>20%</strong> · compositing-ia <strong>15%</strong> · template <strong>10%</strong>
+      </p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Structure des dossiers</summary>
+    <div class="detail-body">
+      <pre style="font-family:'JetBrains Mono';font-size:13px;color:var(--text-2);line-height:1.8;margin-top:8px;">
+DD-MM-YYYY/
+├── brief/brief.md
+├── production/
+│   ├── input.md
+│   ├── art-direction.md
+│   ├── prompt.md
+│   └── caption.md
+├── brouillons/
+└── final/post.png  ← Trace dans l'historique</pre>
+    </div>
+  </details>
+
+  <details>
+    <summary>Checklist avant publication</summary>
+    <div class="detail-body">
+      <ul class="checklist">
+        <li>Image fidele au produit</li>
+        <li>DA respectee (fond, couleurs, ambiance)</li>
+        <li>Pas d'artefacts IA</li>
+        <li>Caption avec hook fort en premiere ligne</li>
+        <li>Hashtags pertinents (mix local + niche + marque)</li>
+        <li>Pas de doublon avec un post recent</li>
+        <li>PNG dans <code>final/</code></li>
+      </ul>
+    </div>
+  </details>
+
+</div>
+
+<!-- ==================== TAB: STORIES ==================== -->
+<div id="tab-stories" class="tab-content">
+
+  <div class="section-title">Produire des stories</div>
+  <div class="section-subtitle">Les modes sont decides au planning. Tu lances la commande pour un jour ou toute la semaine.</div>
+
+  <div class="cmd">/story-producer S3 lundi</div>
+  <div class="cmd">/story-producer S3</div>
+
+  <div class="flow">
+    <div class="flow-node highlight">Brief du jour (modes deja definis)</div>
+    <div class="flow-arrow"></div>
+    <div class="flow-label">pour chaque story</div>
+    <div class="flow-arrow"></div>
+    <div class="flow-branch">
+      <div class="flow-node">Template</div>
+      <div class="flow-node">IRL</div>
+      <div class="flow-node">Sublim.</div>
+      <div class="flow-node">Composit.</div>
+      <div class="flow-node">Full IA</div>
+    </div>
+    <div class="flow-arrow"></div>
+    <div class="flow-node">Validation pre-render (limites caracteres, presets)</div>
+    <div class="flow-arrow"></div>
+    <div class="flow-node">🔒 Checkpoint — Toutes les stories du jour</div>
+    <div class="flow-arrow"></div>
+    <div class="flow-node highlight">Render → <code>story-NN/final/story.png</code></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h3 style="font-family:'Space Grotesk';font-size:18px;font-weight:700;margin-bottom:16px;text-transform:uppercase;letter-spacing:2px;">Pipelines par mode</h3>
+
+  <div class="table-wrap">
+  <table>
+    <tr><th>Mode</th><th>Pipeline</th></tr>
+    <tr><td style="color:var(--text)">template</td><td>Copywriter → Data Mapper → Template HTML → Puppeteer → PNG</td></tr>
+    <tr><td style="color:var(--green)">irl</td><td>Photo brute → irl-story.html overlay DA → Puppeteer → PNG</td></tr>
+    <tr><td style="color:var(--green)">irl-sublimation</td><td>Photo → Sublimation GPT Images (9:16) → PNG + overlay</td></tr>
+    <tr><td style="color:var(--blue)">compositing-irl</td><td>2 photos → Compositing GPT Images (9:16) → PNG + overlay</td></tr>
+    <tr><td style="color:var(--accent)">full-ia</td><td>Prompt → Gemini (9:16) → PNG + overlay</td></tr>
+  </table>
+  </div>
+
+  <div class="divider"></div>
+
+  <h3 style="font-family:'Space Grotesk';font-size:18px;font-weight:700;margin-bottom:16px;text-transform:uppercase;letter-spacing:2px;">6 templates</h3>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">🍔</div>
+      <h4>Vitrine</h4>
+      <p>Fiche produit OU focus ingredient. Photo hero en haut, info en bas. 2 variantes, meme squelette.</p>
+      <span class="tag tag-tmpl">vitrine.html</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔢</div>
+      <h4>Educatif</h4>
+      <p>Gros chiffre + explication + comparaison VS. Positions Y fixes. Photo BG a droite.</p>
+      <span class="tag tag-tmpl">educatif.html</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">📊</div>
+      <h4>Interactif</h4>
+      <p>Question + zone sticker Instagram. Mode Single (1 photo) ou VS (2 produits).</p>
+      <span class="tag tag-tmpl">interactif.html</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">📢</div>
+      <h4>Annonce</h4>
+      <p>Badge + headline + body + CTA. Tout centre. Photo BG dimmed optionnelle.</p>
+      <span class="tag tag-tmpl">annonce.html</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">📷</div>
+      <h4>IRL</h4>
+      <p>Photo plein cadre + overlay DA minimal. Logo + texte optionnel. Coulisses, rush, ambiance.</p>
+      <span class="tag tag-irl">irl-story.html</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔄</div>
+      <h4>Process</h4>
+      <p>Split avant/apres. 2 photos empilees avec bande de separation DA au milieu.</p>
+      <span class="tag tag-tmpl">process.html</span>
+    </div>
+  </div>
+
+  <div class="info">
+    <strong>Cadres rigides :</strong> chaque template a des positions fixes et des limites de caracteres par zone. Le pipeline verifie automatiquement avant le render. Voir <code>SPECS.md</code>.
+  </div>
+
+  <div class="divider"></div>
+
+  <h3 style="font-family:'Space Grotesk';font-size:18px;font-weight:700;margin-bottom:16px;text-transform:uppercase;letter-spacing:2px;">3 familles visuelles</h3>
+
+  <div class="cards">
+    <div class="card" style="border-color:rgba(255,255,255,0.1);">
+      <h4 style="color:var(--text-2);">Dark Premium</h4>
+      <p>Fond charbon. Educatif, interactif, annonce, IRL. Information et engagement.</p>
+    </div>
+    <div class="card" style="border-color:var(--border-strong);">
+      <h4 style="color:var(--accent);">Vitrine</h4>
+      <p>Fond gradient colore. Fiche produit, focus ingredient. Appetit et showcase.</p>
+    </div>
+    <div class="card" style="border-color:rgba(74,122,155,0.3);">
+      <h4 style="color:var(--blue);">Visuel plein cadre</h4>
+      <p>Image generee/sublimee. Sublimation, compositing, full-ia. Impact visuel maximal.</p>
+    </div>
+  </div>
+
+  <details>
+    <summary>Distribution cible (hebdomadaire)</summary>
+    <div class="detail-body">
+      <p style="color:var(--text-2);font-size:14px;margin-top:8px;">
+        template <strong>50%</strong> · irl <strong>20%</strong> · irl-sublimation <strong>15%</strong> · compositing <strong>10%</strong> · full-ia <strong>5%</strong>
+      </p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Structure des dossiers</summary>
+    <div class="detail-body">
+      <pre style="font-family:'JetBrains Mono';font-size:13px;color:var(--text-2);line-height:1.8;margin-top:8px;">
+S1/lundi/
+├── brief/brief-story.md
+├── story-01/
+│   ├── production/data.md + story.html
+│   ├── brouillons/
+│   └── final/story.png  ← Trace dans l'historique
+└── story-02/
+    └── (meme structure)</pre>
+    </div>
+  </details>
+
+  <details>
+    <summary>Checklist avant publication</summary>
+    <div class="detail-body">
+      <ul class="checklist">
+        <li>Textes dans la zone safe Instagram</li>
+        <li>Limites de caracteres respectees (SPECS.md)</li>
+        <li>Preset photo et force gradient assignes</li>
+        <li>Pas de zone basse vide</li>
+        <li>Pas de doublon logo</li>
+        <li>Bon produit (pain noir)</li>
+        <li>Mix des familles visuelles sur la journee</li>
+        <li>PNG dans <code>story-NN/final/</code></li>
+      </ul>
+    </div>
+  </details>
+
+</div>
+
+<!-- ==================== TAB: SYSTEME ==================== -->
+<div id="tab-systeme" class="tab-content">
+
+  <div class="section-title">Comment ca fonctionne</div>
+  <div class="section-subtitle">L'architecture du systeme, le hors-planning, les fichiers cles et les commandes.</div>
+
+  <h3 style="font-family:'Space Grotesk';font-size:18px;font-weight:700;margin-bottom:16px;text-transform:uppercase;letter-spacing:2px;">Le cycle complet</h3>
+
+  <div class="flow">
+    <div class="flow-node">Historique (scan disque)</div>
+    <div class="flow-arrow"></div>
+    <div class="flow-node highlight">Planning semaine</div>
+    <div class="flow-arrow"></div>
+    <div class="flow-branch">
+      <div class="flow-node">Briefs posts</div>
+      <div class="flow-node">Briefs stories</div>
+    </div>
+    <div class="flow-arrow"></div>
+    <div class="flow-branch">
+      <div class="flow-node">/instagram-producer</div>
+      <div class="flow-node">/story-producer</div>
+    </div>
+    <div class="flow-arrow"></div>
+    <div class="flow-node">PNG dans <code>final/</code></div>
+    <div class="flow-arrow"></div>
+    <div class="flow-node">↩ Retour dans l'historique au prochain scan</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h3 style="font-family:'Space Grotesk';font-size:18px;font-weight:700;margin-bottom:16px;text-transform:uppercase;letter-spacing:2px;">Production hors planning</h3>
+
+  <p style="color:var(--text-2);font-size:15px;margin-bottom:20px;">Idee spontanee, actualite, action ponctuelle — tu invoques directement l'agent ou le skill que tu veux.</p>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <h4>Post spontane</h4>
+      <p>"J'ai une photo du burger de ce midi, fais-moi un post IRL-sublimation."<br><br>→ <code>hors-planning/DD-MM-YYYY/</code></p>
+    </div>
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <h4>Story spontanee</h4>
+      <p>"Photo de l'arrivage, fais-moi une story IRL."<br><br>→ <code>hors-planning/DD-MM-YYYY/</code></p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔧</div>
+      <h4>Agent a la carte</h4>
+      <p>Sublimer une photo, generer une caption, creer une art direction — chaque skill est invocable individuellement.</p>
+    </div>
+  </div>
+
+  <div class="info">
+    <strong>Liberte totale.</strong> Aucune contrainte de mode ou de pilier. Le contenu apparait dans l'historique au prochain scan.
+  </div>
+
+  <div class="divider"></div>
+
+  <h3 style="font-family:'Space Grotesk';font-size:18px;font-weight:700;margin-bottom:16px;text-transform:uppercase;letter-spacing:2px;">Commandes</h3>
+
+  <div class="table-wrap">
+  <table>
+    <tr><th>Commande</th><th>Action</th></tr>
+    <tr><td><code>/instagram-producer DD-MM-YYYY</code></td><td>Produit un post (mode lu depuis le brief)</td></tr>
+    <tr><td><code>/story-producer S[X] [jour]</code></td><td>Produit les stories d'un jour</td></tr>
+    <tr><td><code>/story-producer S[X]</code></td><td>Produit toutes les stories de la semaine</td></tr>
+    <tr><td><code>Regenere l'historique</code></td><td>Scanne les dossiers, reecrit l'historique</td></tr>
+  </table>
+  </div>
+
+  <div class="divider"></div>
+
+  <h3 style="font-family:'Space Grotesk';font-size:18px;font-weight:700;margin-bottom:16px;text-transform:uppercase;letter-spacing:2px;">Fichiers cles</h3>
+
+  <div class="table-wrap">
+  <table>
+    <tr><th>Fichier</th><th>Role</th></tr>
+    <tr><td>PLAYBOOK.md</td><td>Ce guide — point d'entree</td></tr>
+    <tr><td>CLAUDE.md</td><td>Statut pipeline + reference technique</td></tr>
+    <tr><td>_templates/SPECS.md</td><td>Limites caracteres, presets photo, gradients</td></tr>
+    <tr><td>_config/historique-production.md</td><td>Genere par scan — reflet du disque</td></tr>
+    <tr><td>_config/pipeline.md</td><td>Config modes, DA, modeles</td></tr>
+    <tr><td>_config/photo-references.md</td><td>Catalogue photos</td></tr>
+    <tr><td>_recettes/[slug].md</td><td>Fiches produit</td></tr>
+  </table>
+  </div>
+
+  <details>
+    <summary>Glossaire</summary>
+    <div class="detail-body">
+      <div class="table-wrap">
+      <table>
+        <tr><th>Terme</th><th>Definition</th></tr>
+        <tr><td>Planning</td><td>Document hebdomadaire qui decide piliers, modes et types</td></tr>
+        <tr><td>Mode</td><td>Methode de creation (full-ia, irl-sublimation, compositing-irl, compositing-ia, template)</td></tr>
+        <tr><td>Pilier</td><td>Categorie editoriale (Le Plat, La Cuisine, Les Macros, L'Equipe, Le Quartier)</td></tr>
+        <tr><td>Symbiose</td><td>Posts et stories se completent, pas de doublon</td></tr>
+        <tr><td>Historique</td><td>Fichier genere par scan — reflet du disque</td></tr>
+        <tr><td>DA</td><td>Direction Artistique "Dark Food Premium"</td></tr>
+        <tr><td>SPECS</td><td>Limites caracteres + presets photo + forces gradient</td></tr>
+        <tr><td>Sublimation</td><td>Retouche IA pour aligner avec la DA</td></tr>
+        <tr><td>Compositing</td><td>Fusion de 2 images en montage realiste</td></tr>
+        <tr><td>Vitrine</td><td>Famille visuelle : gradient colore, produit lumineux</td></tr>
+        <tr><td>Dark Premium</td><td>Famille visuelle : fond charbon, contenu informatif</td></tr>
+        <tr><td>Hors planning</td><td>Contenu spontane, liberte totale</td></tr>
+      </table>
+      </div>
+    </div>
+  </details>
+
+</div>
+
+</div><!-- /content -->
+
+<div class="footer">
+  Playbook Production Instagram — StrictFood · Pipeline v3
+</div>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
