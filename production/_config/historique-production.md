@@ -17,7 +17,7 @@
 
 ---
 
-## Posts produits
+## Posts produits (planning)
 
 > Scanné depuis `posts-stories/posts/*/S*/YYYY-MM-DD/`
 > Un post est comptabilisé si `03-output/` contient au moins un PNG.
@@ -26,7 +26,16 @@
 |---------|------|--------|------|---------|---------------|
 <!-- GENERATED — ne pas modifier -->
 
-## Stories produites
+## Posts produits (hors-planning)
+
+> Scanné depuis `posts-stories/posts/hors-planning/YYYY-MM-DD/`
+> Même critère : `03-output/` contient au moins un PNG.
+
+| Date | Pilier | Mode | Produit | Angle / Sujet |
+|------|--------|------|---------|---------------|
+<!-- GENERATED — ne pas modifier -->
+
+## Stories produites (planning)
 
 > Scanné depuis `posts-stories/stories/S*/[jour]/`
 > Une story est comptabilisée si un `story-NN.png` existe.
@@ -37,9 +46,19 @@
 |------|---|------|------|-----------------|
 <!-- GENERATED — ne pas modifier -->
 
+## Stories produites (hors-planning)
+
+> Scanné depuis `posts-stories/stories/hors-planning/YYYY-MM-DD/`
+> Même critère : un `story-NN.png` existe.
+
+| Date | # | Type | Mode | Produit / Sujet |
+|------|---|------|------|-----------------|
+<!-- GENERATED — ne pas modifier -->
+
 ## Compteurs cumulés
 
-> Calculés automatiquement à partir des tables ci-dessus.
+> Calculés automatiquement à partir de TOUTES les tables ci-dessus (planning + hors-planning).
+> Le hors-planning compte dans les totaux — un post hors-planning sur le STRICT Bœuf est quand même un post sur le STRICT Bœuf.
 
 ### Produits — apparitions posts
 
@@ -89,7 +108,7 @@
 
 Pour régénérer ce fichier, l'agent doit :
 
-### 1. Scanner les posts
+### 1. Scanner les posts planning
 
 ```
 Pour chaque dossier dans posts-stories/posts/*/S*/YYYY-MM-DD/ :
@@ -98,36 +117,53 @@ Pour chaque dossier dans posts-stories/posts/*/S*/YYYY-MM-DD/ :
      - Semaine (depuis le chemin : S1, S2...)
      - Date (depuis le nom du dossier)
      - Pilier (champ "Pilier" dans la table Stratégie du brief)
-     - Mode (champ "Mode" dans la table Stratégie du brief)
+     - Mode (champ "Mode" dans la table Stratégie du brief, ou "full-ia" si brief v2)
      - Produit (champ "Produit" ou titre du brief)
      - Angle (champ "Objectif" résumé en quelques mots)
-  3. Ajouter une ligne dans la table "Posts produits"
-
-Pour chaque dossier dans posts-stories/posts/hors-planning/YYYY-MM-DD/ :
-  Même logique, marquer la semaine comme "HP" (hors-planning)
+  3. Ajouter une ligne dans la table "Posts produits (planning)"
 ```
 
-### 2. Scanner les stories
+### 2. Scanner les posts hors-planning
+
+```
+Pour chaque dossier dans posts-stories/posts/hors-planning/YYYY-MM-DD/ :
+  1. Vérifier que 03-output/ contient au moins un .png (ou tout .png à la racine du dossier)
+  2. Si oui → lire 00-brief/brief.md si existe, sinon déduire depuis le contenu
+     - Date (depuis le nom du dossier)
+     - Pilier, Mode, Produit, Angle (depuis le brief ou à défaut depuis le nom des fichiers)
+  3. Ajouter une ligne dans la table "Posts produits (hors-planning)"
+```
+
+### 3. Scanner les stories planning
 
 ```
 Pour chaque dossier dans posts-stories/stories/S*/[jour]/ :
   1. Lister tous les story-NN.png
   2. Pour chaque PNG trouvé → lire story-NN-data.md (si existe) et brief-story.md
      - Extraire : numéro, type, mode, produit/sujet
-  3. Ajouter une ligne dans la table stories de la semaine
+  3. Ajouter dans la table stories de la semaine correspondante
+```
 
+### 4. Scanner les stories hors-planning
+
+```
 Pour chaque dossier dans posts-stories/stories/hors-planning/YYYY-MM-DD/ :
-  Même logique
+  1. Lister tous les story-NN.png (ou tout .png)
+  2. Pour chaque PNG → lire story-NN-data.md ou brief si existe
+     - Extraire : date, numéro, type, mode, produit/sujet
+  3. Ajouter dans la table "Stories produites (hors-planning)"
 ```
 
-### 3. Calculer les compteurs
+### 5. Calculer les compteurs
 
 ```
-Compter les occurrences de chaque produit, pilier, mode
-Calculer les pourcentages
-Identifier les alertes (écarts > 10% vs cible)
+Agréger TOUTES les tables (planning + hors-planning) :
+  - Compter les occurrences de chaque produit, pilier, mode
+  - Calculer les pourcentages
+  - Identifier les alertes (écarts > 10% vs cible)
+  - Le hors-planning compte dans les totaux
 ```
 
-### 4. Écrire le fichier
+### 6. Écrire le fichier
 
 Réécrire entièrement `_config/historique-production.md` avec les données scannées.
