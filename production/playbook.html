@@ -770,7 +770,9 @@ S1/lundi/
 <div id="tab-systeme" class="tab-content">
 
   <div class="section-title">Comment ca fonctionne</div>
-  <div class="section-subtitle">L'architecture du systeme, le hors-planning, les fichiers cles et les commandes.</div>
+  <div class="section-subtitle">Le cycle de production, les briefs, les skills, les agents et leur role dans le systeme.</div>
+
+  <!-- ===== CYCLE COMPLET ===== -->
 
   <h3 style="font-family:'Space Grotesk';font-size:18px;font-weight:700;margin-bottom:16px;text-transform:uppercase;letter-spacing:2px;">Le cycle complet</h3>
 
@@ -795,6 +797,333 @@ S1/lundi/
   </div>
 
   <div class="divider"></div>
+
+  <!-- ===== LES BRIEFS ===== -->
+
+  <h3 style="font-family:'Space Grotesk';font-size:18px;font-weight:700;margin-bottom:16px;text-transform:uppercase;letter-spacing:2px;">Les briefs — entree du systeme</h3>
+
+  <p style="color:var(--text-2);font-size:15px;margin-bottom:24px;">Le brief est le document d'entree de chaque contenu. Il contient ce que l'operateur veut, et le pipeline fait le reste. Deux types de briefs, deux templates.</p>
+
+  <div class="cards" style="grid-template-columns: 1fr 1fr;">
+    <div class="card" style="border-color:var(--border-strong);">
+      <div class="card-icon">📄</div>
+      <h4>Brief Post</h4>
+      <p style="margin-bottom:12px;">Un brief par post. Contient le pilier, le mode (deja decide au planning), le produit, les sources visuelles selon le mode, et la Direction Caption.</p>
+      <div style="font-size:13px;color:var(--text-3);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px;">Template</div>
+      <code style="font-size:12px;">_templates/brief-v3.md</code>
+      <div style="font-size:13px;color:var(--text-3);margin-top:12px;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px;">Emplacement</div>
+      <code style="font-size:12px;">DD-MM-YYYY/brief/brief.md</code>
+    </div>
+    <div class="card" style="border-color:var(--border-strong);">
+      <div class="card-icon">📄</div>
+      <h4>Brief Story</h4>
+      <p style="margin-bottom:12px;">Un brief par jour. Contient toutes les stories du jour avec pour chacune : le type, le mode (decide au planning), le contenu specifique au type.</p>
+      <div style="font-size:13px;color:var(--text-3);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px;">Template</div>
+      <code style="font-size:12px;">_templates/brief-story.md</code>
+      <div style="font-size:13px;color:var(--text-3);margin-top:12px;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px;">Emplacement</div>
+      <code style="font-size:12px;">S[X]/[jour]/brief/brief-story.md</code>
+    </div>
+  </div>
+
+  <h4 style="font-family:'Space Grotesk';font-size:15px;font-weight:600;margin:24px 0 12px;color:var(--text-2);">Comment un brief est genere</h4>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h3>Le planning decide</h3>
+        <p>Le pilier, le mode, le produit/sujet et le type (pour les stories) sont deja dans le planning valide. Le brief ne fait que les reprendre.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h3>L'operateur complete</h3>
+        <p>L'objectif (1-3 phrases), les sources visuelles (photos pour les modes IRL/compositing), la Direction Caption (angle, ton, CTA, mentions). Pas de caption complete — elle sera generee apres l'image.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h3>Le pipeline lit le brief</h3>
+        <p>L'orchestrateur (<code>/instagram-producer</code> ou <code>/story-producer</code>) lit le brief, extrait le mode, et route vers le bon sous-pipeline.</p>
+      </div>
+    </div>
+  </div>
+
+  <h4 style="font-family:'Space Grotesk';font-size:15px;font-weight:600;margin:24px 0 12px;color:var(--text-2);">Fichiers utilises pour generer les briefs</h4>
+
+  <div class="table-wrap">
+  <table>
+    <tr><th>Fichier</th><th>Quand il est consulte</th><th>Par qui</th></tr>
+    <tr><td><code>planning-SX.md</code></td><td>Pour recuperer le pilier, mode, produit, type</td><td>Operateur</td></tr>
+    <tr><td><code>_recettes/[slug].md</code></td><td>Pour verifier le slug produit et les donnees disponibles</td><td>Operateur</td></tr>
+    <tr><td><code>_config/photo-references.md</code></td><td>Pour identifier les photos sources (modes IRL/compositing)</td><td>Operateur</td></tr>
+    <tr><td><code>strategie/instagram-strategie.md</code></td><td>Pour l'alignement strategique (objectif, persona)</td><td>Operateur</td></tr>
+    <tr><td><code>_config/historique-production.md</code></td><td>Pour eviter les doublons angle/sujet</td><td>Pipeline (auto)</td></tr>
+  </table>
+  </div>
+
+  <div class="info">
+    <strong>Regle cle :</strong> le brief ne contient PAS la caption (seulement une Direction Caption). La caption est generee APRES l'image par le skill <code>/caption-writer</code> qui analyse visuellement le resultat.
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ===== SKILLS ===== -->
+
+  <h3 style="font-family:'Space Grotesk';font-size:18px;font-weight:700;margin-bottom:8px;text-transform:uppercase;letter-spacing:2px;">Les Skills</h3>
+  <p style="color:var(--text-2);font-size:14px;margin-bottom:24px;">Les skills sont des competences invocables par commande. Ils orchestrent, generent, ou servent de reference.</p>
+
+  <div class="cards">
+    <div class="card" style="border-left:3px solid var(--accent);">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <span style="font-size:22px;">🎯</span>
+        <h4 style="margin:0;">instagram-producer</h4>
+      </div>
+      <p>Orchestrateur principal des posts. Detecte le mode dans le brief et route vers le bon sous-pipeline. Enchaine automatiquement toutes les etapes.</p>
+      <div style="margin-top:12px;font-size:12px;">
+        <span style="color:var(--text-3);">INVOCATION</span><br>
+        <code>/instagram-producer DD-MM-YYYY</code>
+      </div>
+      <div style="margin-top:8px;font-size:12px;">
+        <span style="color:var(--text-3);">PRODUIT</span>
+        <span style="color:var(--text-2);"> — Image + caption dans <code>final/</code> + <code>production/</code></span>
+      </div>
+    </div>
+
+    <div class="card" style="border-left:3px solid var(--accent);">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <span style="font-size:22px;">📱</span>
+        <h4 style="margin:0;">story-producer</h4>
+      </div>
+      <p>Orchestrateur des stories. Enchaine copywriting → data mapping → validation → template fill → render pour chaque story du jour.</p>
+      <div style="margin-top:12px;font-size:12px;">
+        <span style="color:var(--text-3);">INVOCATION</span><br>
+        <code>/story-producer S[X] [jour]</code>
+      </div>
+      <div style="margin-top:8px;font-size:12px;">
+        <span style="color:var(--text-3);">PRODUIT</span>
+        <span style="color:var(--text-2);"> — PNG 1080x1920 dans <code>story-NN/final/</code></span>
+      </div>
+    </div>
+
+    <div class="card" style="border-left:3px solid var(--green);">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <span style="font-size:22px;">🎨</span>
+        <h4 style="margin:0;">social-media-art-director</h4>
+      </div>
+      <p>Transforme le brief en direction creative visuelle detaillee : angles, eclairage, composition, mood. Ne voit JAMAIS les photos — travaille sur concept pur.</p>
+      <div style="margin-top:12px;font-size:12px;">
+        <span style="color:var(--text-3);">APPELE PAR</span>
+        <span style="color:var(--text-2);"> — instagram-producer (modes full-ia, compositing-ia)</span>
+      </div>
+      <div style="margin-top:8px;font-size:12px;">
+        <span style="color:var(--text-3);">PRODUIT</span>
+        <span style="color:var(--text-2);"> — <code>production/art-direction.md</code></span>
+      </div>
+    </div>
+
+    <div class="card" style="border-left:3px solid var(--green);">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <span style="font-size:22px;">✍️</span>
+        <h4 style="margin:0;">image-prompt-engineer</h4>
+      </div>
+      <p>Transforme la direction creative en prompt de generation image optimise pour Gemini ou GPT Images. Respecte la fidelite ingredients.</p>
+      <div style="margin-top:12px;font-size:12px;">
+        <span style="color:var(--text-3);">APPELE PAR</span>
+        <span style="color:var(--text-2);"> — instagram-producer (modes full-ia, compositing-ia)</span>
+      </div>
+      <div style="margin-top:8px;font-size:12px;">
+        <span style="color:var(--text-3);">PRODUIT</span>
+        <span style="color:var(--text-2);"> — <code>production/prompt.md</code></span>
+      </div>
+    </div>
+
+    <div class="card" style="border-left:3px solid var(--blue);">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <span style="font-size:22px;">🖼️</span>
+        <h4 style="margin:0;">nano-banana-pro</h4>
+      </div>
+      <p>Genere et edite des images via l'API Gemini 3 Pro Image. Text-to-image et image-to-image. Resolutions 1K, 2K ou 4K.</p>
+      <div style="margin-top:12px;font-size:12px;">
+        <span style="color:var(--text-3);">INVOCATION</span><br>
+        <code>/nano-banana-pro --resolution 4K</code>
+      </div>
+      <div style="margin-top:8px;font-size:12px;">
+        <span style="color:var(--text-3);">PRODUIT</span>
+        <span style="color:var(--text-2);"> — PNG dans <code>final/</code></span>
+      </div>
+    </div>
+
+    <div class="card" style="border-left:3px solid var(--blue);">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <span style="font-size:22px;">📝</span>
+        <h4 style="margin:0;">caption-writer</h4>
+      </div>
+      <p>Genere la caption Instagram APRES l'image. Analyse visuellement le PNG produit, croise avec la Direction Caption du brief et les 15 dernieres captions.</p>
+      <div style="margin-top:12px;font-size:12px;">
+        <span style="color:var(--text-3);">APPELE PAR</span>
+        <span style="color:var(--text-2);"> — instagram-producer (tous les modes, etape finale)</span>
+      </div>
+      <div style="margin-top:8px;font-size:12px;">
+        <span style="color:var(--text-3);">PRODUIT</span>
+        <span style="color:var(--text-2);"> — <code>production/caption.md</code></span>
+      </div>
+    </div>
+
+    <div class="card" style="border-left:3px solid rgba(255,255,255,0.15);">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <span style="font-size:22px;">📋</span>
+        <h4 style="margin:0;">photo-realism-guide</h4>
+      </div>
+      <p>Skill de reference (pas executable). Techniques anti-empreinte IA : camera anchoring, eclairage, imperfections, mots-cles bannis. Consulte par les autres skills.</p>
+      <span class="tag tag-tmpl" style="margin-top:8px;">Reference</span>
+    </div>
+
+    <div class="card" style="border-left:3px solid rgba(255,255,255,0.15);">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <span style="font-size:22px;">📋</span>
+        <h4 style="margin:0;">photo-compositor</h4>
+      </div>
+      <p>Skill de reference. 5 piliers du compositing (eclairage, ombres, perspective, bords, couleur). Consulte pour les modes compositing-irl et compositing-ia.</p>
+      <span class="tag tag-tmpl" style="margin-top:8px;">Reference</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ===== AGENTS ===== -->
+
+  <h3 style="font-family:'Space Grotesk';font-size:18px;font-weight:700;margin-bottom:8px;text-transform:uppercase;letter-spacing:2px;">Les Agents</h3>
+  <p style="color:var(--text-2);font-size:14px;margin-bottom:24px;">Les agents sont des sous-processus specialises lances automatiquement par les orchestrateurs. Chaque agent a un role deterministe et un modele dedie.</p>
+
+  <div class="cards">
+    <div class="card" style="border-left:3px solid var(--accent);">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-size:22px;">🗺️</span>
+          <h4 style="margin:0;">input-mapper</h4>
+        </div>
+        <span class="tag tag-ia" style="margin:0;font-size:10px;">Haiku</span>
+      </div>
+      <p>Resout les liens produit → photo + recette. Lit la direction creative, consulte le catalogue photos et les fiches recettes. Role deterministe : pas de creativite, juste du mapping.</p>
+      <div style="margin-top:12px;font-size:12px;">
+        <span style="color:var(--text-3);">LIT</span>
+        <span style="color:var(--text-2);"> — art-direction.md + photo-references.md + _recettes/</span>
+      </div>
+      <div style="margin-top:4px;font-size:12px;">
+        <span style="color:var(--text-3);">PRODUIT</span>
+        <span style="color:var(--text-2);"> — <code>production/input.md</code></span>
+      </div>
+    </div>
+
+    <div class="card" style="border-left:3px solid var(--green);">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-size:22px;">✏️</span>
+          <h4 style="margin:0;">story-copywriter</h4>
+        </div>
+        <span class="tag tag-irl" style="margin:0;font-size:10px;">Sonnet</span>
+      </div>
+      <p>Reecrit les textes des briefs stories pour plus de punch, moins de redondance. Respecte les limites de caracteres par zone de template. Registre streetfood premium.</p>
+      <div style="margin-top:12px;font-size:12px;">
+        <span style="color:var(--text-3);">LIT</span>
+        <span style="color:var(--text-2);"> — brief-story.md + SPECS.md (limites caracteres)</span>
+      </div>
+      <div style="margin-top:4px;font-size:12px;">
+        <span style="color:var(--text-3);">PRODUIT</span>
+        <span style="color:var(--text-2);"> — Textes reecris (integres au flux)</span>
+      </div>
+    </div>
+
+    <div class="card" style="border-left:3px solid var(--accent);">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-size:22px;">📊</span>
+          <h4 style="margin:0;">story-data-mapper</h4>
+        </div>
+        <span class="tag tag-ia" style="margin:0;font-size:10px;">Haiku</span>
+      </div>
+      <p>Resout les donnees produit (macros, prix, ingredients), photos, brand props et presets pour les stories. Assigne les presets photo et forces gradient. Role deterministe.</p>
+      <div style="margin-top:12px;font-size:12px;">
+        <span style="color:var(--text-3);">LIT</span>
+        <span style="color:var(--text-2);"> — brief + _recettes/ + photo-references.md + brand-props.md + SPECS.md</span>
+      </div>
+      <div style="margin-top:4px;font-size:12px;">
+        <span style="color:var(--text-3);">PRODUIT</span>
+        <span style="color:var(--text-2);"> — <code>story-NN/production/data.md</code></span>
+      </div>
+    </div>
+
+    <div class="card" style="border-left:3px solid var(--green);">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-size:22px;">🎬</span>
+          <h4 style="margin:0;">strict-irl-prompter</h4>
+        </div>
+        <span class="tag tag-irl" style="margin:0;font-size:10px;">Sonnet</span>
+      </div>
+      <p>Specialiste des prompts lifestyle "STRICT IRL". Transforme un concept en prompt optimise pour Gemini avec focus sur fidelite produit, realisme humain et coherence photographique.</p>
+      <div style="margin-top:12px;font-size:12px;">
+        <span style="color:var(--text-3);">PRODUIT</span>
+        <span style="color:var(--text-2);"> — Prompt de generation lifestyle (EN, Gemini 4K)</span>
+      </div>
+    </div>
+
+    <div class="card" style="border-left:3px solid var(--blue);">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-size:22px;">🔀</span>
+          <h4 style="margin:0;">strict-irl-compositor</h4>
+        </div>
+        <span class="tag tag-comp" style="margin:0;font-size:10px;">Sonnet</span>
+      </div>
+      <p>Specialiste du compositing photo reelle + scene. Integre un vrai produit dans une scene lifestyle via multi-image Gemini. Matching eclairage, ombres, perspective.</p>
+      <div style="margin-top:12px;font-size:12px;">
+        <span style="color:var(--text-3);">PRODUIT</span>
+        <span style="color:var(--text-2);"> — Prompt compositing multi-image (EN, Gemini 4K)</span>
+      </div>
+    </div>
+
+    <div class="card" style="border-left:3px solid rgba(255,255,255,0.15);">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-size:22px;">🔄</span>
+          <h4 style="margin:0;">product-variant-generator</h4>
+        </div>
+        <span class="tag tag-irl" style="margin:0;font-size:10px;">Sonnet</span>
+      </div>
+      <p>Genere des variantes visuelles d'un produit (angles, eclairages, cadrages) via GPT Images. Le produit reste fidele — seule la presentation change. Utilise en pre-batch semaine.</p>
+      <div style="margin-top:12px;font-size:12px;">
+        <span style="color:var(--text-3);">PRODUIT</span>
+        <span style="color:var(--text-2);"> — Variantes PNG + entree dans product-variants.md</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ===== QUI VOIT QUOI ===== -->
+
+  <h3 style="font-family:'Space Grotesk';font-size:18px;font-weight:700;margin-bottom:8px;text-transform:uppercase;letter-spacing:2px;">Separation des responsabilites</h3>
+  <p style="color:var(--text-2);font-size:14px;margin-bottom:20px;">Chaque agent ne voit qu'une partie de l'information. C'est delibere — ca evite les hallucinations et garantit la precision.</p>
+
+  <div class="table-wrap">
+  <table>
+    <tr><th>Agent / Skill</th><th>Voit</th><th>Ne voit PAS</th></tr>
+    <tr><td style="color:var(--accent)">Art Director</td><td>Brief, recette (formes), config DA</td><td>Photos</td></tr>
+    <tr><td style="color:var(--accent)">Input Mapper</td><td>Direction creative, photos (descriptions), recettes</td><td>Brief original</td></tr>
+    <tr><td style="color:var(--accent)">Prompt Engineer</td><td>Direction creative + input mapping</td><td>Brief original</td></tr>
+    <tr><td style="color:var(--accent)">Caption Writer</td><td>Brief (Direction Caption), image (vision), 15 dernieres captions</td><td>Prompt, direction creative</td></tr>
+    <tr><td style="color:var(--green)">Story Copywriter</td><td>Brief story, limites caracteres</td><td>Photos, donnees produit</td></tr>
+    <tr><td style="color:var(--green)">Story Data Mapper</td><td>Brief, recettes, photos, brand props</td><td>Texte copywrit</td></tr>
+  </table>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ===== HORS PLANNING ===== -->
 
   <h3 style="font-family:'Space Grotesk';font-size:18px;font-weight:700;margin-bottom:16px;text-transform:uppercase;letter-spacing:2px;">Production hors planning</h3>
 
@@ -824,6 +1153,8 @@ S1/lundi/
 
   <div class="divider"></div>
 
+  <!-- ===== COMMANDES ===== -->
+
   <h3 style="font-family:'Space Grotesk';font-size:18px;font-weight:700;margin-bottom:16px;text-transform:uppercase;letter-spacing:2px;">Commandes</h3>
 
   <div class="table-wrap">
@@ -832,11 +1163,17 @@ S1/lundi/
     <tr><td><code>/instagram-producer DD-MM-YYYY</code></td><td>Produit un post (mode lu depuis le brief)</td></tr>
     <tr><td><code>/story-producer S[X] [jour]</code></td><td>Produit les stories d'un jour</td></tr>
     <tr><td><code>/story-producer S[X]</code></td><td>Produit toutes les stories de la semaine</td></tr>
+    <tr><td><code>/caption-writer</code></td><td>Genere une caption sur une image existante</td></tr>
+    <tr><td><code>/nano-banana-pro</code></td><td>Genere ou edite une image (Gemini)</td></tr>
+    <tr><td><code>/social-media-art-director</code></td><td>Cree une direction creative</td></tr>
+    <tr><td><code>/image-prompt-engineer</code></td><td>Ecrit un prompt de generation image</td></tr>
     <tr><td><code>Regenere l'historique</code></td><td>Scanne les dossiers, reecrit l'historique</td></tr>
   </table>
   </div>
 
   <div class="divider"></div>
+
+  <!-- ===== FICHIERS CLES ===== -->
 
   <h3 style="font-family:'Space Grotesk';font-size:18px;font-weight:700;margin-bottom:16px;text-transform:uppercase;letter-spacing:2px;">Fichiers cles</h3>
 
@@ -845,11 +1182,15 @@ S1/lundi/
     <tr><th>Fichier</th><th>Role</th></tr>
     <tr><td>PLAYBOOK.md</td><td>Ce guide — point d'entree</td></tr>
     <tr><td>CLAUDE.md</td><td>Statut pipeline + reference technique</td></tr>
+    <tr><td>_templates/brief-v3.md</td><td>Template brief post</td></tr>
+    <tr><td>_templates/brief-story.md</td><td>Template brief story</td></tr>
+    <tr><td>_templates/planning-semaine.md</td><td>Template planning (distribution + symbiose)</td></tr>
     <tr><td>_templates/SPECS.md</td><td>Limites caracteres, presets photo, gradients</td></tr>
     <tr><td>_config/historique-production.md</td><td>Genere par scan — reflet du disque</td></tr>
     <tr><td>_config/pipeline.md</td><td>Config modes, DA, modeles</td></tr>
-    <tr><td>_config/photo-references.md</td><td>Catalogue photos</td></tr>
-    <tr><td>_recettes/[slug].md</td><td>Fiches produit</td></tr>
+    <tr><td>_config/photo-references.md</td><td>Catalogue photos (descriptions texte)</td></tr>
+    <tr><td>_config/brand-props.md</td><td>Accessoires marque (dial 4/10)</td></tr>
+    <tr><td>_recettes/[slug].md</td><td>Fiches produit (macros, ingredients, formes)</td></tr>
   </table>
   </div>
 
@@ -860,16 +1201,19 @@ S1/lundi/
       <table>
         <tr><th>Terme</th><th>Definition</th></tr>
         <tr><td>Planning</td><td>Document hebdomadaire qui decide piliers, modes et types</td></tr>
+        <tr><td>Brief</td><td>Document d'entree d'un contenu — genere a partir du planning</td></tr>
         <tr><td>Mode</td><td>Methode de creation (full-ia, irl-sublimation, compositing-irl, compositing-ia, template)</td></tr>
         <tr><td>Pilier</td><td>Categorie editoriale (Le Plat, La Cuisine, Les Macros, L'Equipe, Le Quartier)</td></tr>
+        <tr><td>Skill</td><td>Competence invocable par commande (/instagram-producer, /caption-writer...)</td></tr>
+        <tr><td>Agent</td><td>Sous-processus specialise lance par un orchestrateur (input-mapper, story-copywriter...)</td></tr>
+        <tr><td>Orchestrateur</td><td>Skill qui enchaine automatiquement les etapes (instagram-producer, story-producer)</td></tr>
         <tr><td>Symbiose</td><td>Posts et stories se completent, pas de doublon</td></tr>
         <tr><td>Historique</td><td>Fichier genere par scan — reflet du disque</td></tr>
         <tr><td>DA</td><td>Direction Artistique "Dark Food Premium"</td></tr>
         <tr><td>SPECS</td><td>Limites caracteres + presets photo + forces gradient</td></tr>
         <tr><td>Sublimation</td><td>Retouche IA pour aligner avec la DA</td></tr>
         <tr><td>Compositing</td><td>Fusion de 2 images en montage realiste</td></tr>
-        <tr><td>Vitrine</td><td>Famille visuelle : gradient colore, produit lumineux</td></tr>
-        <tr><td>Dark Premium</td><td>Famille visuelle : fond charbon, contenu informatif</td></tr>
+        <tr><td>Direction Caption</td><td>Instructions dans le brief (angle, ton, CTA) pour generer la caption</td></tr>
         <tr><td>Hors planning</td><td>Contenu spontane, liberte totale</td></tr>
       </table>
       </div>
