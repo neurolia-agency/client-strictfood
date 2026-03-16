@@ -16,23 +16,27 @@ L'orchestrateur te passe le chemin d'un brief story (ex: `production/posts-stori
 
 1. **Lire le brief story** : identifier le type de story et le produit référencé (slug)
 1b. **Lire `production/_config/brand-props.md`** : charger le catalogue des accessoires de marque (wrapper, cup, paper-liner, sticker, napkin, pot-dessert) et le dial `BRAND_PRESENCE` (4/10)
-2. **Si type Fiche Produit** (template: `produit-vitrine.html`) :
+2. **Si type Fiche Produit** (template: `vitrine.html` — variante produit) :
    - Lire `production/_recettes/[slug].md`
    - Extraire : nom, catégorie, prix, kcal, protéines, glucides, lipides
-   - Identifier la **macro star** (la macro la plus impressionnante du produit — généralement les protéines)
    - **Résoudre les photos** depuis `production/_config/photo-references.md` :
      - `HERO_IMAGE_PATH` : photo produit (dark-bg ou produits-source, préférer dark-bg pour le détourage)
-   - **Note** : ce template utilise le style Vitrine (fond gradient coloré). L'image hero n'a PAS de filtre sepia — elle doit être vibrante et appétissante.
-2b. **Si type Focus Ingrédient** (template: `focus-ingredient.html`) :
+   - **Assigner preset photo** : analyser le sujet → `PHOTO_PRESET` (ex: `photo-centre`)
+   - **Note** : ce template utilise le style Vitrine (fond gradient coloré). L'image hero n'a PAS de filtre sepia.
+   - **Limites de caractères** (voir `_templates/SPECS.md`) : DISPLAY_NAME max 22 car, PRODUCT_SUBTITLE max 50 car, BADGE_TEXT max 25 car
+2b. **Si type Focus Ingrédient** (template: `vitrine.html` — variante composant) :
    - Résoudre les données depuis le brief : nom ingrédient, artisan, localité, fait clé, produit associé
    - **Résoudre la photo** depuis `production/_config/photo-references.md` :
      - `HERO_IMAGE_PATH` : photo ingrédient en gros plan (chercher dans `produits-source/` ou `contexte/`)
    - Si aucune photo d'ingrédient spécifique n'existe → signaler comme photo manquante + suggérer une photo approchante
-   - **Note** : même style Vitrine que la Fiche Produit — image vibrante, pas de sepia.
-3. **Si type Teaser** :
-   - Lire le brief du post référencé : `production/posts-stories/posts/periode-X/SY/YYYY-MM-DD/00-brief/brief.md`
-   - Extraire : pilier, produit, objectif, date de publication
-   - `BG_IMAGE_PATH` : photo spécifiée dans le brief story
+   - **Assigner preset photo** : analyser le sujet → `PHOTO_PRESET`
+   - **Note** : même style Vitrine — image vibrante, pas de sepia.
+   - **Limites** : DISPLAY_NAME max 22 car, KEY_FACT max 120 car, ARTISAN_NAME max 30 car
+3. **Si type Process** (template: `process.html`) :
+   - Résoudre les 2 photos (avant/après) depuis le brief
+   - Extraire labels (haut/bas), texte séparateur, caption, tagline
+   - **Assigner presets photo** : `PHOTO_PRESET_TOP` et `PHOTO_PRESET_BOTTOM`
+   - **Limites** : LABEL_TOP/BOTTOM max 20 car, CAPTION max 35 car
 4. **Si type Éducatif** :
    - Lire la fiche recette si un produit est mentionné
    - Extraire les données de comparaison si demandé dans le brief
@@ -119,39 +123,69 @@ Quand un brand prop est visible dans la photo sélectionnée, noter la fidélit�
 
 ## Format de sortie
 
-### Fiche Produit (template: `produit-vitrine.html`)
+### Vitrine — variante produit (template: `vitrine.html`)
 
 ```markdown
-# Story [NN] — Data Mapping (Fiche Produit Vitrine)
+# Story [NN] — Data Mapping (Vitrine Produit)
 
 | Placeholder | Valeur |
 |---|---|
-| `{{PRODUCT_NAME}}` | [nom produit] |
-| `{{PRODUCT_SUBTITLE}}` | [accroche courte — 1 ligne punchy] |
+| `{{DISPLAY_NAME}}` | [nom produit — MAX 22 CAR] |
+| `{{PRODUCT_SUBTITLE}}` | [accroche courte — MAX 50 CAR] |
+| `{{PROTEIN}}` | [ex: "53g"] |
+| `{{FAT}}` | [ex: "21,5g"] |
+| `{{CARBS}}` | [ex: "45g"] |
+| `{{KCAL}}` | [ex: "596"] |
+| `{{BADGE_TEXT}}` | [badge — MAX 25 CAR — ex: "SANS HUILE"] |
 | `{{HERO_IMAGE_PATH}}` | [chemin absolu photo produit] |
-| `{{PRICE}}` | [prix — ex: "8,90€"] |
-| `{{MACRO_STAR_VALUE}}` | [chiffre macro star — ex: "53"] |
-| `{{MACRO_STAR_UNIT}}` | [unité — ex: "g protéines"] |
-| `{{BADGE_TEXT}}` | [badge — ex: "SANS HUILE"] |
-| `{{TAGLINE}}` | [tagline bottom] |
+| `{{TAGLINE}}` | [tagline — MAX 40 CAR] |
 | `{{MOOD_CLASS}}` | [classe CSS mood] |
+| `{{PHOTO_PRESET}}` | [photo-centre / photo-droite / etc.] |
+| `{{SHOW_PRODUIT}}` | flex |
+| `{{SHOW_COMPOSANT}}` | none |
+| `{{VARIANT_CLASS}}` | variant-produit |
 ```
 
-### Focus Ingrédient (template: `focus-ingredient.html`)
+### Vitrine — variante composant (template: `vitrine.html`)
 
 ```markdown
-# Story [NN] — Data Mapping (Focus Ingrédient)
+# Story [NN] — Data Mapping (Vitrine Composant)
 
 | Placeholder | Valeur |
 |---|---|
-| `{{INGREDIENT_NAME}}` | [nom ingrédient] |
-| `{{ARTISAN_NAME}}` | [nom fournisseur] |
-| `{{ARTISAN_LOCALITY}}` | [ville] |
+| `{{DISPLAY_NAME}}` | [nom ingrédient — MAX 22 CAR] |
+| `{{KEY_FACT}}` | [fait clé — MAX 120 CAR — accepte <strong>] |
+| `{{ARTISAN_NAME}}` | [nom fournisseur — MAX 30 CAR] |
+| `{{ARTISAN_CITY}}` | [ville] |
+| `{{IN_PRODUCT}}` | [ex: "DANS TOUS NOS BURGERS" — MAX 30 CAR] |
 | `{{HERO_IMAGE_PATH}}` | [chemin absolu photo ingrédient] |
-| `{{KEY_FACT}}` | [fait clé — accepte <strong>] |
-| `{{IN_PRODUCT}}` | [ex: "Dans le STRICT Boeuf"] |
-| `{{TAGLINE}}` | [tagline bottom] |
+| `{{TAGLINE}}` | [tagline — MAX 40 CAR] |
 | `{{MOOD_CLASS}}` | [classe CSS mood] |
+| `{{PHOTO_PRESET}}` | [photo-centre / photo-droite / etc.] |
+| `{{SHOW_PRODUIT}}` | none |
+| `{{SHOW_COMPOSANT}}` | flex |
+| `{{VARIANT_CLASS}}` | variant-composant |
+```
+
+### Process (template: `process.html`)
+
+```markdown
+# Story [NN] — Data Mapping (Process)
+
+| Placeholder | Valeur |
+|---|---|
+| `{{IMAGE_TOP}}` | [chemin absolu photo avant/étape 1] |
+| `{{IMAGE_BOTTOM}}` | [chemin absolu photo après/étape 2] |
+| `{{LABEL_TOP}}` | [ex: "AVANT" — MAX 20 CAR] |
+| `{{LABEL_BOTTOM}}` | [ex: "APRÈS" — MAX 20 CAR] |
+| `{{SHOW_LABELS}}` | [block / none] |
+| `{{SEPARATOR_TEXT}}` | [ex: "→" — MAX 15 CAR] |
+| `{{SHOW_SEPARATOR_TEXT}}` | [inline / none] |
+| `{{CAPTION}}` | [légende — MAX 35 CAR] |
+| `{{TAGLINE}}` | [tagline — MAX 40 CAR] |
+| `{{MOOD_CLASS}}` | [classe CSS mood] |
+| `{{PHOTO_PRESET_TOP}}` | [photo-centre / etc.] |
+| `{{PHOTO_PRESET_BOTTOM}}` | [photo-centre / etc.] |
 ```
 
 ### Fiche Produit legacy (template: `fiche-produit.html` — Dark Premium)

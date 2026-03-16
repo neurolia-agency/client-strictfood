@@ -28,7 +28,16 @@ Avant de commencer, vérifier :
 4. Le script `render-story.js` existe dans `production/posts-stories/stories/_scripts/`
 5. Le catalogue `production/_config/brand-props.md` existe (utilisé par le data mapper pour l'identité physique de marque)
 
+6. Le fichier `production/posts-stories/stories/_templates/SPECS.md` est la **source de vérité** pour les limites de caractères, les presets photo et les forces de gradient
+
 Si le brief n'existe pas → STOP, demander à l'opérateur de créer le brief (template : `production/_templates/brief-story.md`).
+
+## Référence cadres rigides
+
+Chaque template a un cadre fixe avec des positions absolues. **TOUJOURS consulter `_templates/SPECS.md`** avant le fill pour :
+- Les **limites de caractères** par zone (le copywriter et le data mapper DOIVENT les respecter)
+- Les **presets photo** (`photo-centre`, `photo-droite`, `photo-gauche`, `photo-haut`, `photo-large`, `photo-portrait`) — classes CSS sur le `<body>`
+- Les **forces de gradient** (`gradient-light`, `gradient-medium`, `gradient-strong`) — classes CSS sur le `<body>`
 
 ## Étape 0 — Contexte stratégique (avant toute exécution)
 
@@ -53,23 +62,38 @@ Deux familles visuelles coexistent pour varier la dynamique du feed stories :
 | Lieu / Ambiance | `annonce.html` | Oui |
 | **IRL** | `irl-story.html` | **Oui** |
 
-### Templates Vitrine (fond gradient coloré, produit/ingrédient lumineux en hero)
+### Template Vitrine (fond gradient coloré, produit/ingrédient lumineux en hero)
+
+| Type | Template HTML | Variante | Pipeline |
+|------|---------------|----------|----------|
+| Fiche Produit | `vitrine.html` | `produit` | Oui |
+| Focus Ingrédient | `vitrine.html` | `composant` | Oui |
+
+> `vitrine.html` est un template unifié avec 2 variantes. Voir `_templates/SPECS.md` pour les limites de caractères.
+
+### Template Process (split avant/après)
 
 | Type | Template HTML | Pipeline |
 |------|---------------|----------|
-| Fiche Produit | `produit-vitrine.html` | Oui |
-| Focus Ingrédient | `focus-ingredient.html` | Oui |
+| Process | `process.html` | Oui |
 
 ### Formats spéciaux
 
 | Type | Template HTML | Pipeline |
 |------|---------------|----------|
-| **Séquence (N/M)** | Template existant (éducatif, annonce, etc.) | **Oui** |
-| Récap | — (repost) | Semi-manuel (opérateur) |
+| **Séquence (N/M)** | Template existant (éducatif, annonce, vitrine, etc.) | **Oui** |
+| Récap | — (repost) | Semi-manuel |
 
-> **Objectif de variation** : chaque jour devrait contenir au moins 1 story Vitrine et 1 story Dark Premium pour casser la monotonie visuelle. Le brief doit le planifier.
+### Stories visuelles (non-template)
 
-> **Pas de capture terrain.** Les stories nécessitant des photos sont alimentées par la bibliothèque (`photo-references.md`). Si une photo manque, le pipeline génère une entrée dans le document **Demande Photos** — mais la story reste dans le pipeline pour être produite dès que la photo est fournie.
+| Type | Mode | Pipeline |
+|------|------|----------|
+| Produit DA | `irl-sublimation` | Photo → GPT Images 9:16 → overlay via `irl-story.html` |
+| Produit en situation | `compositing-irl` / `compositing-ia` | 2 photos ou photo+IA → 9:16 → overlay |
+| Visuel IA | `full-ia` | Prompt → Gemini 9:16 → overlay |
+
+> **Distribution** : ~50% template, ~20% IRL, ~15% sublimation, ~10% compositing, ~5% full-ia.
+> **Mix quotidien** : au moins 2 modes différents par jour, au moins 1 story non-template par jour.
 
 ## Format des briefs — Multi-story par jour
 
@@ -169,9 +193,15 @@ Pour chaque story automatisable identifiée à l'étape 1 :
 
 2. **Fusionner les textes copywriter** : remplacer les valeurs textuelles dans le data.md par les versions réécrites du copywriter (étape 1b).
 
-3. Après écriture, vérifier :
+3. **Assigner le preset photo et la force de gradient** :
+   - Analyser le sujet de la photo (centré, à droite, portrait, etc.) → choisir parmi `photo-centre`, `photo-droite`, `photo-gauche`, `photo-haut`, `photo-large`, `photo-portrait`
+   - Analyser la luminosité de la photo (sombre, normale, claire) → choisir `gradient-light`, `gradient-medium`, `gradient-strong`
+   - Écrire les classes dans `story-[NN]-data.md` : `PHOTO_PRESET: photo-centre`, `GRADIENT_CLASS: gradient-medium`
+
+4. Après écriture, vérifier :
    - Tous les placeholders du template sont couverts
    - Aucune `⚠️ DONNÉE MANQUANTE`
+   - **Limites de caractères respectées** (consulter `_templates/SPECS.md`)
 
 **Si pas de produit référencé** (Interactif sans données produit, Annonce, Lieu) :
 → Construire le `story-[NN]-data.md` directement depuis le brief **avec les textes réécrits par le copywriter**. Mapper les champs vers les placeholders du template :
@@ -181,8 +211,9 @@ Pour chaque story automatisable identifiée à l'étape 1 :
 | Interactif | Question → `{{QUESTION}}`, Option A → `{{OPTION_A}}`, Emoji A → `{{OPTION_A_EMOJI}}`, Option B → `{{OPTION_B}}`, Emoji B → `{{OPTION_B_EMOJI}}`, Image → `{{BG_IMAGE_PATH}}`, Tagline → `{{TAGLINE}}` |
 | Annonce / Lieu | Badge → `{{BADGE_TEXT}}`, Headline → `{{HEADLINE}}`, Body → `{{BODY_TEXT}}`, CTA → `{{CTA_TEXT}}`, Image → `{{BG_IMAGE_PATH}}`, Tagline → `{{TAGLINE}}` |
 | Éducatif | Titre → `{{TITLE}}`, Chiffre → `{{FACT_NUMBER}}`, Unité → `{{FACT_UNIT}}`, Explication → `{{EXPLANATION}}`, VS données → `{{VS_*}}`, Image fond → `{{BG_IMAGE_PATH}}`, Image produit → `{{HERO_IMAGE_PATH}}` |
-| Fiche Produit (Vitrine) | Produit → `{{PRODUCT_NAME}}`, Accroche → `{{PRODUCT_SUBTITLE}}`, Macro star → `{{MACRO_STAR_VALUE}}` + `{{MACRO_STAR_UNIT}}`, Badge → `{{BADGE_TEXT}}`, Prix → `{{PRICE}}`, Image hero → `{{HERO_IMAGE_PATH}}`, Tagline → `{{TAGLINE}}` |
-| Focus Ingrédient | Ingrédient → `{{INGREDIENT_NAME}}`, Artisan → `{{ARTISAN_NAME}}`, Localité → `{{ARTISAN_LOCALITY}}`, Fait clé → `{{KEY_FACT}}`, Dans le → `{{IN_PRODUCT}}`, Image → `{{HERO_IMAGE_PATH}}`, Tagline → `{{TAGLINE}}` |
+| Vitrine — produit | Nom → `{{DISPLAY_NAME}}`, Subtitle → `{{PRODUCT_SUBTITLE}}`, Protéines → `{{PROTEIN}}`, Lipides → `{{FAT}}`, Glucides → `{{CARBS}}`, Kcal → `{{KCAL}}`, Badge → `{{BADGE_TEXT}}`, Image → `{{HERO_IMAGE_PATH}}`, Tagline → `{{TAGLINE}}`, Variante → `{{SHOW_PRODUIT}}=flex` + `{{SHOW_COMPOSANT}}=none` |
+| Vitrine — composant | Nom → `{{DISPLAY_NAME}}`, Fait clé → `{{KEY_FACT}}`, Artisan → `{{ARTISAN_NAME}}`, Ville → `{{ARTISAN_CITY}}`, Dans le → `{{IN_PRODUCT}}`, Image → `{{HERO_IMAGE_PATH}}`, Tagline → `{{TAGLINE}}`, Variante → `{{SHOW_PRODUIT}}=none` + `{{SHOW_COMPOSANT}}=flex` |
+| Process | Image haut → `{{IMAGE_TOP}}`, Image bas → `{{IMAGE_BOTTOM}}`, Label haut → `{{LABEL_TOP}}`, Label bas → `{{LABEL_BOTTOM}}`, Séparateur → `{{SEPARATOR_TEXT}}`, Caption → `{{CAPTION}}`, Tagline → `{{TAGLINE}}` |
 | IRL | Photo → `{{BG_IMAGE_PATH}}`, Texte overlay → `{{IRL_TEXT}}`, Position texte → `{{IRL_TEXT_POSITION}}`, Filtre → `{{IRL_FILTER}}` |
 | Séquence | Position → `{{SEQUENCE_POSITION}}` (ex: "1/3"), Titre séquence → `{{SEQUENCE_TITLE}}`, + champs du template sous-jacent |
 
@@ -215,11 +246,30 @@ Story 2 — [Titre] ([Type]) [DARK PREMIUM / VITRINE]
 
 **Attendre la réponse de l'opérateur.** Ne PAS continuer sans validation explicite.
 
+### ÉTAPE 2b — Validation pré-render (OBLIGATOIRE)
+
+**Avant de passer au fill**, vérifier pour chaque story :
+
+1. **Limites de caractères** (consulter `_templates/SPECS.md`) :
+   - Compter les caractères de chaque valeur dans `story-[NN]-data.md`
+   - Si une valeur dépasse la limite → STOP : `⚠️ [ZONE] trop long : [N] car, max [M]. Raccourcir.`
+2. **Preset photo** : `PHOTO_PRESET` est défini dans data.md (pas vide)
+3. **Force gradient** : `GRADIENT_CLASS` est défini pour les templates Dark Premium
+4. **Blocs conditionnels** : `SHOW_VS`, `SHOW_CTA`, `SHOW_PRODUIT`, `SHOW_COMPOSANT`, etc. sont cohérents (flex/none)
+
+Si TOUTES les validations passent → continuer au fill. Sinon → corriger et re-valider.
+
 ### ÉTAPE 3 — Template Fill + Render (par story automatisable)
 
 Pour chaque story validée :
 
 1. **Lire le template HTML** : `production/posts-stories/stories/_templates/[type].html`
+   - Fiche Produit / Focus Ingrédient → `vitrine.html`
+   - Process → `process.html`
+   - Éducatif → `educatif.html`
+   - Interactif → `interactif.html`
+   - Annonce / Lieu → `annonce.html`
+   - IRL → `irl-story.html`
 2. **Lire `story-[NN]-data.md`** : récupérer la table placeholder → valeur
 3. **Créer le HTML rempli** :
    - Copier le template
@@ -307,12 +357,13 @@ Les templates utilisent des chemins relatifs (`_base/base.css`, `_base/logo.svg`
 
 ## Règles visuelles
 
-### Deux familles de templates
+### Trois familles visuelles
 
-| Famille | Templates | Fond | Produit/Image | Usage |
-|---------|-----------|------|---------------|-------|
-| **Dark Premium** | éducatif, interactif, annonce, irl | Charbon #141210 | Background dimmed, flou | Information, engagement, coulisses |
-| **Vitrine** | produit-vitrine, focus-ingredient | Gradient coloré chaud | Hero lumineux, sans filtre sepia | Appétit, désir, showcase |
+| Famille | Templates / Modes | Fond | Usage |
+|---------|------------------|------|-------|
+| **Dark Premium** | éducatif, interactif, annonce, irl | Charbon #141210 | Information, engagement, coulisses |
+| **Vitrine** | vitrine.html (produit + composant) | Gradient coloré chaud | Appétit, showcase |
+| **Visuel plein cadre** | irl-sublimation, compositing-irl/ia, full-ia | Image plein cadre | Impact visuel |
 
 ### Sublimation texte (Dark Premium)
 
@@ -320,9 +371,9 @@ Les templates Dark Premium intègrent un système de sublimation du texte valid�
 
 | Classe | Rôle | Où dans le template |
 |--------|------|---------------------|
-| `text-depth` | Ombre multi-couche lisibilité | Headlines (`annonce-headline`, `edu-title`, `question-text`, `teaser-hook`, `calories-number`) |
-| `mark-tape` | Bande inclinée +1.5deg avec bordures accent | Body texte (`annonce-body`, `explanation`, `teaser-subtext`) |
-| `filter: brightness(1.2)` | Boost couleur accent | Éléments `em` dans headlines, `.fact-number`, `.product-name`, `.calories-unit`, `.teaser-date`, `.vs-value.ours` |
+| `text-depth` | Ombre multi-couche lisibilité | Headlines (`annonce-headline`, `edu-title`, `question-text`, `calories-number`) |
+| `mark-tape` | Bande inclinée +1.5deg avec bordures accent | Body texte (`annonce-body`, `explanation`) |
+| `filter: brightness(1.2)` | Boost couleur accent | Éléments `em` dans headlines, `.fact-number`, `.product-name`, `.calories-unit`, `.vs-value.ours` |
 | `filter: brightness(1.15)` | Boost badges | `.annonce-badge` |
 
 **Ne PAS supprimer ces classes** lors du template fill. Elles font partie intégrante de l'identité visuelle.
@@ -341,7 +392,6 @@ Les templates Vitrine ont leur propre système visuel :
 Les images de fond doivent être **lisibles**, pas noyées dans le noir. Les templates utilisent :
 - `base.css` `.bg-image` : `opacity: var(--img-opacity)` (0.60 defaut) + `brightness(1.15)` — image contextuelle, zone haute droite
 - `annonce.html` `.annonce-bg` : `opacity: 0.35` + `brightness(1.1)` — full-screen dimmed
-- `teaser-post.html` `.teaser-bg` : `opacity: 0.4` + `blur(6px)` — ambiance floue
 
 Si lors du fill une image apparaît trop sombre, **ajuster l'opacity dans le CSS inline du HTML rempli** (ex: `style="opacity: 0.6"`).
 

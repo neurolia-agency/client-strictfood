@@ -201,6 +201,8 @@ Pour les idées spontanées, actions ponctuelles, actualités :
 | Template brief post | `_templates/brief-v3.md` |
 | Template brief story | `_templates/brief-story.md` |
 | Guide opérateur | `_templates/guide-operateur.md` |
+| **Specs templates** | `posts-stories/stories/_templates/SPECS.md` (limites caractères, presets, gradients) |
+| **Playbook** | `PLAYBOOK.md` (guide pas à pas par intention) |
 | Photos fichiers | `../public/images/photos-references/` |
 | Tokens CSS | `../app/globals.css` |
 
@@ -235,8 +237,8 @@ Les stories utilisent les mêmes 5 modes que les posts. Le mode est décidé au 
 
 | Type | Template HTML | Famille |
 |------|---------------|---------|
-| Fiche Produit | `produit-vitrine.html` | Vitrine |
-| Focus Ingrédient | `focus-ingredient.html` | Vitrine |
+| Fiche Produit | `vitrine.html` (variante produit) | Vitrine |
+| Focus Ingrédient | `vitrine.html` (variante composant) | Vitrine |
 | Interactif | `interactif.html` | Dark Premium |
 | Éducatif | `educatif.html` | Dark Premium |
 | Annonce | `annonce.html` | Dark Premium |
@@ -293,6 +295,7 @@ brief-story.md
 | Orchestration | Skill `story-producer` | — | `production/.claude/skills/story-producer/` |
 | Copywriting | Agent `story-copywriter` | Sonnet | `production/posts-stories/stories/.claude/agents/story-copywriter.md` |
 | Data Mapping | Agent `story-data-mapper` | Haiku | `production/posts-stories/stories/.claude/agents/story-data-mapper.md` |
-| Templates HTML | 8 templates paramétrés + demande-photos | — | `production/posts-stories/stories/_templates/` |
+| Templates HTML | 6 templates rigides (vitrine, educatif, interactif, annonce, irl-story, process) + legacy | — | `production/posts-stories/stories/_templates/` |
+| Spécifications templates | Limites caractères, presets photo, gradient | — | `production/posts-stories/stories/_templates/SPECS.md` |
 | CSS partagé | Base + logo | — | `production/posts-stories/stories/_templates/_base/` |
 | Rendu | Script Puppeteer | — | `production/posts-stories/stories/_scripts/render-story.js` |

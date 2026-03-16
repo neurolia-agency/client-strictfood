@@ -29,7 +29,7 @@
 
 ### Contenu
 
-#### Si type = Fiche Produit (template: `produit-vitrine.html`)
+#### Si type = Fiche Produit (template: `vitrine.html — variante produit`)
 
 **Produit** : [NOM PRODUIT]
 Slug recette : `[slug-kebab-case]`
@@ -47,7 +47,7 @@ Image hero : `[chemin vers photo produit détourée sur fond sombre — OBLIGATO
 
 > **Note** : Ce template utilise le style Vitrine (fond gradient coloré, produit lumineux en hero). Pas de photo de fond contextuelle — le produit EST le visuel.
 
-#### Si type = Focus Ingrédient (template: `focus-ingredient.html`)
+#### Si type = Focus Ingrédient (template: `vitrine.html — variante composant`)
 
 **Ingrédient** : [NOM INGRÉDIENT — ex: "Parmesan protéiné"]
 Artisan : `[nom fournisseur — ex: "Myfitcheese"]`
@@ -188,8 +188,8 @@ Texte overlay recommandé : `[texte]`
 
 | Type | Template | Famille |
 |------|----------|---------|
-| Fiche Produit | `produit-vitrine.html` | **Vitrine** |
-| Focus Ingrédient | `focus-ingredient.html` | **Vitrine** |
+| Fiche Produit | `vitrine.html — variante produit` | **Vitrine** |
+| Focus Ingrédient | `vitrine.html — variante composant` | **Vitrine** |
 | Éducatif | `educatif.html` | Dark Premium |
 | Interactif | `interactif.html` | Dark Premium |
 | Annonce / Lieu | `annonce.html` | Dark Premium |
