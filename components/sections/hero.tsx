@@ -137,11 +137,13 @@ export default function Hero() {
         animate="visible"
       >
         <Image
-          src="/images/hero-v2.webp"
+          src="/images/Hero-v2.webp"
           alt="Burger StrictFood, pain brioche doré, viande grillée, ingrédients frais"
           fill
           priority
-          className="object-cover"
+          quality={100}
+          unoptimized
+          className="object-cover object-[calc(50%-80px)_center]"
           sizes="100vw"
         />
       </motion.div>

@@ -455,7 +455,7 @@ export default function LaPromesse() {
             variants={fadeUp}
           >
             <Image
-              src="/images/falafel.webp"
+              src="/images/photos-references/dark-bg/burger-falafel-dark-bg.jpg"
               alt="Falafel StrictFood cuit à chaleur pulsée, croustillant doré sans huile"
               width={1000}
               height={1000}
@@ -507,7 +507,7 @@ export default function LaPromesse() {
               className="relative overflow-visible flex items-center justify-center"
             >
               <Image
-                src="/images/eclate.webp"
+                src="/images/photos-references/dark-bg/burger-black-poulet-roti-eclate-dark-bg.jpg"
                 alt="STRICT Poulet StrictFood vue éclatée avec macros affichées"
                 width={1000}
                 height={1000}
