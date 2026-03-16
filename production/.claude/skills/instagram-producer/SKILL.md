@@ -15,17 +15,17 @@ Tu es l'orchestrateur du pipeline de production de visuels Instagram StrictFood.
 ## Input
 
 L'opérateur fournit :
-- Un **chemin complet** (ex: `production/posts-stories/posts/periode-1/S3/2026-03-24/`)
-- OU une **date seule** (ex: `2026-03-24`)
+- Un **chemin complet** (ex: `production/posts-stories/posts/periode-1/S3/24-03-2026/`)
+- OU une **date seule** (ex: `24-03-2026`)
 
-**Résolution du chemin** : si seule une date est fournie, chercher le dossier existant via `production/posts-stories/posts/**/YYYY-MM-DD/`. Si aucun dossier trouvé, demander à l'opérateur dans quelle période/semaine le créer.
+**Résolution du chemin** : si seule une date est fournie, chercher le dossier existant via `production/posts-stories/posts/**/DD-MM-YYYY/`. Si aucun dossier trouvé, demander à l'opérateur dans quelle période/semaine le créer.
 
 ## Exécution — RESPECTER CET ORDRE EXACT
 
 ### ÉTAPE 0 — Vérification, historique et routage
 
 1. **Résoudre le chemin** → déterminer `[dossier-post]`
-2. Lire `[dossier-post]/00-brief/brief.md`
+2. Lire `[dossier-post]/brief/brief.md`
 3. Vérifier que le brief existe et contient au minimum : Pilier, Format, Objectif, Produit, **Mode**, Direction Caption
 4. **Régénérer et lire l'historique** : scanner les dossiers de production puis lire `production/_config/historique-production.md`
    - Régénérer l'historique par scan des dossiers (voir procédure dans le fichier)
@@ -54,14 +54,14 @@ Brief → Art Direction → Input Mapping → 🔒 CHECKPOINT → Prompt → Gem
 2. Lire la config DA `production/_config/pipeline.md`
 3. **APPELER LE SKILL** : `social-media-art-director`
    - Contexte : brief + recette + config DA
-   - Output : `[dossier-post]/01-art-direction/direction.md`
+   - Output : `[dossier-post]/production/art-direction.md`
 
 ### A2 — Input Mapping (agent obligatoire)
 
 1. **SPAWNER L'AGENT** : `input-mapper`
    - Prompt : "Exécute le mapping pour [dossier-post]"
-   - L'agent lit `direction.md`, consulte `_config/photo-references.md` et `_recettes/`
-   - Output : `[dossier-post]/00-input/input.md`
+   - L'agent lit `art-direction.md`, consulte `_config/photo-references.md` et `_recettes/`
+   - Output : `[dossier-post]/production/input.md`
 
 ### 🔒 CHECKPOINT A
 
@@ -70,8 +70,8 @@ Afficher le mapping à l'opérateur. Attendre validation.
 ### A3 — Prompt Engineering (skill obligatoire)
 
 1. **APPELER LE SKILL** : `image-prompt-engineer` (Mode B)
-   - Contexte : direction.md + input.md
-   - Output : `[dossier-post]/02-prompt/prompt.md`
+   - Contexte : art-direction.md + input.md
+   - Output : `[dossier-post]/production/prompt.md`
 
 ### A4 — Génération image
 
@@ -82,7 +82,7 @@ uv run production/.claude/skills/nano-banana-pro/scripts/generate_image.py \
   --input-image "[photo ref]" --resolution 4K --api-key "$GEMINI_API_KEY"
 ```
 
-Output dans `[dossier-post]/03-output/`.
+Output dans `[dossier-post]/final/`.
 
 ---
 
@@ -125,7 +125,7 @@ Corrections prévues : [alignement couleurs DA, contraste, fond, etc.]
 2. Exécuter via GPT Images (gpt-image-1) en mode edit :
    - Input : photo source
    - Prompt : instructions sublimation
-   - Output dans `[dossier-post]/03-output/`
+   - Output dans `[dossier-post]/final/`
 
 ---
 
@@ -156,7 +156,7 @@ Afficher les deux photos et l'intention de compositing. Attendre validation.
    - **Bords** : intégration naturelle, pas de découpe visible
    - **Couleur** : unifier la température et la saturation (DA Dark Food Premium)
 2. Exécuter via GPT Images en mode edit avec les 2 images
-   - Output dans `[dossier-post]/03-output/`
+   - Output dans `[dossier-post]/final/`
 
 ---
 
@@ -173,14 +173,14 @@ Brief → Art Direction scène → Input Mapping → 🔒 CHECKPOINT → Prompt 
 1. Lire le champ `Scène imaginée` dans le brief
 2. **APPELER LE SKILL** : `social-media-art-director`
    - Contexte : brief + recette + description de la scène souhaitée
-   - Output : `[dossier-post]/01-art-direction/direction.md`
+   - Output : `[dossier-post]/production/art-direction.md`
    - Note : la direction porte sur la SCÈNE, pas sur le produit (le produit est la photo réelle)
 
 ### D2 — Input Mapping
 
 1. **SPAWNER L'AGENT** : `input-mapper`
    - Résout la photo produit depuis le brief (champ `Photo produit`) ou via `photo-references.md`
-   - Output : `[dossier-post]/00-input/input.md`
+   - Output : `[dossier-post]/production/input.md`
 
 ### 🔒 CHECKPOINT D
 
@@ -191,12 +191,12 @@ Afficher la direction scène + la photo produit sélectionnée. Attendre validat
 1. **APPELER LE SKILL** : `image-prompt-engineer` (Mode B)
    - Contexte spécial : la direction décrit la scène, l'input fournit la photo produit à intégrer
    - Le prompt doit instruire Gemini d'intégrer le produit réel dans la scène imaginée
-   - Output : `[dossier-post]/02-prompt/prompt.md`
+   - Output : `[dossier-post]/production/prompt.md`
 
 ### D4 — Génération image
 
 Commande Gemini avec `--input-image` pointant vers la photo produit réelle.
-Output dans `[dossier-post]/03-output/`.
+Output dans `[dossier-post]/final/`.
 
 ---
 
@@ -212,7 +212,7 @@ Brief → Data Mapping → 🔒 CHECKPOINT → Template Fill → Puppeteer → C
 
 1. Lire les données par slide depuis le brief (section `Données slides`)
 2. Résoudre les données produit depuis `_recettes/[slug].md` si nécessaire
-3. Écrire `[dossier-post]/00-input/input.md` avec le mapping placeholder → valeur pour chaque slide
+3. Écrire `[dossier-post]/production/input.md` avec le mapping placeholder → valeur pour chaque slide
 
 ### 🔒 CHECKPOINT E
 
@@ -231,7 +231,7 @@ Pour chaque slide :
    ```
    Note : le script render fonctionne pour tout format, pas seulement les stories.
 
-Output : `[dossier-post]/03-output/slide-01.png`, `slide-02.png`, etc.
+Output : `[dossier-post]/final/slide-01.png`, `slide-02.png`, etc.
 
 ---
 
@@ -241,7 +241,7 @@ Output : `[dossier-post]/03-output/slide-01.png`, `slide-02.png`, etc.
 
 1. **APPELER LE SKILL** : `caption-writer`
    - Contexte : le brief (Direction Caption) + l'image produite (vision)
-   - Output : `[dossier-post]/04-caption/caption.md`
+   - Output : `[dossier-post]/production/caption.md`
 
 2. Afficher la caption à l'opérateur :
    ```
@@ -260,15 +260,16 @@ Output : `[dossier-post]/03-output/slide-01.png`, `slide-02.png`, etc.
 
 ```
 [dossier-post]/
-├── 00-brief/brief.md              ← Opérateur (brief v3)
-├── 00-input/input.md              ← input-mapper OU data mapping (selon mode)
-├── 01-art-direction/direction.md  ← Art Director (modes full-ia et compositing-ia uniquement)
-├── 02-prompt/prompt.md            ← Prompt Engineer (modes full-ia et compositing-ia uniquement)
-├── 03-output/*.png                ← Image(s) produite(s)
-└── 04-caption/caption.md          ← Caption Writer (tous les modes)
+├── brief/brief.md                 ← Opérateur (brief v3)
+├── production/input.md            ← input-mapper OU data mapping (selon mode)
+├── production/art-direction.md    ← Art Director (modes full-ia et compositing-ia uniquement)
+├── production/prompt.md           ← Prompt Engineer (modes full-ia et compositing-ia uniquement)
+├── production/caption.md          ← Caption Writer (tous les modes)
+├── brouillons/                    ← Itérations intermédiaires
+└── final/*.png                    ← Image(s) produite(s)
 ```
 
-Note : les sous-dossiers 01 et 02 n'existent pas pour les modes `irl-sublimation`, `compositing-irl` et `template`.
+Note : les fichiers art-direction.md et prompt.md n'existent pas dans production/ pour les modes `irl-sublimation`, `compositing-irl` et `template`.
 
 ## Séparation des responsabilités
 

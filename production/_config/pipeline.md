@@ -34,9 +34,9 @@ Le pipeline supporte 5 modes de création. Le mode est spécifié dans le brief 
 |-------|--------|
 | Agent | `production/.claude/agents/input-mapper.md` |
 | Modèle | Haiku (tâche déterministe) |
-| Déclenchement | Après validation de `01-art-direction/direction.md` (modes `full-ia` et `compositing-ia`) |
-| Input | Chemin du dossier post (ex: `production/posts-stories/posts/periode-1/S3/2026-03-24/`) |
-| Output | `[dossier-post]/00-input/input.md` |
+| Déclenchement | Après validation de `production/art-direction.md` (modes `full-ia` et `compositing-ia`) |
+| Input | Chemin du dossier post (ex: `production/posts-stories/posts/periode-1/S3/24-03-2026/`) |
+| Output | `[dossier-post]/production/input.md` |
 | Consulte | `_config/photo-references.md` + `_recettes/[slug].md` |
 
 ## Caption Writer
@@ -46,7 +46,7 @@ Le pipeline supporte 5 modes de création. Le mode est spécifié dans le brief 
 | Skill | `production/.claude/skills/caption-writer/SKILL.md` |
 | Déclenchement | APRÈS la génération de l'image (tous les modes) |
 | Input | Brief (Direction Caption) + Image produite (vision) + 15 dernières captions |
-| Output | `[dossier-post]/04-caption/caption.md` |
+| Output | `[dossier-post]/production/caption.md` |
 
 ## DA Référence
 

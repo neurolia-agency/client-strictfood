@@ -5,7 +5,7 @@
 ## Commande principale
 
 ```
-/instagram-producer YYYY-MM-DD
+/instagram-producer DD-MM-YYYY
 ```
 
 L'orchestrateur détecte le **mode** dans le brief et route vers le bon sous-pipeline. Toujours préférer l'orchestrateur aux commandes manuelles.
@@ -48,8 +48,8 @@ L'orchestrateur détecte le **mode** dans le brief et route vers le bon sous-pip
 ### Production hors planning
 
 Pour les contenus spontanés :
-- Posts → `posts-stories/posts/hors-planning/YYYY-MM-DD/`
-- Stories → `posts-stories/stories/hors-planning/YYYY-MM-DD/`
+- Posts → `posts-stories/posts/hors-planning/DD-MM-YYYY/`
+- Stories → `posts-stories/stories/hors-planning/DD-MM-YYYY/`
 - Liberté totale, tout agent invocable directement, pas de contrainte de distribution
 
 ## Caption après image
@@ -77,7 +77,7 @@ La caption est générée par `/caption-writer` **APRÈS** l'image. Le brief con
 
 ## Conventions
 
-- **Dates** : format ISO `YYYY-MM-DD` pour les dossiers post
+- **Dates** : format `DD-MM-YYYY` pour les dossiers post
 - **Recettes** : slug kebab-case (`strict-boeuf.md`, `strict-max-poulet.md`)
 - **Photos** : mapping centralisé dans `_config/photo-references.md`
 - **Le brief ne contient PAS la caption** — seulement la Direction Caption
@@ -90,13 +90,14 @@ La caption est générée par `/caption-writer` **APRÈS** l'image. Le brief con
 ## Structure des posts (v3)
 
 ```
-posts-stories/posts/periode-[N]/S[X]/YYYY-MM-DD/
-├── 00-brief/brief.md              ← Opérateur (brief v3)
-├── 00-input/input.md              ← input-mapper / data mapping
-├── 01-art-direction/direction.md  ← (full-ia, compositing-ia uniquement)
-├── 02-prompt/prompt.md            ← (full-ia, compositing-ia uniquement)
-├── 03-output/*.png                ← Image(s) produite(s)
-└── 04-caption/caption.md          ← /caption-writer (TOUS modes)
+posts-stories/posts/periode-[N]/S[X]/DD-MM-YYYY/
+├── brief/brief.md                 ← Opérateur (brief v3)
+├── production/input.md            ← input-mapper / data mapping
+├── production/art-direction.md    ← (full-ia, compositing-ia uniquement)
+├── production/prompt.md           ← (full-ia, compositing-ia uniquement)
+├── production/caption.md          ← /caption-writer (TOUS modes)
+├── brouillons/                    ← Itérations intermédiaires
+└── final/*.png                    ← Image(s) produite(s)
 ```
 
 ## Brief v2 legacy
@@ -139,7 +140,7 @@ Les stories utilisent les mêmes 5 modes que les posts. Le mode est décidé au 
 ### Conventions stories
 
 - **Dossiers** : `posts-stories/stories/S[X]/[jour]/`
-- **Brief** : `brief-story.md` (template : `_templates/brief-story.md`)
+- **Brief** : `brief/brief-story.md` (template : `_templates/brief-story.md`)
 - **Templates** : `_templates/[type].html` — NE JAMAIS modifier, uniquement copier et remplir
 - **Rendu** : `_scripts/render-story.js` — Puppeteer, 1080×1920, PNG
 - **Chemins absolus** : obligatoires dans le HTML rempli

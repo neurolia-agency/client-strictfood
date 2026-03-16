@@ -1,48 +1,77 @@
-# Brief Stories — S2 Jeudi (2026-03-19)
+# Brief Stories — S2 Jeudi (2026-03-20)
+
+> **Pilier du jour** : La Cuisine (Process & Artisans) — Pas de post
+> **Objectif stratégique** : Journée artisan + coulisses. Présenter Boucherie Labourde (3e artisan, après Myfitcheese et Pains du Soleil en S1). Story IRL du rush pour l'authenticité.
+> **Persona cible** : Actifs pressés (qualité sourcing) + Locavores (artisan local)
+> **Ref stratégie** : Phase 1 §3.2 — "Présenter au moins 2 des 3 artisans partenaires"
 
 ---
 
-## Story 1 — Teaser post S2-02
+## Story 1 — Focus Ingrédient : Viande Boucherie Labourde
 
 | Champ | Valeur |
 |-------|--------|
-| Type | Teaser |
-| Highlight | — |
-| Qui produit | Pipeline (Joris) |
-| Template | `teaser-post.html` |
+| Type | Focus Ingrédient |
+| Mode | `template` |
+| Highlight | NOS ARTISANS |
+| Qui produit | Pipeline |
+| Template | `vitrine.html` (variante composant) |
+| Mood | grenat |
+| Image | hero |
+| Brand props | aucun |
 
 ### Objectif
 
-Teaser le post infographie macros qui compare le STRICT Boeuf a un burger classique. Premier post du pilier "Les Macros" — installer l'angle nutrition.
+Présenter le 3e artisan partenaire : Boucherie Labourde, le boucher local qui fournit la viande de tous les burgers bœuf. Compléter le triptyque artisanal (Myfitcheese S1, Pains du Soleil S1, Labourde S2).
 
 ### Contenu
 
-Post tease : `production/posts-stories/posts/periode-1/S2/2026-03-19/` (STRICT Boeuf vs burger classique — carrousel macros)
-Hook : `Un burger a <em>596 kcal</em> et 53g de prot ?`
-Date de publication : `Aujourd'hui`
-Sous-texte : `Les chiffres parlent. Carrousel comparatif sur le feed cet apres-midi.`
-Image de fond : `aucune`
+**Ingrédient** : Steak haché artisanal
+Artisan : `Boucherie Labourde`
+Localité : `Perpignan`
+Fait clé : `Viande fraîche, jamais surgelée. Haché sur place.`
+Dans le : `STRICT Bœuf`
+Tagline : `Le cheat meal qui n'en est pas un`
+
+Image hero : `public/contenu-instagram/2025-10-03_15-57-14_UTC_1.jpg`
 
 ---
 
-## Story 2 — Coulisse preparation sauces
+## Story 2 — IRL : Rush du midi
 
 | Champ | Valeur |
 |-------|--------|
-| Type | Coulisse |
+| Type | IRL |
+| Mode | `irl` |
 | Highlight | COULISSES |
-| Qui produit | Romain/Dorian |
-| Template | — (capture terrain) |
+| Qui produit | Romain/Dorian (photo) + Pipeline (overlay) |
+| Template | `irl-story.html` |
+| Mood | cuivre |
+| Image | hero |
+| Brand props | aucun |
 
 ### Objectif
 
-Montrer que les sauces sont faites maison. Renforcer le pilier "La Cuisine" et l'authenticite artisanale.
+Montrer l'énergie du service. La cuisine en action, les burgers qui s'enchaînent. L'authenticité du rush crédibilise le volume et la maîtrise.
 
 ### Contenu
 
-> **Ce type n'est PAS automatisable.** Capture terrain par Romain/Dorian.
+Photo : `[À FOURNIR par Romain — rush midi, cuisine en action, assemblage rapide]`
+Texte overlay : `Rush du midi`
+Position texte : bas
+Filtre : léger
 
-Description du contenu attendu : `Video rapide de la preparation de la sauce poivron maison — mixer, assaisonnement, texture finale`
-Moment : `matin (avant service)`
-Duree estimee : `video 10-15s`
-Stickers Instagram recommandes : `—`
+> **Fallback** : si pas de photo fraîche, utiliser `public/contenu-instagram/2025-10-03_15-57-14_UTC_3.jpg` (assemblage burger mains gantées)
+
+---
+
+## Contraintes
+
+- DA : Story 1 Vitrine (Focus Ingrédient) + Story 2 IRL (overlay minimal)
+- Mood : grenat pour le Focus Ingrédient (viande = intensité), cuivre pour l'IRL
+- Le Focus Ingrédient utilise une photo de viande crue — la photo doit rester appétissante
+- L'IRL du rush doit capturer le mouvement et l'énergie
+
+## Étape suivante
+
+> Exécuter `/story-producer S2 jeudi` pour produire ces stories.

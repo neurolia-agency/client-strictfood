@@ -1,55 +1,80 @@
-# Brief Stories — S2 Mardi (2026-03-17)
+# Brief Stories — S2 Mardi (2026-03-18)
+
+> **Pilier du jour** : La Cuisine (Process & Artisans) — Pas de post
+> **Objectif stratégique** : Journée éducation + coulisses. Expliquer la cuisson chaleur pulsée (USP technique) et montrer la cuisine en action. Première story IRL de la période.
+> **Persona cible** : Sportifs (cuisson sans huile = macros) + Actifs pressés (authenticité)
+> **Ref stratégie** : Phase 1 §1.4 — "preuve sociale complémentaire" + §3.2 — "crédibiliser le fait maison"
 
 ---
 
-## Story 1 — Teaser post S2-01
+## Story 1 — Éducatif : Cuisson chaleur pulsée
 
 | Champ | Valeur |
 |-------|--------|
-| Type | Teaser |
+| Type | Éducatif |
+| Mode | `template` |
 | Highlight | — |
-| Qui produit | Pipeline (Joris) |
-| Template | `teaser-post.html` |
+| Qui produit | Pipeline |
+| Template | `educatif.html` |
+| Mood | feuille |
+| Image | visible |
+| Brand props | aucun |
 
 ### Objectif
 
-Annoncer le post STRICT Poulet, premier hero shot non-boeuf du feed. Creer la curiosite autour d'un nouveau produit mis en avant.
+Expliquer le USP technique de StrictFood : la cuisson chaleur pulsée sans huile. Matérialiser l'argument "zéro huile" avec des chiffres. Les sportifs comprennent l'impact sur les lipides.
 
 ### Contenu
 
-Post tease : `production/posts-stories/posts/periode-1/S2/2026-03-17/` (STRICT Poulet — hero shot Food Porn)
-Hook : `Aujourd'hui, le <em>poulet</em> prend la lumiere`
-Date de publication : `Aujourd'hui`
-Sous-texte : `Un nouveau hero sur le feed. Rendez-vous cet apres-midi.`
-Image de fond : `aucune`
+Titre : `Cuisson sans <em>huile</em> ?`
+Chiffre clé : `0` + `grammes d'huile de cuisson`
+Explication : `On cuit tout à la <strong>chaleur pulsée</strong>. Résultat : une croûte Maillard parfaite, sans une seule goutte d'huile. Moins de lipides, même goût.`
+
+Comparaison VS : oui
+- Strict Food's : `0g` `d'huile`
+- Classique : `Friteuse classique` `15-30g` `d'huile par portion`
+
+Image de fond : `public/images/photos-references/contexte/cuisine/air-fryers-pro.jpeg`
+Alignement photo : `—`
+Image produit : `aucune`
 
 ---
 
-## Story 2 — Fiche Produit STRICT Poulet
+## Story 2 — IRL : Coulisses préparation matin
 
 | Champ | Valeur |
 |-------|--------|
-| Type | Fiche Produit |
-| Highlight | LA CARTE |
-| Qui produit | Pipeline (Joris) |
-| Template | `fiche-produit.html` |
+| Type | IRL |
+| Mode | `irl` |
+| Highlight | COULISSES |
+| Qui produit | Romain/Dorian (photo) + Pipeline (overlay) |
+| Template | `irl-story.html` |
+| Mood | cuivre |
+| Image | hero |
+| Brand props | aucun |
 
 ### Objectif
 
-Presenter le STRICT Poulet avec ses macros et benefices. Completer le teaser du matin en donnant les chiffres concrets.
+Première story IRL de la période. Montrer la cuisine avant le service : préparation des ingrédients, mise en place. L'authenticité crée la confiance.
 
 ### Contenu
 
-**Produit** : STRICT Poulet
-Slug recette : `strict-poulet`
+Photo : `[À FOURNIR par Romain — coulisses cuisine matin, préparation]`
+Texte overlay : `Avant le service`
+Position texte : bas
+Filtre : léger
 
-> Le story-data-mapper resout automatiquement les donnees nutritionnelles depuis `_recettes/strict-poulet.md`.
-> Ne PAS copier les macros ici — c'est le role de l'agent.
+> **Fallback** : si pas de photo fraîche, utiliser `public/contenu-instagram/2025-10-03_15-57-14_UTC_2.jpg` (découpe viande, plongée)
 
-Tagline : `53g de proteines, zero huile`
-Benefices a mettre en avant :
-1. Cuisson chaleur pulsee (zero huile)
-2. Poulet roti en lamelles, croute Maillard
-3. Parmesan Myfitcheese artisanal
+---
 
-Image de fond : `public/images/photos-references/dark-bg/burger-poulet-roti-dark-bg.jpg`
+## Contraintes
+
+- DA : Story 1 Dark Premium (Éducatif) + Story 2 IRL (overlay minimal)
+- Mood : feuille pour l'éducatif (technique/nutrition), cuivre pour l'IRL
+- L'éducatif met en avant les air fryers — montrer la technologie, pas juste les chiffres
+- L'IRL doit être authentique — pas de mise en scène excessive
+
+## Étape suivante
+
+> Exécuter `/story-producer S2 mardi` pour produire ces stories.

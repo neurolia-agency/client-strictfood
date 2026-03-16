@@ -1,46 +1,122 @@
-# Brief Stories — S2 Lundi (2026-03-23)
+# Brief Stories — S2 Lundi (2026-03-17)
+
+> **Pilier du jour** : Le Plat (Food Porn Premium) — Post S2-05 publié aujourd'hui (STRICT Poulet, full-ia)
+> **Objectif stratégique** : Accompagner le hero shot poulet SANS répéter la fiche produit (déjà faite en S1 vendredi). Angle éducatif protéines + introduction du concept MAX via sondage + sublimation poulet pour un visuel fort.
+> **Persona cible** : Sportifs (macros poulet) + Actifs pressés (découverte gamme)
+> **Ref stratégie** : Phase 1 §1.4 — "page vivante et cohérente avec le positionnement premium"
 
 ---
 
-## Story 1 — Teaser post S2-04
+## Rappel S1 — Ne pas dupliquer
 
-| Champ | Valeur |
-|-------|--------|
-| Type | Teaser |
-| Highlight | — |
-| Qui produit | Pipeline (Joris) |
-| Template | `teaser-post.html` |
-
-### Objectif
-
-Teaser le post STRICT Wrap Poulet. Rebondir sur le sondage Burger vs Wrap du mercredi et la fiche produit de dimanche pour creer un effet de serie.
-
-### Contenu
-
-Post tease : `production/posts-stories/posts/periode-1/S2/2026-03-23/` (STRICT Wrap Poulet — hero shot)
-Hook : `Le <em>wrap</em> qui a tout d'un grand`
-Date de publication : `Aujourd'hui`
-Sous-texte : `60g de prot, 8.99EUR. Le post arrive sur le feed.`
-Image de fond : `aucune`
+| Contenu | Fait en S1 | Jour |
+|---------|-----------|------|
+| Fiche Produit STRICT Poulet | ✅ | Vendredi |
+| Interactif "Wrap ou Burger ?" | ✅ | Jeudi |
+| Interactif "Bœuf ou Poulet ?" | ✅ | Mercredi |
 
 ---
 
-## Story 2 — Recap best-of semaine
+## Story 1 — Éducatif : 53g de protéines dans un burger ?
 
 | Champ | Valeur |
 |-------|--------|
-| Type | Recap |
+| Type | Éducatif |
+| Mode | `template` |
 | Highlight | — |
-| Qui produit | Joris (manuel) |
-| Template | — (repost du post le plus performant) |
+| Qui produit | Pipeline |
+| Template | `educatif.html` |
+| Mood | feuille |
+| Image | visible |
+| Brand props | aucun |
 
 ### Objectif
 
-Capitaliser sur le post le plus performant de S2 en le remettant en story. Clore la semaine en beaute.
+Approfondir l'angle protéines du STRICT Poulet — le post montre le food porn, la story éduque sur les chiffres. Premier éducatif de la période (S1 n'en avait aucun). La comparaison avec un shaker de whey parle directement aux sportifs.
 
 ### Contenu
 
-> **Ce type est semi-manuel.** Joris selectionne le post le plus performant (meilleur engagement) parmi S2-01 a S2-04 et le reposte en story.
+Titre : `<em>53g</em> de protéines dans un burger ?`
+Chiffre clé : `53` + `g de protéines`
+Explication : `Le STRICT Poulet, c'est l'équivalent de <strong>2 shakers de whey</strong> dans un burger à <strong>596 kcal</strong>. Poulet rôti, zéro huile, parmesan artisanal.`
 
-Action : repost en story du post avec le meilleur engagement de la semaine.
-Texte overlay recommande : `Le post de la semaine`
+Comparaison VS : oui
+- Strict Food's : `53` `g protéines`
+- Classique : `Shaker whey` `25-30` `g protéines`
+
+Image de fond : `public/images/photos-references/dark-bg/burger-poulet-roti-dark-bg.jpg`
+Alignement photo : `—`
+Image produit : `aucune`
+
+---
+
+## Story 2 — Interactif VS : Simple ou MAX ?
+
+| Champ | Valeur |
+|-------|--------|
+| Type | Interactif |
+| Mode | `template` |
+| Highlight | — |
+| Qui produit | Pipeline |
+| Template | `interactif.html` |
+| Mood | cuivre |
+| Image | visible |
+| Brand props | aucun |
+
+### Objectif
+
+Introduire le concept de gamme MAX (double steak) via un sondage. Axe de comparaison jamais utilisé en S1 (les précédents : viande, format, dessert). Préparer le terrain pour la fiche produit MAX Bœuf de mercredi.
+
+### Contenu
+
+Format sticker : Sondage 2 choix
+Question : `Simple ou MAX ?`
+Option A : `Simple`
+Option A Emoji : `👌`
+Option B : `MAX`
+Option B Emoji : `💪`
+
+**Mode visuel** : VS
+Produit A : `STRICT Bœuf` — image : `public/images/photos-references/produits-source/burgers-black/strict-boeuf.png`
+Produit B : `STRICT MAX Bœuf` — image : `public/images/photos-references/produits-source/strict-max-boeuf.png`
+
+Tagline : `Le cheat meal qui n'en est pas un`
+
+---
+
+## Story 3 — Produit DA : STRICT Poulet sublimé
+
+| Champ | Valeur |
+|-------|--------|
+| Type | Produit DA |
+| Mode | `irl-sublimation` |
+| Highlight | — |
+| Qui produit | Pipeline |
+| Template | `irl-story.html` (overlay post-sublimation) |
+| Mood | cuivre |
+| Image | hero |
+| Brand props | aucun |
+
+### Objectif
+
+Clore la journée avec un visuel fort du STRICT Poulet en plein cadre 9:16. La sublimation renforce l'ambiance DA sombre. Impact visuel maximal — première story non-template de la période.
+
+### Contenu
+
+Photo source : `public/images/photos-references/dark-bg/burger-poulet-roti-dark-bg.jpg`
+Direction sublimation : `Renforcer les ombres DA, accentuer les tons cuivrés sur le poulet grillé, fond charbon plus profond, grain film subtil`
+Texte overlay : `—`
+
+---
+
+## Contraintes
+
+- DA : Story 1 Dark Premium (Éducatif) + Story 2 Dark Premium (Interactif) + Story 3 Sublimation
+- Mood : feuille pour l'éducatif (nutrition), cuivre pour l'interactif et la sublimation
+- L'éducatif compare aux shakers de whey — référence directe pour les sportifs
+- Le sondage VS montre visuellement la différence de taille Simple vs MAX
+- La sublimation doit rester réaliste — pas de HDR ou de surexposition
+
+## Étape suivante
+
+> Exécuter `/story-producer S2 lundi` pour produire ces stories.

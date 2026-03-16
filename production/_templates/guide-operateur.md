@@ -60,10 +60,10 @@ Copier le template `_templates/planning-semaine.md` dans `posts-stories/posts/pe
 ### 👤 TOI — Créer le dossier et le brief
 
 ```bash
-mkdir -p production/posts-stories/posts/periode-[N]/S[X]/YYYY-MM-DD/00-brief
+mkdir -p production/posts-stories/posts/periode-[N]/S[X]/DD-MM-YYYY/brief
 ```
 
-Copier le template `_templates/brief-v3.md` dans `00-brief/brief.md` et remplir :
+Copier le template `_templates/brief-v3.md` dans `brief/brief.md` et remplir :
 
 - **Pilier** : Le Plat / La Cuisine / Les Macros / L'Équipe / Le Quartier
 - **Mode** : full-ia / irl-sublimation / compositing-irl / compositing-ia / template
@@ -97,7 +97,7 @@ Copier le template `_templates/brief-v3.md` dans `00-brief/brief.md` et remplir 
 ### 👤 TOI — Un seul prompt
 
 ```
-/instagram-producer YYYY-MM-DD
+/instagram-producer DD-MM-YYYY
 ```
 
 Le pipeline détecte le mode et route automatiquement. Tu n'as rien à choisir.
@@ -200,7 +200,7 @@ Réécris la caption — [ce qui ne va pas]
 /story-producer S[X]            # Toute la semaine
 ```
 
-Le brief story est dans `posts-stories/stories/S[X]/[jour]/brief-story.md`.
+Le brief story est dans `posts-stories/stories/S[X]/[jour]/brief/brief-story.md`.
 Le pipeline gère automatiquement : copywriting → data mapping → template fill → render PNG.
 
 **Nouveaux types v3** :

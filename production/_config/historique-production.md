@@ -4,8 +4,8 @@
 > Il reflète exactement ce qui existe sur le disque. Rien de plus, rien de moins.
 >
 > **Source de vérité** : les fichiers dans `posts-stories/posts/` et `posts-stories/stories/`.
-> - Un post **existe** = son dossier contient un PNG dans `03-output/`
-> - Une story **existe** = son dossier contient un `story-NN.png`
+> - Un post **existe** = son dossier contient un PNG dans `final/`
+> - Une story **existe** = son dossier `story-NN/final/` contient un PNG
 > - Un fichier supprimé = supprimé de l'historique au prochain scan
 >
 > **Quand régénérer** :
@@ -19,8 +19,8 @@
 
 ## Posts produits (planning)
 
-> Scanné depuis `posts-stories/posts/*/S*/YYYY-MM-DD/`
-> Un post est comptabilisé si `03-output/` contient au moins un PNG.
+> Scanné depuis `posts-stories/posts/*/S*/DD-MM-YYYY/`
+> Un post est comptabilisé si `final/` contient au moins un PNG.
 
 | Semaine | Date | Pilier | Mode | Produit | Angle / Sujet |
 |---------|------|--------|------|---------|---------------|
@@ -28,8 +28,8 @@
 
 ## Posts produits (hors-planning)
 
-> Scanné depuis `posts-stories/posts/hors-planning/YYYY-MM-DD/`
-> Même critère : `03-output/` contient au moins un PNG.
+> Scanné depuis `posts-stories/posts/hors-planning/DD-MM-YYYY/`
+> Même critère : `final/` contient au moins un PNG.
 
 | Date | Pilier | Mode | Produit | Angle / Sujet |
 |------|--------|------|---------|---------------|
@@ -38,7 +38,7 @@
 ## Stories produites (planning)
 
 > Scanné depuis `posts-stories/stories/S*/[jour]/`
-> Une story est comptabilisée si un `story-NN.png` existe.
+> Une story est comptabilisée si `story-NN/final/` contient un PNG.
 
 ### S1
 
@@ -48,8 +48,8 @@
 
 ## Stories produites (hors-planning)
 
-> Scanné depuis `posts-stories/stories/hors-planning/YYYY-MM-DD/`
-> Même critère : un `story-NN.png` existe.
+> Scanné depuis `posts-stories/stories/hors-planning/DD-MM-YYYY/`
+> Même critère : `story-NN/final/` contient un PNG.
 
 | Date | # | Type | Mode | Produit / Sujet |
 |------|---|------|------|-----------------|
@@ -111,9 +111,9 @@ Pour régénérer ce fichier, l'agent doit :
 ### 1. Scanner les posts planning
 
 ```
-Pour chaque dossier dans posts-stories/posts/*/S*/YYYY-MM-DD/ :
-  1. Vérifier que 03-output/ contient au moins un .png
-  2. Si oui → lire 00-brief/brief.md et extraire :
+Pour chaque dossier dans posts-stories/posts/*/S*/DD-MM-YYYY/ :
+  1. Vérifier que final/ contient au moins un .png
+  2. Si oui → lire brief/brief.md et extraire :
      - Semaine (depuis le chemin : S1, S2...)
      - Date (depuis le nom du dossier)
      - Pilier (champ "Pilier" dans la table Stratégie du brief)
@@ -126,9 +126,9 @@ Pour chaque dossier dans posts-stories/posts/*/S*/YYYY-MM-DD/ :
 ### 2. Scanner les posts hors-planning
 
 ```
-Pour chaque dossier dans posts-stories/posts/hors-planning/YYYY-MM-DD/ :
-  1. Vérifier que 03-output/ contient au moins un .png (ou tout .png à la racine du dossier)
-  2. Si oui → lire 00-brief/brief.md si existe, sinon déduire depuis le contenu
+Pour chaque dossier dans posts-stories/posts/hors-planning/DD-MM-YYYY/ :
+  1. Vérifier que final/ contient au moins un .png (ou tout .png à la racine du dossier)
+  2. Si oui → lire brief/brief.md si existe, sinon déduire depuis le contenu
      - Date (depuis le nom du dossier)
      - Pilier, Mode, Produit, Angle (depuis le brief ou à défaut depuis le nom des fichiers)
   3. Ajouter une ligne dans la table "Posts produits (hors-planning)"
@@ -138,8 +138,8 @@ Pour chaque dossier dans posts-stories/posts/hors-planning/YYYY-MM-DD/ :
 
 ```
 Pour chaque dossier dans posts-stories/stories/S*/[jour]/ :
-  1. Lister tous les story-NN.png
-  2. Pour chaque PNG trouvé → lire story-NN-data.md (si existe) et brief-story.md
+  1. Lister tous les story-NN/final/ contenant un PNG
+  2. Pour chaque PNG trouvé → lire story-NN/production/data.md (si existe) et brief/brief-story.md
      - Extraire : numéro, type, mode, produit/sujet
   3. Ajouter dans la table stories de la semaine correspondante
 ```
@@ -147,9 +147,9 @@ Pour chaque dossier dans posts-stories/stories/S*/[jour]/ :
 ### 4. Scanner les stories hors-planning
 
 ```
-Pour chaque dossier dans posts-stories/stories/hors-planning/YYYY-MM-DD/ :
-  1. Lister tous les story-NN.png (ou tout .png)
-  2. Pour chaque PNG → lire story-NN-data.md ou brief si existe
+Pour chaque dossier dans posts-stories/stories/hors-planning/DD-MM-YYYY/ :
+  1. Lister tous les story-NN/final/ contenant un PNG (ou tout .png)
+  2. Pour chaque PNG → lire story-NN/production/data.md ou brief si existe
      - Extraire : date, numéro, type, mode, produit/sujet
   3. Ajouter dans la table "Stories produites (hors-planning)"
 ```

@@ -23,7 +23,7 @@ L'opérateur fournit :
 
 Avant de commencer, vérifier :
 1. Le dossier `production/posts-stories/stories/[semaine]/[jour]/` existe
-2. Un fichier `brief-story.md` existe dans ce dossier
+2. Un fichier `brief/brief-story.md` existe dans ce dossier
 3. Les templates HTML existent dans `production/posts-stories/stories/_templates/`
 4. Le script `render-story.js` existe dans `production/posts-stories/stories/_scripts/`
 5. Le catalogue `production/_config/brand-props.md` existe (utilisé par le data mapper pour l'identité physique de marque)
@@ -129,8 +129,8 @@ Chaque `brief-story.md` contient **plusieurs stories numérotées** pour un mêm
 Le pipeline itère sur chaque `## Story N` et les traite séquentiellement. Les fichiers de sortie sont numérotés :
 
 ```
-story-01-data.md / story-01.html / story-01.png  (Story 1)
-story-02-data.md / story-02.html / story-02.png  (Story 2)
+story-01/production/data.md / story-01/production/story.html / story-01/final/story.png  (Story 1)
+story-02/production/data.md / story-02/production/story.html / story-02/final/story.png  (Story 2)
 ```
 
 Les stories Recap (semi-manuelles) sont listées dans le récap mais ne produisent aucun fichier.
@@ -139,7 +139,7 @@ Les stories Recap (semi-manuelles) sont listées dans le récap mais ne produise
 
 ### ÉTAPE 1 — Lecture et parsing du brief
 
-1. Lire `production/posts-stories/stories/[semaine]/[jour]/brief-story.md`
+1. Lire `production/posts-stories/stories/[semaine]/[jour]/brief/brief-story.md`
 2. Parser chaque section `## Story N` et extraire :
    - **Numéro** (N)
    - **Type** : Fiche Produit / Interactif / Éducatif / Annonce / Lieu / Ambiance / Focus Ingrédient / IRL / Produit DA / Produit en situation / Visuel IA / Séquence / Récap
@@ -181,7 +181,7 @@ Pour chaque story automatisable :
    ```
    Agent: story-copywriter
    subagent_type: (utiliser le fichier production/posts-stories/stories/.claude/agents/story-copywriter.md)
-   Prompt: "Réécris les textes de la Story [N] dans production/posts-stories/stories/[semaine]/[jour]/brief-story.md.
+   Prompt: "Réécris les textes de la Story [N] dans production/posts-stories/stories/[semaine]/[jour]/brief/brief-story.md.
    Contexte jour : Pilier=[pilier], Persona=[persona], Objectif=[objectif stratégique]."
    model: sonnet
    ```
@@ -202,17 +202,17 @@ Pour chaque story automatisable identifiée à l'étape 1 :
    ```
    Agent: story-data-mapper
    subagent_type: (utiliser le fichier production/posts-stories/stories/.claude/agents/story-data-mapper.md)
-   Prompt: "Résous les données pour la Story [N] dans production/posts-stories/stories/[semaine]/[jour]/brief-story.md. Brand props: [valeur du champ Brand props du brief — 'auto' si absent]."
+   Prompt: "Résous les données pour la Story [N] dans production/posts-stories/stories/[semaine]/[jour]/brief/brief-story.md. Brand props: [valeur du champ Brand props du brief — 'auto' si absent]."
    model: haiku
    ```
-   L'agent lit le brief, consulte `_recettes/[slug].md`, `_config/photo-references.md` et `_config/brand-props.md`, et écrit `story-[NN]-data.md` dans le même dossier (ex: `story-01-data.md`).
+   L'agent lit le brief, consulte `_recettes/[slug].md`, `_config/photo-references.md` et `_config/brand-props.md`, et écrit `story-[NN]/production/data.md` dans le même dossier (ex: `story-01/production/data.md`).
 
 2. **Fusionner les textes copywriter** : remplacer les valeurs textuelles dans le data.md par les versions réécrites du copywriter (étape 1b).
 
 3. **Assigner le preset photo et la force de gradient** :
    - Analyser le sujet de la photo (centré, à droite, portrait, etc.) → choisir parmi `photo-centre`, `photo-droite`, `photo-gauche`, `photo-haut`, `photo-large`, `photo-portrait`
    - Analyser la luminosité de la photo (sombre, normale, claire) → choisir `gradient-light`, `gradient-medium`, `gradient-strong`
-   - Écrire les classes dans `story-[NN]-data.md` : `PHOTO_PRESET: photo-centre`, `GRADIENT_CLASS: gradient-medium`
+   - Écrire les classes dans `story-[NN]/production/data.md` : `PHOTO_PRESET: photo-centre`, `GRADIENT_CLASS: gradient-medium`
 
 4. Après écriture, vérifier :
    - Tous les placeholders du template sont couverts
@@ -220,7 +220,7 @@ Pour chaque story automatisable identifiée à l'étape 1 :
    - **Limites de caractères respectées** (consulter `_templates/SPECS.md`)
 
 **Si pas de produit référencé** (Interactif sans données produit, Annonce, Lieu) :
-→ Construire le `story-[NN]-data.md` directement depuis le brief **avec les textes réécrits par le copywriter**. Mapper les champs vers les placeholders du template :
+→ Construire le `story-[NN]/production/data.md` directement depuis le brief **avec les textes réécrits par le copywriter**. Mapper les champs vers les placeholders du template :
 
 | Type | Champs brief → Placeholders |
 |------|------------------------------|
@@ -267,7 +267,7 @@ Story 2 — [Titre] ([Type]) [DARK PREMIUM / VITRINE]
 **Avant de passer au fill**, vérifier pour chaque story :
 
 1. **Limites de caractères** (consulter `_templates/SPECS.md`) :
-   - Compter les caractères de chaque valeur dans `story-[NN]-data.md`
+   - Compter les caractères de chaque valeur dans `story-[NN]/production/data.md`
    - Si une valeur dépasse la limite → STOP : `⚠️ [ZONE] trop long : [N] car, max [M]. Raccourcir.`
 2. **Preset photo** : `PHOTO_PRESET` est défini dans data.md (pas vide)
 3. **Force gradient** : `GRADIENT_CLASS` est défini pour les templates Dark Premium
@@ -286,20 +286,20 @@ Pour chaque story validée :
    - Interactif → `interactif.html`
    - Annonce / Lieu → `annonce.html`
    - IRL → `irl-story.html`
-2. **Lire `story-[NN]-data.md`** : récupérer la table placeholder → valeur
+2. **Lire `story-[NN]/production/data.md`** : récupérer la table placeholder → valeur
 3. **Créer le HTML rempli** :
    - Copier le template
    - Remplacer `{{MOOD_CLASS}}` et `{{IMG_CLASS}}` dans le `<body>` par les classes CSS résolues à l'étape 1 (ex: `"mood-grenat"` et `"img-hero"`, ou `""` pour les defaults cuivre/visible)
    - Remplacer chaque `{{PLACEHOLDER}}` par sa valeur depuis data.md
    - Pour les blocs conditionnels (ex: `{{SHOW_VS}}`, `{{SHOW_BG}}`, `{{SHOW_CTA}}`, `{{SHOW_HERO}}`), mettre `flex` ou `block` si actif, `none` si inactif
    - **Résoudre les chemins relatifs** : les `src` vers `_base/base.css`, `_base/logo.svg`, et les images doivent être des **chemins absolus** (préfixe du chemin complet sur le disque) pour que Puppeteer puisse les charger en `file://`
-   - Écrire le fichier dans `production/posts-stories/stories/[semaine]/[jour]/story-[NN].html`
+   - Écrire le fichier dans `production/posts-stories/stories/[semaine]/[jour]/story-[NN]/production/story.html`
 
 4. **Rendre en PNG** :
    ```bash
    node production/posts-stories/stories/_scripts/render-story.js \
-     --input production/posts-stories/stories/[semaine]/[jour]/story-[NN].html \
-     --output production/posts-stories/stories/[semaine]/[jour]/story-[NN].png
+     --input production/posts-stories/stories/[semaine]/[jour]/story-[NN]/production/story.html \
+     --output production/posts-stories/stories/[semaine]/[jour]/story-[NN]/final/story.png
    ```
 
 5. **Contrôle anti-vide bas** : après chaque render, **ouvrir le PNG** et vérifier visuellement le tiers inférieur (zone en dessous de ~1280px). Si cette zone est majoritairement noire/charbon sans texte, image, ou élément visuel (hors tagline bottom) :
@@ -312,9 +312,9 @@ Pour chaque story validée :
    ✅ Stories générées — [semaine]/[jour]
 
    Story 01 (Fiche Produit) [VITRINE] :
-     📄 story-01.html  📸 story-01.png
+     📄 story-01/production/story.html  📸 story-01/final/story.png
    Story 02 (IRL) [DARK PREMIUM] :
-     📄 story-02.html  📸 story-02.png
+     📄 story-02/production/story.html  📸 story-02/final/story.png
 
    📋 Semi-manuel :
      Story 03 (Recap) — repost meilleur post de la semaine
@@ -338,7 +338,7 @@ En fin de traitement d'une période (batch semaine), si des photos manquantes on
 Si l'opérateur demande une semaine entière (`S1`) :
 
 1. Lister tous les jours dans `production/posts-stories/stories/S1/`
-2. Pour chaque jour contenant un `brief-story.md` :
+2. Pour chaque jour contenant un `brief/brief-story.md` :
    - Exécuter les étapes 1→3 (toutes les stories du jour)
    - Collecter les résultats
 3. Afficher un récap final groupé :
@@ -347,10 +347,10 @@ Si l'opérateur demande une semaine entière (`S1`) :
 
    | Jour | Story | Type | Style | Status | Output |
    |------|-------|------|-------|--------|--------|
-   | lundi | #1 | Fiche Produit | Vitrine | ✅ Généré | story-01.png |
-   | lundi | #2 | IRL | Dark | ✅ Généré | story-02.png |
-   | mardi | #1 | Focus Ingrédient | Vitrine | ✅ Généré | story-01.png |
-   | mardi | #2 | Éducatif | Dark | ✅ Généré | story-02.png |
+   | lundi | #1 | Fiche Produit | Vitrine | ✅ Généré | story-01/final/story.png |
+   | lundi | #2 | IRL | Dark | ✅ Généré | story-02/final/story.png |
+   | mardi | #1 | Focus Ingrédient | Vitrine | ✅ Généré | story-01/final/story.png |
+   | mardi | #2 | Éducatif | Dark | ✅ Généré | story-02/final/story.png |
    | ... | ... | ... | ... | ... | ... |
 
    Total : X stories générées / Y semi-manuelles
@@ -433,13 +433,15 @@ Ce pattern est disponible dans `base.css` (classes `.product-hero` et `.zone-ble
 
 ```
 production/posts-stories/stories/S1/lundi/
-  brief-story.md            ← Brief opérateur (toutes les stories du jour)
-  story-01-data.md          ← Données Story 1 (généré par pipeline ou data-mapper)
-  story-01.html             ← Template rempli Story 1
-  story-01.png              ← Rendu final Story 1 (1080×1920)
-  story-02-data.md          ← Données Story 2
-  story-02.html             ← Template rempli Story 2
-  story-02.png              ← Rendu final Story 2
+  brief/brief-story.md              ← Brief opérateur (toutes les stories du jour)
+  story-01/production/data.md       ← Données Story 1 (généré par pipeline ou data-mapper)
+  story-01/production/story.html    ← Template rempli Story 1
+  story-01/brouillons/              ← Itérations Story 1
+  story-01/final/story.png          ← Rendu final Story 1 (1080×1920)
+  story-02/production/data.md       ← Données Story 2
+  story-02/production/story.html    ← Template rempli Story 2
+  story-02/brouillons/              ← Itérations Story 2
+  story-02/final/story.png          ← Rendu final Story 2
 ```
 
 ## Correction photo — Alignement horizontal et lisibilité
@@ -450,7 +452,7 @@ Lors du template fill (étape 3), après le remplacement des placeholders :
 
 Si `{{PHOTO_ALIGN}}` ≠ `"—"` dans le data mapping :
 
-1. **Vérifier `{{PHOTO_TRANSFORM}}`** dans `story-[NN]-data.md`
+1. **Vérifier `{{PHOTO_TRANSFORM}}`** dans `story-[NN]/production/data.md`
 2. **Si valeur connue** (ex: `scale(1.30) translateX(40px) rotate(-0.7deg)`) → appliquer directement sur le `style` de l'`<img>` de fond : `transform: [valeur];`
 3. **Si `none`** → rendre une première fois, évaluer visuellement, puis itérer par incréments de 0.3-0.5deg (négatif = anti-horaire) jusqu'à horizontalité. Compenser chaque rotation avec +0.05 de scale.
 4. **Une fois la correction trouvée** → la reporter dans la table de corrections connues du `story-data-mapper.md` pour les prochaines utilisations.

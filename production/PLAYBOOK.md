@@ -84,7 +84,7 @@ Produis le post du [jour] [date].
 ou directement :
 
 ```
-/instagram-producer 2026-03-24
+/instagram-producer 24-03-2026
 ```
 
 **2.2** Claude lit le planning, crée le brief v3 avec le mode déjà défini, et lance le pipeline adapté. Tu n'as rien à décider sur le mode — c'est fait.
@@ -155,7 +155,7 @@ Un client a posté un avis incroyable, je veux faire un post "Le Quartier" avec 
 Il fait beau, Romain est devant la devanture, on compose un portrait pour Instagram.
 ```
 
-Le pipeline crée le dossier dans `posts-stories/posts/hors-planning/YYYY-MM-DD/` et exécute normalement. Le post est tagué hors-planning et n'affecte pas les compteurs de distribution du planning.
+Le pipeline crée le dossier dans `posts-stories/posts/hors-planning/DD-MM-YYYY/` et exécute normalement. Le post est tagué hors-planning et n'affecte pas les compteurs de distribution du planning.
 
 ### Story hors planning
 
@@ -167,7 +167,7 @@ J'ai une photo de l'arrivage de ce matin, fais-moi une story IRL avec.
 On a un événement ce soir, crée une story annonce vite.
 ```
 
-Le pipeline crée dans `posts-stories/stories/hors-planning/YYYY-MM-DD/`.
+Le pipeline crée dans `posts-stories/stories/hors-planning/DD-MM-YYYY/`.
 
 ### Invoquer un agent directement
 
@@ -332,7 +332,7 @@ Chaque type de story peut utiliser différents modes. Le planning choisit la com
 
 | Commande | Ce qu'elle fait |
 |----------|----------------|
-| `/instagram-producer YYYY-MM-DD` | Produit un post (mode lu depuis le brief) |
+| `/instagram-producer DD-MM-YYYY` | Produit un post (mode lu depuis le brief) |
 | `/story-producer S[X] [jour]` | Produit les stories d'un jour |
 | `/story-producer S[X]` | Produit toutes les stories de la semaine |
 
@@ -343,15 +343,15 @@ production/posts-stories/
 ├── posts/
 │   ├── periode-1/
 │   │   ├── planning-S1.md
-│   │   ├── S1/2026-03-10/...
-│   │   └── S2/2026-03-17/...
+│   │   ├── S1/10-03-2026/...
+│   │   └── S2/17-03-2026/...
 │   └── hors-planning/             ← Posts spontanés
-│       └── YYYY-MM-DD/...
+│       └── DD-MM-YYYY/...
 └── stories/
     ├── S1/lundi/...
     ├── S2/mardi/...
     └── hors-planning/             ← Stories spontanées
-        └── YYYY-MM-DD/...
+        └── DD-MM-YYYY/...
 ```
 
 ---

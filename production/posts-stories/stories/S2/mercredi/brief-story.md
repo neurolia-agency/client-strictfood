@@ -1,63 +1,114 @@
-# Brief Stories — S2 Mercredi (2026-03-18)
+# Brief Stories — S2 Mercredi (2026-03-19)
+
+> **Pilier du jour** : Les Macros (Nutrition & Éducation) — Post S2-06 publié aujourd'hui (Comparaison macros, template carrousel)
+> **Objectif stratégique** : Journée nutrition. Accompagner le post infographique avec un éducatif complémentaire et présenter le STRICT MAX Bœuf (nouveau produit carte). Le compositing-irl montre le produit en contexte réel.
+> **Persona cible** : Sportifs (macros) + Actifs pressés (découverte MAX)
+> **Ref stratégie** : Phase 1 §3.1 — "Installer le Dark Food Premium comme signature reconnaissable"
 
 ---
 
-## Story 1 — Ambiance salle restaurant
+## Story 1 — Éducatif : Notre burger vs burger classique
 
 | Champ | Valeur |
 |-------|--------|
-| Type | Ambiance |
-| Highlight | NOUS TROUVER |
-| Qui produit | Pipeline (Joris) |
-| Template | `annonce.html` |
-
-### Objectif
-
-Montrer l'interieur du restaurant pour ancrer l'univers physique de StrictFood. Donner envie de venir sur place.
-
-### Contenu
-
-> **Etape prealable — Verification bibliotheque :**
->
-> | Resultat | Action |
-> |----------|--------|
-> | Photo trouvee ET pertinente | Reclasser en Pipeline → template `annonce.html` |
->
-> **Reclasse en Pipeline** — Photo disponible (rotation S2 = salle1.jpeg)
-
-| Champ | Valeur |
-|-------|--------|
-| Template | `annonce.html` |
-| Image de fond | `public/images/photos-references/contexte/salle-restaurant/salle1.jpeg` |
-
-Badge : `L'AMBIANCE`
-Headline : `Bienvenue chez <em>StrictFood's</em>`
-Body : `Un cadre <strong>premium</strong> pour un fast-good qui n'a rien de fast-food. Viens decouvrir l'ambiance.`
-CTA : `aucun`
-Tagline : `Le cheat meal qui n'en est pas un`
-
----
-
-## Story 2 — Sondage Burger vs Wrap
-
-| Champ | Valeur |
-|-------|--------|
-| Type | Interactif |
+| Type | Éducatif |
+| Mode | `template` |
 | Highlight | — |
-| Qui produit | Pipeline (Joris) |
-| Template | `interactif.html` |
+| Qui produit | Pipeline |
+| Template | `educatif.html` |
+| Mood | feuille |
+| Image | visible |
+| Brand props | aucun |
 
 ### Objectif
 
-Engager la communaute sur le format produit. Tester l'interet pour les wraps vs burgers. Preparer le terrain pour le post Wrap en fin de semaine.
+Companion du post macros. Résumer la comparaison en un seul chiffre impactant. Les abonnés qui voient la story en premier iront checker le post pour le détail.
 
 ### Contenu
 
-Format sticker : Sondage 2 choix
-Question : `Plutot <em>burger</em> ou <em>wrap</em> ?`
-Option A : `Burger`
-Option A Emoji : `🍔`
-Option B : `Wrap`
-Option B Emoji : `🌯`
-Image de fond : `aucune`
+Titre : `596 kcal, <em>53g</em> de protéines`
+Chiffre clé : `53` + `g de protéines`
+Explication : `Notre STRICT Bœuf : 596 kcal, 53g de prot. Un burger classique : ~900 kcal, 28g de prot. <strong>Même plaisir, pas les mêmes chiffres.</strong>`
+
+Comparaison VS : oui
+- Strict Food's : `53` `g protéines`
+- Classique : `Burger fast-food` `28` `g protéines`
+
+Image de fond : `public/images/photos-references/dark-bg/burger-simple-boeuf-dark-bg.png`
+Alignement photo : `—`
+Image produit : `aucune`
+
+---
+
+## Story 2 — Fiche Produit : STRICT MAX Bœuf
+
+| Champ | Valeur |
+|-------|--------|
+| Type | Fiche Produit |
+| Mode | `template` |
+| Highlight | LA CARTE |
+| Qui produit | Pipeline |
+| Template | `vitrine.html` (variante produit) |
+| Mood | grenat |
+| Image | hero |
+| Brand props | aucun |
+
+### Objectif
+
+Introduire le STRICT MAX Bœuf — le double steak. Nouveau produit dans le highlight LA CARTE. Le mood grenat (intense) marque la différence avec le STRICT Bœuf standard.
+
+### Contenu
+
+**Produit** : STRICT MAX Bœuf
+Slug recette : `strict-max-boeuf`
+
+> Le story-data-mapper résout automatiquement les données nutritionnelles depuis `_recettes/strict-max-boeuf.md`.
+
+Accroche : `Double steak, double ambition`
+Macro star : `[résolu par agent]`
+Badge : `DOUBLE STEAK`
+Prix : `[résolu par agent]`
 Tagline : `Le cheat meal qui n'en est pas un`
+
+Image hero : `public/images/photos-references/produits-source/strict-max-boeuf.png`
+
+---
+
+## Story 3 — Produit en situation : MAX Bœuf sur comptoir
+
+| Champ | Valeur |
+|-------|--------|
+| Type | Produit en situation |
+| Mode | `compositing-irl` |
+| Highlight | — |
+| Qui produit | Pipeline |
+| Template | `irl-story.html` (overlay post-compositing) |
+| Mood | grenat |
+| Image | hero |
+| Brand props | aucun |
+
+### Objectif
+
+Montrer le MAX Bœuf dans son environnement réel — posé sur le comptoir du restaurant. Le compositing IRL crée une immersion. Le spectateur se projette dans le lieu avec le produit.
+
+### Contenu
+
+**compositing-irl** :
+Photo produit : `public/images/photos-references/produits-source/strict-max-boeuf.png`
+Photo lieu : `public/images/photos-references/contexte/salle-restaurant/accueil.jpeg`
+Intention compositing : `Le MAX Bœuf posé sur le comptoir d'accueil, éclairage naturel chaud du restaurant, léger flou en arrière-plan`
+
+Texte overlay : `—`
+
+---
+
+## Contraintes
+
+- DA : Story 1 Dark Premium + Story 2 Vitrine + Story 3 Compositing
+- Mood : feuille (éducatif) + grenat (MAX = intensité, passion)
+- Le compositing doit rester réaliste — le burger doit paraître posé naturellement
+- Le MAX Bœuf est plus impressionnant visuellement que le standard — exploiter la taille
+
+## Étape suivante
+
+> Exécuter `/story-producer S2 mercredi` pour produire ces stories.

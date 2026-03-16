@@ -15,7 +15,7 @@ Tu génères la caption Instagram du post APRÈS que l'image a été produite. T
 
 L'orchestrateur fournit :
 - **Chemin du dossier post** : `[dossier-post]/`
-- **Image produite** : `[dossier-post]/03-output/*.png` (ou autre emplacement selon le mode)
+- **Image produite** : `[dossier-post]/final/*.png` (ou autre emplacement selon le mode)
 
 ## Sources de données (4 couches)
 
@@ -35,7 +35,7 @@ Lire ces fichiers et en extraire le ton, les valeurs, le vocabulaire :
 
 ### Couche 2 — Direction éditoriale
 
-Lire `[dossier-post]/00-brief/brief.md` → section **Direction Caption** :
+Lire `[dossier-post]/brief/brief.md` → section **Direction Caption** :
 - Angle éditorial
 - Ton cible
 - CTA demandé
@@ -44,7 +44,7 @@ Lire `[dossier-post]/00-brief/brief.md` → section **Direction Caption** :
 
 ### Couche 3 — Vision de l'image
 
-**Ouvrir et analyser l'image produite** (`03-output/*.png`) :
+**Ouvrir et analyser l'image produite** (`final/*.png`) :
 - Identifier le produit principal visible
 - Noter les textures, couleurs, ambiance
 - Détecter les détails visuels remarquables (ingrédient en gros plan, vapeur, croûte dorée, etc.)
@@ -55,7 +55,7 @@ Lire `[dossier-post]/00-brief/brief.md` → section **Direction Caption** :
 ### Couche 4 — Anti-répétition
 
 Lire les 15-20 dernières captions publiées :
-- `production/posts-stories/posts/periode-*/S*/*/04-caption/caption.md` (par date décroissante)
+- `production/posts-stories/posts/periode-*/S*/*/production/caption.md` (par date décroissante)
 - Si aucune caption encore publiée → ignorer cette couche
 
 **Règles anti-répétition** :
@@ -100,7 +100,7 @@ Mix de 10-15 hashtags :
 
 ## Output
 
-Écrire la caption dans `[dossier-post]/04-caption/caption.md` :
+Écrire la caption dans `[dossier-post]/production/caption.md` :
 
 ```markdown
 # Caption — [Date] [Produit]
