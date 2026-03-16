@@ -1,0 +1,1965 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stratégie Neurolia × StrictFood | Plan 13 mois</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap">
+  <style>
+    /* ======================================
+       RESET
+       ====================================== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* ======================================
+       DESIGN TOKENS
+       ====================================== */
+    :root {
+      --bg-primary: #050810;
+      --bg-card: #111827;
+      --bg-elevated: #0A0F1A;
+      --bg-contrast: #1A1F2E;
+      --accent: #C45C3B;
+      --accent-hover: #E07856;
+      --accent-pale: #F0A088;
+      --accent-glow: rgba(196, 92, 59, 0.3);
+      --accent-build: #0FB8C4;
+      --accent-build-glow: rgba(15, 184, 196, 0.2);
+      --phase3: #8B5CF6;
+      --phase3-glow: rgba(139, 92, 246, 0.2);
+      --text-primary: #F5F5F5;
+      --text-secondary: #D4D4D4;
+      --text-muted: #A3A3A3;
+      --text-subtle: #737373;
+      --border: rgba(255, 255, 255, 0.08);
+    }
+
+    /* ======================================
+       BASE
+       ====================================== */
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 72px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      background-color: var(--bg-primary);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Satoshi', sans-serif;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ======================================
+       UTILITIES
+       ====================================== */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section {
+      padding: 100px 0;
+    }
+
+    /* Scroll animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ======================================
+       NAVIGATION
+       ====================================== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(5, 8, 16, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-logo {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+
+    .nav-logo span {
+      color: var(--text-subtle);
+      font-weight: 500;
+      margin: 0 6px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 6px;
+      transition: color 0.25s, background 0.25s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .nav-links a.active {
+      color: var(--accent-pale);
+    }
+
+    .nav-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-build), var(--accent), var(--phase3));
+      width: 0%;
+      transition: width 0.15s linear;
+    }
+
+    /* Mobile nav */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .nav-toggle svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .nav-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background: rgba(5, 8, 16, 0.95);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 16px 24px;
+        border-bottom: 1px solid var(--border);
+        gap: 4px;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 10px 14px;
+        font-size: 14px;
+      }
+    }
+
+    /* ======================================
+       HERO
+       ====================================== */
+    .hero {
+      padding: 140px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(196, 92, 59, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-label {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 900;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-muted) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 56px;
+      line-height: 1.6;
+    }
+
+    /* Phase summary cards */
+    .phase-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .phase-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 24px;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .phase-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .phase-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+    }
+
+    .phase-card[data-phase="1"]::before { background: var(--accent-build); }
+    .phase-card[data-phase="2"]::before { background: var(--accent); }
+    .phase-card[data-phase="3"]::before { background: var(--phase3); }
+
+    .phase-card:hover[data-phase="1"] { border-color: rgba(15, 184, 196, 0.3); }
+    .phase-card:hover[data-phase="2"] { border-color: rgba(196, 92, 59, 0.3); }
+    .phase-card:hover[data-phase="3"] { border-color: rgba(139, 92, 246, 0.3); }
+
+    .phase-card-label {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .phase-card[data-phase="1"] .phase-card-label { color: var(--accent-build); }
+    .phase-card[data-phase="2"] .phase-card-label { color: var(--accent); }
+    .phase-card[data-phase="3"] .phase-card-label { color: var(--phase3); }
+
+    .phase-card-period {
+      font-size: 13px;
+      color: var(--text-subtle);
+      margin-bottom: 12px;
+    }
+
+    .phase-card-title {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .phase-card-title::before {
+      content: '« ';
+      opacity: 0.4;
+    }
+    .phase-card-title::after {
+      content: ' »';
+      opacity: 0.4;
+    }
+
+    .phase-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .phase-cards {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+      }
+    }
+
+    /* ======================================
+       GANTT TIMELINE
+       ====================================== */
+    .timeline-section {
+      padding: 80px 0 100px;
+      background: var(--bg-elevated);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .timeline-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .timeline-header h2 {
+      font-size: clamp(24px, 3.5vw, 36px);
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .timeline-header p {
+      color: var(--text-muted);
+      font-size: 16px;
+    }
+
+    .gantt-wrapper {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 16px;
+      margin: 0 -24px;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    .gantt-wrapper::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .gantt-wrapper::-webkit-scrollbar-track {
+      background: var(--bg-card);
+      border-radius: 3px;
+    }
+
+    .gantt-wrapper::-webkit-scrollbar-thumb {
+      background: var(--text-subtle);
+      border-radius: 3px;
+    }
+
+    .gantt {
+      min-width: 1000px;
+      width: 100%;
+    }
+
+    .gantt-months {
+      display: grid;
+      grid-template-columns: 200px repeat(13, 1fr);
+      gap: 0;
+      margin-bottom: 4px;
+    }
+
+    .gantt-months .label-col {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-subtle);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 8px 12px;
+    }
+
+    .gantt-months .month-col {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-subtle);
+      text-align: center;
+      padding: 8px 4px;
+      border-left: 1px solid var(--border);
+    }
+
+    .gantt-phase-group {
+      margin-bottom: 8px;
+    }
+
+    .gantt-phase-header {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      background: var(--bg-contrast);
+      border-radius: 8px;
+      margin-bottom: 4px;
+      overflow: hidden;
+    }
+
+    .gantt-phase-header .phase-label {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 12px;
+      letter-spacing: 1px;
+    }
+
+    .gantt-phase-header[data-phase="1"] .phase-label { color: var(--accent-build); }
+    .gantt-phase-header[data-phase="2"] .phase-label { color: var(--accent); }
+    .gantt-phase-header[data-phase="3"] .phase-label { color: var(--phase3); }
+
+    .gantt-row {
+      display: grid;
+      grid-template-columns: 200px repeat(52, 1fr);
+      align-items: center;
+      min-height: 36px;
+      position: relative;
+    }
+
+    .gantt-row:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .gantt-row-label {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      padding: 6px 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .gantt-bar {
+      height: 22px;
+      border-radius: 4px;
+      position: relative;
+      cursor: pointer;
+      transition: filter 0.2s, transform 0.2s;
+    }
+
+    .gantt-bar:hover {
+      filter: brightness(1.2);
+      transform: scaleY(1.2);
+    }
+
+    .gantt-bar[data-phase="1"] {
+      background: linear-gradient(90deg, var(--accent-build), rgba(15, 184, 196, 0.7));
+    }
+    .gantt-bar[data-phase="2"] {
+      background: linear-gradient(90deg, var(--accent), rgba(196, 92, 59, 0.7));
+    }
+    .gantt-bar[data-phase="3"] {
+      background: linear-gradient(90deg, var(--phase3), rgba(139, 92, 246, 0.7));
+    }
+
+    .gantt-tooltip {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-contrast);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s;
+      z-index: 100;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .gantt-tooltip strong {
+      color: var(--text-primary);
+      display: block;
+      margin-bottom: 2px;
+      font-family: 'Satoshi', sans-serif;
+    }
+
+    .gantt-bar:hover .gantt-tooltip {
+      opacity: 1;
+    }
+
+    /* Grid lines for months */
+    .gantt-grid-lines {
+      display: grid;
+      grid-template-columns: 200px repeat(13, 1fr);
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+    }
+
+    .gantt-grid-lines .grid-line {
+      border-left: 1px solid var(--border);
+    }
+
+    /* ======================================
+       PHASE SECTIONS
+       ====================================== */
+    .phase-section {
+      padding: 100px 0;
+      position: relative;
+    }
+
+    .phase-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .phase-header {
+      margin-bottom: 48px;
+    }
+
+    .phase-header-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 16px;
+    }
+
+    .phase-number {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 48px;
+      font-weight: 900;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .phase-section[data-phase="1"] .phase-number { color: var(--accent-build); }
+    .phase-section[data-phase="2"] .phase-number { color: var(--accent); }
+    .phase-section[data-phase="3"] .phase-number { color: var(--phase3); }
+
+    .phase-header h2 {
+      font-size: clamp(24px, 3.5vw, 36px);
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .phase-header-subtitle {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 700px;
+      line-height: 1.65;
+    }
+
+    .phase-metas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .phase-meta {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-subtle);
+      background: var(--bg-contrast);
+      padding: 6px 14px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    /* Context banner */
+    .context-banner {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 48px;
+      border-left: 3px solid;
+      position: relative;
+    }
+
+    .phase-section[data-phase="1"] .context-banner { border-left-color: var(--accent-build); }
+    .phase-section[data-phase="2"] .context-banner { border-left-color: var(--accent); }
+    .phase-section[data-phase="3"] .context-banner { border-left-color: var(--phase3); }
+
+    .context-banner p {
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    .context-banner p + p {
+      margin-top: 12px;
+    }
+
+    .context-highlights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .context-highlight {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+    }
+
+    .phase-section[data-phase="1"] .context-highlight { color: var(--accent-build); }
+    .phase-section[data-phase="2"] .context-highlight { color: var(--accent); }
+    .phase-section[data-phase="3"] .context-highlight { color: var(--phase3); }
+
+    /* Phase internal timeline */
+    .phase-timeline {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 48px;
+      overflow-x: auto;
+    }
+
+    .phase-timeline-label {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-subtle);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 16px;
+    }
+
+    .phase-timeline-bar-wrapper {
+      display: flex;
+      height: 32px;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      background: var(--bg-contrast);
+    }
+
+    .phase-timeline-segment {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Satoshi', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.85);
+      letter-spacing: 0.5px;
+      position: relative;
+    }
+
+    .phase-timeline-weeks {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+      padding: 0 4px;
+    }
+
+    .phase-timeline-weeks span {
+      font-size: 10px;
+      color: var(--text-subtle);
+    }
+
+    /* Step cards */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+
+    .step-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .step-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .phase-section[data-phase="1"] .step-card:hover { border-color: rgba(15, 184, 196, 0.25); }
+    .phase-section[data-phase="2"] .step-card:hover { border-color: rgba(196, 92, 59, 0.25); }
+    .phase-section[data-phase="3"] .step-card:hover { border-color: rgba(139, 92, 246, 0.25); }
+
+    .step-card.wide {
+      grid-column: 1 / -1;
+    }
+
+    .step-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      gap: 12px;
+    }
+
+    .step-card-number {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .phase-section[data-phase="1"] .step-card-number {
+      background: var(--accent-build-glow);
+      color: var(--accent-build);
+    }
+    .phase-section[data-phase="2"] .step-card-number {
+      background: var(--accent-glow);
+      color: var(--accent-pale);
+    }
+    .phase-section[data-phase="3"] .step-card-number {
+      background: var(--phase3-glow);
+      color: var(--phase3);
+    }
+
+    .step-card-title {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-primary);
+      flex: 1;
+    }
+
+    .step-card-weeks {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-subtle);
+      background: var(--bg-contrast);
+      padding: 4px 10px;
+      border-radius: 5px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .step-card-objectives {
+      list-style: none;
+      margin-bottom: 16px;
+    }
+
+    .step-card-objectives li {
+      font-size: 14px;
+      color: var(--text-muted);
+      padding: 4px 0;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .step-card-objectives li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 11px;
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+    }
+
+    .phase-section[data-phase="1"] .step-card-objectives li::before { background: var(--accent-build); opacity: 0.5; }
+    .phase-section[data-phase="2"] .step-card-objectives li::before { background: var(--accent); opacity: 0.5; }
+    .phase-section[data-phase="3"] .step-card-objectives li::before { background: var(--phase3); opacity: 0.5; }
+
+    .step-card-actions {
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+    }
+
+    .step-card-actions-label {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-subtle);
+      margin-bottom: 8px;
+    }
+
+    .step-card-actions p {
+      font-size: 13px;
+      color: var(--text-subtle);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* KPI grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .kpi-section-title {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+      padding-left: 16px;
+      border-left: 3px solid var(--accent);
+    }
+
+    .phase-section[data-phase="1"] .kpi-section-title { border-left-color: var(--accent-build); }
+    .phase-section[data-phase="2"] .kpi-section-title { border-left-color: var(--accent); }
+    .phase-section[data-phase="3"] .kpi-section-title { border-left-color: var(--phase3); }
+
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .kpi-tag {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      opacity: 0.6;
+    }
+
+    .phase-section[data-phase="1"] .kpi-tag { color: var(--accent-build); }
+    .phase-section[data-phase="2"] .kpi-tag { color: var(--accent); }
+    .phase-section[data-phase="3"] .kpi-tag { color: var(--phase3); }
+
+    .kpi-value {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 22px;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+
+    .phase-section[data-phase="1"] .kpi-value { color: var(--accent-build); }
+    .phase-section[data-phase="2"] .kpi-value { color: var(--accent); }
+    .phase-section[data-phase="3"] .kpi-value { color: var(--phase3); }
+
+    .kpi-label {
+      font-size: 12px;
+      color: var(--text-subtle);
+    }
+
+    @media (max-width: 768px) {
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Condition passage */
+    .condition-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 28px;
+      position: relative;
+    }
+
+    .condition-box::before {
+      content: 'CONDITION DE PASSAGE';
+      font-family: 'Satoshi', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--text-subtle);
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .condition-box p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    /* ======================================
+       LOGIQUE D'ENSEMBLE
+       ====================================== */
+    .ensemble-section {
+      padding: 100px 0;
+      background: var(--bg-elevated);
+      border-top: 1px solid var(--border);
+    }
+
+    .ensemble-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+
+    .ensemble-node {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 32px;
+      text-align: center;
+      min-width: 200px;
+      transition: transform 0.3s;
+    }
+
+    .ensemble-node:hover {
+      transform: translateY(-4px);
+    }
+
+    .ensemble-node-label {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .ensemble-node[data-phase="1"] .ensemble-node-label { color: var(--accent-build); }
+    .ensemble-node[data-phase="2"] .ensemble-node-label { color: var(--accent); }
+    .ensemble-node[data-phase="3"] .ensemble-node-label { color: var(--phase3); }
+
+    .ensemble-node-title {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--text-primary);
+    }
+
+    .ensemble-arrow {
+      font-size: 24px;
+      color: var(--text-subtle);
+    }
+
+    .ensemble-text {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    @media (max-width: 600px) {
+      .ensemble-flow {
+        flex-direction: column;
+        gap: 12px;
+      }
+      .ensemble-arrow {
+        transform: rotate(90deg);
+      }
+    }
+
+    /* ======================================
+       FOOTER
+       ====================================== */
+    .footer {
+      padding: 48px 0;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-brand {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .footer-tagline {
+      font-size: 14px;
+      color: var(--text-subtle);
+      font-style: italic;
+      margin-bottom: 12px;
+    }
+
+    .footer-date {
+      font-size: 12px;
+      color: var(--text-subtle);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================
+       NAVIGATION
+       ============================================ -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <div class="nav-logo">Neurolia <span>×</span> StrictFood</div>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#resume">Résumé</a></li>
+        <li><a href="#calendrier">Calendrier</a></li>
+        <li><a href="#phase1">Phase 1</a></li>
+        <li><a href="#phase2">Phase 2</a></li>
+        <li><a href="#phase3">Phase 3</a></li>
+      </ul>
+    </div>
+    <div class="nav-progress" id="navProgress"></div>
+  </nav>
+
+  <!-- ============================================
+       HERO
+       ============================================ -->
+  <section class="hero section" id="resume">
+    <div class="container">
+      <div class="reveal">
+        <p class="hero-label">Neurolia × StrictFood</p>
+        <h1>Stratégie digitale en 3 phases</h1>
+        <p class="hero-subtitle">Plan de transformation sur 13 mois, de la survie à la scalabilité.</p>
+      </div>
+      <div class="phase-cards">
+        <div class="phase-card reveal reveal-delay-1" data-phase="1">
+          <p class="phase-card-label">Phase 1</p>
+          <p class="phase-card-period">Mois 1 – 4</p>
+          <h3 class="phase-card-title">Survivre</h3>
+          <p>Fondations digitales, image de marque, acquisition locale.</p>
+        </div>
+        <div class="phase-card reveal reveal-delay-2" data-phase="2">
+          <p class="phase-card-label">Phase 2</p>
+          <p class="phase-card-period">Mois 5 – 7</p>
+          <h3 class="phase-card-title">Convertir</h3>
+          <p>Click &amp; Collect, CRM, fidélisation, marge récupérée.</p>
+        </div>
+        <div class="phase-card reveal reveal-delay-3" data-phase="3">
+          <p class="phase-card-label">Phase 3</p>
+          <p class="phase-card-period">Mois 8 – 13</p>
+          <h3 class="phase-card-title">Scaler</h3>
+          <p>Automatisation, scaling publicitaire, modèle franchise.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       TIMELINE GLOBALE (GANTT)
+       ============================================ -->
+  <section class="timeline-section" id="calendrier">
+    <div class="container">
+      <div class="timeline-header reveal">
+        <h2>Vue calendrier · 13 mois</h2>
+        <p>18 étapes réparties sur 3 phases. Survolez une barre pour les détails.</p>
+      </div>
+      <div class="gantt-wrapper reveal">
+        <div class="gantt" id="ganttChart">
+          <!-- Months header -->
+          <div class="gantt-months">
+            <div class="label-col">Étape</div>
+            <div class="month-col">M1</div>
+            <div class="month-col">M2</div>
+            <div class="month-col">M3</div>
+            <div class="month-col">M4</div>
+            <div class="month-col">M5</div>
+            <div class="month-col">M6</div>
+            <div class="month-col">M7</div>
+            <div class="month-col">M8</div>
+            <div class="month-col">M9</div>
+            <div class="month-col">M10</div>
+            <div class="month-col">M11</div>
+            <div class="month-col">M12</div>
+            <div class="month-col">M13</div>
+          </div>
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       PHASE 1 / SURVIVRE
+       ============================================ -->
+  <section class="phase-section section" id="phase1" data-phase="1">
+    <div class="container">
+      <div class="phase-header reveal">
+        <div class="phase-header-top">
+          <div class="phase-number">01</div>
+          <div>
+            <h2>Survivre et poser les fondations</h2>
+            <p class="phase-header-subtitle">Stopper l'hémorragie de CA en remplaçant la logique du « buzz » Instagram par une acquisition locale chirurgicale et intentionniste.</p>
+            <div class="phase-metas">
+              <span class="phase-meta">Mois 1 à 4</span>
+              <span class="phase-meta">S1 à S16</span>
+              <span class="phase-meta">8 livrables</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="context-banner reveal">
+        <p>La Phase 1 est le socle. Sans image de marque cohérente, sans fiche Google optimisée, sans site web, toute dépense publicitaire est du gaspillage. On construit d'abord les fondations, puis on observe les résultats.</p>
+      </div>
+
+      <!-- Phase 1 internal timeline -->
+      <div class="phase-timeline reveal">
+        <p class="phase-timeline-label">Timeline Phase 1 · S1 à S16</p>
+        <div class="phase-timeline-bar-wrapper">
+          <div class="phase-timeline-segment" style="flex: 5; background: var(--accent-build);">Construction</div>
+          <div class="phase-timeline-segment" style="flex: 11; background: var(--accent); opacity: 0.7;">Observation</div>
+        </div>
+        <div class="phase-timeline-weeks">
+          <span>S1</span><span>S4</span><span>S8</span><span>S12</span><span>S16</span>
+        </div>
+      </div>
+
+      <!-- Steps -->
+      <div class="steps-grid">
+        <!-- 1.1 -->
+        <div class="step-card wide reveal">
+          <div class="step-card-header">
+            <span class="step-card-number">1.1</span>
+            <span class="step-card-title">Banque de contenus photo</span>
+            <span class="step-card-weeks">S1 → S2</span>
+          </div>
+          <ul class="step-card-objectives">
+            <li>Kit complet photo/vidéo en 4 formats : produits détourés, lifestyle, stories/reels, campagnes pub</li>
+            <li>100% des canaux alimentés en visuels cohérents</li>
+          </ul>
+          <div class="step-card-actions">
+            <p class="step-card-actions-label">Actions</p>
+            <p>Tri &amp; détourage S1 · Sublimation DA S2 · Constitution kit complet multi-format</p>
+          </div>
+        </div>
+
+        <!-- 1.2 -->
+        <div class="step-card reveal">
+          <div class="step-card-header">
+            <span class="step-card-number">1.2</span>
+            <span class="step-card-title">Audit & Direction Artistique</span>
+            <span class="step-card-weeks">S1 → S2</span>
+          </div>
+          <ul class="step-card-objectives">
+            <li>Charte DA « Dark Food Premium » complète validée à S2</li>
+            <li>Applicable à 100% des livrables</li>
+          </ul>
+          <div class="step-card-actions">
+            <p class="step-card-actions-label">Actions</p>
+            <p>Brand Audit · Typographie &amp; palette · Style photo · Charte DA</p>
+          </div>
+        </div>
+
+        <!-- 1.3 -->
+        <div class="step-card reveal">
+          <div class="step-card-header">
+            <span class="step-card-number">1.3</span>
+            <span class="step-card-title">Google Business Profile</span>
+            <span class="step-card-weeks">S1 → S2</span>
+          </div>
+          <ul class="step-card-objectives">
+            <li>Objectif : 200 avis 5 étoiles (base actuelle : 74)</li>
+            <li>Top 3 pack local Google « restaurant healthy + ville »</li>
+          </ul>
+          <div class="step-card-actions">
+            <p class="step-card-actions-label">Actions</p>
+            <p>Photos qualité · Menu PDF · Lien site · Dispositif NFC/QR pour collecte avis</p>
+          </div>
+        </div>
+
+        <!-- 1.4 -->
+        <div class="step-card reveal">
+          <div class="step-card-header">
+            <span class="step-card-number">1.4</span>
+            <span class="step-card-title">Activation Instagram</span>
+            <span class="step-card-weeks">S1 → S16</span>
+          </div>
+          <ul class="step-card-objectives">
+            <li>Crédibilité premium, vitrine de confiance</li>
+            <li>Objectif : 2 000 followers</li>
+          </ul>
+          <div class="step-card-actions">
+            <p class="step-card-actions-label">Actions</p>
+            <p>Templates DA · Calendrier éditorial 2-3 posts/semaine</p>
+          </div>
+        </div>
+
+        <!-- 1.5 -->
+        <div class="step-card reveal">
+          <div class="step-card-header">
+            <span class="step-card-number">1.5</span>
+            <span class="step-card-title">Activation TikTok</span>
+            <span class="step-card-weeks">S1 → S16</span>
+          </div>
+          <ul class="step-card-objectives">
+            <li>3 000 followers à S16, 10 000 vues moyennes</li>
+            <li>1–2 publications/semaine, 1 shooting mensuel (150 €, 8–10 vidéos)</li>
+          </ul>
+          <div class="step-card-actions">
+            <p class="step-card-actions-label">Actions</p>
+            <p>Concepts créatifs Neurolia · Shooting vidéaste · Montage DA</p>
+          </div>
+        </div>
+
+        <!-- 1.6 -->
+        <div class="step-card reveal">
+          <div class="step-card-header">
+            <span class="step-card-number">1.6</span>
+            <span class="step-card-title">Landing Page Next.js</span>
+            <span class="step-card-weeks">S2 → S3</span>
+          </div>
+          <ul class="step-card-objectives">
+            <li>30+ appels/mois via CTA téléphonique</li>
+            <li>Redirection trafic vers réseaux sociaux</li>
+          </ul>
+          <div class="step-card-actions">
+            <p class="step-card-actions-label">Actions</p>
+            <p>Dev Next.js DA Premium · CTA appel · CTA réseaux sociaux</p>
+          </div>
+        </div>
+
+        <!-- 1.7 -->
+        <div class="step-card reveal">
+          <div class="step-card-header">
+            <span class="step-card-number">1.7</span>
+            <span class="step-card-title">Refonte Uber Eats</span>
+            <span class="step-card-weeks">S2 → S3</span>
+          </div>
+          <ul class="step-card-objectives">
+            <li>100% visuels alignés DA Premium</li>
+            <li>+10% panier moyen, optimisation prix/marges</li>
+          </ul>
+          <div class="step-card-actions">
+            <p class="step-card-actions-label">Actions</p>
+            <p>Refonte visuelle · Optimisation prix · Restructuration menu</p>
+          </div>
+        </div>
+
+        <!-- 1.8 -->
+        <div class="step-card wide reveal">
+          <div class="step-card-header">
+            <span class="step-card-number">1.8</span>
+            <span class="step-card-title">Capture données clients</span>
+            <span class="step-card-weeks">S3 → S5</span>
+          </div>
+          <ul class="step-card-objectives">
+            <li>300+ contacts qualifiés à S16</li>
+            <li>Un geste = collecte coordonnées + avis Google</li>
+          </ul>
+          <div class="step-card-actions">
+            <p class="step-card-actions-label">Actions</p>
+            <p>Carte NFC/QR · Formulaire landing · Centralisation Google Sheet</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPIs -->
+      <h3 class="kpi-section-title reveal">Objectifs mesurables de fin de Phase 1</h3>
+      <div class="kpi-grid reveal">
+        <div class="kpi-card">
+          <div class="kpi-tag">Objectif</div>
+          <div class="kpi-value">200</div>
+          <div class="kpi-label">Avis Google 5 étoiles (base actuelle : 74)</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-tag">Objectif</div>
+          <div class="kpi-value">Top 3</div>
+          <div class="kpi-label">Position dans le pack local Google Maps</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-tag">Objectif</div>
+          <div class="kpi-value">300+</div>
+          <div class="kpi-label">Contacts clients collectés (email / téléphone)</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-tag">Objectif</div>
+          <div class="kpi-value">30+</div>
+          <div class="kpi-label">Appels générés par mois via la landing page</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-tag">Objectif</div>
+          <div class="kpi-value">2 000</div>
+          <div class="kpi-label">Abonnés Instagram (présence crédible)</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-tag">Objectif</div>
+          <div class="kpi-value">3 000</div>
+          <div class="kpi-label">Abonnés TikTok avec 10K vues moy./vidéo</div>
+        </div>
+      </div>
+
+      <div class="condition-box reveal">
+        <h4 style="font-family:'Satoshi',sans-serif;font-weight:700;font-size:16px;color:var(--text-primary);margin-bottom:8px;">Condition de passage en Phase 2</h4>
+        <p>Les KPIs doivent montrer une trajectoire positive (CA en hausse, base de données en croissance, engagement stable) pour justifier l'investissement de la phase suivante.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       PHASE 2 / CONVERTIR
+       ============================================ -->
+  <section class="phase-section section" id="phase2" data-phase="2">
+    <div class="container">
+      <div class="phase-header reveal">
+        <div class="phase-header-top">
+          <div class="phase-number">02</div>
+          <div>
+            <h2>Structurer et convertir</h2>
+            <p class="phase-header-subtitle">Transformer les visiteurs en clients récurrents, reprendre la marge perdue sur Uber Eats grâce au Click &amp; Collect.</p>
+            <div class="phase-metas">
+              <span class="phase-meta">Mois 5 à 7</span>
+              <span class="phase-meta">S1 à S12</span>
+              <span class="phase-meta">5 livrables</span>
+              <span class="phase-meta">Prérequis : KPIs Phase 1 validés</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="context-banner reveal">
+        <p>La Phase 1 a posé les fondations : image premium, fiche Google, réseaux sociaux actifs, landing page, base de données. La Phase 2 capitalise sur ces acquis pour passer de l'acquisition à la conversion.</p>
+        <div class="context-highlights">
+          <span class="context-highlight">Levier principal : Click & Collect</span>
+          <span class="context-highlight">Marge récupérée : 25-30% / commande</span>
+          <span class="context-highlight">Objectif CA : 1 000 € / jour</span>
+        </div>
+      </div>
+
+      <div class="phase-timeline reveal">
+        <p class="phase-timeline-label">Timeline Phase 2 · S1 à S12</p>
+        <div class="phase-timeline-bar-wrapper">
+          <div class="phase-timeline-segment" style="flex: 8; background: var(--accent);">Construction</div>
+          <div class="phase-timeline-segment" style="flex: 4; background: rgba(196, 92, 59, 0.5);">Observation</div>
+        </div>
+        <div class="phase-timeline-weeks">
+          <span>S1</span><span>S4</span><span>S8</span><span>S12</span>
+        </div>
+      </div>
+
+      <div class="steps-grid">
+        <!-- 2.1 -->
+        <div class="step-card wide reveal">
+          <div class="step-card-header">
+            <span class="step-card-number">2.1</span>
+            <span class="step-card-title">Click & Collect</span>
+            <span class="step-card-weeks">S1 → S8</span>
+          </div>
+          <ul class="step-card-objectives">
+            <li>25-30% de marge récupérée vs Uber Eats</li>
+            <li>Levier de rentabilité le plus direct</li>
+          </ul>
+          <div class="step-card-actions">
+            <p class="step-card-actions-label">Actions</p>
+            <p>Parcours commande complet · Paiement en ligne · Personnalisation macros · Confirmation SMS</p>
+          </div>
+        </div>
+
+        <!-- 2.2 -->
+        <div class="step-card reveal">
+          <div class="step-card-header">
+            <span class="step-card-number">2.2</span>
+            <span class="step-card-title">CRM & fidélisation</span>
+            <span class="step-card-weeks">S1 → S5</span>
+          </div>
+          <ul class="step-card-objectives">
+            <li>Exploitation base données Phase 1</li>
+            <li>Segmentation : sportifs, actifs pressés, locavores</li>
+          </ul>
+          <div class="step-card-actions">
+            <p class="step-card-actions-label">Actions</p>
+            <p>SMS push géolocalisés · Offre bienvenue · Carte fidélité digitale · Séquences réengagement</p>
+          </div>
+        </div>
+
+        <!-- 2.3 -->
+        <div class="step-card reveal">
+          <div class="step-card-header">
+            <span class="step-card-number">2.3</span>
+            <span class="step-card-title">Référencement SEO</span>
+            <span class="step-card-weeks">S3 → S8</span>
+          </div>
+          <ul class="step-card-objectives">
+            <li>Capter « burger sain + ville », « restaurant healthy + quartier »</li>
+            <li>Maillage local avec fiche Google</li>
+          </ul>
+          <div class="step-card-actions">
+            <p class="step-card-actions-label">Actions</p>
+            <p>Pages menu optimisées · Page « Nos Artisans » · Blog léger</p>
+          </div>
+        </div>
+
+        <!-- 2.4 -->
+        <div class="step-card reveal">
+          <div class="step-card-header">
+            <span class="step-card-number">2.4</span>
+            <span class="step-card-title">Partenariats locaux</span>
+            <span class="step-card-weeks">S4 → S12</span>
+          </div>
+          <ul class="step-card-objectives">
+            <li>Code promo tracké par partenaire</li>
+            <li>Cibles : salles de sport, entreprises locales, coachs/nutritionnistes</li>
+          </ul>
+          <div class="step-card-actions">
+            <p class="step-card-actions-label">Actions</p>
+            <p>Identification partenaires · Proposition valeur · Codes promo trackés · Suivi ROI</p>
+          </div>
+        </div>
+
+        <!-- 2.5 -->
+        <div class="step-card reveal">
+          <div class="step-card-header">
+            <span class="step-card-number">2.5</span>
+            <span class="step-card-title">Publicité digitale</span>
+            <span class="step-card-weeks">S6 → S12</span>
+          </div>
+          <ul class="step-card-objectives">
+            <li>Activation une fois tunnel de conversion en place</li>
+            <li>Mode test pour valider CAC</li>
+          </ul>
+          <div class="step-card-actions">
+            <p class="step-card-actions-label">Actions</p>
+            <p>Google Ads local · Meta Ads zone ville · A/B testing créas · Optimisation CAC</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="kpi-section-title reveal">Objectifs mesurables de fin de Phase 2</h3>
+      <div class="kpi-grid reveal">
+        <div class="kpi-card">
+          <div class="kpi-tag">Objectif CA</div>
+          <div class="kpi-value">1 000 €/j</div>
+          <div class="kpi-label">Chiffre d'affaires quotidien moyen visé</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-tag">Marge directe</div>
+          <div class="kpi-value">25-30%</div>
+          <div class="kpi-label">Marge récupérée par commande Click &amp; Collect vs Uber Eats</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-tag">Indicateur clé</div>
+          <div class="kpi-value">% C&amp;C</div>
+          <div class="kpi-label">Part des commandes via Click &amp; Collect vs plateformes</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-tag">Indicateur clé</div>
+          <div class="kpi-value">CRM actif</div>
+          <div class="kpi-label">Taille et taux d'engagement de la base clients segmentée</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-tag">Indicateur clé</div>
+          <div class="kpi-value">CAC mesuré</div>
+          <div class="kpi-label">Coût d'acquisition client par canal (Google, Meta, partenaires)</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-tag">Indicateur clé</div>
+          <div class="kpi-value">Récurrence</div>
+          <div class="kpi-label">Taux de clients qui reviennent commander (fidélisation)</div>
+        </div>
+      </div>
+
+      <div class="condition-box reveal">
+        <h4 style="font-family:'Satoshi',sans-serif;font-weight:700;font-size:16px;color:var(--text-primary);margin-bottom:8px;">Condition de passage en Phase 3</h4>
+        <p>Le Click &amp; Collect doit démontrer un volume suffisant pour réduire la dépendance à Uber Eats. Le CRM doit prouver sa capacité à générer des commandes récurrentes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       PHASE 3 / SCALER
+       ============================================ -->
+  <section class="phase-section section" id="phase3" data-phase="3">
+    <div class="container">
+      <div class="phase-header reveal">
+        <div class="phase-header-top">
+          <div class="phase-number">03</div>
+          <div>
+            <h2>Scaler et préparer la duplication</h2>
+            <p class="phase-header-subtitle">Le point de vente devient une machine d'acquisition rentable, automatisée et documentée, prête à être répliquée.</p>
+            <div class="phase-metas">
+              <span class="phase-meta">Mois 8 à 13</span>
+              <span class="phase-meta">S1 à S24</span>
+              <span class="phase-meta">5 livrables</span>
+              <span class="phase-meta">Prérequis : Rentabilité Phase 2 prouvée</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="context-banner reveal">
+        <p>La Phase 2 a prouvé le modèle économique. La Phase 3 industrialise tout et prépare la duplication.</p>
+        <div class="context-highlights">
+          <span class="context-highlight">Zéro intervention humaine quotidienne</span>
+          <span class="context-highlight">Livrable clé : Playbook franchise</span>
+          <span class="context-highlight">CA stabilisé : 1 500 € / jour</span>
+        </div>
+      </div>
+
+      <div class="phase-timeline reveal">
+        <p class="phase-timeline-label">Timeline Phase 3 · S1 à S24</p>
+        <div class="phase-timeline-bar-wrapper">
+          <div class="phase-timeline-segment" style="flex: 1; background: var(--phase3);">Industrialisation & Scaling</div>
+        </div>
+        <div class="phase-timeline-weeks">
+          <span>S1</span><span>S6</span><span>S12</span><span>S18</span><span>S24</span>
+        </div>
+      </div>
+
+      <div class="steps-grid">
+        <!-- 3.1 -->
+        <div class="step-card reveal">
+          <div class="step-card-header">
+            <span class="step-card-number">3.1</span>
+            <span class="step-card-title">Automatisation marketing</span>
+            <span class="step-card-weeks">S1 → S10</span>
+          </div>
+          <ul class="step-card-objectives">
+            <li>5 séquences automatisées : bienvenue, relance J+15, anniversaire, push menu, panier abandonné</li>
+            <li>Zéro intervention humaine quotidienne</li>
+            <li>Taux réactivation > 15%</li>
+          </ul>
+          <div class="step-card-actions">
+            <p class="step-card-actions-label">Actions</p>
+            <p>Configuration workflows · Rédaction séquences · Tests A/B · Monitoring KPIs</p>
+          </div>
+        </div>
+
+        <!-- 3.2 -->
+        <div class="step-card reveal">
+          <div class="step-card-header">
+            <span class="step-card-number">3.2</span>
+            <span class="step-card-title">Scaling publicitaire</span>
+            <span class="step-card-weeks">S4 → S18</span>
+          </div>
+          <ul class="step-card-objectives">
+            <li>x3 budget vs Phase 2 sur canaux validés</li>
+            <li>ROAS maintenu > 3x</li>
+            <li>Extension rayon géographique</li>
+          </ul>
+          <div class="step-card-actions">
+            <p class="step-card-actions-label">Actions</p>
+            <p>Augmentation budgets · Nouvelles zones · Lookalike audiences · Retargeting avancé</p>
+          </div>
+        </div>
+
+        <!-- 3.3 -->
+        <div class="step-card reveal">
+          <div class="step-card-header">
+            <span class="step-card-number">3.3</span>
+            <span class="step-card-title">Programme ambassadeurs</span>
+            <span class="step-card-weeks">S6 → S18</span>
+          </div>
+          <ul class="step-card-objectives">
+            <li>20+ clients ambassadeurs actifs</li>
+            <li>10+ UGC / mois</li>
+            <li>+30% reach organique</li>
+          </ul>
+          <div class="step-card-actions">
+            <p class="step-card-actions-label">Actions</p>
+            <p>Identification ambassadeurs · Programme récompenses · Suivi UGC · Amplification contenu</p>
+          </div>
+        </div>
+
+        <!-- 3.4 -->
+        <div class="step-card wide reveal">
+          <div class="step-card-header">
+            <span class="step-card-number">3.4</span>
+            <span class="step-card-title">Playbook franchise</span>
+            <span class="step-card-weeks">S1 → S20</span>
+          </div>
+          <ul class="step-card-objectives">
+            <li>5 documents complets à S20</li>
+            <li>100% processus documentés</li>
+            <li>Présentable investisseur / franchisé</li>
+          </ul>
+          <div class="step-card-actions">
+            <p class="step-card-actions-label">Actions</p>
+            <p>Documentation processus · Checklists opérationnelles · Guide marketing · Modèle financier · Kit de lancement</p>
+          </div>
+        </div>
+
+        <!-- 3.5 -->
+        <div class="step-card reveal">
+          <div class="step-card-header">
+            <span class="step-card-number">3.5</span>
+            <span class="step-card-title">Infrastructure multi-PDV</span>
+            <span class="step-card-weeks">S16 → S24</span>
+          </div>
+          <ul class="step-card-objectives">
+            <li>Prêt pour 2+ points de vente sans refonte</li>
+            <li>Déploiement en moins de 2 semaines</li>
+            <li>Campagnes dupliquables par zone</li>
+          </ul>
+          <div class="step-card-actions">
+            <p class="step-card-actions-label">Actions</p>
+            <p>Architecture multi-site · Templates campagnes · Onboarding kit · Tests de déploiement</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="kpi-section-title reveal">Objectifs mesurables de fin de Phase 3</h3>
+      <div class="kpi-grid reveal">
+        <div class="kpi-card">
+          <div class="kpi-tag">Objectif CA</div>
+          <div class="kpi-value">1 500 €/j</div>
+          <div class="kpi-label">Chiffre d'affaires quotidien visé en fin de Phase 3</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-tag">Objectif marge</div>
+          <div class="kpi-value">Marge nette ↑</div>
+          <div class="kpi-label">Réduction significative de la part Uber Eats dans le CA total</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-tag">Indicateur clé</div>
+          <div class="kpi-value">LTV mesurée</div>
+          <div class="kpi-label">Valeur totale d'un client sur sa durée de vie (Lifetime Value)</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-tag">Objectif</div>
+          <div class="kpi-value">> 35%</div>
+          <div class="kpi-label">Taux de rétention client à 3 mois (clients qui reviennent)</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-tag">Objectif</div>
+          <div class="kpi-value">CAC optimisé</div>
+          <div class="kpi-label">Coût d'acquisition par canal documenté et rentable</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-tag">Livrable final</div>
+          <div class="kpi-value">Playbook</div>
+          <div class="kpi-label">Dossier franchise complet, présentable à un investisseur</div>
+        </div>
+      </div>
+
+      <div class="condition-box reveal">
+        <h4 style="font-family:'Satoshi',sans-serif;font-weight:700;font-size:16px;color:var(--text-primary);margin-bottom:8px;">Validation finale</h4>
+        <p>Le modèle doit être rentable, automatisé et intégralement documenté. Le playbook franchise est le livrable final qui valide la capacité de duplication.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       LOGIQUE D'ENSEMBLE
+       ============================================ -->
+  <section class="ensemble-section" id="ensemble">
+    <div class="container">
+      <div class="ensemble-flow reveal">
+        <div class="ensemble-node" data-phase="1">
+          <p class="ensemble-node-label">Phase 1</p>
+          <p class="ensemble-node-title">Survivre</p>
+        </div>
+        <span class="ensemble-arrow">&#8594;</span>
+        <div class="ensemble-node" data-phase="2">
+          <p class="ensemble-node-label">Phase 2</p>
+          <p class="ensemble-node-title">Convertir</p>
+        </div>
+        <span class="ensemble-arrow">&#8594;</span>
+        <div class="ensemble-node" data-phase="3">
+          <p class="ensemble-node-label">Phase 3</p>
+          <p class="ensemble-node-title">Scaler</p>
+        </div>
+      </div>
+      <p class="ensemble-text reveal">
+        Phase 1 pose l'image et capte le flux. Phase 2 convertit et récupère la marge. Phase 3 automatise et documente pour dupliquer.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-brand">Neurolia</p>
+      <p class="footer-tagline">Un business qui respire.</p>
+      <p class="footer-date">Mars 2026 · Confidentiel</p>
+    </div>
+  </footer>
+
+  <!-- ============================================
+       JAVASCRIPT
+       ============================================ -->
+  <script>
+    // =========================================
+    // GANTT CHART DATA & RENDERING
+    // =========================================
+    const WEEKS_TOTAL = 52; // 13 months ≈ 52 weeks
+
+    const ganttData = [
+      {
+        phase: 1,
+        label: 'PHASE 1 / SURVIVRE',
+        items: [
+          { id: '1.1', name: 'Banque de contenus photo', startWeek: 1, endWeek: 2, detail: 'Kit photo/vidéo 4 formats' },
+          { id: '1.2', name: 'Audit & Direction Artistique', startWeek: 1, endWeek: 2, detail: 'Charte DA Dark Food Premium' },
+          { id: '1.3', name: 'Google Business Profile', startWeek: 1, endWeek: 2, detail: 'Objectif 200 avis · Top 3 pack local' },
+          { id: '1.4', name: 'Activation Instagram', startWeek: 1, endWeek: 16, detail: '2 000 followers · 2-3 posts/semaine' },
+          { id: '1.5', name: 'Activation TikTok', startWeek: 1, endWeek: 16, detail: '3 000 followers · 10 000 vues moy.' },
+          { id: '1.6', name: 'Landing Page Next.js', startWeek: 2, endWeek: 3, detail: '30+ appels/mois · CTA téléphonique' },
+          { id: '1.7', name: 'Refonte Uber Eats', startWeek: 2, endWeek: 3, detail: '+10% panier moyen · DA Premium' },
+          { id: '1.8', name: 'Capture données clients', startWeek: 3, endWeek: 5, detail: '300+ contacts · NFC/QR' },
+        ]
+      },
+      {
+        phase: 2,
+        label: 'PHASE 2 / CONVERTIR',
+        items: [
+          { id: '2.1', name: 'Click & Collect', startWeek: 17, endWeek: 24, detail: '25-30% marge récupérée' },
+          { id: '2.2', name: 'CRM & fidélisation', startWeek: 17, endWeek: 21, detail: 'Segmentation & séquences' },
+          { id: '2.3', name: 'Référencement SEO', startWeek: 19, endWeek: 24, detail: 'Burger sain + ville · maillage local' },
+          { id: '2.4', name: 'Partenariats locaux', startWeek: 20, endWeek: 28, detail: 'Codes promo trackés · salles de sport' },
+          { id: '2.5', name: 'Publicité digitale', startWeek: 22, endWeek: 28, detail: 'Google Ads + Meta Ads · test CAC' },
+        ]
+      },
+      {
+        phase: 3,
+        label: 'PHASE 3 / SCALER',
+        items: [
+          { id: '3.1', name: 'Automatisation marketing', startWeek: 29, endWeek: 38, detail: '5 séquences · zéro intervention' },
+          { id: '3.2', name: 'Scaling publicitaire', startWeek: 32, endWeek: 46, detail: 'x3 budget · ROAS > 3x' },
+          { id: '3.3', name: 'Programme ambassadeurs', startWeek: 34, endWeek: 46, detail: '20+ ambassadeurs · 10+ UGC/mois' },
+          { id: '3.4', name: 'Playbook franchise', startWeek: 29, endWeek: 48, detail: '5 documents · 100% processus' },
+          { id: '3.5', name: 'Infrastructure multi-PDV', startWeek: 44, endWeek: 52, detail: '2+ PDV · déploiement < 2 semaines' },
+        ]
+      }
+    ];
+
+    function buildGantt() {
+      const chart = document.getElementById('ganttChart');
+
+      ganttData.forEach(group => {
+        // Phase header
+        const headerEl = document.createElement('div');
+        headerEl.className = 'gantt-phase-header';
+        headerEl.dataset.phase = group.phase;
+        headerEl.innerHTML = `<span class="phase-label">${group.label}</span><span></span>`;
+        chart.appendChild(headerEl);
+
+        // Rows
+        group.items.forEach(item => {
+          const row = document.createElement('div');
+          row.className = 'gantt-row';
+          row.style.display = 'grid';
+          row.style.gridTemplateColumns = `200px repeat(${WEEKS_TOTAL}, 1fr)`;
+          row.style.minHeight = '36px';
+          row.style.alignItems = 'center';
+
+          // Label
+          const label = document.createElement('div');
+          label.className = 'gantt-row-label';
+          label.textContent = `${item.id} ${item.name}`;
+          row.appendChild(label);
+
+          // Empty cells + bar
+          for (let w = 1; w <= WEEKS_TOTAL; w++) {
+            const cell = document.createElement('div');
+            cell.style.height = '100%';
+            cell.style.position = 'relative';
+
+            if (w === item.startWeek) {
+              const bar = document.createElement('div');
+              bar.className = 'gantt-bar';
+              bar.dataset.phase = group.phase;
+              const span = item.endWeek - item.startWeek + 1;
+              bar.style.position = 'absolute';
+              bar.style.left = '0';
+              bar.style.top = '50%';
+              bar.style.transform = 'translateY(-50%)';
+              bar.style.width = `calc(${span * 100}% + ${(span - 1) * 0}px)`;
+              bar.style.width = `${span * 100}%`;
+              bar.style.zIndex = '10';
+
+              // Tooltip
+              const tooltip = document.createElement('div');
+              tooltip.className = 'gantt-tooltip';
+              tooltip.innerHTML = `<strong>${item.id} ${item.name}</strong>Semaine ${item.startWeek} → ${item.endWeek}<br>${item.detail}`;
+              bar.appendChild(tooltip);
+
+              cell.appendChild(bar);
+            }
+
+            row.appendChild(cell);
+          }
+
+          chart.appendChild(row);
+        });
+      });
+    }
+
+    buildGantt();
+
+    // =========================================
+    // SCROLL PROGRESS BAR
+    // =========================================
+    const progressBar = document.getElementById('navProgress');
+
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = progress + '%';
+    }
+
+    // =========================================
+    // ACTIVE NAV LINK
+    // =========================================
+    const sections = document.querySelectorAll('section[id]');
+    const navLinksAll = document.querySelectorAll('.nav-links a');
+
+    function updateActiveNav() {
+      const scrollPos = window.scrollY + 120;
+
+      sections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        const id = section.getAttribute('id');
+
+        if (scrollPos >= top && scrollPos < top + height) {
+          navLinksAll.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + id) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }
+
+    // =========================================
+    // SCROLL REVEAL (IntersectionObserver)
+    // =========================================
+    const revealElements = document.querySelectorAll('.reveal');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // =========================================
+    // MOBILE NAV TOGGLE
+    // =========================================
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    // Close mobile nav on link click
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+      });
+    });
+
+    // =========================================
+    // COMBINED SCROLL HANDLER
+    // =========================================
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateProgress();
+          updateActiveNav();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // Initial call
+    updateProgress();
+    updateActiveNav();
+  </script>
+</body>
+</html>
