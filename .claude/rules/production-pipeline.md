@@ -23,12 +23,21 @@ L'orchestrateur détecte le **mode** dans le brief et route vers le bon sous-pip
 ## Workflow de planification
 
 ```
-1. Planning semaine (planning-SX.md) — distribuer piliers, modes (posts ET stories), sujets
+0. Lire _config/historique-production.md — analyser ce qui a été fait (OBLIGATOIRE)
+1. Planning semaine (planning-SX.md) — distribuer piliers, modes, sujets en évitant les doublons
 2. Briefs individuels (brief-v3.md / brief-story.md) — à partir du planning validé
 3. Production — /instagram-producer pour posts, /story-producer pour stories
+4. Mise à jour historique — à la fin de la semaine, mettre à jour historique-production.md
 ```
 
-**ALWAYS** rédiger le planning AVANT les briefs. Le mode est décidé AU PLANNING, pas au brief.
+**ALWAYS** lire l'historique PUIS rédiger le planning AVANT les briefs. Le mode est décidé AU PLANNING, pas au brief.
+
+### Règles anti-doublon (inter-semaines)
+
+- Ne pas refaire un post sur un produit traité les 2 dernières semaines (sauf angle radicalement différent)
+- Prioriser les piliers et modes sous-représentés vs les cibles
+- Ne pas réutiliser la même photo qu'une semaine récente
+- Varier les angles éditoriaux (pas 2 hero shots du même style)
 
 ### Règles de distribution (appliquées au planning)
 

@@ -23,6 +23,13 @@ Comment produire un post Instagram de A à Z. Tes interventions sont marquées `
 
 ## Étape 0 — Planifier la semaine
 
+### 🤖 AUTO — Analyse des semaines précédentes
+
+Claude lit automatiquement `_config/historique-production.md` et identifie :
+- Les produits déjà traités (pour éviter les doublons)
+- Les piliers et modes sous-représentés (pour les prioriser)
+- Les photos déjà utilisées (pour varier)
+
 ### 👤 TOI — Créer le planning
 
 Copier le template `_templates/planning-semaine.md` dans `posts-stories/posts/periode-[N]/planning-S[X].md` et remplir :

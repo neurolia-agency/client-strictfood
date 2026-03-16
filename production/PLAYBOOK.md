@@ -31,7 +31,7 @@
 Créons le planning de la semaine S[X] (du [date] au [date]).
 ```
 
-Claude crée le fichier, applique les règles de distribution automatiquement, et te propose un planning équilibré. Tu ajustes et valides.
+Claude commence par **lire l'historique** (`_config/historique-production.md`) pour savoir ce qui a déjà été fait. Il identifie les produits, piliers et modes en retard, puis te propose un planning qui **compense les manques** et **évite les doublons**. Tu ajustes et valides.
 
 ### Ce que le planning décide
 
@@ -41,6 +41,7 @@ Claude crée le fichier, applique les règles de distribution automatiquement, e
 | **Modes posts** | Quel mode pour chaque post | Variété garantie (jamais 2x le même consécutif) |
 | **Modes stories** | Quel mode pour chaque story | Mix template + IRL + sublimation + compositing |
 | **Types stories** | Quel type (fiche, éducatif, interactif...) | Alternance des familles visuelles |
+| **Anti-doublons** | Quels produits/piliers/modes sont en retard | Compensation automatique basée sur l'historique |
 | **Photos IRL** | Quelles photos prendre cette semaine | Liste claire pour Romain/Dorian |
 
 ### Règles de distribution (appliquées automatiquement)
@@ -322,6 +323,7 @@ Chaque type de story peut utiliser différents modes. Le planning choisit la com
 | `_templates/brief-v3.md` | Template brief post |
 | `_templates/brief-story.md` | Template brief story |
 | `_config/pipeline.md` | Config modes, DA, modèles |
+| `_config/historique-production.md` | **Mémoire inter-semaines** — lu avant chaque planning |
 | `_config/photo-references.md` | Catalogue photos existantes |
 | `_config/brand-props.md` | Accessoires marque |
 | `_recettes/[slug].md` | Fiches produit |

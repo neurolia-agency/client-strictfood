@@ -5,6 +5,28 @@
 
 ---
 
+## Étape 0 — Analyse des semaines précédentes (OBLIGATOIRE)
+
+**Avant de planifier**, lire `production/_config/historique-production.md` et analyser :
+
+1. **Produits déjà couverts** : ne pas refaire un post sur un produit traité les 2 dernières semaines (sauf angle radicalement différent)
+2. **Piliers en retard** : identifier les piliers sous-représentés vs la cible et les prioriser
+3. **Modes en retard** : identifier les modes jamais ou peu utilisés et les forcer dans le planning
+4. **Photos déjà utilisées** : ne pas réutiliser la même photo qu'une semaine récente
+5. **Angles éditoriaux** : varier les angles (pas 2 hero shots du même style consécutifs)
+
+### Résumé des semaines précédentes (à remplir)
+
+| Constat | Action pour cette semaine |
+|---------|--------------------------|
+| Pilier [X] à 0% (cible [Y]%) | Placer [N] posts sur ce pilier |
+| Mode [X] jamais utilisé | Forcer [N] posts/stories en mode [X] |
+| Produit [X] fait S[N-1] | Ne pas le refaire cette semaine |
+| Produit [X] jamais couvert | Le planifier cette semaine |
+| Photo [X] utilisée 2 fois | Utiliser une variante ou un autre angle |
+
+---
+
 ## Règles de distribution
 
 Le planning assure le **relief visuel** du feed et des stories. Chaque contenu a un pilier, un mode de production et un type. Les règles ci-dessous garantissent la variété.
