@@ -9,39 +9,43 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Oswald:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="_base/base.css">
   <style>
-    /* IRL Story — Photo brute avec overlay DA minimal */
-    /* La photo est le héros. L'overlay est discret. */
+    /*
+     * IRL — Photo brute plein cadre + overlay DA minimal
+     * Cadre rigide : photo 100%, logo fixe, texte optionnel en bas
+     * La photo est le héros. L'overlay est discret.
+     *
+     * LIMITES DE CARACTÈRES :
+     * IRL_TEXT            : max 40 car, 2 lignes
+     */
 
+    /* Disable all default overlays */
+    .gradient-top, .gradient-bottom, .gradient-left, .accent-line, .zone-blend, .ambient-bottom, .content, .bottom-section { display: none; }
+
+    /* ===== PHOTO PLEIN CADRE ===== */
     .irl-photo {
       position: absolute;
       top: 0; left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center 40%;
       z-index: 1;
     }
 
-    /* Filtre warm léger — aligne avec la DA sans dénaturer */
-    .irl-filter-leger .irl-photo {
-      filter: brightness(1.05) sepia(0.06) saturate(0.95);
-    }
-    .irl-filter-moyen .irl-photo {
-      filter: brightness(1.0) sepia(0.10) saturate(0.90);
-    }
-    .irl-filter-fort .irl-photo {
-      filter: brightness(0.95) sepia(0.15) saturate(0.85);
-    }
+    /* Photo presets */
+    .photo-centre .irl-photo { object-position: 50% 40%; }
+    .photo-droite .irl-photo { object-position: 75% 30%; }
+    .photo-gauche .irl-photo { object-position: 25% 40%; }
+    .photo-haut .irl-photo { object-position: 50% 20%; }
+    .photo-large .irl-photo { object-position: 50% 50%; transform: scale(1.15); }
+    .photo-portrait .irl-photo { object-position: 50% 25%; transform: scale(1.1); }
 
-    /* Gradient bas uniquement — pour lisibilité du texte overlay */
-    .irl-gradient-bottom {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 600px;
-      background: linear-gradient(to top, rgba(var(--bg-rgb), 0.85) 0%, rgba(var(--bg-rgb), 0.5) 40%, transparent 100%);
-      z-index: 2;
-    }
+    /* ===== FILTRES WARM ===== */
+    .irl-filter-leger .irl-photo { filter: brightness(1.05) sepia(0.06) saturate(0.95); }
+    .irl-filter-moyen .irl-photo { filter: brightness(1.0) sepia(0.10) saturate(0.90); }
+    .irl-filter-fort .irl-photo { filter: brightness(0.95) sepia(0.15) saturate(0.85); }
 
-    /* Gradient haut léger — pour le logo */
+    /* ===== GRADIENTS DISCRETS ===== */
     .irl-gradient-top {
       position: absolute;
       top: 0; left: 0; right: 0;
@@ -50,25 +54,45 @@
       z-index: 2;
     }
 
-    .content {
-      padding: 0 80px;
-      justify-content: flex-end;
-      align-items: flex-start;
-      text-align: left;
-      padding-bottom: calc(var(--safe-bottom) + 40px);
+    .irl-gradient-bottom {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 600px;
+      background: linear-gradient(to top, rgba(var(--bg-rgb), 0.85) 0%, rgba(var(--bg-rgb), 0.5) 40%, transparent 100%);
+      z-index: 2;
     }
 
-    /* Position texte variantes */
-    .irl-text-centre .content {
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding-bottom: var(--safe-bottom);
+    /* ===== FIXED ELEMENTS ===== */
+    .irl-logo {
+      position: absolute;
+      top: 270px;
+      left: 80px;
+      z-index: 10;
+      width: 120px;
+      opacity: 0.8;
     }
-    .irl-text-haut .content {
-      justify-content: flex-start;
-      padding-top: calc(var(--safe-top) + 40px);
-      padding-bottom: 0;
+
+    /* Text — fixed at bottom */
+    .irl-text-zone {
+      position: absolute;
+      bottom: 300px;
+      left: 80px;
+      right: 80px;
+      z-index: 10;
+      max-height: 120px; /* 2 lines safety */
+      overflow: hidden;
+    }
+
+    /* Position variants */
+    .irl-text-centre .irl-text-zone {
+      bottom: auto;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: center;
+    }
+    .irl-text-haut .irl-text-zone {
+      bottom: auto;
+      top: 370px;
     }
 
     .irl-text {
@@ -77,19 +101,14 @@
       font-size: 48px;
       color: #fff;
       line-height: 1.2;
-      max-width: 800px;
-      text-shadow:
-        0 2px 8px rgba(0,0,0,0.6),
-        0 4px 20px rgba(0,0,0,0.4);
+      text-shadow: 0 2px 8px rgba(0,0,0,0.6), 0 4px 20px rgba(0,0,0,0.4);
     }
-
     .irl-text em {
       color: var(--accent);
       font-style: normal;
       filter: brightness(1.2);
     }
 
-    /* Barre accent sous le texte */
     .irl-accent-bar {
       width: 60px;
       height: 4px;
@@ -97,34 +116,24 @@
       margin-top: 20px;
       border-radius: 2px;
     }
-
-    /* Logo en haut à gauche — petit et discret */
-    .irl-logo {
-      position: absolute;
-      top: calc(var(--safe-top) + 20px);
-      left: 80px;
-      z-index: 10;
-      width: 120px;
-      opacity: 0.8;
-    }
   </style>
 </head>
-<body class="{{MOOD_CLASS}} irl-filter-{{IRL_FILTER}} irl-text-{{IRL_TEXT_POSITION}}">
+<body class="{{MOOD_CLASS}} irl-filter-{{IRL_FILTER}} irl-text-{{IRL_TEXT_POSITION}} {{PHOTO_PRESET}}">
 
-  <!-- Photo IRL plein cadre -->
+  <!-- Photo plein cadre -->
   <img class="irl-photo" src="{{BG_IMAGE_PATH}}" alt="">
 
   <!-- Gradients discrets -->
   <div class="irl-gradient-top"></div>
   <div class="irl-gradient-bottom"></div>
 
-  <!-- Logo discret -->
+  <!-- Logo fixe -->
   <img class="irl-logo" src="_base/logo.svg" alt="STRICT FOOD'S">
 
-  <!-- Texte overlay (optionnel — peut être vide) -->
-  <div class="content">
-    <div class="irl-text text-depth" style="display: {{SHOW_TEXT}}">{{IRL_TEXT}}</div>
-    <div class="irl-accent-bar" style="display: {{SHOW_TEXT}}"></div>
+  <!-- Texte overlay (optionnel) -->
+  <div class="irl-text-zone" style="display: {{SHOW_TEXT}}">
+    <div class="irl-text text-depth">{{IRL_TEXT}}</div>
+    <div class="irl-accent-bar"></div>
   </div>
 
 </body>

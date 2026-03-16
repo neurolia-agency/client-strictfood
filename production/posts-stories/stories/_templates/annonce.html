@@ -9,12 +9,84 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Oswald:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="_base/base.css">
   <style>
+    /*
+     * ANNONCE — Badge + headline + body + CTA centré
+     * Cadre rigide : tout centré, positions Y fixes
+     * Photo BG full-screen dimmed optionnelle
+     *
+     * LIMITES DE CARACTÈRES :
+     * BADGE_TEXT         : max 20 car, 1 ligne
+     * HEADLINE           : max 30 car, 2 lignes
+     * BODY_TEXT          : max 120 car, 3 lignes
+     * CTA_TEXT           : max 25 car, 1 ligne
+     * TAGLINE            : max 40 car, 1 ligne
+     */
+
     .content {
       padding: 0 80px;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       text-align: center;
     }
+
+    /* ===== FIXED POSITION ZONES ===== */
+
+    .zone-logo {
+      position: absolute;
+      top: var(--safe-top);
+      left: 0; right: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+    }
+    .zone-logo .logo-container { margin-bottom: 0; }
+
+    .zone-badge {
+      position: absolute;
+      top: 440px;
+      left: 80px; right: 80px;
+      z-index: 10;
+      text-align: center;
+    }
+
+    .zone-headline {
+      position: absolute;
+      top: 530px;
+      left: 80px; right: 80px;
+      z-index: 10;
+      text-align: center;
+      max-height: 210px; /* 2 lines safety */
+      overflow: hidden;
+    }
+
+    .zone-divider {
+      position: absolute;
+      top: 770px;
+      left: 0; right: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+    }
+
+    .zone-body {
+      position: absolute;
+      top: 820px;
+      left: 80px; right: 80px;
+      z-index: 10;
+      text-align: center;
+      max-height: 180px; /* 3 lines safety */
+      overflow: hidden;
+    }
+
+    .zone-cta {
+      position: absolute;
+      top: 1060px;
+      left: 80px; right: 80px;
+      z-index: 10;
+      text-align: center;
+    }
+
+    /* ===== TYPOGRAPHY ===== */
 
     .annonce-badge {
       display: inline-block;
@@ -28,7 +100,6 @@
       color: var(--accent);
       text-transform: uppercase;
       letter-spacing: 5px;
-      margin-bottom: 50px;
       filter: brightness(1.15);
     }
 
@@ -39,10 +110,7 @@
       color: #fff;
       line-height: 1.05;
       text-transform: uppercase;
-      margin-bottom: 40px;
-      max-width: 900px;
     }
-
     .annonce-headline em {
       color: var(--accent);
       font-style: normal;
@@ -53,7 +121,6 @@
       width: 80px;
       height: 4px;
       background: linear-gradient(to right, transparent, var(--accent), transparent);
-      margin: 0 auto 40px;
       border-radius: 2px;
     }
 
@@ -62,14 +129,8 @@
       font-size: 34px;
       color: rgba(255,255,255,0.7);
       line-height: 1.6;
-      max-width: 800px;
-      margin-bottom: 60px;
     }
-
-    .annonce-body strong {
-      color: #fff;
-      font-weight: 600;
-    }
+    .annonce-body strong { color: #fff; font-weight: 600; }
 
     .annonce-cta {
       display: inline-block;
@@ -84,7 +145,7 @@
       letter-spacing: 3px;
     }
 
-    /* Image en fond si fournie */
+    /* ===== BACKGROUND ===== */
     .annonce-bg {
       position: absolute;
       top: 0; left: 0;
@@ -103,7 +164,7 @@
     }
   </style>
 </head>
-<body class="{{MOOD_CLASS}} {{IMG_CLASS}}">
+<body class="{{MOOD_CLASS}} {{IMG_CLASS}} {{GRADIENT_CLASS}} {{PHOTO_PRESET}}">
 
   <!-- Optional background image -->
   <img class="annonce-bg" src="{{BG_IMAGE_PATH}}" alt="" style="display: {{SHOW_BG}}">
@@ -112,24 +173,32 @@
   <div class="gradient-center"></div>
   <div class="ambient-bottom"></div>
 
-  <!-- Main content -->
-  <div class="content">
+  <!-- FIXED POSITION ZONES -->
 
-    <!-- Logo -->
-    <div class="logo-container" style="margin-bottom: 60px;">
+  <div class="zone-logo">
+    <div class="logo-container">
       <img src="_base/logo.svg" alt="STRICT FOOD'S">
     </div>
+  </div>
 
+  <div class="zone-badge">
     <div class="annonce-badge">{{BADGE_TEXT}}</div>
+  </div>
 
+  <div class="zone-headline">
     <div class="annonce-headline text-depth">{{HEADLINE}}</div>
+  </div>
 
+  <div class="zone-divider">
     <div class="divider"></div>
+  </div>
 
+  <div class="zone-body">
     <div class="annonce-body text-depth mark-tape">{{BODY_TEXT}}</div>
+  </div>
 
-    <div class="annonce-cta" style="display: {{SHOW_CTA}}">{{CTA_TEXT}}</div>
-
+  <div class="zone-cta" style="display: {{SHOW_CTA}}">
+    <div class="annonce-cta">{{CTA_TEXT}}</div>
   </div>
 
   <!-- Bottom -->

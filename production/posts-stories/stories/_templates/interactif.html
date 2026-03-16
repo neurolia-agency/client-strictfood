@@ -9,18 +9,73 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Oswald:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="_base/base.css">
   <style>
+    /*
+     * INTERACTIF — Question + zone sticker. Mode Single ou VS.
+     * Cadre rigide : positions Y fixes
+     *
+     * LIMITES DE CARACTÈRES :
+     * QUESTION           : max 50 car, 2 lignes
+     * PRODUCT_A_LABEL    : max 10 car, 1 ligne (mode VS)
+     * PRODUCT_B_LABEL    : max 10 car, 1 ligne (mode VS)
+     * TAGLINE            : max 40 car, 1 ligne
+     */
+
     .content {
-      padding: var(--safe-top) 70px 0;
+      padding: 0 70px 0;
       align-items: flex-start;
+      justify-content: flex-start;
     }
 
+    /* ===== FIXED POSITION ZONES ===== */
+
+    .zone-logo {
+      position: absolute;
+      top: var(--safe-top);
+      left: 70px;
+      z-index: 10;
+    }
+
+    .zone-label {
+      position: absolute;
+      top: 370px;
+      left: 90px;
+      z-index: 10;
+    }
+
+    .zone-question {
+      position: absolute;
+      top: 410px;
+      left: 90px;
+      right: 90px;
+      z-index: 10;
+      max-height: 180px; /* 2 lines safety */
+      overflow: hidden;
+    }
+
+    .zone-vs-typo {
+      position: absolute;
+      top: 630px;
+      left: 70px;
+      right: 70px;
+      z-index: 10;
+      text-align: center;
+    }
+
+    .zone-sticker {
+      position: absolute;
+      top: 780px;
+      left: 90px;
+      right: 90px;
+      z-index: 10;
+    }
+
+    /* ===== TYPOGRAPHY ===== */
     .question-label {
       font-family: 'DM Sans', sans-serif;
       font-size: 24px;
       color: rgba(255,255,255,0.4);
       text-transform: uppercase;
       letter-spacing: 6px;
-      margin-bottom: 30px;
     }
 
     .question-text {
@@ -30,19 +85,16 @@
       color: #fff;
       line-height: 1.15;
       text-transform: uppercase;
-      margin-bottom: 50px;
-      max-width: 900px;
     }
-
     .question-text em {
       color: var(--accent);
       font-style: normal;
       filter: brightness(1.2);
     }
 
-    /* Zone reservee au sticker Instagram (sondage/quiz/slider) */
+    /* Sticker zone */
     .sticker-zone {
-      width: 900px;
+      width: 100%;
       height: 260px;
       border: 3px dashed rgba(var(--accent-rgb),0.3);
       border-radius: 24px;
@@ -50,7 +102,6 @@
       align-items: center;
       justify-content: center;
     }
-
     .sticker-zone-text {
       font-family: 'DM Sans', sans-serif;
       font-size: 24px;
@@ -59,29 +110,13 @@
       letter-spacing: 4px;
     }
 
-    /* ===== MODE SINGLE — hero image unique (questions generales) ===== */
-    .hero-image {
-      width: 1300px;
-      height: 750px;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: 300px;
-      opacity: 0.85;
-      object-fit: cover;
-      mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 75%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 75%, transparent 100%);
-    }
-
-    /* ===== MODE VS — dual product images (choix A vs B) ===== */
+    /* ===== MODE VS ===== */
     .vs-typo {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 40px;
-      width: 100%;
-      margin-bottom: 30px;
     }
-
     .vs-name {
       font-family: 'Oswald', sans-serif;
       font-weight: 700;
@@ -90,7 +125,6 @@
       text-transform: uppercase;
       letter-spacing: 4px;
     }
-
     .vs-separator {
       font-family: 'Oswald', sans-serif;
       font-weight: 700;
@@ -100,8 +134,8 @@
       letter-spacing: 2px;
     }
 
-    .product-left,
-    .product-right {
+    /* ===== PRODUCT IMAGES (VS mode) ===== */
+    .product-left, .product-right {
       position: absolute;
       width: 620px;
       height: 620px;
@@ -110,14 +144,12 @@
       opacity: 0.88;
       filter: brightness(1.05) saturate(1.1);
     }
-
     .product-left {
       left: -40px;
       bottom: 270px;
       mask-image: radial-gradient(ellipse 90% 90% at 45% 50%, rgba(0,0,0,1) 30%, rgba(0,0,0,0.5) 60%, transparent 80%);
       -webkit-mask-image: radial-gradient(ellipse 90% 90% at 45% 50%, rgba(0,0,0,1) 30%, rgba(0,0,0,0.5) 60%, transparent 80%);
     }
-
     .product-right {
       right: -40px;
       bottom: 250px;
@@ -125,18 +157,28 @@
       -webkit-mask-image: radial-gradient(ellipse 90% 90% at 55% 50%, rgba(0,0,0,1) 30%, rgba(0,0,0,0.5) 60%, transparent 80%);
     }
 
-    /* Ajustements en mode VS */
-    body.vs-mode .question-text {
-      margin-bottom: 20px;
+    /* Single mode hero image */
+    .hero-image {
+      position: absolute;
+      width: 1300px;
+      height: 750px;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 300px;
+      opacity: 0.85;
+      object-fit: cover;
+      z-index: 4;
+      mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 75%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 75%, transparent 100%);
     }
   </style>
 </head>
 <body class="{{MOOD_CLASS}} {{IMG_CLASS}} {{VS_CLASS}}">
 
-  <!-- Mode single : hero image unique (questions generales) -->
+  <!-- Mode single : hero image -->
   <img class="hero-image" src="{{BG_IMAGE_PATH}}" alt="" style="display: {{SHOW_IMAGE}}">
 
-  <!-- Mode VS : dual product images (choix produit A vs B) -->
+  <!-- Mode VS : dual product images -->
   <img class="product-left" src="{{PRODUCT_A_IMAGE}}" alt="" style="display: {{SHOW_VS}}">
   <img class="product-right" src="{{PRODUCT_B_IMAGE}}" alt="" style="display: {{SHOW_VS}}">
 
@@ -145,30 +187,36 @@
   <div class="gradient-bottom"></div>
   <div class="ambient-bottom"></div>
 
-  <!-- Main content -->
-  <div class="content">
+  <!-- FIXED POSITION ZONES -->
 
-    <!-- Logo -->
+  <div class="zone-logo">
     <div class="logo-container">
       <img src="_base/logo.svg" alt="STRICT FOOD'S">
     </div>
+  </div>
 
+  <div class="zone-label">
     <div class="question-label">Ton avis</div>
+  </div>
 
+  <div class="zone-question">
     <div class="question-text text-depth">{{QUESTION}}</div>
+  </div>
 
-    <!-- Bloc VS typographique (mode VS uniquement) -->
-    <div class="vs-typo text-depth" style="display: {{SHOW_VS}}">
+  <!-- VS typo block (VS mode only) -->
+  <div class="zone-vs-typo" style="display: {{SHOW_VS}}">
+    <div class="vs-typo text-depth">
       <div class="vs-name">{{PRODUCT_A_LABEL}}</div>
       <div class="vs-separator">VS</div>
       <div class="vs-name">{{PRODUCT_B_LABEL}}</div>
     </div>
+  </div>
 
-    <!-- Zone ou l'operateur placera le sticker Instagram (sondage/quiz/slider) -->
+  <!-- Sticker zone -->
+  <div class="zone-sticker">
     <div class="sticker-zone">
       <div class="sticker-zone-text">Zone sticker sondage</div>
     </div>
-
   </div>
 
   <!-- Bottom -->

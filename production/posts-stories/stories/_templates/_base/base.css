@@ -353,6 +353,39 @@ body {
  * Variables : --img-sepia, --img-saturate appliques a bg-image ET product-hero.
  */
 
+/* ===== PHOTO PRESETS ===== */
+/* Applied as body classes — override object-position on .bg-image and .hero-image */
+body.photo-centre .bg-image,
+body.photo-centre .hero-image { object-position: 50% 40%; }
+body.photo-droite .bg-image,
+body.photo-droite .hero-image { object-position: 75% 30%; }
+body.photo-gauche .bg-image,
+body.photo-gauche .hero-image { object-position: 25% 40%; }
+body.photo-haut .bg-image,
+body.photo-haut .hero-image { object-position: 50% 20%; }
+body.photo-large .bg-image,
+body.photo-large .hero-image { object-position: 50% 50%; transform: scale(1.15); }
+body.photo-portrait .bg-image,
+body.photo-portrait .hero-image { object-position: 50% 25%; transform: scale(1.1); }
+
+/* ===== GRADIENT FORCE ===== */
+/* Applied as body classes — control overlay opacity for different photo brightness */
+body.gradient-light {
+  --grad-top: 0.35;
+  --grad-bottom: 0.55;
+  --grad-left: 0.60;
+}
+body.gradient-medium {
+  --grad-top: 0.55;
+  --grad-bottom: 0.75;
+  --grad-left: 0.80;
+}
+body.gradient-strong {
+  --grad-top: 0.70;
+  --grad-bottom: 0.88;
+  --grad-left: 0.92;
+}
+
 /* ===== BACKGROUND IMAGE ===== */
 .bg-image {
   position: absolute;
