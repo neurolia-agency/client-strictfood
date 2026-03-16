@@ -234,7 +234,7 @@ Output : `[dossier-post]/03-output/slide-01.png`, `slide-02.png`, etc.
 
 ---
 
-## ÉTAPE FINALE — Génération Caption (tous les modes)
+## ÉTAPE FINALE A — Génération Caption (tous les modes)
 
 **Après** la production de l'image, pour TOUS les modes :
 
@@ -252,6 +252,29 @@ Output : `[dossier-post]/03-output/slide-01.png`, `slide-02.png`, etc.
    ✏️ Modifier ?
    🔄 Régénérer ?
    ```
+
+## ÉTAPE FINALE B — Mise à jour historique (OBLIGATOIRE)
+
+**Après validation de la caption**, mettre à jour `production/_config/historique-production.md` :
+
+1. **Ajouter une ligne** dans la table "Posts produits" :
+   ```
+   | S[X] | YYYY-MM-DD | [Pilier] | [Mode] | [Produit] | [Angle/Sujet] | [Photo utilisée] |
+   ```
+
+2. **Mettre à jour les compteurs** :
+   - Compteur produit : incrémenter le produit, mettre à jour "Dernière apparition"
+   - Compteur pilier : incrémenter la semaine en cours
+   - Compteur mode : incrémenter la semaine en cours
+   - Si un compteur révèle un déséquilibre → ajouter/mettre à jour une alerte
+
+3. **Confirmer** à l'opérateur :
+   ```
+   📊 HISTORIQUE MIS À JOUR
+   Post [date] — [produit] ([pilier], [mode]) enregistré.
+   ```
+
+> Cette étape est **NON NÉGOCIABLE**. Sans mise à jour, le prochain planning n'aura pas la mémoire de ce qui vient d'être produit.
 
 ---
 
@@ -298,3 +321,4 @@ Note : les sous-dossiers 01 et 02 n'existent pas pour les modes `irl-sublimation
 4. **Résolution TOUJOURS 4K** pour les modes full-ia et compositing-ia
 5. **API key TOUJOURS `$GEMINI_API_KEY`** — jamais en dur
 6. **Skills/agents via outils dédiés** — Skill tool et Agent tool, pas d'exécution manuelle
+7. **Historique TOUJOURS mis à jour** — après chaque post produit, mettre à jour `_config/historique-production.md`
