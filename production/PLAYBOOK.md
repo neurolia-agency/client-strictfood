@@ -31,7 +31,12 @@
 Créons le planning de la semaine S[X] (du [date] au [date]).
 ```
 
-Claude commence par **scanner les dossiers de production** pour régénérer l'historique (`_config/historique-production.md`). L'historique reflète exactement ce qui existe sur le disque — si tu as supprimé un post, il disparaît. Claude identifie les produits, piliers et modes en retard, puis te propose un planning qui **compense les manques** et **évite les doublons**. Tu ajustes et valides.
+Claude commence par **scanner les dossiers de production** pour régénérer l'historique (`_config/historique-production.md`). L'historique reflète exactement ce qui existe sur le disque :
+- Un post qui a un PNG dans `final/` = il existe
+- Un post dont le PNG est supprimé = il disparaît de l'historique
+- Même logique pour les stories (`story-NN/final/`)
+
+Claude analyse ensuite **posts ET stories** ensemble (symbiose) : produits, piliers, modes en retard, puis propose un planning qui compense les manques et évite les doublons.
 
 ### Ce que le planning décide
 
@@ -41,7 +46,8 @@ Claude commence par **scanner les dossiers de production** pour régénérer l'h
 | **Modes posts** | Quel mode pour chaque post | Variété garantie (jamais 2x le même consécutif) |
 | **Modes stories** | Quel mode pour chaque story | Mix template + IRL + sublimation + compositing |
 | **Types stories** | Quel type (fiche, éducatif, interactif...) | Alternance des familles visuelles |
-| **Anti-doublons** | Quels produits/piliers/modes sont en retard | Compensation automatique basée sur l'historique |
+| **Symbiose** | Les stories complètent les posts, pas de doublon sujet/photo | Cohérence automatique |
+| **Anti-doublons** | Quels produits/piliers/modes sont en retard | Compensation basée sur l'historique |
 | **Photos IRL** | Quelles photos prendre cette semaine | Liste claire pour Romain/Dorian |
 
 ### Règles de distribution (appliquées automatiquement)
@@ -55,7 +61,11 @@ Claude commence par **scanner les dossiers de production** pour régénérer l'h
 - Chaque jour a au moins 2 modes différents
 - Au moins 1 story non-template par jour (IRL, sublimation, compositing ou full-ia)
 - Max 3 interactifs par semaine
-- Alternance des familles visuelles quotidienne
+
+**Symbiose posts ↔ stories** :
+- Les jours de post, les stories complètent le post (fiche produit, éducatif lié, IRL coulisses)
+- Un produit couvert en post ne refait pas une fiche produit story la même semaine (sauf jour du post)
+- Les photos utilisées en post ne sont pas réutilisées en story la même semaine
 
 ### Les 5 piliers
 
@@ -87,7 +97,7 @@ ou directement :
 /instagram-producer 24-03-2026
 ```
 
-**2.2** Claude lit le planning, crée le brief v3 avec le mode déjà défini, et lance le pipeline adapté. Tu n'as rien à décider sur le mode — c'est fait.
+**2.2** Claude scanne l'historique (posts + stories), lit le planning, crée le brief v3 avec le mode déjà défini, et lance le pipeline adapté.
 
 **2.3** Ce que tu fournis dépend du mode (décidé au planning) :
 
@@ -100,6 +110,8 @@ ou directement :
 | `template` | Valider les données des slides |
 
 **2.4** Valide le checkpoint, puis vérifie l'image et la caption générée.
+
+**2.5** Le résultat final atterrit dans `final/` — c'est ce PNG qui sera tracé dans l'historique.
 
 ---
 
@@ -124,9 +136,18 @@ ou directement :
 | `compositing-irl` | 2 photos → Compositing GPT Images (format 9:16) → PNG |
 | `full-ia` | Prompt → Gemini (format 9:16) → PNG |
 
-> Les stories non-template (`irl-sublimation`, `compositing-irl`, `full-ia`) produisent une image plein cadre. Un overlay léger (logo + texte optionnel) est ajouté via le template `irl-story.html`.
+> Les stories non-template (`irl-sublimation`, `compositing-irl`, `full-ia`) produisent une image plein cadre. Un overlay léger (logo + texte optionnel) est ajouté via `irl-story.html`.
 
-### Tu valides au checkpoint, puis vérifies les PNG.
+### Templates rigides
+
+Chaque template a un **cadre fixe** avec des positions absolues et des **limites de caractères** par zone (voir `_templates/SPECS.md`). Le pipeline vérifie automatiquement avant le render :
+- Texte respecte la limite de caractères
+- Preset photo assigné (ex: `photo-centre`, `photo-droite`)
+- Force de gradient assignée (ex: `gradient-medium`, `gradient-strong`)
+
+Si une violation est détectée, le pipeline s'arrête et demande une correction.
+
+### Tu valides au checkpoint, puis vérifies les PNG dans `story-NN/final/`.
 
 ---
 
@@ -148,14 +169,10 @@ J'ai une super photo du burger de ce midi, je veux en faire un post IRL-sublimat
 ```
 
 ```
-Un client a posté un avis incroyable, je veux faire un post "Le Quartier" avec un visuel full-ia.
-```
-
-```
 Il fait beau, Romain est devant la devanture, on compose un portrait pour Instagram.
 ```
 
-Le pipeline crée le dossier dans `posts-stories/posts/hors-planning/DD-MM-YYYY/` et exécute normalement. Le post est tagué hors-planning et n'affecte pas les compteurs de distribution du planning.
+Le pipeline crée le dossier dans `posts-stories/posts/hors-planning/DD-MM-YYYY/` avec la structure standard (brief/, production/, brouillons/, final/).
 
 ### Story hors planning
 
@@ -163,15 +180,9 @@ Le pipeline crée le dossier dans `posts-stories/posts/hors-planning/DD-MM-YYYY/
 J'ai une photo de l'arrivage de ce matin, fais-moi une story IRL avec.
 ```
 
-```
-On a un événement ce soir, crée une story annonce vite.
-```
-
 Le pipeline crée dans `posts-stories/stories/hors-planning/DD-MM-YYYY/`.
 
 ### Invoquer un agent directement
-
-Tu peux aussi appeler n'importe quel skill ou agent de la chaîne indépendamment :
 
 | Tu veux... | Commande / Demande |
 |------------|-------------------|
@@ -182,7 +193,7 @@ Tu peux aussi appeler n'importe quel skill ou agent de la chaîne indépendammen
 | Juste rendre un template story | `/story-producer` sur un brief ponctuel |
 | Générer une variante produit | Invoke l'agent `product-variant-generator` |
 
-> Hors planning = liberté totale. Aucune contrainte de mode ou de pilier. Tu fais ce que tu veux, quand tu veux.
+> Hors planning = liberté totale. Aucune contrainte de mode ou de pilier. Tu fais ce que tu veux, quand tu veux. Le contenu apparaîtra dans l'historique au prochain scan.
 
 ---
 
@@ -204,10 +215,10 @@ Tu peux aussi appeler n'importe quel skill ou agent de la chaîne indépendammen
 
 | Mode | Le plus efficace pour | Exemples |
 |------|----------------------|----------|
-| `full-ia` | Visuels food porn élaborés, nouveau produit sans photo, scènes impossible à shooter | Hero shot burger vapeur dramatique, dessert lévitation |
+| `full-ia` | Visuels food porn élaborés, nouveau produit sans photo, scènes impossibles | Hero shot burger vapeur dramatique, dessert lévitation |
 | `irl-sublimation` | Authenticité + qualité DA, contenu humain, coulisses | Romain qui assemble, arrivage ingrédients, portrait équipe |
-| `compositing-irl` | Produit in situ sans shooting studio | Burger sur comptoir, tenders devant la devanture |
-| `compositing-ia` | Ambiance cinématique autour d'un vrai produit | Burger dans cuisine industrielle vapeur, produit extérieur nuit |
+| `compositing-irl` | Produit immergé dans le lieu réel | Burger sur comptoir, tenders devant la devanture |
+| `compositing-ia` | Ambiance cinématique autour d'un vrai produit | Burger dans cuisine industrielle vapeur, extérieur nuit |
 | `template` | Données chiffrées, comparaisons, éducation | Carrousel macros, "nous vs classique", tips nutrition |
 
 ### Distribution cible
@@ -224,8 +235,6 @@ Tu peux aussi appeler n'importe quel skill ou agent de la chaîne indépendammen
 
 ### Type × Mode — Combinaisons possibles
 
-Chaque type de story peut utiliser différents modes. Le planning choisit la combinaison.
-
 | Type | Modes possibles | Mode par défaut |
 |------|----------------|-----------------|
 | Fiche Produit | template, irl-sublimation | template |
@@ -234,21 +243,33 @@ Chaque type de story peut utiliser différents modes. Le planning choisit la com
 | Interactif | template | template |
 | Annonce | template, full-ia | template |
 | IRL | irl | irl |
+| Process | template (process.html) | template |
 | Séquence | template, irl-sublimation | template |
 | Produit DA | irl-sublimation, compositing-irl, compositing-ia, full-ia | irl-sublimation |
 | Produit en situation | compositing-irl, compositing-ia | compositing-irl |
 | Visuel IA | full-ia | full-ia |
 | Recap | — (semi-manuel) | — |
 
-> **Produit DA**, **Produit en situation** et **Visuel IA** sont des stories visuelles (pas template). Elles produisent une image plein cadre avec overlay logo optionnel.
+### Templates HTML
+
+| Template | Types | Cadre |
+|----------|-------|-------|
+| `vitrine.html` | Fiche Produit (variante produit) + Focus Ingrédient (variante composant) | Photo hero haut 1080px + info zone bas |
+| `educatif.html` | Éducatif | Gros chiffre + explication + VS, positions Y fixes |
+| `interactif.html` | Interactif | Question + zone sticker, mode Single ou VS |
+| `annonce.html` | Annonce, Lieu | Centré, badge + headline + body + CTA |
+| `irl-story.html` | IRL + overlay stories visuelles | Photo plein cadre + overlay DA minimal |
+| `process.html` | Process | Split avant/après avec bande séparation DA |
+
+> Tous les templates ont des **cadres rigides** avec positions absolues et **limites de caractères** par zone. Voir `_templates/SPECS.md`.
 
 ### Familles visuelles
 
-| Famille | Types / Modes | Fond | Contenu |
-|---------|--------------|------|---------|
-| **Dark Premium** | template (éducatif, interactif, annonce), irl | Charbon | Information, engagement |
-| **Vitrine** | template (fiche produit, focus ingrédient) | Gradient coloré | Appétit, showcase |
-| **Visuel plein cadre** | irl-sublimation, compositing-irl, compositing-ia, full-ia | Image plein cadre | Impact visuel |
+| Famille | Types / Modes | Fond |
+|---------|--------------|------|
+| **Dark Premium** | template (éducatif, interactif, annonce), irl | Charbon |
+| **Vitrine** | template (fiche produit, focus ingrédient) | Gradient coloré |
+| **Visuel plein cadre** | irl-sublimation, compositing-irl, compositing-ia, full-ia | Image plein cadre |
 
 ### Fréquences
 
@@ -260,7 +281,8 @@ Chaque type de story peut utiliser différents modes. Le planning choisit la com
 | Focus Ingrédient | 1-2 |
 | Interactif | 2-3 (max 3) |
 | Annonce | 1-2 |
-| Produit DA / en situation / Visuel IA | 3-5 (mix des stories visuelles) |
+| Process | 0-1 |
+| Produit DA / en situation / Visuel IA | 3-5 |
 | Séquence | 0-1 |
 | Recap | 1 |
 
@@ -271,35 +293,32 @@ Chaque type de story peut utiliser différents modes. Le planning choisit la com
 ### Architecture globale
 
 ```
-           ┌─────────────────────────────────┐
-           │      PLANNING SEMAINE           │
-           │  (piliers + modes + types)       │
-           │  Toutes les décisions ici.       │
-           └──────────┬──────────────────────┘
-                      │
-         ┌────────────┼────────────┐
-         ▼                         ▼
-    POSTS                     STORIES
-  (brief-v3.md)           (brief-story.md)
-    mode = X                 mode = X
-         │                         │
-         ▼                         ▼
-  /instagram-producer       /story-producer
-    route par mode            route par mode
-         │                         │
-    ┌────┼────┐              ┌─────┼─────┐
-    ▼    ▼    ▼              ▼     ▼     ▼
-  full  irl  comp          templ  irl   visual
-  -ia   sub  osit          ate    brut  (sub/comp/ia)
-    │    │    │              │     │     │
-    ▼    ▼    ▼              ▼     ▼     ▼
-  IMAGE PRODUITE          STORY PNG (1080×1920)
-         │
-         ▼
-  /caption-writer
-         │
-         ▼
-    CAPTION
+   HISTORIQUE                PLANNING SEMAINE
+   (scan disque)    ──→     (piliers + modes + types)
+        ↑                         │
+        │            ┌────────────┼────────────┐
+        │            ▼                         ▼
+        │       POSTS                     STORIES
+        │     (brief-v3.md)           (brief-story.md)
+        │       mode = X                 mode = X
+        │            │                         │
+        │            ▼                         ▼
+        │     /instagram-producer       /story-producer
+        │       route par mode            route par mode
+        │            │                         │
+        │       ┌────┼────┐              ┌─────┼─────┐
+        │       ▼    ▼    ▼              ▼     ▼     ▼
+        │     full  irl  comp          templ  irl   visual
+        │     -ia   sub  osit          ate    brut  (sub/comp/ia)
+        │       │    │    │              │     │     │
+        │       ▼    ▼    ▼              ▼     ▼     ▼
+        │     final/*.png             story-NN/final/story.png
+        │       │
+        │       ▼
+        │   /caption-writer
+        │       │
+        │       ▼
+        └── production/caption.md
 ```
 
 ```
@@ -310,8 +329,52 @@ Chaque type de story peut utiliser différents modes. Le planning choisit la com
            └──────────┬──────────────────────┘
                       │
               N'importe quel skill/agent
-              → posts-stories/[type]/hors-planning/
+              → posts-stories/[type]/hors-planning/DD-MM-YYYY/
 ```
+
+### Structure des dossiers (unifiée posts + stories)
+
+```
+production/posts-stories/
+├── posts/
+│   ├── periode-1/
+│   │   ├── planning-S1.md
+│   │   └── S1/
+│   │       └── 10-03-2026/           ← Post
+│   │           ├── brief/
+│   │           │   └── brief.md
+│   │           ├── production/
+│   │           │   ├── input.md
+│   │           │   ├── art-direction.md
+│   │           │   ├── prompt.md
+│   │           │   └── caption.md
+│   │           ├── brouillons/
+│   │           │   └── v1.png
+│   │           └── final/
+│   │               └── post.png       ← Tracé dans l'historique
+│   └── hors-planning/
+│       └── DD-MM-YYYY/
+│           └── (même structure)
+└── stories/
+    ├── S1/
+    │   └── lundi/
+    │       ├── brief/
+    │       │   └── brief-story.md     ← Brief du jour
+    │       ├── story-01/
+    │       │   ├── production/
+    │       │   │   ├── data.md
+    │       │   │   └── story.html
+    │       │   ├── brouillons/
+    │       │   └── final/
+    │       │       └── story.png      ← Tracé dans l'historique
+    │       └── story-02/
+    │           └── (même structure)
+    └── hors-planning/
+        └── DD-MM-YYYY/
+            └── (même structure)
+```
+
+> **Règle historique** : un contenu existe = `final/` contient un PNG. Pas de PNG = pas dans l'historique.
 
 ### Fichiers clés
 
@@ -319,11 +382,12 @@ Chaque type de story peut utiliser différents modes. Le planning choisit la com
 |---------|------|
 | `PLAYBOOK.md` | **Ce fichier** — point d'entrée, guide par intention |
 | `CLAUDE.md` | Statut pipeline + référence technique |
-| `_templates/planning-semaine.md` | Template planning (règles de distribution intégrées) |
+| `_templates/planning-semaine.md` | Template planning (distribution + symbiose + historique) |
 | `_templates/brief-v3.md` | Template brief post |
 | `_templates/brief-story.md` | Template brief story |
+| `_templates/SPECS.md` | **Spécifications templates** — limites caractères, presets photo, gradients |
 | `_config/pipeline.md` | Config modes, DA, modèles |
-| `_config/historique-production.md` | **GÉNÉRÉ par scan** — reflet du disque, régénéré avant chaque planning |
+| `_config/historique-production.md` | **GÉNÉRÉ par scan** — reflet du disque |
 | `_config/photo-references.md` | Catalogue photos existantes |
 | `_config/brand-props.md` | Accessoires marque |
 | `_recettes/[slug].md` | Fiches produit |
@@ -335,24 +399,7 @@ Chaque type de story peut utiliser différents modes. Le planning choisit la com
 | `/instagram-producer DD-MM-YYYY` | Produit un post (mode lu depuis le brief) |
 | `/story-producer S[X] [jour]` | Produit les stories d'un jour |
 | `/story-producer S[X]` | Produit toutes les stories de la semaine |
-
-### Dossiers
-
-```
-production/posts-stories/
-├── posts/
-│   ├── periode-1/
-│   │   ├── planning-S1.md
-│   │   ├── S1/10-03-2026/...
-│   │   └── S2/17-03-2026/...
-│   └── hors-planning/             ← Posts spontanés
-│       └── DD-MM-YYYY/...
-└── stories/
-    ├── S1/lundi/...
-    ├── S2/mardi/...
-    └── hors-planning/             ← Stories spontanées
-        └── DD-MM-YYYY/...
-```
+| `Régénère l'historique de production` | Scanne les dossiers et réécrit l'historique |
 
 ---
 
@@ -366,14 +413,18 @@ production/posts-stories/
 - [ ] Caption avec hook fort
 - [ ] Hashtags pertinents
 - [ ] Pas de doublon avec un post récent
+- [ ] PNG dans `final/` (pour le tracking historique)
 
 ### B. Checklist story
 
 - [ ] Textes dans la zone safe Instagram
+- [ ] Textes respectent les limites de caractères (SPECS.md)
+- [ ] Preset photo et force gradient assignés
 - [ ] Pas de zone basse vide
 - [ ] Pas de doublon logo
 - [ ] Bon produit (pain noir)
 - [ ] Mix des familles visuelles sur la journée
+- [ ] PNG dans `story-NN/final/` (pour le tracking historique)
 
 ### C. Glossaire
 
@@ -383,10 +434,15 @@ production/posts-stories/
 | **Mode** | Méthode de création visuelle (full-ia, irl-sublimation, compositing-irl, compositing-ia, template) |
 | **Pilier** | Catégorie éditoriale (Le Plat, La Cuisine, Les Macros, L'Équipe, Le Quartier) |
 | **Hors planning** | Contenu spontané créé en dehors du planning, sans contrainte de distribution |
+| **Symbiose** | Les posts et stories se complètent mutuellement, pas de doublon sujet/photo |
+| **Historique** | Fichier généré par scan des dossiers — reflète ce qui existe sur le disque |
 | **DA** | Direction Artistique "Dark Food Premium" |
-| **Template** | Modèle HTML paramétré rendu en image par Puppeteer |
+| **Template** | Modèle HTML paramétré, cadre rigide, rendu en image par Puppeteer |
+| **SPECS** | Spécifications des templates — limites caractères, presets photo, forces gradient |
 | **Sublimation** | Retouche IA d'une photo réelle pour aligner avec la DA |
 | **Compositing** | Fusion de 2 images en un montage réaliste |
-| **Vitrine** | Famille visuelle : fond gradient coloré, produit lumineux |
+| **Vitrine** | Famille visuelle / template unifié : fond gradient coloré, produit lumineux |
 | **Dark Premium** | Famille visuelle : fond charbon, contenu informatif |
 | **Visuel plein cadre** | Story non-template : image générée/sublimée en 1080×1920 |
+| **Preset photo** | Classe CSS qui positionne la photo (photo-centre, photo-droite, etc.) |
+| **Force gradient** | Classe CSS qui contrôle l'opacité des overlays (gradient-light/medium/strong) |
