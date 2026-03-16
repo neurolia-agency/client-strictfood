@@ -120,7 +120,7 @@ Les briefs S1-S2 sont au format v2 (caption dans le brief, pas de mode). Ils fon
 
 Les stories utilisent les mêmes 5 modes que les posts. Le mode est décidé au planning.
 
-**Template** (~50%) : Fiche Produit, Focus Ingrédient, Interactif, Éducatif, Annonce, Teaser
+**Template** (~50%) : Fiche Produit, Focus Ingrédient, Interactif, Éducatif, Annonce
 **IRL** (~20%) : Photo brute + overlay DA minimal
 **Visuelles** (~30%) : irl-sublimation, compositing-irl, compositing-ia, full-ia → image plein cadre + overlay logo
 

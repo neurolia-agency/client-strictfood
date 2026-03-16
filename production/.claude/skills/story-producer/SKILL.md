@@ -37,7 +37,7 @@ Lire `strategie/strategie-globale.md` (chemin depuis la racine du projet) pour :
 - Vérifier la **cohérence** du brief avec le calendrier thématique de la semaine
 - S'assurer que le **ton et les objectifs** du brief alignent avec la stratégie globale
 
-Si incohérence détectée → WARN à l'opérateur avant de continuer (ex: "Le brief mardi est un Teaser mais la stratégie prévoit un pilier Éducation ce jour-là").
+Si incohérence détectée → WARN à l'opérateur avant de continuer (ex: "Le brief mardi est un Éducatif mais la stratégie prévoit un pilier Engagement ce jour-là").
 
 ## Types de stories et templates
 
@@ -47,7 +47,6 @@ Deux familles visuelles coexistent pour varier la dynamique du feed stories :
 
 | Type | Template HTML | Pipeline |
 |------|---------------|----------|
-| Teaser | `teaser-post.html` | Oui |
 | Interactif | `interactif.html` | Oui |
 | Éducatif | `educatif.html` | Oui |
 | Annonce | `annonce.html` | Oui |
@@ -103,7 +102,7 @@ Les stories Recap (semi-manuelles) sont listées dans le récap mais ne produise
 1. Lire `production/posts-stories/stories/[semaine]/[jour]/brief-story.md`
 2. Parser chaque section `## Story N` et extraire :
    - **Numéro** (N)
-   - **Type** : Fiche Produit / Teaser / Interactif / Éducatif / Annonce / Lieu / Ambiance / Focus Ingrédient / IRL / Séquence / Récap
+   - **Type** : Fiche Produit / Interactif / Éducatif / Annonce / Lieu / Ambiance / Focus Ingrédient / IRL / Produit DA / Produit en situation / Visuel IA / Séquence / Récap
    - **Produit** (si applicable) : slug recette
    - **Ingrédient** (si Focus Ingrédient) : nom + artisan
    - **Template HTML** correspondant (voir table ci-dessus)
@@ -117,7 +116,6 @@ Les stories Recap (semi-manuelles) sont listées dans le récap mais ne produise
         |------|-------------|--------------|
         | Fiche Produit | cuivre | hero |
         | Focus Ingrédient | feuille | hero |
-        | Teaser | grenat | visible |
         | Éducatif | feuille | visible |
         | Interactif | cuivre | visible |
         | Annonce | cuivre | visible |
@@ -175,12 +173,11 @@ Pour chaque story automatisable identifiée à l'étape 1 :
    - Tous les placeholders du template sont couverts
    - Aucune `⚠️ DONNÉE MANQUANTE`
 
-**Si pas de produit référencé** (Teaser, Interactif sans données produit, Annonce, Lieu) :
+**Si pas de produit référencé** (Interactif sans données produit, Annonce, Lieu) :
 → Construire le `story-[NN]-data.md` directement depuis le brief **avec les textes réécrits par le copywriter**. Mapper les champs vers les placeholders du template :
 
 | Type | Champs brief → Placeholders |
 |------|------------------------------|
-| Teaser | Label → `{{TEASER_LABEL}}`, Hook → `{{TEASER_HOOK}}`, Date → `{{TEASER_DATE}}`, Sous-texte → `{{TEASER_SUBTEXT}}`, Image → `{{BG_IMAGE_PATH}}` |
 | Interactif | Question → `{{QUESTION}}`, Option A → `{{OPTION_A}}`, Emoji A → `{{OPTION_A_EMOJI}}`, Option B → `{{OPTION_B}}`, Emoji B → `{{OPTION_B_EMOJI}}`, Image → `{{BG_IMAGE_PATH}}`, Tagline → `{{TAGLINE}}` |
 | Annonce / Lieu | Badge → `{{BADGE_TEXT}}`, Headline → `{{HEADLINE}}`, Body → `{{BODY_TEXT}}`, CTA → `{{CTA_TEXT}}`, Image → `{{BG_IMAGE_PATH}}`, Tagline → `{{TAGLINE}}` |
 | Éducatif | Titre → `{{TITLE}}`, Chiffre → `{{FACT_NUMBER}}`, Unité → `{{FACT_UNIT}}`, Explication → `{{EXPLANATION}}`, VS données → `{{VS_*}}`, Image fond → `{{BG_IMAGE_PATH}}`, Image produit → `{{HERO_IMAGE_PATH}}` |
@@ -248,9 +245,9 @@ Pour chaque story validée :
    ```
    ✅ Stories générées — [semaine]/[jour]
 
-   Story 01 (Teaser) [DARK PREMIUM] :
+   Story 01 (Fiche Produit) [VITRINE] :
      📄 story-01.html  📸 story-01.png
-   Story 02 (Fiche Produit) [VITRINE] :
+   Story 02 (IRL) [DARK PREMIUM] :
      📄 story-02.html  📸 story-02.png
 
    📋 Semi-manuel :
@@ -288,8 +285,8 @@ Si l'opérateur demande une semaine entière (`S1`) :
 
    | Jour | Story | Type | Style | Status | Output |
    |------|-------|------|-------|--------|--------|
-   | lundi | #1 | Teaser | Dark | ✅ Généré | story-01.png |
-   | lundi | #2 | Fiche Produit | Vitrine | ✅ Généré | story-02.png |
+   | lundi | #1 | Fiche Produit | Vitrine | ✅ Généré | story-01.png |
+   | lundi | #2 | IRL | Dark | ✅ Généré | story-02.png |
    | mardi | #1 | Focus Ingrédient | Vitrine | ✅ Généré | story-01.png |
    | mardi | #2 | Éducatif | Dark | ✅ Généré | story-02.png |
    | ... | ... | ... | ... | ... | ... |
@@ -314,7 +311,7 @@ Les templates utilisent des chemins relatifs (`_base/base.css`, `_base/logo.svg`
 
 | Famille | Templates | Fond | Produit/Image | Usage |
 |---------|-----------|------|---------------|-------|
-| **Dark Premium** | teaser, éducatif, interactif, annonce | Charbon #141210 | Background dimmed, flou | Information, éducation, suspense |
+| **Dark Premium** | éducatif, interactif, annonce, irl | Charbon #141210 | Background dimmed, flou | Information, engagement, coulisses |
 | **Vitrine** | produit-vitrine, focus-ingredient | Gradient coloré chaud | Hero lumineux, sans filtre sepia | Appétit, désir, showcase |
 
 ### Sublimation texte (Dark Premium)

@@ -40,7 +40,7 @@ Claude crée le fichier, applique les règles de distribution automatiquement, e
 | **Piliers** | Quel pilier pour chaque post | Distribution équilibrée sur le mois |
 | **Modes posts** | Quel mode pour chaque post | Variété garantie (jamais 2x le même consécutif) |
 | **Modes stories** | Quel mode pour chaque story | Mix template + IRL + sublimation + compositing |
-| **Types stories** | Quel type (teaser, fiche, éducatif...) | Alternance Dark Premium / Vitrine |
+| **Types stories** | Quel type (fiche, éducatif, interactif...) | Alternance des familles visuelles |
 | **Photos IRL** | Quelles photos prendre cette semaine | Liste claire pour Romain/Dorian |
 
 ### Règles de distribution (appliquées automatiquement)
@@ -54,7 +54,7 @@ Claude crée le fichier, applique les règles de distribution automatiquement, e
 - Chaque jour a au moins 2 modes différents
 - Au moins 1 story non-template par jour (IRL, sublimation, compositing ou full-ia)
 - Max 3 interactifs par semaine
-- Alternance Vitrine / Dark Premium quotidienne
+- Alternance des familles visuelles quotidienne
 
 ### Les 5 piliers
 
@@ -227,7 +227,6 @@ Chaque type de story peut utiliser différents modes. Le planning choisit la com
 
 | Type | Modes possibles | Mode par défaut |
 |------|----------------|-----------------|
-| Teaser | template, full-ia | template |
 | Fiche Produit | template, irl-sublimation | template |
 | Focus Ingrédient | template, irl-sublimation | template |
 | Éducatif | template | template |
@@ -240,13 +239,13 @@ Chaque type de story peut utiliser différents modes. Le planning choisit la com
 | Visuel IA | full-ia | full-ia |
 | Recap | — (semi-manuel) | — |
 
-> **Produit DA**, **Produit en situation** et **Visuel IA** sont de nouveaux types de stories visuelles (pas template). Ils produisent une image plein cadre avec overlay logo optionnel.
+> **Produit DA**, **Produit en situation** et **Visuel IA** sont des stories visuelles (pas template). Elles produisent une image plein cadre avec overlay logo optionnel.
 
 ### Familles visuelles
 
-| Famille | Templates / Modes | Fond | Contenu |
-|---------|------------------|------|---------|
-| **Dark Premium** | template (éducatif, interactif, annonce, teaser), irl | Charbon | Information, engagement |
+| Famille | Types / Modes | Fond | Contenu |
+|---------|--------------|------|---------|
+| **Dark Premium** | template (éducatif, interactif, annonce), irl | Charbon | Information, engagement |
 | **Vitrine** | template (fiche produit, focus ingrédient) | Gradient coloré | Appétit, showcase |
 | **Visuel plein cadre** | irl-sublimation, compositing-irl, compositing-ia, full-ia | Image plein cadre | Impact visuel |
 
@@ -254,7 +253,6 @@ Chaque type de story peut utiliser différents modes. Le planning choisit la com
 
 | Type | Par semaine |
 |------|------------|
-| Teaser | 3-4 (1 par jour de post) |
 | Fiche Produit | 4-5 |
 | IRL | 4-5 |
 | Éducatif | 2-3 |
@@ -373,7 +371,7 @@ production/posts-stories/
 - [ ] Pas de zone basse vide
 - [ ] Pas de doublon logo
 - [ ] Bon produit (pain noir)
-- [ ] Mix Vitrine / Dark Premium / Visuel sur la journée
+- [ ] Mix des familles visuelles sur la journée
 
 ### C. Glossaire
 

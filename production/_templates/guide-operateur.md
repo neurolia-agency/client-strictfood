@@ -35,7 +35,7 @@ Copier le template `_templates/planning-semaine.md` dans `posts-stories/posts/pe
 2. **Planifier les stories** par jour (3-4/jour) :
    - Alterner Dark Premium et Vitrine chaque jour
    - Max 3 interactifs par semaine
-   - Placer un Teaser avant chaque post
+   - Placer une Fiche Produit les jours de post
 
 3. **Vérifier la distribution piliers** (table en bas du planning)
 

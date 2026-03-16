@@ -12,6 +12,7 @@
 | Champ | Valeur |
 |-------|--------|
 | Type | [Fiche Produit / Interactif / Éducatif / Annonce / Lieu / Focus Ingrédient / IRL / Produit DA / Produit en situation / Visuel IA / Séquence / Recap] |
+
 | Mode | [template / irl / irl-sublimation / compositing-irl / compositing-ia / full-ia] |
 | Highlight | [LA CARTE / COULISSES / NOS ARTISANS / NOUS TROUVER / L'ÉQUIPE / —] |
 | Qui produit | Pipeline |
@@ -148,7 +149,7 @@ Sujet : `[description du visuel — ex: "STRICT Bœuf en close-up macro, vapeur,
 Direction artistique : `[ambiance, éclairage, style — ex: "cinématique, contre-jour, grain film"]`
 Texte overlay : `[optionnel — 1 phrase ou "—"]`
 
-> Utiliser pour les stories d'impact visuel : teasers spéciaux, lancements, visuels impossibles à photographier.
+> Utiliser pour les stories d'impact visuel : lancements, visuels impossibles à photographier.
 
 #### Si type = Séquence (N/M)
 
@@ -192,7 +193,6 @@ Texte overlay recommandé : `[texte]`
 | Éducatif | `educatif.html` | Dark Premium |
 | Interactif | `interactif.html` | Dark Premium |
 | Annonce / Lieu | `annonce.html` | Dark Premium |
-| Teaser | `teaser-post.html` | Dark Premium |
 
 ### Stories IRL (mode `irl`)
 

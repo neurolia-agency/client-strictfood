@@ -240,7 +240,6 @@ Les stories utilisent les mêmes 5 modes que les posts. Le mode est décidé au 
 | Interactif | `interactif.html` | Dark Premium |
 | Éducatif | `educatif.html` | Dark Premium |
 | Annonce | `annonce.html` | Dark Premium |
-| Teaser | `teaser-post.html` | Dark Premium |
 
 #### Stories IRL (mode `irl`)
 

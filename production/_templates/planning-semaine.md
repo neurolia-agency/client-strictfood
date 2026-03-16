@@ -32,7 +32,7 @@ Le planning assure le **relief visuel** du feed et des stories. Chaque contenu a
 | `irl` | ~20% | ~5 | Photo brute overlay minimal (rush, coulisses, ambiance) |
 | `irl-sublimation` | ~15% | ~3-4 | Photo sublimée DA en 9:16 (beau plat IRL, portrait) |
 | `compositing-irl` | ~10% | ~2-3 | Produit dans le lieu (comptoir, salle, devanture) |
-| `full-ia` | ~5% | ~1 | Visuel IA impactant en story (teaser spécial, lancement) |
+| `full-ia` | ~5% | ~1 | Visuel IA impactant (lancement, produit spécial) |
 
 **Contraintes stories** :
 - Chaque jour a au moins 2 modes différents parmi ses stories
@@ -70,27 +70,27 @@ Le planning assure le **relief visuel** du feed et des stories. Chaque contenu a
 
 | Jour | # | Type | Mode | Sujet | Lien post |
 |------|---|------|------|-------|-----------|
-| Lun | 1 | Teaser | template | Teaser post du jour | Post #1 |
-| Lun | 2 | Fiche Produit | template | [Produit] | Post #1 |
-| Lun | 3 | IRL | irl | Coulisses préparation | — |
+| Lun | 1 | Fiche Produit | template | [Produit] | Post #1 |
+| Lun | 2 | IRL | irl | Coulisses préparation | — |
+| Lun | 3 | Produit DA | irl-sublimation | [Plat sublimé] | — |
 | Mar | 1 | Éducatif | template | [Sujet nutrition] | — |
 | Mar | 2 | Focus Ingrédient | irl-sublimation | [Photo ingrédient sublimée] | — |
 | Mar | 3 | Annonce | template | [Horaires/Nouveauté] | — |
-| Mer | 1 | Teaser | template | Teaser post du jour | Post #2 |
-| Mer | 2 | Fiche Produit | template | [Produit] | Post #2 |
-| Mer | 3 | IRL | irl | Rush du midi | — |
+| Mer | 1 | Fiche Produit | template | [Produit] | Post #2 |
+| Mer | 2 | IRL | irl | Rush du midi | — |
+| Mer | 3 | Éducatif | template | [Sujet nutrition] | — |
 | Jeu | 1 | Produit DA | irl-sublimation | [Beau plat sublimé en story] | — |
 | Jeu | 2 | Interactif | template | [Question] | — |
 | Jeu | 3 | Produit en situation | compositing-irl | [Produit sur comptoir] | — |
-| Ven | 1 | Teaser | template | Teaser post du jour | Post #3 |
+| Ven | 1 | Fiche Produit | template | [Produit] | Post #3 |
 | Ven | 2 | IRL | irl | Ambiance vendredi soir | — |
-| Ven | 3 | Focus Ingrédient | template | [Ingrédient] | — |
+| Ven | 3 | Focus Ingrédient | irl-sublimation | [Photo ingrédient sublimée] | — |
 | Sam | 1 | Interactif | template | [Question fun] | — |
 | Sam | 2 | Produit DA | compositing-irl | [Produit + devanture] | — |
 | Sam | 3 | Recap | — | Meilleur post semaine | — |
 | Dim | 1 | IRL | irl | Ambiance dimanche | — |
 | Dim | 2 | Fiche Produit | template | [Produit] | — |
-| Dim | 3 | Visuel IA | full-ia | [Teaser ou lancement spécial] | — |
+| Dim | 3 | Visuel IA | full-ia | [Lancement ou visuel spécial] | — |
 
 ### Modes stories — Ce que chaque mode produit
 
@@ -175,7 +175,7 @@ Le planning assure le **relief visuel** du feed et des stories. Chaque contenu a
 - [ ] Chaque jour de stories a au moins 2 modes différents
 - [ ] Au moins 1 story non-template par jour
 - [ ] Max 3 interactifs sur la semaine
-- [ ] Chaque jour de post a un Teaser associé
+- [ ] Chaque jour de post a une Fiche Produit associée
 - [ ] Les photos IRL nécessaires sont listées et demandées
 - [ ] La distribution piliers est cohérente avec la cible mensuelle
 
