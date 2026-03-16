@@ -31,7 +31,7 @@
 Créons le planning de la semaine S[X] (du [date] au [date]).
 ```
 
-Claude commence par **lire l'historique** (`_config/historique-production.md`) pour savoir ce qui a déjà été fait. Il identifie les produits, piliers et modes en retard, puis te propose un planning qui **compense les manques** et **évite les doublons**. Tu ajustes et valides.
+Claude commence par **scanner les dossiers de production** pour régénérer l'historique (`_config/historique-production.md`). L'historique reflète exactement ce qui existe sur le disque — si tu as supprimé un post, il disparaît. Claude identifie les produits, piliers et modes en retard, puis te propose un planning qui **compense les manques** et **évite les doublons**. Tu ajustes et valides.
 
 ### Ce que le planning décide
 
@@ -323,7 +323,7 @@ Chaque type de story peut utiliser différents modes. Le planning choisit la com
 | `_templates/brief-v3.md` | Template brief post |
 | `_templates/brief-story.md` | Template brief story |
 | `_config/pipeline.md` | Config modes, DA, modèles |
-| `_config/historique-production.md` | **Mémoire inter-semaines** — lu avant chaque planning |
+| `_config/historique-production.md` | **GÉNÉRÉ par scan** — reflet du disque, régénéré avant chaque planning |
 | `_config/photo-references.md` | Catalogue photos existantes |
 | `_config/brand-props.md` | Accessoires marque |
 | `_recettes/[slug].md` | Fiches produit |

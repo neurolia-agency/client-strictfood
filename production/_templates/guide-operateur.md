@@ -23,9 +23,9 @@ Comment produire un post Instagram de A à Z. Tes interventions sont marquées `
 
 ## Étape 0 — Planifier la semaine
 
-### 🤖 AUTO — Analyse des semaines précédentes
+### 🤖 AUTO — Scan des dossiers + historique
 
-Claude lit automatiquement `_config/historique-production.md` et identifie :
+Claude **scanne les dossiers de production** et régénère `_config/historique-production.md`. L'historique reflète exactement ce qui est sur le disque — un fichier supprimé disparaît. Il identifie :
 - Les produits déjà traités (pour éviter les doublons)
 - Les piliers et modes sous-représentés (pour les prioriser)
 - Les photos déjà utilisées (pour varier)

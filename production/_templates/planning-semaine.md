@@ -7,7 +7,7 @@
 
 ## Étape 0 — Analyse des semaines précédentes (OBLIGATOIRE)
 
-**Avant de planifier**, lire `production/_config/historique-production.md` (posts ET stories) et analyser :
+**Avant de planifier**, RÉGÉNÉRER `production/_config/historique-production.md` par scan des dossiers (voir procédure dans le fichier), puis analyser :
 
 ### Analyse posts
 

@@ -27,10 +27,11 @@ L'opérateur fournit :
 1. **Résoudre le chemin** → déterminer `[dossier-post]`
 2. Lire `[dossier-post]/00-brief/brief.md`
 3. Vérifier que le brief existe et contient au minimum : Pilier, Format, Objectif, Produit, **Mode**, Direction Caption
-4. **Lire l'historique** : `production/_config/historique-production.md`
+4. **Régénérer et lire l'historique** : scanner les dossiers de production puis lire `production/_config/historique-production.md`
+   - Régénérer l'historique par scan des dossiers (voir procédure dans le fichier)
    - Vérifier que ce produit n'a pas été traité en post les 2 dernières semaines (sauf angle différent)
    - Vérifier que les photos prévues n'ont pas été utilisées récemment (en post OU en story)
-   - Identifier les stories prévues/produites cette semaine pour vérifier la cohérence (symbiose)
+   - Identifier les stories produites cette semaine pour vérifier la cohérence (symbiose)
    - Si doublon détecté → WARN à l'opérateur
 5. **Extraire le mode** : champ `Mode` dans la table Stratégie
 6. **Router** vers le sous-pipeline correspondant (voir ci-dessous)
@@ -253,29 +254,6 @@ Output : `[dossier-post]/03-output/slide-01.png`, `slide-02.png`, etc.
    🔄 Régénérer ?
    ```
 
-## ÉTAPE FINALE B — Mise à jour historique (OBLIGATOIRE)
-
-**Après validation de la caption**, mettre à jour `production/_config/historique-production.md` :
-
-1. **Ajouter une ligne** dans la table "Posts produits" :
-   ```
-   | S[X] | YYYY-MM-DD | [Pilier] | [Mode] | [Produit] | [Angle/Sujet] | [Photo utilisée] |
-   ```
-
-2. **Mettre à jour les compteurs** :
-   - Compteur produit : incrémenter le produit, mettre à jour "Dernière apparition"
-   - Compteur pilier : incrémenter la semaine en cours
-   - Compteur mode : incrémenter la semaine en cours
-   - Si un compteur révèle un déséquilibre → ajouter/mettre à jour une alerte
-
-3. **Confirmer** à l'opérateur :
-   ```
-   📊 HISTORIQUE MIS À JOUR
-   Post [date] — [produit] ([pilier], [mode]) enregistré.
-   ```
-
-> Cette étape est **NON NÉGOCIABLE**. Sans mise à jour, le prochain planning n'aura pas la mémoire de ce qui vient d'être produit.
-
 ---
 
 ## Structure des dossiers post (v3)
@@ -321,4 +299,4 @@ Note : les sous-dossiers 01 et 02 n'existent pas pour les modes `irl-sublimation
 4. **Résolution TOUJOURS 4K** pour les modes full-ia et compositing-ia
 5. **API key TOUJOURS `$GEMINI_API_KEY`** — jamais en dur
 6. **Skills/agents via outils dédiés** — Skill tool et Agent tool, pas d'exécution manuelle
-7. **Historique TOUJOURS mis à jour** — après chaque post produit, mettre à jour `_config/historique-production.md`
+7. **Historique TOUJOURS à jour** — régénérer `_config/historique-production.md` par scan des dossiers avant chaque exécution

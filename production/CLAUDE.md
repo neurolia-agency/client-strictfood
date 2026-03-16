@@ -135,10 +135,10 @@ posts-stories/posts/periode-[N]/S[X]/YYYY-MM-DD/
 ## Workflow de planification (NOUVEAU v3)
 
 ```
-0. Analyse semaines précédentes (OBLIGATOIRE)
-   → Lire _config/historique-production.md
+0. Régénérer l'historique (OBLIGATOIRE)
+   → Scanner les dossiers posts + stories
+   → Réécrire _config/historique-production.md
    → Identifier produits, piliers, modes en retard
-   → Éviter les doublons
 
 1. Planning semaine (planning-SX.md)
    → Distribuer piliers, modes (posts ET stories), sujets
@@ -201,7 +201,7 @@ Pour les idées spontanées, actions ponctuelles, actualités :
 | Variantes produit IA | `_config/product-variants.md` |
 | Accessoires marque | `_config/brand-props.md` (BRAND_PRESENCE = 4/10) |
 | Configuration pipeline | `_config/pipeline.md` (modes, DA, modèles) |
-| **Historique production** | `_config/historique-production.md` (mémoire inter-semaines, anti-doublon) |
+| **Historique production** | `_config/historique-production.md` (GÉNÉRÉ par scan des dossiers — reflet du disque) |
 | Recettes | `_recettes/[slug].md` (formes exactes ingrédients + fournisseurs) |
 | Template planning | `_templates/planning-semaine.md` |
 | Template brief post | `_templates/brief-v3.md` |
@@ -214,9 +214,9 @@ Pour les idées spontanées, actions ponctuelles, actualités :
 
 ## Règles
 
-- **Historique d'abord** : toujours lire `_config/historique-production.md` AVANT de planifier
+- **Historique d'abord** : toujours RÉGÉNÉRER `_config/historique-production.md` par scan des dossiers AVANT de planifier ou produire
 - **Planning ensuite** : rédiger `planning-SX.md` avant les briefs individuels
-- **Historique à jour** : mettre à jour l'historique à la fin de chaque semaine de production
+- **Historique = reflet du disque** : un fichier supprimé disparaît de l'historique au prochain scan. Ne JAMAIS modifier l'historique à la main.
 - **Mode obligatoire** : chaque brief v3 doit spécifier un mode de création
 - **Caption après image** : la caption est générée par `/caption-writer` après l'image, jamais écrite dans le brief
 - **Dates** : format ISO `YYYY-MM-DD` pour les dossiers post

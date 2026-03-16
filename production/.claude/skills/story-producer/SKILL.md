@@ -41,9 +41,9 @@ Chaque template a un cadre fixe avec des positions absolues. **TOUJOURS consulte
 
 ## Étape 0 — Contexte stratégique + historique (avant toute exécution)
 
-### 0a. Lire l'historique de production
+### 0a. Régénérer et lire l'historique de production
 
-Lire `production/_config/historique-production.md` pour :
+Régénérer `production/_config/historique-production.md` par scan des dossiers (voir procédure dans le fichier), puis lire pour :
 - Identifier les **produits déjà couverts en story** récemment (pas de fiche produit doublon sur 2 semaines)
 - Identifier les **posts de la semaine en cours** (les stories doivent les compléter, pas les répéter)
 - Vérifier les **photos déjà utilisées** (en post ET en story) pour ne pas les réutiliser
@@ -322,32 +322,7 @@ Pour chaque story validée :
    → Vérifier les rendus avant publication.
    ```
 
-### ÉTAPE FINALE A — Mise à jour historique (OBLIGATOIRE)
-
-**Après le render de toutes les stories du jour**, mettre à jour `production/_config/historique-production.md` :
-
-1. **Ajouter les lignes** dans la table "Stories produites" de la semaine en cours :
-   ```
-   | [Jour] | [N] | [Type] | [Mode] | [Produit/Sujet] | [Highlight] |
-   ```
-   Pour CHAQUE story produite.
-
-2. **Mettre à jour les compteurs** :
-   - Compteur produits stories : incrémenter les produits couverts en fiche
-   - Compteur modes stories : incrémenter la semaine en cours
-   - Compteur focus ingrédients : ajouter l'artisan/ingrédient si nouveau
-   - Compteur interactifs : ajouter l'axe utilisé
-
-3. **Confirmer** à l'opérateur :
-   ```
-   📊 HISTORIQUE MIS À JOUR
-   Stories [semaine]/[jour] — [N] stories enregistrées.
-   Modes : [liste modes utilisés ce jour]
-   ```
-
-> Cette étape est **NON NÉGOCIABLE**. Sans mise à jour, les prochains plannings et la prochaine production de posts n'auront pas la mémoire de ce qui vient d'être produit en story.
-
-### ÉTAPE FINALE B — Génération document Demande Photos (si photos manquantes)
+### ÉTAPE FINALE — Génération document Demande Photos (si photos manquantes)
 
 En fin de traitement d'une période (batch semaine), si des photos manquantes ont été identifiées à l'étape 1 :
 
@@ -383,10 +358,7 @@ Si l'opérateur demande une semaine entière (`S1`) :
    Modes : X template / Y irl / Z sublimation / ...
    ⚠️ Photos manquantes : [liste ou "aucune"]
 
-   📊 Historique mis à jour pour toute la semaine.
    ```
-
-4. **Mettre à jour l'historique** : exécuter l'étape finale A pour chaque jour de la semaine en une seule passe
 
 ## Résolution des chemins dans le HTML
 
@@ -517,7 +489,7 @@ Les templates intègrent ces valeurs via les variables CSS `--safe-top` et `--sa
 ## Règles non négociables
 
 0. **Pain noir obligatoire** — tous les burgers StrictFood sont au pain noir (black bun). Aucune photo de burger au pain blanc ne doit apparaître dans une story. Si détecté au checkpoint → bloquer et demander remplacement.
-0b. **Historique TOUJOURS mis à jour** — après chaque jour de stories produit, mettre à jour `_config/historique-production.md`. Sans ça, la symbiose posts ↔ stories est cassée.
+0b. **Historique TOUJOURS à jour** — régénérer `_config/historique-production.md` par scan des dossiers avant chaque exécution. L'historique reflète ce qui existe sur le disque, pas ce qu'on a écrit dedans.
 1. **Chaque story passe par le story-copywriter** — pas de texte brut du brief dans le rendu final.
 2. **Chaque story avec données produit passe par le story-data-mapper** — pas de résolution manuelle des données nutritionnelles.
 3. **Un seul checkpoint** : après le data mapping + copywriting. Le render s'enchaîne automatiquement.

@@ -23,14 +23,15 @@ L'orchestrateur détecte le **mode** dans le brief et route vers le bon sous-pip
 ## Workflow de planification
 
 ```
-0. Lire _config/historique-production.md — analyser ce qui a été fait (OBLIGATOIRE)
+0. Régénérer l'historique — scanner les dossiers, réécrire historique-production.md (OBLIGATOIRE)
 1. Planning semaine (planning-SX.md) — distribuer piliers, modes, sujets en évitant les doublons
 2. Briefs individuels (brief-v3.md / brief-story.md) — à partir du planning validé
 3. Production — /instagram-producer pour posts, /story-producer pour stories
-4. Mise à jour historique — à la fin de la semaine, mettre à jour historique-production.md
 ```
 
-**ALWAYS** lire l'historique PUIS rédiger le planning AVANT les briefs. Le mode est décidé AU PLANNING, pas au brief.
+**ALWAYS** régénérer l'historique par scan PUIS rédiger le planning AVANT les briefs. Le mode est décidé AU PLANNING, pas au brief.
+
+> L'historique est un fichier GÉNÉRÉ, pas un journal. Il reflète ce qui existe sur le disque. Un fichier supprimé = supprimé de l'historique au prochain scan. Ne JAMAIS modifier l'historique à la main.
 
 ### Règles anti-doublon (inter-semaines)
 
