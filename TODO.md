@@ -4,7 +4,7 @@
 <!-- project: client-strictfood -->
 
 > StrictFood — Landing Page Dark Food Premium + Production Instagram
-> Derniere mise a jour : 2026-03-13
+> Derniere mise a jour : 2026-03-17
 
 ---
 
@@ -36,6 +36,7 @@
 - [x] Section La Promesse <!-- nd:fad5f54b p:normal -->
 - [x] Section Nos Artisans <!-- nd:d286a1ea p:normal -->
 - [x] Section Expérience <!-- nd:15cdb3d7 p:normal -->
+- [ ] page promesse : sélectionner et détourer photos <!-- nd:986397bd p:normal -->
 
 ---
 
@@ -54,9 +55,14 @@
 <!-- workstream: production-instagram -->
 
 <!-- programme: Pipeline contenu -->
-- [ ] Configurer le pipeline Instagram (production/CLAUDE.md) <!-- nd:375bac09 p:normal -->
-- [ ] Creer les premiers posts de lancement <!-- nd:1fb1fe5d p:normal -->
-- [ ] Definir la grille visuelle Instagram <!-- nd:290822df p:normal -->
+- [x] Configurer le pipeline Instagram (production/CLAUDE.md) <!-- nd:375bac09 p:normal -->
+- [x] Creer les premiers posts de lancement <!-- nd:1fb1fe5d p:normal -->
+- [x] Definir la grille visuelle Instagram <!-- nd:290822df p:normal -->
+- [ ] Ajouter guide dans ressources <!-- nd:7f7b55dc p:normal a:joris -->
+- [ ] Refonte Profil : Bio, CTA <!-- nd:ba2dfa2a p:normal a:dorian -->
+- [ ] Optimiser workflows créatifs pour gagner en productivité : verrouiller la pipeline <!-- nd:f62a260e p:normal a:dorian -->
+- [ ] Générer semaine de posts <!-- nd:dea06a1e p:normal a:dorian -->
+- [ ] Générer semaine stories <!-- nd:8c80ebf3 p:normal a:dorian -->
 
 ---
 
@@ -73,9 +79,8 @@
 
 ## Banque de Contenus Photo
 <!-- workstream: banque-contenus-photo -->
-- [ ] Sublimation DA "Dark Food Premium" des produits <!-- nd:5b2cb6cd p:urgent a:joris -->
-- [x] Tri et détourage des clichés bruts <!-- nd:01699e23 p:normal -->
-- [ ] Photos produits détourées site + Uber Eats <!-- nd:2f138a7e p:normal a:dorian -->
+- [ ] Détourer photos site web <!-- nd:720925c5 p:normal a:joris -->
+- [ ] Variations photos sources Instagram <!-- nd:1367e51e p:normal a:dorian -->
 
 ---
 
@@ -90,11 +95,13 @@
 
 ## Google Business Profile
 <!-- workstream: google-business-profile -->
-- [ ] Dispositif QR Code / carte NFC comptoir <!-- nd:fecd34a0 p:normal -->
-- [ ] Lien vers le site web <!-- nd:d24ac980 p:normal -->
-- [ ] Menu propre en PDF/Images <!-- nd:a554e1e7 p:normal -->
-- [ ] Ajout photos de qualité <!-- nd:d882b2f6 p:normal -->
-- [ ] Micro-landing page collecte + avis <!-- nd:f2b6e59e p:normal -->
+- [ ] Commander carte NFC <!-- nd:fecd34a0 p:normal a:joris -->
+- [ ] Lien vers le site web <!-- nd:d24ac980 p:normal a:dorian -->
+- [ ] Menu propre en PDF/Images <!-- nd:a554e1e7 p:normal a:dorian -->
+- [ ] Générer photos ultra-réalistes <!-- nd:d882b2f6 p:normal a:dorian -->
+- [ ] Micro-landing page collecte contact + avis <!-- nd:f2b6e59e p:normal a:joris -->
+- [ ] Paramétrer carte NFC <!-- nd:682466f3 p:normal a:joris -->
+- [ ] Optimisation du contenu textuel (description, informations etc) <!-- nd:c72e840e p:normal a:dorian -->
 
 ---
 
@@ -102,48 +109,35 @@
 <!-- workstream: instagram -->
 
 <!-- programme: Periode 2 -->
-- [ ] Carrousels éducatifs macros <!-- nd:4145fade p:normal -->
-- [ ] Réponse systématique commentaires/DM <!-- nd:2006fe6e p:normal -->
-- [ ] Premiers Reels natifs (4+ sur le mois) <!-- nd:6c17e757 p:normal -->
-- [ ] Analyse données : piliers, jours, formats <!-- nd:9f2bdcd2 p:normal -->
 
 <!-- programme: P1 — Templates Stories -->
-- [ ] `educatif.html` : ajouter un slot optionnel pour image produit hero (`.product-hero` + `.zone-blend`) avec `display: {{SHOW_PRODUCT}}`, pour eviter le CSS custom a chaque story <!-- nd:ce6eb261 p:normal -->
-- [ ] `interactif.html` : ajouter une variante quiz (4 choix) et slider emoji en plus du sondage 2 choix <!-- nd:f866f127 p:low -->
-- [ ] Eliminer la duplication CSS : les stories output doivent `<link>` vers `base.css` + le CSS du template, et n'ajouter que les overrides specifiques en `<style>` inline <!-- nd:d1738fcf p:low -->
 
 <!-- programme: Periode 3 -->
-- [ ] Lancement 2-3 séries récurrentes <!-- nd:fbe2dd98 p:low -->
-- [ ] Activation UGC (sticker, mention comptoir) <!-- nd:5f4886b5 p:low -->
-- [ ] Optimisation calendrier selon data mois 2 <!-- nd:16c0ab81 p:low -->
-- [ ] Montée en puissance Reels (6+/mois) <!-- nd:12d5ea05 p:low -->
 
 <!-- programme: P1 — Trial Reels -->
-- [ ] Definir le CTA et le lien — chaque Reel d'essai doit diriger vers le site ou la bio. CTA recommande : adresse physique en texte overlay + sticker localisation Chateau Roussillon <!-- nd:aa5f8040 p:normal -->
 
 <!-- programme: P1 — Stories S1 -->
-- [ ] Coordonner avec Romain/Dorian les stories terrain (mardi arrivage, mercredi cuisine, vendredi rush, samedi CTA) <!-- nd:5c877ff9 p:normal -->
 
 <!-- programme: P1 — Stories S2 -->
-- [ ] Produire les stories automatisables S2 <!-- nd:438eedaa p:normal -->
 
 ---
 
 ## TikTok
 <!-- workstream: tiktok -->
-- [ ] Montage DA Dark Food Premium <!-- nd:6dbb7384 p:normal -->
-- [ ] Publication 1-2 posts/semaine <!-- nd:cf403dce p:normal -->
-- [ ] Concepts créatifs et briefs visuels <!-- nd:eab36205 p:normal -->
 - [ ] Premier shooting vidéaste <!-- nd:e173f893 p:urgent -->
+- [ ] Stratégie / planning éditorial <!-- nd:53091bef p:normal a:dorian -->
+- [ ] Repérer besoins de post-prods <!-- nd:e4af34af p:normal -->
 
 ---
 
 ## Refonte Uber Eats
 <!-- workstream: refonte-uber-eats -->
-- [ ] Refonte visuelle avec nouveaux visuels DA <!-- nd:67323d69 p:normal -->
-- [ ] Création formules + cross-selling <!-- nd:1a126c41 p:normal -->
-- [ ] Restructuration catégories menu <!-- nd:975125e0 p:normal -->
-- [ ] Optimisation prix vs commissions plateforme <!-- nd:32a3ecd0 p:normal -->
+- [ ] Création formules + Restructuration catégories menu <!-- nd:1a126c41 p:normal a:joris -->
+- [x] Bannière <!-- nd:975125e0 p:normal a:joris -->
+- [ ] Optimisation prix vs commissions plateforme <!-- nd:32a3ecd0 p:normal a:joris -->
+- [ ] Parcours client + cross-selling <!-- nd:6802085a p:normal a:joris -->
+- [ ] Optimisation description produits <!-- nd:45ba9fc5 p:normal a:joris -->
+- [ ] Création et formatage photos produits <!-- nd:698e7a24 p:normal -->
 
 ---
 
