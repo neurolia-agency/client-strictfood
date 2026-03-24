@@ -41,7 +41,7 @@ Accroche : `[1 phrase punchy — ex: "Le burger qui bat tes macros"]`
 Macro star : `[la macro la plus impressionnante — ex: "53g protéines"]`
 Badge : `[argument différenciateur court — ex: "SANS HUILE" / "ARTISANAL" / "LOCAL"]`
 Prix : `[prix — ex: "8,90€"]`
-Tagline : `[texte tagline bottom]`
+Tagline : `Le cheat meal qui n'en est pas un` *(fixe — ne pas modifier)*
 
 Image hero : `[chemin vers photo produit détourée sur fond sombre — OBLIGATOIRE]`
 
@@ -54,7 +54,7 @@ Artisan : `[nom fournisseur — ex: "Myfitcheese"]`
 Localité : `[ville — ex: "Perpignan"]`
 Fait clé : `[1 phrase ou chiffre impactant — ex: "28g de protéines pour 100g" / "Pétri chaque matin à 4h"]`
 Dans le : `[produit qui utilise cet ingrédient — ex: "STRICT Boeuf"]`
-Tagline : `[texte tagline bottom]`
+Tagline : `Le cheat meal qui n'en est pas un` *(fixe — ne pas modifier)*
 
 Image hero : `[chemin vers photo ingrédient en gros plan — OBLIGATOIRE]`
 
@@ -67,7 +67,7 @@ Format sticker : [Sondage 2 choix / Quiz / Slider / Question ouverte]
 Question : `[Texte de la question]`
 Option A : `[texte]`
 Option B : `[texte]`
-Tagline : `[texte ou "—"]`
+Tagline : `Le cheat meal qui n'en est pas un` *(fixe — ne pas modifier)*
 
 **Mode visuel** : [Single / VS]
 
@@ -103,7 +103,7 @@ Body : `[Texte corps — accepte <strong> pour les mots clés]`
 CTA : `[texte bouton ou "aucun"]`
 Image de fond : `[chemin vers photo pertinente OU "aucune" — préférer une image contextuelle]`
 Alignement photo : `[element horizontal de reference — ex: "enseigne STRICT FOOD'S" / "comptoir" / "—"]`
-Tagline : `[texte tagline]`
+Tagline : `Le cheat meal qui n'en est pas un` *(fixe — ne pas modifier)*
 
 #### Si type = IRL (template: `irl-story.html`)
 

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080">
+  <title>Story Educative — Un burger peut faire ça ?</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Oswald:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/Users/dorian.gz/dev/Neurolia Agency/client-strictfood/production/posts-stories/stories/_templates/_base/base.css">
+  <style>
+    /*
+     * ÉDUCATIF — Chiffre clé + explication + VS optionnel
+     * Cadre rigide : positions Y fixes pour chaque zone
+     * Photo BG à droite, gradients à gauche
+     *
+     * LIMITES DE CARACTÈRES :
+     * TITLE             : max 45 car, 2 lignes
+     * FACT_NUMBER       : max 4 car, 1 ligne
+     * FACT_UNIT         : max 25 car, 1 ligne
+     * EXPLANATION       : max 120 car, 3 lignes
+     * VS values         : max 6 car each
+     * VS_THEIRS_LABEL   : max 20 car
+     * TAGLINE           : max 40 car, 1 ligne
+     */
+
+    .content {
+      padding: 0 70px 0;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    /* ===== FIXED POSITION ZONES ===== */
+    /* Each zone has a fixed top position — content never pushes other zones */
+
+    .zone-logo {
+      position: absolute;
+      top: var(--safe-top);
+      left: 70px;
+      z-index: 10;
+    }
+
+    .zone-product-name {
+      position: absolute;
+      top: 180px;
+      left: 90px;
+      z-index: 10;
+    }
+
+    .product-name {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 57px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      filter: brightness(1.2);
+    }
+
+    .zone-fact {
+      position: absolute;
+      top: 340px;
+      left: 90px;
+      z-index: 10;
+    }
+
+    .zone-vs {
+      position: absolute;
+      top: 1250px;
+      left: 70px;
+      right: 70px;
+      z-index: 10;
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    .fact-number {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 200px;
+      color: var(--accent);
+      line-height: 0.85;
+      letter-spacing: -6px;
+      filter: brightness(1.3);
+    }
+
+    .fact-unit {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 500;
+      font-size: 60px;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.6), 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    /* ===== VS BLOCK ===== */
+    .vs-block {
+      display: flex;
+      gap: 30px;
+      width: 100%;
+    }
+
+    .vs-item {
+      flex: 1;
+      padding: 35px;
+      border-radius: 20px;
+      text-align: center;
+    }
+    .vs-item.ours {
+      background: rgba(var(--accent-rgb),0.18);
+      border: 2px solid rgba(var(--accent-rgb),0.45);
+    }
+    .vs-item.theirs {
+      background: rgba(255,255,255,0.12);
+      border: 2px solid rgba(255,255,255,0.25);
+    }
+
+    .vs-item .vs-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 22px;
+      color: rgba(255,255,255,0.85);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 15px;
+    }
+    .vs-item.ours .vs-label { color: var(--accent); filter: brightness(1.1); }
+
+    .vs-item .vs-value {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 80px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .vs-item.ours .vs-value { color: var(--accent); filter: brightness(1.3); }
+    .vs-item.theirs .vs-value { color: #fff; }
+
+    .vs-item .vs-unit {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 24px;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .vs-separator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Oswald', sans-serif;
+      font-size: 36px;
+      color: rgba(255,255,255,0.65);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body class="mood-feuille overlay-left grad-soft photo-droite">
+
+  <!-- Background image — produit surdimensionné, ~50% visible à droite -->
+  <img class="bg-image" src="/Users/dorian.gz/dev/Neurolia Agency/client-strictfood/public/images/photos-references/produits-source/burgers-black/strict-poulet/strict-poulet-black-1.png" alt="" style="display: block; width: 1500px; height: 1500px; top: 150px; right: -670px; object-fit: contain; object-position: center; mask-image: radial-gradient(ellipse 85% 80% at 50% 45%, rgba(0,0,0,0.95) 25%, rgba(0,0,0,0.5) 50%, transparent 72%); -webkit-mask-image: radial-gradient(ellipse 85% 80% at 50% 45%, rgba(0,0,0,0.95) 25%, rgba(0,0,0,0.5) 50%, transparent 72%);">
+
+  <!-- Gradient overlays — gérés par overlay-left + grad-soft sur body -->
+  <div class="gradient-top"></div>
+  <div class="gradient-bottom"></div>
+  <div class="gradient-left"></div>
+  <div class="ambient-bottom"></div>
+
+  <!-- Decorative accent line -->
+  <div class="accent-line"></div>
+
+  <!-- Zone blend + product hero (dual-image pattern, optional) -->
+  <div class="zone-blend" style="display: none"></div>
+  <img class="product-hero" src="" alt="" style="display: none">
+
+  <!-- FIXED POSITION ZONES -->
+
+  <div class="zone-product-name">
+    <div class="product-name text-depth-3">STRICT POULET</div>
+    <div style="font-family: 'DM Sans', sans-serif; font-size: 33px; color: rgba(255,255,255,0.65); margin-top: 12px; letter-spacing: 1px;">Ton shaker ne fait pas le poids.</div>
+  </div>
+
+  <div class="zone-fact">
+    <div class="fact-number">53</div>
+    <div class="fact-unit">grammes de protéines</div>
+  </div>
+
+  <!-- VS block -->
+  <div class="zone-vs" style="display: flex">
+    <div class="vs-block">
+      <div class="vs-item ours">
+        <div class="vs-label">Strict Food's</div>
+        <div class="vs-value">53g</div>
+        <div class="vs-unit">protéines</div>
+      </div>
+      <div class="vs-separator">VS</div>
+      <div class="vs-item theirs">
+        <div class="vs-label">Shaker whey</div>
+        <div class="vs-value">25g</div>
+        <div class="vs-unit">protéines</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom : tagline + logo -->
+  <div class="bottom-section" style="padding-bottom: 50px; padding-top: 60px;">
+    <div class="tagline">Le cheatmeal qui n'en est pas un.</div>
+    <div style="margin-top: 16px;">
+      <img src="/Users/dorian.gz/dev/Neurolia Agency/client-strictfood/production/posts-stories/stories/_templates/_base/logo.svg" alt="STRICT FOOD'S" style="width: 200px; height: auto; opacity: 0.85;">
+    </div>
+  </div>
+
+</body>
+</html>

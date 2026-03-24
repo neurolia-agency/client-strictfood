@@ -311,6 +311,28 @@ Apres le compositing, le logo STRICT FOOD'S doit etre insere via un workflow 2-s
 
 Quand on dispose de **deux photos reelles** (produit + contexte/scene), le compositing est different car le modele IA doit fusionner deux images existantes plutot que generer une scene.
 
+### ⛔ RÈGLE — Fidélité salle de restaurant
+
+Quand le compositing utilise une photo de la salle du restaurant StrictFood (`public/images/photos-references/contexte/salle-restaurant/`), le résultat DOIT être fidèle à cette photo. Autorisé : changer l'angle, reconstituer un élément manquant (même modèle), compléter un mur (même texture). INTERDIT : altérer les matériaux (murs boisés au lieu de carrelage blanc), inventer du mobilier absent, changer l'ambiance (rustique/pub au lieu de moderne/minimaliste). Si le modèle IA réinvente le décor → BLOQUER `⚠️ DÉCOR RESTAURANT NON CONFORME`. Caractéristiques réelles : carrelage blanc/gris clair, bois blond chêne, chaises noires métal, mur végétal néon "STRICT FOOD'S", comptoir vitrine noire, éclairage blanc neutre.
+
+### REGLE FONDAMENTALE — Photo lieu = fond SACRE
+
+Dans le mode `compositing-irl`, la photo du lieu est un **fond sacre** qui ne doit JAMAIS etre reinvente, redesigne ou reinterprete par le modele IA. Le but est que le resultat final ressemble a une vraie photo prise sur place — pas une creation IA.
+
+**Principes non negociables :**
+
+1. **PRESERVER la photo lieu integralement** — chaque element identifiable (murs, comptoirs, eclairage, plantes, vitrines, textures) doit survivre intact dans le resultat final
+2. **PLACER le produit DANS la photo** — le prompt dit "place cet objet dans cette photo", PAS "cree une scene avec ce produit sur un comptoir"
+3. **ADAPTER l'eclairage du produit a l'eclairage existant** — jamais l'inverse. On ne modifie pas l'eclairage de la scene pour mettre en valeur le produit. Le produit doit sembler eclaire par les sources de lumiere deja presentes dans la photo.
+4. **Le prompt commence TOUJOURS par** : `"PRESERVE the background photo exactly as-is."`
+5. **Lister explicitement les elements du lieu** dans le prompt — comptoir, murs, eclairage, mobilier, plantes — pour que le modele sache quoi preserver
+6. **Inclure une section "DO NOT"** qui interdit explicitement la reinvention du decor
+
+**Pourquoi c'est critique :**
+Les modeles IA (GPT Images, Gemini) ont tendance a "comprendre l'intention" et a generer un lieu generique qui correspond a la description. Si le prompt dit "place the burger on a restaurant counter with wood walls and plants", le modele generera un comptoir generique — pas CELUI du restaurant. Il faut forcer le modele a traiter la photo comme un fond immutable.
+
+**Suggestion operationnelle :** Si la photo du lieu montre l'espace de loin (beaucoup de contexte, peu de detail sur la surface de pose), pre-cropper la photo sur la zone d'interet (comptoir, table, etc.) avant de l'envoyer au modele. Plus la surface de pose occupe de pixels dans l'image, moins le modele aura tendance a reinventer le lieu.
+
 ### Workflow
 
 ```
@@ -318,29 +340,49 @@ Photo produit (detouree ou non)
     +
 Photo contexte/scene (lifestyle, lieu, table)
     ↓
-Multi-image Gemini (2 inputs)
+[OPTIONNEL] Pre-crop de la photo lieu sur la zone de pose
     ↓
-Prompt decrivant l'integration
+Multi-image GPT Images / Gemini (2 inputs)
+    ↓
+Prompt PRESERVE-first decrivant l'integration
     ↓
 Image composite finale
 ```
 
-### Instruction prompt pour dual-photo
+### Instruction prompt pour dual-photo (compositing-irl)
 
 ```
-Integrate the product from Image 1 into the scene from Image 2.
+PRESERVE the background photo exactly as-is. This is a photo compositing task, NOT a scene generation task.
 
-IMAGE 1 (product): [description du produit]
-IMAGE 2 (scene): [description de la scene/contexte]
+BACKGROUND PHOTO (Image 1) — DO NOT MODIFY:
+The [lieu] photo must remain IDENTICAL. Every element must survive untouched:
+- [Element 1 du lieu]
+- [Element 2 du lieu]
+- [Element 3 du lieu]
+- [etc. — lister chaque element identifiable]
+- Every texture, color, reflection, and shadow in the original photo
 
-INTEGRATION:
-- Place the product [position specifique dans la scene]
-- Match the lighting from Image 2 onto the product from Image 1
-- Generate realistic contact shadow and cast shadow
-- Perspective of product matches the camera angle of the scene
-- Seamless edge blending — no halos, no fringing
-- Unified color temperature between product and scene
-- Preserve the exact texture and details of the product from Image 1
+TASK: Take the [produit] from Image 2 and PLACE it [position dans la scene].
+The result should look like someone placed the product there and took a photo.
+
+PRODUCT PLACEMENT:
+- [Position specifique]
+- [Echelle realiste]
+
+LIGHTING INTEGRATION:
+- The lighting on the product MUST match the existing ambient lighting in the background photo
+- Do NOT add any light source that is not already present in the background photo
+- Shadows and highlights on the product must be consistent with the scene's existing lighting
+
+SHADOWS:
+- Contact shadow beneath the product where it meets [surface]
+- Cast shadow consistent with existing shadows in the scene
+
+CRITICAL — DO NOT:
+- Reimagine or redesign the [lieu] interior/exterior
+- Change colors, textures, or materials of any background element
+- Add elements not present in the original photo
+- Generate a new environment "inspired by" the photo — USE the actual photo
 ```
 
 ### Avantages vs limites

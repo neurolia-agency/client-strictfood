@@ -44,7 +44,7 @@ Lire `[dossier-post]/brief/brief.md` → section **Direction Caption** :
 
 ### Couche 3 — Vision de l'image
 
-**Ouvrir et analyser l'image produite** (`final/*.png`) :
+**Ouvrir et analyser l'image produite** (`final/*.png` — le visuel validé et promu depuis `brouillons/`) :
 - Identifier le produit principal visible
 - Noter les textures, couleurs, ambiance
 - Détecter les détails visuels remarquables (ingrédient en gros plan, vapeur, croûte dorée, etc.)
@@ -143,6 +143,7 @@ Anti-répétition : ✅ hook unique / ✅ structure variée / ✅ CTA différent
 
 ## Règles non négociables
 
+0. **⛔ Pain noir obligatoire** — tous les burgers StrictFood sont au pain noir (black bun sésame). Dans la caption, toujours écrire "pain noir" — JAMAIS "pain", "bun", "brioche" sans le qualificatif "noir". Le pain noir est un marqueur identitaire, pas un détail. Si l'image montre un burger, mentionner le pain noir au moins une fois dans le corps ou les hashtags (`#painnoir`, `#blackbun`).
 1. **TOUJOURS analyser l'image** — la caption doit correspondre à ce qu'on voit, pas au brief théorique
 2. **Hook en première ligne** — c'est la seule ligne visible avant "...voir plus"
 3. **Pas de formules bannies** : "n'attend plus", "et si on te disait que", "c'est pas un rêve", "découvre"

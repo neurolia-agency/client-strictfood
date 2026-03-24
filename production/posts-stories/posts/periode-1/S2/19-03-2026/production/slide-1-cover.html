@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Space+Grotesk:wght@500;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --accent: #BF8522;
+  --accent-rgb: 191,133,34;
+  --bg: #141210;
+  --bg-rgb: 20,18,16;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  width: 1080px;
+  height: 1350px;
+  background: var(--bg);
+  overflow: hidden;
+  position: relative;
+  font-family: 'DM Sans', sans-serif;
+  color: #ffffff;
+}
+
+/* Mesh gradient background */
+body::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 15% 10%, rgba(191,133,34,0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 70% at 85% 75%, rgba(160,64,53,0.06) 0%, transparent 55%),
+    radial-gradient(ellipse 90% 90% at 50% 50%, #1a1108 0%, #141210 100%);
+  z-index: 0;
+}
+
+/* Film grain */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.03;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+.content {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 90px;
+  text-align: center;
+}
+
+/* Accent line decorative */
+.accent-line-left {
+  position: absolute;
+  left: 65px;
+  top: 120px;
+  width: 3px;
+  height: 1100px;
+  background: linear-gradient(to bottom,
+    transparent,
+    rgba(191,133,34,0.50) 15%,
+    rgba(191,133,34,0.25) 55%,
+    rgba(191,133,34,0.08) 85%,
+    transparent);
+  z-index: 5;
+  border-radius: 2px;
+}
+
+.label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 24px;
+  color: rgba(255,255,255,0.55);
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  margin-bottom: 60px;
+}
+
+.headline {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 108px;
+  line-height: 1.0;
+  color: #ffffff;
+  letter-spacing: -2px;
+  margin-bottom: 40px;
+}
+
+.headline em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.subtitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: 42px;
+  color: var(--accent);
+  letter-spacing: 3px;
+}
+
+.divider {
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), rgba(191,133,34,0.25));
+  border-radius: 2px;
+  margin: 50px auto;
+}
+
+/* Swipe indicator */
+.swipe {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  text-align: center;
+}
+
+.swipe-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 18px;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
+.swipe-arrow {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-right: 2px solid rgba(191,133,34,0.50);
+  border-bottom: 2px solid rgba(191,133,34,0.50);
+  transform: rotate(-45deg);
+  margin-top: 8px;
+}
+
+/* VS decorative element */
+.vs-badge {
+  position: absolute;
+  top: 50%;
+  right: 85px;
+  transform: translateY(-50%);
+  z-index: 5;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 180px;
+  color: rgba(191,133,34,0.06);
+  letter-spacing: -8px;
+}
+</style>
+</head>
+<body>
+  <div class="accent-line-left"></div>
+  <div class="vs-badge">VS</div>
+
+  <div class="content">
+    <div class="label">Nutrition</div>
+    <h1 class="headline">NOTRE BURGER<br>VS<br><em>LES AUTRES.</em></h1>
+    <div class="divider"></div>
+    <p class="subtitle">Les chiffres parlent.</p>
+  </div>
+
+</body>
+</html>

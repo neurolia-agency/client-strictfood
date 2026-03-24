@@ -480,7 +480,7 @@ details .detail-body { padding: 0 20px 20px; }
     <div class="card">
       <div class="card-icon">📱</div>
       <h4>Stories</h4>
-      <p>Au moins 2 modes differents par jour. Au moins 1 story non-template par jour. Max 3 interactifs par semaine.</p>
+      <p>Au moins 2 modes differents par jour. Au moins 2 stories non-template par jour. Au moins 2 IRL moments par jour. Max 3 interactifs par semaine. Max 1 educatif par semaine. Max 1 fiche produit par semaine.</p>
     </div>
     <div class="card">
       <div class="card-icon">🔗</div>
@@ -510,6 +510,8 @@ details .detail-body { padding: 0 20px 20px; }
       <div class="flow-node">Compositing</div>
       <div class="flow-node">Template</div>
     </div>
+    <div class="flow-arrow"></div>
+    <div class="flow-node" style="border-color:var(--red);color:var(--red);">🔍 Realism Auditor (pre + post-prompt)</div>
     <div class="flow-arrow"></div>
     <div class="flow-node">🔒 Checkpoint — Validation</div>
     <div class="flow-arrow"></div>
@@ -705,6 +707,10 @@ DD-MM-YYYY/
     <strong>Cadres rigides :</strong> chaque template a des positions fixes et des limites de caracteres par zone. Le pipeline verifie automatiquement avant le render. Voir <code>SPECS.md</code>.
   </div>
 
+  <div class="info" style="border-left-color:var(--red);">
+    <strong>Philosophie food porn :</strong> les templates ne representent que 10% des stories. Le feed doit etre VIVANT — moments IRL authentiques, food porn visceral, photos candides. Les concepts visuels (<code>_config/concepts-visuels.md</code>) servent d'inspiration au planning, pas de cadre rigide. En mode IRL, le reel prime toujours : si un moment spontane est bon, on l'utilise meme s'il ne correspond a aucun concept.
+  </div>
+
   <div class="divider"></div>
 
   <h3 style="font-family:'Space Grotesk';font-size:18px;font-weight:700;margin-bottom:16px;text-transform:uppercase;letter-spacing:2px;">3 familles visuelles</h3>
@@ -728,7 +734,7 @@ DD-MM-YYYY/
     <summary>Distribution cible (hebdomadaire)</summary>
     <div class="detail-body">
       <p style="color:var(--text-2);font-size:14px;margin-top:8px;">
-        template <strong>50%</strong> · irl <strong>20%</strong> · irl-sublimation <strong>15%</strong> · compositing <strong>10%</strong> · full-ia <strong>5%</strong>
+        template <strong>10%</strong> · irl <strong>25%</strong> · sublimation <strong>20%</strong> · compositing <strong>15%</strong> · full-ia <strong>15%</strong> · scene-ia <strong>15%</strong>
       </p>
     </div>
   </details>
@@ -972,6 +978,22 @@ S1/lundi/
       </div>
     </div>
 
+    <div class="card" style="border-left:3px solid var(--red);">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <span style="font-size:22px;">🔍</span>
+        <h4 style="margin:0;">realism-auditor</h4>
+      </div>
+      <p>Audite les prompts IA AVANT generation. Detecte mains impossibles, sauce illogique, eclairage contradictoire, proportions incoherentes. 3 rulesets : full-ia (8 domaines), sublimation (4 domaines), compositing (5 domaines). Principes candid pour les concepts human-*.</p>
+      <div style="margin-top:12px;font-size:12px;">
+        <span style="color:var(--text-3);">INVOCATION</span><br>
+        <code>/realism-audit [concept] [produit]</code>
+      </div>
+      <div style="margin-top:8px;font-size:12px;">
+        <span style="color:var(--text-3);">OBLIGATOIRE</span>
+        <span style="color:var(--red);"> — Avant TOUTE generation IA (full-ia, compositing-ia, irl-sublimation, compositing-irl)</span>
+      </div>
+    </div>
+
     <div class="card" style="border-left:3px solid rgba(255,255,255,0.15);">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
         <span style="font-size:22px;">📋</span>
@@ -1125,30 +1147,180 @@ S1/lundi/
 
   <!-- ===== HORS PLANNING ===== -->
 
-  <h3 style="font-family:'Space Grotesk';font-size:18px;font-weight:700;margin-bottom:16px;text-transform:uppercase;letter-spacing:2px;">Production hors planning</h3>
+  <h3 style="font-family:'Space Grotesk';font-size:18px;font-weight:700;margin-bottom:16px;text-transform:uppercase;letter-spacing:2px;">Production hors planning — Process par mode</h3>
 
-  <p style="color:var(--text-2);font-size:15px;margin-bottom:20px;">Idee spontanee, actualite, action ponctuelle — tu invoques directement l'agent ou le skill que tu veux.</p>
+  <p style="color:var(--text-2);font-size:15px;margin-bottom:20px;">Idee spontanee, actualite, action ponctuelle — tu decris ce que tu veux, Claude route vers le bon process. Liberte totale, aucune contrainte de distribution.</p>
 
-  <div class="cards">
-    <div class="card">
-      <div class="card-icon">⚡</div>
-      <h4>Post spontane</h4>
-      <p>"J'ai une photo du burger de ce midi, fais-moi un post IRL-sublimation."<br><br>→ <code>hors-planning/DD-MM-YYYY/</code></p>
+  <details>
+    <summary>Mode IRL — Photo brute → story avec overlay</summary>
+    <div class="detail-body">
+      <div class="cmd">J'ai une photo du rush de ce midi, fais-moi une story.</div>
+      <div class="flow" style="margin:16px 0;">
+        <div class="flow-node">Tu fournis la photo</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node">Insertion dans irl-story.html (plein cadre)</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node">Overlay auto : gradient + tagline + logo</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node">Puppeteer → brouillons/</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node highlight">Validation → final/</div>
+      </div>
+      <div class="info"><strong>Pas de Realism Auditor</strong> — photo reelle, pas d'IA. Le reel prime : si la photo est bonne, on l'utilise.</div>
     </div>
-    <div class="card">
-      <div class="card-icon">⚡</div>
-      <h4>Story spontanee</h4>
-      <p>"Photo de l'arrivage, fais-moi une story IRL."<br><br>→ <code>hors-planning/DD-MM-YYYY/</code></p>
+  </details>
+
+  <details>
+    <summary>Mode IRL-Sublimation — Photo reelle sublimee par IA</summary>
+    <div class="detail-body">
+      <div class="cmd">J'ai cette photo du Strict Boeuf, sublime-la pour Instagram.</div>
+      <div class="flow" style="margin:16px 0;">
+        <div class="flow-node">Tu fournis la photo source</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node" style="border-color:var(--red);color:var(--red);">[PRE] Realism Auditor — fidelite, preservation, lumiere</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node">Prompt sublimation</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node" style="border-color:var(--red);color:var(--red);">[POST] Realism Auditor — audit + corrections</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node">GPT Images → brouillons/</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node">Si story : overlay irl-story.html</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node highlight">Validation → final/ → Caption</div>
+      </div>
+      <div class="info"><strong>Risques audites :</strong> GPT reinvente l'environnement, deforme le produit, change les couleurs.</div>
     </div>
-    <div class="card">
-      <div class="card-icon">🔧</div>
-      <h4>Agent a la carte</h4>
-      <p>Sublimer une photo, generer une caption, creer une art direction — chaque skill est invocable individuellement.</p>
+  </details>
+
+  <details>
+    <summary>Mode Compositing IRL — 2 photos reelles fusionnees</summary>
+    <div class="detail-body">
+      <div class="cmd">J'ai une photo du burger et une du comptoir, fusionne-les.</div>
+      <div class="flow" style="margin:16px 0;">
+        <div class="flow-node">Tu fournis 2 photos : produit + lieu</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node" style="border-color:var(--red);color:var(--red);">[PRE] Realism Auditor — scale, lumiere croisee, perspective</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node">Prompt compositing</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node" style="border-color:var(--red);color:var(--red);">[POST] Realism Auditor — audit + corrections</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node">GPT Images → brouillons/</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node">Si story : overlay irl-story.html</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node highlight">Validation → final/ → Caption</div>
+      </div>
+      <div class="info"><strong>Risques audites :</strong> produit colle/flottant, echelle incoherente, lumiere qui ne matche pas, absence d'ombres.</div>
     </div>
+  </details>
+
+  <details>
+    <summary>Mode Compositing IA — Photo produit + scene IA</summary>
+    <div class="detail-body">
+      <div class="cmd">Mets le Strict MAX Poulet dans une ambiance cuisine industrielle avec de la vapeur.</div>
+      <div class="flow" style="margin:16px 0;">
+        <div class="flow-node">Tu fournis la photo produit + description ambiance</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node" style="border-color:var(--red);color:var(--red);">[PRE] Realism Auditor — 8 domaines</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node">Art Director → Input Mapper → Prompt Engineer</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node" style="border-color:var(--red);color:var(--red);">[POST] Realism Auditor — audit + corrections</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node">Gemini 4K → brouillons/</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node highlight">Validation → final/ → Caption</div>
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>Mode Scene IA — Photo scene reelle + sujets IA</summary>
+    <div class="detail-body">
+      <div class="cmd">Prends la photo du comptoir et ajoute un client qui recoit son sac StrictFood.</div>
+      <div class="flow" style="margin:16px 0;">
+        <div class="flow-node">Tu fournis la photo scene + description des sujets</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node" style="border-color:var(--red);color:var(--red);">[PRE] Realism Auditor — preservation scene, lumiere, echelle</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node">Prompt sujets (+ briques human+food si personnes)</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node" style="border-color:var(--red);color:var(--red);">[POST] Realism Auditor — interaction decor, ombres, fidelite</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node">Gemini input-image → brouillons/</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node">Si story : overlay irl-story.html</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node highlight">Validation → final/ → Caption</div>
+      </div>
+      <div class="info"><strong>La scene reelle est sacree :</strong> l'IA ajoute des sujets DANS le decor, elle ne modifie PAS le decor. Combinable avec les briques human+food. Fidelite salle StrictFood obligatoire si interieur du restaurant.</div>
+    </div>
+  </details>
+
+  <details>
+    <summary>Mode Full IA — L'IA genere tout (+ humain optionnel)</summary>
+    <div class="detail-body">
+      <div class="cmd">Genere un human-tight × Strict MAX Poulet : cadrage-bouche, moment-croque, env-ciel-bleu, cam-portrait.</div>
+      <div class="flow" style="margin:16px 0;">
+        <div class="flow-node">Tu decris : produit, concept (ou briques human+food), mood</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node" style="border-color:var(--red);color:var(--red);">[PRE] Realism Auditor — 8 domaines + principes candid</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node">Art Director → Input Mapper → Prompt Engineer</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node" style="border-color:var(--red);color:var(--red);">[POST] Realism Auditor — mains, sauce, eclairage, proportions</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node">Gemini 4K → brouillons/</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node">Si story : overlay irl-story.html</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node highlight">Validation → final/ → Caption</div>
+      </div>
+      <div class="info"><strong>Human+food :</strong> le systeme de briques compose le prompt (cadrage × moment × environnement × camera = 3600 combinaisons). Tu peux specifier les briques ou laisser Claude choisir. Specs camera obligatoires dans le prompt.</div>
+    </div>
+  </details>
+
+  <details>
+    <summary>Mode Template — HTML → Puppeteer</summary>
+    <div class="detail-body">
+      <div class="cmd">Fais-moi une story fiche produit du Strict Vege Falafel.</div>
+      <div class="flow" style="margin:16px 0;">
+        <div class="flow-node">Tu decris le contenu voulu</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node">Copywriter → Data Mapper → Template HTML</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node">Verification limites caracteres + presets</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node">Puppeteer → brouillons/</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node highlight">Validation → final/ → Caption</div>
+      </div>
+      <div class="info"><strong>Pas de Realism Auditor</strong> — pas d'IA. Rappel : max 1 educatif/sem et max 1 fiche/sem meme hors planning.</div>
+    </div>
+  </details>
+
+  <div class="divider" style="margin:32px 0;"></div>
+
+  <h4 style="font-family:'Space Grotesk';font-size:15px;font-weight:600;margin-bottom:16px;color:var(--text-2);">Invoquer un agent directement</h4>
+
+  <div class="table-wrap">
+  <table>
+    <tr><th>Tu veux...</th><th>Commande</th></tr>
+    <tr><td>Sublimer une photo</td><td>Demande + fournis la photo</td></tr>
+    <tr><td>Generer une caption</td><td><code>/caption-writer</code> sur une image</td></tr>
+    <tr><td>Creer une art direction</td><td><code>/social-media-art-director</code></td></tr>
+    <tr><td>Ecrire un prompt image</td><td><code>/image-prompt-engineer</code></td></tr>
+    <tr><td>Rendre un template story</td><td><code>/story-producer</code></td></tr>
+    <tr><td>Generer des variantes produit</td><td>Agent <code>product-variant-generator</code></td></tr>
+    <tr><td>Auditer un prompt</td><td><code>/realism-audit</code></td></tr>
+    <tr><td>Generer une image directement</td><td><code>/nano-banana-pro</code></td></tr>
+  </table>
   </div>
 
   <div class="info">
-    <strong>Liberte totale.</strong> Aucune contrainte de mode ou de pilier. Le contenu apparait dans l'historique au prochain scan.
+    <strong>Liberte totale.</strong> Le contenu apparait dans l'historique au prochain scan. Seuls les caps educatif/fiche (1/sem) s'appliquent meme hors planning.
   </div>
 
   <div class="divider"></div>
@@ -1188,6 +1360,7 @@ S1/lundi/
     <tr><td>_templates/SPECS.md</td><td>Limites caracteres, presets photo, gradients</td></tr>
     <tr><td>_config/historique-production.md</td><td>Genere par scan — reflet du disque</td></tr>
     <tr><td>_config/pipeline.md</td><td>Config modes, DA, modeles</td></tr>
+    <tr><td>_config/concepts-visuels.md</td><td>Bibliotheque concepts visuels (food porn, human+food, moments IRL, micro-saisons)</td></tr>
     <tr><td>_config/photo-references.md</td><td>Catalogue photos (descriptions texte)</td></tr>
     <tr><td>_config/brand-props.md</td><td>Accessoires marque (dial 4/10)</td></tr>
     <tr><td>_recettes/[slug].md</td><td>Fiches produit (macros, ingredients, formes)</td></tr>
@@ -1215,6 +1388,13 @@ S1/lundi/
         <tr><td>Compositing</td><td>Fusion de 2 images en montage realiste</td></tr>
         <tr><td>Direction Caption</td><td>Instructions dans le brief (angle, ton, CTA) pour generer la caption</td></tr>
         <tr><td>Hors planning</td><td>Contenu spontane, liberte totale</td></tr>
+        <tr><td>Concept visuel</td><td>Approche creative pour un visuel (macro, overflow, human-tight...) — pioché dans concepts-visuels.md</td></tr>
+        <tr><td>Systeme combinatoire</td><td>4 briques (cadrage x moment x environnement x camera) combinees pour des visuels human+food uniques</td></tr>
+        <tr><td>Micro-saison</td><td>Rotation hebdo de couleur creative : A=Macro, B=Action, C=Atmosphere, D=Moments</td></tr>
+        <tr><td>Realism Auditor</td><td>Agent qui audite les prompts IA pour detecter les incoherences physiques AVANT generation</td></tr>
+        <tr><td>Temoin invisible</td><td>Principe candid : la camera est un passant, la personne ne sait pas qu'elle est photographiee</td></tr>
+        <tr><td>Moment IRL</td><td>Photo de vie reelle au restaurant (rush, service, deballage, ambiance) — le reel prime toujours</td></tr>
+        <tr><td>Tagline</td><td>Le cheat meal qui n'en est pas un — toujours en HTML avec em, jamais de point</td></tr>
       </table>
       </div>
     </div>
@@ -1225,7 +1405,7 @@ S1/lundi/
 </div><!-- /content -->
 
 <div class="footer">
-  Playbook Production Instagram — StrictFood · Pipeline v3
+  Playbook Production Instagram — StrictFood · Pipeline v3.1 — Food Porn & Candid Update
 </div>
 
 <script>

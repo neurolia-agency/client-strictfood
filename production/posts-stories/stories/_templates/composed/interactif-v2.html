@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080, height=1920">
+  <title>Story Interactive v2 — {{QUESTION}}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Oswald:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../_base/base.css">
+  <link rel="stylesheet" href="../_base/blocks/header-label.css">
+  <link rel="stylesheet" href="../_base/blocks/sticker-zone.css">
+  <link rel="stylesheet" href="../_base/blocks/bottom-section.css">
+  <style>
+    /*
+     * INTERACTIF v2 — Question + zone sticker. Mode Single ou VS.
+     * Cadre rigide : positions Y fixes
+     *
+     * LIMITES DE CARACTERES :
+     * QUESTION           : max 50 car, 2 lignes
+     * PRODUCT_A_LABEL    : max 10 car, 1 ligne (mode VS)
+     * PRODUCT_B_LABEL    : max 10 car, 1 ligne (mode VS)
+     * TAGLINE            : max 40 car, 1 ligne
+     *
+     * BLOCKS USED: header-label, sticker-zone, bottom-section
+     */
+
+    /* Block configuration via custom properties */
+    :root {
+      --label-top: 370px;
+      --label-left: 90px;
+      --sticker-bottom: 320px;
+      --sticker-width: 900px;
+      --sticker-height: 260px;
+    }
+
+    .content {
+      padding: 0 70px 0;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    /* ===== QUESTION ZONE — unique to interactif ===== */
+    .zone-question {
+      position: absolute;
+      top: 410px;
+      left: 90px;
+      right: 90px;
+      z-index: 10;
+      max-height: 180px;
+      overflow: hidden;
+    }
+
+    .question-text {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 72px;
+      color: #fff;
+      line-height: 1.15;
+      text-transform: uppercase;
+    }
+    .question-text em {
+      color: var(--accent);
+      font-style: normal;
+      filter: brightness(1.2);
+    }
+
+    /* ===== VS TYPO BLOCK (VS mode only) ===== */
+    .zone-vs-typo {
+      position: absolute;
+      top: 630px;
+      left: 70px;
+      right: 70px;
+      z-index: 10;
+      text-align: center;
+    }
+
+    .vs-typo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+    }
+    .vs-name {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 90px;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+    }
+    .vs-separator-typo {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 60px;
+      color: var(--accent);
+      filter: brightness(1.2);
+      letter-spacing: 2px;
+    }
+
+    /* ===== PRODUCT IMAGES (VS mode) ===== */
+    .product-left, .product-right {
+      position: absolute;
+      width: 620px;
+      height: 620px;
+      object-fit: cover;
+      z-index: 4;
+      opacity: 0.95;
+      filter: brightness(1.15) saturate(1.20) contrast(1.05);
+    }
+    .product-left {
+      left: -40px;
+      bottom: 270px;
+      mask-image: radial-gradient(ellipse 90% 90% at 45% 50%, rgba(0,0,0,1) 30%, rgba(0,0,0,0.5) 60%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 90% 90% at 45% 50%, rgba(0,0,0,1) 30%, rgba(0,0,0,0.5) 60%, transparent 80%);
+    }
+    .product-right {
+      right: -40px;
+      bottom: 250px;
+      mask-image: radial-gradient(ellipse 90% 90% at 55% 50%, rgba(0,0,0,1) 30%, rgba(0,0,0,0.5) 60%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 90% 90% at 55% 50%, rgba(0,0,0,1) 30%, rgba(0,0,0,0.5) 60%, transparent 80%);
+    }
+
+    /* Single mode hero image */
+    .hero-image-single {
+      position: absolute;
+      width: 1300px;
+      height: 750px;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 300px;
+      opacity: 0.92;
+      object-fit: cover;
+      z-index: 4;
+      mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 75%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 75%, transparent 100%);
+    }
+  </style>
+</head>
+<body class="{{MOOD_CLASS}} {{IMG_CLASS}} {{OVERLAY_CLASS}} {{GRAD_CLASS}} {{VS_CLASS}} grain-medium mesh-cuivre">
+
+  <!-- Mode single : hero image -->
+  <img class="hero-image-single" src="{{BG_IMAGE_PATH}}" alt="" style="display: {{SHOW_IMAGE}}">
+
+  <!-- Mode VS : dual product images -->
+  <img class="product-left" src="{{PRODUCT_A_IMAGE}}" alt="" style="display: {{SHOW_VS}}">
+  <img class="product-right" src="{{PRODUCT_B_IMAGE}}" alt="" style="display: {{SHOW_VS}}">
+
+  <!-- Gradient overlays -->
+  <div class="gradient-top"></div>
+  <div class="gradient-bottom"></div>
+  <div class="ambient-bottom"></div>
+
+  <!-- Decorative accent line (modern v2 with glow) -->
+  <div class="accent-line-modern"></div>
+
+  <!-- CONTENT ZONES -->
+
+  <!-- Header Label (block) -->
+  <div class="header-label">
+    <span class="label-text {{LABEL_DEPTH}}">Ton avis</span>
+  </div>
+
+  <!-- Question (template-specific) -->
+  <div class="zone-question">
+    <div class="question-text {{QUESTION_DEPTH}}">{{QUESTION}}</div>
+  </div>
+
+  <!-- VS typo block (VS mode only, template-specific) -->
+  <div class="zone-vs-typo" style="display: {{SHOW_VS}}">
+    <div class="vs-typo text-depth">
+      <div class="vs-name">{{PRODUCT_A_LABEL}}</div>
+      <div class="vs-separator-typo">VS</div>
+      <div class="vs-name">{{PRODUCT_B_LABEL}}</div>
+    </div>
+  </div>
+
+  <!-- Sticker Zone (block) -->
+  <div class="sticker-zone">
+    <span class="sticker-hint">Zone sticker sondage</span>
+  </div>
+
+  <!-- Bottom Section (block) -->
+  <div class="bottom-section">
+    <div class="tagline">{{TAGLINE}}</div>
+    <div class="logo-container">
+      <img src="../_base/logo.svg" alt="STRICT FOOD'S">
+    </div>
+  </div>
+
+</body>
+</html>

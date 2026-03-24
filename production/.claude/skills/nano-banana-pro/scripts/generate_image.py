@@ -42,7 +42,9 @@ def main():
     )
     parser.add_argument(
         "--input-image", "-i",
-        help="Optional input image path for editing/modification"
+        action="append",
+        default=[],
+        help="Input image path(s) — can be repeated for multi-image compositing"
     )
     parser.add_argument(
         "--reference-image",
@@ -82,18 +84,18 @@ def main():
     output_path = Path(args.filename)
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    # Load input image if provided
-    input_image = None
+    # Load input images if provided
+    input_images = []
     output_resolution = args.resolution
-    if args.input_image:
+    for img_path in args.input_image:
         try:
-            input_image = PILImage.open(args.input_image)
-            print(f"Loaded input image: {args.input_image}")
+            img = PILImage.open(img_path)
+            input_images.append(img)
+            print(f"Loaded input image: {img_path}")
 
-            # Auto-detect resolution if not explicitly set by user
-            if args.resolution == "1K":  # Default value
-                # Map input image size to resolution
-                width, height = input_image.size
+            # Auto-detect resolution from first image if not explicitly set
+            if args.resolution == "1K" and len(input_images) == 1:
+                width, height = img.size
                 max_dim = max(width, height)
                 if max_dim >= 3000:
                     output_resolution = "4K"
@@ -103,7 +105,7 @@ def main():
                     output_resolution = "1K"
                 print(f"Auto-detected resolution: {output_resolution} (from input {width}x{height})")
         except Exception as e:
-            print(f"Error loading input image: {e}", file=sys.stderr)
+            print(f"Error loading input image {img_path}: {e}", file=sys.stderr)
             sys.exit(1)
 
     # Load reference image if provided
@@ -116,13 +118,16 @@ def main():
             print(f"Error loading reference image: {e}", file=sys.stderr)
             sys.exit(1)
 
-    # Build contents (image first if editing, prompt only if generating)
-    if input_image and reference_image:
-        contents = [input_image, reference_image, args.prompt]
-        print(f"Editing image with reference, resolution {output_resolution}...")
-    elif input_image:
-        contents = [input_image, args.prompt]
-        print(f"Editing image with resolution {output_resolution}...")
+    # Build contents (images first, then prompt)
+    if input_images:
+        contents = input_images[:]
+        if reference_image:
+            contents.append(reference_image)
+        contents.append(args.prompt)
+        print(f"{'Compositing' if len(input_images) > 1 else 'Editing'} with {len(input_images)} input image(s){' + reference' if reference_image else ''}, resolution {output_resolution}...")
+    elif reference_image:
+        contents = [reference_image, args.prompt]
+        print(f"Generating with reference image, resolution {output_resolution}...")
     else:
         contents = args.prompt
         print(f"Generating image with resolution {output_resolution}...")

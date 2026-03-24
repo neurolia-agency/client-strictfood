@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Space+Grotesk:wght@500;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --accent: #BF8522;
+  --accent-rgb: 191,133,34;
+  --bg: #141210;
+  --bg-rgb: 20,18,16;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  width: 1080px;
+  height: 1350px;
+  background: var(--bg);
+  overflow: hidden;
+  position: relative;
+  font-family: 'DM Sans', sans-serif;
+  color: #ffffff;
+}
+
+/* Grain */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.03;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* Photo background — top portion */
+.bg-image {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1080px;
+  height: 1080px;
+  object-fit: cover;
+  object-position: 50% 50%;
+  z-index: 1;
+  mask-image: linear-gradient(to bottom, black 0%, black 55%, rgba(0,0,0,0.6) 72%, rgba(0,0,0,0.2) 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 55%, rgba(0,0,0,0.6) 72%, rgba(0,0,0,0.2) 85%, transparent 100%);
+  filter: brightness(1.05) saturate(0.85) sepia(0.15);
+}
+
+/* Content — positioned below the burger */
+.content {
+  position: absolute;
+  bottom: 80px;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  padding: 0 80px;
+  text-align: center;
+}
+
+/* Product name */
+.product-name {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 96px;
+  line-height: 0.95;
+  text-transform: uppercase;
+  color: #ffffff;
+  letter-spacing: -2px;
+  margin-bottom: 16px;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.5);
+}
+
+.product-name em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+/* Tagline */
+.intro-line {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: 36px;
+  color: rgba(255,255,255,0.70);
+  line-height: 1.35;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+}
+
+/* Macros bar */
+.macros {
+  display: flex;
+  gap: 50px;
+}
+
+.macro {
+  display: flex;
+  flex-direction: column;
+}
+
+.macro-value {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 56px;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.macro-value .unit {
+  font-weight: 400;
+  font-size: 24px;
+  color: rgba(255,255,255,0.40);
+  margin-left: 3px;
+}
+
+.macro-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 18px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-top: 6px;
+}
+
+/* Ambient glow */
+.ambient-bottom {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 600px;
+  background: radial-gradient(ellipse 120% 100% at 50% 100%, rgba(191,133,34,0.12) 0%, rgba(191,133,34,0.04) 40%, transparent 70%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Accent line */
+.accent-line {
+  position: absolute;
+  left: 65px;
+  top: 200px;
+  width: 3px;
+  height: 950px;
+  background: linear-gradient(to bottom,
+    transparent,
+    rgba(191,133,34,0.55) 15%,
+    rgba(191,133,34,0.25) 55%,
+    rgba(191,133,34,0.06) 85%,
+    transparent);
+  z-index: 15;
+  border-radius: 2px;
+}
+</style>
+</head>
+<body>
+  <img class="bg-image" src="/Users/dorian.gz/dev/Neurolia Agency/client-strictfood/public/images/photos-references/produits-source/burgers-black/strict-boeuf/strict-boeuf-gold-bg-3.png" alt="">
+  <!-- Color overlay to match accent -->
+  <div style="position:absolute; top:0; left:0; right:0; bottom:0; background: rgba(191,133,34,0.12); mix-blend-mode: color; z-index:2; pointer-events:none;"></div>
+  <div class="ambient-bottom"></div>
+
+  <div class="content">
+    <div class="product-name">STRICT<br><em>BŒUF.</em></div>
+    <div class="intro-line">Seul contre tous.</div>
+  </div>
+</body>
+</html>

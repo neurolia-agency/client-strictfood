@@ -27,8 +27,10 @@ L'opérateur fournit :
 1. **Résoudre le chemin** → déterminer `[dossier-post]`
 2. Lire `[dossier-post]/brief/brief.md`
 3. Vérifier que le brief existe et contient au minimum : Pilier, Format, Objectif, Produit, **Mode**, Direction Caption
-4. **Régénérer et lire l'historique** : scanner les dossiers de production puis lire `production/_config/historique-production.md`
-   - Régénérer l'historique par scan des dossiers (voir procédure dans le fichier)
+4. **Lire et réécrire l'historique** :
+   > **Ce fichier EXISTE TOUJOURS** à `production/_config/historique-production.md`. Ne JAMAIS supposer qu'il n'existe pas. "Régénérer" = le RÉÉCRIRE avec des données fraîches, pas le créer.
+   - Lire le fichier existant `production/_config/historique-production.md`
+   - Scanner les dossiers de production et réécrire le fichier (voir procédure dans le fichier)
    - Vérifier que ce produit n'a pas été traité en post les 2 dernières semaines (sauf angle différent)
    - Vérifier que les photos prévues n'ont pas été utilisées récemment (en post OU en story)
    - Identifier les stories produites cette semaine pour vérifier la cohérence (symbiose)
@@ -73,7 +75,7 @@ Afficher le mapping à l'opérateur. Attendre validation.
    - Contexte : art-direction.md + input.md
    - Output : `[dossier-post]/production/prompt.md`
 
-### A4 — Génération image
+### A4 — Génération image (brouillon)
 
 Assembler et afficher la commande Gemini (Nanobanana Pro) :
 ```bash
@@ -82,7 +84,7 @@ uv run production/.claude/skills/nano-banana-pro/scripts/generate_image.py \
   --input-image "[photo ref]" --resolution 4K --api-key "$GEMINI_API_KEY"
 ```
 
-Output dans `[dossier-post]/final/`.
+Output dans `[dossier-post]/brouillons/` (JAMAIS directement dans `final/`).
 
 ---
 
@@ -125,7 +127,7 @@ Corrections prévues : [alignement couleurs DA, contraste, fond, etc.]
 2. Exécuter via GPT Images (gpt-image-1) en mode edit :
    - Input : photo source
    - Prompt : instructions sublimation
-   - Output dans `[dossier-post]/final/`
+   - Output dans `[dossier-post]/brouillons/` (JAMAIS directement dans `final/`)
 
 ---
 
@@ -156,7 +158,7 @@ Afficher les deux photos et l'intention de compositing. Attendre validation.
    - **Bords** : intégration naturelle, pas de découpe visible
    - **Couleur** : unifier la température et la saturation (DA Dark Food Premium)
 2. Exécuter via GPT Images en mode edit avec les 2 images
-   - Output dans `[dossier-post]/final/`
+   - Output dans `[dossier-post]/brouillons/` (JAMAIS directement dans `final/`)
 
 ---
 
@@ -196,7 +198,7 @@ Afficher la direction scène + la photo produit sélectionnée. Attendre validat
 ### D4 — Génération image
 
 Commande Gemini avec `--input-image` pointant vers la photo produit réelle.
-Output dans `[dossier-post]/final/`.
+Output dans `[dossier-post]/brouillons/` (JAMAIS directement dans `final/`).
 
 ---
 
@@ -223,21 +225,65 @@ Afficher le mapping de chaque slide. Attendre validation.
 Pour chaque slide :
 1. Lire le template HTML dans `production/posts-stories/posts/_templates/[type].html`
 2. Remplacer les `{{PLACEHOLDER}}` par les valeurs
-3. Résoudre les chemins en absolu
-4. Rendre via Puppeteer :
+3. **Layout produit surdimensionné** : si la slide contient du texte concentré d'un côté et une photo produit sur fond noir, appliquer la technique (voir `SPECS.md` section "Layout texte/visuel") :
+   - Agrandir l'image à ~1.5x (ex: `width: 1500px; height: 1500px`)
+   - Décaler vers le bord opposé au texte (ex: `right: -600px`)
+   - ~50% du produit visible, coupé par le bord = impact visuel
+   - Masque radial pour fondre dans le fond sombre
+   - `object-fit: contain` pour les photos produit détourées
+4. Résoudre les chemins en absolu
+5. Rendre via Puppeteer :
    ```bash
    node production/posts-stories/stories/_scripts/render-story.js \
      --input [slide].html --output [slide].png
    ```
    Note : le script render fonctionne pour tout format, pas seulement les stories.
 
-Output : `[dossier-post]/final/slide-01.png`, `slide-02.png`, etc.
+Output : `[dossier-post]/brouillons/slide-01.png`, `slide-02.png`, etc. (JAMAIS directement dans `final/`)
+
+---
+
+## Flux brouillon → final (tous les modes)
+
+Le premier visuel généré va **TOUJOURS dans `brouillons/`**, jamais directement dans `final/`.
+
+```
+[Génération]  →  brouillons/*.png  →  itérations si besoin  →  validation opérateur  →  final/*.png
+```
+
+- `brouillons/` = espace de travail, itérations, corrections
+- `final/` = visuel terminé et prêt à poster (seul dossier tracé dans l'historique)
+
+**Après la génération du brouillon** :
+
+1. Afficher le résultat à l'opérateur :
+   ```
+   📝 BROUILLON généré — [date]
+
+   📸 [dossier-post]/brouillons/[fichier].png
+
+   → Vérifier le visuel.
+   ✅ Valider et promouvoir en final ?
+   ✏️ Modifier ? (décrire les changements)
+   🔄 Régénérer ?
+   ```
+
+2. **Si modifications** : itérer (re-générer dans `brouillons/`, versions successives si besoin)
+
+3. **Quand validé** : copier le brouillon vers `final/`
+   ```bash
+   cp [dossier-post]/brouillons/[fichier].png [dossier-post]/final/[fichier].png
+   ```
+
+4. Puis passer à la caption (étape suivante)
+
+> **Règle** : la caption n'est générée qu'après validation du brouillon et promotion vers `final/`.
 
 ---
 
 ## ÉTAPE FINALE A — Génération Caption (tous les modes)
 
-**Après** la production de l'image, pour TOUS les modes :
+**Après** la promotion du visuel vers `final/`, pour TOUS les modes :
 
 1. **APPELER LE SKILL** : `caption-writer`
    - Contexte : le brief (Direction Caption) + l'image produite (vision)
@@ -265,9 +311,12 @@ Output : `[dossier-post]/final/slide-01.png`, `slide-02.png`, etc.
 ├── production/art-direction.md    ← Art Director (modes full-ia et compositing-ia uniquement)
 ├── production/prompt.md           ← Prompt Engineer (modes full-ia et compositing-ia uniquement)
 ├── production/caption.md          ← Caption Writer (tous les modes)
-├── brouillons/                    ← Itérations intermédiaires
-└── final/*.png                    ← Image(s) produite(s)
+├── brouillons/*.png               ← Premier rendu + itérations (brouillon)
+└── final/*.png                    ← Visuel(s) VALIDÉ(s) prêt(s) à poster (promu(s) depuis brouillons/)
 ```
+
+> **Flux** : Génération → `brouillons/` → itérations si besoin → validation opérateur → promotion vers `final/`
+> **Historique** : seuls les PNG dans `final/` sont tracés. Les brouillons ne comptent pas.
 
 Note : les fichiers art-direction.md et prompt.md n'existent pas dans production/ pour les modes `irl-sublimation`, `compositing-irl` et `template`.
 
@@ -294,10 +343,22 @@ Note : les fichiers art-direction.md et prompt.md n'existent pas dans production
 
 ## Règles non négociables
 
+0. **⛔ PAIN NOIR OBLIGATOIRE** — tous les burgers StrictFood sont au pain noir (black bun sésame). Zéro tolérance :
+   - **Sélection photo** : UNIQUEMENT `burgers-black/`. Photo pain blanc = STOP immédiat.
+   - **Prompts IA** : DOIT contenir "black sesame bun". INTERDIT : "brioche", "white bun", "plain bun", "golden bun".
+   - **Checkpoint** : vérifier visuellement que le bun est NOIR. Pain blanc détecté = BLOQUER.
+   - **Brouillon** : re-vérifier le pain noir avant promotion vers `final/`.
+0b. **⛔ FIDÉLITÉ SALLE DE RESTAURANT** — quand un visuel montre l'intérieur du restaurant StrictFood, chaque élément doit être fidèle à la réalité. Photos de référence : `public/images/photos-references/contexte/salle-restaurant/` (8 photos).
+   - **Autorisé** : changer l'angle/perspective, reconstituer un élément manquant (même modèle), compléter un mur partiellement visible (même texture), cadrer sur une zone spécifique.
+   - **Interdit** : modifier les matériaux, changer l'ambiance (rustique, pub, boisé sombre), inventer du mobilier/déco absents, remplacer des éléments existants.
+   - **Caractéristiques réelles** : carrelage blanc/gris clair, bois blond chêne, chaises noires métal, mur végétal néon "STRICT FOOD'S", comptoir vitrine noire, éclairage blanc neutre moderne.
+   - **Checkpoint** : vérifier que le décor restaurant correspond aux photos de référence. Décor inventé = BLOQUER `⚠️ DÉCOR RESTAURANT NON CONFORME`.
+   - **Lieux neutres (fond sombre, table isolée, extérieur)** : pas concernés par cette règle.
 1. **Le mode détermine le pipeline** — ne JAMAIS exécuter un sous-pipeline qui ne correspond pas au mode
-2. **Caption TOUJOURS après l'image** — ne JAMAIS écrire la caption avant la génération visuelle
-3. **Un seul checkpoint par mode** — avant la génération/sublimation/compositing/render
-4. **Résolution TOUJOURS 4K** pour les modes full-ia et compositing-ia
-5. **API key TOUJOURS `$GEMINI_API_KEY`** — jamais en dur
-6. **Skills/agents via outils dédiés** — Skill tool et Agent tool, pas d'exécution manuelle
-7. **Historique TOUJOURS à jour** — régénérer `_config/historique-production.md` par scan des dossiers avant chaque exécution
+2. **Brouillon d'abord** — le premier visuel va TOUJOURS dans `brouillons/`, JAMAIS directement dans `final/`
+3. **Caption TOUJOURS après promotion** — ne JAMAIS écrire la caption avant la promotion du brouillon en `final/`
+4. **Un seul checkpoint par mode** — avant la génération/sublimation/compositing/render
+5. **Résolution TOUJOURS 4K** pour les modes full-ia et compositing-ia
+6. **API key TOUJOURS `$GEMINI_API_KEY`** — jamais en dur
+7. **Skills/agents via outils dédiés** — Skill tool et Agent tool, pas d'exécution manuelle
+8. **Historique TOUJOURS à jour** — lire puis réécrire `production/_config/historique-production.md` par scan des dossiers avant chaque exécution. Ce fichier EXISTE TOUJOURS.

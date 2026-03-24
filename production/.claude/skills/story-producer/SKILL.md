@@ -41,9 +41,15 @@ Chaque template a un cadre fixe avec des positions absolues. **TOUJOURS consulte
 
 ## Étape 0 — Contexte stratégique + historique (avant toute exécution)
 
-### 0a. Régénérer et lire l'historique de production
+### 0a. Lire et réécrire l'historique de production
 
-Régénérer `production/_config/historique-production.md` par scan des dossiers (voir procédure dans le fichier), puis lire pour :
+> **Ce fichier EXISTE TOUJOURS** à `production/_config/historique-production.md`. Ne JAMAIS supposer qu'il n'existe pas. "Régénérer" = le RÉÉCRIRE avec des données fraîches par scan des dossiers, pas le créer.
+
+1. **Lire** le fichier existant : `production/_config/historique-production.md`
+2. **Scanner** les dossiers de production (voir procédure de scan en fin de ce fichier)
+3. **Réécrire** le fichier avec les données scannées
+
+Puis analyser pour :
 - Identifier les **produits déjà couverts en story** récemment (pas de fiche produit doublon sur 2 semaines)
 - Identifier les **posts de la semaine en cours** (les stories doivent les compléter, pas les répéter)
 - Vérifier les **photos déjà utilisées** (en post ET en story) pour ne pas les réutiliser
@@ -135,6 +141,18 @@ story-02/production/data.md / story-02/production/story.html / story-02/final/st
 
 Les stories Recap (semi-manuelles) sont listées dans le récap mais ne produisent aucun fichier.
 
+## Flux brouillon → final
+
+Le premier visuel généré va **TOUJOURS dans `brouillons/`**, jamais directement dans `final/`.
+
+```
+[Render]  →  brouillons/story.png  →  itérations si besoin  →  validation opérateur  →  final/story.png
+```
+
+- `brouillons/` = espace de travail, itérations, corrections
+- `final/` = visuel terminé et prêt à poster (seul dossier tracé dans l'historique)
+- La promotion de `brouillons/` vers `final/` est explicite (l'opérateur dit "valide" ou "promote en final")
+
 ## Exécution séquentielle — RESPECTER CET ORDRE EXACT
 
 ### ÉTAPE 1 — Lecture et parsing du brief
@@ -175,22 +193,46 @@ Les stories Recap (semi-manuelles) sont listées dans le récap mais ne produise
 
 **OBLIGATOIRE.** Chaque story passe par l'agent copywriter avant le data mapping.
 
-Pour chaque story automatisable :
+Les stories d'un même jour sont traitées **séquentiellement** pour permettre la déduplication cross-stories (contexte batch).
 
-1. **SPAWNER L'AGENT** via le Agent tool :
+Pour chaque story automatisable (dans l'ordre 1, 2, 3...) :
+
+1. **CONSTRUIRE LE CONTEXTE BATCH** avant de spawner l'agent :
+
+   - **Textes déjà écrits ce jour** : collecter les hooks, titres et corps des stories précédentes déjà réécrites (stories 1 à N-1)
+   - **Hooks de la semaine** : collecter les hooks des jours précédents de la même semaine (depuis les `data.md` existants)
+   - **Position dans l'arc narratif du jour** :
+     - Story 1 = **curiosité** (tension, mystère, chiffre choc)
+     - Story 2 = **preuve** (artisan, process, donnée, détail)
+     - Story 3 = **émotion** (ambiance, identité, provocation douce, CTA)
+     - Story 4+ = alterner preuve/émotion
+
+2. **SPAWNER L'AGENT** via le Agent tool :
    ```
    Agent: story-copywriter
    subagent_type: (utiliser le fichier production/posts-stories/stories/.claude/agents/story-copywriter.md)
    Prompt: "Réécris les textes de la Story [N] dans production/posts-stories/stories/[semaine]/[jour]/brief/brief-story.md.
-   Contexte jour : Pilier=[pilier], Persona=[persona], Objectif=[objectif stratégique]."
+   Contexte jour : Pilier=[pilier], Persona=[persona], Objectif=[objectif stratégique].
+   Position arc narratif : [curiosité/preuve/émotion] (story [N] sur [total] du jour).
+
+   ## Textes déjà écrits aujourd'hui :
+   [Story 1 : hook='[texte]', titre='[texte]', corps='[texte]']
+   [Story 2 : hook='[texte]', titre='[texte]', corps='[texte]']
+   (vide si c'est la première story du jour)
+
+   ## Hooks de la semaine (déduplication) :
+   [liste des hooks des jours précédents]
+   (vide si c'est le premier jour)"
    model: sonnet
    ```
 
-2. L'agent retourne les champs textuels réécrits. **Intégrer les textes réécrits** dans le flux — c'est la version copywriter qui sera utilisée pour le data mapping, pas le brief brut.
+3. L'agent retourne les champs textuels réécrits. **Intégrer les textes réécrits** dans le flux — c'est la version copywriter qui sera utilisée pour le data mapping, pas le brief brut.
 
-3. En cas de doute sur une réécriture, conserver le texte original et signaler au checkpoint.
+4. **Collecter les textes réécrits** pour les passer en contexte aux stories suivantes du même jour.
 
-> **Pourquoi cette étape ?** Le brief opérateur contient le fond (bon) mais pas la forme (souvent redondant, banal). Le copywriter transforme "Demain, on casse les codes" + label "Bientot" + date "Demain" en textes sans redondance et plus impactants.
+5. En cas de doute sur une réécriture, conserver le texte original et signaler au checkpoint.
+
+> **Pourquoi le contexte batch ?** Sans cette info, le copywriter produit des textes isolés qui se répètent entre eux (même structure de hook, même registre, mêmes formules). Avec le batch, il varie les entrées (chiffre → nom propre → texture) et respecte l'arc narratif du jour.
 
 ### ÉTAPE 2 — Data Mapping (par story automatisable)
 
@@ -211,6 +253,7 @@ Pour chaque story automatisable identifiée à l'étape 1 :
 
 3. **Assigner le preset photo et la force de gradient** :
    - Analyser le sujet de la photo (centré, à droite, portrait, etc.) → choisir parmi `photo-centre`, `photo-droite`, `photo-gauche`, `photo-haut`, `photo-large`, `photo-portrait`
+   - **Règle layout texte/visuel** : quand le template a beaucoup de texte, placer le visuel dans l'espace opposé. Éducatif (texte à gauche) → `photo-droite`. Annonce (texte centré) → `photo-centre`. Voir `SPECS.md` section "Layout texte/visuel".
    - Analyser la luminosité de la photo (sombre, normale, claire) → choisir `gradient-light`, `gradient-medium`, `gradient-strong`
    - Écrire les classes dans `story-[NN]/production/data.md` : `PHOTO_PRESET: photo-centre`, `GRADIENT_CLASS: gradient-medium`
 
@@ -232,6 +275,25 @@ Pour chaque story automatisable identifiée à l'étape 1 :
 | Process | Image haut → `{{IMAGE_TOP}}`, Image bas → `{{IMAGE_BOTTOM}}`, Label haut → `{{LABEL_TOP}}`, Label bas → `{{LABEL_BOTTOM}}`, Séparateur → `{{SEPARATOR_TEXT}}`, Caption → `{{CAPTION}}`, Tagline → `{{TAGLINE}}` |
 | IRL | Photo → `{{BG_IMAGE_PATH}}`, Texte overlay → `{{IRL_TEXT}}`, Position texte → `{{IRL_TEXT_POSITION}}`, Filtre → `{{IRL_FILTER}}` |
 | Séquence | Position → `{{SEQUENCE_POSITION}}` (ex: "1/3"), Titre séquence → `{{SEQUENCE_TITLE}}`, + champs du template sous-jacent |
+
+### ÉTAPE 2c — Visual Designer (par story automatisable)
+
+**OPTIONNEL mais RECOMMANDÉ.** Le visual designer analyse la photo et génère des overrides CSS sur-mesure.
+
+Pour chaque story automatisable avec une image (BG ou HERO) :
+
+1. **INVOQUER LE SKILL** `/visual-designer` :
+   - Fournir le chemin vers `story-[NN]/production/data.md`
+   - Fournir le(s) chemin(s) photo depuis data.md
+   - Fournir le type de template et le mood
+
+2. Le skill ouvre la photo, analyse la composition et la luminosité, et écrit `story-[NN]/production/design-overrides.css`
+
+3. **Intégrer au template fill** : à l'étape 3, ajouter `<link rel="stylesheet" href="design-overrides.css">` EN DERNIER dans le `<head>` du HTML rempli (après base.css et les blocs)
+
+> **Pourquoi cette étape ?** Les presets photo génériques (6 positions, 3 gradients) ne couvrent pas la diversité des photos. Le visual designer produit des valeurs précises (`object-position: 63% 42%` au lieu de `photo-droite = 75% 30%`) et adapte le contraste et les effets au contenu réel de la photo.
+
+> **Quand sauter cette étape ?** Si le template n'a pas de photo de fond (ex: certains annonces texte-only) ou si l'opérateur demande un render rapide sans optimisation.
 
 ### 🔒 CHECKPOINT — Validation opérateur
 
@@ -291,36 +353,75 @@ Pour chaque story validée :
    - Copier le template
    - Remplacer `{{MOOD_CLASS}}` et `{{IMG_CLASS}}` dans le `<body>` par les classes CSS résolues à l'étape 1 (ex: `"mood-grenat"` et `"img-hero"`, ou `""` pour les defaults cuivre/visible)
    - Remplacer chaque `{{PLACEHOLDER}}` par sa valeur depuis data.md
+   - **`{{TAGLINE}}` est TOUJOURS `Le cheat meal qui n'en est pas un`** — valeur fixe, ne jamais la modifier même si data.md contient autre chose
+   - **Layout produit surdimensionné** : quand la photo est un produit sur fond noir (`burgers-black/`, `dark-bg/`) et que le texte est concentré d'un côté, appliquer la technique du produit surdimensionné (voir `SPECS.md` section "Layout texte/visuel") :
+     - Agrandir l'image à 1.3x–1.5x (ex: `width: 1500px; height: 1500px`)
+     - Décaler vers le bord opposé au texte (ex: `right: -600px` si texte à gauche)
+     - ~50% du produit visible, le reste coupé par le bord = impact visuel
+     - Remplacer le mask linéaire par un `radial-gradient` pour fondre le produit dans le fond
+     - Utiliser `object-fit: contain` (pas `cover`) pour les photos produit détourées
    - Pour les blocs conditionnels (ex: `{{SHOW_VS}}`, `{{SHOW_BG}}`, `{{SHOW_CTA}}`, `{{SHOW_HERO}}`), mettre `flex` ou `block` si actif, `none` si inactif
    - **Résoudre les chemins relatifs** : les `src` vers `_base/base.css`, `_base/logo.svg`, et les images doivent être des **chemins absolus** (préfixe du chemin complet sur le disque) pour que Puppeteer puisse les charger en `file://`
    - Écrire le fichier dans `production/posts-stories/stories/[semaine]/[jour]/story-[NN]/production/story.html`
 
-4. **Rendre en PNG** :
+4. **Rendre en PNG (brouillon)** :
    ```bash
    node production/posts-stories/stories/_scripts/render-story.js \
      --input production/posts-stories/stories/[semaine]/[jour]/story-[NN]/production/story.html \
-     --output production/posts-stories/stories/[semaine]/[jour]/story-[NN]/final/story.png
+     --output production/posts-stories/stories/[semaine]/[jour]/story-[NN]/brouillons/story.png
    ```
 
-5. **Contrôle anti-vide bas** : après chaque render, **ouvrir le PNG** et vérifier visuellement le tiers inférieur (zone en dessous de ~1280px). Si cette zone est majoritairement noire/charbon sans texte, image, ou élément visuel (hors tagline bottom) :
+   > **Le premier render va TOUJOURS dans `brouillons/`**, jamais directement dans `final/`. Le dossier `final/` est réservé au visuel validé et prêt à poster (voir étape 4).
+
+5. **Contrôle anti-vide bas** : après chaque render, **ouvrir le PNG** (`brouillons/story.png`) et vérifier visuellement le tiers inférieur (zone en dessous de ~1280px). Si cette zone est majoritairement noire/charbon sans texte, image, ou élément visuel (hors tagline bottom) :
    - **Dark Premium** : vérifier que `.bg-image` couvre assez bas, que l'`ambient-bottom` (glow accent) est visible, et que le `margin-top: auto` dans le template a bien redistribué le contenu. Si le bas reste vide → ajuster `object-position` de l'image pour descendre le sujet, ou activer le pattern dual-image (`SHOW_HERO = block`) avec une photo complémentaire.
    - **Vitrine** : normalement pas d'issue (info-zone couvre le bas). Si quand même vide → descendre la hero-zone ou augmenter le padding de l'info-zone.
    - **Signaler au checkpoint** : `⚠️ Zone basse vide détectée sur Story [N] — [action corrective prise]`
 
 6. Après toutes les stories du jour, afficher le résultat groupé :
    ```
-   ✅ Stories générées — [semaine]/[jour]
+   📝 BROUILLONS générés — [semaine]/[jour]
 
    Story 01 (Fiche Produit) [VITRINE] :
-     📄 story-01/production/story.html  📸 story-01/final/story.png
+     📄 story-01/production/story.html  📸 story-01/brouillons/story.png
    Story 02 (IRL) [DARK PREMIUM] :
-     📄 story-02/production/story.html  📸 story-02/final/story.png
+     📄 story-02/production/story.html  📸 story-02/brouillons/story.png
 
    📋 Semi-manuel :
      Story 03 (Recap) — repost meilleur post de la semaine
 
-   → Vérifier les rendus avant publication.
+   → Vérifier les brouillons. Demander des modifications si besoin.
+   → Quand satisfait, demander la promotion vers final/.
    ```
+
+### ÉTAPE 4 — Itérations et promotion vers final
+
+**Après le render initial dans `brouillons/`**, l'opérateur examine chaque PNG :
+
+1. **Si modifications nécessaires** : l'opérateur décrit les changements souhaités. Le pipeline :
+   - Corrige le `story-[NN]/production/story.html` (ou `data.md` si données à changer)
+   - Re-render dans `brouillons/` (écrase le PNG précédent ou crée `story-v2.png`, `story-v3.png`, etc.)
+   - Répéter jusqu'à validation
+
+2. **Quand l'opérateur valide** (ex: "c'est bon", "valide", "promote en final") :
+   - Copier le brouillon validé vers `story-[NN]/final/story.png`
+   - C'est ce PNG dans `final/` qui sera tracé dans l'historique de production
+   ```bash
+   cp production/posts-stories/stories/[semaine]/[jour]/story-[NN]/brouillons/story.png \
+      production/posts-stories/stories/[semaine]/[jour]/story-[NN]/final/story.png
+   ```
+
+3. **Afficher le résultat final** :
+   ```
+   ✅ Stories FINALISÉES — [semaine]/[jour]
+
+   Story 01 (Fiche Produit) [VITRINE] :
+     📸 story-01/final/story.png ← PRÊT À POSTER
+   Story 02 (IRL) [DARK PREMIUM] :
+     📸 story-02/final/story.png ← PRÊT À POSTER
+   ```
+
+> **Règle historique** : seul un PNG dans `final/` est tracé dans l'historique. Un brouillon dans `brouillons/` ne compte pas.
 
 ### ÉTAPE FINALE — Génération document Demande Photos (si photos manquantes)
 
@@ -339,26 +440,31 @@ Si l'opérateur demande une semaine entière (`S1`) :
 
 1. Lister tous les jours dans `production/posts-stories/stories/S1/`
 2. Pour chaque jour contenant un `brief/brief-story.md` :
-   - Exécuter les étapes 1→3 (toutes les stories du jour)
+   - Exécuter les étapes 1→3 (brouillons de toutes les stories du jour)
    - Collecter les résultats
-3. Afficher un récap final groupé :
+3. Afficher un récap brouillons :
    ```
-   📊 RÉCAP STORIES — S1
+   📝 RÉCAP BROUILLONS — S1
 
-   | Jour | Story | Type | Style | Status | Output |
-   |------|-------|------|-------|--------|--------|
-   | lundi | #1 | Fiche Produit | Vitrine | ✅ Généré | story-01/final/story.png |
-   | lundi | #2 | IRL | Dark | ✅ Généré | story-02/final/story.png |
-   | mardi | #1 | Focus Ingrédient | Vitrine | ✅ Généré | story-01/final/story.png |
-   | mardi | #2 | Éducatif | Dark | ✅ Généré | story-02/final/story.png |
+   | Jour | Story | Type | Style | Status | Brouillon |
+   |------|-------|------|-------|--------|-----------|
+   | lundi | #1 | Fiche Produit | Vitrine | 📝 Brouillon | story-01/brouillons/story.png |
+   | lundi | #2 | IRL | Dark | 📝 Brouillon | story-02/brouillons/story.png |
+   | mardi | #1 | Focus Ingrédient | Vitrine | 📝 Brouillon | story-01/brouillons/story.png |
+   | mardi | #2 | Éducatif | Dark | 📝 Brouillon | story-02/brouillons/story.png |
    | ... | ... | ... | ... | ... | ... |
 
-   Total : X stories générées / Y semi-manuelles
+   Total : X brouillons générés / Y semi-manuelles
    Variation : X Vitrine / Y Dark Premium / Z Visuelles
    Modes : X template / Y irl / Z sublimation / ...
    ⚠️ Photos manquantes : [liste ou "aucune"]
 
+   → Vérifier les brouillons jour par jour.
+   → Demander les modifications si besoin.
+   → Quand tout est validé, demander la promotion vers final/.
    ```
+
+4. **Étape 4 — Promotion** : après validation de chaque brouillon par l'opérateur, promouvoir vers `final/` (voir étape 4 ci-dessus). En batch, l'opérateur peut valider jour par jour ou en une fois.
 
 ## Résolution des chemins dans le HTML
 
@@ -401,22 +507,41 @@ Les templates Vitrine ont leur propre système visuel :
 - **Panel bottom** avec backdrop-blur pour le texte, assurant la lisibilité sur le gradient
 - **Macro star** mise en avant (le chiffre qui vend le produit)
 
-### Backgrounds visibles (Dark Premium)
+### Système overlay adaptatif + lisibilité texte
 
-Les images de fond doivent être **lisibles**, pas noyées dans le noir. Les templates utilisent :
-- `base.css` `.bg-image` : `opacity: var(--img-opacity)` (0.60 defaut) + `brightness(1.15)` — image contextuelle, zone haute droite
-- `annonce.html` `.annonce-bg` : `opacity: 0.35` + `brightness(1.1)` — full-screen dimmed
+#### Overlays = protection texte uniquement
 
-Si lors du fill une image apparaît trop sombre, **ajuster l'opacity dans le CSS inline du HTML rempli** (ex: `style="opacity: 0.6"`).
+Le `gradient-left` (600px) couvre UNIQUEMENT la zone texte. Le produit à droite conserve ses couleurs pleines.
+
+Les classes `overlay-*` (direction) et `grad-*` (force) sont choisies par le data mapper selon le template et la photo. Ne JAMAIS override le gradient-left en inline.
+
+#### Texte blanc pur + accent
+
+La hiérarchie texte utilise **blanc pur `#fff`** pour tout le contenu et **accent `var(--accent)`** pour les labels et mots-clés. PAS d'opacité réduite (pas de texte gris).
+
+| Rôle | Couleur |
+|------|---------|
+| Labels | Accent + `brightness(1.2)`, font-weight 600 |
+| Headlines, body, unités | Blanc pur `#fff` |
+| Chiffres hero | Accent + `brightness(1.3)` |
+| `<strong>` dans body | Accent + `brightness(1.2)` |
+
+#### Lisibilité sur fond texturé (burger, photo)
+
+Quand du texte est positionné par-dessus un visuel :
+- **`text-depth-3`** sur TOUS les éléments texte — 6 couches d'ombre créant un halo sombre autour de chaque lettre
+- **`mark-tape-strong`** sur les blocs texte longs (>80 car) — bande accent à 0.50 d'opacité qui masque partiellement la photo
+
+Ces classes sont assignées par le data mapper dans les champs `{{*_DEPTH}}` et `{{*_TAPE}}`.
 
 ### Harmonisation couleur des images (Dark Premium uniquement)
 
 Les templates Dark Premium partagent un **filtre warm commun** défini dans `base.css` :
 ```css
-sepia(var(--img-sepia)) saturate(var(--img-saturate))  /* defaults: 0.12 / 0.90 */
+sepia(var(--img-sepia)) saturate(var(--img-saturate))  /* defaults: 0.05 / 1.10 */
 ```
 
-Ce filtre tire toutes les images vers les tons chauds de la DA (cuivre/charbon). **Les templates Vitrine n'utilisent PAS ce filtre** — les images y sont naturelles et vibrantes.
+Ce filtre ajoute une **très légère** touche chaude tout en **boostant la saturation** pour des couleurs riches et appétissantes. **Les templates Vitrine n'utilisent PAS ce filtre** — les images y ont leur propre boost (`brightness(1.20) saturate(1.25) contrast(1.05)`).
 
 ### Pattern dual-image (bg + product-hero) — Dark Premium
 
@@ -436,13 +561,16 @@ production/posts-stories/stories/S1/lundi/
   brief/brief-story.md              ← Brief opérateur (toutes les stories du jour)
   story-01/production/data.md       ← Données Story 1 (généré par pipeline ou data-mapper)
   story-01/production/story.html    ← Template rempli Story 1
-  story-01/brouillons/              ← Itérations Story 1
-  story-01/final/story.png          ← Rendu final Story 1 (1080×1920)
+  story-01/brouillons/story.png     ← Premier render + itérations (brouillon)
+  story-01/final/story.png          ← Visuel VALIDÉ prêt à poster (promu depuis brouillons/)
   story-02/production/data.md       ← Données Story 2
   story-02/production/story.html    ← Template rempli Story 2
-  story-02/brouillons/              ← Itérations Story 2
-  story-02/final/story.png          ← Rendu final Story 2
+  story-02/brouillons/story.png     ← Premier render + itérations (brouillon)
+  story-02/final/story.png          ← Visuel VALIDÉ prêt à poster (promu depuis brouillons/)
 ```
+
+> **Flux** : Render → `brouillons/` → itérations si besoin → validation opérateur → promotion vers `final/`
+> **Historique** : seul `final/story.png` est tracé. Un brouillon ne compte pas.
 
 ## Correction photo — Alignement horizontal et lisibilité
 
@@ -479,19 +607,25 @@ Les templates intègrent ces valeurs via les variables CSS `--safe-top` et `--sa
 | Zone | Pixels | Variable CSS | Contenu Instagram superposé |
 |------|--------|-------------|----------------------------|
 | Haut | 250px (y:0→250) | `--safe-top` | Username, photo profil, timestamp, bouton X |
-| Bas | 250px (y:1670→1920) | `--safe-bottom` | Barre "Envoyer un message", réactions, partage |
+| Bas | 80px (y:1840→1920) | `--safe-bottom` | Marge minimale (IG a supprimé l'overlay message) |
 | Côtés | 65px | `--safe-side` | Marge device cropping |
 
-**Zone safe pour le contenu** : 950px × 1420px (de y:250 à y:1670, avec 65px de marge latérale).
+**Zone safe pour le contenu** : 950px × 1580px (de y:250 à y:1840, avec 65px de marge latérale).
 
 - Les **images de fond** PEUVENT déborder dans les zones IG (elles sont décoratives)
 - Les **textes, logos, CTA, chiffres** doivent rester DANS la zone safe
+- **Le logo est EN BAS** sous la tagline (pas en haut — évite le doublon avec le profil IG)
 - Si un élément est trop proche d'une limite au checkpoint → signaler `⚠️ SAFE ZONE — [élément] à [N]px du bord [haut/bas]`
 
 ## Règles non négociables
 
-0. **Pain noir obligatoire** — tous les burgers StrictFood sont au pain noir (black bun). Aucune photo de burger au pain blanc ne doit apparaître dans une story. Si détecté au checkpoint → bloquer et demander remplacement.
-0b. **Historique TOUJOURS à jour** — régénérer `_config/historique-production.md` par scan des dossiers avant chaque exécution. L'historique reflète ce qui existe sur le disque, pas ce qu'on a écrit dedans.
+0. **⛔ PAIN NOIR OBLIGATOIRE** — tous les burgers StrictFood sont au pain noir (black bun sésame). Zéro tolérance :
+   - Aucune photo de burger au pain blanc ne doit apparaître dans une story
+   - Le data mapper doit sélectionner UNIQUEMENT des photos `burgers-black/`
+   - Le copywriter doit écrire "pain noir" (jamais "pain" ou "bun" seul)
+   - Si pain blanc détecté au checkpoint ou dans un brouillon → **BLOQUER** et demander remplacement
+   - Avant promotion en `final/`, re-vérifier visuellement que le bun est noir
+0b. **Historique TOUJOURS à jour** — lire puis réécrire `production/_config/historique-production.md` par scan des dossiers avant chaque exécution. Ce fichier EXISTE TOUJOURS — ne jamais supposer qu'il n'existe pas. L'historique reflète ce qui existe sur le disque.
 1. **Chaque story passe par le story-copywriter** — pas de texte brut du brief dans le rendu final.
 2. **Chaque story avec données produit passe par le story-data-mapper** — pas de résolution manuelle des données nutritionnelles.
 3. **Un seul checkpoint** : après le data mapping + copywriting. Le render s'enchaîne automatiquement.

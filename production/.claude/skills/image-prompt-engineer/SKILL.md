@@ -124,6 +124,36 @@ Quand l'input est un dossier de direction créative structuré, le workflow chan
 
 Ces règles s'appliquent à **chaque** prompt généré en Mode B, sans exception :
 
+#### 0. ⛔ Pain noir obligatoire (black bun)
+
+Tous les burgers StrictFood sont au **pain noir sésame (black bun)**. Le pain blanc/classique est obsolète.
+
+**Dans chaque prompt impliquant un burger :**
+- DOIT contenir : `"charcoal black sesame bun"` ou `"deep ink-dark black bun densely covered with golden sesame seeds"`
+- INTERDIT dans le prompt : `"brioche"`, `"white bun"`, `"plain bun"`, `"golden bun"`, `"classic bun"`
+- INTERDIT dans les traductions implicites : ne jamais omettre le qualificatif "black" devant "bun"
+- Le pain noir est un **marqueur identitaire** de la marque, pas un détail : il doit être décrit avec précision (texture noire, graines de sésame dorées, surface irrégulière)
+
+**Vérification obligatoire** : avant de livrer un prompt burger, ctrl-F "black" et "bun" — si l'un des deux manque, corriger.
+
+#### 0b. ⛔ Fidélité salle de restaurant
+
+Quand le prompt décrit un décor de **salle de restaurant** (intérieur, dining room, restaurant interior), il DOIT correspondre strictement à la vraie salle StrictFood. Photos de référence : `public/images/photos-references/contexte/salle-restaurant/` (8 photos).
+
+**Éléments réels à utiliser dans le prompt :**
+- `white/light grey rectangular tile walls` (PAS "wood paneling", PAS "brick")
+- `light oak wood accent wall panel and round table tops` (PAS "dark wood", PAS "walnut")
+- `black metal chairs, industrial minimalist style` (PAS "leather", PAS "upholstered")
+- `large green plant wall with white neon "STRICT FOOD'S" sign` (PAS de déco inventée)
+- `black glass-front refrigerated display case, white counter`
+- `modern minimalist ambiance, neutral white lighting` (PAS "warm", PAS "cozy", PAS "rustic")
+
+**Autorisé** : changer l'angle de vue, reconstituer un élément manquant (même modèle/matériau), cadrer sur une zone spécifique, ajuster légèrement l'éclairage pour le food porn.
+
+**INTERDIT dans le prompt si contexte restaurant :** `warm wood paneling`, `rustic`, `cozy pub`, `brick wall`, `dim ambient`, `vintage`, `industrial loft`, `exposed beams`, tout matériau/mobilier absent de la vraie salle.
+
+**Recommandation** : si le brief ne spécifie pas explicitement "dans la salle du restaurant", préférer un fond neutre (dark surface, isolated table, kitchen counter) — c'est toujours OK et sans risque.
+
 #### 1. Fidélité produit absolue
 Le brief spécifie une **recette** ou une **description exacte du produit** (ingrédients, formes, textures spécifiques). Le prompt DOIT décrire chaque élément avec sa forme exacte telle que spécifiée :
 - "parmesan en miettes" → "small, irregular, powdery parmesan crumbles" (PAS "parmesan shavings", PAS "parmesan flakes")
@@ -153,9 +183,64 @@ Si la direction créative inclut un brand prop, le prompt DOIT :
 - L'éclairage sur le prop suit l'éclairage global (pas de spotlight dédié)
 - **OBLIGATOIRE — Fournir le logo en image référence secondaire** : `public/logo/strictfood-logo-reference.png` via `--reference-image` dans la commande de génération. Le prompt DOIT contenir : "Reproduce the exact STRICT FOOD'S logo shown in the second reference image on the branded packaging — especially the burger icon replacing the O."
 
-#### 5. Style v2 — Réalisme documentaire
+#### 5. Compositing-irl — Photo lieu = fond sacré, prompt MINIMAL
 
-Chaque prompt Mode B DOIT intégrer des marqueurs de réalisme. Ces règles sont **non négociables** :
+Quand le mode est `compositing-irl`, le prompt doit être **le plus court possible**. Plus on décrit la scène, plus GPT Images la réinvente.
+
+**Principe fondamental** : NE JAMAIS DÉCRIRE LE LIEU. Ne pas lister les éléments du restaurant. Ne pas mentionner les murs, les meubles, l'éclairage ambiant. Chaque mot qui décrit la scène est un mot que GPT utilise pour RÉGÉNÉRER la scène au lieu de la PRÉSERVER.
+
+**Le prompt dit SEULEMENT :**
+1. "Edit this photo" (pas "create a scene")
+2. "Do NOT change anything" (interdiction absolue)
+3. "Place [product] on [surface visible]" (la seule modification)
+4. Description du produit (ingrédients, bun noir)
+5. "Match existing lighting" (pas de description de l'éclairage)
+6. FORBIDDEN section (courte, directe)
+
+**Structure obligatoire (6 blocs, prompt COURT) :**
+
+```
+0. "Edit this restaurant photo."
+1. "Do NOT change, modify, or reimagine ANY part of the existing scene."
+2. "The ONLY change: place the burger from Image 2 onto [surface] visible in Image 1."
+3. [Description produit — bun noir, ingrédients]
+4. "Match existing lighting. Natural shadow beneath burger."
+5. "FORBIDDEN: Do not redesign the restaurant. Do not generate a new background."
+```
+
+**Ce qui a ÉCHOUÉ (ne plus faire) :**
+- ❌ Lister les éléments du lieu ("counter, walls, plants, display case") → GPT les régénère
+- ❌ Décrire l'éclairage ambiant ("warm neutral interior light") → GPT génère son propre éclairage
+- ❌ Prompt long avec 8 sections → GPT ignore les contraintes noyées dans le texte
+- ❌ "PRESERVE the background photo" suivi de sa description → paradoxe qui invite à régénérer
+
+**Ce qui FONCTIONNE :**
+- ✅ "Edit this photo" (mode édition, pas génération)
+- ✅ "Change NOTHING except..." (une seule modification)
+- ✅ Prompt ultra-court (<100 mots pour la partie lieu)
+- ✅ Pré-cropper la photo lieu pour que la surface de pose soit proche et détaillée
+- ✅ Si échec → approche inpainting avec mask sur la zone de pose
+
+**Pré-crop OBLIGATOIRE** : si la photo du lieu est large (comptoir au loin, vue d'ensemble), TOUJOURS cropper pour zoomer sur la surface où le produit sera posé. Un crop serré réduit la tentation du modèle de réinventer.
+
+#### 5b. Compositing-irl — Réalisme d'intégration
+
+Même quand le fond est préservé, le produit composité a souvent l'air "collé". Les 6 pièges à éviter SYSTÉMATIQUEMENT :
+
+| Piège | Symptôme | Correction dans le prompt |
+|-------|----------|--------------------------|
+| **Surdimensionnement** | Le burger fait 50% du cadre | "The burger is SMALL — about 12cm diameter, occupying roughly 25-30% of the frame width" |
+| **Éclairage studio** | Le burger brille alors que la scène est en lumière ambiante plate | "The lighting on the burger must DEGRADE to match the flat ambient light of the scene. No dramatic shadows, no studio rim light" |
+| **Pas d'interaction surface** | Le burger flotte au-dessus de la table | "The base of the burger slightly compresses on the surface — it has weight. Natural contact shadow, soft and diffused" |
+| **Bords trop nets** | Détourage visible = effet "collé" | "Edges of the burger should blend naturally — slight ambient color spill from surroundings onto burger edges" |
+| **Garnitures exagérées** | Bouquet de mâche, cascade de sauce | "ONLY 3-4 small leaves. ONE thin drizzle. Compact and dense — realistic proportions" |
+| **Trop parfait** | Le burger est plus beau que tout le reste de la photo | "Do not make the burger look perfect — natural imperfections expected. Same photo quality as the rest of the scene" |
+
+**Règle d'or** : le burger composité doit être MOINS beau que dans un studio. Il doit ressembler à ce que verrait quelqu'un qui pose son burger sur la table et prend une photo rapide avec son téléphone. L'éclairage, les ombres, la netteté, les couleurs — tout doit correspondre au niveau de qualité du LIEU, pas du STUDIO.
+
+#### 6. Style v2 — Réalisme documentaire + Dynamisme visuel
+
+Chaque prompt Mode B DOIT intégrer des marqueurs de réalisme ET de dynamisme. Ces règles sont **non négociables** :
 
 | Aspect | Obligation | Interdit |
 |--------|-----------|----------|
@@ -163,13 +248,16 @@ Chaque prompt Mode B DOIT intégrer des marqueurs de réalisme. Ces règles sont
 | Garnitures | Quantités réalistes : mâche = max 3-5 petites feuilles (certaines pliées/naturelles) | Bouquets luxuriants, couronnes de verdure, grappes parfaites |
 | Sauce | Filet unique irrégulier, subtil | Spirale parfaite, nappe épaisse, drizzle graphique |
 | Proportions | Burger compact/dense comme le vrai produit | Towering, exagéré, style magazine food |
-| Ambiance fond | Cuisine réelle en arrière-plan (inox, surfaces sombres, flou) | Fond studio void noir pur, fond uni numérique |
-| Couleur/grain | Film-like natural color, léger grain, tons chauds naturels | HDR, surexposition, post-traitement saturé |
+| Ambiance fond | Cuisine réelle en arrière-plan (inox, surfaces sombres, flou) — **avec éclairage contrasté** | Fond studio void noir pur, fond uni numérique, **fond uniformément sombre** |
+| Couleur/grain | Film-like natural color, léger grain, **tons chauds riches et saturés, contraste marqué** | HDR, surexposition, **mais aussi : visuels ternes/délavés, absence de contraste** |
+| Éclairage | **Éclairage dramatique contrasté** : source lumineuse marquée qui sculpe le produit, zones de highlight vives sur les ingrédients | Éclairage plat/uniforme, produit qui se fond dans le fond |
 | Photo input | TOUJOURS la photo du produit réel (strict-boeuf.png pour un boeuf) | Cross-product (photo poulet → transformer en boeuf) sauf dernier recours |
+
+> **IMPORTANT — Dark Premium ≠ Terne.** Le fond est sombre, mais le PRODUIT doit être lumineux et appétissant. Les couleurs des ingrédients (vert mâche, orange sauce, doré sésame, brun Maillard) doivent éclater sur le fond sombre.
 
 **Template d'instructions de réalisme** à intégrer en fin de prompt :
 ```
-The overall feel should be documentary-style food photography — real, slightly imperfect, authentic. NOT a stock photo. Slight natural film grain.
+The overall feel should be documentary-style food photography — real, slightly imperfect, authentic. NOT a stock photo. Slight natural film grain. Strong directional lighting creating dramatic contrast — the product should pop luminously against the dark background. Rich, saturated ingredient colors. The dark setting is a stage, not a cave.
 ```
 
 ---
@@ -207,6 +295,35 @@ La règle est simple :
 
 **Pour GPT Images** : Structure descriptive plus modulaire. Inclure le texte exact entre guillemets avec police et placement. Utiliser les exclusions explicites si nécessaires ("No watermark, no other text").
 
+### Step 3b — Audit realisme (OBLIGATOIRE)
+
+**Avant de passer a la verification finale, lancer l'agent `realism-auditor` en mode post-prompt.**
+
+L'agent audite le prompt brut sur 8 domaines :
+1. **Mains & prehension** — la prise est-elle anatomiquement possible pour la taille du produit ?
+2. **Physique des fluides** — la sauce a-t-elle une source logique, coule-t-elle vers le bas ?
+3. **Coherence eclairage** — une seule direction de key light, pas de contradiction backlight/front-lit ?
+4. **Perspective & geometrie** — l'angle camera est-il coherent avec ce qui est "visible" ?
+5. **Logique de construction** — pas d'ingredient duplique, ordre des couches physiquement stable ?
+6. **Materiaux & textures** — chaque ingredient decrit avec ses proprietes reelles ?
+7. **Proportions & echelle** — taille relative main/burger coherente ?
+8. **Variete inter-prompts** — suffisamment different des autres prompts du meme concept ?
+
+**Workflow** :
+```
+Prompt brut (Step 3)
+    ↓
+Agent realism-auditor (mode post-prompt)
+    ↓
+Si 🔴 bloquant → corriger et re-auditer
+Si 🟡 important → corriger
+Si 🟢 suggestion → integrer si pertinent
+    ↓
+Prompt audite → Step 4
+```
+
+**Invocation** : l'agent est dans `production/.claude/agents/realism-auditor.md`. Il recoit le prompt brut + le concept + le produit, et retourne un rapport d'audit avec le prompt corrige.
+
 ### Step 4 — Vérifier
 
 - [ ] Le prompt couvre-t-il TOUS les éléments spécifiés dans la fiche de direction créative ?
@@ -215,6 +332,7 @@ La règle est simple :
 - [ ] Le prompt fait-il 4-6 phrases (pas plus de 8) ?
 - [ ] Pour un carrousel : chaque prompt est-il cohérent avec les autres tout en étant autonome ?
 - [ ] Les "éléments absents" du brief ne sont-ils PAS mentionnés dans le prompt (même en négatif pour Gemini) ?
+- [ ] **L'audit realisme (Step 3b) a-t-il ete execute et tous les 🔴 resolus ?**
 
 ### Step 5 — Livrer
 

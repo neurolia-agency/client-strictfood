@@ -31,15 +31,7 @@
 
     /* ===== FIXED POSITION ZONES ===== */
 
-    .zone-logo {
-      position: absolute;
-      top: var(--safe-top);
-      left: 0; right: 0;
-      z-index: 10;
-      display: flex;
-      justify-content: center;
-    }
-    .zone-logo .logo-container { margin-bottom: 0; }
+    /* Logo déplacé en bas sous la tagline — évite doublon avec profil IG */
 
     .zone-badge {
       position: absolute;
@@ -127,10 +119,10 @@
     .annonce-body {
       font-family: 'DM Sans', sans-serif;
       font-size: 34px;
-      color: rgba(255,255,255,0.7);
+      color: #fff;
       line-height: 1.6;
     }
-    .annonce-body strong { color: #fff; font-weight: 600; }
+    .annonce-body strong { color: var(--accent); font-weight: 600; filter: brightness(1.2); }
 
     .annonce-cta {
       display: inline-block;
@@ -159,12 +151,12 @@
     .gradient-center {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(ellipse at center, rgba(var(--bg-rgb),0.3) 0%, rgba(var(--bg-rgb),0.78) 55%, rgba(var(--bg-rgb),0.90) 80%);
+      background: radial-gradient(ellipse at center, rgba(var(--bg-rgb),0.15) 0%, rgba(var(--bg-rgb),0.60) 55%, rgba(var(--bg-rgb),0.80) 80%);
       z-index: 3;
     }
   </style>
 </head>
-<body class="{{MOOD_CLASS}} {{IMG_CLASS}} {{GRADIENT_CLASS}} {{PHOTO_PRESET}}">
+<body class="{{MOOD_CLASS}} {{IMG_CLASS}} {{OVERLAY_CLASS}} {{GRAD_CLASS}} {{PHOTO_PRESET}}">
 
   <!-- Optional background image -->
   <img class="annonce-bg" src="{{BG_IMAGE_PATH}}" alt="" style="display: {{SHOW_BG}}">
@@ -174,12 +166,6 @@
   <div class="ambient-bottom"></div>
 
   <!-- FIXED POSITION ZONES -->
-
-  <div class="zone-logo">
-    <div class="logo-container">
-      <img src="_base/logo.svg" alt="STRICT FOOD'S">
-    </div>
-  </div>
 
   <div class="zone-badge">
     <div class="annonce-badge">{{BADGE_TEXT}}</div>
@@ -201,9 +187,12 @@
     <div class="annonce-cta">{{CTA_TEXT}}</div>
   </div>
 
-  <!-- Bottom -->
+  <!-- Bottom : tagline + logo -->
   <div class="bottom-section">
     <div class="tagline">{{TAGLINE}}</div>
+    <div class="logo-container">
+      <img src="_base/logo.svg" alt="STRICT FOOD'S">
+    </div>
   </div>
 
 </body>

@@ -1,0 +1,49 @@
+/* Block: Glass Card — Glassmorphism content container */
+/* NEW — not in existing templates, uses base.css v2 classes */
+/* Customizable via: --glass-top, --glass-left, --glass-max-width, --glass-blur */
+
+.glass-card {
+  position: absolute;
+  top: var(--glass-top, 800px);
+  left: var(--glass-left, 90px);
+  max-width: var(--glass-max-width, 620px);
+  z-index: 10;
+  background: rgba(var(--bg-rgb), var(--glass-opacity, 0.35));
+  backdrop-filter: blur(var(--glass-blur, 20px)) saturate(1.2);
+  -webkit-backdrop-filter: blur(var(--glass-blur, 20px)) saturate(1.2);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 28px 32px;
+}
+
+.glass-card .glass-card-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--accent);
+  filter: brightness(1.2);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 16px;
+}
+
+.glass-card .glass-card-body {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: rgba(255,255,255,0.92);
+}
+
+.glass-card .glass-card-body strong {
+  color: var(--accent);
+  font-weight: 600;
+  filter: brightness(1.2);
+}
+
+/* Variant: accent border glow */
+.glass-card.glass-accent {
+  border: 1px solid rgba(var(--accent-rgb), 0.15);
+  box-shadow: inset 0 0 20px rgba(var(--accent-rgb), 0.03),
+              0 0 30px rgba(var(--accent-rgb), 0.05);
+}

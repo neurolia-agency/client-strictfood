@@ -1,0 +1,45 @@
+/* Block: Header Label — Category/type label */
+/* Used by: educatif ("Le savais-tu ?"), interactif ("Ton avis"), annonce (badge) */
+/* Customizable via: --label-top, --label-left, --label-font-size, --label-style */
+
+.header-label {
+  position: absolute;
+  top: var(--label-top, 275px);
+  left: var(--label-left, 90px);
+  z-index: 10;
+}
+
+.header-label .label-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: var(--label-font-size, 24px);
+  font-weight: 600;
+  color: var(--accent);
+  filter: brightness(1.2);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
+/* Variant: Badge pill (for annonce) */
+.header-label.label-badge .label-text {
+  display: inline-block;
+  padding: 10px 30px;
+  background: rgba(var(--accent-rgb), 0.22);
+  border: 3px solid rgba(var(--accent-rgb), 0.45);
+  border-radius: 100px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* Variant: Tag (modern, from base.css v2) */
+.header-label.label-tag .label-text {
+  display: inline-block;
+  padding: 6px 18px;
+  background: rgba(var(--accent-rgb), 0.12);
+  border: 1px solid rgba(var(--accent-rgb), 0.25);
+  border-radius: 100px;
+  font-size: 20px;
+  letter-spacing: 2px;
+}

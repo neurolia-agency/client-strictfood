@@ -69,11 +69,13 @@ L'eclairage plat et uniforme = signature IA immediate. Adapter a la scene :
 | Exterieur jour | `natural sunlight, soft shadows, golden hour side-lighting` |
 | Exterieur sunset | `warm golden backlight creating rim-light on subject, subtle lens flare` |
 | Interieur naturel | `natural window side-light at 45 degrees, soft diffused shadows` |
-| Interieur soir | `warm ambient tungsten light, practical light sources visible, slight underexposure in corners` |
+| Interieur soir | `warm ambient tungsten light, practical light sources visible, natural light falloff in corners` |
 | Salle de sport | `harsh overhead fluorescent mixed with natural light from windows, unflattering but authentic` |
 | Nuit urbaine | `streetlamp sodium glow, warm-cold contrast, subtle rim light from neon signs` |
 
 **Toujours ajouter** : `minor uneven exposure, natural light falloff` — brise la perfection IA.
+
+> **⚡ IMPORTANT — Dark ≠ Terne** : l'éclairage doit être **contrasté et directionnel**, pas uniformément sombre. Le sujet (produit, personne) doit avoir des **highlights vifs et des couleurs riches**. Préférer "dramatic directional lighting" à "dim ambient". Le fond peut être sombre, mais le sujet doit "pop".
 
 ### Anti peau plastique (artefact IA le plus detectable)
 
@@ -124,6 +126,26 @@ Si inevitable (ex: salle de sport avec miroirs) : `mirrors blurred in deep backg
 ---
 
 ## REGLES ABSOLUES (ne jamais enfreindre)
+
+### Fidelite salle de restaurant
+
+Quand la scene se deroule **dans la salle du restaurant StrictFood**, le decor DOIT etre fidele a la realite. Photos de reference : `public/images/photos-references/contexte/salle-restaurant/` (8 photos).
+
+**Caracteristiques reelles de la salle (a utiliser dans le prompt) :**
+- `white/light grey rectangular tile walls` — PAS "wood paneling", PAS "brick", PAS "rustic"
+- `light oak wood accent panel on one wall, round light oak table tops`
+- `black metal chairs, minimalist industrial style`
+- `large green living plant wall with white neon "STRICT FOOD'S" sign`
+- `black glass-front refrigerated display, white counter`
+- `modern, minimalist, neutral white lighting` — PAS "warm cozy pub", PAS "dim amber"
+
+**Autorise** : changer l'angle, reconstituer un meuble manquant (meme modele), completer un mur (meme texture), cadrer sur une zone specifique de la salle.
+
+**INTERDIT** : inventer un decor de restaurant different (murs boises sombres, brique, ambiance rustique/pub). Chaque element visible doit exister dans la vraie salle.
+
+**Lieux neutres** (fond sombre, table isolee, exterieur, parc, rue, terrasse) : pas concernes par cette regle — liberte totale.
+
+**Recommandation** : preferer un lieu neutre ou exterieur plutot qu'un interieur restaurant, sauf si le brief demande explicitement la salle StrictFood.
 
 ### Regard et posing
 - Les figurants NE FIXENT JAMAIS l'objectif/camera

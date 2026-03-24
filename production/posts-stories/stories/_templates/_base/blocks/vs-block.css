@@ -1,0 +1,68 @@
+/* Block: VS Block — Side-by-side value comparison */
+/* Used by: educatif */
+/* Customizable via: --vs-top, --vs-left */
+
+.vs-block {
+  position: absolute;
+  top: var(--vs-top, 1080px);
+  left: var(--vs-left, 90px);
+  z-index: 10;
+  display: flex;
+  gap: 50px;
+  align-items: flex-end;
+}
+
+.vs-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.vs-item .vs-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.65);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.vs-item .vs-value {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 80px;
+  line-height: 0.9;
+  color: rgba(255,255,255,0.45);
+}
+
+.vs-item .vs-unit {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 24px;
+  color: rgba(255,255,255,0.45);
+  margin-top: 4px;
+}
+
+/* "Ours" variant — accent highlighted */
+.vs-item.vs-ours .vs-value {
+  color: var(--accent);
+  filter: brightness(1.3);
+}
+.vs-item.vs-ours .vs-unit {
+  color: var(--accent);
+  filter: brightness(1.1);
+}
+.vs-item.vs-ours .vs-label {
+  color: var(--accent);
+  filter: brightness(1.1);
+}
+
+.vs-separator {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.30);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  align-self: center;
+  padding-bottom: 20px;
+}

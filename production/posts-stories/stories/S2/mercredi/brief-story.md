@@ -1,13 +1,13 @@
 # Brief Stories — S2 Mercredi (2026-03-19)
 
-> **Pilier du jour** : Les Macros (Nutrition & Éducation) — Post S2-06 publié aujourd'hui (Comparaison macros, template carrousel)
-> **Objectif stratégique** : Journée nutrition. Accompagner le post infographique avec un éducatif complémentaire et présenter le STRICT MAX Bœuf (nouveau produit carte). Le compositing-irl montre le produit en contexte réel.
-> **Persona cible** : Sportifs (macros) + Actifs pressés (découverte MAX)
-> **Ref stratégie** : Phase 1 §3.1 — "Installer le Dark Food Premium comme signature reconnaissable"
+> **Pilier du jour** : Les Macros — Post #6 Macros comparaison (template)
+> **Objectif stratégique** : Jour de post Macros. Les stories appuient avec un éducatif comparatif et un interactif qui introduit le concept MAX. L'IRL montre le rush.
+> **Persona cible** : Sportifs + Actifs pressés
+> **Ref stratégie** : Phase 1 §1.4 — "matérialiser le positionnement macros/premium"
 
 ---
 
-## Story 1 — Éducatif : Notre burger vs burger classique
+## Story 1 — Éducatif : 596 kcal, 53g prot — et ton burger ?
 
 | Champ | Valeur |
 |-------|--------|
@@ -22,17 +22,17 @@
 
 ### Objectif
 
-Companion du post macros. Résumer la comparaison en un seul chiffre impactant. Les abonnés qui voient la story en premier iront checker le post pour le détail.
+Companion du post macros. Résumer la comparaison en un seul chiffre impactant : 596 kcal vs 800-1000 kcal pour un burger classique. Les abonnés qui voient la story en premier iront checker le post pour le détail.
 
 ### Contenu
 
-Titre : `596 kcal, <em>53g</em> de protéines`
-Chiffre clé : `53` + `g de protéines`
-Explication : `Notre STRICT Bœuf : 596 kcal, 53g de prot. Un burger classique : ~900 kcal, 28g de prot. <strong>Même plaisir, pas les mêmes chiffres.</strong>`
+Titre : `<em>596</em> kcal, 53g prot — et ton burger ?`
+Chiffre clé : `596` + `kcal`
+Explication : `Notre STRICT Bœuf : 596 kcal, 53g de protéines, 21.5g de lipides. Un burger classique ? 800-1000 kcal, 45-55g de lipides.`
 
 Comparaison VS : oui
-- Strict Food's : `53` `g protéines`
-- Classique : `Burger fast-food` `28` `g protéines`
+- Strict Food's : `596 kcal` `21.5g lipides`
+- Classique : `Fast-food` `800-1000 kcal` `45-55g lipides`
 
 Image de fond : `public/images/photos-references/dark-bg/burger-simple-boeuf-dark-bg.png`
 Alignement photo : `—`
@@ -40,74 +40,79 @@ Image produit : `aucune`
 
 ---
 
-## Story 2 — Fiche Produit : STRICT MAX Bœuf
+## Story 2 — Interactif VS : Simple ou MAX ?
 
 | Champ | Valeur |
 |-------|--------|
-| Type | Fiche Produit |
+| Type | Interactif |
 | Mode | `template` |
-| Highlight | LA CARTE |
+| Highlight | — |
 | Qui produit | Pipeline |
-| Template | `vitrine.html` (variante produit) |
-| Mood | grenat |
-| Image | hero |
+| Template | `interactif.html` |
+| Mood | cuivre |
+| Image | visible |
 | Brand props | aucun |
 
 ### Objectif
 
-Introduire le STRICT MAX Bœuf — le double steak. Nouveau produit dans le highlight LA CARTE. Le mood grenat (intense) marque la différence avec le STRICT Bœuf standard.
+Introduire le concept de gamme MAX (double steak) via un sondage VS. Engager les abonnés sur la préférence Simple vs MAX. Préparer le terrain pour la fiche MAX Bœuf de jeudi.
 
 ### Contenu
 
-**Produit** : STRICT MAX Bœuf
-Slug recette : `strict-max-boeuf`
+Format sticker : Sondage 2 choix
+Question : `Simple ou MAX ?`
 
-> Le story-data-mapper résout automatiquement les données nutritionnelles depuis `_recettes/strict-max-boeuf.md`.
+**Mode visuel** : VS
+Produit A : `Simple` — image : `public/images/photos-references/produits-source/burgers-black/strict-boeuf.png`
+Produit B : `MAX` — image : `public/images/photos-references/produits-source/strict-max-boeuf.png`
 
-Accroche : `Double steak, double ambition`
-Macro star : `[résolu par agent]`
-Badge : `DOUBLE STEAK`
-Prix : `[résolu par agent]`
 Tagline : `Le cheat meal qui n'en est pas un`
-
-Image hero : `public/images/photos-references/produits-source/strict-max-boeuf.png`
 
 ---
 
-## Story 3 — Produit en situation : MAX Bœuf sur comptoir
+## Story 3 — IRL : Rush du midi
 
 | Champ | Valeur |
 |-------|--------|
-| Type | Produit en situation |
-| Mode | `compositing-irl` |
-| Highlight | — |
-| Qui produit | Pipeline |
-| Template | `irl-story.html` (overlay post-compositing) |
-| Mood | grenat |
+| Type | IRL |
+| Mode | `irl` |
+| Highlight | COULISSES |
+| Qui produit | Romain/Dorian (photo) + Pipeline (overlay) |
+| Template | `irl-story.html` |
+| Mood | cuivre |
 | Image | hero |
 | Brand props | aucun |
 
 ### Objectif
 
-Montrer le MAX Bœuf dans son environnement réel — posé sur le comptoir du restaurant. Le compositing IRL crée une immersion. Le spectateur se projette dans le lieu avec le produit.
+Montrer l'énergie du service en plein rush. L'authenticité du moment renforce la crédibilité : le restaurant tourne, les commandes sortent. Contraste avec les visuels léchés des autres stories.
 
 ### Contenu
 
-**compositing-irl** :
-Photo produit : `public/images/photos-references/produits-source/strict-max-boeuf.png`
-Photo lieu : `public/images/photos-references/contexte/salle-restaurant/accueil.jpeg`
-Intention compositing : `Le MAX Bœuf posé sur le comptoir d'accueil, éclairage naturel chaud du restaurant, léger flou en arrière-plan`
+Photo : `[À FOURNIR par Romain]`
+Texte overlay : `Rush du midi`
+Position texte : bas
+Filtre : léger
 
-Texte overlay : `—`
+> **Fallback** : si pas de photo fraîche, utiliser `public/contenu-instagram/2025-10-03_15-57-14_UTC_2.jpg`
 
 ---
 
 ## Contraintes
 
-- DA : Story 1 Dark Premium + Story 2 Vitrine + Story 3 Compositing
-- Mood : feuille (éducatif) + grenat (MAX = intensité, passion)
-- Le compositing doit rester réaliste — le burger doit paraître posé naturellement
-- Le MAX Bœuf est plus impressionnant visuellement que le standard — exploiter la taille
+- DA : Story 1 Dark Premium (Éducatif) + Story 2 Dark Premium (Interactif) + Story 3 IRL (overlay minimal)
+- Mood : feuille pour l'éducatif (nutrition), cuivre pour l'interactif et l'IRL
+- L'éducatif compare kcal et lipides — double métrique pour plus d'impact
+- Le sondage VS montre visuellement la différence de taille Simple vs MAX
+- L'IRL doit être authentique — pas de mise en scène excessive
+
+## Logique de variation de template
+
+| Type | Template | Famille |
+|------|----------|---------|
+| Éducatif | `educatif.html` | Dark Premium |
+| Interactif | `interactif.html` | Dark Premium |
+| IRL | `irl-story.html` | Dark Premium (overlay minimal) |
 
 ## Étape suivante
 

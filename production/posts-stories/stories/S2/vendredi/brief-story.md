@@ -1,47 +1,46 @@
 # Brief Stories — S2 Vendredi (2026-03-21)
 
-> **Pilier du jour** : La Cuisine (Process & Artisans) — Post S2-07 publié aujourd'hui (Myfitcheese, irl-sublimation)
-> **Objectif stratégique** : Accompagner le post artisan avec un nouveau produit (Falafel) et un sondage engagement. La sublimation du Falafel clôt la journée avec un visuel fort.
-> **Persona cible** : Végétariens/flexitariens (falafel) + Sportifs (engagement)
-> **Ref stratégie** : Phase 1 §1.4 — "Diversifier les produits présentés pour élargir la perception de la carte"
+> **Pilier du jour** : La Cuisine — Post #7 Boucherie Labourde (irl-sublimation)
+> **Objectif stratégique** : Jour de post artisan Labourde. Les stories complètent avec un angle cuisson (zéro huile) et un interactif viande/végé. Le compositing ancre le Bœuf devant la devanture.
+> **Persona cible** : Sportifs + Locavores
+> **Ref stratégie** : Phase 1 §3.2 — "ancrer la traçabilité locale"
 
 ---
 
-## Story 1 — Fiche Produit : STRICT Végé Falafel
+## Story 1 — Éducatif : 0g d'huile de cuisson
 
 | Champ | Valeur |
 |-------|--------|
-| Type | Fiche Produit |
+| Type | Éducatif |
 | Mode | `template` |
-| Highlight | LA CARTE |
+| Highlight | — |
 | Qui produit | Pipeline |
-| Template | `vitrine.html` (variante produit) |
+| Template | `educatif.html` |
 | Mood | feuille |
-| Image | hero |
+| Image | visible |
 | Brand props | aucun |
 
 ### Objectif
 
-Révéler l'option végétarienne de StrictFood. Élargir la perception : pas que des burgers viande, il y a aussi un falafel artisanal. Le mood feuille (vert) est naturel pour un produit végétal.
+Expliquer le USP technique de StrictFood : la cuisson chaleur pulsée sans huile. Matérialiser l'argument "zéro huile" avec des chiffres. Complément du post artisan — le post parle de la viande, la story parle de la cuisson.
 
 ### Contenu
 
-**Produit** : STRICT Végé Falafel
-Slug recette : `strict-vege-falafel`
+Titre : `<em>0g</em> d'huile de cuisson`
+Chiffre clé : `0` + `grammes d'huile`
+Explication : `Chaleur pulsée, pas de friteuse. Nos burgers sont cuits sans une goutte d'huile ajoutée.`
 
-> Le story-data-mapper résout automatiquement les données nutritionnelles depuis `_recettes/strict-vege-falafel.md`.
+Comparaison VS : oui
+- Strict Food's : `0g` `huile cuisson`
+- Classique : `Friteuse` `15-30g` `huile par service`
 
-Accroche : `Le végé qui n'a rien à envier`
-Macro star : `[résolu par agent]`
-Badge : `VÉGÉTARIEN`
-Prix : `[résolu par agent]`
-Tagline : `Le cheat meal qui n'en est pas un`
-
-Image hero : `public/images/photos-references/produits-source/burgers-black/strict-vege-falafel-black-1.png`
+Image de fond : `public/images/photos-references/contexte/cuisine/air-fryers-pro.jpeg`
+Alignement photo : `—`
+Image produit : `aucune`
 
 ---
 
-## Story 2 — Interactif VS : Bœuf vs Falafel
+## Story 2 — Interactif VS : Team Viande ou Team Végé ?
 
 | Champ | Valeur |
 |-------|--------|
@@ -56,56 +55,64 @@ Image hero : `public/images/photos-references/produits-source/burgers-black/stri
 
 ### Objectif
 
-Engager sur le choix viande vs végé. Montrer que StrictFood a les deux options. Le VS donne envie de goûter l'option qu'on n'a pas encore essayée.
+Engager les abonnés sur la préférence viande/végé. Le Falafel a été présenté mardi en fiche — maintenant on le confronte au Bœuf. Crée du débat et de l'engagement.
 
 ### Contenu
 
 Format sticker : Sondage 2 choix
-Question : `Et toi, Team Viande ou Team Végé ?`
-Option A : `Bœuf`
-Option A Emoji : `🥩`
-Option B : `Falafel`
-Option B Emoji : `🧆`
+Question : `Team Viande ou Team Végé ?`
 
 **Mode visuel** : VS
-Produit A : `STRICT Bœuf` — image : `public/images/photos-references/produits-source/burgers-black/strict-boeuf.png`
-Produit B : `STRICT Falafel` — image : `public/images/photos-references/produits-source/burgers-black/strict-vege-falafel-black-2.png`
+Produit A : `Viande` — image : `public/images/photos-references/produits-source/burgers-black/strict-boeuf.png`
+Produit B : `Végé` — image : `public/images/photos-references/produits-source/burgers-black/strict-vege-falafel-black-1.png`
 
 Tagline : `Le cheat meal qui n'en est pas un`
 
 ---
 
-## Story 3 — Produit DA : Falafel sublimé
+## Story 3 — Produit en situation : Bœuf devant devanture
 
 | Champ | Valeur |
 |-------|--------|
-| Type | Produit DA |
-| Mode | `irl-sublimation` |
+| Type | Produit en situation |
+| Mode | `compositing-irl` |
 | Highlight | — |
 | Qui produit | Pipeline |
-| Template | `irl-story.html` (overlay post-sublimation) |
-| Mood | feuille |
+| Template | `irl-story.html` (overlay post-compositing) |
+| Mood | cuivre |
 | Image | hero |
 | Brand props | aucun |
 
 ### Objectif
 
-Clore la journée avec un visuel sublimé du Falafel en 9:16. Montrer que même le végé est traité avec le même niveau de soin visuel que les burgers viande.
+Ancrer visuellement le STRICT Bœuf devant la façade StrictFood. Burger + devanture = "ce burger, tu le trouves ici". Fusion produit + lieu en lien avec le post artisan du jour (la viande vient d'ici, le burger se mange ici).
 
 ### Contenu
 
-Photo source : `public/images/photos-references/dark-bg/burger-falafel-dark-bg.jpg`
-Direction sublimation : `Renforcer les tons chauds sur la galette falafel, accentuer les verts de la mâche, fond charbon profond, grain film`
+**compositing-irl** :
+Photo produit : `public/images/photos-references/produits-source/burgers-black/strict-boeuf.png`
+Photo lieu : `public/images/photos-references/contexte/exterieur/devanture.jpeg`
+Intention compositing : `Burger posé/tenu devant la façade StrictFood, lumière naturelle, ancrage local`
+
 Texte overlay : `—`
 
 ---
 
 ## Contraintes
 
-- DA : Story 1 Vitrine + Story 2 Dark Premium + Story 3 Sublimation
-- Mood : feuille (produit végétal = fraîcheur/nature), cuivre pour l'interactif
-- Le falafel doit avoir le même niveau de food porn que les burgers — pas un produit de seconde zone
-- La sublimation accentue les verts naturels du falafel
+- DA : Story 1 Dark Premium (Éducatif) + Story 2 Dark Premium (Interactif) + Story 3 Compositing IRL
+- Mood : feuille pour l'éducatif (technique cuisson), cuivre pour l'interactif et le compositing
+- L'éducatif met en avant les air fryers — montrer la technologie, pas juste les chiffres
+- Le compositing doit intégrer naturellement le burger dans le contexte de la devanture
+- Le sondage VS oppose visuellement le Bœuf et le Falafel — formats similaires, identités distinctes
+
+## Logique de variation de template
+
+| Type | Template | Famille |
+|------|----------|---------|
+| Éducatif | `educatif.html` | Dark Premium |
+| Interactif | `interactif.html` | Dark Premium |
+| Produit en situation | `irl-story.html` (overlay post-compositing) | Dark Premium |
 
 ## Étape suivante
 

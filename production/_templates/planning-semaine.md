@@ -68,22 +68,25 @@ Le planning assure le **relief visuel** du feed et des stories. Chaque contenu a
 - Au moins 3 modes différents par semaine (sur 4 posts)
 - Au moins 3 piliers différents par semaine
 
-### Stories — Distribution modes (cible hebdomadaire, ~25 stories)
+### Stories — Distribution modes (cible hebdomadaire, ~21 stories)
 
 | Mode | Cible | Count/sem | Rôle dans le mix |
 |------|-------|-----------|-----------------|
-| `template` | ~50% | ~12-13 | Fiches produit, éducatifs, interactifs, annonces |
-| `irl` | ~20% | ~5 | Photo brute overlay minimal (rush, coulisses, ambiance) |
-| `irl-sublimation` | ~15% | ~3-4 | Photo sublimée DA en 9:16 (beau plat IRL, portrait) |
-| `compositing-irl` | ~10% | ~2-3 | Produit dans le lieu (comptoir, salle, devanture) |
-| `full-ia` | ~5% | ~1 | Visuel IA impactant (lancement, produit spécial) |
+| `template` | **~10%** | **~2** | Fiches produit (max 1/sem), éducatifs (max 1/sem), interactifs, annonces |
+| `irl` | **~30%** | **~6-7** | Moments authentiques : service, rush, coulisses, ambiance, bag handoff, préparation |
+| `irl-sublimation` | **~25%** | **~5-6** | Food porn sublimé : macro, drip, texture, produit magnifié |
+| `compositing-irl` | **~15%** | **~3** | Produit dans le lieu (comptoir, salle, devanture) |
+| `full-ia` | **~20%** | **~4** | Food porn IA : lévitation, éclaté, atmosphères cinématiques |
 
 **Contraintes stories** :
 - Chaque jour a au moins 2 modes différents parmi ses stories
-- Pas plus de 3 stories template consécutives dans une journée
-- Au moins 1 story non-template par jour (irl, sublimation, compositing ou full-ia)
+- Pas plus de 2 stories template consécutives dans une journée
+- Au moins 2 stories non-template par jour (irl, sublimation, compositing ou full-ia)
 - Max 3 interactifs/semaine
-- Alterner Vitrine et Dark Premium chaque jour
+- **Max 1 éducatif/semaine**
+- **Max 1 fiche produit/semaine**
+- **≥2 stories IRL "moments" par jour** (service, rush, ambiance, coulisses)
+- Alterner les concepts visuels (consulter `_config/concepts-visuels.md`)
 
 **Symbiose post ↔ story** :
 - Les jours de post, les stories **complètent** le post (fiche produit, éducatif lié, IRL coulisses)
@@ -118,29 +121,29 @@ Le planning assure le **relief visuel** du feed et des stories. Chaque contenu a
 
 ## Stories
 
-| Jour | # | Type | Mode | Sujet | Lien post |
-|------|---|------|------|-------|-----------|
-| Lun | 1 | Fiche Produit | template | [Produit] | Post #1 |
-| Lun | 2 | IRL | irl | Coulisses préparation | — |
-| Lun | 3 | Produit DA | irl-sublimation | [Plat sublimé] | — |
-| Mar | 1 | Éducatif | template | [Sujet nutrition] | — |
-| Mar | 2 | Focus Ingrédient | irl-sublimation | [Photo ingrédient sublimée] | — |
-| Mar | 3 | Annonce | template | [Horaires/Nouveauté] | — |
-| Mer | 1 | Fiche Produit | template | [Produit] | Post #2 |
-| Mer | 2 | IRL | irl | Rush du midi | — |
-| Mer | 3 | Éducatif | template | [Sujet nutrition] | — |
-| Jeu | 1 | Produit DA | irl-sublimation | [Beau plat sublimé en story] | — |
-| Jeu | 2 | Interactif | template | [Question] | — |
-| Jeu | 3 | Produit en situation | compositing-irl | [Produit sur comptoir] | — |
-| Ven | 1 | Fiche Produit | template | [Produit] | Post #3 |
-| Ven | 2 | IRL | irl | Ambiance vendredi soir | — |
-| Ven | 3 | Focus Ingrédient | irl-sublimation | [Photo ingrédient sublimée] | — |
-| Sam | 1 | Interactif | template | [Question fun] | — |
-| Sam | 2 | Produit DA | compositing-irl | [Produit + devanture] | — |
-| Sam | 3 | Recap | — | Meilleur post semaine | — |
-| Dim | 1 | IRL | irl | Ambiance dimanche | — |
-| Dim | 2 | Fiche Produit | template | [Produit] | — |
-| Dim | 3 | Visuel IA | full-ia | [Lancement ou visuel spécial] | — |
+| Jour | # | Type | Mode | Concept visuel | Sujet | Lien post |
+|------|---|------|------|---------------|-------|-----------|
+| Lun | 1 | Food Porn | irl-sublimation | macro / drip | [Produit macro] | Post #1 |
+| Lun | 2 | IRL Moment | irl | moment-service | Remise commande | — |
+| Lun | 3 | IRL Moment | irl | moment-rush | Rush du midi | — |
+| Mar | 1 | Food Porn | full-ia | sensation-overflow | [Burger généreux] | — |
+| Mar | 2 | IRL Moment | irl | moment-coulisses | Préparation en cuisine | — |
+| Mar | 3 | Food Porn | irl-sublimation | texture / brillance | [Gros plan ingrédient] | — |
+| Mer | 1 | Food Porn | compositing-irl | atmo-intime | [Produit au comptoir] | Post #2 |
+| Mer | 2 | IRL Moment | irl | moment-deballage | Ouverture sac | — |
+| Mer | 3 | IRL Moment | irl | moment-rush | Service midi | — |
+| Jeu | 1 | Food Porn | irl-sublimation | persp-pov | [POV burger] | — |
+| Jeu | 2 | Template | template | — | Interactif : [Question] | — |
+| Jeu | 3 | Food Porn | full-ia | sensation-eclate | [Burger éclaté] | — |
+| Ven | 1 | Food Porn | irl-sublimation | macro / croque | [Produit croqué] | Post #3 |
+| Ven | 2 | IRL Moment | irl | moment-ambiance | Ambiance vendredi soir | — |
+| Ven | 3 | Food Porn | compositing-irl | atmo-neon | [Produit éclairage chaud] | — |
+| Sam | 1 | IRL Moment | irl | moment-partage | Moment entre clients | — |
+| Sam | 2 | Food Porn | full-ia | sensation-fondu | [Fromage qui fond] | — |
+| Sam | 3 | Template | template | — | Fiche Produit : [Produit] | — |
+| Dim | 1 | IRL Moment | irl | moment-ambiance | Ambiance dimanche | — |
+| Dim | 2 | Food Porn | irl-sublimation | persp-rasante | [Produit angle rasant] | — |
+| Dim | 3 | Food Porn | full-ia | mixed-grain-cinema | [Visuel cinématique] | — |
 
 ### Modes stories — Ce que chaque mode produit
 
@@ -216,16 +219,34 @@ Le planning assure le **relief visuel** du feed et des stories. Chaque contenu a
 
 ---
 
+## Moments IRL à capturer cette semaine
+
+> Lister les moments spécifiques à photographier. Consulter `_config/concepts-visuels.md` → section "Moments IRL".
+
+| # | Moment | Quand | Cadrage | Story cible |
+|---|--------|-------|---------|-------------|
+| 1 | | | | |
+| 2 | | | | |
+| 3 | | | | |
+| 4 | | | | |
+| 5 | | | | |
+
+---
+
 ## Checklist finale
 
 - [ ] Chaque post et chaque story a un mode assigné
+- [ ] Chaque story non-template a un concept visuel assigné (colonne "Concept visuel")
 - [ ] Jamais 2 posts consécutifs avec le même mode
 - [ ] Au moins 3 modes différents dans les posts de la semaine
 - [ ] Au moins 3 piliers différents dans les posts de la semaine
 - [ ] Chaque jour de stories a au moins 2 modes différents
-- [ ] Au moins 1 story non-template par jour
+- [ ] **Au moins 2 stories non-template par jour**
+- [ ] **Au moins 2 stories IRL "moments" par jour**
+- [ ] **Max 1 éducatif sur la semaine**
+- [ ] **Max 1 fiche produit sur la semaine**
 - [ ] Max 3 interactifs sur la semaine
-- [ ] Chaque jour de post a une Fiche Produit associée
+- [ ] Les concepts visuels sont variés (pas 2 mêmes concepts consécutifs)
 - [ ] Les photos IRL nécessaires sont listées et demandées
 - [ ] La distribution piliers est cohérente avec la cible mensuelle
 

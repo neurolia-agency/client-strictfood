@@ -28,12 +28,7 @@
 
     /* ===== FIXED POSITION ZONES ===== */
 
-    .zone-logo {
-      position: absolute;
-      top: var(--safe-top);
-      left: 70px;
-      z-index: 10;
-    }
+    /* Logo déplacé en bas sous la tagline — évite doublon avec profil IG */
 
     .zone-label {
       position: absolute;
@@ -73,9 +68,11 @@
     .question-label {
       font-family: 'DM Sans', sans-serif;
       font-size: 24px;
-      color: rgba(255,255,255,0.4);
+      color: var(--accent);
       text-transform: uppercase;
       letter-spacing: 6px;
+      font-weight: 600;
+      filter: brightness(1.2);
     }
 
     .question-text {
@@ -141,8 +138,8 @@
       height: 620px;
       object-fit: cover;
       z-index: 4;
-      opacity: 0.88;
-      filter: brightness(1.05) saturate(1.1);
+      opacity: 0.95;
+      filter: brightness(1.15) saturate(1.20) contrast(1.05);
     }
     .product-left {
       left: -40px;
@@ -165,7 +162,7 @@
       left: 50%;
       transform: translateX(-50%);
       bottom: 300px;
-      opacity: 0.85;
+      opacity: 0.92;
       object-fit: cover;
       z-index: 4;
       mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 75%, transparent 100%);
@@ -173,7 +170,7 @@
     }
   </style>
 </head>
-<body class="{{MOOD_CLASS}} {{IMG_CLASS}} {{VS_CLASS}}">
+<body class="{{MOOD_CLASS}} {{IMG_CLASS}} {{OVERLAY_CLASS}} {{GRAD_CLASS}} {{VS_CLASS}}">
 
   <!-- Mode single : hero image -->
   <img class="hero-image" src="{{BG_IMAGE_PATH}}" alt="" style="display: {{SHOW_IMAGE}}">
@@ -189,18 +186,12 @@
 
   <!-- FIXED POSITION ZONES -->
 
-  <div class="zone-logo">
-    <div class="logo-container">
-      <img src="_base/logo.svg" alt="STRICT FOOD'S">
-    </div>
-  </div>
-
   <div class="zone-label">
-    <div class="question-label">Ton avis</div>
+    <div class="question-label {{LABEL_DEPTH}}">Ton avis</div>
   </div>
 
   <div class="zone-question">
-    <div class="question-text text-depth">{{QUESTION}}</div>
+    <div class="question-text {{QUESTION_DEPTH}}">{{QUESTION}}</div>
   </div>
 
   <!-- VS typo block (VS mode only) -->
@@ -219,9 +210,12 @@
     </div>
   </div>
 
-  <!-- Bottom -->
+  <!-- Bottom : tagline + logo -->
   <div class="bottom-section">
     <div class="tagline">{{TAGLINE}}</div>
+    <div class="logo-container">
+      <img src="_base/logo.svg" alt="STRICT FOOD'S">
+    </div>
   </div>
 
 </body>

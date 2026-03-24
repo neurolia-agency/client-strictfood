@@ -44,6 +44,7 @@ L'orchestrateur te passe le chemin d'un brief story (ex: `production/posts-stori
      - `BG_IMAGE_PATH` : photo de fond spécifiée dans le brief
      - `HERO_IMAGE_PATH` (optionnel) : si le brief spécifie une deuxième image pour le pattern dual-image. Peut être n'importe quel type de photo (produit, contexte, façade, etc.) — choisir la plus pertinente pour le concept.
    - `SHOW_HERO` : `block` si HERO_IMAGE_PATH résolu, `none` sinon
+   - **Layout produit surdimensionné** : le texte éducatif est à gauche → le visuel produit doit occuper l'espace vide à droite. Si la photo est un produit sur fond noir (`burgers-black/`, `dark-bg/`), **signaler dans data.md** : `PHOTO_LAYOUT: produit-surdimensionne-droite` pour que le template fill applique la technique (image 1500px, `right: -600px`, ~50% visible, masque radial). Voir `SPECS.md` section "Layout texte/visuel".
 5. **Générer le bloc de données** : écrire `story-[NN]-data.md` dans le même dossier que le brief
 
 ## Résolution des photos
@@ -121,6 +122,64 @@ Privilégier les photos montrant le produit avec des **proportions compactes et 
 ### Logo STRICT FOOD'S
 Quand un brand prop est visible dans la photo sélectionnée, noter la fidélité du logo dans le data mapping. Le logo correct lit "STRICT FOOD'S" avec une icône burger stylisée remplaçant le second O de FOOD. Si le logo dans la photo est tronqué ou illisible, le signaler : `⚠️ LOGO — [description du problème]`.
 
+## Résolution overlay et lisibilité (adaptatif)
+
+Après avoir résolu les photos, assigner les classes overlay et lisibilité dans le data.md :
+
+### Étape A — Direction overlay (`OVERLAY_CLASS`)
+
+| Template | Valeur |
+|----------|--------|
+| educatif | `overlay-left` |
+| fiche-produit | `overlay-left` |
+| annonce | `overlay-center` |
+| interactif | `overlay-top-bottom` |
+| irl-story | `overlay-full` |
+| Pas de photo (SHOW_BG=none) | `overlay-none` |
+
+### Étape B — Force overlay (`GRAD_CLASS`) — basée sur le chemin photo
+
+| Chemin photo contient | Valeur |
+|----------------------|--------|
+| `burgers-black/` ou `dark-bg/` | `grad-soft` |
+| `cuisine/` ou `salle-restaurant/` | `grad-medium` |
+| `exterieur/` ou `facade/` | `grad-heavy` |
+| IRL plein cadre | `grad-opaque` |
+| Pas de photo | `grad-soft` |
+| Défaut | `grad-medium` |
+
+### Étape C — Profondeur texte (`*_DEPTH`) — text-depth-3 par défaut si photo
+
+| Contexte | Valeur |
+|----------|--------|
+| Texte devant une photo (burger, cuisine, etc.) | `text-depth-3` |
+| Texte sur charbon pur (pas de photo) | `text-depth-1` |
+
+### Étape D — Mark-tape (`*_TAPE`)
+
+| Contexte | Valeur |
+|----------|--------|
+| Bloc texte > 80 car devant une photo | `mark-tape-strong` |
+| Bloc texte > 80 car sur charbon | `mark-tape` |
+| Texte court (≤ 80 car) | _(vide — pas de mark-tape)_ |
+
+### Champs à ajouter dans le data.md
+
+```
+| `{{OVERLAY_CLASS}}` | overlay-left |
+| `{{GRAD_CLASS}}` | grad-soft |
+| `{{LABEL_DEPTH}}` | text-depth-3 |
+| `{{TITLE_DEPTH}}` | text-depth-3 |
+| `{{EXPL_DEPTH}}` | text-depth-3 |
+| `{{EXPL_TAPE}}` | mark-tape-strong |
+| `{{QUESTION_DEPTH}}` | text-depth-3 |
+| `{{HEADLINE_DEPTH}}` | text-depth-3 |
+| `{{BODY_DEPTH}}` | text-depth-3 |
+| `{{BODY_TAPE}}` | mark-tape-strong |
+```
+
+> Seuls les champs pertinents au template sont inclus (pas de QUESTION_DEPTH pour un éducatif).
+
 ## Format de sortie
 
 ### Vitrine — variante produit (template: `vitrine.html`)
@@ -138,7 +197,7 @@ Quand un brand prop est visible dans la photo sélectionnée, noter la fidélit�
 | `{{KCAL}}` | [ex: "596"] |
 | `{{BADGE_TEXT}}` | [badge — MAX 25 CAR — ex: "SANS HUILE"] |
 | `{{HERO_IMAGE_PATH}}` | [chemin absolu photo produit] |
-| `{{TAGLINE}}` | [tagline — MAX 40 CAR] |
+| `{{TAGLINE}}` | Le cheat meal qui n'en est pas un |
 | `{{MOOD_CLASS}}` | [classe CSS mood] |
 | `{{PHOTO_PRESET}}` | [photo-centre / photo-droite / etc.] |
 | `{{SHOW_PRODUIT}}` | flex |
@@ -159,7 +218,7 @@ Quand un brand prop est visible dans la photo sélectionnée, noter la fidélit�
 | `{{ARTISAN_CITY}}` | [ville] |
 | `{{IN_PRODUCT}}` | [ex: "DANS TOUS NOS BURGERS" — MAX 30 CAR] |
 | `{{HERO_IMAGE_PATH}}` | [chemin absolu photo ingrédient] |
-| `{{TAGLINE}}` | [tagline — MAX 40 CAR] |
+| `{{TAGLINE}}` | Le cheat meal qui n'en est pas un |
 | `{{MOOD_CLASS}}` | [classe CSS mood] |
 | `{{PHOTO_PRESET}}` | [photo-centre / photo-droite / etc.] |
 | `{{SHOW_PRODUIT}}` | none |
@@ -182,7 +241,7 @@ Quand un brand prop est visible dans la photo sélectionnée, noter la fidélit�
 | `{{SEPARATOR_TEXT}}` | [ex: "→" — MAX 15 CAR] |
 | `{{SHOW_SEPARATOR_TEXT}}` | [inline / none] |
 | `{{CAPTION}}` | [légende — MAX 35 CAR] |
-| `{{TAGLINE}}` | [tagline — MAX 40 CAR] |
+| `{{TAGLINE}}` | Le cheat meal qui n'en est pas un |
 | `{{MOOD_CLASS}}` | [classe CSS mood] |
 | `{{PHOTO_PRESET_TOP}}` | [photo-centre / etc.] |
 | `{{PHOTO_PRESET_BOTTOM}}` | [photo-centre / etc.] |
@@ -204,7 +263,7 @@ Quand un brand prop est visible dans la photo sélectionnée, noter la fidélit�
 | `{{BENEFIT_1}}` | [valeur] |
 | `{{BENEFIT_2}}` | [valeur] |
 | `{{BENEFIT_3}}` | [valeur] |
-| `{{TAGLINE}}` | [valeur] |
+| `{{TAGLINE}}` | Le cheat meal qui n'en est pas un |
 | `{{HERO_IMAGE_PATH}}` | [chemin absolu] |
 | `{{BG_IMAGE_PATH}}` | [chemin absolu] |
 | `{{SHOW_HERO}}` | block / none |
@@ -235,7 +294,7 @@ Le template interactif supporte **deux modes** :
 | `{{PRODUCT_B_IMAGE}}` | `` |
 | `{{PRODUCT_A_LABEL}}` | `` |
 | `{{PRODUCT_B_LABEL}}` | `` |
-| `{{TAGLINE}}` | [tagline bottom] |
+| `{{TAGLINE}}` | Le cheat meal qui n'en est pas un |
 | `{{BRAND_PROP}}` | [prop visible ou "aucun"] |
 ```
 
@@ -257,7 +316,7 @@ Le template interactif supporte **deux modes** :
 | `{{PRODUCT_B_IMAGE}}` | [chemin absolu photo produit B] |
 | `{{PRODUCT_A_LABEL}}` | [nom court produit A — ex: "Wrap"] |
 | `{{PRODUCT_B_LABEL}}` | [nom court produit B — ex: "Burger"] |
-| `{{TAGLINE}}` | [tagline bottom] |
+| `{{TAGLINE}}` | Le cheat meal qui n'en est pas un |
 | `{{BRAND_PROP}}` | [prop visible ou "aucun"] |
 ```
 

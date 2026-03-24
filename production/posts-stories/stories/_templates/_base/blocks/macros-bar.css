@@ -1,0 +1,48 @@
+/* Block: Macros Bar — Nutritional values row */
+/* Used by: vitrine (produit variant) */
+/* Customizable via: --macros-gap */
+
+.macros-bar {
+  display: flex;
+  gap: var(--macros-gap, 40px);
+  padding: 30px 0;
+}
+
+.macro-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.macro-value {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 52px;
+  color: #fff;
+  line-height: 1;
+}
+
+.macro-value span {
+  font-size: 30px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.75);
+}
+
+.macro-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 17px;
+  color: rgba(255,255,255,0.55);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 4px;
+}
+
+/* Highlight variant (first macro = star) */
+.macro-item.macro-highlight .macro-value {
+  color: var(--accent);
+  filter: brightness(1.3);
+}
+.macro-item.macro-highlight .macro-label {
+  color: var(--accent);
+  filter: brightness(1.1);
+}

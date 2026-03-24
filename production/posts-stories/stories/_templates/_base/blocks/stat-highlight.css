@@ -1,0 +1,60 @@
+/* Block: Stat Highlight — Single impressive stat with context */
+/* NEW — editorial feel, large centered number */
+/* Customizable via: --stat-top */
+
+.stat-highlight {
+  position: absolute;
+  top: var(--stat-top, 500px);
+  left: 0;
+  right: 0;
+  z-index: 10;
+  text-align: center;
+  padding: 0 70px;
+}
+
+.stat-highlight .stat-prefix {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--accent);
+  filter: brightness(1.2);
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  margin-bottom: 20px;
+}
+
+.stat-highlight .stat-value {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 220px;
+  line-height: 0.82;
+  letter-spacing: -8px;
+  /* Uses gradient text from base.css v2 */
+  background: linear-gradient(135deg, var(--accent) 0%, rgba(var(--accent-rgb), 0.75) 45%, #fff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.stat-highlight .stat-unit {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 70px;
+  color: #fff;
+  margin-top: 8px;
+}
+
+.stat-highlight .stat-context {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 34px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.85);
+  margin-top: 30px;
+  line-height: 1.4;
+}
+
+.stat-highlight .stat-context strong {
+  color: var(--accent);
+  font-weight: 600;
+  filter: brightness(1.2);
+}

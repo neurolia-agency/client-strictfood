@@ -145,3 +145,50 @@ Targeting young professionals who appreciate slow, intentional living.
 - For Gemini: convert the template output into flowing narrative paragraphs
 - For GPT Images: the structured format works well as-is
 - Always consider the final use case when deciding level of detail
+
+---
+
+## Éléments Tendances 2025-2026 — Food Photography Premium
+
+### Texture & Film
+
+Ajouter systématiquement dans les prompts food :
+- "subtle analog film grain, Kodak Portra 400 warmth" — texture organique anti-numérique
+- "visible natural texture on food surfaces — Maillard crust, sesame grain detail, sauce viscosity" — micro-détails tactiles
+
+### Éclairage Cinématique
+
+Les éclairages plats sont INTERDITS. Toujours spécifier :
+- "single hard key light from upper-left at 45°, deep sculptural shadows on the right"
+- "rim light on the edge of the bun creating a thin bright contour"
+- "warm ambient fill from below at 10% intensity — not flat, just enough to open the shadows"
+
+### Profondeur de Champ
+
+Toujours spécifier une profondeur de champ professionnelle :
+- "f/1.8 shallow depth of field" — pour les hero shots (produit net, fond flou)
+- "f/2.8 moderate depth" — pour les plans moyens (produit + context)
+- "soft circular bokeh in background, natural light leaks" — ajoute une dimension premium
+
+### Composition & Espace Négatif
+
+Ne JAMAIS remplir tout le cadre. Toujours préserver de l'espace :
+- "30% of frame is negative space, dark charcoal tones" — respiration visuelle
+- "product positioned in lower-right third, looking into empty space upper-left" — dynamisme
+- "asymmetric composition, breaking the center — product at 60-40 split" — anti-générique
+
+### Science Couleur (Color Grading dans le prompt)
+
+Guider le modèle vers la palette DA :
+- "desaturated background tones, selective vivid saturation only on food elements"
+- "deep charcoal shadows (#141210), warm copper highlights on metallic surfaces"
+- "color contrast: rich green mâche leaves against dark bun, golden sesame against charcoal"
+- "cinematic color grading: shadows pulled toward warm brown, highlights toward cream"
+
+### Anti-IA Tells
+
+Phrases à ajouter pour réduire le look "IA" :
+- "natural imperfections: a few crumbs fallen on the paper, one lettuce leaf slightly wilted"
+- "real kitchen environment visible in soft focus behind — stainless steel, worn countertop"
+- "not perfectly centered, slight natural tilt as if casually placed by a chef"
+- "no artificial glow, no neon highlights, no plastic-looking surfaces"

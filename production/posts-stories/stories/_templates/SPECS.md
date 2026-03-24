@@ -7,15 +7,78 @@
 
 ## Conventions globales
 
+### ⛔ Pain noir obligatoire
+
+Toute photo ou visuel de burger DOIT montrer un pain noir (black bun sésame). Si une photo montre un bun blanc → non conforme, ne pas utiliser.
+
+### Layout texte/visuel — Technique du produit surdimensionné
+
+Quand un template contient du texte concentré d'un côté, le visuel produit doit **combler l'espace vide opposé** en étant **surdimensionné et coupé par le bord** (~50% visible).
+
+#### Technique
+
+1. **Agrandir le visuel** : `width` et `height` à 1.3x–1.5x de la taille normale (ex: 1500px au lieu de 1100px)
+2. **Décaler vers le bord** : `right: -500px` à `-700px` (ou `left` si inversé) pour que ~50% du produit déborde hors cadre
+3. **Masque radial** : remplacer le masque linéaire par défaut par un `radial-gradient` qui fond le produit dans le fond sombre sans coupure nette
+4. **`object-fit: contain`** : pour les photos produit sur fond noir (pas `cover`)
+
+Exemple concret (éducatif, texte à gauche, burger à droite) :
+```css
+width: 1500px; height: 1500px; top: 150px; right: -600px;
+object-fit: contain; object-position: center;
+mask-image: radial-gradient(ellipse 85% 85% at 50% 50%, rgba(0,0,0,0.95) 30%, rgba(0,0,0,0.5) 60%, transparent 80%);
+```
+
+#### Application par template
+
+| Template | Texte principal | Placement produit | Technique |
+|----------|----------------|-------------------|-----------|
+| `educatif.html` | Gauche (titre, chiffre, explication, VS) | **Droite, surdimensionné, ~50% visible** | `right: -500/-700px`, width 1300-1500px |
+| `annonce.html` | Centré (headline, body, CTA) | **Fond centré** — la photo remplit le fond derrière le texte centré | Preset `photo-centre`, masque radial |
+| `interactif.html` | Haut (question) + Bas (sticker) | **Centre/bas** — image entre question et sticker zone | Positionnement central |
+| `vitrine.html` | Bas (info zone) | **Haut** — hero photo domine la moitié haute | Preset par défaut du template |
+
+#### Quand appliquer
+
+- **Photos produit sur fond noir** (dossier `burgers-black/`, `dark-bg/`) → technique surdimensionné + `object-fit: contain`
+- **Photos contextuelles** (cuisine, salle, extérieur) → garder le comportement `bg-image` par défaut avec `object-fit: cover`
+- **Vitrine** → ne PAS appliquer (le hero a son propre cadre fixe)
+
 ### Zone safe Instagram (1080×1920)
 
 | Zone | Pixels | Contenu IG superposé |
 |------|--------|---------------------|
 | Haut | 0 → 250px | Username, photo profil, timestamp, X |
-| Bas | 1670 → 1920px | Barre réponse, réactions, partage |
+| Bas | 1840 → 1920px | Marge minimale (IG a supprimé l'overlay "envoyer un message") |
 | Côtés | 0 → 65px | Marge device |
 
-**Zone texte safe** : x: 70-1010px, y: 260-1660px
+**Zone texte safe** : x: 70-1010px, y: 260-1840px
+
+> **`--safe-bottom` = 80px** (réduit de 250px). Instagram a supprimé le call-to-action superposé en bas des stories.
+
+### Logo — Position en bas (sous la tagline)
+
+Le logo est positionné **EN BAS**, sous la tagline, dans TOUS les templates. Il n'est plus en haut — ça évite le doublon avec le nom du profil Instagram affiché par l'interface IG.
+
+**Structure bottom (tous templates Dark Premium) :**
+```html
+<div class="bottom-section">
+  <div class="tagline">Le cheat meal <em>qui n'en est pas un</em></div>
+  <div class="logo-container">
+    <img src="_base/logo.svg" alt="STRICT FOOD'S">
+  </div>
+</div>
+```
+
+**Structure bottom (IRL) :**
+```html
+<div class="irl-bottom">
+  <div class="tagline">Le cheat meal <em>qui n'en est pas un</em></div>
+  <div class="logo-container">
+    <img src="_base/logo.svg" alt="STRICT FOOD'S">
+  </div>
+</div>
+```
 
 ### Presets photo (classes CSS dans base.css)
 
@@ -32,51 +95,95 @@
 
 | Classe | Opacités | Usage |
 |--------|----------|-------|
-| `gradient-light` | top 0.35, bottom 0.55, left 0.60 | Photo sombre |
-| `gradient-medium` | top 0.55, bottom 0.75, left 0.80 | Default |
-| `gradient-strong` | top 0.70, bottom 0.88, left 0.92 | Photo claire / extérieur |
+| `gradient-light` | top 0.20, bottom 0.40, left 0.45 | Photo sombre ou produit lumineux |
+| `gradient-medium` | top 0.40, bottom 0.55, left 0.60 | Default |
+| `gradient-strong` | top 0.55, bottom 0.72, left 0.78 | Photo claire / extérieur |
+
+### Réglages image par défaut (base.css)
+
+| Variable | Valeur | Effet |
+|----------|--------|-------|
+| `--img-opacity` | `0.75` | Visibilité image de fond (75%) |
+| `--img-brightness` | `1.30` | Boost luminosité (+30%) |
+| `--img-sepia` | `0.05` | Touche chaude très légère |
+| `--img-saturate` | `1.10` | Boost saturation (+10%) |
+
+> **Dark Premium ≠ Terne** : le fond est sombre, mais les images et textes doivent être lumineux, contrastés et dynamiques.
+
+### Hiérarchie texte — Blanc pur + Accent
+
+**Principe** : la hiérarchie se fait par **taille, poids et couleur (blanc vs accent)** — PAS par opacité. Tout le texte visible est en blanc pur `#fff` ou en accent `var(--accent)`.
+
+| Rôle | Couleur | Poids | Exemples |
+|------|---------|-------|----------|
+| Labels / catégories | **Accent** (cuivre/vert/grenat) + `brightness(1.2)` | 600 | "Le savais-tu ?", "Ton avis", "Seulement" |
+| Headlines | **Blanc pur** `#fff` | 700 | Titres, questions |
+| Chiffres hero | **Accent** + `brightness(1.3)` | 700 | "53", prix, kcal |
+| Unités / sous-titres | **Blanc pur** `#fff` | 500 | "grammes de protéines" |
+| Body / explications | **Blanc pur** `#fff` | 400 | Texte d'explication |
+| Mots-clés dans body | **Accent** + `brightness(1.2)` | 600 | `<strong>` dans les explications |
+
+> **JAMAIS de texte gris** (opacity < 1.0) pour du contenu principal. Réserver l'opacité réduite aux éléments décoratifs (placeholders sticker, hints).
+
+### Lisibilité sur fond texturé — text-depth + mark-tape
+
+Quand du texte blanc est positionné par-dessus un visuel (burger, photo), utiliser :
+
+| Outil | Classe | Effet | Quand |
+|-------|--------|-------|-------|
+| **Halo sombre** | `text-depth-3` | 6 couches d'ombre (0.9 max) créant un coussin de contraste | Tout texte devant une photo |
+| **Bande accent** | `mark-tape-strong` | Bande accent à 0.50 opacité + bordures 0.90 | Blocs de texte longs (>80 car) devant une photo |
+
+Le `text-depth-3` est le niveau par défaut pour les templates Dark Premium avec photo. Le `text-depth-1` ou `text-depth-2` ne sont utilisés que si le texte est sur du charbon pur (pas de photo derrière).
 
 ---
 
-## 1. Vitrine (`vitrine.html`)
+## 1. Produit Hero (`produit-hero.html`)
 
-> Fiche produit complet OU composant/ingrédient. Deux variantes, même squelette.
+> ⚠️ **Remplace l'ancien template `vitrine.html`.** Le produit est affiché en plein cadre (photo générée ou sublimée), avec des informations minimales en overlay. Pas de zone info séparée — l'image EST le contenu.
 
 ### Cadre fixe
 
-| Zone | Position | Hauteur | Contenu |
-|------|----------|---------|---------|
-| Hero photo | top: 0 | 1080px | Image produit/ingrédient, plein cadre |
-| Gradient transition | top: ~780px | implicite (mask-image sur la photo) | Fade vers le fond |
-| Info zone | top: 1020px → bottom: 0 | ~900px | Tout le texte + macros + tagline + logo |
+| Zone | Position | Contenu |
+|------|----------|---------|
+| Photo plein cadre | absolute, 100% width/height | Image produit (full-ia, irl-sublimation, compositing) |
+| Gradient bas | bottom, height 550px | Protection texte, dégradé vers charbon |
+| Product zone | bottom 220px, centré | Nom produit + info optionnelle |
+| Bottom | bottom 0, padding 80px | Tagline + logo |
 
-### Info zone — Variante `produit`
+### Zones texte
 
-| Élément | Typo | Max car | Max lignes | Position dans la zone |
-|---------|------|---------|------------|----------------------|
-| `PRODUCT_NAME` | Oswald 78px bold | 22 | 1 | Haut de l'info zone |
-| `PRODUCT_SUBTITLE` | DM Sans 32px | 50 | 1 | Sous le nom |
-| Barre macros | Oswald 52px + DM Sans 17px | 4 valeurs | 1 | Sous le subtitle, gap 30px |
-| `BADGE_TEXT` | Space Grotesk 19px | 25 | 1 | Sous les macros |
-| Divider + `TAGLINE` | Space Grotesk 38px | 40 | 1 | Bottom (margin-top: auto) |
-| Logo | 160px width | — | — | Sous la tagline |
+| Élément | Typo | Max car | Max lignes | Optionnel ? |
+|--------|------|---------|------------|-------------|
+| `PRODUCT_NAME` | Oswald 72px bold uppercase | 22 | 1 | Oui — `SHOW_NAME` |
+| `PRODUCT_INFO` | Space Grotesk 34px accent | 25 | 1 | Oui — `SHOW_INFO` |
+| `TAGLINE` | Space Grotesk 36px | 40 | 1 | Non — toujours affiché |
+| Logo | 180px width | — | — | Non — toujours affiché |
 
-### Info zone — Variante `composant`
+### Variants de position
 
-| Élément | Typo | Max car | Max lignes | Position dans la zone |
-|---------|------|---------|------------|----------------------|
-| `INGREDIENT_NAME` | Oswald 78px bold | 22 | 1 | Haut de l'info zone |
-| `KEY_FACT` | DM Sans 32px | 120 | 3 | Sous le nom |
-| `ARTISAN_NAME` | Space Grotesk 19px | 30 | 1 | Sous le fait clé |
-| `IN_PRODUCT` | DM Sans 24px uppercase | 30 | 1 | Sous l'artisan |
-| Divider + `TAGLINE` | Space Grotesk 38px | 40 | 1 | Bottom (margin-top: auto) |
-| Logo | 160px width | — | — | Sous la tagline |
+| Classe | Position info | Quand |
+|--------|-------------|-------|
+| (par défaut) | Centré en bas (au-dessus de tagline) | Produit centré dans l'image |
+| `info-haut-gauche` | Haut gauche (top 280px) | Produit à droite dans l'image |
+| `info-haut-centre` | Haut centré (top 280px) | Produit en bas dans l'image |
+| `info-bas-gauche` | Bas gauche | Produit à droite |
+
+### Exemples d'usage
+
+| Info affichée | PRODUCT_NAME | PRODUCT_INFO | Effet |
+|--------------|-------------|-------------|-------|
+| Nom seul | "STRICT BŒUF" | (masqué) | Impact maximal, nom bold |
+| Nom + macros | "STRICT MAX POULET" | "112g protéines" | Showcase nutrition |
+| Nom + kcal | "STRICT VÉGÉ" | "850 kcal" | Simple et direct |
+| Nom + accroche | "STRICT BŒUF" | "Le goût sans compromis" | Branding |
+| Rien | (masqué) | (masqué) | Pure food porn, tagline + logo seulement |
 
 ### Placeholders
 
-**Variante produit** : `{{VARIANT}}` = `produit`, `{{PRODUCT_NAME}}`, `{{PRODUCT_SUBTITLE}}`, `{{PROTEIN}}`, `{{FAT}}`, `{{CARBS}}`, `{{KCAL}}`, `{{BADGE_TEXT}}`, `{{HERO_IMAGE_PATH}}`, `{{TAGLINE}}`, `{{MOOD_CLASS}}`, `{{PHOTO_PRESET}}`
+`{{BG_IMAGE_PATH}}`, `{{PRODUCT_NAME}}`, `{{PRODUCT_INFO}}`, `{{SHOW_PRODUCT_INFO}}`, `{{SHOW_NAME}}`, `{{SHOW_INFO}}`, `{{SHOW_DIVIDER}}`, `{{TAGLINE}}`, `{{MOOD_CLASS}}`, `{{PHOTO_PRESET}}`, `{{INFO_POSITION}}`
 
-**Variante composant** : `{{VARIANT}}` = `composant`, `{{INGREDIENT_NAME}}`, `{{KEY_FACT}}`, `{{ARTISAN_NAME}}`, `{{ARTISAN_CITY}}`, `{{IN_PRODUCT}}`, `{{HERO_IMAGE_PATH}}`, `{{TAGLINE}}`, `{{MOOD_CLASS}}`, `{{PHOTO_PRESET}}`
+> **Le visuel vient d'un mode IA** (full-ia, irl-sublimation, compositing) — PAS d'une photo référence posée dans un template. L'image est générée/sublimée PUIS insérée dans ce template pour l'overlay texte.
 
 ---
 
@@ -248,10 +355,8 @@
 
 | Template | Zone | Max car |
 |----------|------|---------|
-| vitrine | PRODUCT_NAME / INGREDIENT_NAME | 22 |
-| vitrine | PRODUCT_SUBTITLE | 50 |
-| vitrine | KEY_FACT | 120 |
-| vitrine | BADGE_TEXT | 25 |
+| produit-hero | PRODUCT_NAME | 22 |
+| produit-hero | PRODUCT_INFO | 25 |
 | educatif | TITLE | 45 |
 | educatif | FACT_NUMBER | 4 |
 | educatif | FACT_UNIT | 25 |
@@ -264,4 +369,4 @@
 | annonce | CTA_TEXT | 25 |
 | irl | IRL_TEXT | 40 |
 | process | CAPTION | 35 |
-| **tous** | TAGLINE | 40 |
+| **tous** | TAGLINE | 40 | **FIXE HTML : `Le cheat meal <em>qui n'en est pas un</em>` — JAMAIS en texte brut, JAMAIS de point final** |

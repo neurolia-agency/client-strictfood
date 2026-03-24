@@ -1,0 +1,47 @@
+/* Design Overrides — Story 02 IRL — S2 Lundi
+ * Photo: assemblage burger, mains gantees noires, granite counter
+ * Sujet centre-droit, eclairage chaud lateral gauche
+ */
+
+/* Ajustement cadrage — centrer le burger verticalement
+ * La photo originale est carree (1:1), en cover sur 9:16
+ * on remonte legerement pour voir les mains + le burger complet
+ * Specificity: match .photo-centre .irl-photo from template */
+.photo-centre .irl-photo,
+.irl-photo {
+  object-position: 50% 35% !important;
+}
+
+/* Renforcer le gradient bas — le granite est texture,
+ * il faut un gradient plus opaque pour la lisibilite tagline/logo */
+.irl-gradient-bottom {
+  height: 700px;
+  background: linear-gradient(
+    to top,
+    rgba(var(--bg-rgb), 0.95) 0%,
+    rgba(var(--bg-rgb), 0.75) 30%,
+    rgba(var(--bg-rgb), 0.35) 60%,
+    transparent 100%
+  ) !important;
+}
+
+/* Pousser le texte IRL un peu plus haut pour separer du tagline */
+.irl-text-zone {
+  bottom: 400px;
+}
+
+/* Texte IRL — renforcer la lisibilite sur zone photo */
+.irl-text {
+  font-size: 52px;
+  text-shadow:
+    0 2px 6px rgba(0,0,0,0.8),
+    0 4px 16px rgba(0,0,0,0.5),
+    0 8px 30px rgba(0,0,0,0.3);
+}
+
+/* Accent bar — cuivre renforce pour matcher la photo chaude */
+.irl-accent-bar {
+  width: 70px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), rgba(var(--accent-rgb), 0.4));
+}

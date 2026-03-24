@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080, height=1920">
+  <title>Story Vitrine v2 — {{DISPLAY_NAME}}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Oswald:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../_base/base.css">
+  <link rel="stylesheet" href="../_base/blocks/bottom-section.css">
+  <style>
+    /*
+     * VITRINE v2 — Template unifie produit + composant
+     * Cadre rigide : photo hero haut (1080px) + info zone bas (~840px)
+     * Variante produit : nom + subtitle + macros + badge
+     * Variante composant : nom + description + artisan + "dans quel produit"
+     *
+     * LIMITES DE CARACTERES :
+     * DISPLAY_NAME       : max 22 car, 1 ligne
+     * PRODUCT_SUBTITLE   : max 50 car, 1 ligne (variante produit)
+     * KEY_FACT            : max 120 car, 3 lignes (variante composant)
+     * BADGE_TEXT          : max 25 car, 1 ligne
+     * ARTISAN_NAME       : max 30 car, 1 ligne
+     * IN_PRODUCT          : max 30 car, 1 ligne
+     * TAGLINE             : max 40 car, 1 ligne
+     *
+     * BLOCKS USED: bottom-section (custom: vitrine uses its own bottom-block)
+     * NOTE: Vitrine has its own hero system — kept inline
+     */
+
+    /* ===== VIBRANT MOOD VARIANTS ===== */
+    :root {
+      --vibrant-bg-top: #1a1108;
+      --vibrant-bg-bottom: #3a2510;
+      --vibrant-bg-center: #4a3820;
+    }
+    body.mood-grenat {
+      --vibrant-bg-top: #1a0d0c;
+      --vibrant-bg-bottom: #4a1510;
+      --vibrant-bg-center: #5a2018;
+    }
+    body.mood-feuille {
+      --vibrant-bg-top: #0d1a12;
+      --vibrant-bg-bottom: #1a3a25;
+      --vibrant-bg-center: #1e4a30;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 35%, var(--vibrant-bg-center) 0%, var(--vibrant-bg-top) 25%, var(--vibrant-bg-bottom) 100%);
+    }
+
+    /* Disable Dark Premium overlays — vitrine uses its own system */
+    .gradient-top, .gradient-bottom, .gradient-left, .accent-line, .accent-line-modern, .zone-blend, .ambient-bottom { display: none; }
+
+    .content { padding: 0; display: flex; flex-direction: column; height: 100%; }
+
+    /* ===== HERO ZONE — FIXED 1080px height ===== */
+    .hero-zone {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1080px;
+      z-index: 10;
+      overflow: hidden;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+      filter: brightness(1.20) saturate(1.25) contrast(1.05);
+      mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 58%, transparent 92%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 58%, transparent 92%);
+    }
+
+    /* Photo presets */
+    .photo-centre .hero-image { object-position: 50% 40%; }
+    .photo-droite .hero-image { object-position: 75% 30%; }
+    .photo-gauche .hero-image { object-position: 25% 40%; }
+    .photo-haut .hero-image { object-position: 50% 20%; }
+    .photo-large .hero-image { object-position: 50% 50%; transform: scale(1.15); }
+    .photo-portrait .hero-image { object-position: 50% 25%; transform: scale(1.1); }
+
+    /* ===== INFO ZONE — FIXED position ===== */
+    .info-zone {
+      position: absolute;
+      top: 1020px;
+      bottom: 0;
+      left: 0; right: 0;
+      z-index: 15;
+      display: flex;
+      flex-direction: column;
+      padding: 0 70px 0;
+      background: linear-gradient(to top,
+        rgba(26, 17, 8, 0.99) 0%,
+        rgba(26, 17, 8, 0.97) 20%,
+        rgba(26, 17, 8, 0.85) 50%,
+        rgba(26, 17, 8, 0.5) 75%,
+        transparent 100%
+      );
+    }
+
+    /* ===== DISPLAY NAME — same for both variants ===== */
+    .display-name {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 78px;
+      color: #fff;
+      line-height: 0.95;
+      letter-spacing: -2px;
+      text-transform: uppercase;
+      text-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      margin-bottom: 12px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    /* ===== VARIANT: PRODUIT ===== */
+    .variant-produit .product-subtitle {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 32px;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 1px;
+      margin-bottom: 30px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .macros-bar {
+      display: flex;
+      gap: 40px;
+      margin-bottom: 28px;
+    }
+
+    .macro-item { display: flex; flex-direction: column; }
+
+    .macro-item-value {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 52px;
+      color: #fff;
+      line-height: 1;
+    }
+    .macro-item-value.accent { color: var(--accent); filter: brightness(1.2); }
+
+    .macro-item-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 17px;
+      color: rgba(255,255,255,0.45);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-top: 4px;
+    }
+
+    .badge-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 19px;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin-bottom: 28px;
+    }
+    .badge-label::before { content: '\2014 '; color: var(--accent); opacity: 0.6; }
+    .badge-label::after { content: ' \2014'; color: var(--accent); opacity: 0.6; }
+
+    /* ===== VARIANT: COMPOSANT ===== */
+    .variant-composant .key-fact {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 32px;
+      color: #fff;
+      letter-spacing: 1px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      max-height: 150px;
+      overflow: hidden;
+    }
+    .variant-composant .key-fact strong { color: var(--accent); font-weight: 600; filter: brightness(1.3); }
+    .variant-composant .key-fact em { filter: brightness(1.4); }
+
+    .variant-composant .artisan-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 19px;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin-bottom: 8px;
+    }
+    .variant-composant .artisan-name::before { content: '\2014 '; color: var(--accent); opacity: 0.6; }
+    .variant-composant .artisan-name::after { content: ' \2014'; color: var(--accent); opacity: 0.6; }
+
+    .variant-composant .in-product {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 24px;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    /* ===== BOTTOM — same for both variants ===== */
+    .bottom-block {
+      margin-top: auto;
+      text-align: center;
+      padding-bottom: 270px;
+    }
+
+    .divider-line {
+      width: 100px;
+      height: 3px;
+      background: var(--accent);
+      margin: 0 auto 30px;
+      border-radius: 2px;
+      opacity: 0.8;
+    }
+
+    .tagline-vitrine {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 38px;
+      color: #fff;
+      line-height: 1.4;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .tagline-vitrine em { color: var(--accent); font-style: italic; filter: brightness(1.15); }
+
+    .footer-logo { text-align: center; margin-top: 24px; }
+    .footer-logo img { width: 160px; height: auto; opacity: 0.75; }
+  </style>
+</head>
+<body class="{{MOOD_CLASS}} {{PHOTO_PRESET}} grain-medium">
+
+  <div class="content">
+
+    <!-- HERO ZONE — fixed 1080px -->
+    <div class="hero-zone">
+      <img class="hero-image" src="{{HERO_IMAGE_PATH}}" alt="{{DISPLAY_NAME}}">
+    </div>
+
+    <!-- INFO ZONE — fixed from 1020px to bottom -->
+    <div class="info-zone {{VARIANT_CLASS}}">
+
+      <!-- Nom (identique pour les 2 variantes) -->
+      <div class="display-name">{{DISPLAY_NAME}}</div>
+
+      <!-- VARIANTE PRODUIT -->
+      <div class="variant-produit" style="display: {{SHOW_PRODUIT}}">
+        <div class="product-subtitle">{{PRODUCT_SUBTITLE}}</div>
+        <div class="macros-bar">
+          <div class="macro-item">
+            <div class="macro-item-value accent">{{PROTEIN}}</div>
+            <div class="macro-item-label">Proteines</div>
+          </div>
+          <div class="macro-item">
+            <div class="macro-item-value">{{FAT}}</div>
+            <div class="macro-item-label">Lipides</div>
+          </div>
+          <div class="macro-item">
+            <div class="macro-item-value">{{CARBS}}</div>
+            <div class="macro-item-label">Glucides</div>
+          </div>
+          <div class="macro-item">
+            <div class="macro-item-value">{{KCAL}}</div>
+            <div class="macro-item-label">kcal</div>
+          </div>
+        </div>
+        <div class="badge-label">{{BADGE_TEXT}}</div>
+      </div>
+
+      <!-- VARIANTE COMPOSANT -->
+      <div class="variant-composant" style="display: {{SHOW_COMPOSANT}}">
+        <div class="key-fact">{{KEY_FACT}}</div>
+        <div class="artisan-name">{{ARTISAN_NAME}}</div>
+        <div class="in-product">{{IN_PRODUCT}}</div>
+      </div>
+
+      <!-- BOTTOM — identique -->
+      <div class="bottom-block">
+        <div class="divider-line"></div>
+        <div class="tagline-vitrine">{{TAGLINE}}</div>
+        <div class="footer-logo">
+          <img src="../_base/logo.svg" alt="STRICT FOOD'S">
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

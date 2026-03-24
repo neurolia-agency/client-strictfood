@@ -12,12 +12,14 @@ Comment produire un post Instagram de A à Z. Tes interventions sont marquées `
 👤 TOI     Lancer le pipeline (1 prompt par post)
 🤖 AUTO    [Pipeline adapté au mode]
 👤 TOI     Valider le checkpoint (1 réponse)
-🤖 AUTO    Génération image
-🤖 AUTO    Génération caption
-👤 TOI     Vérifier le résultat final (image + caption)
+🤖 AUTO    Génération brouillon (dans brouillons/)
+👤 TOI     Vérifier le brouillon, itérer si besoin
+👤 TOI     Valider → promotion vers final/
+🤖 AUTO    Génération caption (après promotion)
+👤 TOI     Vérifier la caption
 ```
 
-**Interventions : 4** (planning, brief, validation checkpoint, vérification finale)
+**Interventions : 5** (planning, brief, validation checkpoint, validation brouillon, vérification caption)
 
 ---
 
@@ -150,21 +152,43 @@ Slide 2 : [données]
 
 ---
 
-## Étape 4 — Vérifier le résultat
+## Étape 4 — Vérifier le brouillon
 
-### 👤 TOI — Contrôle qualité image + caption
+### 👤 TOI — Contrôle qualité du brouillon
 
-Après le checkpoint, le pipeline :
-1. Génère l'image (automatique)
-2. Génère la caption (automatique, via `/caption-writer`)
+Après le checkpoint, le pipeline génère le visuel dans `brouillons/` (pas dans `final/`).
 
-Tu vérifies les deux :
-
-**Image** :
+**Tu vérifies le brouillon** :
+- [ ] **⛔ Pain noir** : le burger a bien un bun noir (pas blanc/doré). Si blanc → bloquer.
 - [ ] Fidélité produit (ingrédients corrects)
 - [ ] DA respectée (fond, couleurs, ambiance)
 - [ ] Qualité (pas d'artefacts IA)
 - [ ] Composition cohérente
+
+**Si des modifications sont nécessaires** :
+```
+Modifie le brouillon — [ce qui ne va pas]
+Régénère le brouillon — [ce qui ne va pas]
+```
+
+Tu peux itérer autant de fois que nécessaire. Chaque nouvelle version reste dans `brouillons/`.
+
+---
+
+## Étape 5 — Valider et promouvoir en final
+
+### 👤 TOI — Promotion vers final
+
+Quand le brouillon te convient :
+```
+C'est bon, promote en final
+```
+
+Le pipeline :
+1. Copie le brouillon validé vers `final/` (prêt à poster)
+2. Génère la caption automatiquement (via `/caption-writer`)
+
+### 👤 TOI — Vérifier la caption
 
 **Caption** :
 - [ ] Hook accrocheur (première ligne)
@@ -173,9 +197,8 @@ Tu vérifies les deux :
 - [ ] Hashtags pertinents
 - [ ] Pas de répétition avec les derniers posts
 
-**Si quelque chose ne va pas** :
+**Si la caption ne va pas** :
 ```
-Régénère l'image — [ce qui ne va pas]
 Réécris la caption — [ce qui ne va pas]
 ```
 
@@ -183,13 +206,13 @@ Réécris la caption — [ce qui ne va pas]
 
 ## Résumé par mode
 
-| Mode | Interventions opérateur | Durée estimée |
-|------|------------------------|---------------|
-| `full-ia` | Brief + validation mapping + vérif | ~10 min |
-| `irl-sublimation` | Brief (+ photo) + validation + vérif | ~8 min |
-| `compositing-irl` | Brief (+ 2 photos) + validation + vérif | ~8 min |
-| `compositing-ia` | Brief (+ photo) + validation mapping + vérif | ~10 min |
-| `template` | Brief (+ données slides) + validation + vérif | ~12 min |
+| Mode | Interventions opérateur |
+|------|------------------------|
+| `full-ia` | Brief + validation mapping + vérif brouillon + promotion + vérif caption |
+| `irl-sublimation` | Brief (+ photo) + validation + vérif brouillon + promotion + vérif caption |
+| `compositing-irl` | Brief (+ 2 photos) + validation + vérif brouillon + promotion + vérif caption |
+| `compositing-ia` | Brief (+ photo) + validation mapping + vérif brouillon + promotion + vérif caption |
+| `template` | Brief (+ données slides) + validation + vérif brouillon + promotion + vérif caption |
 
 ---
 
@@ -201,7 +224,9 @@ Réécris la caption — [ce qui ne va pas]
 ```
 
 Le brief story est dans `posts-stories/stories/S[X]/[jour]/brief/brief-story.md`.
-Le pipeline gère automatiquement : copywriting → data mapping → template fill → render PNG.
+Le pipeline gère automatiquement : copywriting → data mapping → template fill → render PNG dans `brouillons/`.
+
+**Même flux brouillon → final** : le premier render atterrit dans `brouillons/`. Tu vérifies, tu itères si besoin, puis tu valides la promotion vers `final/`.
 
 **Nouveaux types v3** :
 - **IRL** : photo brute + overlay DA minimal (coulisses, rush, ambiance)

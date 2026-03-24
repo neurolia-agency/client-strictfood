@@ -1,0 +1,35 @@
+/* Block: Explanation — Body text with optional mark-tape */
+/* Used by: educatif, annonce (body), vitrine (key-fact) */
+/* Customizable via: --expl-top, --expl-left, --expl-max-width, --expl-font-size */
+
+.explanation-block {
+  position: absolute;
+  top: var(--expl-top, 820px);
+  left: var(--expl-left, 90px);
+  max-width: var(--expl-max-width, 620px);
+  z-index: 10;
+}
+
+.explanation-block .explanation-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: var(--expl-font-size, 34px);
+  font-weight: 400;
+  line-height: 1.45;
+  color: rgba(255,255,255,0.92);
+}
+
+.explanation-block .explanation-text strong {
+  color: var(--accent);
+  font-weight: 600;
+  filter: brightness(1.2);
+}
+
+/* Glass variant — uses glassmorphism instead of text-shadow */
+.explanation-block.glass-variant {
+  background: rgba(var(--bg-rgb), 0.35);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 24px 28px;
+}

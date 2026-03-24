@@ -29,6 +29,10 @@ L'orchestrateur te passe le chemin d'un dossier post (ex: `production/posts-stor
 5. **Pour un carrousel**, crée une entrée par slide.
 6. **Ne modifie RIEN d'autre** que le fichier `00-input/input.md`. Tu ne touches pas à la direction créative.
 
+## Règle — Photos salle de restaurant
+
+Quand la direction créative place le produit **dans la salle du restaurant StrictFood**, fournir les photos de référence de la salle (`public/images/photos-references/contexte/salle-restaurant/`) comme input contextuel dans le fichier input.md. Mentionner explicitement que le décor doit être fidèle à ces photos. Ne JAMAIS laisser le prompt engineer inventer un décor restaurant sans référence.
+
 ## Règle de priorité — Same-product first
 
 **TOUJOURS utiliser la photo du produit réel en priorité.** Pour un post sur le STRICT Boeuf, utiliser une photo du STRICT Boeuf. Le cross-product (ex: photo poulet → transformer en boeuf via le prompt) est un **DERNIER RECOURS**, uniquement si aucune photo du produit réel n'existe dans le catalogue. Si un cross-product est utilisé, le justifier explicitement avec `⚠️ CROSS-PRODUCT — [raison]`.

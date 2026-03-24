@@ -1,76 +1,84 @@
 # Brief Stories — S2 Jeudi (2026-03-20)
 
-> **Pilier du jour** : La Cuisine (Process & Artisans) — Pas de post
-> **Objectif stratégique** : Journée artisan + coulisses. Présenter Boucherie Labourde (3e artisan, après Myfitcheese et Pains du Soleil en S1). Story IRL du rush pour l'authenticité.
-> **Persona cible** : Actifs pressés (qualité sourcing) + Locavores (artisan local)
-> **Ref stratégie** : Phase 1 §3.2 — "Présenter au moins 2 des 3 artisans partenaires"
+> **Pilier du jour** : Le Plat — Pas de post
+> **Objectif stratégique** : On dévoile le STRICT MAX Bœuf (double steak) en fiche + sublimation. Mood grenat = intensité. Journée dédiée à la puissance du produit phare pour sportifs.
+> **Persona cible** : Sportifs
+> **Ref stratégie** : Phase 1 §1.4 — "construire une présence crédible et cohérente"
 
 ---
 
-## Story 1 — Focus Ingrédient : Viande Boucherie Labourde
+## Story 1 — Fiche Produit : STRICT MAX Bœuf
 
 | Champ | Valeur |
 |-------|--------|
-| Type | Focus Ingrédient |
+| Type | Fiche Produit |
 | Mode | `template` |
-| Highlight | NOS ARTISANS |
+| Highlight | LA CARTE |
 | Qui produit | Pipeline |
-| Template | `vitrine.html` (variante composant) |
+| Template | `vitrine.html` (variante produit) |
 | Mood | grenat |
 | Image | hero |
 | Brand props | aucun |
 
 ### Objectif
 
-Présenter le 3e artisan partenaire : Boucherie Labourde, le boucher local qui fournit la viande de tous les burgers bœuf. Compléter le triptyque artisanal (Myfitcheese S1, Pains du Soleil S1, Labourde S2).
+Introduire le STRICT MAX Bœuf — le double steak avec 97g de protéines. Le mood grenat marque l'intensité de ce produit hors norme. Nouveau produit dans le highlight LA CARTE.
 
 ### Contenu
 
-**Ingrédient** : Steak haché artisanal
-Artisan : `Boucherie Labourde`
-Localité : `Perpignan`
-Fait clé : `Viande fraîche, jamais surgelée. Haché sur place.`
-Dans le : `STRICT Bœuf`
+**Produit** : STRICT MAX Bœuf
+Slug recette : `strict-max-boeuf`
+
+> Le story-data-mapper résout automatiquement les données nutritionnelles depuis `_recettes/strict-max-boeuf.md`.
+
+Accroche : `Double steak, double ambition`
+Macro star : `97g protéines`
+Badge : `DOUBLE STEAK`
+Prix : `14,99€`
 Tagline : `Le cheat meal qui n'en est pas un`
 
-Image hero : `public/contenu-instagram/2025-10-03_15-57-14_UTC_1.jpg`
+Image hero : `public/images/photos-references/produits-source/strict-max-boeuf.png`
 
 ---
 
-## Story 2 — IRL : Rush du midi
+## Story 2 — Produit DA : MAX Bœuf sublimé
 
 | Champ | Valeur |
 |-------|--------|
-| Type | IRL |
-| Mode | `irl` |
-| Highlight | COULISSES |
-| Qui produit | Romain/Dorian (photo) + Pipeline (overlay) |
-| Template | `irl-story.html` |
-| Mood | cuivre |
+| Type | Produit DA |
+| Mode | `irl-sublimation` |
+| Highlight | — |
+| Qui produit | Pipeline |
+| Template | `irl-story.html` (overlay post-sublimation) |
+| Mood | grenat |
 | Image | hero |
 | Brand props | aucun |
 
 ### Objectif
 
-Montrer l'énergie du service. La cuisine en action, les burgers qui s'enchaînent. L'authenticité du rush crédibilise le volume et la maîtrise.
+Sublimer le STRICT MAX Bœuf en plein cadre 9:16. Le double steak en vedette, les ombres profondes et les tons grenat renforcent le caractère intense du produit. Clôture visuelle de la journée MAX.
 
 ### Contenu
 
-Photo : `[À FOURNIR par Romain — rush midi, cuisine en action, assemblage rapide]`
-Texte overlay : `Rush du midi`
-Position texte : bas
-Filtre : léger
-
-> **Fallback** : si pas de photo fraîche, utiliser `public/contenu-instagram/2025-10-03_15-57-14_UTC_3.jpg` (assemblage burger mains gantées)
+Photo source : `public/images/photos-references/dark-bg/burger-double-boeuf-dark-bg.jpg`
+Direction sublimation : `Ombres profondes, double steak en vedette, textures viande accentuées, tons grenat chauds, grain film`
+Texte overlay : `—`
 
 ---
 
 ## Contraintes
 
-- DA : Story 1 Vitrine (Focus Ingrédient) + Story 2 IRL (overlay minimal)
-- Mood : grenat pour le Focus Ingrédient (viande = intensité), cuivre pour l'IRL
-- Le Focus Ingrédient utilise une photo de viande crue — la photo doit rester appétissante
-- L'IRL du rush doit capturer le mouvement et l'énergie
+- DA : Story 1 Vitrine (Fiche Produit) + Story 2 Sublimation
+- Mood : grenat sur les deux stories — intensité cohérente pour le produit MAX
+- La sublimation doit accentuer la taille du double steak — c'est le différenciateur visuel
+- Pas de troisième story — journée concentrée sur 2 stories fortes
+
+## Logique de variation de template
+
+| Type | Template | Famille |
+|------|----------|---------|
+| Fiche Produit | `vitrine.html` (variante produit) | Vitrine |
+| Produit DA | `irl-story.html` (overlay post-sublimation) | Dark Premium |
 
 ## Étape suivante
 

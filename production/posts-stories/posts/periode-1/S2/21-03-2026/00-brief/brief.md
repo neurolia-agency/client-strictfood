@@ -4,7 +4,7 @@
 
 | Champ | Valeur |
 |-------|--------|
-| Pilier | La Cuisine (Process & Artisans) |
+| Pilier | La Cuisine (Process & Coulisses) |
 | Format | Photo unique |
 | Dimensions | 4:5 |
 | Mode | `irl-sublimation` |
@@ -12,13 +12,14 @@
 
 ## Objectif
 
-Focus sur Myfitcheese, artisan partenaire fromager. Après le carrousel S1-02 (parcours global) et le post macros S2-06, ce post zoome sur un ingrédient distinctif. La sublimation IRL donne une dimension premium à une vraie photo du fromage artisanal.
+Montrer ce qui se passe en cuisine AVANT que le burger arrive. La présentation de Labourde a déjà été faite (carrousel 13-03) — ici on passe au concret : le geste brut de la découpe, la matière première à l'état pur. Le viewer voit la viande crue, le couteau, les mains gantées. C'est un post viscéral, pas informatif.
 
 ## Produit
 
-**Myfitcheese** — Parmesan protéiné et local.
+**Process cuisine — Découpe viande artisanale**
 
-> Pas de slug recette — ce post concerne l'ingrédient, pas un produit fini.
+> Pas de slug recette — ce post montre un geste de préparation, pas un produit fini.
+> Labourde est mentionnable en caption mais n'est PAS le sujet du post (déjà présenté le 13-03).
 
 ---
 
@@ -28,12 +29,8 @@ Focus sur Myfitcheese, artisan partenaire fromager. Après le carrousel S1-02 (p
 
 | Champ | Valeur |
 |-------|--------|
-| Photo source | `public/contenu-instagram/2025-10-03_15-57-14_UTC_7.jpg` |
-| Direction sublimation | Renforcer l'ambiance DA Dark Food Premium : accentuer les ombres, tons cuivrés sur le geste de la main, fond charbon profond, grain film subtil. Garder l'authenticité du geste artisanal — le parmesan qui tombe en miettes est le sujet. |
-
-> **Photo source** : geste parmesan macro — main gantée noire émiettant du parmesan au-dessus d'un burger, plan très serré, fond sombre flou.
-
-> **Fallback** : si la photo ne sublime pas assez bien, basculer sur `full-ia` avec description du geste fromager.
+| Photo source | `public/contenu-instagram/strictfoods/coupe-viande-labourde.png` |
+| Direction sublimation | Renforcer contrastes ombre/lumière, tons cuivrés sur les mains gantées et la lame, charbon profond en fond, grain film subtil, préserver la texture brute de la viande et l'authenticité du geste |
 
 ---
 
@@ -41,14 +38,14 @@ Focus sur Myfitcheese, artisan partenaire fromager. Après le carrousel S1-02 (p
 
 | Champ | Valeur |
 |-------|--------|
-| Angle | Artisan local, qualité vs industriel, fromage protéiné |
-| Ton | Direct, storytelling produit |
-| CTA | Implicite (cuisine ouverte, viens voir) |
+| Angle | Coulisses, transparence, ce qui se passe avant que tu croques — la viande est découpée à la main |
+| Ton | Direct, brut |
+| CTA | Implicite (adresse en fin) |
 | Mention prix | Non |
-| Mention macros | Non (post artisan, pas macros) |
-| Mention fournisseurs | Oui (Myfitcheese — sujet principal) |
-| Mots/phrases à inclure | "pas de cheddar sous plastique", "cuisine ouverte" |
-| Mots/phrases à éviter | "healthy", "protéiné" (trop fitness pour un post artisan) |
+| Mention macros | Non |
+| Mention fournisseurs | Oui (Boucherie Labourde — mention naturelle, pas le sujet principal) |
+| Mots/phrases à inclure | "chaleur pulsée", "le cheat meal qui n'en est pas un" |
+| Mots/phrases à éviter | "healthy", "bio", "régime", "grillé" |
 
 > La caption est générée APRÈS l'image par le skill `/caption-writer`.
 
@@ -56,10 +53,10 @@ Focus sur Myfitcheese, artisan partenaire fromager. Après le carrousel S1-02 (p
 
 ## Contraintes
 
-- Focus sur le geste et la texture du fromage, pas sur le burger entier
-- Plans serrés, mains gantées, ambiance backstage
-- L'image doit communiquer "artisanat" et "qualité" en même temps
-- Éclairage plus contrasté/dramatique que le Plat — ambiance backstage
+- Focus sur le geste et la matière — pas une présentation artisan (déjà fait le 13-03)
+- Éclairage backstage dramatique, contrasté
+- Plan serré mains + couteau + viande brute
+- La sublimation préserve l'authenticité de la photo source
 - DA : Dark Food Premium (fond Charbon, tons Cuivre Braisé)
 - Food Porn Dial : 6/10
 - Brand props : non

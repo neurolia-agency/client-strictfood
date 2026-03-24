@@ -137,6 +137,19 @@ Pour les carrousels, chaque slide a un rôle précis dans la narration :
 - Chaque slide doit être compréhensible **seule** (quelqu'un peut atterrir à la slide 3 via un partage)
 - Le rythme visuel doit varier : pas 5 photos identiques en gros plan
 
+### Layout texte/visuel — Technique du produit surdimensionné
+
+Quand un visuel contient du texte concentré d'un côté (infographies, éducatifs, annonces) :
+
+- **Le visuel produit doit être SURDIMENSIONNÉ et coupé par le bord opposé au texte** (~50% visible)
+- L'effet recherché : le produit est imposant, "sort du cadre", crée un impact visuel fort tout en comblant l'espace vide
+- Texte à gauche → produit à droite, surdimensionné, coupé par le bord droit
+- Texte centré → produit en fond, plus discret
+- Spécifier dans la fiche : "Zone de respiration" → indiquer la direction du produit + mentionner "produit surdimensionné ~50% visible"
+- Pour les carrousels, varier le placement (slide 1 : produit déborde à droite, slide 2 : produit déborde à gauche)
+- **Photos produit sur fond noir** : `object-fit: contain` + masque radial (pas linéaire)
+- **Photos contextuelles** : garder le comportement fond standard
+
 ### Photos vs Visuels générés vs Templates
 
 Décider pour chaque visuel :
@@ -158,7 +171,35 @@ Décider pour chaque visuel :
 | L'Équipe | Chaleur humaine, authenticité, connexion | Plus naturel, éclairage chaud, sourires |
 | Le Quartier | Ancrage local, proximité, communauté | Varié, reprend le ton du contenu partagé |
 
-### Style v2 — Garde-fous réalisme
+### ⛔ Pain noir obligatoire
+
+Tous les burgers StrictFood sont au **pain noir (black bun sésame)**. Le pain blanc/classique est obsolète.
+
+**Dans chaque fiche de direction créative impliquant un burger :**
+- Mentionner explicitement "pain noir sésame (black bun)" dans la section Recette/Produit
+- Dans la section Texture & Détails : "surface noire texturée du bun, recouverte de graines de sésame dorées"
+- INTERDIT : "bun doré", "brioche", "pain classique" ou toute description suggérant un bun clair
+
+### ⛔ Fidélité salle de restaurant
+
+Quand la direction créative place le produit **dans la salle du restaurant StrictFood**, le décor DOIT être fidèle à la réalité. Photos de référence : `public/images/photos-references/contexte/salle-restaurant/` (8 photos).
+
+**Caractéristiques de la vraie salle :**
+- Murs : carrelage blanc/gris clair (grands carreaux rectangulaires)
+- Bois : blond chêne clair (panneau mural partiel + plateaux de table)
+- Mobilier : tables rondes bois blond + chaises noires métal (style industriel épuré)
+- Mur végétal : grand mur de plantes vertes avec néon blanc "STRICT FOOD'S"
+- Comptoir : vitrine réfrigérée noire + comptoir blanc
+- Menu board : grand panneau noir typographie blanche
+- Ambiance : moderne, minimaliste, éclairage blanc/neutre
+
+**Dans la fiche de direction créative :**
+- Si la scène est en salle → décrire UNIQUEMENT les éléments réels ci-dessus dans "Éléments secondaires"
+- Autorisé : changer l'angle, reconstituer un élément manquant (même modèle), compléter un mur (même texture)
+- INTERDIT : bois sombre, murs lambris, ambiance rustique/pub/chaleureuse, brique exposée, mobilier inventé
+- **Alternative recommandée** : un fond neutre (sombre, table isolée, plan serré) est toujours OK et évite le risque
+
+### Style v2 — Garde-fous réalisme + Dynamisme visuel
 
 Ces règles s'appliquent à **toutes** les fiches de direction créative :
 
@@ -167,6 +208,8 @@ Ces règles s'appliquent à **toutes** les fiches de direction créative :
 3. **Ambiance backstage** : privilégier "cuisine réelle en arrière-plan (inox, surfaces sombres, équipements flous)" plutôt que "fond studio noir". Le fond doit raconter un lieu, pas un vide.
 4. **Proportions réalistes** : le burger est compact et dense (fast-good), pas un towering gourmet stack de magazine.
 5. **Logo STRICT FOOD'S** : quand un prop est mentionné, décrire le logo avec précision — "STRICT FOOD'S, le O de FOOD remplacé par une icône burger stylisée, en Cuivre Braisé mat".
+6. **⚡ Éclairage contrasté obligatoire** : le fond est sombre MAIS l'éclairage doit être **dramatique et directionnel** — source lumineuse latérale ou 3/4 marquée qui sculpte le produit. Le produit doit "éclater" sur le fond sombre. Spécifier dans la section Éclairage : "Contrasté, source directionnelle, highlights vifs sur les ingrédients". INTERDIT : éclairage plat/uniforme qui noie le produit dans l'obscurité.
+7. **⚡ Couleurs riches et saturées** : les ingrédients doivent avoir des couleurs **vives et appétissantes** (vert mâche, orange sauce, doré sésame/Maillard). Spécifier dans Palette : "Couleurs riches, saturation naturelle élevée". INTERDIT : palette terne, délavée, trop uniformément sombre. **Dark Premium ≠ Terne** — le fond est sombre, le sujet est lumineux.
 
 ### Brand Props — Accessoires de Marque
 

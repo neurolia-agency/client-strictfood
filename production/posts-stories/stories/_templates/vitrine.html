@@ -65,7 +65,7 @@
       height: 100%;
       object-fit: cover;
       object-position: center 40%; /* overridden by photo preset */
-      filter: brightness(1.05) saturate(1.15);
+      filter: brightness(1.20) saturate(1.25) contrast(1.05);
       mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 58%, transparent 92%);
       -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 58%, transparent 92%);
     }
@@ -227,7 +227,7 @@
     .tagline-vitrine em { color: var(--accent); font-style: italic; filter: brightness(1.15); }
 
     .footer-logo { text-align: center; margin-top: 24px; }
-    .footer-logo img { width: 160px; height: auto; opacity: 0.6; }
+    .footer-logo img { width: 160px; height: auto; opacity: 0.75; }
   </style>
 </head>
 <body class="{{MOOD_CLASS}} {{PHOTO_PRESET}}">

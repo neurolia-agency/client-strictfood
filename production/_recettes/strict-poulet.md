@@ -17,7 +17,7 @@
 | Ordre | Ingrédient | Forme exacte | Fournisseur |
 |-------|-----------|--------------|-------------|
 | 1 | Pain noir au sésame (base) | Bun rond noir, surface texturée recouverte de graines de sésame dorées | Pains du Soleil |
-| 2 | Poulet rôti | En lamelles — tranches fines irrégulières, croûte Maillard visible, cuisson chaleur pulsée (zéro huile). PAS en cubes, PAS en dés, PAS en filet entier. | — |
+| 2 | Poulet rôti | En lamelles — tranches fines irrégulières, croûte Maillard visible, cuisson chaleur pulsée (zéro huile). PAS en cubes, PAS en dés, PAS en filet entier, PAS effiloché | — |
 | 3 | Parmesan | En miettes — petits fragments irréguliers, poudreux. PAS en copeaux, PAS en lamelles, PAS en tranches. | Myfitcheese |
 | 4 | Oignons rouges | En tranches fines — rondelles avec anneaux concentriques visibles. PAS émincés, PAS en dés. | — |
 | 5 | Mâche | Feuilles entières — petites feuilles rondes vertes en bouquet. PAS de roquette, PAS de laitue. | — |

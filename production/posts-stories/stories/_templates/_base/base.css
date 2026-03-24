@@ -4,30 +4,31 @@
 :root {
   --accent: #BF8522;
   --accent-rgb: 191,133,34;
-  --accent-light: rgba(var(--accent-rgb), 0.7);
-  --accent-bg: rgba(var(--accent-rgb), 0.12);
-  --accent-border: rgba(var(--accent-rgb), 0.25);
+  --accent-light: rgba(var(--accent-rgb), 0.85);
+  --accent-bg: rgba(var(--accent-rgb), 0.18);
+  --accent-border: rgba(var(--accent-rgb), 0.35);
   --bg: #141210;
   --bg-rgb: 20,18,16;
   --text-primary: #ffffff;
-  --text-secondary: rgba(255,255,255,0.5);
-  --text-muted: rgba(255,255,255,0.45);
+  --text-secondary: rgba(255,255,255,0.78);
+  --text-muted: rgba(255,255,255,0.60);
+  --text-label: rgba(255,255,255,0.70);
 
   /* Instagram safe zones (1080x1920) — no text/logo in these areas */
   --safe-top: 250px;     /* IG overlay: username, timestamp, close button */
-  --safe-bottom: 250px;  /* IG overlay: reply bar, reactions, share */
+  --safe-bottom: 80px;   /* IG a supprimé l'overlay "envoyer un message" — petit gap suffit */
   --safe-side: 65px;     /* Device cropping margin */
 
   /* Image visibility (overridden by .img-discret / .img-hero) */
-  --img-opacity: 0.60;
-  --img-brightness: 1.15;
-  --img-sepia: 0.12;
-  --img-saturate: 0.90;
+  --img-opacity: 0.75;
+  --img-brightness: 1.30;
+  --img-sepia: 0.05;
+  --img-saturate: 1.10;
 
   /* Gradient strengths (overridden by moods if needed) */
-  --grad-top: 0.55;
-  --grad-bottom: 0.75;
-  --grad-left: 0.80;
+  --grad-top: 0.40;
+  --grad-bottom: 0.55;
+  --grad-left: 0.60;
 }
 
 /* ===== MOOD VARIANTS ===== */
@@ -47,11 +48,11 @@ body.mood-feuille {
 
 /* ===== IMAGE VISIBILITY ===== */
 body.img-discret {
-  --img-opacity: 0.45;
+  --img-opacity: 0.55;
 }
 
 body.img-hero {
-  --img-opacity: 0.75;
+  --img-opacity: 0.88;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -86,10 +87,43 @@ body {
 .gradient-left {
   position: absolute;
   top: 0; bottom: 0; left: 0;
-  width: 650px;
-  background: linear-gradient(to right, var(--bg) 0%, rgba(var(--bg-rgb),var(--grad-left)) 50%, transparent 100%);
+  width: 600px;
+  background: linear-gradient(to right, var(--bg) 0%, rgba(var(--bg-rgb),var(--grad-left)) 40%, rgba(var(--bg-rgb),0.08) 75%, transparent 100%);
   z-index: 3;
 }
+
+/* ===== ADAPTIVE OVERLAY SYSTEM ===== */
+/* Direction : overlay-* on <body> — controls WHERE the gradient protects text */
+
+body.overlay-left .gradient-left { display: block; width: 600px; }
+
+body.overlay-right .gradient-left {
+  left: auto; right: 0;
+  width: 600px;
+  background: linear-gradient(to left, var(--bg) 0%, rgba(var(--bg-rgb),var(--grad-left)) 40%, rgba(var(--bg-rgb),0.08) 75%, transparent 100%);
+}
+
+body.overlay-center .gradient-left { display: none; }
+body.overlay-center::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at center, rgba(var(--bg-rgb),0.15) 0%, rgba(var(--bg-rgb),0.55) 50%, rgba(var(--bg-rgb),0.78) 80%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+body.overlay-top-bottom .gradient-left { display: none; }
+
+body.overlay-full .gradient-left {
+  width: 100%;
+  background: linear-gradient(to right, rgba(var(--bg-rgb),0.4) 0%, transparent 30%, transparent 70%, rgba(var(--bg-rgb),0.4) 100%);
+}
+body.overlay-full { --grad-top: 0.55; --grad-bottom: 0.70; }
+
+body.overlay-none .gradient-left,
+body.overlay-none .gradient-top,
+body.overlay-none .gradient-bottom { display: none; }
 
 /* ===== CONTENT CONTAINER ===== */
 /* padding-top = --safe-top (250px) to clear Instagram's top overlay */
@@ -105,18 +139,20 @@ body {
 }
 
 /* ===== LOGO ===== */
+/* Logo positionné EN BAS sous la tagline (plus en haut — évite doublon avec profil IG) */
 .logo-container {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 16px;
-  margin-bottom: 60px;
+  margin-top: 16px;
 }
 
 .logo-container svg,
 .logo-container img {
-  width: 280px;
+  width: 200px;
   height: auto;
-  opacity: 0.9;
+  opacity: 0.85;
 }
 
 /* ===== TYPOGRAPHY ===== */
@@ -153,7 +189,7 @@ body {
 .label {
   font-family: 'DM Sans', sans-serif;
   font-size: 24px;
-  color: var(--text-muted);
+  color: var(--text-label);
   text-transform: uppercase;
   letter-spacing: 4px;
 }
@@ -170,30 +206,61 @@ body {
 /* 2 marqueurs valides : mark-stamp + mark-tape.                 */
 
 /* --- Tape — bande inclinee derriere le texte, style etiquette collee --- */
-.mark-tape {
+/* 3 niveaux : mark-tape-light, mark-tape (defaut), mark-tape-strong        */
+.mark-tape, .mark-tape-light, .mark-tape-strong {
   position: relative;
   display: inline-block;
-  padding: 4px 22px;
+  padding: 6px 26px;
 }
-.mark-tape::before {
+.mark-tape::before, .mark-tape-light::before, .mark-tape-strong::before {
   content: '';
   position: absolute;
-  top: -4px;
-  left: -14px;
-  right: -14px;
-  bottom: -4px;
-  background: rgba(var(--accent-rgb), 0.14);
-  border-top: 4px solid rgba(var(--accent-rgb), 0.5);
-  border-bottom: 4px solid rgba(var(--accent-rgb), 0.5);
-  transform: rotate(1.5deg);
+  top: -4px; left: -14px; right: -14px; bottom: -4px;
+  transform: rotate(-1.8deg);
   z-index: -1;
 }
+.mark-tape-light::before {
+  background: rgba(var(--accent-rgb), 0.10);
+  border-top: 2px solid rgba(var(--accent-rgb), 0.50);
+  border-bottom: 2px solid rgba(var(--accent-rgb), 0.50);
+}
+.mark-tape::before {
+  background: rgba(var(--accent-rgb), 0.22);
+  border-top: 4px solid rgba(var(--accent-rgb), 0.70);
+  border-bottom: 4px solid rgba(var(--accent-rgb), 0.70);
+}
+.mark-tape-strong::before {
+  background: rgba(var(--accent-rgb), 0.50);
+  border-top: 5px solid rgba(var(--accent-rgb), 0.90);
+  border-bottom: 5px solid rgba(var(--accent-rgb), 0.90);
+}
 
-/* Text depth — multi-layer shadow for readability on any background */
-.text-depth {
+/* ===== TEXT DEPTH — 4-level shadow system for readability ===== */
+/* text-depth-0 : no shadow (text on pure charcoal)               */
+/* text-depth-1 : subtle (text behind strong overlay)              */
+/* text-depth-2 : moderate (default, backward compat)              */
+/* text-depth-3 : aggressive (text directly on photo)              */
+
+.text-depth-0 { text-shadow: none; }
+
+.text-depth-1 {
+  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+.text-depth, .text-depth-2 {
   text-shadow:
-    0 2px 6px rgba(0,0,0,0.5),
-    0 4px 16px rgba(0,0,0,0.2);
+    0 1px 3px rgba(0,0,0,0.6),
+    0 3px 10px rgba(0,0,0,0.3);
+}
+
+.text-depth-3 {
+  text-shadow:
+    0 0 4px rgba(0,0,0,0.9),
+    0 0 8px rgba(0,0,0,0.8),
+    0 1px 3px rgba(0,0,0,0.9),
+    0 2px 10px rgba(0,0,0,0.7),
+    0 4px 20px rgba(0,0,0,0.4),
+    0 8px 40px rgba(0,0,0,0.2);
 }
 
 /* ===== ACCENT LINE ===== */
@@ -203,7 +270,7 @@ body {
   top: 280px;
   width: 4px;
   height: 1400px;
-  background: linear-gradient(to bottom, transparent, rgba(var(--accent-rgb),0.3) 15%, rgba(var(--accent-rgb),0.15) 60%, rgba(var(--accent-rgb),0.06) 85%, transparent);
+  background: linear-gradient(to bottom, transparent, rgba(var(--accent-rgb),0.45) 15%, rgba(var(--accent-rgb),0.25) 60%, rgba(var(--accent-rgb),0.10) 85%, transparent);
   z-index: 5;
   border-radius: 2px;
 }
@@ -213,7 +280,7 @@ body {
   position: absolute;
   bottom: 0; left: 0; right: 0;
   height: 700px;
-  background: radial-gradient(ellipse 120% 100% at 50% 100%, rgba(var(--accent-rgb), 0.06) 0%, rgba(var(--accent-rgb), 0.02) 40%, transparent 70%);
+  background: radial-gradient(ellipse 120% 100% at 50% 100%, rgba(var(--accent-rgb), 0.15) 0%, rgba(var(--accent-rgb), 0.06) 40%, transparent 70%);
   z-index: 2;
   pointer-events: none;
 }
@@ -227,8 +294,8 @@ body {
   right: 70px;
   z-index: 10;
   text-align: center;
-  padding: 100px 0 var(--safe-bottom);
-  background: linear-gradient(to bottom, transparent, rgba(var(--bg-rgb), 0.6) 40%, rgba(var(--bg-rgb), 0.8) 100%);
+  padding: 60px 0 var(--safe-bottom);
+  background: linear-gradient(to bottom, transparent, rgba(var(--bg-rgb), 0.45) 40%, rgba(var(--bg-rgb), 0.65) 100%);
 }
 
 .tagline {
@@ -248,7 +315,7 @@ body {
 .swipe-up {
   font-family: 'DM Sans', sans-serif;
   font-size: 22px;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.55);
   text-transform: uppercase;
   letter-spacing: 4px;
   margin-top: 20px;
@@ -259,8 +326,8 @@ body {
   margin: 10px auto 0;
   width: 30px;
   height: 30px;
-  border-left: 2.5px solid rgba(var(--accent-rgb), 0.5);
-  border-top: 2.5px solid rgba(var(--accent-rgb), 0.5);
+  border-left: 2.5px solid rgba(var(--accent-rgb), 0.65);
+  border-top: 2.5px solid rgba(var(--accent-rgb), 0.65);
   transform: rotate(45deg);
 }
 
@@ -331,7 +398,7 @@ body {
 .macro-value span {
   font-size: 36px;
   font-weight: 500;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255,255,255,0.75);
 }
 
 .macro-label {
@@ -368,22 +435,21 @@ body.photo-large .hero-image { object-position: 50% 50%; transform: scale(1.15);
 body.photo-portrait .bg-image,
 body.photo-portrait .hero-image { object-position: 50% 25%; transform: scale(1.1); }
 
-/* ===== GRADIENT FORCE ===== */
-/* Applied as body classes — control overlay opacity for different photo brightness */
-body.gradient-light {
-  --grad-top: 0.35;
-  --grad-bottom: 0.55;
-  --grad-left: 0.60;
+/* ===== GRADIENT FORCE (adaptive) ===== */
+/* grad-* classes : choose based on photo brightness behind text */
+/* gradient-light/medium/strong kept as backward-compatible aliases */
+
+body.grad-soft, body.gradient-light {
+  --grad-top: 0.15; --grad-bottom: 0.35; --grad-left: 0.45;
 }
-body.gradient-medium {
-  --grad-top: 0.55;
-  --grad-bottom: 0.75;
-  --grad-left: 0.80;
+body.grad-medium, body.gradient-medium {
+  --grad-top: 0.40; --grad-bottom: 0.55; --grad-left: 0.65;
 }
-body.gradient-strong {
-  --grad-top: 0.70;
-  --grad-bottom: 0.88;
-  --grad-left: 0.92;
+body.grad-heavy, body.gradient-strong {
+  --grad-top: 0.55; --grad-bottom: 0.72; --grad-left: 0.82;
+}
+body.grad-opaque {
+  --grad-top: 0.70; --grad-bottom: 0.85; --grad-left: 0.90;
 }
 
 /* ===== BACKGROUND IMAGE ===== */
@@ -415,7 +481,7 @@ body.gradient-strong {
   object-fit: cover;
   object-position: 60% 35%;
   z-index: 5;
-  filter: drop-shadow(-30px -20px 60px rgba(0,0,0,0.5)) sepia(var(--img-sepia)) saturate(var(--img-saturate));
+  filter: drop-shadow(-30px -20px 60px rgba(0,0,0,0.4)) brightness(1.15) sepia(var(--img-sepia)) saturate(var(--img-saturate));
 }
 
 /* ===== PRODUCT HERO (centered bottom, dual-image pattern) ===== */
@@ -429,7 +495,7 @@ body.gradient-strong {
   object-fit: contain;
   object-position: center top;
   z-index: 6;
-  filter: drop-shadow(0 -10px 40px rgba(0,0,0,0.5)) sepia(var(--img-sepia)) saturate(var(--img-saturate)) brightness(0.9);
+  filter: drop-shadow(0 -10px 40px rgba(0,0,0,0.4)) sepia(var(--img-sepia)) saturate(var(--img-saturate)) brightness(1.10);
   mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,1) 8%, rgba(0,0,0,1) 25%, rgba(0,0,0,0.5) 55%, transparent 78%);
   -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,1) 8%, rgba(0,0,0,1) 25%, rgba(0,0,0,0.5) 55%, transparent 78%);
 }
@@ -458,4 +524,227 @@ body.gradient-strong {
   -webkit-backdrop-filter: blur(6px);
   mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+}
+
+/* ===== MODERN DESIGN SYSTEM v2 ===== */
+
+/* ===== FILM GRAIN — Modern food premium texture ===== */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: var(--grain-opacity, 0);
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+body.grain-subtle { --grain-opacity: 0.025; }
+body.grain-medium { --grain-opacity: 0.04; }
+body.grain-heavy  { --grain-opacity: 0.06; }
+
+/* ===== GLASSMORPHISM — Modern text containers ===== */
+.glass-panel {
+  background: rgba(var(--bg-rgb), 0.35);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 28px 32px;
+}
+
+.glass-panel-strong {
+  background: rgba(var(--bg-rgb), 0.55);
+  backdrop-filter: blur(30px) saturate(1.3);
+  -webkit-backdrop-filter: blur(30px) saturate(1.3);
+  border: 1px solid rgba(var(--accent-rgb), 0.10);
+  border-radius: 16px;
+  padding: 28px 32px;
+}
+
+.glass-panel-accent {
+  background: rgba(var(--accent-rgb), 0.08);
+  backdrop-filter: blur(24px) saturate(1.15);
+  -webkit-backdrop-filter: blur(24px) saturate(1.15);
+  border: 1px solid rgba(var(--accent-rgb), 0.15);
+  border-radius: 12px;
+  padding: 24px 28px;
+}
+
+/* ===== ADVANCED TYPOGRAPHY ===== */
+.text-gradient-accent {
+  background: linear-gradient(135deg,
+    var(--accent) 0%,
+    rgba(var(--accent-rgb), 0.75) 45%,
+    #fff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-warm {
+  background: linear-gradient(180deg,
+    #fff 0%,
+    rgba(var(--accent-rgb), 0.9) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-outline {
+  -webkit-text-stroke: 2px rgba(var(--accent-rgb), 0.4);
+  color: transparent;
+}
+
+.text-outline-white {
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.25);
+  color: transparent;
+}
+
+.text-editorial {
+  letter-spacing: 0.15em;
+  font-weight: 300;
+  font-family: 'Space Grotesk', sans-serif;
+  text-transform: uppercase;
+}
+
+/* ===== ORGANIC PHOTO MASKS ===== */
+/* Sujet à droite — masque ellipse décentrée */
+.mask-organic-right .bg-image {
+  mask-image: radial-gradient(ellipse 120% 80% at 70% 40%,
+    black 25%, rgba(0,0,0,0.6) 50%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 120% 80% at 70% 40%,
+    black 25%, rgba(0,0,0,0.6) 50%, transparent 75%);
+}
+
+/* Sujet centré — cercle large */
+.mask-organic-center .bg-image {
+  mask-image: radial-gradient(circle 850px at 55% 35%,
+    black 20%, rgba(0,0,0,0.5) 50%, transparent 72%);
+  -webkit-mask-image: radial-gradient(circle 850px at 55% 35%,
+    black 20%, rgba(0,0,0,0.5) 50%, transparent 72%);
+}
+
+/* Sujet à gauche — ellipse inversée */
+.mask-organic-left .bg-image {
+  mask-image: radial-gradient(ellipse 120% 80% at 30% 40%,
+    black 25%, rgba(0,0,0,0.6) 50%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 120% 80% at 30% 40%,
+    black 25%, rgba(0,0,0,0.6) 50%, transparent 75%);
+}
+
+/* Haut cadre — pour photos portrait/devanture */
+.mask-organic-top .bg-image {
+  mask-image: radial-gradient(ellipse 100% 120% at 50% 25%,
+    black 25%, rgba(0,0,0,0.5) 55%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 100% 120% at 50% 25%,
+    black 25%, rgba(0,0,0,0.5) 55%, transparent 75%);
+}
+
+/* ===== MESH GRADIENT BACKGROUNDS ===== */
+/* Replaces flat #141210 with organic multi-stop backgrounds */
+body.mesh-cuivre {
+  background:
+    radial-gradient(ellipse 80% 50% at 15% 10%, rgba(191,133,34,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 70% at 85% 75%, rgba(160,64,53,0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 90% 90% at 50% 50%, #1a1108 0%, #141210 100%);
+}
+
+body.mesh-feuille {
+  background:
+    radial-gradient(ellipse 70% 60% at 20% 15%, rgba(107,138,94,0.10) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 80% at 80% 80%, rgba(107,138,94,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 90% 90% at 50% 50%, #121413 0%, #141210 100%);
+}
+
+body.mesh-grenat {
+  background:
+    radial-gradient(ellipse 75% 55% at 18% 12%, rgba(160,64,53,0.12) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 75% at 82% 78%, rgba(191,133,34,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 90% 90% at 50% 50%, #1A1210 0%, #141210 100%);
+}
+
+/* ===== ACCENT LINE MODERN — with glow ===== */
+.accent-line-modern {
+  position: absolute;
+  left: 70px;
+  top: 280px;
+  width: 3px;
+  height: 1400px;
+  background: linear-gradient(to bottom,
+    transparent,
+    rgba(var(--accent-rgb),0.6) 15%,
+    rgba(var(--accent-rgb),0.35) 55%,
+    rgba(var(--accent-rgb),0.15) 80%,
+    transparent);
+  box-shadow:
+    0 0 15px rgba(var(--accent-rgb), 0.15),
+    0 0 40px rgba(var(--accent-rgb), 0.06);
+  z-index: 5;
+  border-radius: 2px;
+}
+
+/* ===== COLOR TREATMENTS ===== */
+.duotone-cuivre .bg-image {
+  filter: grayscale(1) brightness(1.15) sepia(0.45) hue-rotate(-8deg) saturate(1.8);
+}
+
+.duotone-feuille .bg-image {
+  filter: grayscale(1) brightness(1.1) sepia(0.3) hue-rotate(60deg) saturate(1.5);
+}
+
+.color-overlay-warm::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg,
+    rgba(191,133,34,0.08) 0%,
+    rgba(160,64,53,0.05) 100%);
+  mix-blend-mode: color;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Selective saturation boost for food elements */
+.photo-vivid .bg-image,
+.photo-vivid .hero-image {
+  filter: brightness(var(--img-brightness, 1.30))
+          sepia(var(--img-sepia, 0.05))
+          saturate(1.35)
+          contrast(1.08);
+}
+
+/* ===== UTILITY CLASSES ===== */
+/* Divider line — horizontal accent */
+.divider-accent {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), rgba(var(--accent-rgb), 0.3));
+  border-radius: 2px;
+  margin: 20px 0;
+}
+
+/* Subtle border glow */
+.border-glow {
+  border: 1px solid rgba(var(--accent-rgb), 0.15);
+  box-shadow: inset 0 0 20px rgba(var(--accent-rgb), 0.03),
+              0 0 30px rgba(var(--accent-rgb), 0.05);
+}
+
+/* Tag / pill style */
+.tag-accent {
+  display: inline-block;
+  padding: 6px 18px;
+  background: rgba(var(--accent-rgb), 0.12);
+  border: 1px solid rgba(var(--accent-rgb), 0.25);
+  border-radius: 100px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }

@@ -78,6 +78,14 @@ When the user wants to modify an existing image:
 
 Preserve user's creative intent in both cases.
 
+## ⛔ Pain noir obligatoire (StrictFood)
+
+Quand le prompt concerne un burger StrictFood : vérifier que le prompt contient "black bun" ou "charcoal black sesame bun". Si le prompt mentionne un burger sans qualifier le bun comme noir → AVERTIR l'opérateur et suggérer d'ajouter la description du pain noir. Le pain blanc est obsolète chez StrictFood.
+
+## ⛔ Fidélité salle de restaurant (StrictFood)
+
+Quand le prompt décrit un intérieur de restaurant (mots-clés : "restaurant interior", "dining room", "restaurant counter", "salle") : vérifier que le décor correspond à la vraie salle StrictFood (carrelage blanc/gris, bois blond chêne, chaises noires métal, mur végétal néon, comptoir vitrine noire, éclairage blanc neutre). Si le prompt contient "warm wood", "rustic", "cozy", "brick wall", "dim ambient" ou tout élément ne correspondant pas à la salle réelle → AVERTIR l'opérateur `⚠️ DÉCOR RESTAURANT NON CONFORME — le prompt décrit un restaurant qui ne ressemble pas à la vraie salle StrictFood`. Photos de référence : `public/images/photos-references/contexte/salle-restaurant/`.
+
 ## Output
 
 - Saves PNG to current directory (or specified path if filename includes directory)

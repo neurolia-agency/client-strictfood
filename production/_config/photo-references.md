@@ -123,37 +123,95 @@ Photos source avec le nouveau pain noir au sésame (black bun). Fond noir, écla
 
 ### STRICT Bœuf (black)
 
-| # | Chemin | Description |
-|---|--------|-------------|
-| 1 | `public/images/photos-references/produits-source/burgers-black/strict-boeuf.png` | STRICT Bœuf, single patty bœuf, black bun sésame, fond noir, vue de face, haute résolution. |
-| 2 | `public/images/photos-references/produits-source/burgers-black/simple-boeuf-black.png` | Burger simple bœuf, black bun, fond noir. |
+| # | Chemin | Description | Concept |
+|---|--------|-------------|---------|
+| 1 | `.../burgers-black/strict-boeuf/strict-boeuf.png` | STRICT Bœuf, vue de face classique, black bun sésame, fond noir, haute résolution. | base |
+| 2 | `.../burgers-black/strict-boeuf/simple-boeuf-black.png` | Burger simple bœuf, black bun, fond noir, vue de face. | base |
+| 3 | `.../burgers-black/strict-boeuf/strict-boeuf-ouvert.png` | STRICT Bœuf ouvert — bun cap flottant au-dessus, intérieur visible, fond noir. | concept-ouvert |
+| 4 | `.../burgers-black/strict-boeuf/strict-boeuf-eclate.png` | STRICT Bœuf éclaté — toutes les couches séparées flottant verticalement, fond noir. | concept-eclate |
+| 5 | `.../burgers-black/strict-boeuf/strict-boeuf-assemblage.png` | STRICT Bœuf assemblage — mains gantées noires construisant le burger, fond noir. | concept-assemblage |
+| 6 | `.../burgers-black/strict-boeuf/strict-boeuf-assemblage-2.png` | STRICT Bœuf assemblage variante 2 — angle/moment différent, mains gantées noires. | concept-assemblage |
+| 7 | `.../burgers-black/strict-boeuf/strict-boeuf-assemblage-3.png` | STRICT Bœuf assemblage variante 3 — angle/moment différent, mains gantées noires. | concept-assemblage |
+| 8 | `.../burgers-black/strict-boeuf/strict-boeuf-main.png` | STRICT Bœuf tenu en main — main gantée noire grippant le burger, fond noir. | concept-main |
+| 9 | `.../burgers-black/strict-boeuf/strict-boeuf-main-2.png` | STRICT Bœuf tenu en main variante 2 — angle différent, main gantée noire. | concept-main |
+| 10 | `.../burgers-black/strict-boeuf/strict-boeuf-macro.png` | STRICT Bœuf macro — gros plan extrême sur la zone Maillard/sauce/parmesan, fond noir. | concept-macro |
+| 11 | `.../burgers-black/strict-boeuf/strict-boeuf-levitation.png` | STRICT Bœuf lévitation — burger flottant incliné au-dessus de la surface, fond noir. | concept-levitation |
+
+> Préfixe complet : `public/images/photos-references/produits-source/burgers-black/strict-boeuf/`
 
 ### STRICT MAX Bœuf (black)
 
-| # | Chemin | Description |
-|---|--------|-------------|
-| 1 | `public/images/photos-references/produits-source/burgers-black/strict-max-boeuf-black-1.png` | STRICT MAX Bœuf, double steak bœuf, black bun sésame, fond noir. |
+| # | Chemin | Description | Concept |
+|---|--------|-------------|---------|
+| 1 | `.../burgers-black/strict-max-boeuf/strict-max-boeuf-black-1.png` | STRICT MAX Bœuf, double steak, black bun sésame, fond noir, vue de face. | base |
+| 2 | `.../burgers-black/strict-max-boeuf/strict-max-boeuf-black-contre-plongee.png` | STRICT MAX Bœuf, double steak, contre-plongée (angle bas), fond noir. | base (contre-plongée) |
+| 3 | `.../burgers-black/strict-max-boeuf/strict-boeuf-ouvert.png` | STRICT MAX Bœuf ouvert — bun cap flottant, double stack visible, fond noir. | concept-ouvert |
+
+> Préfixe complet : `public/images/photos-references/produits-source/burgers-black/strict-max-boeuf/`
 
 ### STRICT Poulet (black)
 
-| # | Chemin | Description |
-|---|--------|-------------|
-| 1 | `public/images/photos-references/produits-source/burgers-black/strict-poulet-black-1.png` | STRICT Poulet, lamelles poulet, black bun sésame, fond noir, variante 1. |
-| 2 | `public/images/photos-references/produits-source/burgers-black/strict-poulet-black-2.png` | STRICT Poulet, lamelles poulet, black bun sésame, fond noir, variante 2. |
+| # | Chemin | Description | Concept |
+|---|--------|-------------|---------|
+| 1 | `.../burgers-black/strict-poulet/strict-poulet-black-1.png` | STRICT Poulet, lamelles poulet, black bun sésame, fond noir, variante 1. | base |
+| 2 | `.../burgers-black/strict-poulet/strict-poulet-black-2.png` | STRICT Poulet, lamelles poulet, black bun sésame, fond noir, variante 2. | base |
+| 3 | `.../burgers-black/strict-poulet/strict-poulet-ouvert.png` | STRICT Poulet ouvert — bun cap flottant, intérieur poulet visible, fond noir. | concept-ouvert |
+| 4 | `.../burgers-black/strict-poulet/strict-poulet-assemblage.png` | STRICT Poulet assemblage — mains gantées noires construisant le burger, fond noir. | concept-assemblage |
+| 5 | `.../burgers-black/strict-poulet/strict-poulet-main.png` | STRICT Poulet tenu en main — main gantée noire grippant le burger, fond noir. | concept-main |
+| 6 | `.../burgers-black/strict-poulet/strict-poulet-croque.png` | STRICT Poulet croqué — morsure profonde exposant l'intérieur, fond noir. | concept-croque |
+| 7 | `.../burgers-black/strict-poulet/strict-poulet-coupe.png` | STRICT Poulet coupé en deux — cross-section couches visibles, fond noir. | concept-coupe |
+| 8 | `.../burgers-black/strict-poulet/strict-poulet-macro.png` | STRICT Poulet macro — gros plan poulet/sauce/parmesan, fond noir. | concept-macro |
+| 9 | `.../burgers-black/strict-poulet/strict-poulet-macro-2.png` | STRICT Poulet macro variante 2 — zone focale différente. | concept-macro |
+| 10 | `.../burgers-black/strict-poulet/strict-poulet-levitation-2.jpeg` | STRICT Poulet lévitation — burger flottant incliné, fond noir. | concept-levitation |
+| 11 | `.../burgers-black/strict-poulet/burger-black-poulet-roti-eclate-dark-bg.jpg` | STRICT Poulet éclaté DA — couches séparées, fond sombre studio. | concept-eclate |
+| 12 | `.../burgers-black/strict-poulet/burger-black-poulet-roti-eclate-dark-bg-2.jpg` | STRICT Poulet éclaté DA variante 2. | concept-eclate |
+| 13 | `.../burgers-black/strict-poulet/burger-black-poulet-roti-eclate-dark-bg-3.jpg` | STRICT Poulet éclaté DA variante 3. | concept-eclate |
+
+> Préfixe complet : `public/images/photos-references/produits-source/burgers-black/strict-poulet/`
 
 ### STRICT MAX Poulet (black)
 
-| # | Chemin | Description |
-|---|--------|-------------|
-| 1 | `public/images/photos-references/produits-source/burgers-black/strict-max-poulet-black-1.png` | STRICT MAX Poulet, double lamelles poulet, black bun sésame, fond noir, variante 1. |
-| 2 | `public/images/photos-references/produits-source/burgers-black/strict-max-poulet-black.png` | STRICT MAX Poulet, double lamelles poulet, black bun sésame, fond noir. |
+| # | Chemin | Description | Concept |
+|---|--------|-------------|---------|
+| 1 | `.../burgers-black/strict-max-poulet/strict-max-poulet-black-1.png` | STRICT MAX Poulet, double portions poulet, black bun sésame, fond noir, variante 1. | base |
+| 2 | `.../burgers-black/strict-max-poulet/strict-max-poulet-black.png` | STRICT MAX Poulet, double portions poulet, black bun sésame, fond noir. | base |
+
+> Préfixe complet : `public/images/photos-references/produits-source/burgers-black/strict-max-poulet/`
 
 ### STRICT Végé Falafel (black)
 
-| # | Chemin | Description |
-|---|--------|-------------|
-| 1 | `public/images/photos-references/produits-source/burgers-black/strict-vege-falafel-black-1.png` | STRICT Végé Falafel, galette falafel entière, black bun sésame, fond noir, variante 1. |
-| 2 | `public/images/photos-references/produits-source/burgers-black/strict-vege-falafel-black-2.png` | STRICT Végé Falafel, galette falafel entière, black bun sésame, fond noir, variante 2. |
+| # | Chemin | Description | Concept |
+|---|--------|-------------|---------|
+| 1 | `.../burgers-black/strict-vege/burger-falafel-dark-bg.jpg` | STRICT Végé Falafel, fond sombre DA, vue de face classique. | base |
+| 2 | `.../burgers-black/strict-vege/strict-vege-falafel-black-2.png` | STRICT Végé Falafel, black bun sésame, fond noir, variante 2. | base |
+| 3 | `.../burgers-black/strict-vege/strict-vege-ouvert.png` | STRICT Végé ouvert — bun cap flottant, falafel et intérieur visibles, fond noir. | concept-ouvert |
+| 4 | `.../burgers-black/strict-vege/strict-vege-ouvert-green.png` | STRICT Végé ouvert fond vert — même concept, fond DEEP FOREST GREEN. | concept-ouvert (vert) |
+| 5 | `.../burgers-black/strict-vege/strict-vege-eclate.png` | STRICT Végé éclaté — toutes les couches falafel séparées flottant, fond noir. | concept-eclate |
+| 6 | `.../burgers-black/strict-vege/strict-vege-main.png` | STRICT Végé tenu en main — main gantée noire grippant le burger, fond noir. | concept-main |
+| 7 | `.../burgers-black/strict-vege/strict-vege-croque.png` | STRICT Végé croqué — morsure exposant intérieur vert falafel, fond noir. | concept-croque |
+| 8 | `.../burgers-black/strict-vege/strict-vege-coupe.png` | STRICT Végé coupé en deux — cross-section falafel vert visible, fond noir. | concept-coupe |
+| 9 | `.../burgers-black/strict-vege/strict-vege-macro.png` | STRICT Végé macro — gros plan croûte falafel/sauce/parmesan, fond noir. | concept-macro |
+| 10 | `.../burgers-black/strict-vege/strict-vege-macro-2.png` | STRICT Végé macro variante 2 — zone focale différente. | concept-macro |
+| 11 | `.../burgers-black/strict-vege/strict-vege-levitation.png` | STRICT Végé lévitation — burger flottant incliné, fond noir. | concept-levitation |
+
+> Préfixe complet : `public/images/photos-references/produits-source/burgers-black/strict-vege/`
+
+### Règle de sélection photo par concept
+
+Quand un brief spécifie un concept visuel, l'input-mapper DOIT sélectionner la photo variante correspondant à ce concept plutôt que la photo de base. La colonne "Concept" sert de clé de matching :
+
+| Concept du brief | Photo à sélectionner | Fallback |
+|-----------------|---------------------|----------|
+| concept-ouvert | Photo tagged `concept-ouvert` du produit | Photo `base` du produit |
+| concept-eclate | Photo tagged `concept-eclate` du produit | Photo `base` du produit |
+| concept-assemblage | Photo tagged `concept-assemblage` du produit | Photo `base` du produit |
+| concept-main | Photo tagged `concept-main` du produit | Photo `base` du produit |
+| concept-croque | Photo tagged `concept-croque` du produit | Photo `base` du produit |
+| concept-macro | Photo tagged `concept-macro` du produit | Photo `base` du produit |
+| concept-coupe | Photo tagged `concept-coupe` du produit | Photo `base` du produit |
+| concept-levitation | Photo tagged `concept-levitation` du produit | Photo `base` du produit |
+
+> Si plusieurs variantes existent pour le même concept (ex: `assemblage`, `assemblage-2`, `assemblage-3`), choisir celle qui n'a PAS été utilisée récemment (anti-doublon). Consulter l'historique de production.
 
 ---
 
@@ -334,10 +392,11 @@ Photos de contexte pour les piliers "La Cuisine", "Le Lieu", "Le Client". Utiles
 |--------------|--------|-------|
 | `dark-bg/` | 15 | Photos DA fond sombre studio |
 | `produits-source/` | 31 | Photos produit multi-angles fond neutre |
+| `produits-source/burgers-black/` | 50+ | Variantes concept par burger (ouvert, éclaté, assemblage, main, croque, macro, coupe, lévitation) |
 | `contexte/` | 14 | Photos contexte restaurant |
-| **Total** | **60** | |
+| **Total** | **110+** | |
 
-Tous les produits de la carte ont au moins une photo dans `produits-source/`. Les burgers ont en plus des variantes dark-bg (DA studio) et des vues multi-angles (plongee, contre-plongee, vue dessus).
+Tous les produits de la carte ont au moins une photo dans `produits-source/`. Les burgers black bun ont des variantes par concept visuel (8 concepts × 5 burgers) permettant une sélection ciblée selon le brief.
 
 ---
 

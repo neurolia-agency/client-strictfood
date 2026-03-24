@@ -1,0 +1,23 @@
+/* Block: CTA Button — Call to action */
+/* Used by: annonce */
+/* Customizable via: --cta-width, --cta-font-size */
+
+.cta-block {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 50px;
+  background: var(--accent);
+  border-radius: 100px;
+  cursor: pointer;
+  min-width: var(--cta-width, 360px);
+}
+
+.cta-block .cta-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: var(--cta-font-size, 28px);
+  font-weight: 700;
+  color: var(--bg);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
