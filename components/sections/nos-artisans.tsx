@@ -346,8 +346,10 @@ function ArtisanPanel({
       >
         <div
           ref={ref}
-          className="sticky top-0 flex items-center"
+          className="flex items-center"
           style={{
+            position: "sticky",
+            top: 0,
             minHeight: "100dvh",
             background: artisan.bg,
             boxShadow:
