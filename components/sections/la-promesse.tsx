@@ -35,22 +35,22 @@ const LENS_MACROS = [
   {
     label: "Protéines", value: "60.5", unit: "g",
     color: "var(--color-feuille)", rawColor: "92, 120, 88",
-    bgPos: "70.5% 56%", bgSize: "2500%",
+    bgPos: "85% 56%", bgSize: "1000%",
     position: { top: "52%", right: "10%" },
     textSide: "right" as const,
   },
   {
-    label: "Glucides", value: "45", unit: "g",
+    label: "Glucides", value: "45.0", unit: "g",
     color: "var(--color-sable)", rawColor: "181, 170, 152",
-    bgPos: "27.5% 75%", bgSize: "2500%",
-    position: { bottom: "5%", right: "82%" },
+    bgPos: "15% 79%", bgSize: "1000%",
+    position: { bottom: "18%", right: "76%" },
     textSide: "left" as const,
   },
   {
     label: "Lipides", value: "19.4", unit: "g",
     color: "var(--color-pierre)", rawColor: "138, 128, 112",
-    bgPos: "28% 49%", bgSize: "2500%",
-    position: { top: "40%", right: "81%" },
+    bgPos: "56% 72%", bgSize: "1000%",
+    position: { top: "22%", right: "67%" },
     textSide: "left" as const,
   },
 ] as const;
@@ -259,8 +259,8 @@ function MacroLens({
             borderRadius: "50%",
             overflow: "hidden",
             flexShrink: 0,
-            boxShadow: `0 4px 20px rgba(${rawColor}, 0.3), 0 2px 8px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.3)`,
-            border: "1px solid rgba(255, 255, 255, 0.1)",
+            boxShadow: `0 0 18px 4px rgba(196, 140, 56, 0.35), 0 0 40px 8px rgba(196, 140, 56, 0.15), 0 4px 20px rgba(${rawColor}, 0.3), 0 2px 8px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.3)`,
+            border: "1.5px solid rgba(196, 140, 56, 0.4)",
           }}
         >
           {/* Zoomed background — effet loupe */}
@@ -270,7 +270,7 @@ function MacroLens({
               position: "absolute",
               inset: 0,
               borderRadius: "inherit",
-              backgroundImage: "url(/images/eclate.webp)",
+              backgroundImage: "url(/images/photos-references/produits-source/burgers-black/strict-poulet/poulet-eclate.webp)",
               backgroundSize: bgSize,
               backgroundPosition: bgPos,
             }}
@@ -303,29 +303,66 @@ function MacroLens({
           <CausticsOverlay rawColor={rawColor} />
         </div>
 
+        {/* Trait de liaison — réticule labo */}
+        <span
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            top: "50%",
+            height: 1,
+            width: 44,
+            transformOrigin: textSide === "left" ? "right center" : "left center",
+            background: `linear-gradient(${textSide === "left" ? "to left" : "to right"}, rgba(196, 140, 56, 0.5), rgba(196, 140, 56, 0.08))`,
+            ...(textSide === "left"
+              ? { right: "calc(100% + 4px)" }
+              : { left: "calc(100% + 4px)" }),
+          }}
+        />
+        {/* Point terminal */}
+        <span
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            top: "50%",
+            transform: "translateY(-50%)",
+            width: 4,
+            height: 4,
+            borderRadius: "50%",
+            background: "rgba(196, 140, 56, 0.6)",
+            ...(textSide === "left"
+              ? { right: "calc(100% + 46px)" }
+              : { left: "calc(100% + 46px)" }),
+          }}
+        />
+
         {/* LES VALEURS — positionnées à gauche ou à droite */}
         <div
           style={{
             position: "absolute",
             top: "50%",
             transform: "translateY(-50%)",
-            whiteSpace: "nowrap",
+            display: "inline-flex",
+            flexDirection: "column",
             ...(textSide === "left"
-              ? { right: "calc(100% + 12px)", textAlign: "right" as const }
-              : { left: "calc(100% + 12px)", textAlign: "left" as const }),
+              ? { right: "calc(100% + 52px)", alignItems: "flex-end" as const }
+              : { left: "calc(100% + 52px)", alignItems: "flex-start" as const }),
           }}
         >
           <span
-            className="font-body uppercase block"
+            className="font-body uppercase"
             style={{
               fontSize: "0.8rem",
-              letterSpacing: "0.1em",
               color: "#fff",
               fontWeight: 700,
               lineHeight: 1.2,
+              alignSelf: "stretch",
+              display: "flex",
+              justifyContent: "space-between",
             }}
           >
-            {label}
+            {label.split("").map((char, i) => (
+              <span key={i}>{char}</span>
+            ))}
           </span>
           <span
             className="font-heading font-bold block"
@@ -361,7 +398,7 @@ function CalorieBadge() {
       <span
         className="font-heading"
         style={{
-          fontSize: "4.5rem",
+          fontSize: "5.5rem",
           lineHeight: 0.9,
           fontWeight: 900,
           color: "var(--color-cuivre)",
@@ -399,7 +436,7 @@ export default function LaPromesse() {
   return (
     <section
       id="promesse"
-      className="section-padding overflow-visible"
+      className="relative section-padding overflow-visible"
       style={{
         background: `
           radial-gradient(ellipse 100% 60% at 50% 0%, oklch(0.67 0.15 68 / 0.15) 0%, transparent 50%),
@@ -454,26 +491,47 @@ export default function LaPromesse() {
             className="flex items-center justify-center order-first overflow-visible"
             variants={fadeUp}
           >
-            <Image
-              src="/images/photos-references/dark-bg/burger-falafel-dark-bg.jpg"
-              alt="Falafel StrictFood cuit à chaleur pulsée, croustillant doré sans huile"
-              width={1000}
-              height={1000}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/burger_promesse1.webp"
+              alt="Burger StrictFood cuit à chaleur pulsée, steak juteux sans huile"
               className="object-contain"
-              style={{ width: "100%", transform: "scaleX(-1) scale(2.5)" }}
-              sizes="(max-width: 1024px) 100vw, 55vw"
+              style={{ width: "100%", transform: "scale(2.5)" }}
             />
           </motion.div>
         </motion.div>
 
         {/* ── Bloc 2 — Macros ── */}
-        <motion.div
-          className="grid grid-cols-1 lg:grid-cols-[38fr_62fr] items-center mt-36 lg:mt-48"
+          <motion.div
+            className="relative z-10 grid grid-cols-1 lg:grid-cols-[38fr_62fr] items-center mt-36 lg:mt-48 overflow-visible"
           style={{ gap: "var(--spacing-gap)" }}
           variants={stagger}
           {...motionProps}
           viewport={{ once: true, amount: 0.15 }}
         >
+          {/* 598 kcal — écriture verticale, déborde à gauche jusqu'au bord d'écran */}
+          <span
+            aria-hidden="true"
+            className="pointer-events-none select-none absolute hidden lg:flex items-center justify-center font-heading"
+            style={{
+              right: "60%",
+              top: 0,
+              bottom: 0,
+              width: "45vw",
+              writingMode: "vertical-rl",
+              transform: "rotate(180deg)",
+              fontSize: "clamp(10rem, 18vw, 20rem)",
+              fontWeight: 900,
+              color: "rgba(196, 140, 56, 0.06)",
+              letterSpacing: "0.05em",
+              lineHeight: 1,
+              zIndex: 0,
+              whiteSpace: "nowrap",
+            }}
+          >
+            598 kcal
+          </span>
+
           {/* Texte — left, titre mis en valeur */}
           <motion.div className="flex flex-col gap-6 lg:pr-8" variants={fadeUp}>
             <NutriBadge>Macros affichées</NutriBadge>
@@ -506,14 +564,12 @@ export default function LaPromesse() {
             <div
               className="relative overflow-visible flex items-center justify-center"
             >
-              <Image
-                src="/images/photos-references/dark-bg/burger-black-poulet-roti-eclate-dark-bg.jpg"
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/photos-references/produits-source/burgers-black/strict-poulet/poulet-eclate.webp"
                 alt="STRICT Poulet StrictFood vue éclatée avec macros affichées"
-                width={1000}
-                height={1000}
                 className="object-contain"
-                style={{ width: "100%", transform: "scale(1.69)" }}
-                sizes="(max-width: 1024px) 100vw, 55vw"
+                style={{ width: "100%", transform: "scale(1.01)" }}
               />
 
               {/* 3 lentilles-loupes — positionnées sur les ingrédients */}
@@ -530,7 +586,7 @@ export default function LaPromesse() {
               {/* Calories — haut droite, hors du burger */}
               <div
                 className="absolute hidden lg:block"
-                style={{ top: "2%", right: "-18%" }}
+                style={{ top: "8%", right: "-18%" }}
               >
                 <CalorieBadge />
               </div>

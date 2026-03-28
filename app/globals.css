@@ -266,6 +266,10 @@
     @apply border-border outline-ring/50;
   }
 
+  html, body {
+    overflow-x: hidden;
+  }
+
   body {
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-body);
@@ -334,6 +338,7 @@
 
   .section-padding {
     padding-block: var(--spacing-section-padding-mobile);
+    scroll-margin-top: var(--header-height);
   }
 
   @media (min-width: 1024px) {

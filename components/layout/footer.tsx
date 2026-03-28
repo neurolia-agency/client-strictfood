@@ -80,7 +80,7 @@ export default function Footer() {
               style={{ gap: "var(--spacing-gap-tight)", marginTop: "var(--spacing-gap-tight)" }}
             >
               <a
-                href="https://instagram.com/strictfood"
+                href="https://www.instagram.com/strictfoods_66/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sable transition-colors hover:text-or-braise"
@@ -93,7 +93,7 @@ export default function Footer() {
                 <Instagram size={24} strokeWidth={1.5} aria-hidden="true" />
               </a>
               <a
-                href="https://tiktok.com/@strictfood"
+                href="https://www.tiktok.com/@strictfoods"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sable transition-colors hover:text-or-braise"
@@ -261,7 +261,7 @@ export default function Footer() {
           {/* Socials */}
           <div className="flex justify-center" style={{ gap: "var(--spacing-gap-tight)" }}>
             <a
-              href="https://instagram.com/strictfood"
+              href="https://www.instagram.com/strictfoods_66/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sable transition-colors hover:text-or-braise"
@@ -274,7 +274,7 @@ export default function Footer() {
               <Instagram size={24} strokeWidth={1.5} aria-hidden="true" />
             </a>
             <a
-              href="https://tiktok.com/@strictfood"
+              href="https://www.tiktok.com/@strictfoods"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sable transition-colors hover:text-or-braise"

@@ -4,6 +4,7 @@ import { Phone } from "lucide-react";
 import MobileMenu from "./mobile-menu";
 
 const NAV_ITEMS = [
+  { label: "La Carte", href: "/la-carte" },
   { label: "La Promesse", href: "#promesse" },
   { label: "Nos Artisans", href: "#artisans" },
   { label: "L'Experience", href: "#experience" },
@@ -25,7 +26,7 @@ export default function Header() {
         {/* Logo */}
         <Link
           href="/"
-          className="relative z-10 transition-opacity hover:opacity-80"
+          className="relative z-10 pl-2 lg:pl-0 transition-opacity hover:opacity-80"
           style={{
             transitionDuration: "var(--duration-normal)",
             transitionTimingFunction: "var(--easing-standard)",

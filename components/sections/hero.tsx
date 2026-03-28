@@ -114,7 +114,7 @@ export default function Hero() {
 
             {/* CTA Secondaire — Liquid Glass */}
             <LiquidGlassLink
-              href="#carte"
+              href="/la-carte"
               className="w-full sm:w-auto"
               style={{
                 padding: "var(--button-padding-hero)",

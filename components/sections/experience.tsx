@@ -101,13 +101,13 @@ export default function Experience() {
               style={prefersReducedMotion ? undefined : { y: imageY }}
             >
               <Image
-                src="/contenu-instagram/2025-10-03_15-57-14_UTC_6.jpg"
-                alt="Fondateur StrictFood derrière la vitrine de la cuisine ouverte, mur végétal en arrière-plan"
+                src="/images/photos-references/contexte/exterieur/2026-03-20-19-40-00-devanture-duo-v4.png"
+                alt="Les deux fondateurs de StrictFood devant la devanture du restaurant, casquettes baissees, tabliers noirs, poings leves"
                 width={800}
-                height={1000}
+                height={1067}
                 className="object-cover w-full"
                 style={{
-                  aspectRatio: "4 / 5",
+                  aspectRatio: "3 / 4",
                   borderRadius: "var(--radius-large)",
                 }}
                 sizes="(max-width: 1024px) 100vw, 45vw"

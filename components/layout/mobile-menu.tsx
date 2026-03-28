@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
-import { Menu, X, Phone } from "lucide-react";
+import { Phone } from "lucide-react";
 
 interface NavItem {
   readonly label: string;
@@ -62,25 +62,48 @@ export default function MobileMenu({ items }: MobileMenuProps) {
 
   return (
     <>
-      {/* Hamburger button */}
+      {/* Animated hamburger / close button */}
       <button
-        className="relative z-10 flex lg:hidden items-center justify-center text-creme transition-colors hover:text-or-braise"
+        className="relative z-50 flex lg:hidden items-center justify-center"
         style={{
           width: "var(--button-min-height)",
           height: "var(--button-min-height)",
-          transitionDuration: "var(--duration-normal)",
-          transitionTimingFunction: "var(--easing-standard)",
         }}
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
         aria-controls="mobile-nav"
         aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
       >
-        {isOpen ? (
-          <X size={24} strokeWidth={1.5} aria-hidden="true" />
-        ) : (
-          <Menu size={24} strokeWidth={1.5} aria-hidden="true" />
-        )}
+        <div className="relative flex flex-col items-center justify-center" style={{ width: 22, height: 14 }}>
+          <span
+            className="absolute block rounded-full bg-creme"
+            style={{
+              width: 22,
+              height: 2,
+              transition: `transform var(--duration-normal) var(--easing-standard), opacity var(--duration-normal) var(--easing-standard)`,
+              transform: isOpen ? "translateY(0) rotate(45deg)" : "translateY(-6px) rotate(0deg)",
+            }}
+          />
+          <span
+            className="absolute block rounded-full bg-creme"
+            style={{
+              width: 22,
+              height: 2,
+              transition: `transform var(--duration-normal) var(--easing-standard), opacity var(--duration-normal) var(--easing-standard)`,
+              opacity: isOpen ? 0 : 1,
+              transform: isOpen ? "scaleX(0)" : "scaleX(1)",
+            }}
+          />
+          <span
+            className="absolute block rounded-full bg-creme"
+            style={{
+              width: 22,
+              height: 2,
+              transition: `transform var(--duration-normal) var(--easing-standard), opacity var(--duration-normal) var(--easing-standard)`,
+              transform: isOpen ? "translateY(0) rotate(-45deg)" : "translateY(6px) rotate(0deg)",
+            }}
+          />
+        </div>
       </button>
 
       {/* Mobile overlay */}
@@ -105,6 +128,40 @@ export default function MobileMenu({ items }: MobileMenuProps) {
         aria-modal="true"
         aria-label="Menu de navigation"
       >
+        {/* Close button inside panel */}
+        <button
+          className="absolute flex items-center justify-center"
+          style={{
+            top: "calc((var(--header-height) - var(--button-min-height)) / 2)",
+            right: "var(--spacing-container)",
+            width: "var(--button-min-height)",
+            height: "var(--button-min-height)",
+          }}
+          onClick={close}
+          aria-label="Fermer le menu"
+        >
+          <div className="relative" style={{ width: 22, height: 22 }}>
+            <span
+              className="absolute left-0 top-1/2 block rounded-full bg-creme"
+              style={{
+                width: 22,
+                height: 2,
+                transform: "rotate(45deg)",
+                transition: `transform var(--duration-normal) var(--easing-standard)`,
+              }}
+            />
+            <span
+              className="absolute left-0 top-1/2 block rounded-full bg-creme"
+              style={{
+                width: 22,
+                height: 2,
+                transform: "rotate(-45deg)",
+                transition: `transform var(--duration-normal) var(--easing-standard)`,
+              }}
+            />
+          </div>
+        </button>
+
         <ul className="flex flex-col items-center" style={{ gap: "var(--spacing-breath)" }}>
           {items.map((item, index) => (
             <li

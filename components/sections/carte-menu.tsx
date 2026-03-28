@@ -7,7 +7,6 @@ import { Phone } from "lucide-react";
 
 /* ─── Constants ─── */
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
-const PRODUCT_IMAGE = "/images/falafel.webp";
 
 /* ─── Types ─── */
 type Macros = {
@@ -20,6 +19,7 @@ type Macros = {
 type Product = {
   name: string;
   price: number;
+  image: string;
   macros: Macros;
   highlight?: boolean;
   badge?: string;
@@ -43,18 +43,21 @@ const categories: Category[] = [
       {
         name: "STRICT B\u0153uf",
         price: 12.99,
+        image: "/images/photos-references/produits-source/burgers-black/strict-boeuf/strict-boeuf.png",
         macros: { kcal: 596, prot: 53, gluc: 45, lip: 21.5 },
         description: "Steak artisanal Labourde, pain Pains du Soleil, sauce maison",
       },
       {
         name: "STRICT Poulet",
         price: 11.99,
+        image: "/images/photos-references/produits-source/burgers-black/strict-poulet/strict-poulet-black-1.png",
         macros: { kcal: 598, prot: 60.5, gluc: 45, lip: 19.4 },
         description: "Filet de poulet grille, pain artisanal, crudites fraiches",
       },
       {
         name: "STRICT V\u00e9g\u00e9 Falafel",
         price: 12.99,
+        image: "/images/photos-references/produits-source/burgers-black/strict-vege/strict-vege-falafel-black-2.png",
         macros: { kcal: 850, prot: 35.5, gluc: 91.5, lip: 39.5 },
         badge: "VEGGIE",
         description: "Galette falafel maison, houmous, crudites, sauce tahini",
@@ -62,6 +65,7 @@ const categories: Category[] = [
       {
         name: "STRICT MAX B\u0153uf",
         price: 14.99,
+        image: "/images/photos-references/produits-source/burgers-black/strict-max-boeuf/strict-max-boeuf-black-1.png",
         macros: { kcal: 942, prot: 97, gluc: 45, lip: 39 },
         highlight: true,
         badge: "DOUBLE STEAK",
@@ -70,6 +74,7 @@ const categories: Category[] = [
       {
         name: "STRICT MAX Poulet",
         price: 15.99,
+        image: "/images/photos-references/produits-source/burgers-black/strict-max-poulet/strict-max-poulet-black-1.png",
         macros: { kcal: 946, prot: 112, gluc: 45, lip: 34.8 },
         highlight: true,
         badge: "112G PROT",
@@ -85,12 +90,14 @@ const categories: Category[] = [
       {
         name: "STRICT Wrap B\u0153uf",
         price: 9.99,
+        image: "/images/photos-references/produits-source/wraps/strict-wrap-boeuf.png",
         macros: { kcal: 566, prot: 51, gluc: 39, lip: 20.5 },
         description: "Tortilla, steak artisanal, crudites, sauce signature",
       },
       {
         name: "STRICT Wrap Poulet",
         price: 8.99,
+        image: "/images/photos-references/produits-source/wraps/strict-wrap-poulet.png",
         macros: { kcal: 598, prot: 60.5, gluc: 39, lip: 20.4 },
         description: "Tortilla, filet de poulet grille, crudites, sauce legere",
       },
@@ -104,18 +111,21 @@ const categories: Category[] = [
       {
         name: "Frites classiques",
         price: 2.99,
+        image: "/images/photos-references/produits-source/snacks/frites-classiques.png",
         macros: { kcal: 199, prot: 4, gluc: 38, lip: 4 },
         description: "Pommes de terre fraiches, cuisson air pulse",
       },
       {
         name: "Frites Patates Douces",
         price: 3.99,
+        image: "/images/photos-references/produits-source/snacks/frites-patates-douces.png",
         macros: { kcal: 211, prot: 3, gluc: 40, lip: 5 },
         description: "Patates douces fraiches, cuisson air pulse",
       },
       {
         name: "Tenders STRICT",
         price: 6.99,
+        image: "/images/photos-references/produits-source/snacks/tenders-strict.png",
         macros: { kcal: 250, prot: 25, gluc: 18, lip: 9 },
         highlight: true,
         badge: "25G PROT",
@@ -131,12 +141,14 @@ const categories: Category[] = [
       {
         name: "Cookie prot\u00e9in\u00e9",
         price: 3.99,
+        image: "/images/photos-references/produits-source/desserts/cookie-proteine.png",
         macros: { kcal: 273, prot: 26, gluc: 27, lip: 9 },
         description: "Cookie fondant, whey, pepites de chocolat",
       },
       {
         name: "Overnight STRICT",
         price: 4.99,
+        image: "/images/photos-references/produits-source/desserts/overnight-strict.png",
         macros: { kcal: 470, prot: 52.9, gluc: 52.5, lip: 9.4 },
         highlight: true,
         badge: "53G PROT",
@@ -145,12 +157,14 @@ const categories: Category[] = [
       {
         name: "Tiramisu prot\u00e9in\u00e9",
         price: 3.5,
+        image: "/images/photos-references/produits-source/desserts/tiramisu-proteine.png",
         macros: { kcal: 252, prot: 24, gluc: 14, lip: 8 },
         description: "Mascarpone allege, biscuit, cacao, whey",
       },
       {
         name: "Milkshake prot\u00e9in\u00e9",
         price: 3.0,
+        image: "/images/photos-references/produits-source/desserts/milkshake-proteine.png",
         macros: { kcal: 215, prot: 29, gluc: 12, lip: 6 },
         description: "Lait, whey, fruits de saison",
       },
@@ -164,12 +178,14 @@ const categories: Category[] = [
       {
         name: "Boisson Z\u00e9ro",
         price: 2.0,
+        image: "/images/photos-references/produits-source/boissons/boisson-zero.png",
         macros: { kcal: null, prot: null, gluc: null, lip: null },
         description: "Coca, Fanta, Sprite, Ice Tea — version zero",
       },
       {
         name: "Boisson \u00e9nergisante",
         price: 2.99,
+        image: "/images/photos-references/produits-source/boissons/boisson-energisante.png",
         macros: { kcal: null, prot: null, gluc: null, lip: null },
         description: "Monster, Red Bull — zero sucre",
       },
@@ -299,7 +315,7 @@ function ProductCard({ product }: { product: Product }) {
       {/* Image */}
       <div className="relative aspect-[4/3] overflow-hidden bg-charbon">
         <Image
-          src={PRODUCT_IMAGE}
+          src={product.image}
           alt={product.name}
           fill
           className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
@@ -552,7 +568,11 @@ export default function CarteMenu() {
                   key={cat.id}
                   data-cat={cat.id}
                   onClick={() => scrollToCategory(cat.id)}
-                  className="shrink-0 transition-all duration-300"
+                  className={`shrink-0 transition-all duration-300 cursor-pointer ${
+                    isActive
+                      ? "bg-cuivre text-charbon"
+                      : "text-sable hover:bg-[oklch(0.67_0.15_68_/_0.12)] hover:text-cuivre"
+                  }`}
                   style={{
                     padding: "0.5rem 1.25rem",
                     borderRadius: "var(--radius-pill)",
@@ -560,12 +580,6 @@ export default function CarteMenu() {
                     fontWeight: isActive ? 700 : 500,
                     fontSize: "var(--font-size-small)",
                     letterSpacing: "var(--letter-spacing-wide)",
-                    backgroundColor: isActive
-                      ? "var(--color-cuivre)"
-                      : "transparent",
-                    color: isActive
-                      ? "var(--color-charbon)"
-                      : "var(--color-sable)",
                   }}
                 >
                   {cat.label}
