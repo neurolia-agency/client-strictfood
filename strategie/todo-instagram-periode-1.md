@@ -377,14 +377,14 @@ Les Reels d'essai sont une fonctionnalite Instagram (depuis fin 2024) qui permet
 <!-- workstream: site-design -->
 
 <!-- programme: Phase B — Vibe Coding -->
-- [ ] Finaliser le polish global (B05-Validate) <!-- nd:0af35919 p:urgent -->
-- [ ] Finaliser le polish global (B05-Validate) <!-- nd:2721ad7c p:urgent -->
-- [ ] Verifier la coherence des design tokens avec globals.css <!-- nd:cc2f9391 p:normal -->
-- [ ] Verifier la coherence des design tokens avec globals.css <!-- nd:2c9524f2 p:normal -->
-- [ ] Responsive mobile — verifier tous les breakpoints <!-- nd:c4590546 p:normal -->
-- [ ] Responsive mobile — verifier tous les breakpoints <!-- nd:15802c9f p:normal -->
-- [ ] Dark mode — contraste et lisibilite <!-- nd:33631948 p:normal -->
-- [ ] Dark mode — contraste et lisibilite <!-- nd:c8c798b2 p:normal -->
+- [ ] Finaliser le polish global (B05-Validate) <!-- nd:ddd8c4bd p:urgent -->
+- [ ] Finaliser le polish global (B05-Validate) <!-- nd:68389a45 p:urgent -->
+- [ ] Verifier la coherence des design tokens avec globals.css <!-- nd:896093e5 p:normal -->
+- [ ] Verifier la coherence des design tokens avec globals.css <!-- nd:24651fb6 p:normal -->
+- [ ] Responsive mobile — verifier tous les breakpoints <!-- nd:2217b6cf p:normal -->
+- [ ] Responsive mobile — verifier tous les breakpoints <!-- nd:efe3a6a1 p:normal -->
+- [ ] Dark mode — contraste et lisibilite <!-- nd:3e919cad p:normal -->
+- [ ] Dark mode — contraste et lisibilite <!-- nd:6db9e391 p:normal -->
 
 ---
 
@@ -392,12 +392,12 @@ Les Reels d'essai sont une fonctionnalite Instagram (depuis fin 2024) qui permet
 <!-- workstream: site-contenu -->
 
 <!-- programme: Textes et copywriting -->
-- [ ] Rediger les meta descriptions SEO pour chaque page <!-- nd:163fa541 p:normal -->
-- [ ] Rediger les meta descriptions SEO pour chaque page <!-- nd:e9fc5195 p:normal -->
-- [ ] Verifier le vouvoiement sur tous les contenus client <!-- nd:1200bffb p:normal -->
-- [ ] Verifier le vouvoiement sur tous les contenus client <!-- nd:0fb91dcb p:normal -->
-- [ ] Relire et valider les textes de la homepage <!-- nd:ba99268b p:normal -->
-- [ ] Relire et valider les textes de la homepage <!-- nd:3640a605 p:normal -->
+- [ ] Rediger les meta descriptions SEO pour chaque page <!-- nd:34b4a8d9 p:normal -->
+- [ ] Rediger les meta descriptions SEO pour chaque page <!-- nd:6aff0404 p:normal -->
+- [ ] Verifier le vouvoiement sur tous les contenus client <!-- nd:850b39dd p:normal -->
+- [ ] Verifier le vouvoiement sur tous les contenus client <!-- nd:5e47c5e6 p:normal -->
+- [ ] Relire et valider les textes de la homepage <!-- nd:1ce5fcb1 p:normal -->
+- [ ] Relire et valider les textes de la homepage <!-- nd:bb05b52c p:normal -->
 
 ---
 
@@ -405,12 +405,12 @@ Les Reels d'essai sont une fonctionnalite Instagram (depuis fin 2024) qui permet
 <!-- workstream: site-animations -->
 
 <!-- programme: Motion + Lenis -->
-- [ ] Scroll animations Lenis — polish et performance <!-- nd:0fb5fa55 p:normal -->
-- [ ] Scroll animations Lenis — polish et performance <!-- nd:e551a8e5 p:normal -->
-- [ ] Transitions entre pages (Framer Motion) <!-- nd:2646220b p:normal -->
-- [ ] Transitions entre pages (Framer Motion) <!-- nd:2558aedb p:normal -->
-- [ ] Verifier les animations sur mobile (performance) <!-- nd:4c4a99c1 p:normal -->
-- [ ] Verifier les animations sur mobile (performance) <!-- nd:3382bec2 p:normal -->
+- [ ] Scroll animations Lenis — polish et performance <!-- nd:ea8a6e04 p:normal -->
+- [ ] Scroll animations Lenis — polish et performance <!-- nd:3e1ed13c p:normal -->
+- [ ] Transitions entre pages (Framer Motion) <!-- nd:a947e0df p:normal -->
+- [ ] Transitions entre pages (Framer Motion) <!-- nd:c8a2d94a p:normal -->
+- [ ] Verifier les animations sur mobile (performance) <!-- nd:fcbda3ae p:normal -->
+- [ ] Verifier les animations sur mobile (performance) <!-- nd:128b7eec p:normal -->
 
 ---
 
@@ -418,14 +418,14 @@ Les Reels d'essai sont une fonctionnalite Instagram (depuis fin 2024) qui permet
 <!-- workstream: site-seo -->
 
 <!-- programme: Referencement -->
-- [ ] Sitemap.xml et robots.txt <!-- nd:6169bc2e p:normal -->
-- [ ] Sitemap.xml et robots.txt <!-- nd:9f442d16 p:normal -->
-- [ ] Open Graph et meta tags pour chaque page <!-- nd:d5157bf5 p:normal -->
-- [ ] Open Graph et meta tags pour chaque page <!-- nd:891183ea p:normal -->
-- [ ] Schema.org (Organization + LocalBusiness) <!-- nd:52c0d740 p:normal -->
-- [ ] Schema.org (Organization + LocalBusiness) <!-- nd:f7aeb346 p:normal -->
-- [ ] Lighthouse audit et optimisation performance <!-- nd:1e42eaf6 p:normal -->
-- [ ] Lighthouse audit et optimisation performance <!-- nd:aedd1157 p:normal -->
+- [ ] Sitemap.xml et robots.txt <!-- nd:eb574f8f p:normal -->
+- [ ] Sitemap.xml et robots.txt <!-- nd:caeac2f6 p:normal -->
+- [ ] Open Graph et meta tags pour chaque page <!-- nd:21ad01d6 p:normal -->
+- [ ] Open Graph et meta tags pour chaque page <!-- nd:ac0b7d02 p:normal -->
+- [ ] Schema.org (Organization + LocalBusiness) <!-- nd:2e2fd49d p:normal -->
+- [ ] Schema.org (Organization + LocalBusiness) <!-- nd:cc259da4 p:normal -->
+- [ ] Lighthouse audit et optimisation performance <!-- nd:9edc7d29 p:normal -->
+- [ ] Lighthouse audit et optimisation performance <!-- nd:21e90d69 p:normal -->
 
 ---
 
@@ -433,16 +433,16 @@ Les Reels d'essai sont une fonctionnalite Instagram (depuis fin 2024) qui permet
 <!-- workstream: social-media -->
 
 <!-- programme: Strategie contenu -->
-- [ ] Definir la ligne editoriale Neurolia <!-- nd:b9ed7ee1 p:normal -->
-- [ ] Definir la ligne editoriale Neurolia <!-- nd:f610c80f p:normal -->
-- [ ] Creer les templates visuels pour posts <!-- nd:d1185594 p:low -->
-- [ ] Creer les templates visuels pour posts <!-- nd:46e55556 p:low -->
-- [ ] Planning editorial mensuel <!-- nd:b6e396da p:low -->
-- [ ] Planning editorial mensuel <!-- nd:9931e703 p:low -->
+- [ ] Definir la ligne editoriale Neurolia <!-- nd:70801b5b p:normal -->
+- [ ] Definir la ligne editoriale Neurolia <!-- nd:3df7a4cb p:normal -->
+- [ ] Creer les templates visuels pour posts <!-- nd:63cefd5b p:low -->
+- [ ] Creer les templates visuels pour posts <!-- nd:093e416d p:low -->
+- [ ] Planning editorial mensuel <!-- nd:2eb9266e p:low -->
+- [ ] Planning editorial mensuel <!-- nd:cff9dcb9 p:low -->
 
 ---
 
 ## Site Agence (B05)
 <!-- workstream: site-agence -->
-- [ ] Validation finale B05 <!-- nd:29203d06 p:normal -->
-- [ ] Validation finale B05 <!-- nd:5c7a4d43 p:normal -->
+- [ ] Validation finale B05 <!-- nd:46e27171 p:normal -->
+- [ ] Validation finale B05 <!-- nd:4f9d0f69 p:normal -->
