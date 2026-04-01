@@ -24,6 +24,7 @@ type Product = {
   highlight?: boolean;
   badge?: string;
   description?: string;
+  imageScale?: number;
 };
 
 type Category = {
@@ -53,6 +54,7 @@ const categories: Category[] = [
         image: "/images/visuels/website/carte/strict-poulet.webp",
         macros: { kcal: 598, prot: 60.5, gluc: 45, lip: 19.4 },
         description: "Filet de poulet grille, pain artisanal, crudites fraiches",
+        imageScale: 0.78,
       },
       {
         name: "STRICT V\u00e9g\u00e9 Falafel",
@@ -61,6 +63,7 @@ const categories: Category[] = [
         macros: { kcal: 850, prot: 35.5, gluc: 91.5, lip: 39.5 },
         badge: "VEGGIE",
         description: "Galette falafel maison, houmous, crudites, sauce tahini",
+        imageScale: 0.85,
       },
       {
         name: "STRICT MAX B\u0153uf",
@@ -70,6 +73,7 @@ const categories: Category[] = [
         highlight: true,
         badge: "DOUBLE STEAK",
         description: "Double steak artisanal Labourde, fromage Myfitcheese, sauce premium",
+        imageScale: 0.68,
       },
       {
         name: "STRICT MAX Poulet",
@@ -79,6 +83,7 @@ const categories: Category[] = [
         highlight: true,
         badge: "112G PROT",
         description: "Double filet de poulet, fromage hyperproteine, sauce speciale",
+        imageScale: 0.68,
       },
     ],
   },
@@ -314,13 +319,18 @@ function ProductCard({ product }: { product: Product }) {
 
       {/* Image */}
       <div className="relative aspect-[4/3] overflow-hidden bg-charbon">
-        <Image
-          src={product.image}
-          alt={product.name}
-          fill
-          className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-        />
+        <div
+          className="absolute inset-0 transition-transform duration-500 ease-out group-hover:scale-[1.06]"
+          style={product.imageScale ? { transform: `scale(${product.imageScale})` } : undefined}
+        >
+          <Image
+            src={product.image}
+            alt={product.name}
+            fill
+            className="object-cover"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          />
+        </div>
         {/* Warm radial glow */}
         <div
           className="absolute inset-0 pointer-events-none"
