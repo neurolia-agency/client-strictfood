@@ -493,7 +493,7 @@ export default function LaPromesse() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/burger_promesse1.webp"
+              src="/images/visuels/website/section2.webp"
               alt="Burger StrictFood cuit à chaleur pulsée, steak juteux sans huile"
               className="object-contain"
               style={{ width: "100%", transform: "scale(2.5)" }}

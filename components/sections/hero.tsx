@@ -137,7 +137,7 @@ export default function Hero() {
         animate="visible"
       >
         <Image
-          src="/images/Hero-v2.webp"
+          src="/images/visuels/website/hero-strictfoods.webp"
           alt="Burger StrictFood, pain brioche doré, viande grillée, ingrédients frais"
           fill
           priority
