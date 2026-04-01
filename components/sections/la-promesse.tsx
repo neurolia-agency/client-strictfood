@@ -496,7 +496,7 @@ export default function LaPromesse() {
               src="/images/visuels/website/section2.webp"
               alt="Burger StrictFood cuit à chaleur pulsée, steak juteux sans huile"
               className="object-contain"
-              style={{ width: "100%", transform: "scale(2.5)" }}
+              style={{ width: "100%", transform: "scale(1.5)" }}
             />
           </motion.div>
         </motion.div>
