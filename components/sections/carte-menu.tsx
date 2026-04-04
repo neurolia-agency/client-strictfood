@@ -134,43 +134,6 @@ const categories: Category[] = [
     ],
   },
   {
-    id: "desserts",
-    label: "Desserts",
-    tagline: "Gourmandise et proteines",
-    products: [
-      {
-        name: "Cookie prot\u00e9in\u00e9",
-        price: 3.99,
-        image: "/images/photos-references/produits-source/desserts/cookie-proteine.png",
-        macros: { kcal: 273, prot: 26, gluc: 27, lip: 9 },
-        description: "Cookie fondant, whey, pepites de chocolat",
-      },
-      {
-        name: "Overnight STRICT",
-        price: 4.99,
-        image: "/images/photos-references/produits-source/desserts/overnight-strict.png",
-        macros: { kcal: 470, prot: 52.9, gluc: 52.5, lip: 9.4 },
-        highlight: true,
-        badge: "53G PROT",
-        description: "Flocons, whey, fruits frais, prepare la veille",
-      },
-      {
-        name: "Tiramisu prot\u00e9in\u00e9",
-        price: 3.5,
-        image: "/images/photos-references/produits-source/desserts/tiramisu-proteine.png",
-        macros: { kcal: 252, prot: 24, gluc: 14, lip: 8 },
-        description: "Mascarpone allege, biscuit, cacao, whey",
-      },
-      {
-        name: "Milkshake prot\u00e9in\u00e9",
-        price: 3.0,
-        image: "/images/photos-references/produits-source/desserts/milkshake-proteine.png",
-        macros: { kcal: 215, prot: 29, gluc: 12, lip: 6 },
-        description: "Lait, whey, fruits de saison",
-      },
-    ],
-  },
-  {
     id: "boissons",
     label: "Boissons",
     tagline: "Zero sucre, zero compromis",
@@ -658,6 +621,102 @@ export default function CarteMenu() {
             </section>
           ))}
         </div>
+
+        {/* ── Desserts — Coming Soon ── */}
+        <motion.div
+          className="relative overflow-hidden"
+          initial={prefersReducedMotion ? undefined : "hidden"}
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          variants={prefersReducedMotion ? undefined : fadeUp}
+          style={{
+            marginTop: "clamp(3rem, 5vw, 5rem)",
+            padding: "clamp(2rem, 4vw, 3.5rem)",
+            borderRadius: "var(--radius-large)",
+            border: "1px solid oklch(0.67 0.15 68 / 0.15)",
+            background:
+              "linear-gradient(135deg, oklch(0.18 0.008 60) 0%, oklch(0.16 0.012 65) 100%)",
+          }}
+        >
+          {/* Subtle cuivre glow — top-right */}
+          <div
+            className="absolute pointer-events-none"
+            style={{
+              top: "-40%",
+              right: "-10%",
+              width: "50%",
+              height: "120%",
+              background:
+                "radial-gradient(ellipse at center, oklch(0.67 0.15 68 / 0.04), transparent 70%)",
+            }}
+          />
+
+          <div className="relative flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-col gap-3">
+              <div className="flex items-center gap-3">
+                <h2
+                  className="text-ivoire"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    fontSize: "var(--font-size-h3)",
+                    fontWeight: 700,
+                  }}
+                >
+                  Desserts
+                </h2>
+                <span
+                  className="text-cuivre"
+                  style={{
+                    padding: "0.2rem 0.75rem",
+                    borderRadius: "var(--radius-pill)",
+                    border: "1px solid oklch(0.67 0.15 68 / 0.3)",
+                    backgroundColor: "oklch(0.67 0.15 68 / 0.08)",
+                    fontFamily: "var(--font-heading)",
+                    fontWeight: 700,
+                    fontSize: "0.6875rem",
+                    letterSpacing: "var(--letter-spacing-uppercase)",
+                  }}
+                >
+                  BIENT&Ocirc;T
+                </span>
+              </div>
+              <p
+                className="text-sable max-w-[36rem]"
+                style={{
+                  fontSize: "var(--font-size-body)",
+                  lineHeight: "var(--line-height-relaxed)",
+                }}
+              >
+                Cookies, overnight oats, tiramisu — tout fait maison, tout
+                protein&eacute;. Le dessert qui respecte tes macros, sans
+                sacrifier le plaisir.
+              </p>
+            </div>
+
+            <div
+              className="bg-cuivre shrink-0 hidden sm:block"
+              style={{
+                width: "2px",
+                height: "3.5rem",
+                borderRadius: "var(--radius-pill)",
+                opacity: 0.15,
+              }}
+            />
+
+            <p
+              className="text-pierre shrink-0"
+              style={{
+                fontFamily: "var(--font-heading)",
+                fontSize: "var(--font-size-small)",
+                fontWeight: 500,
+                letterSpacing: "var(--letter-spacing-wide)",
+                whiteSpace: "nowrap",
+              }}
+            >
+              Arrive tr&egrave;s vite sur la carte
+            </p>
+          </div>
+        </motion.div>
       </div>
 
       {/* ── Bottom CTA ── */}

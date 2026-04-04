@@ -4,7 +4,7 @@ import CarteMenu from "@/components/sections/carte-menu";
 export const metadata: Metadata = {
   title: "La Carte | StrictFood",
   description:
-    "Decouvre notre carte : burgers, wraps, snacks et desserts proteines. 0% huile de cuisson, macros affichees sur chaque produit.",
+    "Decouvre notre carte : burgers, wraps, snacks et boissons. 0% huile de cuisson, macros affichees sur chaque produit.",
 };
 
 export default function LaCartePage() {
