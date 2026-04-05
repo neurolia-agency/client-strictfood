@@ -1,509 +1,295 @@
 ---
 name: image-prompt-engineer
 description: >
-  Craft professional image generation prompts for GPT Images and Nano Banana (Gemini).
-  Use when the user asks to create, write, craft, improve, or optimize an image prompt,
-  or when preparing prompts before generating images with /nano-banana-pro.
-  Covers food photography, product shots, lifestyle, portraits, architecture, and more.
-  Transforms vague requests OR structured creative briefs into detailed, effective prompts.
-  Triggers on: "image prompt", "write a prompt for", "prompt for image", "photo prompt",
-  "generate prompt", "prompt engineering image", "improve this prompt", "better prompt".
+  Rédige des prompts professionnels de génération d'image calibrés Combo-B (150-300 mots)
+  pour GPT Images et Nano Banana (Gemini). Utiliser ce skill DÈS que l'utilisateur veut
+  écrire, rédiger, créer, améliorer, optimiser ou transformer un prompt de génération d'image
+  à partir d'un brief de direction créative structuré.
+  Couvre food photography, produits, lifestyle, portraits, architecture.
+  Utiliser aussi quand l'utilisateur demande des explications sur le style Combo-B
+  ou la structure d'un prompt image. Toujours utiliser AVANT /nano-banana-pro pour préparer le prompt.
+  Ne PAS utiliser pour : générer l'image elle-même (→ nano-banana-pro), la direction artistique
+  (→ social-media-art-director), l'audit réalisme (→ realism-auditor).
 ---
 
 # Image Prompt Engineer
 
 Transform image requests into professional-grade generation prompts optimized for GPT Images (gpt-image-1.5) or Nano Banana (Gemini 3 Pro Image).
 
-**Accepts two types of input :**
-- **Mode A — Requête libre** : Une demande vague ou courte ("a photo of a burger") → workflow complet avec clarification
-- **Mode B — Brief structuré** : Un dossier de direction créative détaillé (output du skill `social-media-art-director`) → traduction directe en prompt, sans questions
+Recoit un dossier de direction creative detaille (output de `social-media-art-director`) et le traduit en prompt calibre Combo-B.
 
-## Détection du mode
+### CONTRAINTES NON NEGOCIABLES
 
-**Mode B** si l'input contient **au moins 3** de ces éléments :
-- Un champ "Angle de prise de vue" ou "Cadrage"
-- Un champ "Éclairage" avec direction et qualité
-- Un champ "Palette dominante" ou "Couleurs"
-- Un champ "Sujet principal" avec description détaillée
-- Un champ "Texte on-image" avec contenu spécifié
-- Une structure par visuel numéroté ("Visuel 1 / 5", "Slide 2")
+#### 0. Pain noir obligatoire
+Tous les burgers = **pain noir sesame (black bun)**. DOIT contenir `"charcoal black sesame bun"`. INTERDIT : `brioche`, `white bun`, `plain bun`, `golden bun`. Verification : ctrl-F "black" + "bun" avant livraison.
 
-**Mode A** dans tous les autres cas.
+#### 0b. Fidelite salle de restaurant
+Si decor restaurant : correspondre strictement a la vraie salle (photos : `public/images/photos-references/contexte/salle-restaurant/`). Elements reels : carrelage blanc/gris, bois chene clair, chaises noires metal, mur vegetal neon "STRICT FOOD'S", comptoir blanc. INTERDIT : `rustic`, `brick wall`, `warm wood paneling`, `cozy pub`, `vintage`. En cas de doute, preferer un fond neutre.
 
----
-
-## Mode A — Requête libre (workflow existant)
-
-### Step 1 — Clarify Intent
-
-Before writing, identify:
-- **Subject**: What exactly should be in the image?
-- **Purpose**: Where will this image be used? (social media, menu, website, print)
-- **Style**: Photo-realistic, illustration, watercolor, 3D render, flat design?
-- **Mood**: What emotion should the viewer feel?
-- **Model target**: GPT Images or Gemini? (defaults to Gemini for photo-realism, GPT for text-in-image)
-
-If the user's request is too vague, ask 1-2 targeted questions. Never ask more than 3 questions — infer the rest from context.
-
-### Step 2 — Choose Model
-
-| Criterion | GPT Images (gpt-image-1.5) | Gemini 3 Pro Image |
-|-----------|---------------------------|-------------------|
-| **Best for** | Text in images, logos, illustrations, editorial | Photo-realism, food, architecture, product |
-| **Prompt style** | Structured, descriptive | Narrative paragraphs, cinematic language |
-| **Text rendering** | Excellent (quotes, labels) | Limited |
-| **Max resolution** | 1024×1024 / 1536 variants | 1K, 2K, 4K |
-| **Negative prompts** | Supported (avoid X) | Not supported — reformulate positively |
-| **Editing** | Inpainting with masks | Image-to-image with instructions |
-
-### Step 3 — Structure the Prompt
-
-Build the prompt using these 7 elements **in order**. Not all are required for every prompt — use judgment.
-
-#### The 7 Elements
-
-1. **Style / Medium**
-   - Photography, digital illustration, watercolor, oil painting, 3D render, pencil sketch, vector art
-   - For photography: specify camera feel (editorial, documentary, commercial, lifestyle)
-
-2. **Subject**
-   - Detailed description of the main subject
-   - Be specific: "a steaming bowl of hand-pulled ramen with chashu pork" not "a bowl of noodles"
-   - Include textures, colors, materials, states (melting, steaming, glistening)
-
-3. **Environment / Setting**
-   - Background, context, location
-   - "on a weathered oak table in a sunlit French bistro" not "on a table"
-   - Include depth cues: foreground elements, background blur
-
-4. **Lighting**
-   - Type: natural, studio, golden hour, overcast, neon, candlelight
-   - Direction: side-lit, backlit, top-down, Rembrandt, rim light
-   - Quality: soft/diffused, hard/dramatic, dappled
-
-5. **Composition**
-   - Camera angle: overhead/flat lay, 45°, eye-level, low angle, Dutch angle
-   - Lens: 50mm (natural), 85mm (portrait), 35mm (environmental), macro
-   - Framing: close-up, medium shot, wide, rule of thirds, centered, negative space
-
-6. **Palette / Mood**
-   - Color temperature: warm, cool, neutral
-   - Dominant colors and accents
-   - Emotional tone: cozy, dramatic, fresh, nostalgic, luxurious, playful
-
-7. **Technical Details**
-   - Aspect ratio (16:9, 1:1, 4:5, 9:16)
-   - Resolution preference
-   - Special requirements: no text, no watermark, transparent background
-   - For GPT Images: any text to render in the image
-
-#### Element Priority by Category
-
-| Category | Must-have elements | Nice-to-have |
-|----------|-------------------|--------------|
-| Food | Subject, Lighting, Composition | Setting, Palette |
-| Product | Subject, Lighting, Style | Composition, Technical |
-| Portrait | Subject, Lighting, Mood | Setting, Composition |
-| Landscape | Setting, Lighting, Palette | Composition, Style |
-| Lifestyle | Subject, Setting, Mood | Lighting, Composition |
-
-### Step 4 — Refine
-
-- Read the prompt aloud — does it paint a clear picture?
-- Remove redundancy (don't say "beautiful" — describe what makes it beautiful)
-- Check model compatibility (no negatives for Gemini, specify text for GPT)
-- Suggest 1-2 variations if the user might want options
-
----
-
-## Mode B — Brief structuré (depuis social-media-art-director)
-
-Quand l'input est un dossier de direction créative structuré, le workflow change.
-
-### CONTRAINTES NON NÉGOCIABLES (Mode B)
-
-Ces règles s'appliquent à **chaque** prompt généré en Mode B, sans exception :
-
-#### 0. ⛔ Pain noir obligatoire (black bun)
-
-Tous les burgers StrictFood sont au **pain noir sésame (black bun)**. Le pain blanc/classique est obsolète.
-
-**Dans chaque prompt impliquant un burger :**
-- DOIT contenir : `"charcoal black sesame bun"` ou `"deep ink-dark black bun densely covered with golden sesame seeds"`
-- INTERDIT dans le prompt : `"brioche"`, `"white bun"`, `"plain bun"`, `"golden bun"`, `"classic bun"`
-- INTERDIT dans les traductions implicites : ne jamais omettre le qualificatif "black" devant "bun"
-- Le pain noir est un **marqueur identitaire** de la marque, pas un détail : il doit être décrit avec précision (texture noire, graines de sésame dorées, surface irrégulière)
-
-**Vérification obligatoire** : avant de livrer un prompt burger, ctrl-F "black" et "bun" — si l'un des deux manque, corriger.
-
-#### 0b. ⛔ Fidélité salle de restaurant
-
-Quand le prompt décrit un décor de **salle de restaurant** (intérieur, dining room, restaurant interior), il DOIT correspondre strictement à la vraie salle StrictFood. Photos de référence : `public/images/photos-references/contexte/salle-restaurant/` (8 photos).
-
-**Éléments réels à utiliser dans le prompt :**
-- `white/light grey rectangular tile walls` (PAS "wood paneling", PAS "brick")
-- `light oak wood accent wall panel and round table tops` (PAS "dark wood", PAS "walnut")
-- `black metal chairs, industrial minimalist style` (PAS "leather", PAS "upholstered")
-- `large green plant wall with white neon "STRICT FOOD'S" sign` (PAS de déco inventée)
-- `black glass-front refrigerated display case, white counter`
-- `modern minimalist ambiance, neutral white lighting` (PAS "warm", PAS "cozy", PAS "rustic")
-
-**Autorisé** : changer l'angle de vue, reconstituer un élément manquant (même modèle/matériau), cadrer sur une zone spécifique, ajuster légèrement l'éclairage pour le food porn.
-
-**INTERDIT dans le prompt si contexte restaurant :** `warm wood paneling`, `rustic`, `cozy pub`, `brick wall`, `dim ambient`, `vintage`, `industrial loft`, `exposed beams`, tout matériau/mobilier absent de la vraie salle.
-
-**Recommandation** : si le brief ne spécifie pas explicitement "dans la salle du restaurant", préférer un fond neutre (dark surface, isolated table, kitchen counter) — c'est toujours OK et sans risque.
-
-#### 1. Fidélité produit absolue
-Le brief spécifie une **recette** ou une **description exacte du produit** (ingrédients, formes, textures spécifiques). Le prompt DOIT décrire chaque élément avec sa forme exacte telle que spécifiée :
-- "parmesan en miettes" → "small, irregular, powdery parmesan crumbles" (PAS "parmesan shavings", PAS "parmesan flakes")
-- "oignons rouges en tranches" → "thin slices of raw red onion with visible concentric rings" (PAS "diced onion", PAS "onion chunks")
-- "sauce poivron jaune-orangé" → "a subtle warm yellow-orange roasted pepper sauce" (PAS "red sauce", PAS "ketchup-like drizzle")
-
-**Règle** : Ne jamais approximer, interpréter ou remplacer un ingrédient/forme par un synonyme. Si la recette dit "miettes", le prompt dit "crumbles/fragments", jamais "shavings/flakes/chips". La photo référence sert de vérification visuelle — le prompt doit correspondre à ce qu'on voit dans la photo.
-
-#### 2. Résolution toujours 4K
-Tout prompt Mode B est destiné à une génération en **4K**. Pas de 1K draft, pas de 2K intermédiaire.
-- **Résolution recommandée** = toujours `4K`
-- Ne jamais suggérer de "commencer en 1K pour itérer" — le pipeline est conçu pour produire un livrable final en une passe.
-
-#### 3. Instruction photo référence obligatoire
-Chaque prompt Mode B est accompagné d'une **photo référence** du produit réel, fournie en input image à Nanobanana. Le prompt DOIT contenir une instruction explicite de fidélité à cette photo. Ajouter systématiquement en fin de prompt :
-- Pour Gemini : `"Match the exact appearance, ingredients, and proportions of the burger shown in the reference photo provided."`
-- Pour GPT Images : `"Use the reference image as the definitive guide for the product's appearance — match all visible ingredients, their forms, textures, and arrangement exactly."`
-
-Cette instruction est **obligatoire** et ne doit jamais être omise, même si le reste du prompt est très détaillé.
-
-#### 4. Brand props — fidélité packaging
-Si la direction créative inclut un brand prop, le prompt DOIT :
-- Décrire le matériau exact (papier kraft noir mat, carton recyclé sombre, etc.)
-- Spécifier le logo "STRICT FOOD'S" en majuscules condensées bold — **le second O de FOOD est une icône burger stylisée** (cercle avec 3 lignes ondulées = couches burger, base plate = bun bas). L'apostrophe-S fait partie du nom.
-- Utiliser la couleur exacte : Cuivre Braisé (#BF8522) sur fond sombre OU blanc sur fond sombre OU noir mat sur kraft clair
-- Intégrer le prop comme élément d'environnement/setting, JAMAIS comme sujet principal
-- L'éclairage sur le prop suit l'éclairage global (pas de spotlight dédié)
-- **OBLIGATOIRE — Fournir le logo en image référence secondaire** : `public/logo/strictfood-logo-reference.png` via `--reference-image` dans la commande de génération. Le prompt DOIT contenir : "Reproduce the exact STRICT FOOD'S logo shown in the second reference image on the branded packaging — especially the burger icon replacing the O."
-
-#### 5. Compositing-irl — Photo lieu = fond sacré, prompt MINIMAL
-
-Quand le mode est `compositing-irl`, le prompt doit être **le plus court possible**. Plus on décrit la scène, plus GPT Images la réinvente.
-
-**Principe fondamental** : NE JAMAIS DÉCRIRE LE LIEU. Ne pas lister les éléments du restaurant. Ne pas mentionner les murs, les meubles, l'éclairage ambiant. Chaque mot qui décrit la scène est un mot que GPT utilise pour RÉGÉNÉRER la scène au lieu de la PRÉSERVER.
-
-**Le prompt dit SEULEMENT :**
-1. "Edit this photo" (pas "create a scene")
-2. "Do NOT change anything" (interdiction absolue)
-3. "Place [product] on [surface visible]" (la seule modification)
-4. Description du produit (ingrédients, bun noir)
-5. "Match existing lighting" (pas de description de l'éclairage)
-6. FORBIDDEN section (courte, directe)
-
-**Structure obligatoire (6 blocs, prompt COURT) :**
-
+#### 0c. Proportions pain noir — Anti-surdimensionnement
+Le bun DOIT etre `slightly compressed`, `compact`, ou `naturally sagging` — JAMAIS un dome parfait. Les ingredients DEBORDENT (2-3cm). Le top bun est `slightly flattened`. Phrase obligatoire dans chaque prompt burger :
 ```
-0. "Edit this restaurant photo."
-1. "Do NOT change, modify, or reimagine ANY part of the existing scene."
-2. "The ONLY change: place the burger from Image 2 onto [surface] visible in Image 1."
-3. [Description produit — bun noir, ingrédients]
-4. "Match existing lighting. Natural shadow beneath burger."
-5. "FORBIDDEN: Do not redesign the restaurant. Do not generate a new background."
+The bun is COMPACT — slightly compressed under the weight of the filling, NOT a tall perfect dome,
+NOT oversized. The ingredients bulge out 2-3cm past the bun edges on all sides.
 ```
+INTERDIT : `perfectly round`, `tall dome`, `puffy`, `large bun`, `thick bun`.
 
-**Ce qui a ÉCHOUÉ (ne plus faire) :**
-- ❌ Lister les éléments du lieu ("counter, walls, plants, display case") → GPT les régénère
-- ❌ Décrire l'éclairage ambiant ("warm neutral interior light") → GPT génère son propre éclairage
-- ❌ Prompt long avec 8 sections → GPT ignore les contraintes noyées dans le texte
-- ❌ "PRESERVE the background photo" suivi de sa description → paradoxe qui invite à régénérer
+#### 0d. Ordre d'empilement — Marqueurs spatiaux obligatoires
+L'ordre des ingredients suit l'empilement reel (recette, bottom → top) avec **>=3 marqueurs spatiaux** : `from bottom to top:`, `sits directly on the bun`, `on top of the [precedent]:`, `above the [X]`, `peeking out from under`. INTERDIT : lister des ingredients sans position relative. Chaque couche est decrite APRES celle sur laquelle elle repose.
 
-**Ce qui FONCTIONNE :**
-- ✅ "Edit this photo" (mode édition, pas génération)
-- ✅ "Change NOTHING except..." (une seule modification)
-- ✅ Prompt ultra-court (<100 mots pour la partie lieu)
-- ✅ Pré-cropper la photo lieu pour que la surface de pose soit proche et détaillée
-- ✅ Si échec → approche inpainting avec mask sur la zone de pose
+#### 0e. Signature Charbon × Ambre obligatoire
+Chaque prompt contient les DEUX couleurs. Le fond determine la dominante, l'accent oppose est automatique. Voir BLOC 1b. Verification : ctrl-F `black`/`dark`/`charcoal` + `amber`/`golden`/`warm`/`copper`. Si l'un manque → AJOUTER un element d'accent.
 
-**Pré-crop OBLIGATOIRE** : si la photo du lieu est large (comptoir au loin, vue d'ensemble), TOUJOURS cropper pour zoomer sur la surface où le produit sera posé. Un crop serré réduit la tentation du modèle de réinventer.
+#### 1. Fidelite produit absolue
+Le prompt DOIT decrire chaque element avec sa forme exacte (recette). Ne jamais approximer. Descriptions verrouillees dans `references/category-guides.md`.
 
-#### 5b. Compositing-irl — Réalisme d'intégration
+**ZERO ABREVIATION** : les descriptions locked (bun ~40 mots, Maillard ~40 mots, mache ~40 mots, sauce ~30 mots) doivent etre utilisees **EN ENTIER**. Violations : `"3-4 leaves casually placed"` → REJET. `"black bun with sesame"` → REJET.
 
-Même quand le fond est préservé, le produit composité a souvent l'air "collé". Les 6 pièges à éviter SYSTÉMATIQUEMENT :
+#### 2. Resolution toujours 4K
+Tout prompt Mode B = generation en **4K**. Pas de 1K draft.
 
-| Piège | Symptôme | Correction dans le prompt |
-|-------|----------|--------------------------|
-| **Surdimensionnement** | Le burger fait 50% du cadre | "The burger is SMALL — about 12cm diameter, occupying roughly 25-30% of the frame width" |
-| **Éclairage studio** | Le burger brille alors que la scène est en lumière ambiante plate | "The lighting on the burger must DEGRADE to match the flat ambient light of the scene. No dramatic shadows, no studio rim light" |
-| **Pas d'interaction surface** | Le burger flotte au-dessus de la table | "The base of the burger slightly compresses on the surface — it has weight. Natural contact shadow, soft and diffused" |
-| **Bords trop nets** | Détourage visible = effet "collé" | "Edges of the burger should blend naturally — slight ambient color spill from surroundings onto burger edges" |
-| **Garnitures exagérées** | Bouquet de mâche, cascade de sauce | "ONLY 3-4 small leaves. ONE thin drizzle. Compact and dense — realistic proportions" |
-| **Trop parfait** | Le burger est plus beau que tout le reste de la photo | "Do not make the burger look perfect — natural imperfections expected. Same photo quality as the rest of the scene" |
+#### 3. Produit TOUJOURS decrit (jamais de photo reference produit)
+Produits decrits textuellement depuis `_recettes/[slug].md`. JAMAIS de photo produit en input. Seule photo en input = photo de scene/lieu en mode `edit-ia`.
 
-**Règle d'or** : le burger composité doit être MOINS beau que dans un studio. Il doit ressembler à ce que verrait quelqu'un qui pose son burger sur la table et prend une photo rapide avec son téléphone. L'éclairage, les ombres, la netteté, les couleurs — tout doit correspondre au niveau de qualité du LIEU, pas du STUDIO.
+#### 4. Brand props — fidelite packaging
+Si brand prop : decrire materiau exact, logo "STRICT FOOD'S" (le second O = icone burger stylisee), couleur Cuivre Braise (#BF8522). Fournir `public/logo/strictfood-logo-reference.png` en image reference secondaire.
 
-#### 6. Style v2 — Réalisme documentaire + Dynamisme visuel
-
-Chaque prompt Mode B DOIT intégrer des marqueurs de réalisme ET de dynamisme. Ces règles sont **non négociables** :
-
-| Aspect | Obligation | Interdit |
-|--------|-----------|----------|
-| Imperfections | Au moins 2 par prompt : miettes tombées, pli du papier, feuille égarée, asymétrie, grain naturel | Perfection symétrique, propreté irréaliste |
-| Garnitures | Quantités réalistes : mâche = max 3-5 petites feuilles (certaines pliées/naturelles) | Bouquets luxuriants, couronnes de verdure, grappes parfaites |
-| Sauce | Filet unique irrégulier, subtil | Spirale parfaite, nappe épaisse, drizzle graphique |
-| Proportions | Burger compact/dense comme le vrai produit | Towering, exagéré, style magazine food |
-| Ambiance fond | Cuisine réelle en arrière-plan (inox, surfaces sombres, flou) — **avec éclairage contrasté** | Fond studio void noir pur, fond uni numérique, **fond uniformément sombre** |
-| Couleur/grain | Film-like natural color, léger grain, **tons chauds riches et saturés, contraste marqué** | HDR, surexposition, **mais aussi : visuels ternes/délavés, absence de contraste** |
-| Éclairage | **Éclairage dramatique contrasté** : source lumineuse marquée qui sculpe le produit, zones de highlight vives sur les ingrédients | Éclairage plat/uniforme, produit qui se fond dans le fond |
-| Photo input | TOUJOURS la photo du produit réel (strict-boeuf.png pour un boeuf) | Cross-product (photo poulet → transformer en boeuf) sauf dernier recours |
-
-> **IMPORTANT — Dark Premium ≠ Terne.** Le fond est sombre, mais le PRODUIT doit être lumineux et appétissant. Les couleurs des ingrédients (vert mâche, orange sauce, doré sésame, brun Maillard) doivent éclater sur le fond sombre.
-
-**Template d'instructions de réalisme** à intégrer en fin de prompt :
-```
-The overall feel should be documentary-style food photography — real, slightly imperfect, authentic. NOT a stock photo. Slight natural film grain. Strong directional lighting creating dramatic contrast — the product should pop luminously against the dark background. Rich, saturated ingredient colors. The dark setting is a stage, not a cave.
-```
+#### 5. Mode edit-ia — Photo lieu reelle + produit decrits
+Prompt decrit SEULEMENT ce qu'on AJOUTE. **A. MINIMAL** (lieu reel) : `"Edit this photo. Do NOT change the scene. The ONLY change: place [product] on [surface]. Match lighting. FORBIDDEN: do not redesign."` **B. ENRICHI** (scene generique) : plus descriptif pour enrichir l'ambiance tout en preservant le fond. Pieges : surdimensionnement, eclairage studio/ambient, bords trop nets → voir `references/category-guides.md`.
 
 ---
 
 ### Step 1 — Lire les inputs
 
-**Fichiers à lire (dans cet ordre) :**
-1. `[dossier-post]/01-art-direction/direction.md` — La fiche de direction créative
-2. `production/_recettes/[produit].md` — La recette avec ingrédients et formes exactes
-3. `production/_config/pipeline.md` — Le chemin de la photo référence + config DA
-4. `production/_config/brand-props.md` — Si la direction créative mentionne un brand prop (champ "Brand props"), lire la description détaillée dans ce catalogue et l'intégrer au prompt.
+**Fichiers :** `art-direction.md` → `_recettes/[produit].md` → `_config/pipeline.md` → `brand-props.md` (si brand prop) → `fonds-ambre.md` (si fond ambre).
 
-**Extraire pour chaque visuel :**
-- **Composition** → mapper vers Element 5 (angle, lens, framing)
-- **Éclairage** → mapper vers Element 4 (type, direction, qualité)
-- **Sujet principal + secondaires + absents** → mapper vers Element 2 (subject) + 3 (setting)
-- **Palette & Mood** → mapper vers Element 6
-- **Texte on-image** → décider du modèle (texte = GPT Images, pas de texte = Gemini)
-- **Texture & Détails sensoriels** → enrichir Element 2 avec le vocabulaire sensoriel
-- **Dimensions** → mapper vers Element 7
-- **Recette / Description produit** → verrouiller chaque ingrédient et sa forme exacte (cf. contrainte 1)
-- **Photo référence** → récupérer le chemin depuis `_config/pipeline.md` ou depuis la recette
+**Extraire :** Composition, Eclairage, Sujet + secondaires, Palette & Mood, Fond (ambre/charbon/mixte), Texte on-image (decide du modele), Recette (verrouiller chaque ingredient).
 
-### Step 2 — Choisir le modèle automatiquement
+### Step 2 — Choisir le modele
 
-La règle est simple :
-- **Texte on-image = Oui** → GPT Images (gpt-image-1.5)
-- **Texte on-image = Non** et **Type = Photo** → Gemini (Nano Banana Pro)
-- **Type = Infographie ou Template pur** → GPT Images (meilleure gestion des éléments graphiques)
-- **Type = Mixte** → GPT Images si le texte est dominant, Gemini si la photo est dominante avec un texte simple superposable en post-production
+**Texte on-image** → GPT Images | **Photo sans texte** → Gemini | **Infographie** → GPT Images
 
-### Step 3 — Construire le prompt
+### Step 3 — Construire le prompt (structure 8 blocs)
 
-**Pour Gemini** : Convertir toutes les informations du brief en un paragraphe narratif fluide de 4-6 phrases. Suivre l'ordre : Style → Subject (avec textures sensorielles) → Setting → Lighting → Composition → Mood. Ne PAS reformuler les "éléments absents" en négatif — les ignorer simplement ou reformuler positivement.
+**8 blocs obligatoires**, 150-300 mots, un ou deux paragraphes narratifs fluides. Voir **Style Combo-B** en fin de document.
 
-**Pour GPT Images** : Structure descriptive plus modulaire. Inclure le texte exact entre guillemets avec police et placement. Utiliser les exclusions explicites si nécessaires ("No watermark, no other text").
+```
+BLOC 1 — OUVERTURE + FOND      BLOC 5 — ECLAIRAGE
+BLOC 2 — PRODUIT                BLOC 6 — PROFONDEUR DE CHAMP
+BLOC 3 — IMPERFECTIONS          BLOC 7 — FEEL GLOBAL
+BLOC 4 — ANGLE CAMERA           BLOC 8 — FORMAT
+```
+
+#### FORMAT DE SORTIE (regle critique)
+
+**Les blocs = outil de planification interne. Le prompt final = recit immersif SANS labels.**
+```
+Real food photograph. [fond]. [produit, CAPS sur critiques, negatifs inline].
+[imperfections]. [angle]. [eclairage]. [feel + format].
+```
+
+#### Produits MAX (regle critique)
+
+Pour TOUT burger MAX, le BLOC 2 DOIT inclure :
+```
+The burger has exactly TWO buns — one bottom, one top. Between them, TWO [steaks/chicken]
+are stacked DIRECTLY on top of each other with [sauce/parmesan] as the ONLY separator.
+The second portion rests FLAT on the first — meat touching meat with sauce between.
+```
+JAMAIS "double-stacked" seul. JAMAIS "NO middle bun" comme seule protection.
+
+#### Traitements stories (regle critique)
+
+`colonne`, `sillon`, `sceau`, `feuillete-photo`, `feuillete-data` = **post-production** (Puppeteer overlay). Le prompt genere SEULEMENT la photo de base.
+
+---
+
+#### BLOC 1 — Ouverture + Fond
+
+Commencer par `Real food photograph.` puis decrire le fond.
+
+| Fond | Instructions |
+|------|-------------|
+| `ambre-[ID]` | Injecter le bloc `prompt` de `_config/fonds-ambre.md` |
+| `charbon` | `Dark matte charcoal surface (#1a1714) — slightly rough texture, subtle grain under raking light.` |
+| `ambre+charbon` | Fond ambre dominant + accessoires charbon (kraft noir, ardoise, ustensiles sombres) |
+| `charbon+ambre` | Fond charbon dominant + touches ambre (sesame, serviette doree, sauce) |
+| Scene/lieu | Materiaux reels, lumiere ambiante, details d'usure |
+| Concept | Action/concept comme ouverture narrative |
+
+**Regle** : chaque fond = proprietes physiques (materiau, texture, usure). JAMAIS un mot seul.
+
+#### BLOC 1b — Signature Charbon × Ambre (OBLIGATOIRE)
+
+**Chaque prompt StrictFood DOIT contenir les deux couleurs : charbon ET ambre.** S'applique aux posts ET aux stories (food, lifestyle, brand). Le fond du brief determine la dominante — l'accent oppose est injecte automatiquement.
+
+**Regle de couverture : l'accent couvre 15-20% du cadre.** Ce n'est PAS un detail discret — c'est un element structurant visible au premier regard.
+
+| Fond dominant | Accent a injecter (15-20% du cadre) | Exemples STRUCTURANTS |
+|---------------|--------------------------------------|----------------------|
+| charbon | Ambre | Large kraft paper (couvrant ~1/5 du cadre), warm amber spotlight zone, golden clothing piece, copper tray, amber-lit surface area |
+| ambre | Charbon | Black jacket/clothing, dark StrictFood bag, charcoal slate surface, deep shadow mass, black nitrile gloves |
+| minimal | L'oppose du fond choisi | Si charbon → large zone de lumiere ambre. Si ambre → objet charbon imposant |
+| craft | Les deux via produit + lumiere | Le bun noir = charbon (~15%), l'eclairage chaud = ambre (~15%) |
+| **lifestyle (scene)** | Porte par le PERSONNAGE | Vetement charbon (veste noire, t-shirt sombre) + accessoire ambre (sac kraft dore, echarpe, bijou) OU l'inverse. Le sac kraft StrictFood (noir + logo dore) porte les DEUX couleurs |
+
+**Verification avant livraison :**
+1. ctrl-F charbon (`dark`, `black`, `charcoal`, `matte`, `shadow`) — present ?
+2. ctrl-F ambre (`amber`, `golden`, `warm`, `copper`, `kraft`) — present ?
+3. L'element d'accent est-il STRUCTURANT (grand objet, large surface, vetement visible) ou juste un reflet discret ? Si trop discret → renforcer.
+
+**Ce bloc influence le BLOC 1 (fond), BLOC 2 (accessoires) et BLOC 5 (eclairage).** L'accent est naturel — un vetement, un accessoire, une lumiere, une surface — jamais force artificiellement.
+
+#### BLOC 2 — Produit (description exhaustive)
+
+Chaque ingredient dans l'ordre d'empilement, forme exacte, proprietes physiques. Descriptions verrouillees dans `references/category-guides.md`.
+
+**Structure :**
+1. Bun bottom + description COMPLETE (40+ mots, locked `Pain noir (surface)` avec CRACKS, FISSURES, LOPSIDED, SPLIT)
+2. `The bun is COMPACT — slightly compressed, NOT a tall perfect dome, NOT a perfect sphere.`
+3. Chaque ingredient avec marqueur spatial (`on the bun:`, `on top of:`, `above:`)
+4. Bun top : RE-DECRIRE les imperfections (JAMAIS juste "identical" — repeter cracks, lopsided, fissures, flat spot). Voir locked `Pain noir (top bun)`.
+5. `The ingredients bulge out 2-3cm past the bun edges.`
+
+**REGLE TOP BUN** : JAMAIS decrire le top bun comme "identical charcoal black sesame bun" ou "same as base". Gemini oublie les details 200 mots plus tot. TOUJOURS re-decrire au minimum : `charcoal black bun cap with visible cracks, one side slightly LOPSIDED, a flat spot where it settled, sesame seeds in uneven clusters — NOT a pristine dome, NOT symmetric.`
+
+#### BLOC 3 — Imperfections (minimum 3)
+Elements tombes, produit pas parfait, detail de vie. Vraie photo, pas un render 3D.
+
+#### BLOC 4 — Angle camera
+Position precise. Varier entre prompts. Termes : `STRAIGHT-ON`, `slight LOW ANGLE (15 deg)`, `3/4 from LEFT`, `OVERHEAD`, `off-center (rule of thirds)`.
+
+#### BLOC 5 — Eclairage
+Key light (direction+qualite+temperature) + Fill light (direction+intensite) + Specular highlights (sur quels elements). Varier entre prompts.
+
+#### BLOC 6 — Profondeur de champ
+Specifier QUOI est sharp et QUOI est soft.
+
+#### BLOC 7 — Feel global
+Templates dans `references/category-guides.md` (food hero, lifestyle/candid, macro/close-up).
+
+#### BLOC 8 — Format
+`Aspect ratio: 4:5.` (ou 1:1, 9:16 selon brief).
+
+---
 
 ### Step 3b — Audit realisme (OBLIGATOIRE)
 
-**Avant de passer a la verification finale, lancer l'agent `realism-auditor` en mode post-prompt.**
+Lancer `production/.claude/agents/realism-auditor.md` en mode post-prompt. 8 domaines : mains, fluides, eclairage, perspective, construction, materiaux, proportions, variete.
 
-L'agent audite le prompt brut sur 8 domaines :
-1. **Mains & prehension** — la prise est-elle anatomiquement possible pour la taille du produit ?
-2. **Physique des fluides** — la sauce a-t-elle une source logique, coule-t-elle vers le bas ?
-3. **Coherence eclairage** — une seule direction de key light, pas de contradiction backlight/front-lit ?
-4. **Perspective & geometrie** — l'angle camera est-il coherent avec ce qui est "visible" ?
-5. **Logique de construction** — pas d'ingredient duplique, ordre des couches physiquement stable ?
-6. **Materiaux & textures** — chaque ingredient decrit avec ses proprietes reelles ?
-7. **Proportions & echelle** — taille relative main/burger coherente ?
-8. **Variete inter-prompts** — suffisamment different des autres prompts du meme concept ?
+### Step 4 — Verifier
 
-**Workflow** :
-```
-Prompt brut (Step 3)
-    ↓
-Agent realism-auditor (mode post-prompt)
-    ↓
-Si 🔴 bloquant → corriger et re-auditer
-Si 🟡 important → corriger
-Si 🟢 suggestion → integrer si pertinent
-    ↓
-Prompt audite → Step 4
-```
-
-**Invocation** : l'agent est dans `production/.claude/agents/realism-auditor.md`. Il recoit le prompt brut + le concept + le produit, et retourne un rapport d'audit avec le prompt corrige.
-
-### Step 4 — Vérifier
-
-- [ ] Le prompt couvre-t-il TOUS les éléments spécifiés dans la fiche de direction créative ?
-- [ ] Les textures et détails sensoriels du brief sont-ils traduits en vocabulaire de prompt ?
-- [ ] Le modèle choisi est-il compatible avec les exigences (texte, photo-réalisme) ?
-- [ ] Le prompt fait-il 4-6 phrases (pas plus de 8) ?
-- [ ] Pour un carrousel : chaque prompt est-il cohérent avec les autres tout en étant autonome ?
-- [ ] Les "éléments absents" du brief ne sont-ils PAS mentionnés dans le prompt (même en négatif pour Gemini) ?
-- [ ] **L'audit realisme (Step 3b) a-t-il ete execute et tous les 🔴 resolus ?**
+Voir la **checklist unifiee** en fin de document (Auto-verification).
 
 ### Step 5 — Livrer
 
-Pour chaque visuel, fournir :
-
 ```
 ## Prompt — Visuel [N] / [N total]
-
-**Model**: [GPT Images / Gemini]
-**Category**: [Food / Product / Portrait / Lifestyle / Infographic / Other]
-**Aspect Ratio**: [selon la fiche]
-**Résolution** : 4K
-**Photo référence** : [chemin du fichier — à fournir en input image à Nanobanana/GPT]
-
-**Recette / Produit** :
-[Liste exacte des ingrédients et leurs formes, copiée depuis le brief — sert de checklist de fidélité]
-
-**Prompt**:
-[Le prompt complet, prêt à copier-coller. DOIT contenir l'instruction de fidélité photo référence en fin de prompt.]
-
-**Notes de post-production** : [si applicable]
+**Model**: [GPT Images / Gemini]  **Aspect Ratio**: [from brief]  **Resolution**: 4K
+**Input image**: [chemin si edit-ia, sinon "aucune"]
+**Recette / Produit**: [ingredients et formes — checklist fidelite]
+**Prompt**: [150-300 mots, narratif, style Combo-B]
+**Notes de post-production**: [si applicable]
 ```
-
-Si le brief contient un carrousel de N slides, livrer N prompts dans l'ordre, chacun avec son bloc formaté.
-
-**Écrire l'output** dans `[dossier-post]/02-prompt/prompt.md`
+Ecrire dans `[dossier-post]/production/prompt.md`
 
 ---
 
-## Mapping Brief → Prompt (référence rapide)
+## Mapping Brief → Prompt
 
-| Champ du brief (art director) | Element du prompt | Notes |
-|-------------------------------|-------------------|-------|
-| Cadrage | Composition / Framing | plan serré → close-up, plan large → wide shot |
-| Angle de prise de vue | Composition / Camera angle | 3/4 → 45-degree, contre-plongée → low angle |
-| Sujet principal | Subject | Enrichir avec les textures du brief |
-| Éléments secondaires | Setting / Environment | Background elements, props |
-| Éléments absents | — | NE PAS mentionner. Pour GPT : exclusion explicite. Pour Gemini : ignorer. |
-| Type d'éclairage | Lighting / Type | Mapper directement |
-| Direction d'éclairage | Lighting / Direction | "latéral gauche" → "side-lit from the left" |
-| Qualité d'éclairage | Lighting / Quality | "doux et diffus" → "soft, diffused" |
-| Température lumière | Lighting + Palette | "chaud doré" → "warm golden tones" |
-| Palette dominante | Palette / Colors | Traduire les couleurs DA en descriptions visuelles |
-| Ambiance | Mood | 1-2 mots → développer en atmosphère narrative |
-| Texte on-image (contenu) | Technical / Text | Exact entre guillemets, spécifier police et placement |
-| Texte on-image (typo) | Technical / Text | "Oswald bold" → "bold condensed sans-serif" |
-| Texture à mettre en valeur | Subject / Sensory | Utiliser le vocabulaire de `food-photography.md` |
-| Mouvement | Subject / Action | "fromage qui file" → "stretching melted cheese" |
-| Zone de respiration | Composition / Framing | "tiers supérieur dégagé" → "generous negative space in the upper third" |
-| Brand props (ID + placement) | Setting / Environment | Lire description dans brand-props.md, traduire matériaux/textures/logo en prompt. Élément de Setting, pas de Subject. |
+Cadrage → Composition/Framing | Angle → Camera angle | Sujet → Subject (enrichir textures) | Elements secondaires → Setting | Elements absents → NE PAS mentionner | Eclairage → Lighting | Palette → Colors | Ambiance → Mood (developper) | Texte on-image → Technical/Text | Texture → Sensory | Brand props → Setting (lire brand-props.md)
 
 ---
 
-## Rules
+## Style de reference — Combo-B
 
-1. **Narrative over keywords**: Write flowing descriptions, not comma-separated tags. "A steaming espresso in a ceramic cup on a marble counter, side-lit by morning sun through a café window" beats "espresso, ceramic cup, marble, side lighting, café, morning".
+> **Source** : `production/_config/prompts-variantes-combo-b.md` — 40 prompts calibres.
 
-2. **Be specific, not generic**: Replace vague adjectives with concrete details. "Beautiful sunset" → "Golden hour light casting long amber shadows across wet sand, sky graduating from peach to deep violet".
+### Principes
 
-3. **No negative prompts for Gemini**: Instead of "no blur, no artifacts", describe what you want positively: "tack-sharp focus on the subject with creamy bokeh background".
+1. **Un ou deux paragraphes narratifs fluides** — PAS de bullet points, PAS de blocs separes
+2. **150-300 mots** — precision proportionnelle a la qualite
+3. **CAPS pour directives critiques** — `DRIPPING`, `THICK GLOSSY`, `SQUEEZING OUT`, `NOT shavings`
+4. **Negatifs inline** — `(NOT shavings, NOT slices)` directement apres l'ingredient
+5. **Descriptions COMPLETES a chaque mention** — ne pas abreger
+6. **Verbes de mouvement** — `SQUEEZING OUT`, `DRIPPING down`, `BURSTING from`, `TRAILING like warm honey`
+7. **Positionnement spatial precis** — `8-10cm above`, `12cm to the LEFT`
+8. **Conclusion** : eclairage + angle + fond + ratio
+9. **Expression "trailing like warm honey"** — pattern sauce (visqueux, organique)
+10. **APPETIT** — JUICY, WET, GENEROUS, OVERSTUFFED, GLISTENING, IMPOSING
 
-4. **Front-load the important parts**: Models weight the beginning of prompts more heavily. Put the style and subject first.
-
-5. **Match prompt length to complexity**: Simple subjects need 1-3 sentences. Complex scenes need 4-6. Never exceed 8 sentences for a single prompt.
-
-6. **Include sensory cues**: Textures (crispy, velvety, rough), temperatures (steaming, frosted), sounds implied by the scene (bustling market, quiet studio).
-
-7. **Specify what you DON'T want only for GPT Images**: Use "without" or "no" sparingly and only with GPT. For Gemini, always reformulate positively.
-
-8. **Context drives choices**: A menu photo needs clean isolation. An Instagram post needs lifestyle context. A billboard needs bold simplicity. Always consider the end use.
-
-9. **Aspect ratio matters**: Portrait subjects → 4:5 or 9:16. Landscapes → 16:9. Products → 1:1. Social media → platform-specific.
-
-10. **Iterate, don't restart**: When refining, change one element at a time. Track what works.
-
-11. **Brief structuré = pas de questions** : Quand l'input vient du skill art director, toute l'information nécessaire est déjà là. Ne PAS demander de clarification — traduire directement. Si un champ est manquant, inférer la meilleure option.
-
-12. **Cohérence carrousel** : Pour un set de prompts de carrousel, maintenir un fil conducteur visuel (même palette, même qualité de lumière) tout en variant suffisamment chaque slide (angle, cadrage, sujet).
-
-## Anti-Patterns
-
-| Bad | Why | Fix |
-|-----|-----|-----|
-| "A nice photo of food" | Too vague, zero specificity | "A close-up photo of a golden-brown croque monsieur on a white plate, melted gruyère stretching as it's cut, side-lit by soft window light" |
-| "4K, HDR, ultra-realistic, 8K, masterpiece" | Keyword stuffing, models ignore most | Pick one quality indicator and describe the scene instead |
-| "NOT blurry, NO watermark, without artifacts" | Negative prompts don't work on Gemini, waste tokens | "Tack-sharp focus, clean composition" |
-| "A person standing" | No context, lighting, mood, or purpose | "A young barista in a linen apron, smiling while pouring latte art, warm morning light filtering through a café window, shot at 85mm f/1.8" |
-| Prompt > 10 sentences | Diminishing returns, model confusion | Distill to 4-6 impactful sentences |
-| "Make it look professional" | Subjective, unactionable | Specify what "professional" means: consistent lighting, clean background, styled props |
-| Poser des questions quand le brief est complet | Perte de temps, le brief contient déjà tout | Traduire directement les specs du brief en prompt |
-| Ignorer les textures du brief | Le prompt perd en spécificité sensorielle | Toujours mapper les champs "Texture" et "Mouvement" du brief |
-
-## Output Format
-
-**Mode A (requête libre) :**
-```
-**Model**: [GPT Images / Gemini]
-**Category**: [Food / Product / Portrait / Lifestyle / Architecture / Other]
-**Aspect Ratio**: [16:9 / 1:1 / 4:5 / 9:16]
-
-**Prompt**:
-[The complete, ready-to-use prompt]
-```
-
-**Mode B (brief structuré) :**
-```
-## Prompt — Visuel [N] / [N total]
-
-**Model**: [GPT Images / Gemini]
-**Category**: [Food / Product / Portrait / Lifestyle / Infographic / Other]
-**Aspect Ratio**: [from brief]
-**Résolution** : 4K
-**Photo référence** : [chemin du fichier — à fournir en input image]
-
-**Recette / Produit** :
-[Liste exacte des ingrédients et formes — checklist fidélité]
-
-**Prompt**:
-[The complete prompt, incluant l'instruction de fidélité photo référence en fin de prompt]
-
-**Notes de post-production** : [si applicable]
-```
-
-If the user wants both models, provide two separate prompts with model-specific optimizations.
-
-## Specialized References
-
-For detailed guidance, consult these reference files in `references/`:
-
-- **`gpt-images-best-practices.md`** — OpenAI-specific parameters, text rendering, multi-image inputs
-- **`gemini-best-practices.md`** — Gemini narrative style, resolution options, photography language
-- **`food-photography.md`** — Food-specific lighting, plating, texture vocabulary, angles
-- **`prompt-templates.md`** — Fill-in-the-blank templates for food, product, portrait, architecture
-- **`few-shot-examples.md`** — 20 real input→prompt examples by model and category
-
-## Integration with /nano-banana-pro
-
-When chaining with `/nano-banana-pro`:
-1. Craft the prompt using this skill's workflow
-2. Pass the prompt directly to nano-banana-pro's `--prompt` parameter
-3. **Résolution : toujours 4K en Mode B** (pas de draft 1K, pas de 2K intermédiaire)
-4. **Fournir la photo référence en input image** — c'est obligatoire en Mode B. Nanobanana reçoit la photo + le prompt et doit produire un visuel fidèle au produit réel.
-5. For edits: craft the editing instruction as a focused, action-oriented prompt
-
-## Pipeline Position
+### Exemple calibre — concept-main (Strict Boeuf)
 
 ```
-Calendrier éditorial (brief stratégique)
-        ↓                                    ╮
-   social-media-art-director                 │
-   (direction créative détaillée)            │ Photo référence produit
-   ⚠ Ne voit PAS la photo référence          │ (fournie par l'opérateur)
-        ↓                                    │
-   [CE SKILL] image-prompt-engineer  ←───────╯
-   Reçoit : fiche art director + photo référence + recette
-   Produit : prompt qui fusionne direction créative + fidélité produit
-        ↓
-   Nano Banana Pro / GPT Images
-   Reçoit : prompt + photo référence en input image
-   Produit : visuel final en 4K
+A hand wearing a black glove gripping this burger firmly but casually, as if about to
+take a bite. The hand enters from the bottom-left of the frame, fingers wrapped tightly
+around the charcoal black sesame bun (deep ink-dark surface with artisanal imperfections
+— visible cracks in the crust, slightly asymmetric shape, one side more puffed than the
+other, micro-fissures, rustic handmade quality, golden sesame seeds in RANDOM uneven
+distribution — dense clusters mixed with sparse patches, a few loose seeds on the glove),
+thumb pressing down hard on the cap creating a deep visible dent that reveals the dark
+charcoal-black crumb underneath, fingers digging into the base leaving deep indentations
+in the soft bread. The bun visibly DEFORMS under the grip pressure, squishing inward where
+each finger presses — the thick beef steak with deep intense Maillard crust (oven-seared
+at high pulsed heat, NO grill marks, NO char lines — rough, cratered, bark-like surface
+with deep mahogany-brown coloring almost blackened at edges, visible meat grain texture,
+NOT smooth, NOT polished) bulging at the sides, juices glistening on its exposed edge.
+Yellow-orange pepper sauce SQUEEZING OUT between the bun layers in thick glossy trails
+trailing like warm honey, DRIPPING down the glove and falling in viscous drips below the
+hand. Mache leaves (small round spoon-shaped leaves with visible vein texture and natural
+imperfections — varied sizes, some wilted at edges, one crumpled, one folded over, another
+with a tiny brown spot near the stem, NOT arugula, NEVER uniform or plastic-looking)
+BURSTING OUT from the compressed sides — a natural mix: some pristine, others crumpled
+with wrinkled edges, one with a small tear, sticking out 2-3cm past the bun. Red onion
+ring slices peeking out with concentric layers visible, one half-hanging off the edge.
+Parmesan crumbles (small irregular powdery fragments, NOT shavings, NOT slices — a hard
+cheese that does NOT melt or stretch) visible at the edges, some fragments stuck to the
+wet sauce on the glove fingers, a few fallen onto the dark surface below. The burger looks
+OVERSTUFFED, JUICY, barely contained — sauce and ingredients escaping from the OPPOSITE
+SIDE of the strongest grip pressure. Shot from a slight LOW ANGLE, heroic perspective
+looking up at the hand and burger. Hard side light from the RIGHT, warm amber temperature,
+casting the glove's sharp shadow across the bun surface, sculpting every texture. The sauce
+catches specular highlights from the key light. Dark matte background. Aspect ratio: 4:5.
 ```
 
-**Rôle de chaque input dans le prompt :**
-- **Fiche art director** → Détermine le COMMENT (angle, éclairage, composition, mood, fond, texte)
-- **Photo référence** → Détermine le QUOI (apparence exacte du produit, ingrédients, proportions)
-- **Recette** → Verrouille la fidélité ingrédients dans le texte du prompt (filet de sécurité si la photo ne suffit pas)
+### Auto-verification (checklist unifiee — Steps 4 + Combo-B)
 
-## Quick Reference Card
+**Contenu :**
+- [ ] Couvre TOUS les elements de la direction creative ?
+- [ ] Chaque ingredient = forme exacte (recette) + description verrouilllee complete (40+ mots pour bun/mache/Maillard) ?
+- [ ] Aucun terme interdit (grill marks, cheese pull, brioche, arugula, amber) ?
+- [ ] Pas de nom commercial (STRICT, StrictFood) ?
+- [ ] Audit realisme (Step 3b) execute, tous rouges resolus ?
+
+**Style Combo-B :**
+- [ ] 150-300 mots, narratif fluide (pas de listes) ?
+- [ ] >=5 CAPS + negatifs inline (NOT/NEVER apres chaque ingredient) ?
+- [ ] >=3 verbes de mouvement (DRIPPING, SQUEEZING, BURSTING) ?
+- [ ] Positions spatiales precises (cm, degres, directions) ?
+- [ ] Termine par : angle + eclairage + fond + ratio ?
+
+**Burger specifique :**
+- [ ] BUN COMPACT : "slightly compressed" / "NOT a tall perfect dome" ?
+- [ ] ORDRE EMPILEMENT : >=3 marqueurs spatiaux ("on the bun:", "on top of:", "above:") ?
+- [ ] DEBORDEMENT : "bulge out 2-3cm past the bun edges" ?
+- [ ] Le prompt donne FAIM a la lecture ?
+
+---
+
+## References
+
+| File | Content |
+|------|---------|
+| `category-guides.md` | Descriptions verrouillees ingredients, realism style, colour calibration, regles & anti-patterns |
+| `food-photography.md` | Vocabulaire food-specific : eclairage, dressage, textures |
+| `gpt-images-best-practices.md` | Parametres OpenAI, text rendering |
+| `gemini-best-practices.md` | Style narratif Gemini, options resolution |
+| `prompt-templates.md` | Templates fill-in-the-blank par categorie |
+| `few-shot-examples.md` | 20 exemples reels input→prompt |
+
+## Integration & Pipeline Position
 
 ```
-STYLE → SUBJECT → SETTING → LIGHT → COMPOSITION → MOOD → TECHNICAL
-  ↓        ↓         ↓        ↓          ↓           ↓        ↓
-photo    what      where    how lit    camera      feeling   specs
+social-media-art-director → [CE SKILL] → Nano Banana Pro / GPT Images → visuel 4K
 ```
+Passer le prompt via `--prompt`. Resolution : toujours 4K. Pas de photo reference produit. Mode `edit-ia` : photo scene en `--input-image`.

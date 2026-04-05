@@ -1,16 +1,33 @@
 ---
 name: instagram-producer
 description: >
-  Orchestrateur du pipeline Instagram StrictFood v3. Détecte le mode de création (full-ia,
-  irl-sublimation, compositing-irl, compositing-ia, template) et route vers le sous-pipeline
-  adapté. Génère la caption après l'image via /caption-writer. Supporte tous les piliers et formats.
-  Triggers : "produis le post", "lance le pipeline", "instagram producer", "pipeline post",
-  "génère le post", "lance la production".
+  Orchestrateur OBLIGATOIRE du pipeline de production de posts Instagram StrictFood v5.
+  Coordonne art direction, input mapping, prompt engineering, génération Gemini 4K,
+  validation et caption — dans cet ordre exact. Détecte le mode (full-ia, edit-ia, template, irl)
+  et route vers le bon sous-pipeline. Utiliser ce skill DÈS que l'utilisateur veut produire,
+  générer, lancer, relancer, ou créer un post Instagram — même s'il ne dit pas explicitement
+  "pipeline" ou "instagram producer". Couvre aussi les cas où un brief existe et que l'utilisateur
+  demande de le traiter, de générer le visuel, de lancer la prod, ou de refaire un brouillon.
+  Ne PAS utiliser pour : les stories (→ story-producer), les carrousels (→ carousel-producer),
+  la rédaction de prompts seuls (→ image-prompt-engineer), les captions seules (→ caption-writer).
 ---
 
-# Instagram Producer — Orchestrateur Pipeline v3
+# Instagram Producer — Orchestrateur Pipeline v5
 
 Tu es l'orchestrateur du pipeline de production de visuels Instagram StrictFood. Tu détectes le **mode de création** dans le brief et routes vers le sous-pipeline adapté.
+
+## Modes v5
+
+| Mode | Description | Planifiable | API |
+|------|-------------|:-----------:|-----|
+| `full-ia` | Gemini génère tout (produit DÉCRIT + scène) | Oui | Gemini 4K |
+| `edit-ia` | Photo lieu en input + produit DÉCRIT dans le prompt | **NON** (hors-planning) | Gemini 4K |
+| `template` | Data mapping → Template HTML → Puppeteer | Oui | Aucune |
+| `irl` | Photo fraîche en live + overlay | **NON** (hors-planning) | Aucune |
+
+> **Planning standard** = `full-ia` + `template` uniquement.
+> **Hors-planning** = les 4 modes sont disponibles.
+> **Produit** = TOUJOURS décrit dans le prompt, jamais de photo référence en input (sauf `edit-ia` qui prend la photo du LIEU, pas du produit).
 
 ## Input
 
@@ -39,23 +56,26 @@ L'opérateur fournit :
 6. **Router** vers le sous-pipeline correspondant (voir ci-dessous)
 
 Si le brief utilise l'ancien format v2 (pas de champ Mode, caption brute) → traiter comme `full-ia` par défaut et WARN l'opérateur.
+Si le brief contient un mode supprimé (`irl-sublimation`, `compositing-irl`, `compositing-ia`, `scene-ia`, `irl-archive`) → STOP, informer l'opérateur que ce mode n'existe plus en v5. Suggérer `full-ia` ou `edit-ia` selon le contexte.
 
 ---
 
 ## SOUS-PIPELINE A — `full-ia` (génération IA complète)
 
-Gemini génère tout (produit + scène) à partir d'un prompt.
+Gemini génère tout (produit DÉCRIT + scène) à partir d'un prompt. Aucune photo en input.
 
 ```
-Brief → Art Direction → Input Mapping → 🔒 CHECKPOINT → Prompt → Gemini 4K → Caption
+Brief → Art Direction → Input Mapping → 🔒 CHECKPOINT → Prompt → Realism Audit → Gemini 4K → brouillons/
 ```
 
 ### A1 — Art Direction (skill obligatoire)
 
 1. Lire la fiche recette `production/_recettes/[slug].md`
 2. Lire la config DA `production/_config/pipeline.md`
-3. **APPELER LE SKILL** : `social-media-art-director`
-   - Contexte : brief + recette + config DA
+3. Lire le catalogue `production/_config/fonds-ambre.md` (variantes de fonds)
+4. **APPELER LE SKILL** : `social-media-art-director`
+   - Contexte : brief + recette + config DA + catalogue fonds ambre
+   - **Fond ambre** : si le brief est un hero shot produit (pilier "Le Plat") ET ne spécifie pas `Fond: charbon`, l'art director sélectionne un fond ambre adapté (guidé par le brief OU choix intelligent basé sur l'historique et le produit). Le fond sélectionné apparaît dans `art-direction.md` avec son ID.
    - Output : `[dossier-post]/production/art-direction.md`
 
 ### A2 — Input Mapping (agent obligatoire)
@@ -63,164 +83,124 @@ Brief → Art Direction → Input Mapping → 🔒 CHECKPOINT → Prompt → Gem
 1. **SPAWNER L'AGENT** : `input-mapper`
    - Prompt : "Exécute le mapping pour [dossier-post]"
    - L'agent lit `art-direction.md`, consulte `_config/photo-references.md` et `_recettes/`
+   - **Le produit est DÉCRIT textuellement** (jamais de photo référence en input pour Gemini)
    - Output : `[dossier-post]/production/input.md`
 
 ### 🔒 CHECKPOINT A
 
 Afficher le mapping à l'opérateur. Attendre validation.
 
-### A3 — Prompt Engineering (skill obligatoire)
+### A3 — Realism Audit (obligatoire)
+
+1. **APPELER LE SKILL** : `realism-auditor` en mode PRE-PROMPT
+   - Contexte : concept + produit + recette
+   - Output : fiche de contraintes réalisme
+
+### A4 — Prompt Engineering (skill obligatoire)
 
 1. **APPELER LE SKILL** : `image-prompt-engineer` (Mode B)
-   - Contexte : art-direction.md + input.md
+   - Contexte : art-direction.md + input.md + contraintes réalisme
    - Output : `[dossier-post]/production/prompt.md`
 
-### A4 — Génération image (brouillon)
+2. **APPELER LE SKILL** : `realism-auditor` en mode POST-PROMPT
+   - Contexte : prompt rédigé
+   - Output : prompt audité et corrigé
+
+### A5 — Génération image (brouillon)
 
 Assembler et afficher la commande Gemini (Nanobanana Pro) :
 ```bash
 uv run production/.claude/skills/nano-banana-pro/scripts/generate_image.py \
   --prompt "[prompt]" --filename "[date]-[slug]-4x5.png" \
-  --input-image "[photo ref]" --resolution 4K --api-key "$GEMINI_API_KEY"
+  --resolution 4K --api-key "$GEMINI_API_KEY"
 ```
 
-Output dans `[dossier-post]/brouillons/` (JAMAIS directement dans `final/`).
+Output dans `[dossier-post]/brouillons/` (JAMAIS de `--input-image` en full-ia — le produit est DÉCRIT).
 
 ---
 
-## SOUS-PIPELINE B — `irl-sublimation` (photo réelle sublimée)
+## SOUS-PIPELINE B — `edit-ia` (photo lieu + produit décrit — hors-planning uniquement)
 
-Photo réelle → retouche/sublimation pour aligner avec la DA.
+Photo du lieu réel en input, produit DÉCRIT dans le prompt (pas de photo produit). Gemini intègre le produit dans la scène.
 
 ```
-Brief → Vérification photo → 🔒 CHECKPOINT → Sublimation GPT Images → Caption
+Brief → Vérification photo lieu → Art Direction → Input Mapping → 🔒 CHECKPOINT → Realism Audit → Prompt → Gemini 4K → brouillons/
 ```
 
-### B1 — Vérification photo source
+### B1 — Vérification photo lieu
 
-1. Lire le champ `Photo source` dans le brief
+1. Lire le champ `Photo lieu` dans le brief
 2. Vérifier que le fichier existe (Glob)
-3. **Ouvrir et analyser la photo** : identifier le sujet, la luminosité, les problèmes à corriger
+3. **Ouvrir et analyser la photo** : identifier l'environnement, l'éclairage, la perspective
+
+### B2 — Art Direction scène
+
+1. **APPELER LE SKILL** : `social-media-art-director`
+   - Contexte : brief + recette + description de la scène souhaitée + analyse de la photo lieu
+   - Output : `[dossier-post]/production/art-direction.md`
+   - Note : la direction porte sur l'INTÉGRATION du produit dans le lieu, en respectant l'éclairage et la perspective de la photo
+
+### B3 — Input Mapping
+
+1. **SPAWNER L'AGENT** : `input-mapper`
+   - Résout la description du produit depuis `_recettes/[slug].md`
+   - Résout la photo lieu depuis le brief (champ `Photo lieu`)
+   - **Le produit est DÉCRIT textuellement** dans le prompt, seule la photo lieu est en input
+   - Output : `[dossier-post]/production/input.md`
 
 ### 🔒 CHECKPOINT B
 
-Afficher à l'opérateur :
-```
-📋 CHECKPOINT — Sublimation IRL
+Afficher la direction scène + la photo lieu sélectionnée. Attendre validation.
 
-Photo source : [chemin]
-Sujet identifié : [description]
-Direction sublimation : [depuis le brief]
-Corrections prévues : [alignement couleurs DA, contraste, fond, etc.]
+### B4 — Realism Audit (obligatoire)
 
-✅ Valider et sublimer ?
-✏️ Modifier la direction ?
-```
+1. **APPELER LE SKILL** : `realism-auditor` en mode PRE-PROMPT (edit-ia)
+   - Contexte : concept + produit + photo lieu
+   - Output : fiche de contraintes réalisme (8 domaines full-ia + checks intégration)
 
-### B2 — Sublimation via GPT Images
-
-1. Construire le prompt de sublimation :
-   - Instruction : retouche légère, aligner avec la DA Dark Food Premium
-   - Direction depuis le brief (champ `Direction sublimation`)
-   - Contraintes : ne pas dénaturer le produit, garder le réalisme documentaire
-   - Palette : tons charbon, cuivre braisé, grenat fumé
-2. Exécuter via GPT Images (gpt-image-1) en mode edit :
-   - Input : photo source
-   - Prompt : instructions sublimation
-   - Output dans `[dossier-post]/brouillons/` (JAMAIS directement dans `final/`)
-
----
-
-## SOUS-PIPELINE C — `compositing-irl` (2 photos réelles mixées)
-
-Photo produit + photo lieu → composition réaliste.
-
-```
-Brief → Vérification photos → 🔒 CHECKPOINT → Compositing GPT Images → Caption
-```
-
-### C1 — Vérification des deux photos
-
-1. Lire `Photo produit` et `Photo lieu` depuis le brief
-2. Vérifier que les deux fichiers existent
-3. Analyser la compatibilité : éclairage, perspective, échelle
-
-### 🔒 CHECKPOINT C
-
-Afficher les deux photos et l'intention de compositing. Attendre validation.
-
-### C2 — Compositing via GPT Images
-
-1. Construire le prompt compositing en s'appuyant sur le skill `/photo-compositor` (5 piliers) :
-   - **Éclairage** : harmoniser les sources lumineuses des deux photos
-   - **Ombres** : ombres portées cohérentes avec la lumière du lieu
-   - **Perspective** : aligner les lignes de fuite et l'angle de vue
-   - **Bords** : intégration naturelle, pas de découpe visible
-   - **Couleur** : unifier la température et la saturation (DA Dark Food Premium)
-2. Exécuter via GPT Images en mode edit avec les 2 images
-   - Output dans `[dossier-post]/brouillons/` (JAMAIS directement dans `final/`)
-
----
-
-## SOUS-PIPELINE D — `compositing-ia` (photo réelle + scène IA)
-
-Photo produit réelle (ou variante) intégrée dans une scène générée par l'IA.
-
-```
-Brief → Art Direction scène → Input Mapping → 🔒 CHECKPOINT → Prompt → Gemini 4K → Caption
-```
-
-### D1 — Art Direction scène
-
-1. Lire le champ `Scène imaginée` dans le brief
-2. **APPELER LE SKILL** : `social-media-art-director`
-   - Contexte : brief + recette + description de la scène souhaitée
-   - Output : `[dossier-post]/production/art-direction.md`
-   - Note : la direction porte sur la SCÈNE, pas sur le produit (le produit est la photo réelle)
-
-### D2 — Input Mapping
-
-1. **SPAWNER L'AGENT** : `input-mapper`
-   - Résout la photo produit depuis le brief (champ `Photo produit`) ou via `photo-references.md`
-   - Output : `[dossier-post]/production/input.md`
-
-### 🔒 CHECKPOINT D
-
-Afficher la direction scène + la photo produit sélectionnée. Attendre validation.
-
-### D3 — Prompt Engineering
+### B5 — Prompt Engineering
 
 1. **APPELER LE SKILL** : `image-prompt-engineer` (Mode B)
-   - Contexte spécial : la direction décrit la scène, l'input fournit la photo produit à intégrer
-   - Le prompt doit instruire Gemini d'intégrer le produit réel dans la scène imaginée
+   - Contexte : art-direction.md + input.md + contraintes réalisme
+   - Le prompt décrit le produit à intégrer dans la scène photographiée
    - Output : `[dossier-post]/production/prompt.md`
 
-### D4 — Génération image
+2. **APPELER LE SKILL** : `realism-auditor` en mode POST-PROMPT (edit-ia)
+   - Contexte : prompt rédigé + photo lieu
+   - Output : prompt audité et corrigé (inclut vérification intégration : scale, éclairage, edges)
 
-Commande Gemini avec `--input-image` pointant vers la photo produit réelle.
-Output dans `[dossier-post]/brouillons/` (JAMAIS directement dans `final/`).
+### B6 — Génération image
+
+Commande Gemini avec `--input-image` pointant vers la photo lieu :
+```bash
+uv run production/.claude/skills/nano-banana-pro/scripts/generate_image.py \
+  --prompt "[prompt]" --filename "[date]-[slug]-edit-ia.png" \
+  --input-image "[photo lieu]" --resolution 4K --api-key "$GEMINI_API_KEY"
+```
+
+Output dans `[dossier-post]/brouillons/`.
 
 ---
 
-## SOUS-PIPELINE E — `template` (carrousel/infographie HTML)
+## SOUS-PIPELINE C — `template` (carrousel/infographie HTML)
 
 Contenu graphique généré via templates HTML + Puppeteer.
 
 ```
-Brief → Data Mapping → 🔒 CHECKPOINT → Template Fill → Puppeteer → Caption
+Brief → Data Mapping → 🔒 CHECKPOINT → Template Fill → Puppeteer → brouillons/
 ```
 
-### E1 — Data Mapping
+### C1 — Data Mapping
 
 1. Lire les données par slide depuis le brief (section `Données slides`)
 2. Résoudre les données produit depuis `_recettes/[slug].md` si nécessaire
 3. Écrire `[dossier-post]/production/input.md` avec le mapping placeholder → valeur pour chaque slide
 
-### 🔒 CHECKPOINT E
+### 🔒 CHECKPOINT C
 
 Afficher le mapping de chaque slide. Attendre validation.
 
-### E2 — Template Fill + Render
+### C2 — Template Fill + Render
 
 Pour chaque slide :
 1. Lire le template HTML dans `production/posts-stories/posts/_templates/[type].html`
@@ -239,86 +219,137 @@ Pour chaque slide :
    ```
    Note : le script render fonctionne pour tout format, pas seulement les stories.
 
-Output : `[dossier-post]/brouillons/slide-01.png`, `slide-02.png`, etc. (JAMAIS directement dans `final/`)
+Output : `[dossier-post]/brouillons/slide-01.png`, `slide-02.png`, etc.
 
 ---
 
-## Flux brouillon → final (tous les modes)
+## SOUS-PIPELINE D — `irl` (photo fraîche en live — hors-planning uniquement)
 
-Le premier visuel généré va **TOUJOURS dans `brouillons/`**, jamais directement dans `final/`.
+Photo prise en direct + overlay minimal. Réservé au `hors-planning/`.
 
 ```
-[Génération]  →  brouillons/*.png  →  itérations si besoin  →  validation opérateur  →  final/*.png
+Brief → Photo fournie par opérateur → Template overlay → Puppeteer → brouillons/
 ```
 
-- `brouillons/` = espace de travail, itérations, corrections
-- `final/` = visuel terminé et prêt à poster (seul dossier tracé dans l'historique)
+### D1 — Photo fraîche
 
-**Après la génération du brouillon** :
+1. L'opérateur fournit la photo en live
+2. Vérifier la qualité : résolution, cadrage, éclairage
+3. Appliquer un overlay DA minimal via template HTML
 
-1. Afficher le résultat à l'opérateur :
-   ```
-   📝 BROUILLON généré — [date]
-
-   📸 [dossier-post]/brouillons/[fichier].png
-
-   → Vérifier le visuel.
-   ✅ Valider et promouvoir en final ?
-   ✏️ Modifier ? (décrire les changements)
-   🔄 Régénérer ?
-   ```
-
-2. **Si modifications** : itérer (re-générer dans `brouillons/`, versions successives si besoin)
-
-3. **Quand validé** : copier le brouillon vers `final/`
-   ```bash
-   cp [dossier-post]/brouillons/[fichier].png [dossier-post]/final/[fichier].png
-   ```
-
-4. Puis passer à la caption (étape suivante)
-
-> **Règle** : la caption n'est générée qu'après validation du brouillon et promotion vers `final/`.
+Output dans `[dossier-post]/brouillons/`.
 
 ---
 
-## ÉTAPE FINALE A — Génération Caption (tous les modes)
+## Flux brouillon → validation → caption → a-publier/
 
-**Après** la promotion du visuel vers `final/`, pour TOUS les modes :
+Le premier visuel genere va **TOUJOURS dans `brouillons/`**.
+
+```
+[Generation]  →  brouillons/*.png  →  iterations si besoin  →  ✅ validation  →  Caption  →  MOVE vers a-publier/
+```
+
+- `brouillons/` = espace de travail, iterations, corrections
+
+**Apres la generation du brouillon** :
+
+1. Afficher le resultat a l'operateur :
+   ```
+   BROUILLON genere — [date]
+
+   [dossier-post]/brouillons/[fichier].png
+
+   → Verifier le visuel.
+   Valider ?
+   Modifier ? (decrire les changements)
+   Regenerer ?
+   ```
+
+2. **Si modifications** : iterer (re-generer dans `brouillons/`, versions successives si besoin)
+
+3. **Quand valide** : passer a la caption (etape suivante)
+
+---
+
+## ETAPE FINALE — Caption → Deplacement vers a-publier/
+
+### 1. Generation Caption (tous les modes)
+
+**Apres** validation du brouillon, pour TOUS les modes :
 
 1. **APPELER LE SKILL** : `caption-writer`
    - Contexte : le brief (Direction Caption) + l'image produite (vision)
    - Output : `[dossier-post]/production/caption.md`
 
-2. Afficher la caption à l'opérateur :
+2. Afficher la caption a l'operateur :
    ```
-   📝 CAPTION GÉNÉRÉE
+   CAPTION GENEREE
 
    [caption]
 
-   ✅ Valider ?
-   ✏️ Modifier ?
-   🔄 Régénérer ?
+   Valider ?
+   Modifier ?
+   Regenerer ?
    ```
+
+### 2. Deplacement vers a-publier/ (OBLIGATOIRE apres validation caption)
+
+Quand la caption est validee :
+
+1. **Determiner le nom de fichier** : `DD-MM-YYYY-[slug]-[format].png`
+   - DD-MM-YYYY = date de publication prevue (depuis le dossier)
+   - slug = nom du produit ou description courte (kebab-case)
+   - format = `4x5` (post standard), `1x1` (carre), `9x16` (story)
+   - Exemple : `07-04-2026-strict-boeuf-levitation-4x5.png`
+
+2. **DEPLACER le visuel** :
+   ```bash
+   mv "[dossier-post]/brouillons/[fichier].png" "production/a-publier/posts/DD-MM-YYYY-[slug]-[format].png"
+   ```
+
+3. **Copier la caption** en texte brut a cote :
+   - Extraire le texte de la caption depuis `caption.md` (sans les metadonnees/headers)
+   - Ecrire dans `production/a-publier/posts/DD-MM-YYYY-[slug]-[format].txt`
+
+4. **Carrousels** (multi-slides) :
+   ```bash
+   mkdir -p "production/a-publier/posts/DD-MM-YYYY-[slug]/"
+   mv "[dossier-post]/brouillons/slide-*.png" "production/a-publier/posts/DD-MM-YYYY-[slug]/"
+   # Caption dans le sous-dossier
+   ```
+   Ecrire la caption dans `production/a-publier/posts/DD-MM-YYYY-[slug]/caption.txt`
+
+5. Confirmer a l'operateur :
+   ```
+   ✅ PRET A PUBLIER
+
+   Visuel : production/a-publier/posts/DD-MM-YYYY-[slug]-[format].png
+   Caption : production/a-publier/posts/DD-MM-YYYY-[slug]-[format].txt
+
+   Les metadonnees (brief, direction, prompt) restent dans [dossier-post]/
+   ```
+
+> **Le visuel n'existe plus dans `brouillons/`** apres le deplacement. Les metadonnees (brief, art-direction, input, prompt, caption.md) restent dans le dossier date original.
+> **Post-publication** : l'operateur supprime manuellement de `a-publier/` quand il veut.
 
 ---
 
-## Structure des dossiers post (v3)
+## Structure des dossiers post (v5)
 
 ```
 [dossier-post]/
-├── brief/brief.md                 ← Opérateur (brief v3)
+├── brief/brief.md                 ← Opérateur (brief v5)
 ├── production/input.md            ← input-mapper OU data mapping (selon mode)
-├── production/art-direction.md    ← Art Director (modes full-ia et compositing-ia uniquement)
-├── production/prompt.md           ← Prompt Engineer (modes full-ia et compositing-ia uniquement)
-├── production/caption.md          ← Caption Writer (tous les modes)
-├── brouillons/*.png               ← Premier rendu + itérations (brouillon)
-└── final/*.png                    ← Visuel(s) VALIDÉ(s) prêt(s) à poster (promu(s) depuis brouillons/)
+├── production/art-direction.md    ← Art Director (modes full-ia et edit-ia uniquement)
+├── production/prompt.md           ← Prompt Engineer (modes full-ia et edit-ia uniquement)
+├── production/caption.md          ← Caption Writer (tous les modes, APRÈS validation)
+└── brouillons/*.png               ← Visuel(s) (supprimés après publication, métadonnées conservées)
 ```
 
-> **Flux** : Génération → `brouillons/` → itérations si besoin → validation opérateur → promotion vers `final/`
-> **Historique** : seuls les PNG dans `final/` sont tracés. Les brouillons ne comptent pas.
+> **Flux** : Génération → `brouillons/` → itérations si besoin → validation → caption → publication → archivage (PNG supprimé)
+> **Historique** : tracé depuis les métadonnées (brief, caption), pas depuis les PNG.
 
-Note : les fichiers art-direction.md et prompt.md n'existent pas dans production/ pour les modes `irl-sublimation`, `compositing-irl` et `template`.
+Note : les fichiers art-direction.md et prompt.md n'existent pas dans production/ pour les modes `template` et `irl`.
 
 ## Séparation des responsabilités
 
@@ -327,6 +358,7 @@ Note : les fichiers art-direction.md et prompt.md n'existent pas dans production
 | Art Direction | Skill | Brief, Recette (formes), DA | Photos |
 | Input Mapping | Agent | Direction créative, Photos (descriptions), Recettes | Brief |
 | Prompt Engineer | Skill | Direction + Input (tout) | Brief original |
+| Realism Auditor | Skill | Prompt, Recette, Concept | Brief original |
 | Caption Writer | Skill | Brief (Direction Caption), Image (vision), Dernières captions | Prompt, Direction créative |
 
 ## Gestion d'erreurs
@@ -335,30 +367,26 @@ Note : les fichiers art-direction.md et prompt.md n'existent pas dans production
 |--------|--------|
 | Brief absent | STOP → demander création via template `_templates/brief-v3.md` |
 | Brief v2 détecté (pas de Mode) | WARN → traiter comme `full-ia`, suggérer migration |
-| Mode inconnu | STOP → lister les 5 modes valides |
-| Photo source manquante (IRL/compositing) | STOP → demander le chemin |
+| Mode supprimé détecté (irl-sublimation, compositing-irl, compositing-ia, scene-ia, irl-archive) | STOP → informer que le mode n'existe plus, suggérer full-ia ou edit-ia |
+| Mode inconnu | STOP → lister les 4 modes valides |
+| Photo lieu manquante (edit-ia) | STOP → demander le chemin |
+| Mode hors-planning en planning standard (edit-ia, irl) | STOP → rappeler que seuls full-ia et template sont planifiables |
 | Skill non invocable | STOP → informer opérateur |
 | Recette manquante | STOP → demander création |
 | Template HTML manquant (mode template) | STOP → signaler |
 
 ## Règles non négociables
 
-0. **⛔ PAIN NOIR OBLIGATOIRE** — tous les burgers StrictFood sont au pain noir (black bun sésame). Zéro tolérance :
-   - **Sélection photo** : UNIQUEMENT `burgers-black/`. Photo pain blanc = STOP immédiat.
-   - **Prompts IA** : DOIT contenir "black sesame bun". INTERDIT : "brioche", "white bun", "plain bun", "golden bun".
-   - **Checkpoint** : vérifier visuellement que le bun est NOIR. Pain blanc détecté = BLOQUER.
-   - **Brouillon** : re-vérifier le pain noir avant promotion vers `final/`.
-0b. **⛔ FIDÉLITÉ SALLE DE RESTAURANT** — quand un visuel montre l'intérieur du restaurant StrictFood, chaque élément doit être fidèle à la réalité. Photos de référence : `public/images/photos-references/contexte/salle-restaurant/` (8 photos).
-   - **Autorisé** : changer l'angle/perspective, reconstituer un élément manquant (même modèle), compléter un mur partiellement visible (même texture), cadrer sur une zone spécifique.
-   - **Interdit** : modifier les matériaux, changer l'ambiance (rustique, pub, boisé sombre), inventer du mobilier/déco absents, remplacer des éléments existants.
-   - **Caractéristiques réelles** : carrelage blanc/gris clair, bois blond chêne, chaises noires métal, mur végétal néon "STRICT FOOD'S", comptoir vitrine noire, éclairage blanc neutre moderne.
-   - **Checkpoint** : vérifier que le décor restaurant correspond aux photos de référence. Décor inventé = BLOQUER `⚠️ DÉCOR RESTAURANT NON CONFORME`.
-   - **Lieux neutres (fond sombre, table isolée, extérieur)** : pas concernés par cette règle.
+> **Règles DA transversales** (pain noir, chaleur pulsée, fidélité salle) : cf. `.claude/rules/production-pipeline.md` — toujours en contexte, non répétées ici.
+
 1. **Le mode détermine le pipeline** — ne JAMAIS exécuter un sous-pipeline qui ne correspond pas au mode
-2. **Brouillon d'abord** — le premier visuel va TOUJOURS dans `brouillons/`, JAMAIS directement dans `final/`
-3. **Caption TOUJOURS après promotion** — ne JAMAIS écrire la caption avant la promotion du brouillon en `final/`
-4. **Un seul checkpoint par mode** — avant la génération/sublimation/compositing/render
-5. **Résolution TOUJOURS 4K** pour les modes full-ia et compositing-ia
-6. **API key TOUJOURS `$GEMINI_API_KEY`** — jamais en dur
-7. **Skills/agents via outils dédiés** — Skill tool et Agent tool, pas d'exécution manuelle
-8. **Historique TOUJOURS à jour** — lire puis réécrire `production/_config/historique-production.md` par scan des dossiers avant chaque exécution. Ce fichier EXISTE TOUJOURS.
+2. **Brouillon d'abord** — le premier visuel va TOUJOURS dans `brouillons/`
+3. **Caption TOUJOURS après validation** — ne JAMAIS écrire la caption avant la validation du brouillon
+4. **Archivage** — après publication, le PNG est supprimé, les métadonnées restent
+5. **Un seul checkpoint par mode** — avant la génération/render
+6. **Résolution TOUJOURS 4K** pour les modes full-ia et edit-ia
+7. **API key TOUJOURS `$GEMINI_API_KEY`** — jamais en dur
+8. **Skills/agents via outils dédiés** — Skill tool et Agent tool, pas d'exécution manuelle
+9. **Historique TOUJOURS à jour** — lire puis réécrire `production/_config/historique-production.md` par scan des dossiers avant chaque exécution. Ce fichier EXISTE TOUJOURS.
+10. **Produit TOUJOURS décrit** — jamais de photo produit en input pour Gemini (sauf photo LIEU en edit-ia)
+11. **Realism Audit obligatoire** — pour full-ia et edit-ia, avant ET apres le prompt. **APPELER LE SKILL `realism-auditor`** formellement (pas d'application manuelle des contraintes)

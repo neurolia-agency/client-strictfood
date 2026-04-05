@@ -1,224 +1,192 @@
-# Brief Stories — [Semaine] [Jour] (YYYY-MM-DD)
+# Brief Story — [Semaine] [Jour] #[N] (YYYY-MM-DD)
 
-> **Pilier du jour** : [Le Plat / La Cuisine / L'Équipe / Confiance] — [Post SX-NN publié aujourd'hui / Pas de post]
-> **Objectif stratégique** : [1-2 phrases sur le rôle de ce jour dans la semaine]
-> **Persona cible** : [Sportifs / Actifs pressés / Locavores / Tous]
-> **Ref stratégie** : Phase 1 §X.X — "[citation courte]"
+> **1 brief = 1 story.** Chaque story a son propre fichier brief.
+> **Pilier du jour** : [Le Plat / La Cuisine / L'Equipe / Confiance] — [Post SX-NN publie aujourd'hui / Pas de post]
+
+> **REGLE ABSOLUE** : Tous les chemins photo doivent pointer vers des fichiers existants. JAMAIS de `[A FOURNIR]`. Si aucune photo ne matche, changer le sujet ou le mode.
+> **Templates** : `story-universal.html` (defaut), `story-sillon.html`, `story-sceau.html`, `story-feuillete-photo.html`, `story-feuillete-data.html`.
 
 ---
 
-## Story 1 — [Titre]
+## Story
 
 | Champ | Valeur |
 |-------|--------|
-| Type | [Fiche Produit / Interactif / Éducatif / Annonce / Lieu / Focus Ingrédient / IRL / Produit DA / Produit en situation / Visuel IA / Séquence / Recap] |
+| Mode | [full-ia] — toutes les stories sont en full-ia. `edit-ia` et `irl` sont hors-planning uniquement. `template` est deprecie pour les stories. |
+| Traitement | [— / sillon / sceau / feuillete-photo / feuillete-data] |
+| Fond | [— / ambre / charbon / ambre+charbon / charbon+ambre] |
+| Highlight | [LA CARTE / COULISSES / NOS ARTISANS / NOUS TROUVER / L'EQUIPE / —] |
+| Mood | [cuivre / grenat / feuille] |
+| Concept visuel | [concept depuis `_config/concepts-visuels.md`] |
+| Intention | [envie / curiosite / confiance / presence] |
 
-| Mode | [template / irl / irl-sublimation / compositing-irl / compositing-ia / full-ia] |
-| Highlight | [LA CARTE / COULISSES / NOS ARTISANS / NOUS TROUVER / L'ÉQUIPE / —] |
-| Qui produit | Pipeline |
-| Template | `[template].html` (si mode=template ou irl) |
-| Mood | [cuivre / grenat / feuille — optionnel, herite du mood jour] |
-| Image | [discret / visible / hero — optionnel, herite de la valeur jour] |
-| Brand props | [ID prop depuis `_config/brand-props.md` — ex: "wrapper-burger" / "cup-branded" / "auto" / "aucun" — optionnel, defaut: "auto"] |
+> Le **Mode** est defini dans le planning semaine. Ne pas le changer dans le brief sauf hors-planning.
+> Le **Traitement** est defini dans le planning semaine. Si vide ou `—`, c'est `photo-pure` (story-universal.html).
+> Le **Fond** est pertinent uniquement pour le mode `full-ia` — il determine la palette du background dans le prompt image.
+> Le produit est TOUJOURS decrit dans le prompt (jamais fourni en photo reference a l'IA).
+> L'**Intention** est OBLIGATOIRE — elle guide le choix du concept et la direction artistique.
 
-> Le **Mode** est défini dans le planning semaine. Ne pas le changer dans le brief sauf hors-planning.
+### Intention emotionnelle
+
+| Valeur | Ce que le viewer doit RESSENTIR | Guide le concept vers |
+|--------|-------------------------------|----------------------|
+| `envie` | "Je veux ca MAINTENANT" — reaction viscerale, salivation | macro-sauce, sensation-overflow, action-croque, macro-jus, sensation-brillance |
+| `curiosite` | "C'est quoi ca ?" — arrete le scroll, intrigue | eclate, selective-color, persp-dessous, double-exposure, persp-reflet, grain-cinema |
+| `confiance` | "Ils sont serieux ces gens" — qualite, artisanat, process | action-service, macro-texture, macro-fromage, atmo-clair-obscur, moment-assemblage |
+| `presence` | "Ah oui StrictFood, je devrais y aller" — rappel, horaires, CTA | Concepts brand/rappel, devanture, comptoir, moment-remise-sac |
 
 ### Objectif
 
-[1-2 phrases : pourquoi cette story existe, quel rôle dans la séquence du jour]
+[1-2 phrases : en quoi cette story sert l'intention choisie. Ex: "Envie — gros plan sauce qui coule sur le falafel, le viewer doit sauter le repas qu'il a prevu"]
 
-### Contenu
+### Contenu (selon le mode)
 
-#### Si type = Fiche Produit (template: `vitrine.html — variante produit`)
+#### Si mode = `full-ia`
 
-**Produit** : [NOM PRODUIT]
-Slug recette : `[slug-kebab-case]`
+> Image entierement generee par l'IA en plein cadre.
 
-> Le story-data-mapper résout automatiquement les données nutritionnelles depuis `_recettes/[slug].md`.
-> Ne PAS copier les macros ici — c'est le rôle de l'agent.
+| Champ | Valeur |
+|-------|--------|
+| Sujet | [description du visuel — ex: "STRICT Boeuf close-up macro, vapeur, fond charbon"] |
+| Produit | [NOM PRODUIT] — slug recette : `[slug-kebab-case]` |
+| Direction artistique | [ambiance, eclairage, style — ex: "cinematique, contre-jour, grain film"] |
+| TEXT_LINE_1 | [max 22 car OU "—"] |
+| TEXT_LINE_2 | [max 30 car OU "—"] |
 
-Accroche : `[1 phrase punchy — ex: "Le burger qui bat tes macros"]`
-Macro star : `[la macro la plus impressionnante — ex: "53g protéines"]`
-Badge : `[argument différenciateur court — ex: "SANS HUILE" / "ARTISANAL" / "LOCAL"]`
-Prix : `[prix — ex: "8,90€"]`
-Tagline : `Le cheat meal qui n'en est pas un` *(fixe — ne pas modifier)*
+#### Si mode = `full-ia` et type = `lifestyle`
 
-Image hero : `[chemin vers photo produit détourée sur fond sombre — OBLIGATOIRE]`
+> Photo lifestyle generee par IA. Process 2 etapes : generation photo → edition IA pour logo sur sac kraft.
+> Voir `_config/lifestyle-process.md` pour le process complet.
 
-> **Note** : Ce template utilise le style Vitrine (fond gradient coloré, produit lumineux en hero). Pas de photo de fond contextuelle — le produit EST le visuel.
+| Champ | Valeur |
+|-------|--------|
+| Concept | [concept depuis `_config/concepts-visuels.md` section Lifestyle IA] |
+| Photo reference | [URL Pinterest/IG ou chemin local de la photo d'inspiration du modele] |
+| Personnage | [description OU "voir photo reference" — Claude analysera automatiquement] |
+| Tenue | [description OU "adapter depuis photo reference" — piece ambre OBLIGATOIRE] |
+| Posture | [en marche / assis / appuye — JAMAIS regard camera] |
+| Regard | [deporte droite / deporte gauche / profil / 3/4 dos] |
+| Scene | [description du lieu OU "adapter depuis photo reference"] |
+| Sac kraft | oui |
+| Cadrage | [plein pied / plan americain] |
+| TEXT_LINE_1 | [max 22 car OU "—"] |
+| TEXT_LINE_2 | [max 30 car OU "—"] |
 
-#### Si type = Focus Ingrédient (template: `vitrine.html — variante composant`)
+> **Process 3 etapes** (voir `_config/lifestyle-process.md`) :
+> 0. Claude analyse la photo reference et retranscrit le personnage, la tenue, le fond. Adapte pour StrictFood (piece ambre, sac kraft, regard candid).
+> 1. Generation photo de base via `/image-prompt-engineer` + `/nano-banana-pro` (4K). PAS de logo dans le prompt.
+> 2. Incrustation logo via Gemini edit avec `--reference-image public/logo/strictfood-logo-white-reference.png`.
 
-**Ingrédient** : [NOM INGRÉDIENT — ex: "Parmesan protéiné"]
-Artisan : `[nom fournisseur — ex: "Myfitcheese"]`
-Localité : `[ville — ex: "Perpignan"]`
-Fait clé : `[1 phrase ou chiffre impactant — ex: "28g de protéines pour 100g" / "Pétri chaque matin à 4h"]`
-Dans le : `[produit qui utilise cet ingrédient — ex: "STRICT Boeuf"]`
-Tagline : `Le cheat meal qui n'en est pas un` *(fixe — ne pas modifier)*
+#### Si mode = `template`
 
-Image hero : `[chemin vers photo ingrédient en gros plan — OBLIGATOIRE]`
+> Photo existante plein cadre + texte informatif overlay via `story-universal.html`.
+> Remplace les anciens templates (educatif, interactif, fiche-produit, annonce).
 
-> **Note** : Ce template utilise le style Vitrine. L'ingrédient est en hero plein cadre, lumineux, sans filtre.
-> **Highlight recommandé** : NOS ARTISANS
+| Champ | Valeur |
+|-------|--------|
+| Photo | `[chemin vers photo existante — OBLIGATOIRE]` |
+| TEXT_LINE_1 | [max 22 car — chiffre cle, nom produit, question, annonce] |
+| TEXT_LINE_2 | [max 30 car — unite, sous-titre, info complementaire] |
+| PHOTO_PRESET | [photo-centre / photo-droite / photo-gauche / photo-haut / photo-bas / photo-large] |
+| INFO_POSITION | [(vide=bas-centre) / info-haut-gauche / info-haut-centre / info-bas-gauche] |
 
-#### Si type = Interactif (template: `interactif.html`)
+**Exemples de contenu template** :
+- Educatif : TEXT_LINE_1 = "53G PROTEINES", TEXT_LINE_2 = "Ton shaker ne fait pas le poids"
+- Interactif : TEXT_LINE_1 = "QUEL EST TON STRICT ?", TEXT_LINE_2 = "—" (sondage ajoute nativement dans IG)
+- Fiche produit : TEXT_LINE_1 = "STRICT VEGE", TEXT_LINE_2 = "850 kcal"
+- Annonce : TEXT_LINE_1 = "MARDI-DIMANCHE", TEXT_LINE_2 = "11h-14h / 18h-22h"
 
-Format sticker : [Sondage 2 choix / Quiz / Slider / Question ouverte]
-Question : `[Texte de la question]`
-Option A : `[texte]`
-Option B : `[texte]`
-Tagline : `Le cheat meal qui n'en est pas un` *(fixe — ne pas modifier)*
+> Les VS blocs, macros bars, listes d'ingredients = supprimes du template. Si ce contenu est important, il va en caption Instagram ou en post carrousel.
 
-**Mode visuel** : [Single / VS]
+#### Si mode = `edit-ia` (hors-planning uniquement)
 
-**Si Single** (question générale, pas de comparaison produit) :
-Image de fond : `[chemin vers photo pertinente OU "aucune"]`
+> Photo existante editee/sublimee par IA, puis overlay via `story-universal.html`.
 
-**Si VS** (choix entre deux produits identifiables) :
-Produit A : `[nom court — ex: "Wrap"]` — image : `[chemin vers photo produit A]`
-Produit B : `[nom court — ex: "Burger"]` — image : `[chemin vers photo produit B]`
+| Champ | Valeur |
+|-------|--------|
+| Photo source | `[chemin vers photo existante — OBLIGATOIRE]` |
+| Direction edit | [ce qu'on veut modifier — ex: "ambiance DA, ombres dramatiques, tons cuivre" ou "bun-swap pain noir"] |
+| TEXT_LINE_1 | [max 22 car OU "—"] |
+| TEXT_LINE_2 | [max 30 car OU "—"] |
 
-> **Quand utiliser VS** : dès que les deux options sont des produits de la carte avec photos disponibles (burger vs wrap, boeuf vs poulet, etc.). Le template affiche les deux images en split + un bloc typographique "A VS B".
-> **Quand rester en Single** : question d'opinion générale, options abstraites, ou un seul produit en fond.
+#### Si mode = `irl` (hors-planning uniquement)
 
-#### Si type = Éducatif (template: `educatif.html`)
+> Photo fraiche prise en live + overlay DA minimal via `story-universal.html`.
 
-Titre : `[Question éducative — ex: "Cuisson sans huile ?"]`
-Chiffre clé : `[nombre]` + `[unité — ex: "grammes de lipides en moins"]`
-Explication : `[1-2 phrases]`
+| Champ | Valeur |
+|-------|--------|
+| Photo | `[chemin vers photo fraiche — OBLIGATOIRE, doit exister sur le disque]` |
+| TEXT_LINE_1 | [max 22 car OU "—"] |
+| TEXT_LINE_2 | [max 30 car OU "—"] |
+| PHOTO_PRESET | [photo-centre / photo-droite / photo-gauche / photo-haut / photo-bas / photo-large] |
+| IRL_FILTER | [none / leger / moyen / fort] |
+| INFO_POSITION | [(vide=bas-centre) / info-haut-gauche / info-haut-centre / info-bas-gauche] |
 
-Comparaison VS (optionnel) :
-- Strict Food's : `[valeur]` `[unité]`
-- Classique : `[label]` `[valeur]` `[unité]`
+#### Si traitement = `sillon`
 
-Image de fond : `[chemin vers photo contextuelle — cuisine, restaurant, etc.]`
-Alignement photo : `[element horizontal de reference — ex: "enseigne STRICT FOOD'S" / "comptoir" / "—"]`
-Image produit (optionnel) : `[chemin vers photo produit pour le pattern dual-image, OU "aucune"]`
+> Photo haut + arc dome + zone ambre bas. Le fond de la PHOTO est gere par `/image-prompt-engineer` via le champ Fond.
 
-#### Si type = Annonce / Lieu (template: `annonce.html`)
+| Champ | Valeur |
+|-------|--------|
+| PRODUCT_NAME | [max 20 car — nom produit en Oswald 120px] |
+| PRODUCT_INFO | [max 30 car — macros, accroche OU "—"] |
 
-Badge : `[texte badge — ex: "NOUVEAU" / "NOUS TROUVER"]`
-Headline : `[Titre principal — accepte <em> pour l'accent couleur]`
-Body : `[Texte corps — accepte <strong> pour les mots clés]`
-CTA : `[texte bouton ou "aucun"]`
-Image de fond : `[chemin vers photo pertinente OU "aucune" — préférer une image contextuelle]`
-Alignement photo : `[element horizontal de reference — ex: "enseigne STRICT FOOD'S" / "comptoir" / "—"]`
-Tagline : `Le cheat meal qui n'en est pas un` *(fixe — ne pas modifier)*
+#### Si traitement = `sceau`
 
-#### Si type = IRL (template: `irl-story.html`)
+> Cercle glassmorphism avec arc dome interieur, sur photo plein cadre. Zone libre en dessous pour stickers IG.
 
-> **Nouveau.** Photo brute prise par l'équipe (coulisses, rush, ambiance) avec overlay DA minimal.
+| Champ | Valeur |
+|-------|--------|
+| SCEAU_NAME | [max 12 car — nom produit, 2 lignes possibles avec <br>] |
+| SCEAU_SUB | [max 20 car — sous-titre] |
+| SCEAU_INFO | [max 15 car — info (kcal, prix) OU "—"] |
 
-Photo : `[chemin vers la photo brute]`
-Texte overlay : `[1 phrase courte — ex: "Derrière le comptoir" / "Rush du midi" / "—"]`
-Position texte : [bas / centre / haut — défaut: bas]
-Filtre : [léger / moyen / fort — défaut: léger]
+#### Si traitement = `feuillete-photo`
 
-> **Quand utiliser** : contenu authentique du quotidien (coulisses cuisine, ambiance, arrivages, équipe en action). Le pipeline applique un overlay DA minimal (logo + texte optionnel + filtre warm léger) sans dénaturer l'authenticité de la photo.
+> Photo plein cadre + bandeau dome ambre en haut. Utilise en sequence avec `feuillete-data`.
 
-#### Si type = Produit DA (mode: `irl-sublimation`)
+Pas de champs supplementaires — le template n'a que la photo + tagline + dome.
 
-> **Story visuelle.** Photo produit sublimée en plein cadre 1080×1920.
+#### Si traitement = `feuillete-data`
 
-Photo source : `[chemin vers la photo du produit]`
-Direction sublimation : `[ce qu'on veut améliorer — ex: "renforcer ambiance DA, ombres plus dramatiques"]`
-Texte overlay : `[optionnel — 1 phrase ou "—"]`
+> Fond charbon + donnee geante. Pas de photo. Fermeture de sequence.
 
-> Le pipeline sublime la photo via GPT Images en format 9:16, puis ajoute un overlay logo + texte optionnel via `irl-story.html`.
+| Champ | Valeur |
+|-------|--------|
+| DATA_NUMBER | [max 6 car — chiffre geant (ex: "946", "53G", "0%")] |
+| DATA_UNIT | [max 15 car — unite (ex: "CALORIES", "PROTEINES")] |
+| DATA_LINE_1 | [max 25 car — info (ex: "MARDI — DIMANCHE")] |
+| DATA_LINE_2 | [max 25 car — info (ex: "11h-14h / 18h-22h") OU "—"] |
 
-#### Si type = Produit en situation (mode: `compositing-irl` ou `compositing-ia`)
+#### Si type = `rappel`
 
-> **Story visuelle.** Produit intégré dans un lieu réel ou une scène IA, plein cadre 1080×1920.
+> Story bonus (#4) — rappel de presence. Visuel IA unique + accroche + CTA.
+> L'info (horaires, adresse, tel) est integree dans le prompt IA ou ajoutee en overlay natif Instagram par l'operateur.
+> Voir `_config/story-rappel.md` pour la banque d'accroches.
 
-**Si compositing-irl** :
-Photo produit : `[chemin vers la photo du produit]`
-Photo lieu : `[chemin vers la photo du lieu]`
-Intention compositing : `[ex: "burger posé sur le comptoir, lumière naturelle fenêtre"]`
-
-**Si compositing-ia** :
-Photo produit : `[chemin vers la photo du produit]`
-Scène imaginée : `[ex: "comptoir cuisine industrielle, vapeur, éclairage dramatique"]`
-
-Texte overlay : `[optionnel — 1 phrase ou "—"]`
-
-#### Si type = Visuel IA (mode: `full-ia`)
-
-> **Story visuelle.** Image entièrement générée par l'IA en plein cadre 1080×1920.
-
-Sujet : `[description du visuel — ex: "STRICT Bœuf en close-up macro, vapeur, fond charbon"]`
-Direction artistique : `[ambiance, éclairage, style — ex: "cinématique, contre-jour, grain film"]`
-Texte overlay : `[optionnel — 1 phrase ou "—"]`
-
-> Utiliser pour les stories d'impact visuel : lancements, visuels impossibles à photographier.
-
-#### Si type = Séquence (N/M)
-
-> **Multi-stories liées visuellement.** Pour les process en étapes, avant/après, séries éducatives.
-
-Position dans la séquence : `[N/M — ex: 1/3]`
-Titre séquence : `[Nom commun — ex: "Du brut à l'assiette"]`
-Template : `[template existant — educatif.html, annonce.html, etc.]`
-
-> Chaque story de la séquence est un `## Story N` séparé dans le brief, avec le champ `Position dans la séquence` rempli. Le pipeline ajoute un indicateur visuel (ex: "1/3") sur chaque story. Toutes les stories d'une séquence utilisent le même mood et la même famille visuelle pour la cohérence.
-
-[Remplir les champs du template choisi ci-dessus — Éducatif, Annonce, etc.]
-
-#### Si type = Recap
-
-> **Semi-manuel.** L'opérateur sélectionne le post le plus performant et le reposte en story.
-
-Action : repost en story du post avec le meilleur engagement.
-Texte overlay recommandé : `[texte]`
+| Champ | Valeur |
+|-------|--------|
+| Sujet | [description de la scene IA — ex: "facade StrictFood vue de nuit, neon blanc, ambiance urbaine" ou "comptoir vu de 3/4, barquettes kraft, vapeur air fryer"] |
+| Direction artistique | [ambiance, eclairage — ex: "nuit urbaine, neon, grain cinema" ou "lumiere chaude soiree, contre-jour"] |
+| Accroche | [depuis la banque — ex: "TON WEEK-END COMMENCE ICI"] |
+| Mot accent | [le mot en ambre — ex: "ICI"] |
+| CTA type | [telephone / horaires / adresse] |
+| CTA valeur | [ex: "06 11 74 59 44" ou "11h-14h / 18h-22h" ou "88 Chemin de la Roseraie"] |
+| TEXT_LINE_1 | [accroche courte OU "—" si ajoutee en natif IG] |
+| TEXT_LINE_2 | [CTA OU "—" si ajoute en natif IG] |
 
 ---
 
 ## Contraintes
 
-- DA : Dark Food Premium (templates dark) / Vitrine (Fiche Produit + Focus Ingrédient)
-- Mood : [cuivre / grenat / feuille] — cuivre = standard, grenat = intense/passion, feuille = nutrition/fraicheur
-- Image : [discret / visible / hero] — visible = defaut, hero = photo dominante
-- Sublimation : les templates appliquent automatiquement `text-depth` (headlines), `mark-tape` (body/info), `brightness(1.2)` (accents). Aucune action manuelle requise.
-- [Contrainte specifique si applicable]
+- DA : Dark Food Premium — template par defaut `story-universal.html`, ou traitement specifique (sillon, sceau, feuillete-photo, feuillete-data)
+- Mood : [cuivre / grenat / feuille] — cuivre = standard
+- **Fond** : assigne dans le planning pour le mode `full-ia` — determine la palette du prompt image
+- **Traitement** : assigne dans le planning — determine le template HTML utilise
+- **Pain noir obligatoire** sur tous les visuels burger
+- **Chaleur pulsee** : jamais "grill", "grille", "barbecue"
+- Tagline fixe : `Le cheat meal <em>qui n'en est pas un</em>`
 
-## Logique de variation de template
+## Etape suivante
 
-| Type | Template | Style |
-|------|----------|-------|
-### Stories template (mode `template`)
-
-| Type | Template | Famille |
-|------|----------|---------|
-| Fiche Produit | `vitrine.html — variante produit` | **Vitrine** |
-| Focus Ingrédient | `vitrine.html — variante composant` | **Vitrine** |
-| Éducatif | `educatif.html` | Dark Premium |
-| Interactif | `interactif.html` | Dark Premium |
-| Annonce / Lieu | `annonce.html` | Dark Premium |
-
-### Stories IRL (mode `irl`)
-
-| Type | Template | Famille |
-|------|----------|---------|
-| IRL | `irl-story.html` | Dark Premium (overlay minimal) |
-
-### Stories visuelles (modes `irl-sublimation`, `compositing-irl`, `compositing-ia`, `full-ia`)
-
-| Type | Mode | Famille |
-|------|------|---------|
-| Produit DA | `irl-sublimation` | Visuel plein cadre |
-| Produit en situation | `compositing-irl` / `compositing-ia` | Visuel plein cadre |
-| Visuel IA | `full-ia` | Visuel plein cadre |
-
-> Les stories visuelles produisent une image plein cadre 1080×1920. Un overlay logo + texte optionnel est ajouté via `irl-story.html`.
-
-### Séquence
-
-| Type | Mode | Famille |
-|------|------|---------|
-| Séquence (N/M) | Selon la story | Variable (même famille sur toute la séquence) |
-
-> **Mix quotidien** : alterner template, IRL et visuelles dans la journée. Chaque jour doit avoir au moins 2 modes différents et au moins 1 story non-template.
-> **Interactifs** : max 3/semaine.
-
-## Étape suivante
-
-> Exécuter `/story-producer S[X] [jour]` pour produire ces stories.
+> Executer `/story-producer S[X] [jour]` pour produire cette story.

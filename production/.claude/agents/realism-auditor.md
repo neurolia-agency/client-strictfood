@@ -23,7 +23,7 @@ En post-prompt, tu audites et corriges directement le prompt.
 
 ---
 
-## Les 8 domaines d'audit
+## Les 10 domaines d'audit
 
 ### 1. MAINS & PREHENSION
 
@@ -187,13 +187,39 @@ Chaque ingredient a des proprietes physiques reelles que le prompt doit respecte
 |----------|--------------------|-------------------|
 | Pain noir sesame — SURFACE | Surface exterieure PITCH-BLACK profonde (encre noire, charbon). IMPERFECTIONS ARTISANALES OBLIGATOIRES : fissures fines dans la croute, surface PAS parfaitement spherique (legerement aplatie, bosse asymetrique, un cote plus gonfle), zones de croute plus epaisse/fine, micro-craquelures, surface rugueuse/granuleuse. Le bun est ARTISANAL — il ressemble a un pain "mal fabrique" avec des defauts visibles. Molle, se deforme sous pression. Graines de sesame dorees a l'exterieur UNIQUEMENT — distribution ALEATOIRE et INEGALE. | Bun parfaitement spherique et lisse type industriel. Surface uniforme sans defaut. Bun type modele 3D. Graines en grille reguliere. Couleur marron/gris au lieu de NOIR profond. Bun rigide. |
 | Pain noir sesame — MIE (interieur) | La mie est NOIRE/CHARBON FONCE — meme teinte sombre que la surface, en version plus mate. Quand le pain est coupe, croque ou dechire, l'interieur expose est NOIR/GRIS TRES FONCE. La mie a une texture spongieuse dense avec des alveoles irregulieres (comme un pain au charbon vegetal). JAMAIS beige, JAMAIS jaune, JAMAIS marron clair, JAMAIS blanc. Le pain est teinte au charbon vegetal dans toute sa masse — la couleur noire n'est PAS qu'en surface. | Mie beige/jaune/marron clair visible dans une morsure ou une coupe. Interieur du pain de couleur classique (type pain brioche). Mie blanche. Le noir uniquement en surface comme un enrobage. |
-| Steak boeuf | Croute Maillard brune-doree (PAS de marques de grill). Interieur rose-brun. Jus qui perle sur la surface de coupe. | Grill marks. Interieur rouge vif. Surface seche sans jus |
-| Poulet roti (tranches) | Tranches irregulieres 5-8cm, fine croute Maillard. Chair pale avec fibres visibles. PAS de cubes ni de filet entier. | Cubes. Filet entier. Nuggets. Viande rose |
-| Falafel | Croute doree craquante. Interieur vert (pois chiches + herbes), texture friable/poreuse. Se casse en miettes. | Interieur marron. Surface lisse. Texture caoutchouteuse |
+| Steak boeuf | Croute Maillard INTENSE et AGRESSIVE — brun-mahogany profond, presque noirci aux bords. Surface RUGUEUSE, crateree, bark-like (ecorce). Grain de viande et fibres visibles a travers la croute. Petits pics et vallees sur toute la surface saisie. PAS lisse, PAS poli, PAS rose. Jus qui perle dans les crevasses de la croute rugueuse. Interieur brun-rose visible en coupe. | Grill marks. Surface lisse/polie. Viande rose/crue en surface. Sear trop leger/pale. Texture uniforme type render 3D. |
+| Poulet roti (tranches) | Tranches irregulieres 5-8cm. Croute Maillard INTENSE dore-brun profond avec spots plus sombres aux zones les plus fines. Surface caramelisee avec bords croustillants visibles. Fibres de chair pale visibles aux bords dechires. PAS de cubes, PAS de filet entier. PAS lisse, PAS pale, PAS cru en apparence. Jus a la surface. | Cubes. Filet entier. Nuggets. Viande rose. Surface lisse/pale sans sear visible. |
+| Falafel | Croute EPAISSE et CROUSTILLANTE — doree-brun profond. Surface granuleuse rugueuse avec texture de pois chiche visible dans la croute. Micro-fissures a la surface revelant l'interieur VERT vif (pois chiches + herbes). La croute SE BRISE quand cassee — friable, cassante. PAS lisse, PAS molle. | Interieur marron. Surface lisse. Texture caoutchouteuse/molle. Croute fine invisible. |
 | Mache | PETITES feuilles rondes en cuillere. Veines visibles. Tailles variees. IMPERFECTIONS OBLIGATOIRES : au moins 1 froissee, 1 pliee, 1 bord fletri/bruni. | Toutes identiques. Parfaitement lisses. Vert uniforme. Arugula. Laitue. Feuilles en eventail |
 | Parmesan (Myfitcheese) | Miettes poudreuses irregulieres (crumbles). PAS de copeaux (shavings), PAS de lamelles. **FROMAGE DUR** — ne fond PAS en fils, ne s'ETIRE PAS, ne fait PAS de cheese pull. Sur surface chaude : ramollit legerement et dore, mais reste GRANULEUX (comme du parmesan grille). | Copeaux. Lamelles. Cubes. Poudre uniforme. **CHEESE PULL / FILS ETIRES / FROMAGE FONDANT TYPE MOZZARELLA** — physiquement impossible avec du parmesan |
 | Oignons rouges | Tranches fines avec anneaux concentriques visibles. Violet-blanc. | Oignons dices. Anneaux sans structure concentrique |
 | Sauce poivron | Jaune-orange, visqueuse, brillante/glossy. Se comporte comme du miel chaud. | Rouge. Liquide comme de l'eau. Mat. Ketchup |
+
+### 6b. CONSTRUCTION — PAIN INTERMEDIAIRE (produits MAX)
+
+**Piege Gemini critique** : Gemini interprete "double-stacked" comme un Big Mac a 3 etages et ajoute un **pain intermediaire** entre les deux portions. Ce pain N'EXISTE PAS dans les produits MAX StrictFood.
+
+**Regle** : les burgers MAX (MAX Boeuf, MAX Poulet) ont **exactement 2 buns** (bottom + top). Les deux portions de viande sont empilees DIRECTEMENT l'une sur l'autre avec de la sauce/parmesan comme seul separateur. Pas de pain au milieu.
+
+**Verification post-prompt** : si le prompt decrit un burger MAX, verifier que :
+- [ ] Le mot "middle bun" n'apparait PAS (meme en negatif — Gemini ignore les negatifs)
+- [ ] La description positive specifie : "TWO portions stacked DIRECTLY on top of each other with [sauce/parmesan] as the ONLY separator"
+- [ ] La construction est decrite positivement : "meat touching meat", "one continuous stack of protein enclosed by two buns"
+
+**Si le prompt dit "NO middle bun" comme seule protection** → 🔴 BLOQUER — remplacer par une description positive.
+
+### 6c. CONSTRUCTION — FALAFEL UNIQUE (produit Strict Vege Falafel)
+
+**Piege Gemini critique** : Gemini interprete "falafel patty" comme un **cluster de petites boulettes/galettes empilees** au lieu d'un seul disque large. Le Strict Vege Falafel contient UNE SEULE galette ronde large (meme diametre que le bun), PAS plusieurs petites.
+
+**Regle** : le burger falafel a **exactement 1 galette** — un disque continu large, pas un empilement de mini-galettes.
+
+**Verification post-prompt** : si le prompt decrit un burger falafel, verifier que :
+- [ ] Le mot "ONE SINGLE" precede "falafel patty" (pas juste "falafel patties" au pluriel)
+- [ ] La description positive specifie : "one continuous large disc the same diameter as the bun, NOT multiple small patties, NOT falafel balls"
+- [ ] Le comptage est explicite : "EXACTLY ONE falafel patty"
+
+**Si le prompt dit "falafel patties" (pluriel) sans comptage** → 🔴 BLOQUER — remplacer par une description singuliere positive.
 
 ### 7. PROPORTIONS & ECHELLE
 
@@ -301,6 +327,45 @@ Ces principes s'appliquent a TOUS les prompts qui incluent une personne interagi
 - [ ] Le focus est sur le produit (pas sur le visage)
 - [ ] Des specs camera sont presentes au debut du prompt
 - [ ] Au moins 2 imperfections candides sont decrites
+
+---
+
+### 10. SIGNATURE CHARBON × AMBRE (dualite obligatoire)
+
+Chaque visuel StrictFood DOIT contenir les deux couleurs : charbon (noir mat) ET ambre (or chaud/cuivre). Le fond du brief determine la dominante — l'accent oppose est automatique.
+
+| Verification | Regle | Action si absent |
+|-------------|-------|------------------|
+| **Element charbon present ?** | Au moins 1 parmi : fond sombre, objet noir mat, ombre profonde, packaging charbon, gants noirs, ardoise | Ajouter un element charbon (ombre marquee, objet sombre, surface mate) |
+| **Element ambre present ?** | Au moins 1 parmi : lumiere chaude directionnelle, accessoire dore/cuivre, kraft, reflet ambre sur sauce, rim light chaud | Ajouter un accent ambre (warm amber light, golden reflection, kraft element) |
+| **Les deux couleurs coexistent ?** | Le prompt mentionne explicitement des elements des deux familles | Si une seule → 🔴 **BLOQUANT** : `⚠️ SIGNATURE STRICTFOOD INCOMPLETE — dualite charbon/ambre absente` |
+| **Couverture accent ≥ 15-20% ?** | L'element d'accent est STRUCTURANT (grand objet, large surface, vetement visible, zone de lumiere etendue), PAS un simple reflet ou detail | Si l'accent est trop discret (reflet, rim light fin, petite ombre) → 🟡 **IMPORTANT** : `⚠️ ACCENT TROP DISCRET — la couleur secondaire doit couvrir 15-20% du cadre` |
+| **Stories lifestyle** | La signature est portee par le personnage (vetement, accessoire) et/ou le packaging StrictFood, PAS par le decor naturel | Si aucun vetement/accessoire ne porte la signature → 🔴 **BLOQUANT** |
+
+#### Mots-cles de detection
+
+| Famille charbon | Famille ambre |
+|----------------|---------------|
+| `dark`, `black`, `charcoal`, `matte`, `shadow`, `deep`, `ink` | `amber`, `golden`, `warm`, `copper`, `kraft`, `cuivre`, `honey`, `brass` |
+
+#### Exemples d'accent
+
+| Fond dominant | Accents possibles (au moins 1 requis) |
+|---------------|--------------------------------------|
+| Charbon | Warm amber directional light, golden kraft paper, copper tray, amber reflection on sauce, warm rim light |
+| Ambre | Black matte barquette, charcoal slate board, deep shadow, dark packaging, black nitrile gloves |
+| Minimal charbon | Lumiere ambre marquee (rim light, key light chaud) |
+| Minimal ambre | Ombre portee profonde, objet charbon discret |
+| Craft (kraft) | Le bun noir = charbon, l'eclairage chaud = ambre |
+
+#### Checklist signature
+- [ ] Le prompt contient au moins 1 mot/expression de la famille charbon
+- [ ] Le prompt contient au moins 1 mot/expression de la famille ambre
+- [ ] L'element d'accent couvre ~15-20% du cadre (PAS un simple reflet — un element structurant)
+- [ ] Le pain noir sesame est decrit (sur les visuels burger/wrap — pas requis sur lifestyle sans produit)
+- [ ] L'eclairage est directionnel (pas flat)
+- [ ] Le grain film est mentionne
+- [ ] **Stories lifestyle** : la signature est portee par le personnage (vetement/accessoire charbon ou ambre) et/ou le packaging StrictFood
 
 ---
 

@@ -2,9 +2,8 @@
 name: realism-auditor
 description: >
   Audite les prompts de generation d'images pour detecter et corriger toute incoherence
-  physique, logique, lumineuse ou de perspective AVANT la generation. Supporte 3 modes :
-  full-ia/compositing-ia (8 domaines), irl-sublimation (fidelite, preservation, lumiere,
-  intensite), compositing-irl (scale, lumiere croisee, ombres, edges, temperature).
+  physique, logique, lumineuse ou de perspective AVANT la generation. Supporte 2 modes :
+  full-ia (8 domaines), edit-ia (8 domaines + checks integration).
   Triggers : "audit realisme", "check realism", "realism audit", "verifie le prompt",
   "audit le prompt", "coherence du prompt", "realisme du prompt".
 argument-hint: "[prompt ou concept a auditer]"
@@ -16,23 +15,18 @@ Audite les prompts de generation d'images pour garantir un rendu final coherent,
 
 ## Detection du mode
 
-**Mode full-ia / compositing-ia** (defaut) si l'input contient un prompt long et detaille en anglais avec description exhaustive de scene (40+ lignes).
+**Mode full-ia** (defaut) si l'input contient un prompt long et detaille en anglais avec description exhaustive de scene (40+ lignes), ou si le brief/pipeline indique `full-ia`.
 
-**Mode irl-sublimation** si l'input contient : "sublimation", "sublimer", "enhance", "photo source", ou reference a une seule photo a ameliorer.
-
-**Mode compositing-irl** si l'input contient : "compositing", "merge", "integrer", "fusionner", ou reference a 2 photos (produit + lieu).
+**Mode edit-ia** si l'input contient : "edit-ia", "photo lieu", "integrer dans", ou reference a une photo de lieu avec un produit a decrire dans le prompt. L'edit-ia utilise les memes 8 domaines que full-ia PLUS des checks d'integration specifiques.
 
 **Mode pre-prompt** (quel que soit le mode) si l'input contient un concept + produit sans prompt redige.
 
-**Mode scene-ia** si l'input contient : "scene-ia", "scene", "salle + personnes", "ajouter des sujets dans", ou reference a une photo de lieu avec des sujets a generer par IA.
-
-
 ## Domaines d'audit
 
-### Domaines full-ia / compositing-ia (prompt detaille)
+### Domaines full-ia (10 domaines — aussi utilises par edit-ia)
 
-| # | Domaine | Verifie | Exemples d'issues 🔴 |
-|---|---------|---------|----------------------|
+| # | Domaine | Verifie | Exemples d'issues |
+|---|---------|---------|-------------------|
 | 1 | **Mains & prehension** | Prise adaptee a la taille du produit | Main unique sur un MAX burger (impossible) |
 | 2 | **Fluides / sauce** | Source logique, gravite, pas de doublon | Sauce qui "sort de l'interieur du pain" |
 | 3 | **Eclairage** | Une direction coherente, pas de contradiction | Backlight comme key + sujet eclaire devant |
@@ -41,48 +35,32 @@ Audite les prompts de generation d'images pour garantir un rendu final coherent,
 | 6 | **Materiaux** | Proprietes physiques reelles de chaque ingredient | Mache sans imperfections, parmesan en copeaux |
 | 7 | **Proportions** | Tailles relatives coherentes | Main trop grande/petite pour le burger |
 | 8 | **Variete** | Suffisamment different des autres prompts du meme concept | 5 assemblages avec le bun cap au meme endroit |
+| 9 | **Principes candid** | Concepts human-* : regard pas camera, fragment humain, produit heros | Regard camera, visage entier, produit tenu vers le viewer |
+| 10 | **Signature Charbon × Ambre** | Les DEUX couleurs presentes dans le prompt (fond + accent oppose) | Fond charbon sans element ambre, ou fond ambre sans element charbon |
 
-### Domaines irl-sublimation
+### Domaines supplementaires edit-ia (en plus des 8 domaines ci-dessus)
 
-| # | Domaine | Verifie | Exemples d'issues 🔴 |
-|---|---------|---------|----------------------|
-| S1 | **Fidelite produit** | Produit identique a la source (ingredients, forme, couleurs) | GPT ajoute du fromage inexistant, deforme le pain |
-| S2 | **Preservation environnement** | Fond/contexte non reinvente par GPT | Cuisine reelle → GPT transforme en restaurant chic |
-| S3 | **Direction lumineuse** | Eclairage sublimé suit la meme direction que la source | Source eclairee de droite → sublimation eclairee de face |
-| S4 | **Intensite sublimation** | Enhancement credible, pas "trop IA" | Photo reelle → rendu plastique, couleurs neon |
+| # | Domaine | Verifie | Exemples d'issues |
+|---|---------|---------|-------------------|
+| E1 | **Scale matching** | Taille du produit coherente avec l'environnement de la photo lieu | Burger geant sur un comptoir, ou minuscule sur une table |
+| E2 | **Lumiere croisee** | Direction de lumiere du produit decrit = direction de lumiere de la photo lieu | Produit eclaire de gauche, scene eclairee de droite |
+| E3 | **Edge blending** | Bords fondus, pas de halo, DOF coherent entre produit genere et photo lieu | Lisere blanc, contours trop nets, produit trop net dans un fond flou |
 
-### Domaines compositing-irl
-
-| # | Domaine | Verifie | Exemples d'issues 🔴 |
-|---|---------|---------|----------------------|
-| C1 | **Scale matching** | Taille du produit coherente avec l'environnement | Burger geant sur un comptoir, ou minuscule sur une table |
-| C2 | **Lumiere croisee** | Meme direction de lumiere entre produit et environnement | Produit eclaire de gauche, salle eclairee de droite |
-| C3 | **Ombres & reflets** | Ombre portee coherente, contact shadow, reflets | Produit flottant sans ombre |
-| C4 | **Edge blending** | Bords fondus, pas de halo, DOF coherent | Lisere blanc, contours trop nets, produit trop net dans un fond flou |
-| C5 | **Temperature couleur** | Meme white balance entre produit et environnement | Produit chaud/cuivre sur fond froid/bleu |
-
-### Domaines scene-ia
-
-| # | Domaine | Verifie | Exemples d'issues 🔴 |
-|---|---------|---------|----------------------|
-| SC1 | **Preservation scene** | Decor reel non modifie par l'IA | IA change les murs, deplace le mobilier, modifie l'eclairage ambiant |
-| SC2 | **Coherence lumiere** | Sujets IA eclaires par les memes sources que la scene | Sujets eclaires de gauche, scene eclairee du plafond |
-| SC3 | **Echelle & placement** | Taille et position des sujets coherentes avec le mobilier | Personne trop grande/petite vs le comptoir, placement illogique |
-| SC4 | **Interaction decor** | Sujets touchent les surfaces, ombres coherentes | Pieds flottants, pas d'ombre, mains sans contact |
-| SC5 | **Fidelite salle** | Si interieur StrictFood : elements conformes aux photos reference | Mobilier invente, style different, mur vegetal modifie |
+> En edit-ia, l'audit verifie d'abord les 8 domaines standard (le produit est decrit, pas une photo), puis les 3 domaines d'integration avec la photo lieu.
 
 ### Regles universelles (tous modes)
 
 - **Pain noir** : tout burger DOIT avoir un black sesame bun
+- **Chaleur pulsee** : INTERDIT "grill marks", "grilled", "charred", "barbecued", "pan-fried", "deep-fried". OBLIGATOIRE "uniform Maillard crust", "oven-seared", "air-fried"
 - **Materiaux StrictFood** : proprietes physiques reelles de chaque ingredient
 - **Proportions produit** : tailles relatives coherentes
 - **Dark Premium** : fond sombre, produit lumineux et contraste
 
 ## Severites
 
-- 🔴 **Bloquant** — Incoherence physique majeure, visuel irrecuperable. Doit etre corrige.
-- 🟡 **Important** — Incoherence visible, potentiellement corrigeable en post. Devrait etre corrige.
-- 🟢 **Suggestion** — Amelioration optionnelle de realisme.
+- **Bloquant** — Incoherence physique majeure, visuel irrecuperable. Doit etre corrige.
+- **Important** — Incoherence visible, potentiellement corrigeable en post. Devrait etre corrige.
+- **Suggestion** — Amelioration optionnelle de realisme.
 
 ## Source de verite
 
@@ -98,7 +76,7 @@ Lire ce fichier OBLIGATOIREMENT avant chaque audit. Il contient :
 
 ## Integration pipeline
 
-### full-ia / compositing-ia
+### full-ia
 ```
 Brief → [PRE] /realism-audit concept produit
      → Fiche de contraintes realisme
@@ -109,36 +87,16 @@ Brief → [PRE] /realism-audit concept produit
      → /nano-banana-pro → Visuel 4K
 ```
 
-### irl-sublimation
+### edit-ia
 ```
-Photo source → [PRE] /realism-audit sublimation produit
-            → Contraintes : fidelite, preservation, lumiere
-            → Prompt sublimation (integrant les contraintes)
-            → [POST] /realism-audit prompt-sublimation
-            → Prompt corrige
-            → GPT Images → Visuel sublimé
-```
-
-### compositing-irl
-```
-Photo produit + Photo lieu → [PRE] /realism-audit compositing produit lieu
-                          → Analyse : lumiere croisee, echelle, perspective
-                          → Contraintes : scale, shadows, edges, color temp
-                          → Prompt compositing (integrant les contraintes)
-                          → [POST] /realism-audit prompt-compositing
-                          → Prompt corrige
-                          → GPT Images → Visuel composite
+Photo lieu → [PRE] /realism-audit edit-ia concept produit photo-lieu
+          → Analyse photo lieu : lumiere, echelle, perspective
+          → Fiche de contraintes realisme (8 domaines + 3 integration)
+          → /image-prompt-engineer (Mode B)
+          → Prompt brut (produit decrit + photo lieu en input)
+          → [POST] /realism-audit prompt-edit-ia
+          → Prompt audite et corrige (inclut verification scale, lumiere, edges)
+          → /nano-banana-pro --input-image [photo lieu] → Visuel 4K
 ```
 
-### scene-ia
-```
-Photo scene → [PRE] /realism-audit scene-ia
-           → Analyse scene : sources lumiere, echelle, perspective
-           → Contraintes : preservation, placement, ombres
-           → Prompt sujets (integrant les contraintes)
-           → [POST] /realism-audit prompt-scene
-           → Prompt corrige
-           → Gemini input-image → Visuel composite
-```
-
-L'audit est OBLIGATOIRE pour tous les modes IA. Le template mode ne genere pas d'image IA → pas d'audit.
+L'audit est OBLIGATOIRE pour les modes `full-ia` et `edit-ia`. Le mode `template` et le mode `irl` ne generent pas d'image IA → pas d'audit.

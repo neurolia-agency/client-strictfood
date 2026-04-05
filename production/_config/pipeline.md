@@ -15,7 +15,7 @@ StrictFood est ouvert **du mardi au dimanche**. Ferme le **lundi** uniquement.
 | Dimanche | 11h — 14h | 18h — 22h |
 
 **Implications pour la production** :
-- **IRL (photos fraiches)** : possibles du mardi au dimanche (6 jours)
+- **IRL (hors-planning uniquement)** : si Romain fournit des photos, elles vont en `hors-planning/`
 - **Seul jour ferme** : lundi — pas de rush, pas de service, pas de clients
 - **Annonces horaires** : TOUJOURS ecrire "du mardi au dimanche" (JAMAIS "du mardi au samedi")
 - **"Dernier jour de la semaine"** : le dimanche (PAS le samedi)
@@ -80,29 +80,45 @@ Tout agent, skill ou script qui injecte `{{TAGLINE}}` DOIT utiliser cette versio
 
 ## Modes de création
 
-Le pipeline supporte 5 modes de création. Le mode est spécifié dans le brief (champ `Mode`).
+Le pipeline supporte 4 modes de creation. Le mode est specifie dans le brief (champ `Mode`).
 
-| Mode | Description | Pipeline | API |
-|------|-------------|----------|-----|
-| `full-ia` | Gemini génère tout (produit + scène) | Art Direction → Input Mapping → Prompt → Gemini 4K | Gemini |
-| `irl-sublimation` | Photo réelle sublimée pour aligner DA | Photo source → Sublimation prompt → GPT Images | GPT Images |
-| `compositing-irl` | 2 photos réelles mixées (produit + lieu) | Photo produit + Photo lieu → Compositing → GPT Images | GPT Images |
-| `compositing-ia` | Photo produit réelle dans scène IA | Art Direction scène → Input Mapping → Prompt → Gemini 4K | Gemini |
-| `scene-ia` | Photo scène réelle + sujets IA (personnes, produits, interactions) | Photo scène → Realism Audit → Prompt sujets → Gemini input-image | Gemini |
-| `template` | Carrousels, infographies (HTML → Puppeteer) | Data mapping → Template HTML → Puppeteer | Aucune |
+| Mode | Description | Pipeline | API | Planifiable |
+|------|-------------|----------|-----|-------------|
+| `full-ia` | Gemini genere tout (produit DECRIT + scene) | Art Direction → Input Mapping → Prompt → Gemini 4K | Gemini | Oui |
+| `edit-ia` | Photo existante editee/sublimee par IA | Photo source → Edit prompt → GPT Images / Gemini | GPT Images / Gemini | **NON** (hors-planning uniquement) |
+| `template` | Photo plein cadre + texte overlay minimal | Data mapping → `story-universal.html` → Puppeteer | Aucune | Oui |
+| `irl` | Photo fraiche prise en live + overlay | Photo fraiche → `story-universal.html` → Puppeteer | Aucune | **NON** (hors-planning uniquement) |
+
+> Le planning standard n'utilise que `full-ia` et `template`. Les modes `edit-ia` et `irl` sont reserves au `hors-planning/`.
+> Les produits sont TOUJOURS decrits dans le prompt (jamais fournis en photo reference a l'IA).
+
+### Bun-swap (photos pain blanc)
+
+Les photos avec un pain blanc/rose/dore PEUVENT etre utilisees a condition de passer par un **bun-swap** :
+1. La photo est passee en `edit-ia` avec directive : "Replace the golden/white bun with a charcoal black sesame bun, keeping everything else identical"
+2. Le resultat est une photo avec pain noir, utilisable normalement
+3. Le brief doit mentionner `bun-swap-required`
 
 ### Quand utiliser quel mode
 
 | Pilier | Modes typiques | Justification |
 |--------|----------------|---------------|
-| Le Plat | `full-ia`, `compositing-ia` | Food porn premium, scènes élaborées |
-| La Cuisine | `irl-sublimation`, `compositing-irl` | Authenticité, photos réelles du process |
-| Les Macros | `template`, `full-ia` | Infographies, données visuelles |
-| L'Équipe | `irl-sublimation`, `compositing-irl`, `scene-ia` | Portraits réels, humanisation, interactions IA |
-| Le Quartier | `irl-sublimation`, `compositing-irl`, `scene-ia` | Lieu réel, communauté, scène de vie |
-| Scène de vie | `scene-ia` | Scène réelle du restaurant + personnes/interactions IA |
+| Le Produit | `full-ia` | Food porn premium, scènes élaborées |
+| Les Bénéfices | `template`, `full-ia` | Infographies, données visuelles, carrousels |
+| La Marque | `full-ia`, `template` | Ponctuel : process, portraits, ancrage local |
 
-> Aucun mode n'est réservé à un pilier. Un post "Le Plat" peut être en `irl-sublimation` (photo prise en cuisine) et un post "L'Équipe" peut être en `compositing-ia` (portrait dans une scène imaginée).
+> Posts simples (2/semaine) : tous en `full-ia`. Carrousels (2/semaine) : famille A = Puppeteer, famille B = Gemini × N, famille C = Gemini 16:9 + decoupe. Stories : **100% full-ia** (food 40% + lifestyle 30% + brand 30%). Le mode `template` n'est plus utilise pour les stories (trop redondant visuellement, limite la creativite).
+
+## Produit dans les prompts IA
+
+**Le produit est TOUJOURS décrit dans le prompt, JAMAIS fourni en photo reference.** Gemini génère le produit à partir de la description textuelle (ingrédients exacts depuis `_recettes/[slug].md`). Meilleurs résultats quand l'IA génère le produit : elle matche automatiquement la lumière, les ombres, la perspective et la profondeur de champ de la scène.
+
+### Règles produit dans le prompt
+
+1. **Description produit** : ingrédients exacts depuis `_recettes/[slug].md`
+2. **Imperfections bun** : rond mais avec bosses, creux, micro-fissures, zones qui s'effritent, texture rugueuse — NE JAMAIS dire "oblong" (ça change la forme)
+3. **Contraintes** : pain noir, pas de grill marks, croûte Maillard uniforme
+4. **Style** : `Documentary food photography. No text, no logos, no people.`
 
 ## Photos Référence
 
@@ -114,7 +130,7 @@ Le pipeline supporte 5 modes de création. Le mode est spécifié dans le brief 
 |-------|--------|
 | Agent | `production/.claude/agents/input-mapper.md` |
 | Modèle | Haiku (tâche déterministe) |
-| Déclenchement | Après validation de `production/art-direction.md` (modes `full-ia` et `compositing-ia`) |
+| Déclenchement | Après validation de `production/art-direction.md` (mode `full-ia`) |
 | Input | Chemin du dossier post (ex: `production/posts-stories/posts/periode-1/S3/24-03-2026/`) |
 | Output | `[dossier-post]/production/input.md` |
 | Consulte | `_config/photo-references.md` + `_recettes/[slug].md` |
@@ -135,16 +151,15 @@ Le pipeline supporte 5 modes de création. Le mode est spécifié dans le brief 
 | Agent | `production/.claude/agents/realism-auditor.md` |
 | Skill | `production/.claude/skills/realism-auditor/SKILL.md` |
 | Modèle | Sonnet |
-| Déclenchement | **OBLIGATOIRE** pour tous les modes IA (full-ia, compositing-ia, irl-sublimation, compositing-irl, scene-ia) |
+| Déclenchement | **OBLIGATOIRE** pour les modes IA (`full-ia`, `edit-ia`) |
 | Modes | Pre-prompt (concept → contraintes) + Post-prompt (prompt → audit + corrections) |
 
 ### Rulesets par mode
 
 | Mode | Domaines audités | Risques principaux |
 |------|-----------------|-------------------|
-| `full-ia` / `compositing-ia` | 8 domaines (mains, fluides, éclairage, perspective, construction, matériaux, proportions, variété) | Mains impossibles, sauce illogique, éclairage contradictoire |
-| `irl-sublimation` | 4 domaines (fidélité, préservation environnement, direction lumière, intensité) | GPT réinvente le décor, déforme le produit, aspect trop IA |
-| `compositing-irl` | 5 domaines (scale matching, lumière croisée, ombres/reflets, edge blending, température couleur) | Produit collé, échelle incohérente, absence d'ombres |
+| `full-ia` | 8 domaines (mains, fluides, éclairage, perspective, construction, matériaux, proportions, variété) | Mains impossibles, sauce illogique, éclairage contradictoire |
+| `edit-ia` | 4 domaines (fidélité, préservation environnement, direction lumière, intensité) | L'IA réinvente le décor, déforme le produit, aspect trop IA |
 
 > L'audit est OBLIGATOIRE avant toute génération IA. Le mode `template` (Puppeteer) n'est pas concerné.
 
@@ -192,11 +207,100 @@ Principes visuels obligatoires pour toutes les générations de visuels Instagra
 | Ambiance | Cuisine réelle en arrière-plan (inox, surfaces sombres, flou) — **mais avec un éclairage contrasté et dynamique** | Fond studio void pur noir, fond uni numérique, **fond uniformément sombre sans contraste** |
 | Grain et couleur | Film-like natural color, léger grain, **tons chauds riches et saturés, contraste marqué** | HDR, surexposition, **mais aussi : visuels ternes, sombres sans relief, couleurs délavées** |
 | Contraste et dynamisme | **Éclairage contrasté avec zones de lumière marquées sur le produit.** Le burger doit "ressortir" du fond sombre. Couleurs des ingrédients vives et appétissantes. | Éclairage plat et uniforme, produit qui se fond dans le fond, absence de points lumineux |
-| Photo input | TOUJOURS la photo du produit réel (strict-boeuf.png pour un boeuf) | Cross-product transform (poulet→boeuf) sauf si aucune photo du produit réel n'existe |
+| Produit | TOUJOURS décrit dans le prompt (jamais fourni en photo reference). Description depuis `_recettes/[slug].md` | Fournir une photo du produit en input à l'IA |
 
 > **IMPORTANT — Dark Premium ≠ Terne.** Le fond est sombre (charbon), mais le PRODUIT doit être lumineux, contrasté et appétissant. Les couleurs des ingrédients (vert mâche, orange sauce, doré graines sésame, brun croûte Maillard) doivent "éclater" sur le fond sombre. Un visuel Dark Food Premium réussi = fond sombre dramatique + sujet lumineux et saturé.
 
 > Ces règles s'appliquent à tous les agents et skills du pipeline. L'art director, le prompt engineer et l'opérateur doivent les respecter.
+
+## Signature visuelle StrictFood — Trinite Charbon × Ambre × Pain Noir
+
+**Chaque visuel StrictFood contient TOUJOURS ces 3 elements. Aucune exception. S'applique aux posts ET aux stories (food, lifestyle, brand).**
+
+### Les 3 constantes
+
+| Element | Description | Toujours present |
+|---------|-------------|:----------------:|
+| **Pain noir sesame** | Charcoal black sesame bun, surface encre noire, graines dorees irregulieres | OUI (sauf stories lifestyle sans produit visible) |
+| **Charbon** | Noir mat profond — en fond OU en accessoire/objet/vetement/ombre | OUI |
+| **Ambre** | Or chaud/cuivre — en fond OU en accessoire/lumiere/reflet/vetement | OUI |
+
+### Regle de dualite
+
+Les deux couleurs (charbon ET ambre) sont presentes sur chaque visuel. Le champ `Fond` du brief determine la dominante — l'accent oppose est automatique.
+
+### Regle de couverture minimale (15-20%)
+
+**La couleur secondaire (accent) doit couvrir au minimum 15-20% de la surface du visuel.** Ce n'est PAS un reflet discret ou un detail — c'est un element structurant, visible au premier coup d'oeil.
+
+| Couleur secondaire | 15-20% = concretement | Trop peu (< 10%) |
+|-------------------|------------------------|-------------------|
+| **Ambre sur fond charbon** | Grand element dore (sac kraft, plateau, surface partielle, vetement, lumiere chaude marquee couvrant 1/5 du cadre) | Simple reflet sur la sauce, rim light fin, graine de sesame |
+| **Charbon sur fond ambre** | Objet noir mat imposant (sac StrictFood, barquette, vetement sombre, ombre portee large, surface charbon partielle) | Petite ombre, logo discret, fine ligne sombre |
+
+**Application par type de story :**
+
+| Type story | Dominant typique | Accent 15-20% | Exemples concrets |
+|------------|-----------------|----------------|-------------------|
+| **Food** | Charbon (fond sombre) | Ambre : kraft dore visible, lumiere chaude marquee, surface ambre partielle | Hero shot sur fond charbon + large papier kraft dore sous le produit |
+| **Lifestyle** | Variable (scene reelle) | Si scene claire → vetement/accessoire charbon (veste noire, sac noir StrictFood, casquette sombre). Si scene sombre → piece ambre (echarpe doree, sac kraft, lumiere ambre marquee) | Personnage en veste noire dans un parc ensoleille + sac kraft dore. OU : scene de rue sombre + echarpe/accessoire ambre |
+| **Brand/Rappel** | Charbon ou ambre | L'accent oppose couvre 15-20% (texte overlay, element graphique, accessoire) | Fond charbon + zone ambre avec accroche. OU : fond ambre + element charbon (ardoise, packaging) |
+
+**Pour les stories lifestyle** (scenes de vie, exterieurs, environnements varies) :
+- La signature NE DEPEND PAS du decor naturel — elle est portee par le PERSONNAGE et ses ACCESSOIRES
+- Vetement noir/charbon (veste, t-shirt, casquette) = element charbon
+- Accessoire ambre/dore (sac kraft StrictFood, echarpe, bijou, lumiere chaude) = element ambre
+- Le sac kraft noir avec logo dore StrictFood est l'accessoire ideal — il porte les DEUX couleurs
+- Si la scene naturelle est deja dans les tons charbon (nuit, interieur sombre), l'accent ambre vient d'un vetement ou accessoire dore
+- Si la scene est lumineuse/chaude (golden hour, plage, parc), l'accent charbon vient d'un vetement ou objet sombre
+
+| Fond du brief | Dominant | Accent (automatique) | Exemples d'accent |
+|---------------|----------|---------------------|-------------------|
+| `charbon` | Fond sombre mat | Element ambre visible | Gants dores, plateau cuivre, serviette ambre, papier kraft dore, reflet chaud marque sur la sauce, lumiere ambre directionnelle |
+| `ambre` | Fond dore chaud texture | Element charbon visible | Barquette noire mate, ardoise charbon, emballage noir, ombre portee profonde, ustensile sombre |
+| `ambre+charbon` | Fond ambre | Accessoires charbon multiples | Papier kraft noir, ardoise, ustensiles sombres |
+| `charbon+ambre` | Fond charbon | Accessoires ambre multiples | Serviette doree, sauce visible, eclats sesame, lumiere chaude marquee |
+| `minimal` | Charbon OU ambre uni | L'accent oppose est dans la lumiere ou un detail | Rim light ambre sur fond charbon, ombre charbon sur fond ambre |
+| `craft` | Kraft naturel | Les deux couleurs via le produit (bun noir) + lumiere (ambre) | Le kraft est neutre, le bun apporte le charbon, l'eclairage apporte l'ambre |
+
+### Bloc de constantes prompt (injection obligatoire)
+
+Le skill `/image-prompt-engineer` DOIT injecter ce bloc dans chaque prompt StrictFood :
+
+```
+STRICTFOOD VISUAL SIGNATURE (mandatory — posts AND stories):
+- CHARCOAL × AMBER DUALITY: both colors MUST be present in the image
+  - The SECONDARY color covers at least 15-20% of the frame — it is a STRUCTURAL element, not a subtle detail
+  - If charcoal-dominant → amber element covers ~15-20% (large kraft paper, warm-lit surface area, golden clothing piece, amber spotlight zone)
+  - If amber-dominant → charcoal element covers ~15-20% (black jacket, dark bag, charcoal surface, deep shadow mass)
+  - For LIFESTYLE scenes: the signature is carried by the PERSON (clothing, accessories) and the StrictFood PACKAGING (black kraft bag with gold logo), NOT by the natural environment
+- BLACK SESAME BUN: always present on burger/wrap visuals (not required on lifestyle stories without visible product)
+- DIRECTIONAL LIGHTING: never flat — always sculpted, dramatic, with clear light direction
+- FILM GRAIN: subtle analog grain, warm tones, NOT digital-clean
+- ARTISANAL IMPERFECTIONS: crumbs, asymmetry, sauce drip, paper fold — never sterile
+```
+
+### Exemples concrets
+
+| Concept | Fond | Accent | Resultat |
+|---------|------|--------|----------|
+| concept-macro | charbon | Eclairage ambre chaud qui fait briller la sauce | Gros plan croute Maillard, sauce dorée qui capte une lumière chaude, fond noir mat |
+| concept-main | ambre | Gant noir qui contraste | Main gantée noire sur fond doré, pain noir sésame, lumière chaude |
+| concept-coupe | minimal charbon | Kraft doré sous le burger coupé | Burger tranché sur papier kraft, fond noir, lumière ambre latérale |
+| concept-flatlay | ambre | Ardoise charbon comme support | Vue top-down, sol ambre, ardoise noire avec burger, accessoires sombres |
+| concept-levitation | charbon | Reflet ambre au sol + rim light doré | Burger flottant, fond noir, halo doré en bas, lumiere de contour ambre |
+| concept-decon | minimal ambre | Ingredients alignes sur surface noire mate | Fond ambre, planche charbon, ingredients separes, eclairage dramatique |
+| **story food** | charbon | Kraft dore ~20% du cadre | Hero shot 9:16, fond charbon, large papier kraft dore sous le burger, lumiere ambre |
+| **story lifestyle** | scene claire (parc) | Veste noire + sac kraft noir/dore ~15% | Personnage en veste charbon dans un parc, tenant un sac kraft StrictFood dore, golden hour |
+| **story lifestyle** | scene sombre (nuit) | Echarpe/accessoire ambre ~15% | Scene de rue la nuit, personnage avec accessoire ambre (echarpe, bonnet dore), sac kraft noir |
+| **story brand** | charbon | Zone ambre avec accroche texte ~20% | Fond charbon, bande ambre avec texte "Ouvert mardi-dimanche", produit en bas |
+
+### Verification
+
+Le `realism-auditor` verifie la presence de la dualite :
+- Le prompt mentionne-t-il un element charbon ? (fond, objet, ombre)
+- Le prompt mentionne-t-il un element ambre ? (fond, lumiere, accessoire, reflet)
+- Si l'un des deux manque → **BLOQUANT** : `⚠️ SIGNATURE STRICTFOOD INCOMPLETE — dualite charbon/ambre absente`
 
 ## Brand Props
 
@@ -217,7 +321,9 @@ Certains ingrédients ont un rendu visuel problématique si mal traduits. Ces tr
 | Mâche (feuilles entières) | "lamb's lettuce (mâche) — small, round, spoon-shaped whole leaves" | "arugula", "rocket", "lettuce", "spinach" |
 | Oignons rouges en tranches fines | "thin-sliced red onion rings with visible concentric layers" | "diced", "chopped", "minced" |
 | Sauce poivron | "a thin delicate drizzle of yellow-orange pepper sauce — a single fine thread" | "ketchup", "mustard", "mayo", "thick sauce" |
-| Croûte Maillard (chaleur pulsée) | "uniform golden-brown Maillard crust, smooth caramelized surface (oven-seared)" | "grill marks", "char lines", "blackened" |
+| Croûte Maillard boeuf (chaleur pulsée) | "deep intense Maillard crust (oven-seared at high pulsed heat) — rough, cratered, bark-like surface, deep mahogany-brown almost blackened at edges, visible meat grain, NOT smooth, NOT polished" | "grill marks", "char lines", "smooth surface", "pink meat" |
+| Croûte Maillard poulet (chaleur pulsée) | "deep golden-brown Maillard crust (oven-seared at high pulsed heat) — caramelized surface with crispy edges, darker spots at thinnest points, shredded pale meat fibers at torn edges, NOT smooth, NOT pale" | "grill marks", "char lines", "smooth surface", "raw-looking" |
+| Croûte falafel (chaleur pulsée) | "deep golden crispy crust (air-fried at high pulsed heat) — thick, crunchy, rough granular surface, micro-cracks revealing green interior, SHATTERS when broken, NOT smooth, NOT soft" | "deep-fried", "smooth surface", "brown interior" |
 
 > **Règle** : le prompt engineer DOIT consulter ce tableau avant d'écrire tout prompt contenant ces ingrédients. Si un terme INTERDIT apparaît dans un prompt, c'est un bug.
 
@@ -226,12 +332,60 @@ Certains ingrédients ont un rendu visuel problématique si mal traduits. Ces tr
 | Mode | Modèle | Usage |
 |------|--------|-------|
 | `full-ia` | Gemini (Nanobanana Pro) | Génération complète produit + scène |
-| `irl-sublimation` | GPT Images (gpt-image-1) | Retouche/sublimation photo réelle |
-| `compositing-irl` | GPT Images (gpt-image-1) | Mixage 2 photos réelles |
-| `compositing-ia` | Gemini (Nanobanana Pro) | Intégration produit réel dans scène IA |
-| `scene-ia` | Gemini (Nanobanana Pro) | Intégration sujets IA dans scène réelle |
+| `edit-ia` | GPT Images (gpt-image-1) ou Gemini | Edition/sublimation photo existante |
 | `template` | Aucun (Puppeteer) | Rendu HTML en PNG |
+| `irl` | Aucun (Puppeteer) | Photo fraiche + overlay |
 
 **Fallbacks** :
-- Si Gemini échoue sur `full-ia` / `compositing-ia` → basculer sur GPT Images
+- Si Gemini échoue sur `full-ia` → basculer sur GPT Images
 - Si le mode nécessite du texte on-image → forcer GPT Images quel que soit le mode
+
+## Carrousels — 9 types, 3 familles
+
+### Rythme
+
+**2 carrousels par semaine** (+ 2 posts simples = 4 publications/semaine).
+
+### Familles
+
+| Famille | Types | Pipeline | API |
+|---------|-------|----------|-----|
+| **A — Texte** | Educatif, Ingredient Spotlight, Menu Objectif | Recherche → Copywriting → Template HTML → Puppeteer | Aucune |
+| **B — Photo** | Zoom Progressif, Texture/ASMR, Construction, Defile Gamme, Process Cuisine | Bloc coherence → Prompt × N slides → Gemini 4K | Gemini |
+| **C — Panoramique** | Panoramique | Prompt scene large → Gemini 4K (16:9) → `render-panoramic.js` | Gemini |
+
+### Distribution mensuelle (~8/mois)
+
+| Type | Famille | Freq/mois | Pilier |
+|------|---------|-----------|--------|
+| Panoramique | C | 2-3 | Le Produit |
+| Zoom Progressif | B | 1-2 | Le Produit |
+| Texture/ASMR | B | 1 | Le Produit |
+| Educatif | A | 1 | Les Benefices |
+| Construction | B | 0.5 | Le Produit |
+| Ingredient Spotlight | A | 0.5 | Les Benefices |
+| Defile Gamme | B | 0.5 | Le Produit |
+| Process Cuisine | B | 0.5 | La Marque |
+| Menu Objectif | A | 0.5 | Les Benefices |
+
+### Contraintes carrousels
+
+- Pas 2 memes types d'affilee (varier)
+- Pas 2 memes produits en carrousel que la semaine precedente
+- Max 1 carrousel texte (famille A) par semaine
+- Le panoramique est le format le plus frequent (2-3/mois)
+- Pain noir obligatoire sur tous les burgers visibles
+- Pas de grill marks
+- Produit DECRIT dans les prompts (jamais de photo reference)
+
+### Briefs
+
+| Famille | Template | Commande |
+|---------|----------|----------|
+| A | `_templates/brief-carousel.md` | `/carousel-producer DD-MM-YYYY` |
+| B | `_templates/brief-carousel-photo.md` | Prompt × N + `/nano-banana-pro` |
+| C | `_templates/brief-carousel-panoramique.md` | Prompt + `/nano-banana-pro` + `render-panoramic.js` |
+
+### Reference complete
+
+→ `_config/carousel-themes.md` (taxonomie, scenes panoramiques, sequences zoom/texture/construction/gamme/process, 31 themes educatifs)

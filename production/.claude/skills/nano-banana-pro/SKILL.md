@@ -1,6 +1,13 @@
 ---
 name: nano-banana-pro
-description: Generate and edit images using Google's Nano Banana Pro (Gemini 3 Pro Image) API. Use when the user asks to generate, create, edit, modify, change, alter, or update images. Also use when user references an existing image file and asks to modify it in any way (e.g., "modify this image", "change the background", "replace X with Y"). Supports both text-to-image generation and image-to-image editing with configurable resolution (1K default, 2K, or 4K for high resolution). DO NOT read the image file first - use this skill directly with the --input-image parameter.
+description: >
+  Génère et édite des images via l'API Nano Banana Pro (Gemini 3 Pro Image).
+  Utiliser quand l'utilisateur demande de générer, créer, éditer, modifier ou retoucher une image.
+  Aussi quand un fichier image existant est référencé pour modification (fond, remplacement, retouche).
+  Supporte text-to-image et image-to-image, résolution configurable (1K, 2K, 4K).
+  NE PAS lire l'image avant — utiliser directement avec --input-image.
+  Triggers : "génère l'image", "nano banana", "gemini image", "génère avec gemini",
+  "modifie cette image", "change le fond", "retouche", "image 4K".
 ---
 
 # Nano Banana Pro Image Generation & Editing
@@ -77,6 +84,25 @@ When the user wants to modify an existing image:
 **For editing:** Pass editing instructions in `--prompt` (e.g., "add a rainbow in the sky", "make it look like a watercolor painting")
 
 Preserve user's creative intent in both cases.
+
+## ⛔ Realism Audit obligatoire AVANT generation (StrictFood)
+
+**AVANT de lancer `generate_image.py`** pour un visuel StrictFood (post, story, freestyle) :
+
+Verifier que le skill `/realism-auditor` a ete formellement invoque dans cette conversation :
+- **PRE-PROMPT** : extraction des contraintes (avant ecriture du prompt)
+- **POST-PROMPT** : audit du prompt fini (apres ecriture du prompt)
+
+Si l'un des deux est manquant → **BLOQUER la generation** :
+```
+STOP — GENERATION BLOQUEE
+Le skill /realism-auditor n'a pas ete invoque en [PRE/POST]-PROMPT.
+Invoquer /realism-auditor maintenant avant de continuer.
+```
+
+Ne PAS appliquer les contraintes "de tete" sans invoquer le skill. L'application manuelle produit systematiquement des erreurs (cheese pull, grill marks, morsure impossible, pain blanc).
+
+**Exception** : si le prompt ne concerne PAS un produit StrictFood (test, image decorative sans produit), l'audit n'est pas requis.
 
 ## ⛔ Pain noir obligatoire (StrictFood)
 
