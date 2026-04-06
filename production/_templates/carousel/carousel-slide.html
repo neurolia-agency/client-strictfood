@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="_base/carousel-base.css">
+<style>
+  body { background: var(--charbon); }
+
+  /* === LAYOUT: stat === */
+  .layout-stat .content { gap: 50px; }
+
+  /* === LAYOUT: vs === */
+  .layout-vs .content { gap: 40px; }
+
+  /* === LAYOUT: bullets === */
+  .layout-bullets .content { gap: 45px; }
+
+  /* === LAYOUT: text === */
+  .layout-text .content { gap: 40px; }
+
+  /* === LAYOUT: quote === */
+  .layout-quote .content {
+    justify-content: center;
+    gap: 0;
+  }
+  .layout-quote .quote-block {
+    margin-top: 40px;
+  }
+
+  /* === LAYOUT: split === */
+  .layout-split .content {
+    gap: 30px;
+  }
+  .layout-split .split-row {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+  }
+  .layout-split .split-text {
+    flex: 1;
+  }
+  .layout-split .split-stats {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .layout-split .mini-stat {
+    text-align: center;
+  }
+  .layout-split .mini-stat-value {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 72px;
+    color: var(--ambre);
+    line-height: 1;
+  }
+  .layout-split .mini-stat-label {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 16px;
+    color: rgba(var(--blanc-rgb), 0.6);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+</style>
+</head>
+<body class="layout-{{LAYOUT}}">
+  <div class="bg-charbon"></div>
+
+  <div class="content">
+    {{SLIDE_CONTENT}}
+  </div>
+
+  <div class="grain"></div>
+</body></html>

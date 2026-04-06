@@ -1,0 +1,533 @@
+/* ============================================
+   CAROUSEL BASE CSS — StrictFood "Béton & Marker"
+   1080 x 1350 (portrait 4:5)
+   Style : béton brut + soulignements marker + tape ambre + grain 8%
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Space+Grotesk:wght@600;700&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap');
+
+/* === Reset === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* === Dimensions === */
+body {
+  width: 1080px;
+  height: 1350px;
+  overflow: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* === Tokens === */
+:root {
+  --ambre: #E5A520;
+  --charbon: #1a1714;
+  --blanc: #f5f0e8;
+  --blanc-pur: #fff;
+
+  --ambre-rgb: 229, 165, 32;
+  --charbon-rgb: 26, 23, 20;
+  --blanc-rgb: 245, 240, 232;
+
+  --font-display: 'Oswald', sans-serif;
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+
+  --safe-margin: 80px;
+}
+
+/* =============================================
+   FONDS — Béton brut (remplace les aplats plats)
+   ============================================= */
+
+/* Fond charbon béton — texture concrete brute, micro-fissures, grain visible */
+.bg-charbon {
+  position: absolute;
+  inset: 0;
+  background-color: #1c1915;
+  background-image:
+    /* Veinures / micro-fissures diagonales */
+    repeating-linear-gradient(
+      -35deg,
+      transparent,
+      transparent 80px,
+      rgba(var(--blanc-rgb), 0.008) 80px,
+      rgba(var(--blanc-rgb), 0.008) 81px
+    ),
+    /* Gradient de profondeur — lueur ambre subtile */
+    radial-gradient(
+      ellipse at 45% 35%,
+      rgba(var(--ambre-rgb), 0.04) 0%,
+      transparent 55%
+    ),
+    /* Speckle béton — taches claires irrégulières */
+    radial-gradient(circle at 20% 70%, rgba(var(--blanc-rgb), 0.015) 0%, transparent 2%),
+    radial-gradient(circle at 75% 25%, rgba(var(--blanc-rgb), 0.012) 0%, transparent 3%),
+    radial-gradient(circle at 55% 85%, rgba(var(--blanc-rgb), 0.018) 0%, transparent 1.5%),
+    radial-gradient(circle at 30% 15%, rgba(var(--blanc-rgb), 0.01) 0%, transparent 2.5%),
+    /* Variation de ton — le béton n'est jamais uniforme */
+    radial-gradient(ellipse at 70% 60%, rgba(var(--blanc-rgb), 0.02) 0%, transparent 40%),
+    radial-gradient(ellipse at 25% 40%, rgba(var(--charbon-rgb), 0.3) 0%, transparent 35%);
+}
+
+/* Fond ambre béton — surface ambre avec texture minérale */
+.bg-ambre {
+  position: absolute;
+  inset: 0;
+  background-color: var(--ambre);
+  background-image:
+    repeating-linear-gradient(
+      -35deg,
+      transparent,
+      transparent 60px,
+      rgba(var(--charbon-rgb), 0.03) 60px,
+      rgba(var(--charbon-rgb), 0.03) 61px
+    ),
+    radial-gradient(ellipse at 40% 60%, rgba(var(--charbon-rgb), 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 30%, rgba(var(--blanc-rgb), 0.1) 0%, transparent 40%);
+}
+
+/* =============================================
+   GRAIN — 8% opacité (agressif, anti-IA)
+   ============================================= */
+
+.grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.08;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 10;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+  background-size: 256px;
+}
+
+/* Second layer grain plus gros (Tri-X feel) */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 128 128' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.45' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.4'/%3E%3C/svg%3E");
+  background-size: 128px;
+}
+
+/* =============================================
+   ZONE DE CONTENU
+   ============================================= */
+
+.content {
+  position: absolute;
+  top: var(--safe-margin);
+  left: var(--safe-margin);
+  right: var(--safe-margin);
+  bottom: var(--safe-margin);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 40px;
+  z-index: 2;
+}
+
+/* =============================================
+   TYPOGRAPHIE — Oswald + légère rotation organique
+   ============================================= */
+
+.headline {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  line-height: 1.05;
+  color: var(--ambre);
+  /* Micro-rotation : rien n'est parfaitement droit sur du béton */
+  transform: rotate(-0.3deg);
+}
+.headline--xl { font-size: 100px; letter-spacing: 6px; }
+.headline--lg { font-size: 80px; letter-spacing: 5px; }
+.headline--md { font-size: 64px; letter-spacing: 4px; }
+.headline--sm { font-size: 52px; letter-spacing: 3px; }
+
+.subheading {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--blanc);
+}
+
+.body-text {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 34px;
+  color: var(--blanc);
+  line-height: 1.5;
+}
+.body-text strong {
+  color: var(--ambre);
+  font-weight: 500;
+}
+
+/* =============================================
+   MARKER UNDERLINE — Soulignement épais irrégulier
+   Utilisation : <span class="marker">MOT CLÉ</span>
+   ============================================= */
+
+/* === Marker underline — SUPPRIMÉ (trop IA/gimmick) === */
+
+.marker { position: relative; display: inline; }
+.marker::after { display: none; }
+.marker--strong::after { display: none; }
+
+/* =============================================
+   TAPE STRIP — Bande adhésive ambre
+   Utilisation : <div class="tape">CONTENU</div>
+   ============================================= */
+
+.tape {
+  position: relative;
+  display: inline-block;
+  padding: 12px 30px 10px;
+  background: rgba(var(--ambre-rgb), 0.15);
+  border: 1px solid rgba(var(--ambre-rgb), 0.25);
+  transform: rotate(-0.7deg);
+  /* Effet adhésif — ombre légère dessous */
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 0 0 1px rgba(var(--ambre-rgb), 0.05);
+}
+.tape::before,
+.tape::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  width: 3px;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(var(--ambre-rgb), 0.2) 0px,
+    rgba(var(--ambre-rgb), 0.2) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+}
+.tape::before { left: 0; }
+.tape::after { right: 0; }
+
+/* =============================================
+   STAMP — Cachet/tampon rond
+   Utilisation : <span class="stamp">ZÉRO HUILE</span>
+   ============================================= */
+
+.stamp {
+  display: inline-block;
+  padding: 10px 24px;
+  border: 3px solid var(--ambre);
+  border-radius: 4px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--ambre);
+  transform: rotate(-3deg);
+  opacity: 0.85;
+}
+
+/* === Séparateur arc dome — SUPPRIMÉ (trop IA/template) === */
+
+.separator { display: none; }
+
+/* =============================================
+   STAT BLOCK — Chiffre géant
+   ============================================= */
+
+.stat-block {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+}
+.stat-number {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 200px;
+  color: var(--ambre);
+  line-height: 1;
+  /* Le chiffre a un poids visuel brut */
+  transform: rotate(-0.5deg);
+}
+.stat-unit {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 30px;
+  color: var(--blanc);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+.stat-context {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 26px;
+  color: rgba(var(--blanc-rgb), 0.6);
+  margin-top: 8px;
+}
+
+/* =============================================
+   VS BLOCK — Comparatif 2 colonnes
+   ============================================= */
+
+.vs-block {
+  display: flex;
+  gap: 30px;
+  align-items: stretch;
+}
+.vs-col {
+  flex: 1;
+  padding: 30px;
+  border-radius: 4px;
+}
+.vs-good {
+  background: rgba(var(--ambre-rgb), 0.08);
+  border-left: 4px solid var(--ambre);
+  /* Légère rotation pour casser la symétrie */
+  transform: rotate(0.3deg);
+}
+.vs-bad {
+  background: rgba(var(--blanc-rgb), 0.04);
+  border-left: 4px solid rgba(var(--blanc-rgb), 0.2);
+  transform: rotate(-0.3deg);
+}
+.vs-label {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.vs-good .vs-label { color: var(--ambre); }
+.vs-bad .vs-label { color: rgba(var(--blanc-rgb), 0.5); }
+.vs-item {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1.4;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(var(--blanc-rgb), 0.06);
+}
+.vs-item:last-child { border-bottom: none; }
+.vs-good .vs-item { color: var(--blanc); }
+.vs-bad .vs-item { color: rgba(var(--blanc-rgb), 0.5); }
+.vs-item strong {
+  color: var(--ambre);
+  font-weight: 500;
+}
+
+/* =============================================
+   BULLET LIST — Puces losange
+   ============================================= */
+
+.bullet-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.bullet-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+.bullet-icon {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  margin-top: 14px;
+  background: var(--ambre);
+  transform: rotate(45deg);
+}
+.bullet-text {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 32px;
+  color: var(--blanc);
+  line-height: 1.4;
+}
+.bullet-text strong {
+  color: var(--ambre);
+  font-weight: 500;
+}
+
+/* =============================================
+   QUOTE BLOCK
+   ============================================= */
+
+.quote-block {
+  border-left: 5px solid var(--ambre);
+  padding-left: 30px;
+  /* Le bloc quote est légèrement décalé — comme collé au mur */
+  transform: rotate(-0.2deg);
+}
+.quote-text {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 38px;
+  font-style: italic;
+  color: var(--blanc);
+  line-height: 1.4;
+}
+.quote-source {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 16px;
+  color: rgba(var(--blanc-rgb), 0.5);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 16px;
+}
+
+/* =============================================
+   SOURCE LINE (discret)
+   ============================================= */
+
+.source {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 14px;
+  color: rgba(var(--blanc-rgb), 0.3);
+  font-style: italic;
+}
+
+/* =============================================
+   TAGLINE
+   ============================================= */
+
+.tagline {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--blanc-pur);
+  line-height: 1.3;
+  text-align: center;
+}
+.tagline em {
+  font-style: italic;
+  color: var(--ambre);
+}
+
+/* Version fond ambre : tagline en charbon */
+.bg-ambre ~ * .tagline { color: var(--blanc-pur); }
+.bg-ambre ~ * .tagline em { color: var(--charbon); }
+
+/* =============================================
+   BOTTOM ZONE
+   ============================================= */
+
+.bottom {
+  position: absolute;
+  bottom: var(--safe-margin);
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* === Swipe indicator — SUPPRIMÉ (IG montre les dots) === */
+
+.swipe {
+  display: none;
+  font-size: 13px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+/* =============================================
+   MACROS ROW
+   ============================================= */
+
+.macro-row {
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+}
+.macro-item { text-align: center; }
+.macro-value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 64px;
+  color: var(--ambre);
+  line-height: 1;
+}
+.macro-label {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 14px;
+  color: rgba(var(--blanc-rgb), 0.5);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
+/* =============================================
+   SOURCES LIST
+   ============================================= */
+
+.sources-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.source-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.source-number {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--ambre);
+  flex-shrink: 0;
+  width: 30px;
+}
+.source-ref {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 20px;
+  color: rgba(var(--blanc-rgb), 0.7);
+  line-height: 1.4;
+}
+.source-ref strong {
+  color: var(--blanc);
+  font-weight: 500;
+}
+
+/* =============================================
+   CLOSING / CTA
+   ============================================= */
+
+.closing-headline {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 80px;
+  letter-spacing: 5px;
+  color: var(--ambre);
+  text-transform: uppercase;
+  line-height: 1.05;
+  text-align: center;
+}
+.closing-body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 32px;
+  color: var(--blanc);
+  line-height: 1.5;
+  text-align: center;
+  max-width: 850px;
+  margin: 0 auto;
+}
+.closing-body strong {
+  color: var(--ambre);
+  font-weight: 500;
+}

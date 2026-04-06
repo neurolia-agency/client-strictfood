@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Space+Grotesk:wght@600;700&family=DM+Sans:wght@400;500&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { width:1080px; height:1350px; overflow:hidden; background:#1a1714; position:relative; }
+
+  .bg {
+    position:absolute; inset:0; background:#1a1714;
+    background-image: radial-gradient(ellipse at 50% 50%, rgba(229,165,32,0.03) 0%, transparent 60%);
+  }
+
+  .content {
+    position:absolute; top:100px; left:80px; right:80px; bottom:100px;
+    display:flex; flex-direction:column; justify-content:center; gap:45px;
+    z-index:2;
+  }
+
+  .headline {
+    font-family:'Oswald', sans-serif; font-weight:700; font-size:56px;
+    letter-spacing:3px; color:#E5A520; text-transform:uppercase; line-height:1.1;
+  }
+
+  .body-text {
+    font-family:'DM Sans', sans-serif; font-weight:400; font-size:26px;
+    color:#f5f0e8; line-height:1.6;
+  }
+  .body-text strong { color:#E5A520; font-weight:500; }
+
+  .bullet-list { display:flex; flex-direction:column; gap:24px; }
+  .bullet-item { display:flex; align-items:flex-start; gap:20px; }
+  .bullet-icon { flex-shrink:0; width:8px; height:8px; margin-top:12px; background:#E5A520; transform:rotate(45deg); }
+  .bullet-text { font-family:'DM Sans', sans-serif; font-weight:400; font-size:26px; color:#f5f0e8; line-height:1.5; }
+  .bullet-text strong { color:#E5A520; font-weight:500; }
+
+  .source {
+    font-family:'DM Sans', sans-serif; font-weight:400; font-size:14px;
+    color:rgba(245,240,232,0.3); font-style:italic;
+  }
+
+  .grain {
+    position:absolute; inset:0; opacity:0.035; mix-blend-mode:overlay; pointer-events:none; z-index:10;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    background-size:200px;
+  }
+</style>
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="content">
+    <div class="headline">CE QUE LES BONS<br>LIPIDES FONT POUR TOI</div>
+
+    <div class="body-text">
+      Sur le <strong>moyen et long terme</strong>, les lipides de qualité :
+    </div>
+
+    <div class="bullet-list">
+      <div class="bullet-item">
+        <div class="bullet-icon"></div>
+        <div class="bullet-text">Réduisent le <strong>risque cardiovasculaire de 30%</strong></div>
+      </div>
+      <div class="bullet-item">
+        <div class="bullet-icon"></div>
+        <div class="bullet-text">Optimisent ta <strong>production hormonale</strong> (testostérone, cortisol)</div>
+      </div>
+      <div class="bullet-item">
+        <div class="bullet-icon"></div>
+        <div class="bullet-text">Améliorent l'<strong>absorption des vitamines</strong> A, D, E, K</div>
+      </div>
+      <div class="bullet-item">
+        <div class="bullet-icon"></div>
+        <div class="bullet-text">Protègent les <strong>articulations et le système nerveux</strong></div>
+      </div>
+      <div class="bullet-item">
+        <div class="bullet-icon"></div>
+        <div class="bullet-text">Favorisent la <strong>satiété</strong> et réduisent les fringales</div>
+      </div>
+    </div>
+
+    <div class="source">Sources : NEJM 2023, European Heart Journal 2024</div>
+  </div>
+  <div class="grain"></div>
+</body></html>

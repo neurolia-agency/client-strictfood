@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="_base/carousel-base.css">
+<style>
+  body { background: var(--charbon); }
+
+  .content {
+    position: absolute; inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    z-index: 2;
+    padding: 100px var(--safe-margin);
+  }
+
+  /* Le mot/phrase clé avec traitement visuel différencié */
+  .cta-keyword {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: {{KEYWORD_FONT_SIZE}}px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--ambre);
+    line-height: 1.05;
+    text-align: center;
+  }
+
+  .cta-body {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 26px;
+    color: var(--blanc);
+    line-height: 1.6;
+    text-align: center;
+    max-width: 800px;
+  }
+  .cta-body strong {
+    color: var(--ambre);
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+  <div class="bg-charbon"></div>
+
+  <div class="content">
+    <div class="closing-headline">{{CTA_HEADLINE}}</div>
+
+    <svg class="separator" viewBox="0 0 200 12" width="200" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 0,10 Q 100,0 200,10" fill="none" stroke="#E5A520" stroke-width="2" opacity="0.4"/>
+    </svg>
+
+    <div class="cta-body">{{CTA_BODY}}</div>
+
+    <div class="macro-row">
+      {{MACRO_ITEMS}}
+      <!--
+      Structure par item :
+      <div class="macro-item">
+        <div class="macro-value">[VALEUR]</div>
+        <div class="macro-label">[LABEL]</div>
+      </div>
+      -->
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div class="tagline">Le cheat meal <em>qui n'en est pas un</em></div>
+  </div>
+
+  <div class="grain"></div>
+</body></html>

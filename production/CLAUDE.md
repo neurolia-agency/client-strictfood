@@ -18,8 +18,8 @@ Le **planning semaine** décide du mode de chaque post et chaque story. L'orches
 
 | Mode | Description | API | Planifiable |
 |------|-------------|-----|-------------|
-| `full-ia` | Gemini genere tout (produit decrit + scene) | Gemini 4K | Oui |
-| `edit-ia` | Photo lieu en input + produit decrit dans le prompt | Gemini 4K | **NON** (hors-planning uniquement) |
+| `full-ia` | Gemini genere tout (produit decrit + scene) | Gemini 2K | Oui |
+| `edit-ia` | Photo lieu en input + produit decrit dans le prompt | Gemini 2K | **NON** (hors-planning uniquement) |
 | `template` | Photo plein cadre + texte overlay minimal (Puppeteer) | Aucune | Oui |
 | `irl` | Photo fraiche en live + overlay | Aucune | **NON** (hors-planning uniquement) |
 
@@ -33,7 +33,7 @@ Le **planning semaine** décide du mode de chaque post et chaque story. L'orches
 
 ```
 MODE full-ia :
-  Brief → Art Direction → Input Mapping → 🔒 → Realism Audit PRE → Prompt (Combo-B) → Realism Audit POST → Gemini 4K → brouillons/ → 🔍 itérations → ✅ Validation → Caption → a-publier/
+  Brief → Art Direction → Input Mapping → 🔒 → Realism Audit PRE → Prompt (Combo-B) → Realism Audit POST → Gemini 2K → brouillons/ → 🔍 itérations → ✅ Validation → Caption → a-publier/
 
 MODE edit-ia (hors-planning) :
   Brief → Photo lieu → 🔒 → Realism Audit PRE → Prompt (produit decrit) → Realism Audit POST → Gemini edit 4K → brouillons/ → 🔍 itérations → ✅ Validation → Caption → a-publier/
@@ -309,14 +309,14 @@ Pour les idees spontanees, actions ponctuelles, actualites :
 - **Historique = reflet du disque** : un fichier supprimé disparaît de l'historique au prochain scan. Ne JAMAIS modifier l'historique à la main.
 - **Mode obligatoire** : chaque brief v3 doit spécifier un mode de création
 - **Dates** : format `DD-MM-YYYY` pour les dossiers post
-- **Résolution** : ALWAYS 4K pour full-ia et edit-ia
+- **Resolution** : ALWAYS 2K pour full-ia et edit-ia (4K desactive)
 - **API key** : `$GEMINI_API_KEY` (variable d'environnement, NEVER en dur)
 - **Brief v2 legacy** : les briefs S1-S2 fonctionnent en mode `full-ia` par défaut
 - **Distribution piliers** : 3 piliers (Le Produit 55%, Les Bénéfices 35%, La Marque 10%). Vérifier mensuellement
 - **Zero dependance photos fraiches** : le planning standard ne depend JAMAIS de photos a prendre. Le mode `irl` et `edit-ia` sont reserves au `hors-planning/` uniquement.
 - **Templates stories** : `story-universal.html` (defaut) + `story-sillon.html`, `story-sceau.html`, `story-feuillete-photo.html`, `story-feuillete-data.html`. Le traitement est choisi au planning. Les anciens templates (educatif, interactif, fiche-produit, annonce) sont deprecies.
 - **Fond stories (modes IA)** : chaque story en mode IA a un fond assigne (`ambre`, `charbon`, `ambre+charbon`, `charbon+ambre`) qui determine la palette du background dans le prompt image via `/image-prompt-engineer`.
-- **Story Rappel** : story bonus #4 publiee tous les 2 jours — photo reelle du restaurant + accroche + CTA (telephone/horaires/adresse). Ne remplace pas les 3 stories principales. Voir `_config/story-rappel.md`.
+- **Story Rappel** : 1 rappel tous les 2 jours, REMPLACE le slot Brand (#3) du jour. Visuel IA unique + accroche + CTA (telephone/horaires/adresse). 3 stories/jour TOUJOURS, pas 4. Voir `_config/story-rappel.md`.
 - **Realism Auditor obligatoire** : `/realism-audit` DOIT etre execute avant toute generation IA (full-ia, edit-ia). Pre-prompt (contraintes) + post-prompt (audit). Les modes `template` et `irl` sont exempts.
 - **Prompt Engineer calibre Combo-B** : les prompts font 150-300 mots, style Combo-B. Le prompt engineer est calibre sur ce format.
 

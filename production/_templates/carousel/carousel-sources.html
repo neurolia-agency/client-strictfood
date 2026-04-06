@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="_base/carousel-base.css">
+<style>
+  body { background: var(--charbon); }
+
+  .content {
+    justify-content: center;
+    gap: 50px;
+  }
+
+  .sources-header {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: rgba(var(--ambre-rgb), 0.5);
+  }
+
+  .sources-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 56px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ambre);
+    line-height: 1.1;
+  }
+
+  .sources-list {
+    gap: 24px;
+  }
+
+  .source-item {
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(var(--blanc-rgb), 0.06);
+  }
+  .source-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .source-ref {
+    font-size: 22px;
+  }
+
+  .sources-note {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 16px;
+    color: rgba(var(--blanc-rgb), 0.3);
+    font-style: italic;
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+  <div class="bg-charbon"></div>
+
+  <div class="content">
+    <div class="sources-header">Références</div>
+    <div class="sources-title">{{SOURCES_TITLE}}</div>
+
+    <svg class="separator" viewBox="0 0 200 12" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 0,10 Q 100,0 200,10" fill="none" stroke="#E5A520" stroke-width="2" opacity="0.4"/>
+    </svg>
+
+    <div class="sources-list">
+      {{SOURCES_ITEMS}}
+      <!--
+      Structure par item :
+      <div class="source-item">
+        <div class="source-number">[N]</div>
+        <div class="source-ref"><strong>[Auteur/Institution]</strong> — [Titre étude], [Journal], [Année]</div>
+      </div>
+      -->
+    </div>
+
+    <div class="sources-note">Études consultées et vérifiées pour ce carrousel.</div>
+  </div>
+
+  <div class="grain"></div>
+</body></html>
