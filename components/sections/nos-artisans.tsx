@@ -66,8 +66,8 @@ const ARTISANS: Artisan[] = [
     image:
       "/images/photos-references/contexte/myfitcheese/2026-03-20-18-30-00-myfitcheese-parmesan-sublime.png",
     alt: "Main gantee noire saupoudrant du parmesan rape hyperproteine dore sur ardoise, Myfitcheese Perpignan",
-    image2: "/images/visuels/cheese.jpg",
-    alt2: "Burger avec fromage artisanal fondu coulant sur steak, fond noir, food photography premium",
+    image2: "/images/visuels/website/carte/strict-vege-falafel.webp",
+    alt2: "Burger végétarien falafel StrictFood au pain noir sésame, fond noir, food photography premium",
     imageOnLeft: true,
     bg: "var(--color-charbon)",
     transitionType: "diamond-reveal",
