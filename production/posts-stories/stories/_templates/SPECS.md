@@ -205,140 +205,23 @@ Le **fond** est une dimension independante du traitement template. Il determine 
 
 | Fond | Description | Modes concernes |
 |------|-----------|-----------------|
-| `ambre` | Surface ambre doree texturee (#FABA43), eclairage chaud | full-ia, compositing-ia, irl-sublimation |
-| `charbon` | Surface charbon sombre (#1a1714), eclairage contraste | full-ia, compositing-ia, irl-sublimation |
-| `ambre+charbon` | Fond ambre + accessoires charbon (papier kraft noir, ardoise) | full-ia, compositing-ia |
-| `charbon+ambre` | Fond charbon + accessoires ambre (serviette doree, sesame) | full-ia, compositing-ia |
-| `—` | Photo existante, pas de choix | irl-archive, template |
+| `ambre` | Surface ambre doree texturee (#FABA43), eclairage chaud | full-ia |
+| `charbon` | Surface charbon sombre (#1a1714), eclairage contraste | full-ia |
+| `ambre+charbon` | Fond ambre + accessoires charbon (papier kraft noir, ardoise) | full-ia |
+| `charbon+ambre` | Fond charbon + accessoires ambre (serviette doree, sesame) | full-ia |
 
 ---
 
-## Story Sillon (`story-sillon.html`)
-
-> Photo en haut (~65% du canvas) + arc dome + zone ambre en bas avec nom produit et macros.
-
-### Cadre fixe
-
-| Zone | Position | Contenu |
-|------|----------|---------|
-| Photo | absolute, top 0, height 1250px | Image (irl-archive, full-ia, sublimation, compositing) |
-| Gradient haut | top, height 300px | Protection safe zone IG |
-| Sillon (arc dome) | top 1170px, height 120px | SVG dome ambre — transition photo/zone brand |
-| Zone ambre | top 1250px → bottom | Fond #FABA43 + radial gradients profondeur |
-| Contenu ambre | top 1290px, bottom 220px | Nom produit + divider + macros (centre vertical) |
-| Tagline + logo | bottom, padding-bottom 80px | Fixe, charbon sur ambre |
-
-### Zones texte
-
-| Element | Typo | Max car | Optionnel ? |
-|---------|------|---------|-------------|
-| `PRODUCT_NAME` | Oswald 120px bold uppercase | 20 | Non |
-| `PRODUCT_INFO` | Space Grotesk 42px | 30 | Oui — `SHOW_INFO` |
-| `TAGLINE` | Space Grotesk 34px | 40 | Non — fixe |
-| Logo | 140px width, filter brightness(0) | — | Non |
-
-### Placeholders
-
-`{{BG_IMAGE_PATH}}`, `{{PRODUCT_NAME}}`, `{{PRODUCT_INFO}}`, `{{SHOW_INFO}}`, `{{TAGLINE}}`, `{{MOOD_CLASS}}`, `{{PHOTO_PRESET}}`, `{{GRAIN}}`
+> **TEMPLATES SUPPRIMES** : `story-sillon.html`, `story-sceau.html`, `story-feuillete-photo.html`, `story-feuillete-data.html` et leurs traitements associes (arc dome, sceau glassmorphism, bandeau dome) sont supprimes. Le nouveau systeme utilise le Visual Concept Engine (intent-engine) pour les stories visuelles IA et le visual-composer pour les layouts typographiques crees a la volee.
 
 ---
 
-## Story Sceau (`story-sceau.html`)
-
-> Photo plein cadre + cercle glassmorphism semi-transparent avec arc dome interieur. Zone libre en dessous pour stickers IG natifs.
-
-### Cadre fixe
-
-| Zone | Position | Contenu |
-|------|----------|---------|
-| Photo | absolute, 100% plein cadre | Image |
-| Gradient haut | top, height 300px | Protection safe zone IG |
-| Gradient bas | bottom, height 500px | Protection tagline |
-| Sceau | top 380px, centre, 400x400px | Cercle blur + border ambre + contenu |
-| Tagline + logo | bottom, padding-bottom 80px | Fixe |
-
-### Sceau — contenu interne
-
-| Element | Typo | Max car |
-|---------|------|---------|
-| Arc dome SVG | 180x40px | — |
-| `SCEAU_NAME` | Oswald 58px bold | 12 (2 lignes possibles via `<br>`) |
-| `SCEAU_SUB` | Space Grotesk 22px | 20 |
-| `SCEAU_INFO` | DM Sans 20px | 15 (optionnel — `SHOW_SCEAU_INFO`) |
-
-### Placeholders
-
-`{{BG_IMAGE_PATH}}`, `{{SCEAU_NAME}}`, `{{SCEAU_SUB}}`, `{{SCEAU_INFO}}`, `{{SHOW_SCEAU_INFO}}`, `{{TAGLINE}}`, `{{MOOD_CLASS}}`, `{{PHOTO_PRESET}}`, `{{GRAIN}}`
-
----
-
-## Story Feuillete Photo (`story-feuillete-photo.html`)
-
-> Photo plein cadre + bandeau dome ambre en haut. Utilise en sequence avec `feuillete-data`.
-
-### Cadre fixe
-
-| Zone | Position | Contenu |
-|------|----------|---------|
-| Photo | absolute, 100% plein cadre | Image food porn |
-| Dome ambre haut | top 0, height 90px | SVG dome ambre (fil rouge sequence) |
-| Gradient bas | bottom, height 400px | Protection tagline |
-| Tagline + logo | bottom, padding-bottom 80px | Fixe |
-
-### Zones texte
-
-Pas de texte specifique — seulement la tagline fixe. La photo parle seule.
-
-### Placeholders
-
-`{{BG_IMAGE_PATH}}`, `{{TAGLINE}}`, `{{MOOD_CLASS}}`, `{{PHOTO_PRESET}}`, `{{GRAIN}}`
-
----
-
-## Story Feuillete Data (`story-feuillete-data.html`)
-
-> Fond charbon mesh + donnee geante. Pas de photo. Fermeture de sequence ou story informative.
-
-### Cadre fixe
-
-| Zone | Position | Contenu |
-|------|----------|---------|
-| Mesh gradient | absolute, plein cadre | Charbon + subtils radials ambre/grenat |
-| Dome ambre haut | top 0, height 90px | SVG dome ambre (fil rouge sequence) |
-| Contenu centre | flex column, centre vertical | Chiffre + unite + divider + infos |
-| Tagline + logo | bottom, padding-bottom 80px | Fixe |
-
-### Zones texte
-
-| Element | Typo | Max car | Optionnel ? |
-|---------|------|---------|-------------|
-| `DATA_NUMBER` | Oswald 280px bold | 6 | Non |
-| `DATA_UNIT` | Oswald 72px | 15 | Non |
-| `DATA_LINE_1` | Space Grotesk 32px | 25 | Non |
-| `DATA_LINE_2` | DM Sans 30px | 25 | Oui — `SHOW_LINE_2` |
-| `TAGLINE` | Space Grotesk 36px | 40 | Non — fixe |
-
-### Placeholders
-
-`{{DATA_NUMBER}}`, `{{DATA_UNIT}}`, `{{DATA_LINE_1}}`, `{{DATA_LINE_2}}`, `{{SHOW_LINE_2}}`, `{{TAGLINE}}`, `{{MOOD_CLASS}}`, `{{GRAIN}}`
-
----
-
-## Recap limites de caracteres — Tous templates
+## Recap limites de caracteres
 
 | Template | Zone | Max car |
 |----------|------|---------|
 | **story-universal** | TEXT_LINE_1 | 22 |
 | **story-universal** | TEXT_LINE_2 | 30 |
-| **story-sillon** | PRODUCT_NAME | 20 |
-| **story-sillon** | PRODUCT_INFO | 30 |
-| **story-sceau** | SCEAU_NAME | 12 |
-| **story-sceau** | SCEAU_SUB | 20 |
-| **story-sceau** | SCEAU_INFO | 15 |
-| **story-feuillete-data** | DATA_NUMBER | 6 |
-| **story-feuillete-data** | DATA_UNIT | 15 |
-| **story-feuillete-data** | DATA_LINE_1 | 25 |
-| **story-feuillete-data** | DATA_LINE_2 | 25 |
 | **tous** | TAGLINE | 40 | **FIXE : `Le cheat meal <em>qui n'en est pas un</em>`** |
 
 ---

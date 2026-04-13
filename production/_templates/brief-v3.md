@@ -52,7 +52,7 @@ Slug recette : `[slug-kebab-case]`
 | Fond | [ambre / charbon] |
 | Texte bande | [Nom du produit — ex: "STRICT BOEUF"] |
 
-> Bande dome : charbon sur fond ambre, ambre sur fond charbon. Tagline en dessous.
+> Bande identitaire : charbon sur fond ambre, ambre sur fond charbon. Tagline en dessous.
 
 ### Si traitement = `masque`
 

@@ -1,169 +1,136 @@
 ---
 name: freestyle
 description: >
-  Production hors planning cadrée par le visual system StrictFood.
-  Produit un visuel spontané à partir d'une description libre,
-  en respectant toutes les contraintes DA (pain noir, chaleur pulsée, fidélité produit).
-  Triggers : "freestyle", "hors planning", "idée spontanée", "quick produce",
-  "produis ça", "je veux un visuel de".
+  Mode libre pour la production Instagram StrictFood. Absorbe n'importe quel input
+  (idée, photo, trend, screenshot, visuel en tête), brainstorm obligatoire, puis produit
+  via le pipeline Visual Concept Engine. Output dans hors-planning/.
+  Triggers : "freestyle", "j'ai une idée", "hors planning", "fais-moi", "je veux un post",
+  "je veux une story", "produis ça", toute demande spontanée de création.
 ---
 
-# Freestyle — Production hors planning
+# Freestyle — Mode Libre
 
-Produit un visuel StrictFood à partir d'une description libre. Le visual system et les contraintes DA s'appliquent, mais pas de planning, pas de brief formel, pas d'art direction séparée.
+L'opérateur arrive avec une idée. Tu la comprends, tu brainstormes, tu produis.
 
-## Input
+## Étape 1 — Absorber
 
-Une description libre en français :
-```
-/freestyle "Strict Boeuf qui flotte au-dessus d'un skateboard dans un skatepark sunset"
-/freestyle "Photo de la salle avec le burger posé sur le comptoir"
-/freestyle "Romain en train de couper la viande, photo prise ce midi"
-/freestyle "Un couple qui mange des wraps sur un banc au parc, golden hour"
-```
+L'opérateur donne n'importe quoi :
+- Une idée vague : "un truc sur les protéines"
+- Une idée précise : "story promo 1 acheté 1 offert avec cette photo"
+- Un visuel/photo à utiliser
+- Un trend vu sur Instagram/TikTok
+- Un événement ou une actu
+- Un screenshot d'un concurrent comme inspiration
 
-## Process
+Accepte tout. Ne rejette rien.
 
-### Étape 1 — Analyser l'intention
+## Étape 2 — Brainstorm (OBLIGATOIRE)
 
-Déterminer automatiquement :
-- **Mode** : full-ia (pas de photo input), edit-ia (photo fournie), template (texte + photo existante), irl (photo fraîche)
-- **Format** : post (4:5, 1:1) ou story (9:16)
-- **Produit** : identifier le produit StrictFood mentionné → charger la recette
-- **Type** : food, lifestyle, scene, macro, concept
-- **Traitement** : détecter si un traitement post-production est mentionné (voir ci-dessous)
+Même si l'idée semble claire, tu DOIS :
 
-#### Détection des traitements (CRITIQUE)
+**2a — Reformuler** l'idée en 1-2 phrases pour vérifier la compréhension.
 
-Les mots suivants sont des **traitements post-production** (template HTML + Puppeteer overlay), PAS des concepts photographiques :
+**2b — Proposer 2-3 concepts visuels** (Visual First — le visuel EST le hook) :
 
-| Mot détecté | Traitement | Action |
-|-------------|-----------|--------|
-| `colonne` | Bandeau vertical texte + texture sésame | Générer la PHOTO seule → appliquer le template `story-colonne` par dessus |
-| `sillon` | Arc dome + zone ambre en bas | Générer la PHOTO seule → appliquer `story-sillon.html` |
-| `sceau` | Cercle glassmorphism | Générer la PHOTO seule → appliquer `story-sceau.html` |
-| `feuilleté-photo` | Split photo dominante + texte | Générer la PHOTO seule → appliquer `story-feuillete-photo.html` |
-| `feuilleté-data` | Split data dominante + photo | Générer la PHOTO seule → appliquer `story-feuillete-data.html` |
-| `knockout-band` | Bande dome identitaire (post) | Générer la PHOTO seule → appliquer l'overlay knockout |
-| `masque` | Typo géante révèle le produit (post) | Générer la PHOTO seule → appliquer le masque typographique |
-| `masque-inverse` | Texte ambre solide sur photo (post) | Générer la PHOTO seule → appliquer |
-| `texture-fill` | Lettres remplies texture (post) | Générer la PHOTO seule → appliquer |
+Pour chaque option, donner :
+- **Format** : post (4:5), story visuelle (9:16 IA plein écran), story template (9:16 layout typo), triptych
+- **Ce qu'on VOIT** : description vivide de l'image (composition, angle, lumière, mise en scène)
+- **Fond** (si story template) : description du fond (couleur + technique + paramètres)
+- **Texte** (si story template) : headline, body, CTA
+- **Caption direction** : ce que la caption apportera en complément du visuel
 
-**Si un traitement est détecté** : le prompt IA décrit UNIQUEMENT la photo de base (produit + fond). Le traitement est appliqué APRÈS la génération par Puppeteer ou overlay. Ne JAMAIS intégrer le traitement dans le prompt IA.
+L'opérateur choisit ou demande un mix. On itère si besoin.
 
-### Étape 2 — Vérifier la conformité DA
+## Étape 3 — Structurer (IDENTIQUE au pipeline classique)
 
-**OBLIGATOIRE avant toute génération :**
+Le concept validé au brainstorm est formalisé dans le MÊME format que le Visual Concept Engine. Pas de raccourci.
 
-- [ ] Pain noir : si burger mentionné, le prompt spécifiera "charcoal black sesame bun"
-- [ ] Chaleur pulsée : pas de "grill", "grillé", "barbecue" dans le prompt
-- [ ] Ingrédients fidèles : vérifier vs la recette (`_recettes/[slug].md`)
-- [ ] Si salle restaurant visible : fidélité au vrai décor
-- [ ] Si lifestyle : logo obligatoire (emballage ou kraft bag)
-
-Si la description viole une contrainte → AVERTIR l'opérateur et proposer une alternative.
-
-### Étape 3 — Realism Audit PRE-PROMPT (OBLIGATOIRE pour full-ia et edit-ia)
-
-> **Ne PAS sauter cette étape.** Ne PAS appliquer les contraintes "de tête" sans invoquer le skill.
-
-1. **APPELER LE SKILL** : `realism-auditor` en mode PRE-PROMPT
-   - Contexte : description libre + produit identifié + recette
-   - Si edit-ia : ajouter la photo lieu au contexte
-   - Output : fiche de contraintes réalisme (domaines applicables, termes interdits, proportions, matériaux)
-
-2. La fiche de contraintes est transmise à l'étape 4 comme input obligatoire du prompt engineer.
-
-> Pour les modes `template` et `irl` : passer directement à l'étape 4 (pas d'audit — pas d'IA).
-
-### Étape 4 — Construire le prompt
-
-**Si full-ia :**
-- **APPELER LE SKILL** : `image-prompt-engineer` (Mode B, style Combo-B)
-  - Contexte : description adaptée + contraintes réalisme (étape 3) + fond (ambre ou charbon)
-  - Output : prompt.md (150-300 mots, narratif, CAPS, négatifs inline)
-
-- **APPELER LE SKILL** : `realism-auditor` en mode POST-PROMPT
-  - Contexte : prompt rédigé
-  - Output : prompt audité et corrigé (8 domaines vérifiés)
-
-**Si edit-ia :**
-- **APPELER LE SKILL** : `image-prompt-engineer` (Mode B, style Combo-B)
-  - Photo lieu en input + produit décrit dans le prompt
-  - Contexte : description + contraintes réalisme (étape 3) + analyse photo lieu
-  - Output : prompt.md
-
-- **APPELER LE SKILL** : `realism-auditor` en mode POST-PROMPT (edit-ia)
-  - Contexte : prompt rédigé + photo lieu
-  - Output : prompt audité (8 domaines + 3 domaines intégration)
-
-**Si template :**
-- Data mapping vers template HTML
-- Puppeteer render
-
-**Si irl :**
-- Photo fraîche → story-universal.html → Puppeteer
-
-### Étape 5 — Générer
-
-```
-/nano-banana-pro --prompt "[prompt]" --filename "[date]-[description].png" --resolution 2K
+**Pour un post ou une story visuelle :**
+```yaml
+concept_visuel:
+  nom: "..."
+  produit: strict-boeuf
+  niveau: APPÉTIT | CONCEPT | UNIVERS
+  hook_visuel: "1 phrase — ce qui arrête le scroll"
+  description_image: "description vivide complète"
+  palette: "..."
+  eclairage: "..."
+  angle: "..."
+  format: post-simple | story-visuelle
+  caption_direction: "..."
 ```
 
-Ou Puppeteer pour template/irl.
-
-### Étape 6 — Validation
-
-Le visuel va dans :
+**Pour une story template :**
+```yaml
+story_template:
+  type: promotion | annonce | data-produit | rappel
+  fond: "Description complète : couleur + technique + paramètres"
+  contenu:
+    headline: "..."
+    body: "..."
+    cta: "..." # si pertinent
+  elements_graphiques:
+    - element 1 (position, opacité)
+    - element 2 (position, opacité)
+    - element 3 (position, opacité)
+    # minimum 3, maximum 6
+  layout_direction: "..."
 ```
-posts-stories/[posts|stories]/hors-planning/DD-MM-YYYY/brouillons/
-```
 
-L'operateur verifie → iterations si besoin → validation.
+## Étape 4 — Produire (MÊME pipeline que la production classique)
 
-### Étape 7 — Caption
+| Format | Pipeline exact |
+|--------|----------------|
+| **Post** | Concept structuré → Realism audit PRE → Prompt Combo-B (checklist obligatoire) → Realism audit POST → Génération image → brouillons/ |
+| **Story visuelle** | Concept structuré → Realism audit PRE → Prompt Combo-B 9:16 (checklist obligatoire) → Realism audit POST → Génération image → Overlay tagline + logo → brouillons/ |
+| **Story template** | Concept structuré → HTML (fond + contenu + éléments graphiques + tagline/logo) → Puppeteer render 1080×1920 → brouillons/ |
+| **Triptych** | 3 concepts structurés → 3× pipeline post → brouillons/ |
 
-1. **APPELER LE SKILL** : `caption-writer`
-   - Contexte : description libre (en lieu de brief) + image produite (vision)
-   - Output : `production/caption.md` dans le dossier hors-planning
+**Aucune étape n'est sautée.** Le freestyle ne court-circuite pas le pipeline — il remplace uniquement l'étape "le moteur génère l'idée" par "l'opérateur donne l'idée".
 
-2. Afficher la caption a l'operateur pour validation.
+**Output** : toujours dans `posts-stories/[posts|stories]/hors-planning/DD-MM-YYYY/brouillons/`
 
-### Étape 8 — Deplacement vers a-publier/ (OBLIGATOIRE apres validation caption)
+## Stories template — Éléments graphiques OBLIGATOIRES
 
-Quand la caption est validee :
+Chaque story template DOIT inclure des éléments graphiques du visual system. C'est ce qui marque l'identité StrictFood et empêche les stories de ressembler à un slide Canva générique.
 
-1. **Determiner la destination** :
-   - Post (4:5, 1:1) → `production/a-publier/posts/`
-   - Story (9:16) → `production/a-publier/stories/`
+**Règles :**
 
-2. **Determiner le nom** : `DD-MM-YYYY-[slug]-[format].png`
-   - DD-MM-YYYY = date du jour ou date choisie
-   - slug = description courte (kebab-case)
-   - format = `4x5`, `1x1`, ou `9x16`
+| Règle | Détail |
+|-------|--------|
+| **Minimum 3 éléments** | Chaque story template utilise au minimum 3 éléments graphiques différents |
+| **Maximum 6 éléments** | Au-delà, ça devient chargé |
+| **Équilibre vertical** | Les éléments couvrent les 3 tiers (haut, milieu, bas). JAMAIS de tiers vide |
+| **Zones vides = éléments structurants** | Si une grande zone est vide, utiliser des éléments MARQUÉS (barre diagonale, tape-band) — PAS des éléments subtils (cercles fins, dots) qui ne remplissent pas l'espace |
+| **Grain TOUJOURS présent** | Le grain film est obligatoire sur chaque story (opacity 0.04-0.06) |
+| **Positions variables** | Les éléments changent de position d'une story à l'autre |
 
-3. **DEPLACER le visuel** :
-   ```bash
-   mv "[dossier]/brouillons/[fichier].png" "production/a-publier/[posts|stories]/DD-MM-YYYY-[slug]-[format].png"
-   ```
+**Éléments disponibles** (piocher dans cette liste, voir `visual-composer/references/brand-dna.md` pour le CSS exact) :
 
-4. **Copier la caption** en texte brut a cote (meme nom, extension `.txt`)
+| Élément | Usage typique | Impact visuel |
+|---------|--------------|---------------|
+| **Barre diagonale** | Traverser une zone vide | Fort — structurant |
+| **Tape-band** | Bandeau tagline en boucle | Fort — structurant |
+| **Tech-frame** | Coins en L (2 ou 4 coins) | Moyen — cadrage |
+| **Filet doré** | Bordure fine autour du canvas | Moyen — cadrage |
+| **Lignes parallèles** | 1-2 lignes fines accompagnant une barre | Subtil — rythme |
+| **Dots clusters** | Grilles 2×2 ou 3×3 de points | Subtil — texture |
+| **Embers** | Points lumineux avec glow | Subtil — vie |
+| **Cercles** | Cercles décoratifs en bordure fine | Subtil — respiration |
+| **Burger icon** | SVG burger décoratif en très basse opacité | Subtil — identité |
+| **Golden bokeh** | Cercles flous ambre | Subtil — chaleur |
 
-5. Confirmer :
-   ```
-   ✅ PRET A PUBLIER
+**Règle d'inversion :**
+- Fond charbon → éléments en ambre/doré (rgba 250,186,67)
+- Fond ambre → éléments en charbon (rgba 26,23,20)
 
-   Visuel : production/a-publier/[posts|stories]/DD-MM-YYYY-[slug]-[format].png
-   Caption : production/a-publier/[posts|stories]/DD-MM-YYYY-[slug]-[format].txt
-   ```
+## Contraintes (toujours actives)
 
-## Règles
-
-> **Règles DA transversales** (pain noir, chaleur pulsée, fidélité salle) : cf. `.claude/rules/production-pipeline.md` — toujours en contexte, non répétées ici.
-
-1. **Pas de brief formel** : la description libre remplace le brief
-2. **Pas d'art direction séparée** : le prompt est construit directement
-3. **Dossier hors-planning** : n'affecte pas les compteurs de distribution
-4. **Tous les modes disponibles** : full-ia, edit-ia, template, irl
-5. **Le produit est TOUJOURS décrit** dans le prompt (jamais de photo référence produit)
-6. **Realism audit obligatoire** pour les modes IA (full-ia, edit-ia) — **APPELER LE SKILL `realism-auditor`** en PRE-PROMPT (étape 3) ET POST-PROMPT (étape 4). Ne JAMAIS appliquer les contraintes manuellement sans invoquer le skill.
+- Pain noir sésame obligatoire (JAMAIS pain blanc)
+- Chaleur pulsée (JAMAIS grill/barbecue/poêle)
+- Lifestyle = sport / vie active
+- Fidélité produit (lire `_recettes/[slug].md`)
+- Checklist Combo-B obligatoire pour tout prompt IA
+- Realism audit PRE et POST obligatoire pour tout prompt IA
+- Pas de salle restaurant dans les visuels
+- Stories template : fond unique (pas de répétition)

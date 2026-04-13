@@ -94,10 +94,9 @@ Pour chaque carrousel, decider :
 
 | Champ | Choix |
 |-------|-------|
-| **Mode** | `full-ia` (food ou lifestyle) ou `template` |
-| **Sous-type** | Food : concept visuel produit. Lifestyle : concept lifestyle. Template : educatif, interactif, annonce, fiche produit |
+| **Mode** | `full-ia` (food, lifestyle, ou brand) |
+| **Sous-type** | Food : concept visuel produit. Lifestyle : concept lifestyle. Brand : rappel, educatif, avis |
 | **Fond** (modes IA) | ambre, charbon, ambre+charbon, charbon+ambre |
-| **Traitement** (stories) | photo-pure, sillon, sceau, feuillete-photo, feuillete-data |
 | **Produit/Sujet** | Varier vs posts et stories adjacentes |
 
 ### Etape 3 — Verifier les distributions
@@ -611,21 +610,15 @@ Photo prise en live par Romain ou Dorian + overlay DA minimal. Reserve au hors-p
 | Traitement | Description |
 |-----------|-------------|
 | **photo-pure** | Produit seul, zero overlay. Le food porn parle seul. |
-| **knockout-band** | Produit hero + bande dome identitaire (charbon sur ambre OU ambre sur charbon) |
+| **knockout-band** | Produit hero + bande identitaire (charbon sur ambre OU ambre sur charbon) |
 | **masque** | Typo geante revele le produit (lettres = fenetre sur la photo) |
 | **masque-inverse** | Texte ambre solide sur photo |
 | **texture-fill** | Lettres remplies par texture produit (sesame, Maillard) |
 | **triptych** | 3 posts = 1 visuel dans la grille Instagram |
 
-### Traitements stories
+### Stories
 
-| Traitement | Template HTML | Description |
-|-----------|---------------|-------------|
-| **photo-pure** | `story-universal.html` | Photo plein cadre + overlay logo minimal |
-| **sillon** | `story-sillon.html` | Photo haut + arc dome + zone ambre bas |
-| **sceau** | `story-sceau.html` | Photo + cercle glassmorphism avec arc dome |
-| **feuillete-photo** | `story-feuillete-photo.html` | Split photo dominante + zone texte |
-| **feuillete-data** | `story-feuillete-data.html` | Split data dominante + zone photo |
+Les stories utilisent le Visual Concept Engine (intent-engine) pour la direction creative. Les anciens traitements story (sillon, sceau, feuillete-photo, feuillete-data) et leurs templates HTML sont supprimes. Les stories sont soit des visuels IA plein ecran, soit des layouts typographiques crees a la volee via le visual-composer.
 
 ### Fonds
 

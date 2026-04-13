@@ -4,7 +4,7 @@
 > **Pilier du jour** : [Le Plat / La Cuisine / L'Equipe / Confiance] — [Post SX-NN publie aujourd'hui / Pas de post]
 
 > **REGLE ABSOLUE** : Tous les chemins photo doivent pointer vers des fichiers existants. JAMAIS de `[A FOURNIR]`. Si aucune photo ne matche, changer le sujet ou le mode.
-> **Templates** : `story-universal.html` (defaut), `story-sillon.html`, `story-sceau.html`, `story-feuillete-photo.html`, `story-feuillete-data.html`.
+> **Systeme visuel** : les stories utilisent le Visual Concept Engine (intent-engine) pour la direction creative. Les anciens templates HTML (sillon, sceau, feuillete) sont supprimes.
 
 ---
 
@@ -13,7 +13,6 @@
 | Champ | Valeur |
 |-------|--------|
 | Mode | [full-ia] — toutes les stories sont en full-ia. `edit-ia` et `irl` sont hors-planning uniquement. `template` est deprecie pour les stories. |
-| Traitement | [— / sillon / sceau / feuillete-photo / feuillete-data] |
 | Fond | [— / ambre / charbon / ambre+charbon / charbon+ambre] |
 | Highlight | [LA CARTE / COULISSES / NOS ARTISANS / NOUS TROUVER / L'EQUIPE / —] |
 | Mood | [cuivre / grenat / feuille] |
@@ -21,7 +20,6 @@
 | Intention | [envie / curiosite / confiance / presence] |
 
 > Le **Mode** est defini dans le planning semaine. Ne pas le changer dans le brief sauf hors-planning.
-> Le **Traitement** est defini dans le planning semaine. Si vide ou `—`, c'est `photo-pure` (story-universal.html).
 > Le **Fond** est pertinent uniquement pour le mode `full-ia` — il determine la palette du background dans le prompt image.
 > Le produit est TOUJOURS decrit dans le prompt (jamais fourni en photo reference a l'IA).
 > L'**Intention** est OBLIGATOIRE — elle guide le choix du concept et la direction artistique.
@@ -122,42 +120,6 @@
 | IRL_FILTER | [none / leger / moyen / fort] |
 | INFO_POSITION | [(vide=bas-centre) / info-haut-gauche / info-haut-centre / info-bas-gauche] |
 
-#### Si traitement = `sillon`
-
-> Photo haut + arc dome + zone ambre bas. Le fond de la PHOTO est gere par `/image-prompt-engineer` via le champ Fond.
-
-| Champ | Valeur |
-|-------|--------|
-| PRODUCT_NAME | [max 20 car — nom produit en Oswald 120px] |
-| PRODUCT_INFO | [max 30 car — macros, accroche OU "—"] |
-
-#### Si traitement = `sceau`
-
-> Cercle glassmorphism avec arc dome interieur, sur photo plein cadre. Zone libre en dessous pour stickers IG.
-
-| Champ | Valeur |
-|-------|--------|
-| SCEAU_NAME | [max 12 car — nom produit, 2 lignes possibles avec <br>] |
-| SCEAU_SUB | [max 20 car — sous-titre] |
-| SCEAU_INFO | [max 15 car — info (kcal, prix) OU "—"] |
-
-#### Si traitement = `feuillete-photo`
-
-> Photo plein cadre + bandeau dome ambre en haut. Utilise en sequence avec `feuillete-data`.
-
-Pas de champs supplementaires — le template n'a que la photo + tagline + dome.
-
-#### Si traitement = `feuillete-data`
-
-> Fond charbon + donnee geante. Pas de photo. Fermeture de sequence.
-
-| Champ | Valeur |
-|-------|--------|
-| DATA_NUMBER | [max 6 car — chiffre geant (ex: "946", "53G", "0%")] |
-| DATA_UNIT | [max 15 car — unite (ex: "CALORIES", "PROTEINES")] |
-| DATA_LINE_1 | [max 25 car — info (ex: "MARDI — DIMANCHE")] |
-| DATA_LINE_2 | [max 25 car — info (ex: "11h-14h / 18h-22h") OU "—"] |
-
 #### Si type = `rappel`
 
 > Story bonus (#4) — rappel de presence. Visuel IA unique + accroche + CTA.
@@ -179,10 +141,9 @@ Pas de champs supplementaires — le template n'a que la photo + tagline + dome.
 
 ## Contraintes
 
-- DA : Dark Food Premium — template par defaut `story-universal.html`, ou traitement specifique (sillon, sceau, feuillete-photo, feuillete-data)
+- DA : Dark Food Premium — visuels IA plein ecran ou layouts typographiques via visual-composer
 - Mood : [cuivre / grenat / feuille] — cuivre = standard
 - **Fond** : assigne dans le planning pour le mode `full-ia` — determine la palette du prompt image
-- **Traitement** : assigne dans le planning — determine le template HTML utilise
 - **Pain noir obligatoire** sur tous les visuels burger
 - **Chaleur pulsee** : jamais "grill", "grille", "barbecue"
 - Tagline fixe : `Le cheat meal <em>qui n'en est pas un</em>`

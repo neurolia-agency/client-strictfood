@@ -152,29 +152,29 @@ La source image détermine COMMENT la photo de base est obtenue. Pertinent uniqu
 > 3. Generer les combinaisons jour par jour
 > 4. Valider la semaine (couverture, rotation, ratio)
 
-| Jour | # | Type | Produit | Concept | Fond | Intention | Traitement | Description courte |
-|------|---|------|---------|---------|------|-----------|------------|-------------------|
-| Lun | 1 | Food | [slug] | [concept] | [charbon/ambre/...] | [envie/curiosite/confiance/presence] | [— / sillon / sceau / ...] | [1 phrase : mise en scene] |
-| Lun | 2 | Lifestyle | [slug ou —] | [lifestyle-*] | [—] | [intention] | [—] | [personnage + scene + ref Pinterest] |
-| Lun | 3 | Brand | [slug ou —] | [concept brand] | [charbon/ambre] | [presence] | [—] | [accroche / rappel / educatif] |
-| Mar | 1 | | | | | | | |
-| Mar | 2 | | | | | | | |
-| Mar | 3 | | | | | | | |
-| Mer | 1 | | | | | | | |
-| Mer | 2 | | | | | | | |
-| Mer | 3 | | | | | | | |
-| Jeu | 1 | | | | | | | |
-| Jeu | 2 | | | | | | | |
-| Jeu | 3 | | | | | | | |
-| Ven | 1 | | | | | | | |
-| Ven | 2 | | | | | | | |
-| Ven | 3 | | | | | | | |
-| Sam | 1 | | | | | | | |
-| Sam | 2 | | | | | | | |
-| Sam | 3 | | | | | | | |
-| Dim | 1 | | | | | | | |
-| Dim | 2 | | | | | | | |
-| Dim | 3 | | | | | | | |
+| Jour | # | Type | Produit | Concept | Fond | Intention | Description courte |
+|------|---|------|---------|---------|------|-----------|-------------------|
+| Lun | 1 | Food | [slug] | [concept] | [charbon/ambre/...] | [envie/curiosite/confiance/presence] | [1 phrase : mise en scene] |
+| Lun | 2 | Lifestyle | [slug ou —] | [lifestyle-*] | [—] | [intention] | [personnage + scene + ref Pinterest] |
+| Lun | 3 | Brand | [slug ou —] | [concept brand] | [charbon/ambre] | [presence] | [accroche / rappel / educatif] |
+| Mar | 1 | | | | | | |
+| Mar | 2 | | | | | | |
+| Mar | 3 | | | | | | |
+| Mer | 1 | | | | | | |
+| Mer | 2 | | | | | | |
+| Mer | 3 | | | | | | |
+| Jeu | 1 | | | | | | |
+| Jeu | 2 | | | | | | |
+| Jeu | 3 | | | | | | |
+| Ven | 1 | | | | | | |
+| Ven | 2 | | | | | | |
+| Ven | 3 | | | | | | |
+| Sam | 1 | | | | | | |
+| Sam | 2 | | | | | | |
+| Sam | 3 | | | | | | |
+| Dim | 1 | | | | | | |
+| Dim | 2 | | | | | | |
+| Dim | 3 | | | | | | |
 
 **Regles de remplissage :**
 - **Produit** : slug recette (`strict-boeuf`, `strict-wrap-poulet`, etc.) — chaque produit au moins 1x/semaine
@@ -189,13 +189,13 @@ La source image détermine COMMENT la photo de base est obtenue. Pertinent uniqu
 
 | Mode story | Pipeline | Output | Cible |
 |------------|----------|--------|-------|
-| `full-ia` (food) | Prompt → Gemini 2K (9:16) → template | PNG 1080x1920 (produit IA) | **40%** |
-| `full-ia` (lifestyle) | Photo ref → Analyse → Gemini 2K → (edit logo si sac) → template | PNG 1080x1920 (lifestyle) | **30%** |
-| `full-ia` (brand) | Prompt → Gemini 2K (9:16) → template | PNG 1080x1920 (rappel, fiche, educatif, interactif) | **30%** |
+| `full-ia` (food) | Prompt → Gemini 2K (9:16) | PNG 1080x1920 (produit IA) | **40%** |
+| `full-ia` (lifestyle) | Photo ref → Analyse → Gemini 2K → (edit logo si sac) | PNG 1080x1920 (lifestyle) | **30%** |
+| `full-ia` (brand) | Prompt → Gemini 2K (9:16) | PNG 1080x1920 (rappel, fiche, educatif, interactif) | **30%** |
 
 > **100% full-ia** — Le mode `template` n'est plus utilise pour les stories (trop redondant visuellement, limite la creativite). Toutes les stories sont des visuels IA uniques.
 > Les modes `edit-ia` et `irl` sont reserves au `hors-planning/`.
-> **Templates stories** : `story-universal.html` (defaut) + `story-sillon.html`, `story-sceau.html`, `story-feuillete-photo.html`, `story-feuillete-data.html` (optionnels).
+> Le nouveau systeme utilise le Visual Concept Engine (intent-engine) pour la direction creative et le visual-composer pour les layouts typographiques.
 
 ### Fonds stories (modes IA uniquement)
 
@@ -208,19 +208,6 @@ Pertinent uniquement pour le mode `full-ia` (food et lifestyle).
 | `charbon` | Surface/fond charbon sombre (#1a1714) |
 | `ambre+charbon` | Fond ambre + accessoires charbon (papier kraft noir, ardoise, ustensiles sombres) |
 | `charbon+ambre` | Fond charbon + accessoires ambre (serviette doree, sauce visible, eclats sesame) |
-
-### Traitements stories (optionnel)
-
-Le **traitement** determine le template HTML utilise pour la story. Si vide ou `—`, c'est `photo-pure` (story-universal.html, comme avant).
-
-| Traitement | Template | Usage |
-|-----------|----------|-------|
-| *(vide)* / `photo-pure` | `story-universal.html` | Default — photo plein cadre + overlay minimal |
-| `sillon` | `story-sillon.html` | Photo haut + arc dome + zone ambre bas (nom produit, macros) |
-| `sceau` | `story-sceau.html` | Photo + cercle glassmorphism avec arc dome (nom, info) |
-| `feuillete-photo` | `story-feuillete-photo.html` | Photo plein cadre + bandeau dome ambre en haut (sequence) |
-| `feuillete-data` | `story-feuillete-data.html` | Fond charbon + donnee geante (chiffre, horaires, CTA) |
-| `avis` | `story-avis.html` | Avis Google (1-3 avis, fond ambre, speech bubbles) |
 
 ### Stories Lifestyle (~30% des stories, max 7/semaine — type `lifestyle` dans la colonne Type)
 
@@ -373,17 +360,6 @@ Voir `_config/story-rappel.md` pour les accroches et CTA.
 | ambre+charbon | /~N | ~15% |
 | charbon+ambre | /~N | ~10% |
 
-### Stories — Traitements cette semaine
-
-| Traitement | Count |
-|-----------|-------|
-| photo-pure (defaut) | /~21 |
-| sillon | /~21 |
-| sceau | /~21 |
-| feuillete-photo | /~21 |
-| feuillete-data | /~21 |
-| avis | /~21 | cible : 2/semaine |
-
 ### Stories — Intentions cette semaine
 
 | Intention | Count | Cible |
@@ -451,7 +427,7 @@ Voir `_config/story-rappel.md` pour les accroches et CTA.
 - [ ] **Rotation intention** : pas 2 stories consecutives avec la meme intention
 - [ ] **Rotation produit** : pas 2 stories consecutives avec le meme produit
 - [ ] **Signature Charbon × Ambre** : chaque story a les 2 couleurs (accent 15-20%)
-- [ ] Les traitements stories sont varies (pas 3 sillons d'affilee)
+- [ ] Les concepts stories sont varies (pas 3 concepts identiques d'affilee)
 - [ ] ~30% des stories sont lifestyle (max 7 sur ~21)
 - [ ] Chaque story lifestyle a un concept `lifestyle-*`, un produit et une photo reference
 - [ ] Les personnages lifestyle sont varies (H/F, ages, styles)

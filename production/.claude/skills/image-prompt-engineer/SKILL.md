@@ -98,10 +98,6 @@ The second portion rests FLAT on the first — meat touching meat with sauce bet
 ```
 JAMAIS "double-stacked" seul. JAMAIS "NO middle bun" comme seule protection.
 
-#### Traitements stories (regle critique)
-
-`colonne`, `sillon`, `sceau`, `feuillete-photo`, `feuillete-data` = **post-production** (Puppeteer overlay). Le prompt genere SEULEMENT la photo de base.
-
 ---
 
 #### BLOC 1 — Ouverture + Fond

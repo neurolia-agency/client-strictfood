@@ -1,9 +1,9 @@
 ---
 name: story-producer
 description: >
-  Orchestrateur OBLIGATOIRE du pipeline de production de stories Instagram StrictFood v5.
-  Route vers 3 sous-pipelines : full-ia food (40%), full-ia lifestyle (30%), template (30%).
-  Coordonne copywriting, data mapping, template fill, Puppeteer render, et caption.
+  Orchestrateur OBLIGATOIRE du pipeline de production de stories Instagram StrictFood v6.
+  Route vers 3 sous-pipelines : full-ia food (40%), full-ia lifestyle (30%), full-ia brand (30%).
+  Coordonne le Visual Concept Engine (intent-engine), la generation IA, et la caption.
   Utiliser ce skill DÈS que l'utilisateur veut produire, générer, lancer ou créer une ou
   plusieurs stories — même s'il ne dit pas "story producer". Couvre : story unique, batch jour,
   batch semaine complète, relance d'une story, story hors planning. 1 brief = 1 story.
@@ -11,19 +11,20 @@ description: >
   la rédaction de prompts seuls (→ image-prompt-engineer), les captions seules (→ caption-writer).
 ---
 
-# Story Producer -- Orchestrateur Pipeline Stories v5
+# Story Producer -- Orchestrateur Pipeline Stories v6
 
-Tu es l'orchestrateur du pipeline de production de stories Instagram StrictFood. Tu routes chaque brief vers le sous-pipeline adapte : **full-ia food**, **full-ia lifestyle**, ou **template**.
+Tu es l'orchestrateur du pipeline de production de stories Instagram StrictFood. Tu routes chaque brief vers le sous-pipeline adapte : **full-ia food**, **full-ia lifestyle**, ou **full-ia brand**.
 
-## Modes v5
+## Modes v6
 
 | Mode | Pipeline | Distribution |
 |------|----------|:------------:|
-| `full-ia` (food) | Prompt -> Realism Audit -> Gemini 2K 9:16 -> template traitement | **40%** |
+| `full-ia` (food) | Prompt -> Realism Audit -> Gemini 2K 9:16 | **40%** |
 | `full-ia` (lifestyle) | Pinterest search -> Analyse -> Adapt -> Prompt Combo-B -> Gemini 2K 9:16 -> logo insertion | **30%** |
-| `full-ia` (brand) | **Rappel-copywriter** -> Prompt -> Realism Audit -> Gemini 2K 9:16 -> template traitement | **30%** |
+| `full-ia` (brand) | **Rappel-copywriter** -> Prompt -> Realism Audit -> Gemini 2K 9:16 | **30%** |
 
 > **100% full-ia** — le mode `template` est deprecie pour les stories. Chaque story est un visuel IA unique.
+> **Visual Concept Engine** : les stories visuelles passent par le Visual Concept Engine (intent-engine) pour la direction creative. Les stories template utilisent le visual-composer pour des layouts typographiques uniques.
 > **Modes supprimes** : `template` (stories), `irl-sublimation`, `compositing-irl`, `compositing-ia`, `scene-ia`, `irl-archive`. Si un brief contient un de ces modes -> STOP, informer l'operateur.
 > **1 brief = 1 story** : chaque story a son propre fichier brief.
 
@@ -38,19 +39,9 @@ L'operateur fournit :
 
 Avant de commencer, verifier :
 1. Le dossier story existe avec un `brief/brief-story.md`
-2. Les templates HTML existent dans `production/posts-stories/stories/_templates/`
-3. Le script `render-story.js` existe dans `production/posts-stories/stories/_scripts/`
-4. Le catalogue `production/_config/brand-props.md` existe
-5. Le fichier `production/posts-stories/stories/_templates/SPECS.md` est la **source de verite** pour les limites de caracteres, les presets photo et les forces de gradient
+2. Le catalogue `production/_config/brand-props.md` existe
 
 Si le brief n'existe pas -> STOP, demander a l'operateur de creer le brief (template : `production/_templates/brief-story.md`).
-
-## Reference cadres rigides
-
-Chaque template a un cadre fixe avec des positions absolues. **TOUJOURS consulter `_templates/SPECS.md`** avant le fill pour :
-- Les **limites de caracteres** par zone
-- Les **presets photo** (`photo-centre`, `photo-droite`, `photo-gauche`, `photo-haut`, `photo-large`, `photo-portrait`)
-- Les **forces de gradient** (`gradient-light`, `gradient-medium`, `gradient-strong`)
 
 ## Etape 0 -- Contexte strategique + historique (avant toute execution)
 
@@ -83,23 +74,13 @@ Lire `strategie/strategie-globale.md` (chemin depuis la racine du projet) pour :
 
 Si incoherence detectee -> WARN a l'operateur avant de continuer.
 
-## Templates et routage
+## Routage
 
-Le **traitement** (champ `Traitement` du brief) determine quel template HTML est utilise. Si vide ou `--`, c'est `photo-pure` = `story-universal.html` (comportement par defaut).
-
-### Routage traitement -> template
-
-| Traitement | Template | Description |
-|-----------|----------|-------------|
-| *(vide)* / `photo-pure` | `story-universal.html` | Photo plein cadre + overlay minimal (defaut) |
-| `sillon` | `story-sillon.html` | Photo haut + arc dome + zone ambre bas (nom produit, macros) |
-| `sceau` | `story-sceau.html` | Photo + cercle glassmorphism avec arc dome (nom, info) |
-| `feuillete-photo` | `story-feuillete-photo.html` | Photo plein cadre + bandeau dome ambre en haut |
-| `feuillete-data` | `story-feuillete-data.html` | Fond charbon + donnee geante (pas de photo) |
+Le routage se fait par **type** de story (food, lifestyle, brand/rappel). Les anciens traitements post-production (sillon, sceau, feuillete-photo, feuillete-data) et leurs templates HTML sont **supprimes**. Le nouveau systeme utilise le Visual Concept Engine (intent-engine) pour les stories visuelles IA et le visual-composer pour les stories template (layouts typographiques crees a la volee).
 
 ### Fond de la photo (modes IA uniquement)
 
-Le champ `Fond` du brief determine la palette du BACKGROUND dans l'image generee. Gere par `/image-prompt-engineer`, pas par le template.
+Le champ `Fond` du brief determine la palette du BACKGROUND dans l'image generee. Gere par `/image-prompt-engineer`.
 
 | Fond | Instruction pour le prompt |
 |------|---------------------------|
@@ -108,14 +89,11 @@ Le champ `Fond` du brief determine la palette du BACKGROUND dans l'image generee
 | `ambre+charbon` | Fond ambre + accessoires charbon (papier kraft noir, ardoise, ustensiles sombres) |
 | `charbon+ambre` | Fond charbon + accessoires ambre (serviette doree, sauce visible, eclats sesame) |
 
-Pour le mode `template`, le fond est celui de la photo existante -- pas de choix.
-
 ### Logique de routage (pseudo-code)
 
 ```
 mode = brief.mode           # full-ia (toujours pour les stories)
 type = brief.type           # food / lifestyle / brand / rappel
-traitement = brief.traitement || "photo-pure"
 
 # --- Detection du sous-pipeline ---
 SI type == "lifestyle":
@@ -129,13 +107,6 @@ SI type == "brand" OU type == "Brand":
 
 SI type == "food" OU type absent:
   -> SOUS-PIPELINE FOOD
-
-# --- Resolution template ---
-SI traitement == "photo-pure"       -> template = "story-universal.html"
-SI traitement == "sillon"           -> template = "story-sillon.html"
-SI traitement == "sceau"            -> template = "story-sceau.html"
-SI traitement == "feuillete-photo"  -> template = "story-feuillete-photo.html"
-SI traitement == "feuillete-data"   -> template = "story-feuillete-data.html"
 ```
 
 ### Regle absolue -- zero dependance photos fraiches
@@ -168,9 +139,7 @@ Pour les stories de type `Brand` et `Rappel`. Deux agents interviennent en seque
 [3] Suivre le SOUS-PIPELINE FOOD standard :
     Input Mapping -> Realism Audit PRE -> Prompt Combo-B -> Realism Audit POST -> Gemini 2K 9:16
 
-[4] Template traitement (overlay) :
-    L'accroche est integree via le template HTML (TEXT_LINE_1/TEXT_LINE_2)
-    ou ajoutee en overlay natif IG par l'operateur
+[4] L'accroche est ajoutee en overlay natif IG par l'operateur
 ```
 
 ### Separation des responsabilites (brand/rappel)
@@ -257,30 +226,20 @@ Voir [references/batch-mode.md](references/batch-mode.md) pour le mode semaine c
 
 ---
 
-## Structure d'une story (v5)
+## Structure d'une story (v6)
 
 ```
 production/posts-stories/stories/S1/lundi/story-01/
   brief/brief-story.md              <- Brief operateur (1 brief = 1 story)
-  production/data.md                <- Donnees (template) ou input.md (full-ia)
+  production/data.md                <- Donnees ou input.md (full-ia)
   production/art-direction.md       <- Art Director (full-ia food uniquement)
   production/prompt.md              <- Prompt Engineer (full-ia food/lifestyle)
   production/caption.md             <- Caption Writer (APRES validation)
-  production/story.html             <- Template rempli (si template)
   brouillons/story.png              <- Visuel (supprime apres publication)
 ```
 
 > **Flux** : Generation -> `brouillons/` -> iterations -> validation -> caption -> publication -> archivage (PNG supprime)
 > **Historique** : trace depuis les metadonnees, pas depuis les PNG.
-
-## Resolution des chemins dans le HTML
-
-Les templates utilisent des chemins relatifs (`_base/base.css`, `_base/logo.svg`). Lors du fill :
-
-1. **CSS** : remplacer `href="_base/base.css"` par le chemin absolu vers `production/posts-stories/stories/_templates/_base/base.css`
-2. **Logo** : remplacer `src="_base/logo.svg"` par le chemin absolu vers `production/posts-stories/stories/_templates/_base/logo.svg`
-3. **Images** : resoudre les chemins en absolu vers les fichiers dans `public/`
-4. **Google Fonts** : laisser les liens CDN tels quels
 
 ## Regles visuelles
 
@@ -300,13 +259,11 @@ Voir [references/visual-rules.md](references/visual-rules.md) pour les familles 
    - Si violation → WARN l'operateur et suggerer un changement
 5. **Signature Charbon × Ambre** -- chaque story respecte la dualite (accent 15-20% du cadre). Pour lifestyle : portee par le personnage (vetement/accessoire).
 6. **Un seul checkpoint** : apres le data mapping / avant la generation.
-7. **Ne JAMAIS modifier les templates HTML** dans `_templates/`. Copier, remplacer, ecrire dans le dossier story.
-8. **Chemins absolus** dans le HTML rempli pour Puppeteer.
-9. **Backgrounds visibles** -- pas de fond noir uniforme.
-10. **Pas de video** -- PNG 1080x1920 uniquement.
-11. **Distribution** : food 40%, lifestyle 30%, brand 30% (verifier a la semaine). 100% full-ia.
-12. **Realism Audit obligatoire** -- pour full-ia food, lifestyle ET brand, avant ET apres le prompt. APPELER LE SKILL `realism-auditor` (pas d'application manuelle).
-13. **a-publier/** -- apres validation caption, DEPLACER le visuel vers `a-publier/stories/` + caption en `.txt`. L'operateur supprime apres publication.
+7. **Backgrounds visibles** -- pas de fond noir uniforme.
+8. **Pas de video** -- PNG 1080x1920 uniquement.
+9. **Distribution** : food 40%, lifestyle 30%, brand 30% (verifier a la semaine). 100% full-ia.
+10. **Realism Audit obligatoire** -- pour full-ia food, lifestyle ET brand, avant ET apres le prompt. APPELER LE SKILL `realism-auditor` (pas d'application manuelle).
+11. **a-publier/** -- apres validation caption, DEPLACER le visuel vers `a-publier/stories/` + caption en `.txt`. L'operateur supprime apres publication.
 
 ## Gestion d'erreurs
 
@@ -317,6 +274,4 @@ Voir [references/visual-rules.md](references/visual-rules.md) pour les familles 
 | Recette manquante | STOP -> demander creation |
 | Donnee manquante | WARN dans le checkpoint |
 | Image introuvable | WARN + chercher alternative via Glob |
-| Template HTML manquant | STOP -> verifier `_templates/` |
-| Puppeteer fail | Afficher l'erreur -> verifier chemins absolus et fonts |
 | Pinterest search echoue (lifestyle) | WARN -> demander une photo de reference manuelle a l'operateur |
