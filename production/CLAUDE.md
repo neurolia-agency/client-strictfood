@@ -27,7 +27,7 @@ Le **planning semaine** décide du mode de chaque post et chaque story. L'orches
 > **Planning standard** : utilise uniquement `full-ia` et `template`.
 > **Hors-planning** : peut utiliser `edit-ia` et `irl` en plus.
 > **Produit TOUJOURS decrit** : le produit est decrit dans le prompt, jamais en photo reference.
-> **Template unique** : toutes les stories utilisent `story-universal.html` (photo plein cadre + overlay minimal).
+> **Stories** : 2 types — story visuelle (IA plein ecran 9:16) et story template (layout typographique cree a la volee par le visual-composer). Plus de templates fixes.
 
 ### Flux par mode
 
@@ -227,7 +227,7 @@ posts-stories/posts/periode-[N]/S[X]/DD-MM-YYYY/
 **Carrousels** : 9 types, 3 familles (A texte, B photo, C panoramique). Voir `_config/carousel-themes.md`.
 - Distribution mensuelle : Panoramique 2-3, Zoom Progressif 1-2, Texture/ASMR 1, Educatif 1, Construction 0.5, Ingredient Spotlight 0.5, Defile Gamme 0.5, Process Cuisine 0.5, Menu Objectif 0.5
 **Piliers** : Le Produit 55%, Les Benefices 35%, La Marque 10% (posts + carrousels combines)
-**Stories** : **100% full-ia** — food 40% · lifestyle 30% · brand 30% · max 7 lifestyle/semaine. Le mode `template` est deprecie pour les stories.
+**Stories** : ~60-70% story visuelle (IA plein ecran) · ~30-40% story template (layout typographique cree a la volee). Distribution : food 40% · lifestyle 30% · brand 30% · max 7 lifestyle/semaine.
 
 ### Production hors planning
 
@@ -282,7 +282,7 @@ Pour les idees spontanees, actions ponctuelles, actualites :
 | Template brief story | `_templates/brief-story.md` (1 brief = 1 story) |
 | **Taxonomie carrousels** | `_config/carousel-themes.md` (9 types, 3 familles, scenes, sequences) |
 | Guide operateur | `_templates/guide-operateur.md` |
-| **Specs templates** | `posts-stories/stories/_templates/SPECS.md` (limites caractères, presets, gradients) |
+| **Visual Composer** | `.claude/skills/visual-composer/` (skill pour layouts typographiques stories a la volee) |
 | **Playbook** | `PLAYBOOK.md` (guide pas à pas par intention) |
 | Photos fichiers | `../public/images/photos-references/` |
 | Tokens CSS | `../app/globals.css` |
@@ -296,7 +296,7 @@ Pour les idees spontanees, actions ponctuelles, actualites :
 - **Post-publication** : l'operateur supprime manuellement de `a-publier/` quand il veut. Les metadonnees (brief, direction, prompt, caption) restent dans le dossier date.
 - **Caption après validation** : la caption est générée par `/caption-writer` APRES validation du visuel par l'opérateur.
 - **Produit decrit, jamais en photo reference** : dans tous les modes IA (full-ia, edit-ia), le produit est DECRIT dans le prompt textuel. Jamais de photo produit en input.
-- **Layout produit surdimensionné (templates)** : quand un template a du texte concentré d'un côté, le visuel produit est **surdimensionné (~1.5x) et coupé à ~50% par le bord opposé**. Texte à gauche → produit déborde à droite. Photos produit sur fond noir → `object-fit: contain` + masque radial. Voir `SPECS.md`.
+- **Layout produit surdimensionné (stories template)** : quand un layout a du texte concentré d'un côté, le visuel produit est **surdimensionné (~1.5x) et coupé à ~50% par le bord opposé**. Texte à gauche → produit déborde à droite. Photos produit sur fond noir → `object-fit: contain` + masque radial.
 - **⚡ Dark Premium ≠ Terne** : le fond est sombre (charbon) mais le PRODUIT et les TEXTES doivent être lumineux, contrastés et dynamiques. Couleurs des ingrédients vives et saturées. Éclairage contrasté et directionnel dans les prompts IA.
 - **Texte blanc pur + accent** : hiérarchie par taille/poids/couleur, PAS par opacité. Blanc `#fff` pour le contenu, accent pour les labels et mots-clés. Jamais de texte gris.
 - **Lisibilité sur photo** : `text-depth-3` (6 couches ombre) sur tout texte devant une photo. `mark-tape-strong` (accent 0.50) sur les blocs longs.
@@ -314,7 +314,7 @@ Pour les idees spontanees, actions ponctuelles, actualites :
 - **Brief v2 legacy** : les briefs S1-S2 fonctionnent en mode `full-ia` par défaut
 - **Distribution piliers** : 3 piliers (Le Produit 55%, Les Bénéfices 35%, La Marque 10%). Vérifier mensuellement
 - **Zero dependance photos fraiches** : le planning standard ne depend JAMAIS de photos a prendre. Le mode `irl` et `edit-ia` sont reserves au `hors-planning/` uniquement.
-- **Templates stories** : `story-universal.html` (defaut) + `story-sillon.html`, `story-sceau.html`, `story-feuillete-photo.html`, `story-feuillete-data.html`. Le traitement est choisi au planning. Les anciens templates (educatif, interactif, fiche-produit, annonce) sont deprecies.
+- **Stories** : 2 types — story visuelle (IA plein ecran) et story template (layout cree a la volee). Plus de templates fixes. Les anciens templates (story-universal, story-sillon, story-sceau, story-feuillete-photo, story-feuillete-data, educatif, interactif, fiche-produit, annonce) sont SUPPRIMES.
 - **Fond stories (modes IA)** : chaque story en mode IA a un fond assigne (`ambre`, `charbon`, `ambre+charbon`, `charbon+ambre`) qui determine la palette du background dans le prompt image via `/image-prompt-engineer`.
 - **Story Rappel** : 1 rappel tous les 2 jours, REMPLACE le slot Brand (#3) du jour. Visuel IA unique + accroche + CTA (telephone/horaires/adresse). 3 stories/jour TOUJOURS, pas 4. Voir `_config/story-rappel.md`.
 - **Realism Auditor obligatoire** : `/realism-audit` DOIT etre execute avant toute generation IA (full-ia, edit-ia). Pre-prompt (contraintes) + post-prompt (audit). Les modes `template` et `irl` sont exempts.
@@ -343,8 +343,8 @@ Les stories utilisent les memes modes que les posts. Le mode est decide au plann
 | Lifestyle | Scene de vie, moment, ambiance (pas de produit central) | 30% |
 | Brand | Rappels, fiches produit, educatif, interactif — visuels IA uniques | 30% |
 
-> Toutes les stories sont en full-ia. Le mode `template` est deprecie pour les stories (trop redondant visuellement, limite la creativite).
-> **Distribution** : **full-ia food 40% · full-ia lifestyle 30% · full-ia brand 30%**
+> **2 types de stories** : story visuelle (IA plein ecran 9:16, generee par Gemini) et story template (layout typographique cree a la volee par le visual-composer, rendu Puppeteer). Plus de templates fixes.
+> **Distribution** : **~60-70% story visuelle · ~30-40% story template** — food 40% · lifestyle 30% · brand 30%
 > **Contrainte** : max 7 lifestyle/semaine
 > **Concept visuel** : chaque story DOIT avoir un concept visuel assigne (voir `_config/concepts-visuels.md`)
 
@@ -378,7 +378,7 @@ brief/brief-story.md (1 brief = 1 story)
 | Copywriting | Agent `story-copywriter` | Sonnet | `production/.claude/agents/story-copywriter.md` |
 | Data Mapping | Agent `story-data-mapper` | Haiku | `production/posts-stories/stories/.claude/agents/story-data-mapper.md` |
 | Background | Agent `background-inventor` | Sonnet | `production/.claude/agents/background-inventor.md` |
-| Template HTML | `story-universal.html` (template unique) | — | `production/posts-stories/stories/_templates/` |
-| Specifications templates | Limites caracteres, presets photo, gradient | — | `production/posts-stories/stories/_templates/SPECS.md` |
+| Layout stories | visual-composer (layout typographique a la volee) | — | `production/.claude/skills/visual-composer/` |
+| Visual Composer | Layouts typographiques stories a la volee | — | `production/.claude/skills/visual-composer/` |
 | CSS partage | Base + logo | — | `production/posts-stories/stories/_templates/_base/` |
 | Rendu | Script Puppeteer | — | `production/posts-stories/stories/_scripts/render-story.js` |

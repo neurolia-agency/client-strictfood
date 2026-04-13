@@ -24,8 +24,8 @@ Le visual designer résout ça en analysant CHAQUE photo et en produisant des va
 
 1. **`story-NN/production/data.md`** — données mappées avec tous les placeholders résolus
 2. **Chemin(s) photo** — `BG_IMAGE_PATH` et/ou `HERO_IMAGE_PATH` depuis data.md
-3. **Template** — type de template (educatif, annonce, vitrine, interactif, irl-story, process)
-4. **Mood** — cuivre / grenat / feuille
+3. **Template** — type de template (educatif, annonce, interactif, process) ou composition Visual Concept Engine
+4. **Mood** — ambre (palette unique v6)
 
 ## Output
 
@@ -41,7 +41,7 @@ Ouvrir la photo via vision (Read tool sur le chemin image). Analyser :
 |--------|-----------------|-----------|
 | **Position du sujet** | Où est l'élément principal (burger, plat, personne, enseigne) ? Gauche/centre/droite, haut/milieu/bas | `object-position` précis (ex: `62% 38%` au lieu du preset `75% 30%`) |
 | **Zones de luminosité** | Quelles zones sont claires, lesquelles sont sombres ? | Force de gradient par zone (pas global). Zone texte = gradient fort si photo claire derrière |
-| **Palette couleur** | Couleurs dominantes de la photo | Choix mesh gradient (cuivre/feuille/grenat), intensité `color-overlay-warm` |
+| **Palette couleur** | Couleurs dominantes de la photo | Choix mesh gradient ambre, intensité `color-overlay-warm` |
 | **Densité texture** | La photo est-elle chargée (cuisine pleine) ou épurée (produit détouré) ? | Si chargée dans zone texte → `glass-panel` ou blur. Si épurée → gradient léger suffit |
 | **Échelle sujet** | Gros plan (produit remplit le cadre) ou plan large (contexte visible) ? | Scale factor (`transform: scale()`), crop via `object-position` |
 | **Orientation** | L'élément de référence est-il horizontal ? (enseigne, comptoir) | Correction rotation si nécessaire (`transform: rotate()`) |
@@ -64,12 +64,6 @@ Pour chaque template, les décisions varient :
 - **Radial gradient** : ajuster le centre du gradient radial vers la zone la plus claire de la photo
 - **Grain** : `grain-medium`
 - **Text depth** : si la photo a beaucoup de détails au centre → augmenter à `text-depth-3`
-
-#### Vitrine (hero photo en haut)
-
-- **Hero photo cadrage** : `object-position` précis pour centrer le produit dans le cadre supérieur
-- **Pas de mask organique** (le vitrine a son propre système de mask linéaire)
-- **Grain** : `grain-subtle` (le vitrine est plus lumineux)
 
 #### Interactif
 

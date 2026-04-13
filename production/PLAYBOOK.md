@@ -66,7 +66,7 @@ Pour chaque post, decider :
 | Champ | Choix | Source |
 |-------|-------|--------|
 | **Pilier** | Le Produit, Les Benefices, La Marque | Distribution piliers |
-| **Traitement** | photo-pure, knockout-band, masque, masque-inverse, texture-fill, triptych | Distribution traitements |
+| **Traitement** | photo-pure, triptych | Distribution traitements |
 | **Fond** | ambre (+ ID variante) ou charbon | Distribution fonds |
 | **Produit** | Un des 8 produits ou sujet pilier | Historique (eviter doublons) |
 | **Concept visuel** | Un concept de `_config/concepts-visuels.md` | Varier vs semaines precedentes |
@@ -104,20 +104,15 @@ Pour chaque carrousel, decider :
 Avant de valider, verifier :
 
 **Posts :**
-- [ ] ≥3 traitements differents sur les 4 posts
 - [ ] ≥3 piliers differents
-- [ ] Pas 2 consecutifs meme traitement
 - [ ] Max 1 triptych/quinzaine
 - [ ] ~65% fonds ambre / ~35% charbon
 
 **Stories :**
-- [ ] ~40% full-ia food (~8-9 stories)
-- [ ] ~30% full-ia lifestyle (~6-7 stories)
-- [ ] ~30% template (~6-7 stories)
-- [ ] ≥2 full-ia par jour
-- [ ] Max 3 interactifs/semaine
-- [ ] Max 1 educatif/semaine
-- [ ] Max 1 fiche produit/semaine
+- [ ] ~60-70% story visuelle (IA plein ecran)
+- [ ] ~30-40% story template (layout typographique cree a la volee)
+- [ ] Distribution thematique : food 40% · lifestyle 30% · brand 30%
+- [ ] Max 7 lifestyle/semaine
 - [ ] Fonds IA : ~50% ambre, ~25% charbon, ~15% ambre+charbon, ~10% charbon+ambre
 
 ### Etape 4 — Briefs individuels
@@ -301,23 +296,22 @@ Brief story lu → mode full-ia lifestyle detecte
 [8] Validation → caption → publication → archivage
 ```
 
-### Pipeline template
+### Pipeline story template (layout typographique)
 
-Pour les stories educatif, interactif, annonce, fiche produit :
+Pour les stories a dominante textuelle (educatif, interactif, annonce, fiche produit) :
 
 ```
-Brief story lu → mode template detecte
+Brief story lu → type story template detecte
          ↓
 [1] Story-copywriter (agent Sonnet)
     Reecrit les textes bruts du brief en textes impactants
          ↓
-[2] Story-data-mapper (agent Haiku)
-    Mappe les donnees vers les champs du template HTML
+[2] Visual-composer (skill)
+    Compose un layout HTML/CSS unique a la volee (pas de template fixe)
          ↓
-    🔒 Validation operateur (donnees)
+    🔒 Validation operateur
          ↓
-[3] Template fill (story-universal.html ou traitement specifique)
-    + Puppeteer render 1080x1920
+[3] Puppeteer render 1080x1920
          ↓
 [4] brouillons/ → verification → validation
          ↓
@@ -328,7 +322,7 @@ Brief story lu → mode template detecte
 
 Story supplementaire publiee tous les 2 jours. Rappel que le restaurant existe + CTA.
 
-- **Visuel** : photo reelle du restaurant (mode template) OU fond ambre/charbon (mode full-ia)
+- **Visuel** : photo reelle du restaurant (story template via visual-composer) OU fond ambre/charbon (story visuelle full-ia)
 - **Texte** : hook de la banque de rotation + telephone/horaires/adresse
 - **Config** : `_config/story-rappel.md`
 - Ne remplace pas les 3 stories principales
@@ -455,7 +449,7 @@ Exemples :
 |------|-----------------|-----|
 | `full-ia` | Visuel invente de zero (food porn, lifestyle, concept creatif) | Gemini 2K |
 | `edit-ia` | Tu as une bonne photo de lieu et tu veux y integrer un produit/personnage | Gemini 2K (input-image) |
-| `template` | Story rapide avec texte + photo existante | Puppeteer |
+| `template` | Story template rapide (layout typographique via visual-composer) | Puppeteer |
 | `irl` | Romain vient de prendre une photo en cuisine/service | Puppeteer (overlay DA) |
 
 ### Flux hors planning
@@ -525,7 +519,7 @@ Reserve au hors-planning (necessite une bonne photo de contexte).
 
 ### template — Rendu HTML
 
-Pas d'IA. Donnees mappees dans un template HTML, rendues par Puppeteer. Pour les stories educatif, interactif, annonce, fiche produit, et les carrousels.
+Pas d'IA. Rendu par Puppeteer. Pour les carrousels (templates HTML fixes) et les stories template (layout typographique cree a la volee par le visual-composer, pas de template fixe).
 
 ### irl — Photo fraiche
 
@@ -543,12 +537,10 @@ Photo prise en live par Romain ou Dorian + overlay DA minimal. Reserve au hors-p
 
 | Traitement | Cible |
 |-----------|-------|
-| photo-pure | ~45% |
-| knockout-band | ~25% |
-| texture-fill | ~10% |
+| photo-pure | ~90% |
 | triptych | ~10% |
-| masque | ~5% |
-| masque-inverse | ~5% |
+
+> Les traitements knockout-band, masque, masque-inverse, texture-fill sont SUPPRIMES.
 
 **Fonds :** ambre ~65% / charbon ~35%
 **Mode :** tous en `full-ia`
@@ -576,7 +568,6 @@ Photo prise en live par Romain ou Dorian + overlay DA minimal. Reserve au hors-p
 | La Marque | 10% | Ponctuel : devanture, fondateur, process cuisine |
 
 **Contraintes publications :**
-- Jamais 2 posts consecutifs meme traitement
 - ≥2 piliers differents/semaine (posts + carrousels)
 - Max 1 triptych/quinzaine
 - Pas 2 carrousels du meme type d'affilee
@@ -586,16 +577,16 @@ Photo prise en live par Romain ou Dorian + overlay DA minimal. Reserve au hors-p
 
 **Modes :**
 
-| Mode | Sous-type | Cible | Par semaine |
+| Type | Sous-type | Cible | Par semaine |
 |------|-----------|-------|-------------|
-| full-ia | food (produit, macro, concept) | **40%** | ~8-9 |
-| full-ia | lifestyle (personnage + produit) | **30%** | ~6-7 |
-| template | educatif, interactif, annonce, fiche | **30%** | ~6-7 |
+| story visuelle (IA plein ecran) | food, lifestyle, brand | **60-70%** | ~13-15 |
+| story template (layout typographique) | educatif, interactif, annonce, fiche | **30-40%** | ~6-8 |
+
+Distribution thematique (tous types confondus) : food 40% · lifestyle 30% · brand 30%
 
 **Fonds stories (modes IA) :** ambre ~50%, charbon ~25%, ambre+charbon ~15%, charbon+ambre ~10%
 
 **Contraintes stories :**
-- ≥2 full-ia par jour
 - Max 3 interactifs/semaine
 - Max 1 educatif/semaine
 - Max 1 fiche produit/semaine
@@ -610,15 +601,17 @@ Photo prise en live par Romain ou Dorian + overlay DA minimal. Reserve au hors-p
 | Traitement | Description |
 |-----------|-------------|
 | **photo-pure** | Produit seul, zero overlay. Le food porn parle seul. |
-| **knockout-band** | Produit hero + bande identitaire (charbon sur ambre OU ambre sur charbon) |
-| **masque** | Typo geante revele le produit (lettres = fenetre sur la photo) |
-| **masque-inverse** | Texte ambre solide sur photo |
-| **texture-fill** | Lettres remplies par texture produit (sesame, Maillard) |
 | **triptych** | 3 posts = 1 visuel dans la grille Instagram |
+
+> Les traitements knockout-band, masque, masque-inverse, texture-fill sont SUPPRIMES.
 
 ### Stories
 
-Les stories utilisent le Visual Concept Engine (intent-engine) pour la direction creative. Les anciens traitements story (sillon, sceau, feuillete-photo, feuillete-data) et leurs templates HTML sont supprimes. Les stories sont soit des visuels IA plein ecran, soit des layouts typographiques crees a la volee via le visual-composer.
+Les stories utilisent le Visual Concept Engine (`intent-engine`) pour la direction creative. 2 types :
+- **Story visuelle** : IA plein ecran 9:16 (Gemini) — food, lifestyle, brand
+- **Story template** : layout typographique cree a la volee par le `visual-composer` (Puppeteer)
+
+Les anciens traitements story (sillon, sceau, feuillete-photo, feuillete-data, dome) et leurs templates HTML fixes (story-universal, story-sillon, story-sceau, etc.) sont SUPPRIMES.
 
 ### Fonds
 
@@ -648,12 +641,13 @@ Les concepts sont de l'**inspiration**, pas des regles rigides.
           ┌────────────┼────────────┐
           ▼            ▼            ▼
      POSTS (2)     STORIES (21)  CARROUSELS (2)
-     (full-ia)    (full-ia +     (A: Puppeteer
+     (full-ia)    (visuelle +    (A: Puppeteer
                    template)      B: Gemini x N
           │            │          C: Gemini + split)
           ▼            ▼            │
        Gemini      Gemini /         ▼
-        2K        Puppeteer    Gemini / Puppeteer
+        2K        visual-      Gemini / Puppeteer
+                  composer
           │            │            │
           └────────────┼────────────┘
                        ▼
@@ -688,7 +682,7 @@ Les concepts sont de l'**inspiration**, pas des regles rigides.
 | `/nutrition-researcher` | Skill | Recherche scientifique (carrousels) |
 | `input-mapper` | Agent Haiku | Mapping produit → recettes |
 | `story-copywriter` | Agent Sonnet | Reecriture textes stories |
-| `story-data-mapper` | Agent Haiku | Mapping donnees → template HTML |
+| `story-data-mapper` | Agent Haiku | Mapping donnees → visual-composer |
 | `carousel-copywriter` | Agent Sonnet | Contenu structure par slide |
 | `background-inventor` | Agent | Invention fonds creatifs DA |
 
@@ -733,7 +727,7 @@ Les concepts sont de l'**inspiration**, pas des regles rigides.
 - [ ] **Pas de grill** : pas de marques de grill (croute Maillard uniforme)
 - [ ] **Ingredients fideles** : mache (petites feuilles rondes), parmesan (miettes), sauce (jaune-orange), oignons rouges (tranches)
 - [ ] **Esthetique DA** : fond coherent, eclairage contraste, produit lumineux sur fond sombre
-- [ ] **Traitement** : le traitement visuel est correct (knockout-band, masque, etc.)
+- [ ] **Traitement** : le traitement visuel est correct (photo-pure, triptych)
 - [ ] **Texte parasite** : pas de texte genere par l'IA dans l'image
 - [ ] **Caption** : generee par /caption-writer, pas de "grill"/"grille"/"barbecue"
 - [ ] **Format** : ratio correct (4:5, 1:1, 9:16)
@@ -778,7 +772,7 @@ Les concepts sont de l'**inspiration**, pas des regles rigides.
 | Terme | Definition |
 |-------|-----------|
 | **Pilier** | Categorie editoriale (Le Produit, Les Benefices, La Marque) |
-| **Traitement** | Style visuel du post dans le feed (photo-pure, knockout-band, masque, etc.) |
+| **Traitement** | Style visuel du post dans le feed (photo-pure, triptych) |
 | **Mode** | Methode de creation (full-ia, edit-ia, template, irl) |
 | **Fond** | Arriere-plan du visuel (ambre, charbon, variantes) |
 | **Concept visuel** | Idee de mise en scene (macro-sauce, concept-eclate, lifestyle-terrasse) |

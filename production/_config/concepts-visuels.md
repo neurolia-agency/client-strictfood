@@ -15,7 +15,7 @@
 
 ---
 
-## Concepts Food Porn (pour modes `irl-sublimation`, `full-ia`, `compositing-ia`)
+## Concepts Food Porn (pour mode `full-ia`)
 
 ### Macro / Texture
 
@@ -83,7 +83,7 @@
 
 ### Humain + Produit — Système combinatoire
 
-> Ces concepts montrent une PERSONNE interagissant avec le produit. Réalisables en `full-ia` (visages IA), `irl` ou `irl-sublimation` (photos réelles). En full-ia, la description du produit est ULTRA-FIDÈLE à la recette.
+> Ces concepts montrent une PERSONNE interagissant avec le produit. Réalisables en `full-ia` (visages IA) ou `irl` (photos réelles, hors-planning uniquement). En full-ia, la description du produit est ULTRA-FIDÈLE à la recette.
 >
 > **Principe** : chaque visuel est COMPOSÉ en piochant une brique dans chaque catégorie. Aucun template figé — la variété vient de la combinatoire.
 

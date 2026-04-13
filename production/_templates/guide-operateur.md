@@ -1,4 +1,4 @@
-# Guide Opérateur — Pipeline Instagram v3
+# Guide Opérateur — Pipeline Instagram v6
 
 Comment produire un post Instagram de A à Z. Tes interventions sont marquées `👤 TOI`, le reste est automatique.
 
@@ -14,12 +14,26 @@ Comment produire un post Instagram de A à Z. Tes interventions sont marquées `
 👤 TOI     Valider le checkpoint (1 réponse)
 🤖 AUTO    Génération brouillon (dans brouillons/)
 👤 TOI     Vérifier le brouillon, itérer si besoin
-👤 TOI     Valider → promotion vers final/
-🤖 AUTO    Génération caption (après promotion)
+👤 TOI     Valider → déplacement vers a-publier/
+🤖 AUTO    Génération caption (après validation)
 👤 TOI     Vérifier la caption
 ```
 
 **Interventions : 5** (planning, brief, validation checkpoint, validation brouillon, vérification caption)
+
+---
+
+## Modes de création v6
+
+| Mode | Description | Planifiable | API |
+|------|-------------|-------------|-----|
+| `full-ia` | Gemini génère tout (produit décrit + scène) | **Oui** (planning standard) | Gemini 2K |
+| `edit-ia` | Photo lieu en input + produit décrit dans le prompt | **Non** (hors-planning uniquement) | Gemini 2K |
+| `irl` | Photo fraîche en live + overlay minimal | **Non** (hors-planning uniquement) | Aucune |
+
+> **Modes supprimés** : `irl-sublimation`, `compositing-irl`, `compositing-ia`, `scene-ia`, `irl-archive`, `template` (stories). Ces modes n'existent plus.
+> **Planning standard** : utilise uniquement `full-ia`.
+> **Hors-planning** (`/freestyle`) : peut utiliser `edit-ia` et `irl` en plus.
 
 ---
 
@@ -36,24 +50,24 @@ Claude **scanne les dossiers de production** et régénère `_config/historique-
 
 Copier le template `_templates/planning-semaine.md` dans `posts-stories/posts/periode-[N]/planning-S[X].md` et remplir :
 
-1. **Distribuer les posts** sur la semaine (3-4 posts) :
-   - Varier les **piliers** (Le Plat, La Cuisine, Les Macros, L'Équipe, Le Quartier)
-   - Assigner un **mode** à chaque post
-   - Identifier les **photos IRL** à fournir AVANT la semaine
+1. **Distribuer les posts** sur la semaine (2 posts + 2 carrousels) :
+   - Varier les **piliers** (Le Produit 55%, Les Bénéfices 35%, La Marque 10%)
+   - Tous les posts en mode `full-ia`
+   - Choisir un **concept visuel** pour chaque post (voir `_config/concepts-visuels.md`)
 
-2. **Planifier les stories** par jour (3-4/jour) :
-   - Alterner Dark Premium et Vitrine chaque jour
-   - Max 3 interactifs par semaine
-   - Placer une Fiche Produit les jours de post
+2. **Planifier les stories** par jour (3/jour) :
+   - Distribution : food 40% · lifestyle 30% · brand 30%
+   - Max 7 lifestyle/semaine
+   - 1 rappel tous les 2 jours (remplace le slot Brand du jour)
 
 3. **Vérifier la distribution piliers** (table en bas du planning)
 
 ### Vérification rapide
 
-- [ ] Chaque post a un mode de création assigné
-- [ ] Les 5 piliers sont représentés sur le mois
-- [ ] Les photos IRL sont identifiées et demandées
-- [ ] Les stories alternent les familles visuelles
+- [ ] Tous les posts sont en mode `full-ia`
+- [ ] Les 3 piliers sont représentés sur le mois
+- [ ] Les stories alternent food / lifestyle / brand
+- [ ] Aucun mode `irl` ou `edit-ia` dans le planning standard
 
 ---
 
@@ -67,30 +81,28 @@ mkdir -p production/posts-stories/posts/periode-[N]/S[X]/DD-MM-YYYY/brief
 
 Copier le template `_templates/brief-v3.md` dans `brief/brief.md` et remplir :
 
-- **Pilier** : Le Plat / La Cuisine / Les Macros / L'Équipe / Le Quartier
-- **Mode** : full-ia / irl-sublimation / compositing-irl / compositing-ia / template
+- **Pilier** : Le Produit / Les Bénéfices / La Marque
+- **Mode** : `full-ia` (planning standard)
 - **Format** : Photo unique / Carrousel N slides
 - **Objectif** : 1-3 phrases
 - **Produit** : Nom + slug recette
-- **Sources visuelles** : selon le mode (voir brief-v3.md)
+- **Concept visuel** : choisi depuis `_config/concepts-visuels.md`
 - **Direction Caption** : angle, ton, CTA, mentions (la caption sera générée automatiquement)
 
 ### Ce qui change par mode
 
 | Mode | Ce que tu fournis dans le brief |
 |------|--------------------------------|
-| `full-ia` | Produit + slug. C'est tout. Le pipeline fait le reste. |
-| `irl-sublimation` | Chemin vers la photo réelle + direction sublimation |
-| `compositing-irl` | Chemin photo produit + chemin photo lieu + intention |
-| `compositing-ia` | Chemin photo produit + description de la scène imaginée |
-| `template` | Type de template + données par slide |
+| `full-ia` | Produit + slug + concept visuel. C'est tout. Le pipeline fait le reste. |
+| `edit-ia` (hors-planning) | Chemin vers la photo lieu + produit + concept visuel |
+| `irl` (hors-planning) | Chemin vers la photo fraîche. Overlay minimal uniquement. |
 
 ### Vérification rapide
 
 - [ ] Le mode est spécifié
 - [ ] La Direction Caption est remplie (angle + ton + CTA au minimum)
 - [ ] Il n'y a PAS de caption complète dans le brief
-- [ ] Les photos sources existent (modes IRL/compositing)
+- [ ] Aucune dépendance à des photos à prendre (`[À FOURNIR]` interdit)
 
 ---
 
@@ -104,48 +116,33 @@ Copier le template `_templates/brief-v3.md` dans `brief/brief.md` et remplir :
 
 Le pipeline détecte le mode et route automatiquement. Tu n'as rien à choisir.
 
+Pour le hors-planning :
+
+```
+/freestyle
+```
+
 ---
 
 ## Étape 3 — Valider le checkpoint
 
 ### 👤 TOI — Répondre au checkpoint
 
-Le contenu du checkpoint varie selon le mode :
-
-**Mode `full-ia` / `compositing-ia`** :
+**Mode `full-ia`** :
 ```
 📋 CHECKPOINT — Input Mapping
 Produit : [nom]
-Photo sélectionnée : [chemin] — [justification]
-Direction scène : [résumé] (compositing-ia uniquement)
+Concept visuel : [concept]
+Direction scène : [résumé]
 
 ✅ Valider ?  ✏️ Modifier ?
 ```
 
-**Mode `irl-sublimation`** :
+**Mode `edit-ia`** (hors-planning) :
 ```
-📋 CHECKPOINT — Sublimation IRL
-Photo source : [chemin]
-Direction : [ce qui sera ajusté]
-
-✅ Valider ?  ✏️ Modifier ?
-```
-
-**Mode `compositing-irl`** :
-```
-📋 CHECKPOINT — Compositing
-Photo produit : [chemin]
+📋 CHECKPOINT — Edit IA
 Photo lieu : [chemin]
-Intention : [résumé]
-
-✅ Valider ?  ✏️ Modifier ?
-```
-
-**Mode `template`** :
-```
-📋 CHECKPOINT — Data Mapping
-Slide 1 : [données]
-Slide 2 : [données]
+Produit décrit : [résumé]
 
 ✅ Valider ?  ✏️ Modifier ?
 ```
@@ -160,6 +157,7 @@ Après le checkpoint, le pipeline génère le visuel dans `brouillons/` (pas dan
 
 **Tu vérifies le brouillon** :
 - [ ] **⛔ Pain noir** : le burger a bien un bun noir (pas blanc/doré). Si blanc → bloquer.
+- [ ] **⛔ Pas de grill marks** : croûte Maillard uniforme (air fryer, pas de grill).
 - [ ] Fidélité produit (ingrédients corrects)
 - [ ] DA respectée (fond, couleurs, ambiance)
 - [ ] Qualité (pas d'artefacts IA)
@@ -175,18 +173,19 @@ Tu peux itérer autant de fois que nécessaire. Chaque nouvelle version reste da
 
 ---
 
-## Étape 5 — Valider et promouvoir en final
+## Étape 5 — Valider et déplacer vers a-publier
 
-### 👤 TOI — Promotion vers final
+### 👤 TOI — Validation
 
 Quand le brouillon te convient :
 ```
-C'est bon, promote en final
+C'est bon, valide
 ```
 
 Le pipeline :
-1. Copie le brouillon validé vers `final/` (prêt à poster)
+1. Déplace le brouillon validé vers `a-publier/[posts|stories]/` avec le nommage `DD-MM-YYYY-[slug]-[format].png`
 2. Génère la caption automatiquement (via `/caption-writer`)
+3. Copie la caption en `.txt` à côté du visuel
 
 ### 👤 TOI — Vérifier la caption
 
@@ -196,6 +195,7 @@ Le pipeline :
 - [ ] Données correctes (prix, macros) si mentionnées
 - [ ] Hashtags pertinents
 - [ ] Pas de répétition avec les derniers posts
+- [ ] "Pain noir" (jamais "pain" seul), "chaleur pulsée" (jamais "grillé")
 
 **Si la caption ne va pas** :
 ```
@@ -206,13 +206,11 @@ Réécris la caption — [ce qui ne va pas]
 
 ## Résumé par mode
 
-| Mode | Interventions opérateur |
-|------|------------------------|
-| `full-ia` | Brief + validation mapping + vérif brouillon + promotion + vérif caption |
-| `irl-sublimation` | Brief (+ photo) + validation + vérif brouillon + promotion + vérif caption |
-| `compositing-irl` | Brief (+ 2 photos) + validation + vérif brouillon + promotion + vérif caption |
-| `compositing-ia` | Brief (+ photo) + validation mapping + vérif brouillon + promotion + vérif caption |
-| `template` | Brief (+ données slides) + validation + vérif brouillon + promotion + vérif caption |
+| Mode | Planifiable | Interventions opérateur |
+|------|-------------|------------------------|
+| `full-ia` | Oui | Brief + validation mapping + vérif brouillon + validation + vérif caption |
+| `edit-ia` | Non (hors-planning) | Brief (+ photo lieu) + validation + vérif brouillon + validation + vérif caption |
+| `irl` | Non (hors-planning) | Photo fraîche + vérif brouillon + validation + vérif caption |
 
 ---
 
@@ -224,10 +222,7 @@ Réécris la caption — [ce qui ne va pas]
 ```
 
 Le brief story est dans `posts-stories/stories/S[X]/[jour]/brief/brief-story.md`.
-Le pipeline gère automatiquement : copywriting → data mapping → template fill → render PNG dans `brouillons/`.
 
-**Même flux brouillon → final** : le premier render atterrit dans `brouillons/`. Tu vérifies, tu itères si besoin, puis tu valides la promotion vers `final/`.
+**Distribution stories** : food 40% · lifestyle 30% · brand 30%. Toutes en `full-ia`. 3 stories/jour.
 
-**Nouveaux types v3** :
-- **IRL** : photo brute + overlay DA minimal (coulisses, rush, ambiance)
-- **Séquence** : multi-stories liées (1/3, 2/3, 3/3 pour process ou éducatif)
+**Même flux brouillon → a-publier/** : le premier render atterrit dans `brouillons/`. Tu vérifies, tu itères si besoin, puis tu valides le déplacement vers `a-publier/stories/`.

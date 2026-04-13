@@ -4,7 +4,7 @@
 
 ## Contexte
 
-Session précédente : brainstorm + construction du pipeline v6 complet (Intent Engine, Pulse Engine, Visual System, Visual Composer, Freestyle, multi-model router). Pivot en fin de session vers un style e-commerce minimal. Nouvelle couleur ambre #FABA43.
+Session précédente : brainstorm + construction du pipeline v6 complet (Visual Concept Engine, Visual System, Visual Composer, Freestyle, multi-model router). Pivot en fin de session vers un style e-commerce minimal. Nouvelle couleur ambre #FABA43.
 
 ## p:urgent — Prochaine session
 
@@ -37,7 +37,7 @@ Session précédente : brainstorm + construction du pipeline v6 complet (Intent 
 - [ ] Tester avec Flux Max : produit sur fond charbon gradient + produit sur fond ambre gradient
 
 ### 4. Process simplifié posts
-- [ ] Définir le workflow final : Intent Engine → prompt → Flux Max → image e-commerce → (optionnel: overlay texte) → post
+- [ ] Définir le workflow final : Visual Concept Engine → prompt → Flux Max → image e-commerce → (optionnel: overlay texte) → post
 - [ ] Créer un template HTML léger pour les posts AVEC texte (style 112G DE PROT)
 - [ ] Tester le workflow end-to-end : de l'idée au PNG publiable
 
@@ -76,10 +76,9 @@ Session précédente : brainstorm + construction du pipeline v6 complet (Intent 
 | `visual-system/tokens.css` | Palette, typo, spacing |
 | `visual-system/assets/fond-ambre-9x16.png` | Fond ambre fixe (fallback) |
 | `visual-system/generate-image.js` | Multi-model router (Flux Max/Pro/Klein + Gemini) |
-| `.claude/skills/intent-engine/SKILL.md` | Cerveau créatif posts |
-| `.claude/skills/pulse-engine/SKILL.md` | Batch stories |
+| `.claude/skills/intent-engine/SKILL.md` | Visual Concept Engine (cerveau créatif posts + stories) |
 | `.claude/skills/visual-composer/` | Agent designer layouts |
-| `.claude/skills/freestyle-v6/SKILL.md` | Mode libre + brainstorm |
+| `.claude/skills/freestyle/SKILL.md` | Mode libre + brainstorm |
 | `_config/munitions.md` | Banque de munitions (62 entrées) |
 | `_config/calendrier.md` | Événements 3 tiers |
 | `ubereats/story-1achete1offert-alt.html` | Template de référence (style cible) |
