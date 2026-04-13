@@ -2,7 +2,7 @@
 name: instagram-producer
 description: >
   Orchestrateur OBLIGATOIRE du pipeline de production de posts Instagram StrictFood v5.
-  Coordonne art direction, input mapping, prompt engineering, génération Gemini 4K,
+  Coordonne art direction, input mapping, prompt engineering, génération Gemini 2K,
   validation et caption — dans cet ordre exact. Détecte le mode (full-ia, edit-ia, template, irl)
   et route vers le bon sous-pipeline. Utiliser ce skill DÈS que l'utilisateur veut produire,
   générer, lancer, relancer, ou créer un post Instagram — même s'il ne dit pas explicitement
@@ -20,8 +20,8 @@ Tu es l'orchestrateur du pipeline de production de visuels Instagram StrictFood.
 
 | Mode | Description | Planifiable | API |
 |------|-------------|:-----------:|-----|
-| `full-ia` | Gemini génère tout (produit DÉCRIT + scène) | Oui | Gemini 4K |
-| `edit-ia` | Photo lieu en input + produit DÉCRIT dans le prompt | **NON** (hors-planning) | Gemini 4K |
+| `full-ia` | Gemini génère tout (produit DÉCRIT + scène) | Oui | Gemini 2K |
+| `edit-ia` | Photo lieu en input + produit DÉCRIT dans le prompt | **NON** (hors-planning) | Gemini 2K |
 | `template` | Data mapping → Template HTML → Puppeteer | Oui | Aucune |
 | `irl` | Photo fraîche en live + overlay | **NON** (hors-planning) | Aucune |
 
@@ -65,7 +65,7 @@ Si le brief contient un mode supprimé (`irl-sublimation`, `compositing-irl`, `c
 Gemini génère tout (produit DÉCRIT + scène) à partir d'un prompt. Aucune photo en input.
 
 ```
-Brief → Art Direction → Input Mapping → 🔒 CHECKPOINT → Prompt → Realism Audit → Gemini 4K → brouillons/
+Brief → Art Direction → Input Mapping → 🔒 CHECKPOINT → Prompt → Realism Audit → Gemini 2K → brouillons/
 ```
 
 ### A1 — Art Direction (skill obligatoire)
@@ -112,7 +112,7 @@ Assembler et afficher la commande Gemini (Nanobanana Pro) :
 ```bash
 uv run production/.claude/skills/nano-banana-pro/scripts/generate_image.py \
   --prompt "[prompt]" --filename "[date]-[slug]-4x5.png" \
-  --resolution 4K --api-key "$GEMINI_API_KEY"
+  --resolution 2K --api-key "$GEMINI_API_KEY"
 ```
 
 Output dans `[dossier-post]/brouillons/` (JAMAIS de `--input-image` en full-ia — le produit est DÉCRIT).
@@ -124,7 +124,7 @@ Output dans `[dossier-post]/brouillons/` (JAMAIS de `--input-image` en full-ia �
 Photo du lieu réel en input, produit DÉCRIT dans le prompt (pas de photo produit). Gemini intègre le produit dans la scène.
 
 ```
-Brief → Vérification photo lieu → Art Direction → Input Mapping → 🔒 CHECKPOINT → Realism Audit → Prompt → Gemini 4K → brouillons/
+Brief → Vérification photo lieu → Art Direction → Input Mapping → 🔒 CHECKPOINT → Realism Audit → Prompt → Gemini 2K → brouillons/
 ```
 
 ### B1 — Vérification photo lieu
@@ -175,7 +175,7 @@ Commande Gemini avec `--input-image` pointant vers la photo lieu :
 ```bash
 uv run production/.claude/skills/nano-banana-pro/scripts/generate_image.py \
   --prompt "[prompt]" --filename "[date]-[slug]-edit-ia.png" \
-  --input-image "[photo lieu]" --resolution 4K --api-key "$GEMINI_API_KEY"
+  --input-image "[photo lieu]" --resolution 2K --api-key "$GEMINI_API_KEY"
 ```
 
 Output dans `[dossier-post]/brouillons/`.

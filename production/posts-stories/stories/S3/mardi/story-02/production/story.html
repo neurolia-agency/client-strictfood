@@ -3,104 +3,201 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=1080">
-  <title>Story IRL — macro-croustillant</title>
+  <title>Story — Le Sillon</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Oswald:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/Users/dorian.gz/dev/Neurolia Agency/client-strictfood/production/posts-stories/stories/_templates/_base/base.css">
   <style>
-    .gradient-top, .gradient-bottom, .gradient-left, .accent-line, .zone-blend, .ambient-bottom, .content, .bottom-section { display: none; }
+    /* ===== LE SILLON — Photo haute + arc dome + zone ambre basse ===== */
 
-    .irl-photo {
+    body {
+      background: #FABA43;
+    }
+
+    /* Mood variants — overrides amber tones */
+    body.mood-cuivre { /* default amber — no override needed */ }
+    body.mood-grenat {
+      --sillon-amber: #A04035;
+      --sillon-text: #1a1210;
+    }
+    body.mood-feuille {
+      --sillon-amber: #6B8A5E;
+      --sillon-text: #121413;
+    }
+
+    /* ===== PHOTO — zone haute ===== */
+    .photo-zone {
       position: absolute;
-      top: 0; left: 0;
+      top: 0; left: 0; right: 0;
+      height: 1250px;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .photo-zone img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 40%;
-      z-index: 1;
+      object-position: 50% 35%;
+      filter: brightness(1.15) saturate(1.10);
     }
 
-    .photo-centre .irl-photo { object-position: 50% 40%; }
+    /* Photo presets — override object-position */
+    body.photo-centre .photo-zone img { object-position: 50% 35%; }
+    body.photo-droite .photo-zone img { object-position: 75% 30%; }
+    body.photo-gauche .photo-zone img { object-position: 25% 40%; }
+    body.photo-haut .photo-zone img { object-position: 50% 20%; }
+    body.photo-large .photo-zone img { object-position: 50% 50%; transform: scale(1.15); }
+    body.photo-portrait .photo-zone img { object-position: 50% 25%; transform: scale(1.1); }
 
-    .irl-filter-leger .irl-photo { filter: brightness(1.05) sepia(0.06) saturate(0.95); }
-
-    .irl-gradient-top {
+    /* Gradient de protection IG en haut */
+    .gradient-top {
       position: absolute;
       top: 0; left: 0; right: 0;
-      height: 350px;
-      background: linear-gradient(to bottom, rgba(var(--bg-rgb), 0.5) 0%, transparent 100%);
-      z-index: 2;
+      height: 300px;
+      background: linear-gradient(to bottom, rgba(26,23,20,0.50) 0%, transparent 100%);
+      z-index: 3;
     }
 
-    .irl-gradient-bottom {
+    /* ===== LE SILLON — arc dome qui separe photo et zone ambre ===== */
+    .sillon {
       position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 600px;
-      background: linear-gradient(to top, rgba(var(--bg-rgb), 0.85) 0%, rgba(var(--bg-rgb), 0.5) 40%, transparent 100%);
-      z-index: 2;
+      top: 1170px;
+      left: 0; right: 0;
+      height: 120px;
+      z-index: 5;
+    }
+    .sillon svg {
+      width: 100%;
+      height: 100%;
+      display: block;
     }
 
-    .irl-bottom {
+    /* ===== ZONE AMBRE — tout le bas ===== */
+    .amber-zone {
+      position: absolute;
+      top: 1250px;
+      left: 0; right: 0;
+      bottom: 0;
+      z-index: 4;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 20%, rgba(26,23,20,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 80% 80%, rgba(26,23,20,0.04) 0%, transparent 50%),
+        var(--sillon-amber, #FABA43);
+    }
+
+    /* Contenu centre dans la zone ambre */
+    .amber-content {
+      position: absolute;
+      top: 1290px;
+      left: 70px; right: 70px;
+      bottom: 220px;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 0;
+      gap: 12px;
+    }
+
+    .product-name {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 120px;
+      text-transform: uppercase;
+      letter-spacing: -3px;
+      color: var(--sillon-text, #1a1714);
+      text-align: center;
+      line-height: 0.92;
+    }
+
+    .divider {
+      width: 80px;
+      height: 4px;
+      background: var(--sillon-text, #1a1714);
+      margin: 4px 0;
+    }
+
+    .product-info {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 42px;
+      color: rgba(26,23,20,0.65);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .tagline-block {
       position: absolute;
       bottom: 0; left: 0; right: 0;
       z-index: 10;
       text-align: center;
-      padding: 40px 70px 80px;
+      padding: 0 70px 80px;
     }
-    .irl-bottom .tagline {
+
+    .tagline {
       font-family: 'Space Grotesk', sans-serif;
       font-weight: 700;
-      font-size: 40px;
-      color: #fff;
+      font-size: 34px;
+      color: var(--sillon-text, #1a1714);
+      text-align: center;
       line-height: 1.3;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
     }
-    .irl-bottom .tagline em { color: var(--accent); font-style: italic; }
-    .irl-bottom .logo-container { margin-top: 16px; display: flex; justify-content: center; }
-    .irl-bottom .logo-container img { width: 200px; height: auto; opacity: 0.85; }
+    .tagline em { color: #fff; font-style: italic; }
 
-    .irl-text-zone {
+    .logo-container { margin-top: 8px; }
+    .logo-container img {
+      width: 140px;
+      height: auto;
+      opacity: 0.45;
+      filter: brightness(0);
+    }
+
+    /* Film grain — controlled via body class */
+    body::before {
+      content: '';
       position: absolute;
-      bottom: 350px;
-      left: 80px;
-      right: 80px;
-      z-index: 10;
-      max-height: 120px;
-      overflow: hidden;
+      inset: 0;
+      z-index: 100;
+      pointer-events: none;
+      opacity: var(--grain-opacity, 0);
+      mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px;
     }
-
-    .irl-text {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: 48px;
-      color: #fff;
-      line-height: 1.2;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.6), 0 4px 20px rgba(0,0,0,0.4);
-    }
-
-    .irl-accent-bar {
-      width: 60px;
-      height: 4px;
-      background: var(--accent);
-      margin-top: 20px;
-      border-radius: 2px;
-    }
+    body.grain-subtle { --grain-opacity: 0.025; }
+    body.grain-medium { --grain-opacity: 0.04; }
   </style>
 </head>
-<body class=" irl-filter-leger irl-text-bas photo-centre">
+<body class="mood-cuivre photo-centre grain-subtle">
 
-  <img class="irl-photo" src="/Users/dorian.gz/dev/Neurolia Agency/client-strictfood/production/posts-stories/stories/S3/mardi/story-02/brouillons/sublimation.png" alt="">
+  <!-- Zone photo (haut) -->
+  <div class="photo-zone">
+    <img src="/Users/dorian.gz/dev/Neurolia Agency/client-strictfood/production/posts-stories/stories/S3/mardi/story-02/brouillons/story.png" alt="">
+  </div>
+  <div class="gradient-top"></div>
 
-  <div class="irl-gradient-top"></div>
-  <div class="irl-gradient-bottom"></div>
-
-  <div class="irl-text-zone" style="display: none">
-    <div class="irl-text text-depth"></div>
-    <div class="irl-accent-bar"></div>
+  <!-- Le Sillon — arc dome transition -->
+  <div class="sillon">
+    <svg viewBox="0 0 1080 120" preserveAspectRatio="none">
+      <path d="M 0,120 L 0,60 Q 540,0 1080,60 L 1080,120 Z" fill="var(--sillon-amber, #FABA43)"/>
+    </svg>
   </div>
 
-  <div class="irl-bottom">
+  <!-- Zone ambre (bas complet) -->
+  <div class="amber-zone"></div>
+
+  <!-- Contenu dans la zone ambre -->
+  <div class="amber-content">
+    <div class="product-name">PAUSE STRICT</div>
+    <div class="divider"></div>
+    <div class="product-info" style="display:block">Ton midi, en mieux</div>
+  </div>
+
+  <!-- Tagline + logo en bas -->
+  <div class="tagline-block">
     <div class="tagline">Le cheat meal <em>qui n'en est pas un</em></div>
     <div class="logo-container">
       <img src="/Users/dorian.gz/dev/Neurolia Agency/client-strictfood/production/posts-stories/stories/_templates/_base/logo.svg" alt="STRICT FOOD'S">

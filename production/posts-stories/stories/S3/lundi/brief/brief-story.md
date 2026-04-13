@@ -1,94 +1,108 @@
 # Brief Stories — S3 Lundi (2026-03-24)
 
-> **Pilier du jour** : Le Plat — Pas de post
-> **Objectif strategique** : Lancement de la micro-saison "Macro & Texture". Restaurant ferme = 3 stories visuelles pures. Macro sauce, texture pain noir, goutte suspendue. Impact visuel maximal pour ouvrir la semaine.
-> **Persona cible** : Sportifs + Tous
-> **Ref strategie** : Phase 1 §1.4 — "installer le Dark Food Premium comme signature"
+> **Pilier du jour** : — (pas de post lundi, restaurant ferme)
+> **Objectif strategique** : Ouverture de semaine Macro & Texture. Stories full-ia viscerales + lifestyle decontracte. Rappel horaires pour le lendemain.
+
+> **REGLE ABSOLUE** : Tous les chemins photo doivent pointer vers des fichiers existants.
+> **Templates** : `story-universal.html` (defaut), `story-sillon.html`, `story-sceau.html`, `story-feuillete-photo.html`, `story-feuillete-data.html`.
 
 ---
 
-## Story 1 — Visuel IA : Sauce sur STRICT Boeuf
+## Story 1 — Wrap Poulet macro texture
 
 | Champ | Valeur |
 |-------|--------|
-| Type | Visuel IA |
-| Mode | `full-ia` |
-| Highlight | — |
-| Qui produit | Pipeline |
-| Template | `irl-story.html` (overlay post-generation) |
+| Mode | full-ia |
+| Traitement | — |
+| Fond | ambre |
+| Highlight | LA CARTE |
 | Mood | cuivre |
-| Image | hero |
-| Brand props | aucun |
+| Concept visuel | macro-texture |
 
 ### Objectif
 
-Ouvrir la semaine "Macro & Texture" avec un gros plan extreme de sauce. La sauce est le hero — brillance, viscosite, reflets cuivres. Ce type de visuel est impossible a photographier avec cette precision : la full-ia permet le "temps arrete" sur le filet de sauce.
+Premiere apparition du STRICT Wrap Poulet en story. Gros plan extreme sur la tortilla doree ouverte revelant les lamelles de poulet, les miettes de parmesan et la mache. Micro-saison Macro & Texture — focus sur les surfaces et les grains.
 
 ### Contenu
 
-Sujet : `Gros plan extreme sur la sauce maison StrictFood qui coule lentement sur le pain noir sesame d'un STRICT Boeuf. La sauce est le sujet principal — chaque goutte, chaque reflet, chaque fil de viscosite. Le bun noir en arriere-plan sert de toile de fond sombre.`
-Direction artistique : `Fond charbon ultra-sombre. Eclairage lateral dramatique a 45 degres revelant chaque goutte et reflet. Nettete chirurgicale sur la sauce, leger bokeh sur le bun. Tons cuivres/ambre sur les reflets. Format portrait 9:16. Pas de mains, pas de contexte — juste sauce + bun. Style "objet precieux dans le noir".`
-Texte overlay : `—`
+| Champ | Valeur |
+|-------|--------|
+| Sujet | STRICT Wrap Poulet — macro gros plan tortilla doree entrouverte, lamelles poulet roti croute Maillard visible, miettes parmesan irregulieres, petites feuilles rondes de mache, filet de sauce poivron jaune-orange, fond ambre incandescent |
+| Produit | STRICT Wrap Poulet — slug recette : `strict-wrap-poulet` |
+| Direction artistique | Macro 100mm f/2.8, eclairage lateral chaud rasant, fond ambre-sable, profondeur de champ ultra-courte, texture tortilla toastee visible, grain cinematique subtil |
+| TEXT_LINE_1 | — |
+| TEXT_LINE_2 | — |
 
 ---
 
-## Story 2 — Produit DA : STRICT Poulet macro texture
+## Story 2 — Lifestyle escalier tenders
 
 | Champ | Valeur |
 |-------|--------|
-| Type | Produit DA |
-| Mode | `irl-sublimation` |
+| Mode | full-ia |
+| Traitement | — |
+| Fond | — |
 | Highlight | — |
-| Qui produit | Pipeline |
-| Template | `irl-story.html` (overlay post-sublimation) |
 | Mood | cuivre |
-| Image | hero |
-| Brand props | aucun |
+| Concept visuel | lifestyle-escalier |
 
 ### Objectif
 
-Gros plan macro sur les textures du STRICT Poulet : graines de sesame sur le pain noir, croute de Maillard sur le poulet grille. La sublimation pousse la photo source vers l'abstraction texturale — on sent presque la surface sous les doigts.
+Scene lifestyle decontractee : un jeune homme assis sur des escaliers en beton, ecouteurs, picorant des tenders dans une barquette kraft noire. Ambiance gen-Z, pause repas urbaine.
 
 ### Contenu
 
-Photo source : `public/images/photos-references/produits-source/burgers-black/strict-poulet/strict-poulet-coupe.png`
-Direction sublimation : `Pousser les textures de la coupe transversale vers l'abstraction. Chaque couche interne visible : croute Maillard du poulet, miettes de parmesan irregulieres, feuilles de mache, filet de sauce poivron, tranche du pain noir sesame. Accentuer les micro-textures de chaque strate. Tons cuivres chauds, ombres profondes, grain film prononce. Full-frame 9:16.`
-Texte overlay : `—`
+| Champ | Valeur |
+|-------|--------|
+| Concept | lifestyle-escalier |
+| Photo reference | [ref Pinterest : "young man sitting concrete stairs eating takeaway earbuds streetwear candid"] |
+| Personnage | Homme ~22 ans, peau claire, cheveux chatains courts, barbe naissante |
+| Tenue | Bomber ambre (#FABA43), t-shirt noir, jogger cargo gris, sneakers blanches |
+| Posture | Assis marches beton, jambes ecartees, coudes sur genoux, barquette tenders sur les genoux |
+| Regard | Deporte droite, concentre sur la nourriture |
+| Scene | Escalier beton urbain, mur gris brut, lumiere laterale naturelle |
+| Sac kraft | non (barquette tenders kraft noire a la place) |
+| Cadrage | Plan americain, legere contre-plongee |
+| TEXT_LINE_1 | — |
+| TEXT_LINE_2 | — |
 
 ---
 
-## Story 3 — Visuel IA : Tenders goutte suspendue
+## Story 3 — Template horaires
 
 | Champ | Valeur |
 |-------|--------|
-| Type | Visuel IA |
-| Mode | `full-ia` |
-| Highlight | — |
-| Qui produit | Pipeline |
-| Template | `irl-story.html` (overlay post-generation) |
+| Mode | template |
+| Traitement | — |
+| Fond | — |
+| Highlight | NOUS TROUVER |
 | Mood | cuivre |
-| Image | hero |
-| Brand props | aucun |
+| Concept visuel | — |
 
 ### Objectif
 
-Fermer la journee avec un visuel "temps arrete" — une goutte de sauce suspendue a l'extremite d'un tender. Le concept `sensation-goutte` est un classique food porn mais rarement execute en 9:16 vertical. La full-ia permet la precision irrealiste de la goutte parfaite.
+Rappel des horaires d'ouverture pour le lendemain (mardi = reouverture apres fermeture du lundi). Photo devanture du restaurant en fond.
 
 ### Contenu
 
-Sujet : `Un tender STRICT tenu par une main gantee noire, croute doree croustillante hyper-detaillee. A l'extremite du tender, UNE SEULE goutte de sauce parfaite suspendue dans le vide — temps arrete. La goutte est ronde, transparente, avec des reflets ambre.`
-Direction artistique : `Fond charbon total. Eclairage spot unique venant du haut-droit, tout le reste dans l'ombre. Macro shot. La goutte est le hero — reflets, transparence, tension de surface visible. La croute du tender est hyper-texturee (miettes, reliefs). La main gantee noire disparait dans le fond sombre — seuls le tender et la goutte sont visibles. Format portrait 9:16.`
-Texte overlay : `—`
+| Champ | Valeur |
+|-------|--------|
+| Photo | `../public/images/photos-references/contexte/exterieur/devanture.jpeg` |
+| TEXT_LINE_1 | MARDI-DIMANCHE |
+| TEXT_LINE_2 | 11h-14h · 18h-22h |
+| PHOTO_PRESET | photo-centre |
+| INFO_POSITION | — |
 
 ---
 
 ## Contraintes
 
-- DA : 3 stories visuelles pures — pas de template, pas d'IRL (restaurant ferme)
-- Mood : cuivre sur les 3 stories (coherence "Macro & Texture")
-- Micro-saison A : les 3 concepts sont macro/sensation (sauce, texture, goutte)
-- Full-ia : ALWAYS specifier "black sesame bun" / "pain noir sesame" dans les prompts
-- Sublimation : rester dans le registre macro — pas de recadrage large, pas de contexte ajoute
+- DA : Dark Food Premium — `story-universal.html`
+- Mood : cuivre
+- **Fond** : ambre (story 1), — (story 2), — (story 3)
+- **Pain noir obligatoire** sur tous les visuels burger
+- **Chaleur pulsee** : jamais "grill", "grille", "barbecue"
+- Tagline fixe : `Le cheat meal <em>qui n'en est pas un</em>`
 
 ## Etape suivante
 

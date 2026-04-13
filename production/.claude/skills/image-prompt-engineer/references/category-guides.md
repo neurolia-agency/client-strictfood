@@ -58,9 +58,9 @@ saturated ingredient colors. The dark setting is a stage, not a cave.
 
 | Target colour | Terms to use | FORBIDDEN |
 |--------------|-------------|-----------|
-| Ambre `#E5A520` | `warm gold`, `yellow-gold`, `marigold`, `NOT orange` | `amber` (orange drift), `copper`, `burnt sienna` |
+| Ambre `#FABA43` | `warm gold`, `yellow-gold`, `marigold`, `NOT orange` | `amber` (orange drift), `copper`, `burnt sienna` |
 | Charbon `#1a1714` | `dark charcoal`, `deep ink-dark` | `black` alone (too pure), `grey` |
-| Cuivre Braise `#BF8522` | `warm matte copper-gold` | `bronze`, `brown` |
+| Cuivre Braise `#FABA43` | `warm matte copper-gold` | `bronze`, `brown` |
 
 ### Commercial Names
 

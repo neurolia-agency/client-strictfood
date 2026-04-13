@@ -74,7 +74,7 @@ Deuxieme post Macros du feed (apres S2-06 "notre burger vs burger classique"). C
 
 | Slide | Contenu | Notes DA |
 |-------|---------|----------|
-| 1 (Cover) | "112g de proteines. C'est un burger." + silhouette du MAX Poulet | Fond #141210, chiffre "112g" en gros Oswald blanc, "proteines" en Space Grotesk #BF8522. Image de grille — graphique et percutante. |
+| 1 (Cover) | "112g de proteines. C'est un burger." + silhouette du MAX Poulet | Fond #141210, chiffre "112g" en gros Oswald blanc, "proteines" en Space Grotesk #FABA43. Image de grille — graphique et percutante. |
 | 2 | Macro breakdown visuel : 946 kcal, 112g prot, 45g gluc, 34,8g lip. Barres visuelles proportionnelles. Comparaison contextuelle : "= 2 doubles shakers de whey" / "= 4 blancs de poulet" | Barres en Cuivre Braise pour les proteines, Feuille Grillee pour les glucides. Fond sombre. |
 | 3 | Les 3 ingredients cles : "Poulet Boucherie Labourde + Pain Pains du Soleil + Fromage Myfitcheese. Cuit sans huile. 15,99EUR." | Icones simples, texte Space Grotesk, fond sombre. Photo du produit en petit encart si disponible. |
 | 4 | Conclusion : "STRICT MAX Poulet. 112g de proteines. Le cheat meal qui n'en est pas un." + localisation | Tagline en signature, CTA implicite. |
@@ -376,7 +376,7 @@ Troisieme post Macros — change d'angle par rapport a S2-06 (burger vs burger) 
 
 | Slide | Contenu | Notes DA |
 |-------|---------|----------|
-| 1 (Cover) | "Un cookie a 26g de proteines. Un tiramisu a 24g. Un overnight a 52,9g." + icone dessert stylisee | Fond #141210, chiffres en Oswald blanc, "proteines" en #BF8522. Accroche graphique — pas de photo, texte fort. |
+| 1 (Cover) | "Un cookie a 26g de proteines. Un tiramisu a 24g. Un overnight a 52,9g." + icone dessert stylisee | Fond #141210, chiffres en Oswald blanc, "proteines" en #FABA43. Accroche graphique — pas de photo, texte fort. |
 | 2 | Comparaison : Cookie proteine (273 kcal, 26g prot, 3,99EUR) vs Cookie classique (~400 kcal, 4g prot). Barres visuelles. | Cuivre Braise pour StrictFood, gris pour le classique. |
 | 3 | Gamme complete : Cookie (26g prot) / Tiramisu (24g prot, 252 kcal, 3,50EUR) / Overnight (52,9g prot, 470 kcal, 4,99EUR) / Milkshake (29g prot, 215 kcal, 3EUR). Presentation en grille ou liste. | Fond sombre, chiffres lisibles, icones produits. |
 | 4 | Conclusion : "De 3EUR a 4,99EUR. Tous les jours au comptoir." + localisation + "Le cheat meal qui n'en est pas un." | CTA + tagline + 📍 |

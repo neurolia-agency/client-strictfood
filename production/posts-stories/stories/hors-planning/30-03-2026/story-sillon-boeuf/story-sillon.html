@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080">
+  <title>Story Sillon — Strict Bœuf</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/Users/dorian.gz/dev/Neurolia Agency/client-strictfood/production/posts-stories/stories/_templates/_base/base.css">
+  <style>
+    /* ===== LE SILLON — Photo haute + arc dome + zone ambre basse ===== */
+
+    body {
+      background: #FABA43;
+    }
+
+    /* ===== PHOTO — zone haute ===== */
+    .photo-zone {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1250px;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .photo-zone img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 48%;
+      filter: brightness(1.15) saturate(1.10);
+    }
+
+    /* Gradient de protection IG en haut */
+    .gradient-top {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 300px;
+      background: linear-gradient(to bottom, rgba(26,23,20,0.50) 0%, transparent 100%);
+      z-index: 3;
+    }
+
+
+    /* ===== LE SILLON — arc dome ===== */
+    .sillon {
+      position: absolute;
+      top: 1170px;
+      left: 0; right: 0;
+      height: 120px;
+      z-index: 5;
+    }
+    .sillon svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* ===== ZONE AMBRE ===== */
+    .amber-zone {
+      position: absolute;
+      top: 1250px;
+      left: 0; right: 0;
+      bottom: 0;
+      z-index: 4;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 20%, rgba(26,23,20,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 80% 80%, rgba(26,23,20,0.04) 0%, transparent 50%),
+        #FABA43;
+    }
+
+    .amber-content {
+      position: absolute;
+      top: 1290px;
+      left: 70px; right: 70px;
+      bottom: 220px;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .amber-title {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 96px;
+      text-transform: uppercase;
+      letter-spacing: -2px;
+      color: #1a1714;
+      text-align: center;
+      line-height: 1.0;
+    }
+
+    .tagline-block {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 10;
+      text-align: center;
+      padding: 0 70px 80px;
+    }
+
+    .tagline {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 34px;
+      color: #1a1714;
+      text-align: center;
+      line-height: 1.3;
+    }
+    .tagline em { color: #fff; font-style: italic; }
+
+    .logo-container { margin-top: 8px; }
+    .logo-container img {
+      width: 140px;
+      height: auto;
+      opacity: 0.45;
+      filter: brightness(0);
+    }
+
+    /* Film grain */
+    body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 100;
+      pointer-events: none;
+      opacity: 0.025;
+      mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Zone photo (haut) -->
+  <div class="photo-zone">
+    <img src="/Users/dorian.gz/dev/Neurolia Agency/client-strictfood/production/posts-stories/stories/hors-planning/30-03-2026/story-sillon-boeuf/30-03-2026-strict-boeuf-intime.png" alt="">
+  </div>
+  <div class="gradient-top"></div>
+
+  <!-- Le Sillon — arc dome transition -->
+  <div class="sillon">
+    <svg viewBox="0 0 1080 120" preserveAspectRatio="none">
+      <path d="M 0,120 L 0,60 Q 540,0 1080,60 L 1080,120 Z" fill="#FABA43"/>
+    </svg>
+  </div>
+
+  <!-- Zone ambre -->
+  <div class="amber-zone"></div>
+
+  <!-- Contenu ambre -->
+  <div class="amber-content">
+    <div class="amber-title">TU LE MÉRITES</div>
+  </div>
+
+  <!-- Tagline + logo -->
+  <div class="tagline-block">
+    <div class="tagline">Le cheat meal <em>qui n'en est pas un</em></div>
+    <div class="logo-container">
+      <img src="/Users/dorian.gz/dev/Neurolia Agency/client-strictfood/production/posts-stories/stories/_templates/_base/logo.svg" alt="STRICT FOOD'S">
+    </div>
+  </div>
+
+</body>
+</html>

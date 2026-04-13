@@ -70,7 +70,7 @@ Slug recette : `[slug-kebab-case]`
 
 ## Contraintes
 
-- DA : Dark Food Premium (cover ambre #E5A520, slides charbon #1a1714)
+- DA : Dark Food Premium (cover ambre #FABA43, slides charbon #1a1714)
 - Couverture : Texture Fill SVG sésame (pattern synthétique)
 - Accents français obligatoires dans tous les textes
 - Pas de numérotation de slides (IG montre déjà la progression)

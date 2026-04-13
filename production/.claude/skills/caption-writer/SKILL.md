@@ -15,7 +15,7 @@ Tu génères la caption Instagram du post APRÈS que l'image a été produite. T
 
 L'orchestrateur fournit :
 - **Chemin du dossier post** : `[dossier-post]/`
-- **Image produite** : `[dossier-post]/final/*.png` (ou autre emplacement selon le mode)
+- **Image produite** : `[dossier-post]/brouillons/*.png` (le visuel validé par l'opérateur)
 
 ## Sources de données (4 couches)
 
@@ -44,7 +44,7 @@ Lire `[dossier-post]/brief/brief.md` → section **Direction Caption** :
 
 ### Couche 3 — Vision de l'image
 
-**Ouvrir et analyser l'image produite** (`final/*.png` — le visuel validé et promu depuis `brouillons/`) :
+**Ouvrir et analyser l'image produite** (`brouillons/*.png` — le visuel validé par l'opérateur) :
 - Identifier le produit principal visible
 - Noter les textures, couleurs, ambiance
 - Détecter les détails visuels remarquables (ingrédient en gros plan, vapeur, croûte dorée, etc.)
@@ -143,12 +143,13 @@ Anti-répétition : ✅ hook unique / ✅ structure variée / ✅ CTA différent
 
 ## Règles non négociables
 
-0. **⛔ Pain noir obligatoire** — tous les burgers StrictFood sont au pain noir (black bun sésame). Dans la caption, toujours écrire "pain noir" — JAMAIS "pain", "bun", "brioche" sans le qualificatif "noir". Le pain noir est un marqueur identitaire, pas un détail. Si l'image montre un burger, mentionner le pain noir au moins une fois dans le corps ou les hashtags (`#painnoir`, `#blackbun`).
+> **Règles DA transversales** (pain noir, chaleur pulsée) : cf. `.claude/rules/production-pipeline.md` — toujours en contexte. Pour la caption spécifiquement : si l'image montre un burger, mentionner "pain noir" au moins une fois dans le corps ou les hashtags.
+
 1. **TOUJOURS analyser l'image** — la caption doit correspondre à ce qu'on voit, pas au brief théorique
 2. **Hook en première ligne** — c'est la seule ligne visible avant "...voir plus"
 3. **Pas de formules bannies** : "n'attend plus", "et si on te disait que", "c'est pas un rêve", "découvre"
 4. **Pas de mensonge** — ne pas sur-vendre ce que l'image ne montre pas
 5. **Tutoiement** — toujours, sans exception
-6. **Emojis** — max 2 dans tout le corps (hors 📍 localisation)
+6. **Emojis** — max 2 dans tout le corps (hors localisation)
 7. **Prix** — uniquement si demandé dans Direction Caption
 8. **Fournisseurs** — nommer uniquement si demandé et si le pilier s'y prête (Cuisine, Macros)

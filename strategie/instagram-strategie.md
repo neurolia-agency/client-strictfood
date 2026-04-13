@@ -236,7 +236,7 @@ Le compte remplit sa mission stratégique : quand un prospect arrive depuis Goog
 
 | Élément | Valeur |
 |---------|--------|
-| Couleur signature | Cuivre Braisé — oklch(0.67 0.15 68) / #BF8522 |
+| Couleur signature | Cuivre Braisé — oklch(0.67 0.15 68) / #FABA43 |
 | Couleur secondaire | Grenat Fumé — oklch(0.42 0.10 22) / #7C3530 |
 | Accent nutrition | Feuille Grillée — oklch(0.52 0.06 145) / #5C7858 |
 | Background | Charbon — oklch(0.14 0.008 60) / #141210 |

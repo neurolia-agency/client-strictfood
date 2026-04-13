@@ -45,14 +45,14 @@ Le prompt DOIT decrire chaque element avec sa forme exacte (recette). Ne jamais 
 
 **ZERO ABREVIATION** : les descriptions locked (bun ~40 mots, Maillard ~40 mots, mache ~40 mots, sauce ~30 mots) doivent etre utilisees **EN ENTIER**. Violations : `"3-4 leaves casually placed"` → REJET. `"black bun with sesame"` → REJET.
 
-#### 2. Resolution toujours 4K
-Tout prompt Mode B = generation en **4K**. Pas de 1K draft.
+#### 2. Resolution toujours 2K
+Tout prompt Mode B = generation en **2K**. Le 4K est desactive.
 
 #### 3. Produit TOUJOURS decrit (jamais de photo reference produit)
 Produits decrits textuellement depuis `_recettes/[slug].md`. JAMAIS de photo produit en input. Seule photo en input = photo de scene/lieu en mode `edit-ia`.
 
 #### 4. Brand props — fidelite packaging
-Si brand prop : decrire materiau exact, logo "STRICT FOOD'S" (le second O = icone burger stylisee), couleur Cuivre Braise (#BF8522). Fournir `public/logo/strictfood-logo-reference.png` en image reference secondaire.
+Si brand prop : decrire materiau exact, logo "STRICT FOOD'S" (le second O = icone burger stylisee), couleur Cuivre Braise (#FABA43). Fournir `public/logo/strictfood-logo-reference.png` en image reference secondaire.
 
 #### 5. Mode edit-ia — Photo lieu reelle + produit decrits
 Prompt decrit SEULEMENT ce qu'on AJOUTE. **A. MINIMAL** (lieu reel) : `"Edit this photo. Do NOT change the scene. The ONLY change: place [product] on [surface]. Match lighting. FORBIDDEN: do not redesign."` **B. ENRICHI** (scene generique) : plus descriptif pour enrichir l'ambiance tout en preservant le fond. Pieges : surdimensionnement, eclairage studio/ambient, bords trop nets → voir `references/category-guides.md`.
@@ -114,6 +114,8 @@ Commencer par `Real food photograph.` puis decrire le fond.
 | `charbon` | `Dark matte charcoal surface (#1a1714) — slightly rough texture, subtle grain under raking light.` |
 | `ambre+charbon` | Fond ambre dominant + accessoires charbon (kraft noir, ardoise, ustensiles sombres) |
 | `charbon+ambre` | Fond charbon dominant + touches ambre (sesame, serviette doree, sauce) |
+| `ecom-charbon` | Fond e-commerce charbon — voir BLOC 1c ci-dessous |
+| `ecom-ambre` | Fond e-commerce ambre — voir BLOC 1c ci-dessous |
 | Scene/lieu | Materiaux reels, lumiere ambiante, details d'usure |
 | Concept | Action/concept comme ouverture narrative |
 
@@ -139,6 +141,46 @@ Commencer par `Real food photograph.` puis decrire le fond.
 3. L'element d'accent est-il STRUCTURANT (grand objet, large surface, vetement visible) ou juste un reflet discret ? Si trop discret → renforcer.
 
 **Ce bloc influence le BLOC 1 (fond), BLOC 2 (accessoires) et BLOC 5 (eclairage).** L'accent est naturel — un vetement, un accessoire, une lumiere, une surface — jamais force artificiellement.
+
+#### BLOC 1c — Fonds e-commerce (produit hero sur gradient studio)
+
+Fonds generés par l'IA avec un rendu studio naturel — halo lumineux au centre, vignette sombre aux bords. Le produit est le héros absolu, posé sur une surface minimale ou en lévitation. L'IA produit un dégradé organique qu'un aplat CSS ne peut pas reproduire.
+
+**Quand utiliser :** Posts "APPÉTIT" purs (food porn, produit hero), stories visuelles food, tout concept où le produit doit dominer sans distraction de décor.
+
+**Variante charbon (`ecom-charbon`) :**
+```
+Studio product shot on seamless dark charcoal background. Deep matte black-brown (#1a1714)
+gradient — darkest at the edges with natural vignette falloff, subtly lighter at center
+where a soft warm AMBER radial glow emanates from behind the product, creating a luminous
+halo effect. The glow is NOT a spotlight — it is a diffused warmth that gives depth to the
+dark background, covering roughly 30% of the frame behind the subject. Minimal surface:
+[matte black stone / dark slate / invisible surface with contact shadow only]. Clean,
+editorial, zero props.
+```
+
+**Variante ambre (`ecom-ambre`) :**
+```
+Studio product shot on seamless warm amber-gold background (#FABA43). Rich golden gradient
+— brightest and most saturated at center, deepening to darker burnt amber and muted bronze
+at the edges with natural vignette. The gradient is organic and painterly, NOT a flat color
+— subtle tonal shifts across the surface like studio paper under warm key light. Minimal
+surface: [warm amber surface / matte gold reflective plane / invisible surface with soft
+shadow]. The dark product (black sesame bun) creates MAXIMUM contrast against the bright
+amber field. Clean, editorial, zero props.
+```
+
+**Termes clés qui produisent le bon rendu :**
+
+| Effet voulu | Termes à utiliser | Termes à ÉVITER |
+|-------------|-------------------|-----------------|
+| Dégradé naturel | `seamless gradient`, `natural vignette falloff`, `organic tonal shifts` | `flat color`, `solid background`, `uniform` |
+| Halo lumineux | `radial glow from behind`, `luminous halo effect`, `diffused warmth` | `spotlight`, `beam`, `harsh light` |
+| Vignette bords | `darkest at edges`, `natural vignette`, `falloff to shadows` | `border`, `frame`, `black border` |
+| Surface minimale | `minimal surface`, `contact shadow only`, `invisible surface` | `table`, `plate`, `cutting board` |
+| Rendu studio | `studio product shot`, `editorial`, `clean` | `restaurant`, `kitchen`, `scene` |
+
+**Règle :** Le fond e-commerce respecte toujours le BLOC 1b (Signature Charbon × Ambre). Sur `ecom-charbon` l'ambre est dans le halo. Sur `ecom-ambre` le charbon est dans le produit lui-même (pain noir).
 
 #### BLOC 2 — Produit (description exhaustive)
 
@@ -185,7 +227,7 @@ Voir la **checklist unifiee** en fin de document (Auto-verification).
 
 ```
 ## Prompt — Visuel [N] / [N total]
-**Model**: [GPT Images / Gemini]  **Aspect Ratio**: [from brief]  **Resolution**: 4K
+**Model**: [GPT Images / Gemini]  **Aspect Ratio**: [from brief]  **Resolution**: 2K
 **Input image**: [chemin si edit-ia, sinon "aucune"]
 **Recette / Produit**: [ingredients et formes — checklist fidelite]
 **Prompt**: [150-300 mots, narratif, style Combo-B]
@@ -290,6 +332,6 @@ catches specular highlights from the key light. Dark matte background. Aspect ra
 ## Integration & Pipeline Position
 
 ```
-social-media-art-director → [CE SKILL] → Nano Banana Pro / GPT Images → visuel 4K
+social-media-art-director → [CE SKILL] → Nano Banana Pro / GPT Images → visuel 2K
 ```
-Passer le prompt via `--prompt`. Resolution : toujours 4K. Pas de photo reference produit. Mode `edit-ia` : photo scene en `--input-image`.
+Passer le prompt via `--prompt`. Resolution : toujours 2K. Pas de photo reference produit. Mode `edit-ia` : photo scene en `--input-image`.

@@ -42,7 +42,7 @@ ROLE ET CONTEXTE :
   - L'eclairage du decor est legerement rehausse : {lighting_mood}.
 
   CHARTE GRAPHIQUE :
-  - Couleur principale : Cuivre Braise (#BF8522) — tons dores, ambres, caramelises
+  - Couleur principale : Cuivre Braise (#FABA43) — tons dores, ambres, caramelises
     en accents subtils dans les reflets et lumieres. Presence max 10-15%.
   - Couleur secondaire : Grenat Fume (#7C3530) — sous-tons rouges profonds,
     rappel viande grillee, bois sombre.

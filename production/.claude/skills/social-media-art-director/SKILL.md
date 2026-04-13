@@ -91,7 +91,7 @@ Ce bloc est transmis tel quel au prompt engineer pour verrouiller la fidélité.
 - **Présence** : Oui / Non
 - **Contenu exact** : [le texte qui doit apparaître]
 - **Typographie** : [Oswald bold / Space Grotesk medium / DM Sans — selon la DA]
-- **Couleur du texte** : [ex: Cuivre Braisé #BF8522 sur fond Charbon]
+- **Couleur du texte** : [ex: Cuivre Braisé #FABA43 sur fond Charbon]
 - **Placement** : [centré / tiers supérieur / bas de l'image / superposé au sujet]
 - **Taille relative** : [dominant (titre) / secondaire (sous-titre) / discret (mention)]
 
@@ -171,33 +171,7 @@ Décider pour chaque visuel :
 | L'Équipe | Chaleur humaine, authenticité, connexion | Plus naturel, éclairage chaud, sourires |
 | Le Quartier | Ancrage local, proximité, communauté | Varié, reprend le ton du contenu partagé |
 
-### ⛔ Pain noir obligatoire
-
-Tous les burgers StrictFood sont au **pain noir (black bun sésame)**. Le pain blanc/classique est obsolète.
-
-**Dans chaque fiche de direction créative impliquant un burger :**
-- Mentionner explicitement "pain noir sésame (black bun)" dans la section Recette/Produit
-- Dans la section Texture & Détails : "surface noire texturée du bun, recouverte de graines de sésame dorées"
-- INTERDIT : "bun doré", "brioche", "pain classique" ou toute description suggérant un bun clair
-
-### ⛔ Fidélité salle de restaurant
-
-Quand la direction créative place le produit **dans la salle du restaurant StrictFood**, le décor DOIT être fidèle à la réalité. Photos de référence : `public/images/photos-references/contexte/salle-restaurant/` (8 photos).
-
-**Caractéristiques de la vraie salle :**
-- Murs : carrelage blanc/gris clair (grands carreaux rectangulaires)
-- Bois : blond chêne clair (panneau mural partiel + plateaux de table)
-- Mobilier : tables rondes bois blond + chaises noires métal (style industriel épuré)
-- Mur végétal : grand mur de plantes vertes avec néon blanc "STRICT FOOD'S"
-- Comptoir : vitrine réfrigérée noire + comptoir blanc
-- Menu board : grand panneau noir typographie blanche
-- Ambiance : moderne, minimaliste, éclairage blanc/neutre
-
-**Dans la fiche de direction créative :**
-- Si la scène est en salle → décrire UNIQUEMENT les éléments réels ci-dessus dans "Éléments secondaires"
-- Autorisé : changer l'angle, reconstituer un élément manquant (même modèle), compléter un mur (même texture)
-- INTERDIT : bois sombre, murs lambris, ambiance rustique/pub/chaleureuse, brique exposée, mobilier inventé
-- **Alternative recommandée** : un fond neutre (sombre, table isolée, plan serré) est toujours OK et évite le risque
+> **Règles DA transversales** (pain noir, chaleur pulsée, fidélité salle de restaurant) : cf. `.claude/rules/production-pipeline.md` — toujours en contexte, non répétées ici. En art direction : mentionner "pain noir sésame (black bun)" dans Recette/Produit et décrire la salle uniquement avec les éléments réels si scène en restaurant.
 
 ### Style v2 — Garde-fous réalisme + Dynamisme visuel
 
@@ -210,6 +184,38 @@ Ces règles s'appliquent à **toutes** les fiches de direction créative :
 5. **Logo STRICT FOOD'S** : quand un prop est mentionné, décrire le logo avec précision — "STRICT FOOD'S, le O de FOOD remplacé par une icône burger stylisée, en Cuivre Braisé mat".
 6. **⚡ Éclairage contrasté obligatoire** : le fond est sombre MAIS l'éclairage doit être **dramatique et directionnel** — source lumineuse latérale ou 3/4 marquée qui sculpte le produit. Le produit doit "éclater" sur le fond sombre. Spécifier dans la section Éclairage : "Contrasté, source directionnelle, highlights vifs sur les ingrédients". INTERDIT : éclairage plat/uniforme qui noie le produit dans l'obscurité.
 7. **⚡ Couleurs riches et saturées** : les ingrédients doivent avoir des couleurs **vives et appétissantes** (vert mâche, orange sauce, doré sésame/Maillard). Spécifier dans Palette : "Couleurs riches, saturation naturelle élevée". INTERDIT : palette terne, délavée, trop uniformément sombre. **Dark Premium ≠ Terne** — le fond est sombre, le sujet est lumineux.
+
+### Fonds Ambre Incandescente — Sélection automatique
+
+Quand le post est un **hero shot produit** (pilier "Le Plat", mode `full-ia` ou `compositing-ia`, photo unique centrée sur le produit), l'art director DOIT sélectionner un fond depuis `production/_config/fonds-ambre.md`.
+
+**Logique de sélection :**
+
+1. **Si le brief spécifie `Fond: [ID]`** → utiliser ce fond exactement
+2. **Si le brief ne spécifie pas de fond** → l'art director choisit intelligemment :
+   - Lire `production/_config/historique-production.md` pour voir quels fonds ont été utilisés récemment
+   - Ne PAS répéter un fond utilisé dans les 3 derniers posts produit
+   - Adapter le fond au produit et au mood du post :
+     - Produit brut/artisanal → fonds texturés (béton, kraft, bois brûlé)
+     - Produit premium/hero → fonds lumineux (halo, bokeh, vignette)
+     - Produit dynamique/action → fonds organiques (braises, épices, splash)
+     - Produit sobre/clean → fonds accessoires (planche, assiette, plateau)
+   - Privilégier la variété catégorielle (pas 2 textures de suite, pas 2 lumineux de suite)
+
+3. **Quand NE PAS utiliser un fond ambre** :
+   - Le brief spécifie explicitement `Fond: charbon` (défaut sombre classique)
+   - Le mode est `irl-sublimation` ou `compositing-irl` (la photo source a déjà son fond)
+   - Le pilier n'est PAS "Le Plat" (sauf demande explicite)
+   - Le post est un carrousel éducatif/macros (template)
+
+**Dans la fiche de direction créative :**
+```markdown
+### Background
+- **Fond** : `[ID du fond]` (source : `_config/fonds-ambre.md`)
+- **Justification** : [pourquoi ce fond pour ce produit — ex: "braises incandescentes pour évoquer la chaleur pulsée du steak"]
+```
+
+Le prompt engineer lit l'ID, ouvre `fonds-ambre.md`, et injecte le bloc `prompt` correspondant dans le prompt final.
 
 ### Brand Props — Accessoires de Marque
 

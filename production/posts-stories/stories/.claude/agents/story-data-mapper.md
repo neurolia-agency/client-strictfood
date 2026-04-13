@@ -182,7 +182,45 @@ Après avoir résolu les photos, assigner les classes overlay et lisibilité dan
 
 ## Format de sortie
 
-### Vitrine — variante produit (template: `vitrine.html`)
+### Story Universal (template: `story-universal.html`) — FORMAT PRINCIPAL
+
+> Toutes les nouvelles stories (S3+) utilisent ce format. C'est le seul template actif.
+
+```markdown
+# Story [NN] — Data Mapping (Story Universal)
+
+| Placeholder | Valeur |
+|---|---|
+| `{{BG_IMAGE_PATH}}` | [chemin absolu photo — OBLIGATOIRE, doit exister sur le disque] |
+| `{{TEXT_LINE_1}}` | [texte principal — MAX 22 CAR — ou vide si masque] |
+| `{{TEXT_LINE_2}}` | [texte secondaire — MAX 30 CAR — ou vide si masque] |
+| `{{SHOW_TEXT}}` | [block / none] |
+| `{{SHOW_LINE_1}}` | [block / none] |
+| `{{SHOW_LINE_2}}` | [block / none] |
+| `{{SHOW_DIVIDER}}` | [block / none] |
+| `{{PHOTO_PRESET}}` | [photo-centre / photo-droite / photo-gauche / photo-haut / photo-bas / photo-large] |
+| `{{MOOD_CLASS}}` | [mood-cuivre / mood-grenat / mood-feuille] |
+| `{{INFO_POSITION}}` | [(vide=bas-centre) / info-haut-gauche / info-haut-centre / info-bas-gauche] |
+| `{{IRL_FILTER}}` | [none / leger / moyen / fort] |
+| `{{GRAIN}}` | [(vide) / grain-subtle / grain-medium] |
+| `{{TAGLINE}}` | Le cheat meal <em>qui n'en est pas un</em> |
+| `{{BRAND_PROP}}` | [prop visible ou "aucun" — informatif] |
+```
+
+**Exemples de contenu TEXT_LINE_1 / TEXT_LINE_2** :
+- Food porn pur : SHOW_TEXT = none (juste la photo + tagline)
+- Produit nomme : "STRICT BOEUF" / "946 kcal"
+- Educatif : "53G PROTEINES" / "Ton shaker ne fait pas le poids"
+- Interactif : "QUEL EST TON STRICT ?" / — (sticker ajoute nativement dans IG)
+- Fiche produit : "STRICT VEGE" / "850 kcal"
+- Annonce : "MARDI-DIMANCHE" / "11h-14h / 18h-22h"
+- IRL archive : "RUSH DU MIDI" / — (ou texte court)
+
+---
+
+### FORMATS LEGACY (templates deprecies — S1-S2 uniquement)
+
+### Vitrine — variante produit (template: `vitrine.html`) — DEPRECATED
 
 ```markdown
 # Story [NN] — Data Mapping (Vitrine Produit)

@@ -5,10 +5,16 @@
 | Champ | Valeur |
 |-------|--------|
 | Pilier | [Le Plat / La Cuisine / Les Macros / L'Équipe / Le Quartier] |
-| Format | [Photo unique / Carrousel N slides] |
-| Dimensions | 4:5 |
-| Mode | [full-ia / irl-sublimation / compositing-irl / compositing-ia / template] |
+| Format | [Photo unique / Carrousel N slides / Triptych (3 posts)] |
+| Dimensions | [4:5 / 1:1 / 3240x1080 (triptych) / 3240x1350 (triptych 4:5)] |
+| **Traitement** | [photo-pure / knockout-band / masque / masque-inverse / texture-fill / carousel / triptych] |
+| **Fond** | [ambre / charbon — voir `_config/fonds-ambre.md` pour les variantes ambre] |
+| **Mode** | [full-ia / template (carrousel)] — `edit-ia` et `irl` sont hors-planning uniquement |
+| Source image | [archive / ia — uniquement pour photo-pure, knockout-band, triptych] |
 | Période | [SX — Nom de la période] |
+
+> **RÈGLE ABSOLUE** : Tous les chemins photo doivent pointer vers des fichiers existants. JAMAIS de `[À FOURNIR]`. Si aucune photo ne matche, changer le sujet ou le traitement. Les photos pain blanc sont autorisées avec la mention `bun-swap-required`.
+> **Mode** : les posts en planning sont tous en `full-ia` (sauf carrousels = `template`). Le produit est TOUJOURS décrit dans le prompt, jamais fourni en photo reference à l'IA.
 
 ## Objectif
 
@@ -24,53 +30,80 @@ Slug recette : `[slug-kebab-case]`
 
 ---
 
-## Sources visuelles (selon le mode)
+## Direction visuelle (selon le traitement)
 
-### Si mode = `full-ia`
-
-> Aucune source à fournir. Le pipeline résout via `photo-references.md` et génère avec Gemini.
-
-### Si mode = `irl-sublimation`
+### Si traitement = `photo-pure`
 
 | Champ | Valeur |
 |-------|--------|
-| Photo source | `[chemin vers la photo réelle à sublimer]` |
-| Direction sublimation | [Ce qu'on veut améliorer — ex: "aligner couleurs DA, renforcer contraste, fond plus sombre"] |
+| Source | [archive: `chemin/photo.png` / ia] |
+| Direction photo | [Ce qu'on veut montrer — angle, cadrage, ambiance] |
+| Fond | [ID fond ambre — ex: `ambre-halo` / charbon] |
 
-### Si mode = `compositing-irl`
+> Zéro overlay, zéro élément graphique. Le produit parle seul.
+> Si source = `ia` : le produit est DÉCRIT précisément depuis la fiche recette (`_recettes/[slug].md`), PAS de photo référence jointe. Meilleurs résultats quand l'IA génère le produit à partir de la description.
 
-| Champ | Valeur |
-|-------|--------|
-| Photo produit | `[chemin vers la photo du produit]` |
-| Photo lieu | `[chemin vers la photo du lieu — salle, devanture, comptoir]` |
-| Intention compositing | [Comment intégrer le produit dans le lieu — ex: "burger posé sur le comptoir, éclairage naturel fenêtre"] |
-
-### Si mode = `compositing-ia`
+### Si traitement = `knockout-band`
 
 | Champ | Valeur |
 |-------|--------|
-| Photo produit | `[chemin vers la photo du produit réel]` |
-| Scène imaginée | [Description de la scène IA — ex: "cuisine industrielle avec inox, vapeur, éclairage dramatique latéral"] |
+| Source | [archive: `chemin/photo.png` / ia] |
+| Direction photo | [Cadrage, ambiance, fond — le produit doit être hero en plein cadre] |
+| Fond | [ambre / charbon] |
+| Texte bande | [Nom du produit — ex: "STRICT BOEUF"] |
 
-### Si mode = `template`
+> Bande dome : charbon sur fond ambre, ambre sur fond charbon. Tagline en dessous.
+
+### Si traitement = `masque`
 
 | Champ | Valeur |
 |-------|--------|
-| Type template | [carrousel-macros / comparaison / astuce-nutrition / custom] |
-| Nombre de slides | [N] |
-| Données par slide | [voir section données ci-dessous] |
+| Photo produit | [archive: `chemin/photo.png` — sera visible à travers les lettres] |
+| Texte | [1-2 mots — ex: "STRICT BOEUF", "MAX POULET"] |
+| Fond | ambre |
 
-#### Données slides (si mode template)
+> Règle : le burger doit être zoomé pour remplir 60%+ de chaque lettre. Un seul burger continu dans tout le texte.
 
-**Slide 1 — [Titre/Rôle]**
-- [Champ] : [Valeur]
-- [Champ] : [Valeur]
+### Si traitement = `masque-inverse`
 
-**Slide 2 — [Titre/Rôle]**
-- [Champ] : [Valeur]
-- [Champ] : [Valeur]
+| Champ | Valeur |
+|-------|--------|
+| Photo produit | [archive: `chemin/photo.png` — visible en fond, luminosité boostée] |
+| Texte | [1-2 mots en ambre solide par-dessus la photo] |
+| Fond | charbon |
 
-[Répéter pour chaque slide]
+### Si traitement = `texture-fill`
+
+| Champ | Valeur |
+|-------|--------|
+| Texte | [1-3 lignes — ex: "LES BONS / LIPIDES"] |
+| Texture | [bun-sesame-svg / bun-macro-photo / custom: description] |
+| Fond | [ambre / charbon] |
+
+> Variabilité : la texture doit correspondre au sujet (bun sésame pour les burgers, croûte poulet pour le poulet, etc.)
+
+### Si traitement = `carousel`
+
+| Champ | Valeur |
+|-------|--------|
+| Thématique | [Ex: "Les bons lipides", "Air fryer vs cuisson traditionnelle"] |
+| Nombre de slides | [3-7] |
+| Couverture | texture-fill SVG sésame (automatique) |
+| Résumé contenu par slide | [Titres/angles de chaque slide] |
+
+> Le contenu détaillé des slides est rédigé par l'agent copywriter carousel (`/carousel-producer`).
+> Le brief ne contient que la thématique et la structure générale.
+
+### Si traitement = `triptych`
+
+| Champ | Valeur |
+|-------|--------|
+| Source | [archive / ia — doit être panoramique ou adaptable] |
+| Texte panoramique | [Le mot/phrase qui traverse les 3 posts — ex: "STRICT BOEUF"] |
+| Fond | [ambre / charbon] |
+| Format | [3240x1080 (1:1) / 3240x1350 (4:5)] |
+
+> Prévoir zone morte ~4px aux points de coupe (1080px et 2160px). Chaque post doit fonctionner seul ET en grille.
 
 ---
 
@@ -85,9 +118,10 @@ Slug recette : `[slug-kebab-case]`
 | Mention macros | [Oui (headline / dans le corps) / Non] |
 | Mention fournisseurs | [Oui (lesquels) / Non] |
 | Mots/phrases à inclure | [Optionnel — ex: "cheat meal qui n'en est pas un"] |
-| Mots/phrases à éviter | [Optionnel — ex: "healthy", "régime"] |
+| Mots/phrases à éviter | [Optionnel — ex: "healthy", "régime", "sauce maison"] |
 
 > La caption est générée APRÈS l'image par le skill `/caption-writer`.
+> Pour les carrousels, la caption COMPLÈTE le contenu (angle différent, approfondissement, punch line).
 > Ne PAS écrire la caption complète dans le brief.
 
 ---
@@ -96,7 +130,6 @@ Slug recette : `[slug-kebab-case]`
 
 - [Contrainte visuelle 1 — ex: "Hero shot dessert, textures couches visibles"]
 - [Contrainte visuelle 2 — ex: "Angle différent du post précédent"]
-- DA : Dark Food Premium (fond Charbon, tons Cuivre Braisé)
 - Food Porn Dial : [X]/10
 - Brand props : [oui (l'art director choisit) / non (pas de branding) / forcé: wrapper-burger]
 
@@ -104,5 +137,6 @@ Slug recette : `[slug-kebab-case]`
 
 ## Étape suivante
 
-> Exécuter `/instagram-producer [DATE]`
-> Le pipeline détecte automatiquement le mode et route vers le bon sous-pipeline.
+> Exécuter `/instagram-producer [DATE]` pour les posts photo/knockout/masque.
+> Exécuter `/carousel-producer [THEMATIQUE]` pour les carrousels.
+> Le pipeline détecte automatiquement le traitement et route vers le bon sous-pipeline.

@@ -91,7 +91,7 @@ La stratégie mère définit 5 piliers. En S0-S1, ils ne sont pas activés de ma
 - **Éclairage :** Latéral chaud, contrastes forts. La source lumineuse principale vient du côté (45° ou 90°), pas de dessus. Ombres assumées mais pas écrasantes.
 - **Fond :** Sombre systématiquement. Plan de travail en bois sombre, ardoise, ou papier kraft sur fond charbon. Jamais de fond blanc, clair, ou "cafétéria".
 - **Composition :** Le produit occupe 60-70% du cadre. Pas de décor excessif. 1-2 éléments secondaires maximum (un ingrédient brut, le papier brandé, le logo en arrière-plan).
-- **Palette :** Tons chauds dominants — dorés, cuivrés, ambrés. La couleur Cuivre Braisé (#BF8522) doit résonner naturellement dans l'image (lumière, fromage fondant, croûte du pain).
+- **Palette :** Tons chauds dominants — dorés, cuivrés, ambrés. La couleur Cuivre Braisé (#FABA43) doit résonner naturellement dans l'image (lumière, fromage fondant, croûte du pain).
 - **Angles :** Alterner entre 3/4 (le plus flatteur pour les burgers), vue rapprochée (textures), et vue légèrement plongeante (wraps, bowls, desserts).
 - **Format :** 4:5 systématiquement (optimal pour le feed Instagram, occupe plus d'espace dans le scroll).
 
@@ -157,7 +157,7 @@ Chaque artisan a une histoire qui sert le positionnement de StrictFood :
 
 **Direction créative :**
 
-- **Style :** Infographie sobre et premium. Fond Charbon (#141210), typo Oswald pour les chiffres forts, Space Grotesk pour les labels, accents en Cuivre Braisé (#BF8522) et Feuille Grillée (#5C7858) pour les indicateurs nutrition.
+- **Style :** Infographie sobre et premium. Fond Charbon (#141210), typo Oswald pour les chiffres forts, Space Grotesk pour les labels, accents en Cuivre Braisé (#FABA43) et Feuille Grillée (#5C7858) pour les indicateurs nutrition.
 - **Ce qu'on fait :** Macro breakdowns visuels (barres protéines/glucides/lipides), comparaisons avant/après avec chiffres
 - **Ce qu'on ne fait pas :** Style "fitness bro" criard (fond fluo, typo Impact, emojis musclés). L'éducation est premium, pas gymshark.
 - **Données sources :** Toutes les macros viennent de `pipeline/input/content/carte.md` — données vérifiées et vérifiables.
@@ -311,7 +311,7 @@ Les Highlights sont les "pages permanentes" du profil. Ils restent visibles mêm
 | **AVIS** | Basse en S0-S1 | 1-2 captures d'avis Google 5 étoiles mis en forme. S'étoffe avec le temps. |
 | **NOUS TROUVER** | Haute — remplir dès S0 | Plan d'accès, photo façade, parking, horaires. Le prospect local a besoin de ça. |
 
-**Covers Highlights :** Fond Charbon (#141210) + texte ou icône en Cuivre Braisé (#BF8522). Typo Oswald ou Space Grotesk. Style minimaliste et cohérent entre toutes les covers.
+**Covers Highlights :** Fond Charbon (#141210) + texte ou icône en Cuivre Braisé (#FABA43). Typo Oswald ou Space Grotesk. Style minimaliste et cohérent entre toutes les covers.
 
 ---
 

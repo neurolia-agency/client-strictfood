@@ -84,7 +84,7 @@ Le pipeline supporte 4 modes de creation. Le mode est specifie dans le brief (ch
 
 | Mode | Description | Pipeline | API | Planifiable |
 |------|-------------|----------|-----|-------------|
-| `full-ia` | Gemini genere tout (produit DECRIT + scene) | Art Direction → Input Mapping → Prompt → Gemini 4K | Gemini | Oui |
+| `full-ia` | Gemini genere tout (produit DECRIT + scene) | Art Direction → Input Mapping → Prompt → Gemini 2K | Gemini | Oui |
 | `edit-ia` | Photo existante editee/sublimee par IA | Photo source → Edit prompt → GPT Images / Gemini | GPT Images / Gemini | **NON** (hors-planning uniquement) |
 | `template` | Photo plein cadre + texte overlay minimal | Data mapping → `story-universal.html` → Puppeteer | Aucune | Oui |
 | `irl` | Photo fraiche prise en live + overlay | Photo fraiche → `story-universal.html` → Puppeteer | Aucune | **NON** (hors-planning uniquement) |
@@ -351,8 +351,8 @@ Certains ingrédients ont un rendu visuel problématique si mal traduits. Ces tr
 | Famille | Types | Pipeline | API |
 |---------|-------|----------|-----|
 | **A — Texte** | Educatif, Ingredient Spotlight, Menu Objectif | Recherche → Copywriting → Template HTML → Puppeteer | Aucune |
-| **B — Photo** | Zoom Progressif, Texture/ASMR, Construction, Defile Gamme, Process Cuisine | Bloc coherence → Prompt × N slides → Gemini 4K | Gemini |
-| **C — Panoramique** | Panoramique | Prompt scene large → Gemini 4K (16:9) → `render-panoramic.js` | Gemini |
+| **B — Photo** | Zoom Progressif, Texture/ASMR, Construction, Defile Gamme, Process Cuisine | Bloc coherence → Prompt × N slides → Gemini 2K | Gemini |
+| **C — Panoramique** | Panoramique | Prompt scene large → Gemini 2K (16:9) → `render-panoramic.js` | Gemini |
 
 ### Distribution mensuelle (~8/mois)
 

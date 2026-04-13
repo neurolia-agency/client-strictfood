@@ -59,7 +59,7 @@
 
 ### Couleurs & Mood
 
-- **Palette dominante** : Charbon profond (#141210) pour le fond et les ombres, Cuivre Braisé (#BF8522) dans les highlights du steak et du bun, Brun Maillard sombre pour la viande.
+- **Palette dominante** : Charbon profond (#141210) pour le fond et les ombres, Cuivre Braisé (#FABA43) dans les highlights du steak et du bun, Brun Maillard sombre pour la viande.
 - **Accent** : Le vert délicat de la mâche — petites touches de Feuille Grillée (#5C7858) qui percent à travers le clair-obscur, contraste chromatique avec les tons chauds ambiants. Le violet-pourpre des rondelles d'oignons rouges comme accent secondaire.
 - **Ambiance** : **Brut et souverain.** Ce n'est pas un burger mignon — c'est un monument de viande artisanale. La photo doit provoquer un arrêt de scroll immédiat et une sensation physique de faim. Premium sans être prétentieux. Dark sans être sinistre.
 - **Référence DA** : Background Charbon absolu. Highlights Cuivre Braisé sur les crêtes de la croûte Maillard et le dôme du bun. Grenat Fumé (#7C3530) dans les ombres chaudes du steak. Feuille Grillée dans la mâche uniquement.

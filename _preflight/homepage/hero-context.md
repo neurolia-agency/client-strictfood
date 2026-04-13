@@ -53,7 +53,7 @@ Source : homepage.md > Section 1 > Layout
 - **Fond** : var(--color-charbon) = oklch(0.14 0.008 60) / #141210 ← visual-vocabulary.md > Couleurs > "fond principal" & app/globals.css
 - **Texte H1/H2** : var(--color-ivoire) = oklch(0.91 0.015 80) / #E8E0D4 ← app/globals.css > h1, h2 > color
 - **Texte Body (Baseline)** : var(--color-sable) = oklch(0.73 0.025 75) / #B5AA98 ← visual-vocabulary.md > Couleurs > "texte secondaire"
-- **CTA Primaire Background** : var(--color-cuivre) = oklch(0.67 0.15 68) / #BF8522 ← visual-vocabulary.md > Couleurs > "accent signature" & app/globals.css
+- **CTA Primaire Background** : var(--color-cuivre) = oklch(0.67 0.15 68) / #FABA43 ← visual-vocabulary.md > Couleurs > "accent signature" & app/globals.css
 - **CTA Primaire Texte** : var(--color-primary-foreground) = oklch(0.14 0.008 60) / Charbon ← ui-kit.md > Boutons > Primaire > Texte
 - **CTA Secondaire Border** : var(--color-cendre) = oklch(0.30 0.01 55) / #3D3832 ← visual-vocabulary.md > Couleurs > "bordure subtile"
 - **CTA Secondaire Texte** : var(--color-creme) = oklch(0.96 0.012 85) / #F5F0E8 ← ui-kit.md > Boutons > Secondaire > Texte

@@ -1,0 +1,34 @@
+/* ============================================
+   LAYOUT STORY — 1080 × 1920 (9:16)
+   Instagram Story format
+   ============================================ */
+
+body {
+  width: 1080px;
+  height: 1920px;
+}
+
+/* Zone de contenu safe (hors UI Instagram) */
+.content-zone {
+  position: absolute;
+  top: var(--safe-top-ig);      /* 250px — sous le username IG */
+  left: var(--safe-side-ig);    /* 65px — marge device */
+  right: var(--safe-side-ig);
+  bottom: calc(var(--safe-bottom-ig) + 120px); /* 200px — logo + tagline */
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+}
+
+/* Zone brand fixe en bas */
+.brand-zone {
+  position: absolute;
+  bottom: var(--safe-bottom-ig);
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-sm);
+  z-index: 3;
+}

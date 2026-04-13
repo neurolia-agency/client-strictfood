@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Oswald:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      position: relative;
+      background: #1a1714;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== PHOTO ===== */
+    .bg-photo {
+      position: absolute;
+      top: 280px; left: 0; right: 0;
+      height: 1100px;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .bg-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 35%;
+    }
+
+    /* Fondus charbon */
+    .fade-top {
+      position: absolute;
+      top: 280px; left: 0; right: 0;
+      height: 250px;
+      background: linear-gradient(to bottom, #1a1714 0%, rgba(26,23,20,0.6) 40%, transparent 100%);
+      z-index: 2;
+    }
+    .fade-bottom {
+      position: absolute;
+      top: 1150px; left: 0; right: 0;
+      height: 250px;
+      background: linear-gradient(to top, #1a1714 0%, rgba(26,23,20,0.4) 60%, transparent 100%);
+      z-index: 2;
+    }
+    /* Blur localisé sur la bordure basse de la photo — fond la transition */
+    .blur-edge {
+      position: absolute;
+      top: 1280px; left: 0; right: 0;
+      height: 120px;
+      z-index: 2;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      mask-image: linear-gradient(to top, black 0%, black 30%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to top, black 0%, black 30%, transparent 100%);
+    }
+
+    /* ===== ELEMENTS GRAPHIQUES — ambre sur charbon ===== */
+    .tech-tl {
+      position: absolute; top: 50px; right: 35px;
+      width: 90px; height: 60px;
+      border-top: 1.5px solid rgba(250,186,67,0.18);
+      border-right: 1.5px solid rgba(250,186,67,0.18);
+      z-index: 15;
+    }
+    .tech-br {
+      position: absolute; bottom: 50px; left: 35px;
+      width: 90px; height: 60px;
+      border-bottom: 1.5px solid rgba(250,186,67,0.12);
+      border-left: 1.5px solid rgba(250,186,67,0.12);
+      z-index: 15;
+    }
+
+    .gfx-bar {
+      position: absolute;
+      top: 260px; left: -80px;
+      width: 1300px; height: 40px;
+      background: linear-gradient(90deg,
+        rgba(250,186,67,0.20) 0%, rgba(237,190,68,0.08) 60%, transparent 100%);
+      transform: rotate(-5deg);
+      z-index: 3; pointer-events: none;
+    }
+
+    .ember { position: absolute; border-radius: 50%; z-index: 15; }
+    .ember-1 { top: 310px; left: 70px; width: 4px; height: 4px; background: #EDBE44; box-shadow: 0 0 10px 4px rgba(237,190,68,0.30); }
+    .ember-2 { bottom: 480px; right: 60px; width: 3px; height: 3px; background: rgba(255,255,255,0.20); box-shadow: 0 0 6px 2px rgba(255,255,255,0.08); }
+
+    /* ===== HOOK — zone haute ===== */
+    .hook {
+      position: absolute;
+      top: 330px; left: 75px; right: 75px;
+      z-index: 10;
+    }
+    .hook-line {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 50px;
+      font-weight: 500;
+      color: #fff;
+      line-height: 1.4;
+      text-align: center;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.8);
+    }
+    .hook-line strong {
+      color: #FABA43;
+      font-weight: 700;
+    }
+
+    /* ===== OFFRE — zone basse ===== */
+    .offre-zone {
+      position: absolute;
+      bottom: 270px; left: 0; right: 0;
+      z-index: 10;
+      padding: 0 75px;
+    }
+
+    .offre-gradient {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 750px;
+      background: linear-gradient(to top, #1a1714 0%, rgba(26,23,20,0.95) 40%, rgba(26,23,20,0.6) 65%, transparent 100%);
+      z-index: 3;
+    }
+
+    .uber-badge {
+      position: absolute;
+      top: 220px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 12px 28px;
+      background: rgba(255,255,255,0.06);
+      border: 1.5px solid rgba(255,255,255,0.10);
+      border-radius: 12px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700; font-size: 45px;
+      z-index: 15;
+    }
+    .uber-badge .uber { color: #fff; }
+    .uber-badge .eats { color: #3FC060; }
+
+    .offre-row {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .offre-title {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 100px;
+      text-transform: uppercase;
+      line-height: 0.95;
+      letter-spacing: -2px;
+    }
+    .offre-title .gold { color: #FABA43; }
+    .offre-title .white { color: #fff; }
+
+    .offre-desc {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 30px; font-weight: 400;
+      color: #fff;
+      line-height: 1.45;
+      margin-bottom: 28px;
+    }
+    .offre-desc strong { color: #FABA43; font-weight: 700; }
+
+    .offre-cta {
+      display: inline-block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700; font-size: 22px;
+      color: #1a1714;
+      text-transform: uppercase; letter-spacing: 4px;
+      padding: 14px 40px;
+      background: #FABA43;
+      border-radius: 8px;
+      margin-bottom: 40px;
+    }
+
+    .story-bottom {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 12;
+      text-align: center;
+      padding: 0 70px 80px;
+    }
+
+    .tagline {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700; font-size: 34px; color: #fff;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+    .tagline em { color: #FABA43; font-style: italic; }
+
+    .logo-container {
+      display: flex; justify-content: center;
+    }
+    .logo-container img { width: 350px; height: auto; opacity: 0.80; }
+
+    /* ===== GRAIN ===== */
+    .grain {
+      position: absolute; inset: 0; z-index: 50;
+      pointer-events: none; opacity: 0.05; mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+      background-size: 256px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PHOTO -->
+  <div class="bg-photo">
+    <img src="file:///Users/dorian.gz/dev/Neurolia%20Agency/client-strictfood/production/a-publier/stories/story-01-max-poulet-action-main.png" />
+  </div>
+  <div class="fade-top"></div>
+  <div class="fade-bottom"></div>
+  <div class="blur-edge"></div>
+
+  <!-- ELEMENTS GRAPHIQUES -->
+  <div class="tech-tl"></div>
+  <div class="tech-br"></div>
+  <div class="gfx-bar"></div>
+  <div class="ember ember-1"></div>
+  <div class="ember ember-2"></div>
+
+  <!-- HOOK — zone haute -->
+  <div class="hook">
+    <div class="hook-line">T'auras besoin de <strong>la deuxième main</strong>.</div>
+  </div>
+
+  <!-- GRADIENT BAS -->
+  <div class="offre-gradient"></div>
+
+  <!-- UBER EATS BADGE — centré dans la zone haute -->
+  <div class="uber-badge">
+    <span class="uber">Uber</span><span class="eats">Eats</span>
+  </div>
+
+  <!-- OFFRE — zone basse -->
+  <div class="offre-zone">
+    <div class="offre-row">
+      <div class="offre-title">
+        <span class="gold">1 acheté</span><br><span class="white">= 1 offert</span>
+      </div>
+    </div>
+    <div class="offre-desc">Sur tous les burgers et wraps.<br>(même les <strong>menus</strong>, parce qu'on est super cool)</div>
+  </div>
+
+  <!-- TAGLINE + LOGO — ancré en bas -->
+  <div class="story-bottom">
+    <div class="tagline">Le cheat meal <em>qui n'en est pas un</em></div>
+    <div class="logo-container">
+      <img src="file:///Users/dorian.gz/dev/Neurolia%20Agency/client-strictfood/production/posts-stories/stories/_templates/_base/logo.svg" alt="STRICT FOOD'S">
+    </div>
+  </div>
+
+  <div class="grain"></div>
+
+</body>
+</html>

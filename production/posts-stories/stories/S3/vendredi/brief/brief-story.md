@@ -1,100 +1,108 @@
 # Brief Stories — S3 Vendredi (2026-03-28)
 
-> **Pilier du jour** : Le Plat / Confiance — Pas de post
-> **Objectif strategique** : IRL ambiance vendredi (vitrine + salle) + sublimation Falafel wet-look. Montrer le restaurant vivant un vendredi + food porn vegetal pour varier les produits.
-> **Persona cible** : Locavores + Tous
-> **Ref strategie** : Phase 1 §1.4 — "installer le Dark Food Premium comme signature"
+> **Pilier du jour** : — (pas de post vendredi)
+> **Objectif strategique** : Lifestyle mur colore pour varier les decors. Macro jus STRICT Boeuf (wet-look visceral). Interactif sondage pour l'engagement. Pas de rappel aujourd'hui.
+
+> **REGLE ABSOLUE** : Tous les chemins photo doivent pointer vers des fichiers existants.
+> **Templates** : `story-universal.html` (defaut), `story-sillon.html`, `story-sceau.html`, `story-feuillete-photo.html`, `story-feuillete-data.html`.
 
 ---
 
-## Story 1 — IRL : Vitrine pleine
+## Story 1 — Lifestyle mur teal burger boeuf
 
 | Champ | Valeur |
 |-------|--------|
-| Type | IRL |
-| Mode | `irl` |
+| Mode | full-ia |
+| Traitement | — |
+| Fond | — |
 | Highlight | — |
-| Qui produit | Romain/Dorian (photo) + Pipeline (overlay) |
-| Template | `irl-story.html` |
 | Mood | cuivre |
-| Image | hero |
-| Brand props | aucun |
+| Concept visuel | lifestyle-mur-uni |
 
 ### Objectif
 
-La vitrine pleine en debut de service = abondance, choix, fraicheur. La profondeur du plan large montre l'etendue de l'offre. Preuve visuelle que le restaurant est approvisionne et pret.
+Lifestyle graphique editorial : une jeune femme appuyee contre un mur teal vif, tenant un burger boeuf black bun en main. Contraste teal vs ambre vs noir du pain. Posture nonchalante, pas posee.
 
 ### Contenu
 
-Photo : `[A FOURNIR par Romain/Dorian — vendredi debut de service]`
-Texte overlay : `Service.`
-Position texte : bas
-Filtre : leger
-
-> **Cadrage souhaite** : Plan large, vitrine refrigeree noire pleine de produits, profondeur de champ, eclairage interieur. Le logo sur la vitrine est un bonus.
+| Champ | Valeur |
+|-------|--------|
+| Concept | lifestyle-mur-uni |
+| Photo reference | [ref Pinterest : "woman leaning teal wall eating burger candid urban fashion photography"] |
+| Personnage | Femme ~24 ans, peau mate, cheveux noirs mi-longs lisses |
+| Tenue | Veste en jean oversize avec doublure ambre (#FABA43) visible au col, t-shirt blanc, pantalon large noir, baskets blanches |
+| Posture | Appuyee epaule droite contre le mur, jambe gauche croisee, burger tenu en main droite a hauteur de poitrine |
+| Regard | Deporte droite, expression detendue |
+| Scene | Mur peint teal vif uni, trottoir beton clair, lumiere naturelle diffuse |
+| Sac kraft | non (burger boeuf black bun tenu en main, ingredients visibles : steak croute Maillard, mache, parmesan miettes, sauce poivron) |
+| Cadrage | Plein pied, frontal legere |
+| TEXT_LINE_1 | — |
+| TEXT_LINE_2 | — |
 
 ---
 
-## Story 2 — IRL : Clients en salle
+## Story 2 — STRICT Boeuf macro jus
 
 | Champ | Valeur |
 |-------|--------|
-| Type | IRL |
-| Mode | `irl` |
-| Highlight | — |
-| Qui produit | Romain/Dorian (photo) + Pipeline (overlay) |
-| Template | `irl-story.html` |
+| Mode | full-ia |
+| Traitement | — |
+| Fond | charbon |
+| Highlight | LA CARTE |
 | Mood | cuivre |
-| Image | hero |
-| Brand props | aucun |
+| Concept visuel | macro-jus |
 
 ### Objectif
 
-Preuve sociale en direct — des vrais clients qui mangent dans la salle. Le mur vegetal/neon en arriere-plan ancre le lieu. Photo discrete, pas de mise en scene. L'ambiance du vendredi soir transpire.
+Macro visceral : jus de viande qui perle a la surface du steak, gouttelettes brillantes, wet-look maximal. Le STRICT Boeuf vu en ultra-gros plan — on sent presque le jus. Micro-saison Macro & Texture.
 
 ### Contenu
-
-Photo : `[A FOURNIR par Romain/Dorian — vendredi midi ou soir, discret]`
-Texte overlay : `—`
-Position texte : bas
-Filtre : leger
-
-> **Cadrage souhaite** : Plan large discret, clients qui mangent a leur table. Mur vegetal/neon "STRICT FOOD'S" en arriere-plan si angle le permet. Ne pas deranger les clients — photo au telephoto depuis le comptoir.
-
----
-
-## Story 3 — Produit DA : STRICT Vege Falafel wet-look
 
 | Champ | Valeur |
 |-------|--------|
-| Type | Produit DA |
-| Mode | `irl-sublimation` |
-| Highlight | — |
-| Qui produit | Pipeline |
-| Template | `irl-story.html` (overlay post-sublimation) |
-| Mood | feuille |
-| Image | hero |
-| Brand props | aucun |
+| Sujet | STRICT Boeuf — macro extreme sur la surface du steak de boeuf dans le burger ouvert, jus de viande perlant en gouttelettes brillantes, wet-look maximal, croute Maillard uniforme (air fryer), miettes de parmesan autour, fond charbon profond, eclairage spot rasant |
+| Produit | STRICT Boeuf — slug recette : `strict-boeuf` |
+| Direction artistique | Macro 100mm f/2.8, eclairage rasant lateral unique, fond charbon profond, gouttelettes ultra-nettes, brillance grasse, profondeur 2mm, grain cinematique, style food porn Maillard (PAS de grill marks — croute uniforme) |
+| TEXT_LINE_1 | — |
+| TEXT_LINE_2 | — |
+
+---
+
+## Story 3 — Interactif sondage STRICT
+
+| Champ | Valeur |
+|-------|--------|
+| Mode | template |
+| Traitement | — |
+| Fond | — |
+| Highlight | LA CARTE |
+| Mood | cuivre |
+| Concept visuel | — |
 
 ### Objectif
 
-Food porn vegetal — le Falafel sous son meilleur angle macro. Le concept `sensation-brillance` pousse le wet-look au maximum : chaque surface lustree et brillante. Les tons verts naturels du falafel sont preserves et intensifies. Variete produit par rapport aux burgers viande des autres jours.
+Sondage interactif pour l'engagement : "QUEL EST TON STRICT ?" avec les 3 gammes. Le sondage est ajoute nativement dans Instagram (pas dans le template). Photo macro burger en fond.
 
 ### Contenu
 
-Photo source : `public/images/photos-references/produits-source/burgers-black/strict-vege/strict-vege-macro.png`
-Direction sublimation : `Wet-look maximal — chaque surface du falafel lustree et brillante. Accentuer la sauce, les reflets sur la croute croustillante du falafel. Tons verts naturels preserves mais intensifies. Eclairage directionnel revelant les textures (sauce, croute, salade, pain noir). Grain film subtil. Full-frame 9:16.`
-Texte overlay : `—`
+| Champ | Valeur |
+|-------|--------|
+| Photo | `../public/images/photos-references/produits-source/burgers-black/strict-boeuf/strict-boeuf-macro.png` |
+| TEXT_LINE_1 | TON STRICT ? |
+| TEXT_LINE_2 | Poulet · Boeuf · Vege |
+| PHOTO_PRESET | photo-centre |
+| INFO_POSITION | — |
 
 ---
 
 ## Contraintes
 
-- DA : 2 IRL ambiance + 1 sublimation food porn vegetal
-- Mood : cuivre pour les IRL (ambiance restaurant), feuille pour la sublimation (fraicheur vegetale)
-- La sublimation Falafel doit preserver les tons VERTS naturels — ne pas tout cuivrer
-- Micro-saison A : concept `sensation-brillance` pour la story 3
-- Photos IRL : prises pendant le service du vendredi
+- DA : Dark Food Premium — `story-universal.html`
+- Mood : cuivre
+- **Fond** : — (story 1), charbon (story 2), — (story 3)
+- **Pain noir obligatoire** sur tous les visuels burger
+- **Chaleur pulsee** : jamais "grill", "grille", "barbecue"
+- Tagline fixe : `Le cheat meal <em>qui n'en est pas un</em>`
 
 ## Etape suivante
 

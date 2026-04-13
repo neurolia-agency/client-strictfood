@@ -3,7 +3,7 @@
 Pipeline en 2+ etapes avec recherche Pinterest automatique.
 
 ```
-Brief -> Pinterest Search -> Analyse photo ref -> Adaptation StrictFood -> Realism Audit PRE -> Prompt Combo-B -> Realism Audit POST -> Gemini 4K 9:16 -> (Logo insertion si pas dans scene) -> brouillons/
+Brief -> Pinterest Search -> Analyse photo ref -> Adaptation StrictFood -> ART DIRECTION (invention) -> Realism Audit PRE -> Prompt Combo-B -> Realism Audit POST -> Gemini 2K 9:16 -> (Logo insertion si pas dans scene) -> brouillons/
 ```
 
 ## L1 -- Recherche Pinterest automatique
@@ -25,47 +25,56 @@ Brief -> Pinterest Search -> Analyse photo ref -> Adaptation StrictFood -> Reali
    - **Posture** : debout/assis, angle, expression
    - **Decor** : environnement, lumiere, palette de couleurs
 
-## L3 -- Adaptation StrictFood
+## L3 -- Adaptation StrictFood (contraintes de base)
 
-Transformer la reference Pinterest pour l'univers StrictFood :
+Appliquer les contraintes non negociables a la reference Pinterest :
 
-1. **Signature Charbon × Ambre (15-20% chacun)** : le personnage PORTE la signature via vetements et accessoires. Les deux couleurs doivent etre presentes et couvrir chacune ~15-20% du cadre :
-   - **Element charbon** (~15-20%) : vetement sombre (veste noire, t-shirt charbon, casquette sombre, pantalon noir) OU accessoire noir (sac StrictFood noir)
-   - **Element ambre** (~15-20%) : accessoire dore/cuivre (echarpe ambre, bijou, sac kraft dore, bonnet dore) OU piece vestimentaire chaude OU lumiere ambre marquee (golden hour, eclairage chaud)
-   - **Le sac kraft StrictFood** (noir + logo dore) porte les DEUX couleurs — c'est l'accessoire ideal
+1. **Regard candid** : pas de regard camera direct -- regard de cote, vers le bas, vers le produit. Expression naturelle, pas posee.
+2. **Pain noir** : si un burger est visible, TOUJOURS black sesame bun
+3. **Aucun logo sur les vetements** sauf StrictFood
+4. **Produit StrictFood** : le personnage tient un **sac kraft noir avec logo STRICT FOOD'S** OU un **burger wrapper noir avec logo**
 
-2. **Produit StrictFood** : le personnage tient un **sac kraft noir avec logo STRICT FOOD'S** OU un **burger wrapper noir avec logo**
-3. **Regard candid** : pas de regard camera direct -- regard de cote, vers le bas, vers le produit. Expression naturelle, pas posee.
-4. **Pain noir** : si un burger est visible, TOUJOURS black sesame bun
-5. **Aucun logo sur les vetements** sauf StrictFood
+## L3b -- Art Direction (OBLIGATOIRE — invention creative)
 
-## L3b -- Realism Audit PRE-PROMPT (OBLIGATOIRE)
+**APPELER LE SKILL** : `social-media-art-director`
+- **Input** : brief lifestyle + photo Pinterest analysee + concept visuel du brief + intention emotionnelle + fond assigne
+- **Mandat** : le skill ne se contente PAS d'adapter la photo Pinterest — il INVENTE une mise en scene unique qui respecte la reference mais l'enrichit. Il decide :
+  - **Signature Charbon × Ambre** : quels vetements/accessoires portent les 15-20% de chaque couleur ? Quel article precis (pas "un vetement sombre" — "une veste bomber noire mate, zip cuivre visible") ?
+  - **L'accessoire ambre** : quel objet dore/cuivre specifique ? Ou est-il place ? Comment capte-t-il la lumiere ?
+  - **La scene** : quel detail narratif rend cette story unique ? (ex: un sac kraft pose sur un muret, une main qui sort un burger du sac, des miettes sur le jean)
+  - **L'eclairage** : quelle lumiere precise, quelle direction, quel mood ? (pas juste "golden hour" — "soleil rasant 15 degres depuis la gauche, ombre longue du personnage sur le trottoir")
+  - **Le cadrage** : quel fragment du personnage est visible ? Quelle proportion produit vs humain ?
+- **Output** : `art-direction.md` dans le dossier production de la story
+
+> L'art-director INVENTE. Il ne se contente pas de mapper les contraintes — il cree un visuel que le catalogue de combinaisons n'aurait pas propose. C'est ici que la creativite entre dans le pipeline.
+
+## L3c -- Realism Audit PRE-PROMPT (OBLIGATOIRE)
 
 1. **APPELER LE SKILL** : `realism-auditor` en mode PRE-PROMPT
-   - Contexte : concept lifestyle + produit StrictFood (si visible) + recette
+   - Contexte : art-direction lifestyle + produit StrictFood (si visible) + recette
    - Output : fiche de contraintes realisme
-   - Verifie : pain noir, chaleur pulsee, proportions produit, materiaux, regard candid
+   - Verifie : pain noir, chaleur pulsee, proportions produit, materiaux, regard candid, signature charbon×ambre
 
-> **BLOQUANT** : ne PAS passer a L4 sans cette etape. L'audit lifestyle verifie que le produit decrit (sac kraft, burger, wrapper) respecte les contraintes physiques et visuelles.
+> **BLOQUANT** : ne PAS passer a L4 sans cette etape.
 
 ## L4 -- Prompt Engineering (style Combo-B)
 
 1. **APPELER LE SKILL** : `image-prompt-engineer` (Mode A ou B, style Combo-B)
-   - Contexte : description adaptee (personnage, tenue, posture, decor, piece ambre, produit StrictFood) + **contraintes realisme (L3b)**
+   - Contexte : **art-direction.md** (PAS la photo Pinterest brute) + contraintes realisme (L3c)
    - Format : 9:16 (1080x1920)
    - Output : prompt.md
 
 2. **APPELER LE SKILL** : `realism-auditor` en mode POST-PROMPT
    - Contexte : prompt redige
    - Output : prompt audite et corrige
-   - Verifie les 8 domaines : mains, fluides, eclairage, perspective, construction, materiaux, proportions, variete
+   - Verifie les 10 domaines
 
 ## L5 -- Generation image
 
 ```bash
 uv run production/.claude/skills/nano-banana-pro/scripts/generate_image.py \
   --prompt "[prompt]" --filename "[date]-lifestyle-story.png" \
-  --resolution 4K --api-key "$GEMINI_API_KEY"
+  --resolution 2K --api-key "$GEMINI_API_KEY"
 ```
 
 ## L6 -- Logo insertion (si necessaire)

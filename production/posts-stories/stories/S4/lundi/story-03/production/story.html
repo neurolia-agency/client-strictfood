@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080">
+  <title>Story — Le Feuillete Data</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/Users/dorian.gz/dev/Neurolia Agency/client-strictfood/production/posts-stories/stories/_templates/_base/base.css">
+  <style>
+    /* ===== LE FEUILLETE DATA — Typographie pure sur fond charbon mesh ===== */
+
+    body {
+      background: #1a1714;
+      color: #fff;
+    }
+
+    /* Mesh gradient charbon */
+    .mesh {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    /* Mood mesh variants */
+    body.mood-cuivre .mesh {
+      background:
+        radial-gradient(ellipse 80% 50% at 15% 10%, rgba(250,186,67,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 70% at 85% 75%, rgba(160,64,53,0.05) 0%, transparent 55%),
+        radial-gradient(ellipse 90% 90% at 50% 50%, #1a1108 0%, #1a1714 100%);
+    }
+    body.mood-grenat .mesh {
+      background:
+        radial-gradient(ellipse 80% 50% at 15% 10%, rgba(160,64,53,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 70% at 85% 75%, rgba(250,186,67,0.05) 0%, transparent 55%),
+        radial-gradient(ellipse 90% 90% at 50% 50%, #1a1210 0%, #1a1714 100%);
+    }
+    body.mood-feuille .mesh {
+      background:
+        radial-gradient(ellipse 80% 50% at 15% 10%, rgba(107,138,94,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 70% at 85% 75%, rgba(107,138,94,0.05) 0%, transparent 55%),
+        radial-gradient(ellipse 90% 90% at 50% 50%, #121413 0%, #1a1714 100%);
+    }
+
+    /* Default mesh (mood-cuivre if no class) */
+    .mesh {
+      background:
+        radial-gradient(ellipse 80% 50% at 15% 10%, rgba(250,186,67,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 70% at 85% 75%, rgba(160,64,53,0.05) 0%, transparent 55%),
+        radial-gradient(ellipse 90% 90% at 50% 50%, #1a1108 0%, #1a1714 100%);
+    }
+
+    /* Arc dome en haut (fil rouge story feuillete) */
+    .dome-top {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      z-index: 5;
+    }
+    .dome-top svg { width: 100%; height: 90px; }
+
+    /* Contenu centre */
+    .content {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      padding: 250px 80px 200px;
+    }
+
+    .big-number {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 280px;
+      line-height: 0.85;
+      color: #FABA43;
+      letter-spacing: -8px;
+    }
+
+    /* Mood big-number color */
+    body.mood-grenat .big-number { color: #A04035; }
+    body.mood-feuille .big-number { color: #6B8A5E; }
+
+    .unit {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 500;
+      font-size: 72px;
+      color: rgba(255,255,255,0.90);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin-top: -10px;
+    }
+
+    .divider {
+      width: 120px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #FABA43, transparent);
+      margin: 10px 0;
+    }
+
+    /* Mood divider color */
+    body.mood-grenat .divider { background: linear-gradient(90deg, transparent, #A04035, transparent); }
+    body.mood-feuille .divider { background: linear-gradient(90deg, transparent, #6B8A5E, transparent); }
+
+    .data-line-1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 32px;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .data-line-2 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 30px;
+      color: rgba(255,255,255,0.60);
+      margin-top: 10px;
+    }
+
+    /* Bottom */
+    .story-bottom {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 10;
+      text-align: center;
+      padding: 30px 70px 80px;
+    }
+    .tagline {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 36px;
+      color: #fff;
+      line-height: 1.3;
+    }
+    .tagline em { color: #FABA43; font-style: italic; }
+
+    /* Mood tagline em color */
+    body.mood-grenat .tagline em { color: #A04035; }
+    body.mood-feuille .tagline em { color: #6B8A5E; }
+
+    .logo-container { margin-top: 14px; }
+    .logo-container img { width: 160px; height: auto; opacity: 0.80; }
+
+    /* Grain */
+    body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 100;
+      pointer-events: none;
+      opacity: var(--grain-opacity, 0);
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px;
+    }
+    body.grain-subtle { --grain-opacity: 0.025; }
+    body.grain-medium { --grain-opacity: 0.04; }
+  </style>
+</head>
+<body class="mood-cuivre grain-subtle">
+
+  <div class="mesh"></div>
+
+  <!-- Arc dome en haut -->
+  <div class="dome-top">
+    <svg viewBox="0 0 1080 90" preserveAspectRatio="none">
+      <path d="M 0,0 L 1080,0 L 1080,40 Q 540,90 0,40 Z" fill="#FABA43" opacity="0.85"/>
+    </svg>
+  </div>
+
+  <div class="content">
+    <div class="big-number">112G</div>
+    <div class="unit">PROTEINES</div>
+    <div class="divider"></div>
+    <div class="data-line-1">STRICT MAX POULET</div>
+    <div class="data-line-2" style="display:block">1120 kcal — zero compromis</div>
+  </div>
+
+  <div class="story-bottom">
+    <div class="tagline">Le cheat meal <em>qui n'en est pas un</em></div>
+    <div class="logo-container">
+      <img src="/Users/dorian.gz/dev/Neurolia Agency/client-strictfood/production/posts-stories/stories/_templates/_base/logo.svg" alt="STRICT FOOD'S">
+    </div>
+  </div>
+
+</body>
+</html>

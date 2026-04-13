@@ -60,7 +60,7 @@
 
 ### Couleurs & Mood
 
-- **Palette dominante** : Charbon profond (#141210) en périphérie, Cuivre Braisé (#BF8522) concentré dans le rim light et les reflets du bun, Brun bois carbonisé pour la surface.
+- **Palette dominante** : Charbon profond (#141210) en périphérie, Cuivre Braisé (#FABA43) concentré dans le rim light et les reflets du bun, Brun bois carbonisé pour la surface.
 - **Accent** : Le jaune-orangé de la sauce poivron qui trace un arc doré sur la planche — écho lumineux du rim light arrière. Le vert tendre de la mâche rétroéclairée, presque translucide, qui respire la fraîcheur.
 - **Ambiance** : **Intime et organique.** On n'est plus dans le monument souverain de la v1 — ici c'est le moment juste avant la première bouchée. Le burger est vivant, imparfait, irrésistible. On sent la chaleur, la texture du bois, l'odeur de la viande braisée. C'est tactile.
 - **Référence DA** : Background Charbon en dégradé (plus clair près de la source lumineuse arrière). Rim light Cuivre Braisé. Ombres teintées Grenat Fumé (#7C3530). Surface bois brûlé = extension du vocabulaire Charbon dans le registre organique.

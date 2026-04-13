@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080">
+  <title>Post Base Ambre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 1080px; height: 1350px; overflow: hidden; position: relative;
+      font-family: 'DM Sans', sans-serif; color: #fff;
+      background:
+        radial-gradient(circle 400px at 50% 30%, rgba(240,208,96,0.40) 0%, transparent 55%),
+        radial-gradient(circle 300px at 85% 70%, rgba(237,190,68,0.30) 0%, transparent 50%),
+        radial-gradient(circle 350px at 10% 60%, rgba(229,165,32,0.25) 0%, transparent 50%),
+        linear-gradient(165deg, #B8841E 0%, #9A6B18 25%, #7A5412 55%, #5A3F0E 85%, #4D3509 100%);
+    }
+
+    /* Grain */
+    body::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 100; pointer-events: none; opacity: 0.025; mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      background-repeat: repeat; background-size: 256px 256px;
+    }
+
+    /* ===== STRUCTURAL ELEMENT: Garniture band (wavy lines as horizontal separator) ===== */
+    .garniture-band {
+      position: absolute;
+      top: 580px; left: -50px;
+      width: 1200px; height: 80px;
+      z-index: 3; pointer-events: none;
+      transform: rotate(-5deg);
+      opacity: 0.18;
+    }
+
+    .garniture-band-2 {
+      position: absolute;
+      top: 1050px; left: -30px;
+      width: 1150px; height: 60px;
+      z-index: 3; pointer-events: none;
+      transform: rotate(-5deg);
+      opacity: 0.12;
+    }
+
+    /* ===== STRUCTURAL ELEMENT: Dome arc as photo clip/frame ===== */
+    .dome-structure {
+      position: absolute;
+      top: 85px; left: 50%;
+      transform: translateX(-50%);
+      width: 700px; height: 120px;
+      z-index: 6; pointer-events: none;
+    }
+
+    .dome-structure-bottom {
+      position: absolute;
+      top: 780px; left: 50%;
+      transform: translateX(-50%) rotate(180deg);
+      width: 700px; height: 100px;
+      z-index: 6; pointer-events: none;
+    }
+
+    /* ===== STRUCTURAL ELEMENT: Sesame texture zone ===== */
+    .sesame-zone {
+      position: absolute;
+      top: 0; right: 0;
+      width: 300px; height: 1350px;
+      z-index: 2; pointer-events: none;
+      overflow: hidden;
+    }
+    .sesame-zone .seed {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(20,18,16,0.10);
+    }
+
+    /* ===== PHOTO ZONE — clipped within dome boundaries ===== */
+    .photo-zone {
+      position: absolute;
+      top: 130px; left: 50%;
+      transform: translateX(-50%) rotate(-3deg);
+      width: 680px; height: 845px;
+      z-index: 10;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow:
+        0 15px 50px rgba(0,0,0,0.35),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+    .photo-zone img {
+      width: 100%; height: 100%;
+      object-fit: contain; object-position: center center;
+    }
+    .photo-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      background: radial-gradient(circle at 50% 40%, rgba(250,186,67,0.10) 0%, transparent 60%), #141210;
+    }
+    .photo-placeholder span {
+      font-family: 'Oswald', sans-serif; font-size: 28px;
+      color: rgba(255,255,255,0.10); text-transform: uppercase; letter-spacing: 4px;
+    }
+
+    /* ===== KEYWORDS — stacked, bold, tronques par les bords ===== */
+    .kw-stack {
+      position: absolute; z-index: 4; pointer-events: none; user-select: none;
+      font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase;
+      line-height: 0.85;
+    }
+    /* Left column — empile, tronque par le bord gauche */
+    .kw-left {
+      left: -40px; top: 860px;
+      font-size: 120px; letter-spacing: -3px;
+      color: rgba(20,18,16,0.12);
+      transform: rotate(-5deg);
+    }
+    .kw-left-2 {
+      left: -20px; top: 970px;
+      font-size: 80px; letter-spacing: -1px;
+      color: rgba(255,255,255,0.10);
+      transform: rotate(-5deg);
+    }
+    /* Right — tronque par le bord droit */
+    .kw-right {
+      right: -60px; top: 180px;
+      font-size: 140px; letter-spacing: -4px;
+      color: rgba(20,18,16,0.08);
+      transform: rotate(-5deg);
+    }
+    /* Small scattered */
+    .kw-sm {
+      font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px;
+      letter-spacing: 5px; text-transform: uppercase;
+      position: absolute; z-index: 4; pointer-events: none; user-select: none;
+    }
+    .kw-sm-1 { top: 130px; left: 50px; color: rgba(255,255,255,0.18); transform: rotate(-5deg); }
+    .kw-sm-2 { top: 1080px; right: 60px; color: rgba(20,18,16,0.20); transform: rotate(-5deg); }
+    .kw-sm-3 { top: 830px; left: 60px; color: rgba(20,18,16,0.16); transform: rotate(-5deg); }
+
+    /* ===== TAGLINE BAND — horizontal thick ===== */
+    .tagline-band {
+      position: absolute;
+      bottom: 60px; left: -20px; right: -20px;
+      z-index: 12;
+      background: rgba(20,18,16,0.70);
+      padding: 18px 0;
+      transform: rotate(-3deg);
+    }
+    .tagline-band-inner {
+      font-family: 'Space Grotesk', sans-serif; font-weight: 700;
+      font-size: 22px; letter-spacing: 6px; text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      white-space: nowrap;
+      text-align: center;
+    }
+    .tagline-band-inner em {
+      color: #EDBE44; font-style: italic;
+    }
+
+    /* ===== BURGER ICON — structural, large ===== */
+    .brand-burger-xl {
+      position: absolute; left: -100px; top: 750px;
+      width: 450px; height: 450px;
+      opacity: 0.10; transform: rotate(-15deg);
+      z-index: 3; pointer-events: none;
+    }
+    .brand-burger-sm { position: absolute; z-index: 3; pointer-events: none; }
+    .bsm-1 { top: 50px; right: 40px; width: 55px; height: 55px; transform: rotate(20deg); opacity: 0.14; }
+    .bsm-2 { top: 1100px; left: 350px; width: 40px; height: 40px; transform: rotate(-25deg); opacity: 0.10; }
+
+    /* ===== LOGO TEXT — empile verticalement ===== */
+    .logo-text {
+      position: absolute; z-index: 4; pointer-events: none; user-select: none;
+      font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase;
+    }
+    .logo-vertical {
+      right: 25px; top: 850px;
+      font-size: 90px; letter-spacing: 6px;
+      color: rgba(20,18,16,0.06);
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+    }
+    .logo-sm {
+      left: 55px; top: 95px;
+      font-size: 18px; letter-spacing: 8px;
+      color: rgba(255,255,255,0.22);
+    }
+
+    /* ===== EMBERS ===== */
+    .ember { position: absolute; border-radius: 50%; z-index: 5; }
+    .em-1 { top: 300px; left: 35px; width: 5px; height: 5px; background: #EDBE44; box-shadow: 0 0 10px 4px rgba(237,190,68,0.50); }
+    .em-2 { top: 900px; right: 80px; width: 6px; height: 6px; background: #EDBE44; box-shadow: 0 0 12px 4px rgba(237,190,68,0.45); }
+    .em-3 { top: 1200px; left: 200px; width: 4px; height: 4px; background: rgba(255,255,255,0.30); box-shadow: 0 0 8px 3px rgba(255,255,255,0.12); }
+
+    /* ===== ACCENT LINES — horizontal, structural ===== */
+    .h-line {
+      position: absolute; z-index: 3; pointer-events: none;
+      height: 2px; border-radius: 1px;
+      transform: rotate(-5deg);
+    }
+    .hl-1 { top: 120px; left: 0; width: 250px; background: linear-gradient(90deg, rgba(20,18,16,0.25), transparent); }
+    .hl-2 { top: 820px; right: 0; width: 300px; background: linear-gradient(270deg, rgba(20,18,16,0.20), transparent); }
+    .hl-3 { top: 1250px; left: 100px; width: 400px; background: linear-gradient(90deg, transparent, rgba(20,18,16,0.15), transparent); }
+  </style>
+</head>
+<body>
+
+  <!-- STRUCTURAL: Garniture bands (wavy burger lines as separator) -->
+  <svg class="garniture-band" viewBox="280 22 75 18" fill="#141210"><path d="M328.32,35.59c-17.57,3.75-2-2.84,15.01-3.21,8.42-.18,6.69-3.05-2.32-2.69-47.3,1.94.58-3.37,9.16-4.11,1.12-.1,2.05-2.69-1.21-2.84,0,0-29.98-.18-45.5,8-17.38,9.16,19.68.42,21.33,1.58,0,0-13.48,2.74-20.26,6.71-5.93,3.47,30.72-3.81,49.17-2.81,9,.49-3.71-5.25-25.38-.63Z"/></svg>
+  <svg class="garniture-band-2" viewBox="280 22 75 18" fill="#141210"><path d="M328.32,35.59c-17.57,3.75-2-2.84,15.01-3.21,8.42-.18,6.69-3.05-2.32-2.69-47.3,1.94.58-3.37,9.16-4.11,1.12-.1,2.05-2.69-1.21-2.84,0,0-29.98-.18-45.5,8-17.38,9.16,19.68.42,21.33,1.58,0,0-13.48,2.74-20.26,6.71-5.93,3.47,30.72-3.81,49.17-2.81,9,.49-3.71-5.25-25.38-.63Z"/></svg>
+
+  <!-- STRUCTURAL: Dome arcs (top + bottom) -->
+  <svg class="dome-structure" viewBox="0 0 700 120" fill="none"><path d="M0 120 Q0 0 350 0 Q700 0 700 120" stroke="#141210" stroke-width="4" fill="none" opacity="0.25"/></svg>
+  <svg class="dome-structure-bottom" viewBox="0 0 700 100" fill="none"><path d="M0 100 Q0 0 350 0 Q700 0 700 100" stroke="#141210" stroke-width="3" fill="none" opacity="0.18"/></svg>
+
+  <!-- STRUCTURAL: Sesame texture zone (right strip) -->
+  <div class="sesame-zone">
+    <div class="seed" style="top:80px;left:20px;width:5px;height:10px;transform:rotate(25deg)"></div>
+    <div class="seed" style="top:180px;left:80px;width:4px;height:9px;transform:rotate(-35deg)"></div>
+    <div class="seed" style="top:300px;left:40px;width:6px;height:11px;transform:rotate(50deg)"></div>
+    <div class="seed" style="top:420px;left:120px;width:5px;height:10px;transform:rotate(-20deg)"></div>
+    <div class="seed" style="top:550px;left:60px;width:4px;height:9px;transform:rotate(40deg)"></div>
+    <div class="seed" style="top:680px;left:150px;width:5px;height:10px;transform:rotate(-45deg)"></div>
+    <div class="seed" style="top:800px;left:30px;width:6px;height:11px;transform:rotate(30deg)"></div>
+    <div class="seed" style="top:920px;left:100px;width:4px;height:8px;transform:rotate(-15deg)"></div>
+    <div class="seed" style="top:1050px;left:70px;width:5px;height:10px;transform:rotate(55deg)"></div>
+    <div class="seed" style="top:1180px;left:140px;width:5px;height:11px;transform:rotate(-40deg)"></div>
+    <div class="seed" style="top:1280px;left:50px;width:4px;height:9px;transform:rotate(20deg)"></div>
+  </div>
+
+  <!-- KEYWORDS — empiles, tronques, bold -->
+  <div class="kw-stack kw-left">PROTÉINES</div>
+  <div class="kw-stack kw-left-2">SANS HUILE</div>
+  <div class="kw-stack kw-right">STRICT</div>
+  <div class="kw-sm kw-sm-1">AIR FRYER</div>
+  <div class="kw-sm kw-sm-2">PAIN NOIR</div>
+  <div class="kw-sm kw-sm-3">HEALTHY</div>
+
+  <!-- LOGO TEXT -->
+  <div class="logo-text logo-vertical">STRICT FOOD'S</div>
+  <div class="logo-text logo-sm">STRICT FOOD'S</div>
+
+  <!-- ACCENT LINES -->
+  <div class="h-line hl-1"></div>
+  <div class="h-line hl-2"></div>
+  <div class="h-line hl-3"></div>
+
+  <!-- BURGER ICONS -->
+  <svg class="brand-burger-xl" viewBox="295 -2 62 57" fill="#141210"><path d="M301.14,27.2s23.15-7.06,48.17-6.88c9.57.07-2.47-22.65-27.13-20.12-.26.03-.53.07-.79.12-22.86,4.79-23.62,19.86-23.62,19.86,0,0-2.25,8.21,3.37,7.02Z"/><path d="M328.32,35.59c-17.57,3.75-2-2.84,15.01-3.21,8.42-.18,6.69-3.05-2.32-2.69-47.3,1.94.58-3.37,9.16-4.11,1.12-.1,2.05-2.69-1.21-2.84,0,0-29.98-.18-45.5,8-17.38,9.16,19.68.42,21.33,1.58,0,0-13.48,2.74-20.26,6.71-5.93,3.47,30.72-3.81,49.17-2.81,9,.49-3.71-5.25-25.38-.63Z"/><path d="M301.55,49.28c5.53,3.9,42.86,7.27,51.08-6.11,4.37-10.48-60.87-1.63-51.08,6.11Z"/></svg>
+  <svg class="brand-burger-sm bsm-1" viewBox="295 -2 62 57" fill="#141210"><path d="M301.14,27.2s23.15-7.06,48.17-6.88c9.57.07-2.47-22.65-27.13-20.12-.26.03-.53.07-.79.12-22.86,4.79-23.62,19.86-23.62,19.86,0,0-2.25,8.21,3.37,7.02Z"/><path d="M328.32,35.59c-17.57,3.75-2-2.84,15.01-3.21,8.42-.18,6.69-3.05-2.32-2.69-47.3,1.94.58-3.37,9.16-4.11,1.12-.1,2.05-2.69-1.21-2.84,0,0-29.98-.18-45.5,8-17.38,9.16,19.68.42,21.33,1.58,0,0-13.48,2.74-20.26,6.71-5.93,3.47,30.72-3.81,49.17-2.81,9,.49-3.71-5.25-25.38-.63Z"/><path d="M301.55,49.28c5.53,3.9,42.86,7.27,51.08-6.11,4.37-10.48-60.87-1.63-51.08,6.11Z"/></svg>
+  <svg class="brand-burger-sm bsm-2" viewBox="295 -2 62 57" fill="#141210"><path d="M301.14,27.2s23.15-7.06,48.17-6.88c9.57.07-2.47-22.65-27.13-20.12-.26.03-.53.07-.79.12-22.86,4.79-23.62,19.86-23.62,19.86,0,0-2.25,8.21,3.37,7.02Z"/><path d="M328.32,35.59c-17.57,3.75-2-2.84,15.01-3.21,8.42-.18,6.69-3.05-2.32-2.69-47.3,1.94.58-3.37,9.16-4.11,1.12-.1,2.05-2.69-1.21-2.84,0,0-29.98-.18-45.5,8-17.38,9.16,19.68.42,21.33,1.58,0,0-13.48,2.74-20.26,6.71-5.93,3.47,30.72-3.81,49.17-2.81,9,.49-3.71-5.25-25.38-.63Z"/><path d="M301.55,49.28c5.53,3.9,42.86,7.27,51.08-6.11,4.37-10.48-60.87-1.63-51.08,6.11Z"/></svg>
+
+  <!-- EMBERS -->
+  <div class="ember em-1"></div>
+  <div class="ember em-2"></div>
+  <div class="ember em-3"></div>
+
+  <!-- PHOTO -->
+  <div class="photo-zone">
+    <img src="/Users/dorian.gz/dev/Neurolia Agency/client-strictfood/production/posts-stories/posts/periode-2/S5/10-04-2026/brouillons/10-04-2026-strict-poulet-macro-masque-4x5.png" alt="">
+  </div>
+
+  <!-- TAGLINE BAND (horizontal thick, angled) -->
+  <div class="tagline-band">
+    <div class="tagline-band-inner">Le cheat meal <em>qui n'en est pas un</em> &ensp;&bull;&ensp; Le cheat meal <em>qui n'en est pas un</em> &ensp;&bull;&ensp; Le cheat meal <em>qui n'en est pas un</em></div>
+  </div>
+
+</body>
+</html>

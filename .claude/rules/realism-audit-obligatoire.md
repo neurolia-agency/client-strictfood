@@ -23,17 +23,18 @@ PAS : écrire → vérifier → corriger.
 
 | Situation | S'applique ? |
 |-----------|:------------------:|
-| `/instagram-producer` ou `/story-producer` (pipeline) | **OUI** — intégré dans le flux |
-| Écriture/modification de prompts dans `prompts-variantes-combo-*.md` | **OUI** |
-| Demande directe "génère un prompt pour concept-X produit-Y" | **OUI** |
-| Demande directe "régénère le prompt de concept-croque pour le Strict Max Boeuf" | **OUI** |
-| Demande directe "sublime cette photo" (irl-sublimation) | **OUI** |
-| Demande directe "compose ces 2 photos" (compositing) | **OUI** |
-| Demande directe "ajoute des sujets dans cette scène" (scene-ia) | **OUI** |
+| `/instagram-producer` ou `/story-producer` (pipeline) | **OUI** — integre dans le flux |
+| Mode `full-ia` (produit + scene generes par IA) | **OUI** |
+| Mode `edit-ia` (photo lieu + produit decrit dans le prompt) | **OUI** |
+| Ecriture/modification de prompts dans `prompts-variantes-combo-*.md` | **OUI** |
+| Demande directe "genere un prompt pour concept-X produit-Y" | **OUI** |
+| Demande directe "regenere le prompt de concept-croque pour le Strict Max Boeuf" | **OUI** |
 | Utilisation directe de `/nano-banana-pro` ou `generate_image.py` | **OUI** |
-| Écriture d'un brief (pas un prompt image) | NON |
-| Écriture d'une caption | NON |
-| Remplissage de template HTML (mode template, pas d'IA) | NON |
+| `/freestyle` avec mode IA (full-ia, edit-ia) | **OUI** |
+| Mode `template` (pas d'IA, remplissage HTML) | NON |
+| Mode `irl` (photo fraiche, pas d'IA) | NON |
+| Ecriture d'un brief (pas un prompt image) | NON |
+| Ecriture d'une caption | NON |
 
 ## Le process en 4 étapes
 

@@ -183,7 +183,7 @@ Reel 2 (S8-31) — Recette complete dynamique :
 
 **Direction creative :**
 
-Identique aux blocs precedents : fond Charbon (#141210), typo Oswald pour les chiffres forts, Space Grotesk pour les labels, accents Cuivre Braise (#BF8522) et Feuille Grillee (#5C7858).
+Identique aux blocs precedents : fond Charbon (#141210), typo Oswald pour les chiffres forts, Space Grotesk pour les labels, accents Cuivre Braise (#FABA43) et Feuille Grillee (#5C7858).
 
 **Nouveaute S7-S8 :** Un badge ou titre recurrent "MERCREDI MACROS" visible en haut de chaque slide cover (meme position, meme typo, meme couleur). Ca installe visuellement la serie et la rend identifiable dans le feed.
 

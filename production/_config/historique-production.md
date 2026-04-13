@@ -1,262 +1,215 @@
 # Historique Production Instagram — StrictFood
 
-> **Ce fichier EXISTE TOUJOURS** a `production/_config/historique-production.md`.
-> Ne JAMAIS supposer qu'il n'existe pas. Il est REECRIT (pas cree) par scan des dossiers.
->
 > **Ce fichier est REECRIT automatiquement** par scan des dossiers de production.
 > Il reflete exactement ce qui existe sur le disque. Rien de plus, rien de moins.
 >
-> **Source de verite** : les fichiers dans `posts-stories/posts/` et `posts-stories/stories/`.
-> - Un post **existe** = son dossier contient un PNG dans `final/` ou `03-output/`
-> - Une story **existe** = son dossier contient un PNG dans `story-NN/final/`
-> - Les PNG dans `brouillons/` ne sont PAS comptabilises (brouillon ≠ contenu termine)
+> **Source de verite** : les fichiers dans `posts-stories/posts/`, `posts-stories/stories/`, et `a-publier/`.
+> - Un post **existe** = son dossier contient un PNG dans `final/`, `03-output/` (legacy S1), ou `a-publier/posts/`
+> - Les PNG dans `brouillons/` ne sont PAS comptabilises
 > - Un fichier supprime = supprime de l'historique au prochain scan
->
-> **Quand reecrire** :
-> - Avant chaque planning (obligatoire)
-> - Apres chaque suppression de fichier
-> - Commande : `Regenere l'historique de production`
-> - **Comment** : LIRE ce fichier d'abord, puis scanner les dossiers, puis REECRIRE
 >
 > **NE JAMAIS modifier ce fichier a la main.** Il sera ecrase au prochain scan.
 
 ---
 
-> **Dernier scan** : 2026-03-20
+> **Dernier scan** : 2026-04-09
 
 ## Posts produits (planning)
 
-> Scanne depuis `posts-stories/posts/*/S*/DD-MM-YYYY/`
-> Un post est comptabilise si `03-output/` ou `final/` contient au moins un PNG.
+> Scanne depuis `posts-stories/posts/*/S*/DD-MM-YYYY/` + `a-publier/posts/`
+> Un post est comptabilise si `03-output/` (legacy), `final/`, ou `a-publier/posts/` contient au moins un PNG.
 
-| Semaine | Date | Pilier | Mode | Produit | Angle / Sujet |
-|---------|------|--------|------|---------|---------------|
-| S1 | 10-03-2026 | Le Plat | full-ia | STRICT Boeuf | Hero shot Dark Food Premium — premier post reboot (2 PNG) |
-| S1 | 12-03-2026 | La Cuisine | full-ia | STRICT Boeuf | Carrousel "Du boucher a l'assiette" — process artisanal (5 PNG, slides 3-5) |
-| S2 | 17-03-2026 | Le Plat | compositing-ia | STRICT Poulet | Levitation cinematique sur fond charbon (1 PNG) |
-| S2 | 19-03-2026 | Les Macros | template | STRICT Boeuf | Carrousel comparaison nutritionnelle vs fast-food (9 PNG, 6 slides) |
+| Semaine | Date | Pilier | Mode | Traitement | Produit | Angle / Sujet | Renders | Emplacement |
+|---------|------|--------|------|------------|---------|---------------|---------|-------------|
+| S1 | 10-03-2026 | Le Produit | full-ia | photo-pure | STRICT Boeuf | Hero shot Dark Food Premium — premier post reboot | 2 PNG | 03-output/ |
+| S1 | 12-03-2026 | La Marque | full-ia | carousel | STRICT Boeuf | Carrousel "Du boucher a l'assiette" — process artisanal | 5 PNG | 03-output/ |
+| S2 | 17-03-2026 | Le Produit | full-ia | photo-pure | STRICT Poulet | Levitation cinematique sur fond charbon | 1 PNG | final/ |
+| S2 | 19-03-2026 | Les Benefices | template | carousel | STRICT Boeuf | Carrousel comparaison nutritionnelle vs fast-food | 9 PNG | final/ |
+| S4 | 01-04-2026 | Le Produit | full-ia | masque-inverse | STRICT Vege Falafel | Falafel vue frontale, texte ambre "FALAFEL" | 2 PNG | a-publier/posts/ |
 
-> Posts planifies mais NON produits (pas de PNG en final/) :
-> - S1 : 14-03-2026 (Tiramisu), 16-03-2026 (Fondateurs)
-> - S2 : 21-03-2026 (Boucherie Labourde, irl-sublimation — brief pret), 23-03-2026 (Wrap Poulet, compositing-ia — brief pret)
+> Posts planifies avec brief mais NON finalises (PNG en brouillons seulement ou aucun PNG) :
+> - S2/23-03 : STRICT Wrap Poulet (brief v2, 0 PNG)
+> - S3/25-03 : Tenders STRICT — macro texture (brief, 0 PNG)
+> - S3/27-03 : STRICT MAX Poulet — knockout-band (brief, 0 PNG)
+> - S3/29-03 : Panoramique table complete (brief, 18 PNG brouillons — non finalise)
+> - S3/30-03 : Educatif "cheat meal mythe" (brief, 9 PNG brouillons — non finalise)
+> - S4/03-04 : STRICT MAX Boeuf — texture-fill (brief, 0 PNG)
+> - S4/05-04 : Zoom Progressif Wrap Poulet (brief, 10 PNG brouillons — non finalise)
+> - S4/06-04 : Ingredient Spotlight Myfitcheese (brief, 0 PNG)
 
 ## Posts produits (hors-planning)
 
 > Scanne depuis `posts-stories/posts/hors-planning/DD-MM-YYYY/`
-> Meme critere : contient au moins un PNG.
 
 | Date | Pilier | Mode | Produit | Angle / Sujet |
 |------|--------|------|---------|---------------|
-| 16-03-2026 | — | — | — | Gym vs Burger split (1 PNG, sans brief structure) |
+| — | — | — | — | Aucun post hors-planning avec PNG valide |
 
-> Hors-planning 18-03-2026 (Romain devanture, compositing-irl) : 2 PNG en brouillons/ uniquement — NON comptabilise.
+> 04-04-2026 : Falafel assemblage — 1 PNG brouillon uniquement (non finalise)
 
 ## Stories produites (planning)
 
-> Scanne depuis `posts-stories/stories/S*/[jour]/`
-> S1 utilise une structure legacy (PNGs directement dans le dossier jour, pas dans story-NN/final/).
+> **Note nettoyage v5 (30-03-2026)** : tous les PNG stories S1-S3 (final/ et brouillons/) ont ete supprimes.
+> L'historique ci-dessous conserve la trace textuelle de ce qui a ete produit.
 
 ### S1
 
 | Jour | # | Type | Mode | Produit / Sujet |
 |------|---|------|------|-----------------|
 | mercredi | 02 | Interactif | template | "Boeuf ou Poulet?" |
-| mercredi | 03 | — | template | (2 variantes option A2/B2) |
+| mercredi | 03 | — | template | (variantes option A2/B2) |
 | mercredi | 04 | — | template | — |
 | jeudi | 01 | Focus Ingredient | template | Myfitcheese — parmesan proteine |
 | jeudi | 03 | — | template | — |
 | jeudi | 04 | Annonce | template | — |
 | vendredi | 01 | Fiche Produit | template | STRICT Poulet |
-| vendredi | 01-v2 | Fiche Produit | template | STRICT Poulet (variante) |
 | vendredi | 02 | Interactif | template | "Cookie ou Tiramisu?" |
 | samedi | 02 | Fiche Produit | template | STRICT Wrap Boeuf |
 | dimanche | 02 | Focus Ingredient | template | Pain noir — Pains du Soleil |
-
-> **Note** : lundi S1 — brief existant mais aucun PNG produit.
 
 ### S2
 
 | Jour | # | Type | Mode | Produit / Sujet |
 |------|---|------|------|-----------------|
-| lundi | 01 | Educatif | template | "53g de proteines" — STRICT Poulet vs shaker whey |
+| lundi | 01 | Educatif | template | "53g de proteines" — Poulet vs shaker whey |
 | mardi | 01 | Fiche Produit | template | STRICT Vege Falafel |
 | mardi | 02 | Focus Ingredient | template | Viande Boucherie Labourde |
-| mardi | 03 | Produit en situation | compositing-irl | Falafel sur comptoir salle |
+| mardi | 03 | Produit en situation | full-ia | Falafel sur comptoir salle |
 | mercredi | 03 | IRL | irl | Rush du midi |
+| jeudi | 01 | Fiche Produit | template | STRICT MAX Boeuf |
+| jeudi | 02 | Produit DA | full-ia | STRICT MAX Boeuf ouvert sublime |
 
-> Stories S2 en brouillons/ (NON comptabilisees) :
-> - lundi story-02 (IRL coulisses), jeudi story-01 (Fiche MAX Boeuf), jeudi story-02 (MAX Boeuf sublimation)
-> Stories S2 non demarrees : lundi story-03, mercredi story-01/02, vendredi-dimanche (aucun dossier cree)
+### S3
+
+| Jour | # | Type | Mode | Produit / Sujet |
+|------|---|------|------|-----------------|
+| lundi | 01 | Visuel IA | full-ia | Sauce STRICT Boeuf — macro extreme |
+| lundi | 02 | Produit DA | full-ia | STRICT Poulet macro texture coupe |
+| lundi | 03 | Visuel IA | full-ia | Tenders goutte suspendue |
+| mardi | 01 | Educatif | template | "7 ingredients naturels" vs 60+ additifs |
+| mardi | 02 | Produit DA | full-ia | STRICT Boeuf macro-croustillant |
+| mardi | 03 | Produit DA | full-ia | Parmesan Myfitcheese macro |
+| mercredi | 02 | IRL Archive | template | Remise du sac au comptoir |
+| vendredi | 01 | IRL Archive | template | Comptoir et vitrine |
+| vendredi | 02 | IRL Archive | template | Ambiance salle |
+| vendredi | 03 | Produit DA | full-ia | STRICT Vege Falafel wet-look |
+
+### S4
+
+| Jour | # | Type | Mode | Concept | Produit / Sujet |
+|------|---|------|------|---------|-----------------|
+| lundi | 1 | Food | full-ia | action-main | STRICT MAX Poulet — main gantee |
+| lundi | 2 | Lifestyle | full-ia | lifestyle-escalier | STRICT Wrap Poulet — sac kraft |
+| lundi | 3 | Food | full-ia | atmo-clair-obscur | STRICT Boeuf — clair-obscur |
+| mardi | 1 | Food | full-ia | persp-pov | STRICT Wrap Boeuf — POV mains |
+| mardi | 2 | Lifestyle | full-ia | lifestyle-rue | STRICT MAX Boeuf — femme rue |
+| mardi | 3 | Brand/Rappel | full-ia | brand-horaires | Rappel — CTA tel |
+| mercredi | 1 | Food | full-ia | eclate | STRICT Vege Falafel — vue explosee |
+| mercredi | 2 | Food | full-ia | action-trempe | Frites-Tenders — trempe sauce |
+| mercredi | 3 | Brand | full-ia | brand-macros | STRICT Poulet — "53G PROTEINES" |
+| jeudi | 1 | Food | full-ia | persp-rasante | STRICT MAX Poulet — rasante |
+| jeudi | 2 | Lifestyle | full-ia | lifestyle-parc | STRICT Boeuf — parc golden hour |
+| jeudi | 3 | Brand/Rappel | full-ia | brand-adresse | Rappel — CTA adresse |
+| vendredi | 1 | Food | full-ia | atmo-neon | STRICT Poulet — neon cuivre |
+| vendredi | 2 | Food | full-ia | action-ecrase | STRICT MAX Boeuf — ecrase |
+| vendredi | 3 | Brand | full-ia | brand-artisan | Boucherie Labourde |
+| samedi | 1 | Lifestyle | full-ia | lifestyle-mur-uni | STRICT Vege Falafel — mur teal |
+| samedi | 2 | Food | full-ia | flat | STRICT Wrap Boeuf — top-down |
+| samedi | 3 | Brand/Rappel | full-ia | brand-horaires | Rappel — CTA horaires |
+| dimanche | 1 | Food | full-ia | ouvert | STRICT MAX Poulet — bun souleve |
+| dimanche | 2 | Lifestyle | full-ia | lifestyle-terrasse | STRICT Boeuf — terrasse cafe |
+| dimanche | 3 | Food | full-ia | persp-tilt | STRICT Wrap Poulet — tilt |
 
 ## Stories produites (hors-planning)
 
-> Scanne depuis `posts-stories/stories/hors-planning/`
-
 | Date | # | Type | Mode | Produit / Sujet |
 |------|---|------|------|-----------------|
-<!-- Aucun PNG trouve dans hors-planning/ au format story-NN/final/ -->
+| 30-03-2026 | 1 | Sillon | full-ia | STRICT Boeuf intime — 1 PNG |
 
-> Fichiers isoles trouves (non comptabilises — pas de structure story-NN/final/) :
-> - macro-tagline.png, tenders-irl-v4.png, test-human-tight/
+## Stories en a-publier/
+
+| Fichier | Type | Note |
+|---------|------|------|
+| 05-04-2026-brand-bun-noir-paques-9x16.png | Brand | Story brand Paques |
+| 07-04-2026-rappel-presence-9x16.png | Rappel | Rappel presence |
+| 08-04-2026-avis-google-vos-retours-9x16.png | Avis | Avis Google |
+| 08-04-2026-promo-ubereats-9x16.png | Brand | Promo Uber Eats |
+| story-01-max-poulet-action-main.png | Food | MAX Poulet action main (S4 lun?) |
+| story-01-max-poulet-hero-face-v2.png | Food | MAX Poulet hero face v2 |
+| story-v4-ia.png | — | Test v4 legacy |
 
 ## Compteurs cumules
 
-> Calcules automatiquement a partir de TOUTES les tables ci-dessus (planning + hors-planning).
-
-### Produits — apparitions posts
+### Produits — apparitions posts (finalises uniquement)
 
 | Produit | Posts | Derniere apparition |
 |---------|-------|---------------------|
 | STRICT Boeuf | 3 | 19-03-2026 (S2 — comparaison macros) |
-| STRICT Poulet | 1 | 17-03-2026 (S2) |
+| STRICT Poulet | 1 | 17-03-2026 (S2 — levitation) |
+| STRICT Vege Falafel | 1 | 01-04-2026 (S4 — masque-inverse) |
 
-### Produits — apparitions stories
+> Produits briefes mais non finalises : Tenders (S3), MAX Poulet (S3), MAX Boeuf (S4), Wrap Poulet (S4), Myfitcheese (S4)
 
-| Produit | Stories | Derniere apparition |
-|---------|---------|---------------------|
-| STRICT Boeuf | 1 (interactif) | mercredi S1 |
-| STRICT Poulet | 3 (fiche + v2 + educatif) | lundi S2 |
-| STRICT Wrap Boeuf | 1 (fiche) | samedi S1 |
-| STRICT Vege Falafel | 2 (fiche + compositing) | mardi S2 |
-| Myfitcheese | 1 (focus ingredient) | jeudi S1 |
-| Pains du Soleil | 1 (focus ingredient) | dimanche S1 |
-| Cookie Proteine | 1 (interactif) | vendredi S1 |
-| Tiramisu Proteine | 1 (interactif) | vendredi S1 |
-| Boucherie Labourde | 1 (focus ingredient) | mardi S2 |
+### Produits JAMAIS couverts en post (finalise)
 
-### Produits JAMAIS couverts
+| Produit | Type |
+|---------|------|
+| STRICT MAX Boeuf | Burger |
+| STRICT MAX Poulet | Burger |
+| STRICT Wrap Boeuf | Wrap |
+| STRICT Wrap Poulet | Wrap |
+| Tenders STRICT | Snack |
+| Frites Classiques | Snack |
+| Frites Patates Douces | Snack |
+| Overnight STRICT | Dessert |
+| Milkshake Proteine | Dessert |
+| Cookie Proteine | Dessert |
+| Tiramisu Proteine | Dessert |
+| Boissons Zero / Energisante | Boisson |
 
-| Produit | Type | Note |
-|---------|------|------|
-| STRICT MAX Poulet | Burger | Aucune apparition (post ou story) |
-| Frites Classiques | Snack | Aucune apparition |
-| Frites Patates Douces | Snack | Aucune apparition |
-| Overnight STRICT | Dessert | Aucune apparition |
-| Milkshake Proteine | Dessert | Aucune apparition |
-| Boissons Zero / Energisante | Boisson | Aucune apparition |
-
-### Piliers — apparitions posts
+### Piliers — apparitions posts (finalises)
 
 | Pilier | Total | % | Cible |
 |--------|-------|---|-------|
-| Le Plat | 2 | 50% | 35% |
-| La Cuisine | 1 | 25% | 25% |
-| Les Macros | 1 | 25% | 18% |
-| L'Equipe | 0 | 0% | 15% |
-| Le Quartier | 0 | 0% | 7% |
+| Le Produit | 3 | 60% | 55% |
+| Les Benefices | 1 | 20% | 35% |
+| La Marque | 1 | 20% | 10% |
 
-> 4 posts produits — echantillon petit mais Les Macros est desormais represente.
-> Priorites S3 : introduire L'Equipe et Le Quartier.
+> 5 posts finalises (PNG sur disque). Les Benefices tres sous-represente.
 
-### Modes — apparitions posts
+### Traitements — apparitions posts (finalises)
 
-| Mode | Total | % | Cible |
-|------|-------|---|-------|
-| full-ia | 2 | 50% | 30% |
-| compositing-ia | 1 | 25% | 15% |
-| template | 1 | 25% | 10% |
-| irl-sublimation | 0 | 0% | 25% |
-| compositing-irl | 0 | 0% | 20% |
+| Traitement | Total | % |
+|-----------|-------|---|
+| photo-pure | 2 | 40% |
+| carousel | 2 | 40% |
+| masque-inverse | 1 | 20% |
 
-> Priorites S3 : introduire irl-sublimation et compositing-irl (jamais utilises en post).
+> Traitements JAMAIS utilises (finalises) : knockout-band, masque, texture-fill, triptych
 
-### Modes — apparitions stories
+### Carrousels — types produits (finalises + brouillons)
 
-| Mode | Total | % | Cible |
-|------|-------|---|-------|
-| template | 14 | 87.5% | ~10% |
-| irl | 1 | 6.25% | ~30% |
-| compositing-irl | 1 | 6.25% | ~15% |
-| irl-sublimation | 0 | 0% | ~25% |
-| full-ia | 0 | 0% | ~20% |
+| Type | Famille | Semaine | Statut |
+|------|---------|---------|--------|
+| Process Cuisine | B→A | S1 | Finalise (5 PNG 03-output) |
+| Educatif | A | S2 | Finalise (9 PNG final) |
+| Panoramique | C | S3 | Brouillons (18 PNG) |
+| Educatif | A | S3 | Brouillons (9 PNG) |
+| Zoom Progressif | B | S4 | Brouillons (10 PNG) |
+| Ingredient Spotlight | A | S4 | Brief seulement |
 
-> S1 etait 100% template, S2 commence a diversifier (3 modes differents).
-> Priorites S3 : push massif IRL + irl-sublimation + full-ia. Templates a ~10%.
+> Types JAMAIS faits : Texture/ASMR, Construction, Defile Gamme, Menu Objectif
 
-### Axes interactifs utilises
+### Modes — posts (finalises)
 
-| Semaine | Question | Produits |
-|---------|----------|----------|
-| S1 | "Boeuf ou Poulet?" | STRICT Boeuf / STRICT Poulet |
-| S1 | "Cookie ou Tiramisu?" | Cookie / Tiramisu |
-| S2 (planifie) | "Simple ou MAX?" | STRICT Boeuf / STRICT MAX Boeuf |
-| S2 (planifie) | "Team Viande ou Team Vege?" | STRICT Boeuf / STRICT Vege Falafel |
+| Mode | Total | % |
+|------|-------|---|
+| full-ia | 4 | 80% |
+| template | 1 | 20% |
 
-> Axes disponibles pour S3 : Frites (Classiques vs Patates Douces), Wraps (Boeuf vs Poulet), Desserts (Overnight vs Milkshake), Format (Burger vs Wrap)
+### Fonds — posts (finalises)
 
-### Educatifs utilises
-
-| Semaine | Sujet | Chiffre cle |
-|---------|-------|-------------|
-| S2 (planifie) | Proteines burger vs shaker | 53g |
-| S2 (planifie) | Calories burger vs fast-food | 596 kcal |
-| S2 (planifie) | Cuisson sans huile | 0g |
-
-> Sujets disponibles pour S3 : pain noir (composition), ratio prot/euro, ingredients clean, fibres, sodium, supply chain fraicheur
-
----
-
-## Procedure de scan
-
-Pour regenerer ce fichier, l'agent doit :
-
-### 1. Scanner les posts planning
-
-```
-Pour chaque dossier dans posts-stories/posts/*/S*/DD-MM-YYYY/ :
-  1. Verifier que final/ ou 03-output/ contient au moins un .png
-  2. Si oui → lire brief/brief.md ou 00-brief/brief.md et extraire :
-     - Semaine (depuis le chemin : S1, S2...)
-     - Date (depuis le nom du dossier)
-     - Pilier (champ "Pilier" dans la table Strategie du brief)
-     - Mode (champ "Mode" dans la table Strategie du brief, ou "full-ia" si brief v2)
-     - Produit (champ "Produit" ou titre du brief)
-     - Angle (champ "Objectif" resume en quelques mots)
-  3. Ajouter une ligne dans la table "Posts produits (planning)"
-```
-
-### 2. Scanner les posts hors-planning
-
-```
-Pour chaque dossier dans posts-stories/posts/hors-planning/DD-MM-YYYY/ :
-  1. Verifier que final/ contient au moins un .png (ou tout .png a la racine du dossier)
-  2. Si oui → lire brief/brief.md si existe, sinon deduire depuis le contenu
-     - Date (depuis le nom du dossier)
-     - Pilier, Mode, Produit, Angle (depuis le brief ou a defaut depuis le nom des fichiers)
-  3. Ajouter une ligne dans la table "Posts produits (hors-planning)"
-```
-
-### 3. Scanner les stories planning
-
-```
-Pour chaque dossier dans posts-stories/stories/S*/[jour]/ :
-  1. Lister tous les story-NN/final/ contenant un PNG
-     (legacy S1 : PNGs directement dans le dossier jour)
-  2. Pour chaque PNG trouve → lire story-NN/production/data.md (si existe) et brief/brief-story.md
-     - Extraire : numero, type, mode, produit/sujet
-  3. Ajouter dans la table stories de la semaine correspondante
-```
-
-### 4. Scanner les stories hors-planning
-
-```
-Pour chaque dossier dans posts-stories/stories/hors-planning/DD-MM-YYYY/ :
-  1. Lister tous les story-NN/final/ contenant un PNG (ou tout .png)
-  2. Pour chaque PNG → lire story-NN/production/data.md ou brief si existe
-     - Extraire : date, numero, type, mode, produit/sujet
-  3. Ajouter dans la table "Stories produites (hors-planning)"
-```
-
-### 5. Calculer les compteurs
-
-```
-Agreger TOUTES les tables (planning + hors-planning) :
-  - Compter les occurrences de chaque produit, pilier, mode
-  - Calculer les pourcentages
-  - Identifier les alertes (ecarts > 10% vs cible)
-  - Le hors-planning compte dans les totaux
-```
-
-### 6. Ecrire le fichier
-
-Reecrire entierement `_config/historique-production.md` avec les donnees scannees.
+| Fond | Total | % |
+|------|-------|---|
+| charbon | 3 | 60% |
+| ambre | 2 | 40% |

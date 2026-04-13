@@ -1,0 +1,57 @@
+/* ============================================
+   TAPE-BAND — Bande horizontale tagline en boucle
+   Signature feed : bande ambre avec tagline répétée
+   ============================================ */
+
+.tape-band {
+  position: relative;
+  width: 100%;
+  height: 48px;
+  background: var(--ambre);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  z-index: 5;
+}
+
+.tape-band__track {
+  display: flex;
+  white-space: nowrap;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--charbon);
+  line-height: 1;
+}
+
+.tape-band__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 20px;
+}
+
+.tape-band__item em {
+  font-style: italic;
+  color: var(--noir);
+}
+
+.tape-band__dot {
+  width: 5px;
+  height: 5px;
+  background: var(--charbon);
+  border-radius: 50%;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+/* Variante fine (pour expression IMPACT) */
+.tape-band--thin {
+  height: 24px;
+}
+.tape-band--thin .tape-band__track {
+  font-size: 11px;
+  letter-spacing: 2px;
+}

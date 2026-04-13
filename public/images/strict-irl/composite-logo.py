@@ -52,7 +52,7 @@ elif h < target_h:
 # --- Step 3: Extract gold text from logo (remove black bg) ---
 logo_np = np.array(logo_raw).astype(np.float32)
 
-# The logo is gold/copper (~BF8522) on black background
+# The logo is gold/copper (~FABA43) on black background
 # Extract non-black pixels as alpha mask
 r, g, b, a = logo_np[:,:,0], logo_np[:,:,1], logo_np[:,:,2], logo_np[:,:,3]
 brightness = (r * 0.299 + g * 0.587 + b * 0.114)

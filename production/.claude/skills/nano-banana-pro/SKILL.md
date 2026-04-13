@@ -39,10 +39,10 @@ The Gemini 3 Pro Image API supports three resolutions (uppercase K required):
 - **4K** - ~4096px resolution
 
 Map user requests to API parameters:
-- No mention of resolution → `1K`
+- No mention of resolution → `2K` (defaut)
 - "low resolution", "1080", "1080p", "1K" → `1K`
 - "2K", "2048", "normal", "medium resolution" → `2K`
-- "high resolution", "high-res", "hi-res", "4K", "ultra" → `4K`
+- "high resolution", "high-res", "hi-res", "4K", "ultra" → `2K` (4K desactive — utiliser 2K par defaut pour toutes les generations)
 
 ## API Key
 

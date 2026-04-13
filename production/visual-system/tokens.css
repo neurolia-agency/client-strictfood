@@ -1,0 +1,103 @@
+/* ============================================
+   VISUAL SYSTEM v6 — StrictFood Design Tokens
+   Source unique de vérité pour toutes les expressions
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Space+Grotesk:wght@600;700&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap');
+
+/* === Reset === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* =============================================
+   PALETTE — 4 couleurs, pas une de plus
+   ============================================= */
+
+:root {
+  /* --- Primitives --- */
+  --noir:       #000000;
+  --charbon:    #1a1714;
+  --ambre:      #FABA43;
+  --blanc:      #ffffff;
+
+  /* RGB pour rgba() */
+  --noir-rgb:    0, 0, 0;
+  --charbon-rgb: 26, 23, 20;
+  --ambre-rgb:   250, 186, 67;
+  --blanc-rgb:   255, 255, 255;
+
+  /* --- Semantic: Backgrounds --- */
+  --bg-deep:    var(--noir);
+  --bg-warm:    var(--charbon);
+  --bg-glow:    var(--ambre);
+
+  /* --- Semantic: Text --- */
+  --text-primary:    var(--blanc);
+  --text-secondary:  rgba(var(--blanc-rgb), 0.78);
+  --text-tertiary:   rgba(var(--blanc-rgb), 0.50);
+  --text-muted:      rgba(var(--blanc-rgb), 0.30);
+  --text-accent:     var(--ambre);
+
+  /* --- Semantic: Accents --- */
+  --accent:          var(--ambre);
+  --accent-strong:   var(--ambre);
+  --accent-medium:   rgba(var(--ambre-rgb), 0.60);
+  --accent-subtle:   rgba(var(--ambre-rgb), 0.30);
+  --accent-glow:     rgba(var(--ambre-rgb), 0.10);
+  --accent-ghost:    rgba(var(--ambre-rgb), 0.05);
+
+  /* --- Semantic: Borders --- */
+  --border-subtle:   rgba(var(--blanc-rgb), 0.08);
+  --border-accent:   rgba(var(--ambre-rgb), 0.38);
+  --border-frame:    rgba(var(--ambre-rgb), 0.55);
+
+  /* --- Semantic: Shadows --- */
+  --shadow-deep:     rgba(var(--noir-rgb), 0.6);
+  --shadow-medium:   rgba(var(--noir-rgb), 0.35);
+  --shadow-soft:     rgba(var(--noir-rgb), 0.15);
+
+  /* =============================================
+     TYPOGRAPHY
+     ============================================= */
+
+  --font-display: 'Oswald', sans-serif;       /* Headlines, stats, statements */
+  --font-heading: 'Space Grotesk', sans-serif; /* Subheadings, labels, tagline */
+  --font-body:    'DM Sans', sans-serif;       /* Body, descriptions, small text */
+
+  /* =============================================
+     SPACING & SAFE ZONES
+     ============================================= */
+
+  --safe-margin:   80px;
+  --safe-top-ig:   250px;   /* Instagram UI overlay (top) */
+  --safe-bottom-ig: 80px;   /* Instagram bottom margin */
+  --safe-side-ig:   65px;   /* Device edge cropping */
+
+  --gap-xs: 8px;
+  --gap-sm: 16px;
+  --gap-md: 24px;
+  --gap-lg: 40px;
+  --gap-xl: 64px;
+
+  /* =============================================
+     MICRO-ROTATIONS (rien n'est droit)
+     ============================================= */
+
+  --rotate-subtle:  -0.3deg;
+  --rotate-light:   -0.5deg;
+  --rotate-medium:  -0.7deg;
+  --rotate-strong:  -1.2deg;
+  --rotate-stamp:   -3deg;
+}
+
+/* =============================================
+   BASE — Shared across all formats
+   ============================================= */
+
+body {
+  overflow: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+}

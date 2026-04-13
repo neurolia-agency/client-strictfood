@@ -1,13 +1,13 @@
 ---
 name: photo-realism-guide
+user-invocable: false
 description: >
-  Reference skill for anti-AI fingerprint techniques in photo generation.
-  Covers camera anchoring, lighting, skin realism, food photography, packaging,
-  intentional imperfections, banned/required keywords, post-processing, and model selection.
-  Consult this skill when generating or reviewing any photo-realistic image prompt —
-  lifestyle, food, portrait, or product photography.
-  Triggers on: "photo realism", "anti AI", "realistic photo", "reduce AI fingerprint",
-  "natural photo", "photo quality", "realism guide".
+  Référence anti-empreinte IA pour la génération photo-réaliste.
+  Ancrage caméra, éclairage, peau réaliste, food photography, packaging,
+  imperfections volontaires, mots interdits/obligatoires, post-processing, choix modèle.
+  Consulter ce skill lors de toute rédaction ou revue de prompt photo-réaliste —
+  lifestyle, food, portrait ou produit. Utilisé automatiquement par image-prompt-engineer
+  et les agents strict-irl-*.
 ---
 
 # Photo Realism Guide

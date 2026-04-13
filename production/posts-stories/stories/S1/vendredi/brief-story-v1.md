@@ -66,7 +66,7 @@ Tagline : `Le cheat meal qui n'en est pas un`
 
 ## Contraintes
 
-- DA : Dark Food Premium (fond Charbon #141210, accents Cuivre Braisé #BF8522)
+- DA : Dark Food Premium (fond Charbon #141210, accents Cuivre Braisé #FABA43)
 - La fiche poulet diversifie la carte mentale — pas "encore un boeuf"
 - Le sondage rebondit sur le post tiramisu du jour
 

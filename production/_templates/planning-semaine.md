@@ -18,10 +18,14 @@
 
 ### Analyse stories
 
-5. **Produits déjà couverts en story** : ne pas refaire une fiche produit sur un produit qui a eu une fiche les 2 dernières semaines
-6. **Artisans/ingrédients déjà couverts** : alterner les focus ingrédients (ne pas refaire le même artisan 2 semaines de suite)
-7. **Axes interactifs déjà utilisés** : ne pas réutiliser un axe de sondage récent (consulter l'historique des interactifs)
-8. **Modes stories en retard** : identifier les modes peu utilisés en story et les forcer
+5. **Lire `_config/story-combinations.md`** (OBLIGATOIRE) — ce fichier contient le generateur de combinaisons. Suivre la procedure en 4 etapes :
+   - **Etape 1** : lire l'historique stories (produits, concepts, fonds, intentions des 21 dernieres stories)
+   - **Etape 2** : identifier les manques (produit jamais couvert, famille de concepts absente, fond desequilibre, intention manquante)
+   - **Etape 3** : generer les combinaisons pour chaque jour (produit × concept × fond × intention) AVANT de rediger les briefs
+   - **Etape 4** : valider la semaine (couverture produit, variete concepts, ratio fonds, rotation)
+6. **Produits sous-representes** : forcer les produits absents de la semaine precedente (wraps, falafel, frites/tenders)
+7. **Concepts sous-representes** : si la semaine precedente etait dominee par hero-3/4, forcer des concepts action/macro/perspective cette semaine
+8. **Hero-3/4 LIMITE** : max 3 stories hero-3/4 sur 21 (~15%). Privilegier les concepts action, macro, perspective, atmosphere
 
 ### Analyse symbiose posts ↔ stories
 
@@ -75,7 +79,7 @@ La source image détermine COMMENT la photo de base est obtenue. Pertinent uniqu
 
 | Fond | Hex | Traitements typiques |
 |------|-----|---------------------|
-| Ambre | `#E5A520` | photo-pure, masque, texture-fill, triptych |
+| Ambre | `#FABA43` | photo-pure, masque, texture-fill, triptych |
 | Charbon | `#1a1714` | photo-pure, knockout-band, masque-inverse |
 
 > Le knockout-band fonctionne sur les DEUX fonds (bande charbon sur fond ambre, bande ambre sur fond charbon).
@@ -127,8 +131,8 @@ La source image détermine COMMENT la photo de base est obtenue. Pertinent uniqu
 | Famille | Types | Pipeline |
 |---------|-------|----------|
 | **A — Texte** | Educatif, Ingredient Spotlight, Menu Objectif | `/carousel-producer DD-MM-YYYY` |
-| **B — Photo** | Zoom Progressif, Texture/ASMR, Construction, Defile Gamme, Process Cuisine | Art Dir → Prompt × N slides → Gemini 4K |
-| **C — Panoramique** | Panoramique | Prompt scene large → Gemini 4K 16:9 → `render-panoramic.js` |
+| **B — Photo** | Zoom Progressif, Texture/ASMR, Construction, Defile Gamme, Process Cuisine | Art Dir → Prompt × N slides → Gemini 2K |
+| **C — Panoramique** | Panoramique | Prompt scene large → Gemini 2K 16:9 → `render-panoramic.js` |
 
 ### Briefs carrousels
 
@@ -142,37 +146,52 @@ La source image détermine COMMENT la photo de base est obtenue. Pertinent uniqu
 
 ## Stories
 
-| Jour | # | Type | Mode | Fond | Traitement | Concept visuel | Sujet | Lien post |
-|------|---|------|------|------|-----------|---------------|-------|-----------|
-| Lun | 1 | Food Porn | full-ia | ambre | — | macro / drip | [Produit macro] | Post #1 |
-| Lun | 2 | Lifestyle | full-ia | — | — | lifestyle-street-art | Homme + sac kraft, mur graffiti [ref Pinterest] | — |
-| Lun | 3 | Brand | full-ia | charbon+ambre | — | [concept brand] | [Educatif / fiche / interactif — visuel IA unique] | — |
-| Mar | 1 | Lifestyle | full-ia | — | sillon | lifestyle-terrasse | Femme croquant burger, terrasse [ref Pinterest] | — |
-| Mar | 2 | Food Porn | full-ia | ambre | — | sensation-overflow | [Burger genereux] | — |
-| Mar | 3 | Brand | full-ia | charbon | — | [concept brand] | [Educatif / fiche / interactif — visuel IA unique] | — |
-| Mer | 1 | Food Porn | full-ia | charbon | — | macro-texture | [Gros plan pain noir sesame] | Post #2 |
-| Mer | 2 | Lifestyle | full-ia | — | — | lifestyle-escalier | Homme assis escalier + wrap [ref Pinterest] | — |
-| Mer | 3 | Food Porn | full-ia | ambre+charbon | sceau | atmo-neon | [Produit eclairage chaud] | — |
-| Jeu | 1 | Food Porn | full-ia | ambre | — | persp-pov | [POV burger] | — |
-| Jeu | 2 | Lifestyle | full-ia | — | — | lifestyle-rue | Groupe partageant frites, rue [ref Pinterest] | — |
-| Jeu | 3 | Brand | full-ia | charbon+ambre | — | [concept brand] | [Educatif / fiche / interactif — visuel IA unique] | — |
-| Ven | 1 | Lifestyle | full-ia | — | sillon | lifestyle-parc | Femme + burger, banc parc golden hour [ref Pinterest] | Post #3 |
-| Ven | 2 | Food Porn | full-ia | charbon+ambre | — | sensation-eclate | [Burger eclate] | — |
-| Ven | 3 | Food Porn | full-ia | ambre | — | atmo-intime | [Produit sur surface texturee] | — |
-| Sam | 1 | Lifestyle | full-ia | — | — | lifestyle-mur-uni | Homme + sac kraft, mur teal [ref Pinterest] | — |
-| Sam | 2 | Food Porn | full-ia | ambre | sillon | sensation-fondu | [Fromage qui fond] | — |
-| Sam | 3 | Brand | full-ia | ambre | — | [concept brand] | [Educatif / fiche / interactif — visuel IA unique] | — |
-| Dim | 1 | Food Porn | full-ia | ambre | — | persp-rasante | [Produit angle rasant] | — |
-| Dim | 2 | Lifestyle | full-ia | — | feuillete-photo | lifestyle-sortie | Femme sortant du resto + sac [ref Pinterest] | — |
-| Dim | 3 | Food Porn | full-ia | charbon | — | mixed-grain-cinema | [Visuel cinematique] | — |
+> **Procedure** : AVANT de remplir ce tableau, suivre la procedure de `_config/story-combinations.md` :
+> 1. Lire l'historique (produits, concepts, fonds, intentions de la semaine precedente)
+> 2. Identifier les manques (produit absent, concept sous-represente, fond desequilibre)
+> 3. Generer les combinaisons jour par jour
+> 4. Valider la semaine (couverture, rotation, ratio)
+
+| Jour | # | Type | Produit | Concept | Fond | Intention | Traitement | Description courte |
+|------|---|------|---------|---------|------|-----------|------------|-------------------|
+| Lun | 1 | Food | [slug] | [concept] | [charbon/ambre/...] | [envie/curiosite/confiance/presence] | [— / sillon / sceau / ...] | [1 phrase : mise en scene] |
+| Lun | 2 | Lifestyle | [slug ou —] | [lifestyle-*] | [—] | [intention] | [—] | [personnage + scene + ref Pinterest] |
+| Lun | 3 | Brand | [slug ou —] | [concept brand] | [charbon/ambre] | [presence] | [—] | [accroche / rappel / educatif] |
+| Mar | 1 | | | | | | | |
+| Mar | 2 | | | | | | | |
+| Mar | 3 | | | | | | | |
+| Mer | 1 | | | | | | | |
+| Mer | 2 | | | | | | | |
+| Mer | 3 | | | | | | | |
+| Jeu | 1 | | | | | | | |
+| Jeu | 2 | | | | | | | |
+| Jeu | 3 | | | | | | | |
+| Ven | 1 | | | | | | | |
+| Ven | 2 | | | | | | | |
+| Ven | 3 | | | | | | | |
+| Sam | 1 | | | | | | | |
+| Sam | 2 | | | | | | | |
+| Sam | 3 | | | | | | | |
+| Dim | 1 | | | | | | | |
+| Dim | 2 | | | | | | | |
+| Dim | 3 | | | | | | | |
+
+**Regles de remplissage :**
+- **Produit** : slug recette (`strict-boeuf`, `strict-wrap-poulet`, etc.) — chaque produit au moins 1x/semaine
+- **Concept** : depuis `_config/concepts-visuels.md` ou `_config/story-combinations.md` — PAS 2 consecutifs identiques
+- **Fond** : alterner charbon-dominant et ambre-dominant dans la journee
+- **Intention** : PAS 2 consecutives identiques. Ratio cible : envie ~40%, curiosite ~25%, confiance ~25%, presence ~10%
+- **hero-3/4 LIMITE** : max 3 sur 21 stories (~15%)
+- **Type** : food ~40% (8-9), lifestyle ~30% (6-7), brand ~30% (6-7) dont **2 avis Google/semaine**
+- **Signature Charbon × Ambre** : les 2 couleurs presentes sur chaque story (accent 15-20%)
 
 ### Modes stories — Ce que chaque mode produit
 
 | Mode story | Pipeline | Output | Cible |
 |------------|----------|--------|-------|
-| `full-ia` (food) | Prompt → Gemini 4K (9:16) → template | PNG 1080x1920 (produit IA) | **40%** |
-| `full-ia` (lifestyle) | Photo ref → Analyse → Gemini 4K → (edit logo si sac) → template | PNG 1080x1920 (lifestyle) | **30%** |
-| `full-ia` (brand) | Prompt → Gemini 4K (9:16) → template | PNG 1080x1920 (rappel, fiche, educatif, interactif) | **30%** |
+| `full-ia` (food) | Prompt → Gemini 2K (9:16) → template | PNG 1080x1920 (produit IA) | **40%** |
+| `full-ia` (lifestyle) | Photo ref → Analyse → Gemini 2K → (edit logo si sac) → template | PNG 1080x1920 (lifestyle) | **30%** |
+| `full-ia` (brand) | Prompt → Gemini 2K (9:16) → template | PNG 1080x1920 (rappel, fiche, educatif, interactif) | **30%** |
 
 > **100% full-ia** — Le mode `template` n'est plus utilise pour les stories (trop redondant visuellement, limite la creativite). Toutes les stories sont des visuels IA uniques.
 > Les modes `edit-ia` et `irl` sont reserves au `hors-planning/`.
@@ -185,7 +204,7 @@ Pertinent uniquement pour le mode `full-ia` (food et lifestyle).
 
 | Fond | Description |
 |------|-----------|
-| `ambre` | Surface/fond ambre dore texture (#E5A520) |
+| `ambre` | Surface/fond ambre dore texture (#FABA43) |
 | `charbon` | Surface/fond charbon sombre (#1a1714) |
 | `ambre+charbon` | Fond ambre + accessoires charbon (papier kraft noir, ardoise, ustensiles sombres) |
 | `charbon+ambre` | Fond charbon + accessoires ambre (serviette doree, sauce visible, eclats sesame) |
@@ -201,6 +220,7 @@ Le **traitement** determine le template HTML utilise pour la story. Si vide ou `
 | `sceau` | `story-sceau.html` | Photo + cercle glassmorphism avec arc dome (nom, info) |
 | `feuillete-photo` | `story-feuillete-photo.html` | Photo plein cadre + bandeau dome ambre en haut (sequence) |
 | `feuillete-data` | `story-feuillete-data.html` | Fond charbon + donnee geante (chiffre, horaires, CTA) |
+| `avis` | `story-avis.html` | Avis Google (1-3 avis, fond ambre, speech bubbles) |
 
 ### Stories Lifestyle (~30% des stories, max 7/semaine — type `lifestyle` dans la colonne Type)
 
@@ -235,6 +255,26 @@ Voir `_config/lifestyle-process.md` pour le process complet.
 - Varier les produits (pas 3x sac kraft d'affilee — alterner burger, wrap, frites, sac, repas)
 - Le personnage ne regarde JAMAIS la camera
 
+### Stories Avis Google (2/semaine — type `Brand/Avis` dans la colonne Type)
+
+Le type `Avis` affiche 1 à 3 avis Google réels dans le template `story-avis.html`. C'est une preuve sociale forte qui renforce la confiance. Les stories avis comptent dans le quota Brand (~30%).
+
+**Mode : template** — le template `story-avis.html` est rempli avec les données des avis et rendu via Puppeteer (1080x1920). Ce n'est PAS le template `story-universal.html` déprécié — c'est un template graphique dédié avec fond ambre, speech bubbles, étoiles dorées et rappels de marque.
+
+**Au planning** : placer 2 stories avis/semaine, de préférence sur des jours différents (ex: mercredi + samedi). Elles remplacent un slot Brand (#3) du jour.
+
+**Dans le tableau** : Type = `Brand/Avis`, Intention = `confiance`, Concept = `—`, Fond = `—`, Traitement = `avis`
+
+**Brief** : utiliser `_templates/brief-story-avis.md` — sélectionner 1 à 3 avis Google récents, corriger les accents, varier les couleurs d'avatar.
+
+**Contraintes Avis** :
+- 2 avis/semaine exactement — pas plus, pas moins
+- Les avis remplacent des slots Brand (#3) — le total reste 3 stories/jour
+- Ne pas réutiliser un avis déjà publié
+- Accents obligatoires dans les textes des avis
+- Varier le nombre d'avis par story (alterner 2 avis et 3 avis)
+- Sélectionner des avis qui mentionnent des points clés (qualité, santé, goût, service, ambiance)
+
 ### Stories Rappel (story #4 bonus — 1 fois tous les 2 jours)
 
 Le type `Rappel` est une story BONUS ajoutee en #4 tous les 2 jours. Elle ne compte PAS dans la distribution des 3 stories principales. C'est un rappel de presence avec accroche + CTA (telephone, horaires, adresse).
@@ -243,15 +283,18 @@ Le type `Rappel` est une story BONUS ajoutee en #4 tous les 2 jours. Elle ne com
 
 Voir `_config/story-rappel.md` pour les accroches et CTA.
 
-**Au planning** : placer une story #4 Rappel les jours **mardi, jeudi, samedi** (ou **mercredi, vendredi, dimanche** — alterner par semaine).
+**Au planning** : le rappel REMPLACE l'une des 3 stories du jour (slot #3 = Brand par defaut). Publier 1 rappel tous les 2 jours : **mardi, jeudi, samedi** (ou **mercredi, vendredi, dimanche** — alterner par semaine). Le rythme reste 3 stories/jour, pas 4.
 
-**Dans le tableau** : Type = `Rappel`, Mode = `full-ia`, # = `4`
+**Dans le tableau** : Type = `Brand/Rappel`, Intention = `presence`, # = `3` (remplace le slot Brand du jour)
 
 **Contraintes Rappel** :
+- 1 rappel tous les 2 jours = 3-4 rappels/semaine dans les 21 stories
+- Le rappel REMPLACE le slot Brand du jour — pas de story supplementaire
 - Alterner les accroches (pas la meme en 2 semaines)
 - Alterner le CTA (telephone → horaires → adresse → telephone...)
 - Pas de rappel le lundi (ferme)
 - Chaque rappel a une direction creative unique (pas de copier-coller visuel)
+- Le rappel compte dans le quota Brand (~30%) et dans l'intention `presence`
 
 **Contraintes stories** :
 - Toutes les stories en `full-ia` (100% IA, mode `template` deprecie)
@@ -339,15 +382,49 @@ Voir `_config/story-rappel.md` pour les accroches et CTA.
 | sceau | /~21 |
 | feuillete-photo | /~21 |
 | feuillete-data | /~21 |
+| avis | /~21 | cible : 2/semaine |
+
+### Stories — Intentions cette semaine
+
+| Intention | Count | Cible |
+|-----------|-------|-------|
+| envie | /~21 | ~40% (8-9) |
+| curiosite | /~21 | ~25% (5-6) |
+| confiance | /~21 | ~25% (5-6) |
+| presence | /~21 | ~10% (2-3) |
+
+### Stories — Couverture produits cette semaine
+
+| Produit | Count | Min 1 ? |
+|---------|-------|:-------:|
+| strict-boeuf | /~21 | [ ] |
+| strict-poulet | /~21 | [ ] |
+| strict-max-boeuf | /~21 | [ ] |
+| strict-max-poulet | /~21 | [ ] |
+| strict-vege-falafel | /~21 | [ ] |
+| strict-wrap-boeuf | /~21 | [ ] |
+| strict-wrap-poulet | /~21 | [ ] |
+| frites-tenders | /~21 | [ ] |
+
+### Stories — Familles de concepts cette semaine
+
+| Famille | Count | Min |
+|---------|-------|-----|
+| Produit pur (hero, levitation, eclate, ouvert, decon, minimal) | /~21 | |
+| Action (croque, assemblage, main, trempe, ecrase, service) | /~21 | 3+ |
+| Macro (sauce, texture, fromage, croustillant) | /~21 | 2+ |
+| Atmosphere (neon, contre-jour, clair-obscur, intime) | /~21 | 1+ |
+| Perspective (pov, rasante, tilt, dessous, flat) | /~21 | 2+ |
+| hero-3/4 specifiquement | /~21 | MAX 3 |
 
 ### Stories — Lifestyle cette semaine
 
 | Dimension | Detail |
 |-----------|--------|
 | Count lifestyle | /~21 (cible ~30%) |
-| Personnages varies | [H/F/mix] |
+| Personnages varies | [H/F/mix, ages varies] |
 | Produits varies | [sac/burger/wrap/frites/repas] |
-| Concepts varies | [pas 2x meme concept] |
+| Concepts varies | [pas 2x meme concept lifestyle] |
 
 ---
 
@@ -381,6 +458,8 @@ Voir `_config/story-rappel.md` pour les accroches et CTA.
 - [ ] Aucun brief ne contient "[A FOURNIR]"
 - [ ] Le mode `template` n'apparait PAS dans le planning stories (100% full-ia)
 - [ ] Le mode `irl` n'apparait PAS dans le planning standard
+- [ ] **2 stories avis Google** sont planifiées cette semaine (type `Brand/Avis`, traitement `avis`)
+- [ ] Les avis Google ne sont pas des doublons de stories avis précédentes
 
 ## Étape suivante
 

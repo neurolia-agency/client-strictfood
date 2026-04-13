@@ -312,7 +312,7 @@ Quatrieme post Macros du feed (apres S2-06, S3-10, S4-15). Angle inedit : on com
 
 | Slide | Contenu | Notes DA |
 |-------|---------|----------|
-| 1 (Cover) | "Leurs sides vs les notres." + icones frites/tenders | Fond #141210, texte Oswald blanc, "vs" en #BF8522. Graphique et epure. |
+| 1 (Cover) | "Leurs sides vs les notres." + icones frites/tenders | Fond #141210, texte Oswald blanc, "vs" en #FABA43. Graphique et epure. |
 | 2 | Comparaison Tenders : "Nuggets fast-food : ~300 kcal, 12g prot, frits dans l'huile" vs "Tenders STRICT : 250 kcal, 25g prot, chaleur pulsee". Barres visuelles. | Cuivre Braise pour StrictFood, gris pour le classique. |
 | 3 | Comparaison Frites : "Frites fast-food : ~330 kcal, 17g lip, huile de friture" vs "Frites PD StrictFood : 211 kcal, 5g lip, sans huile" + "Frites classiques StrictFood : 199 kcal, 4g lip, sans huile". Les deux options StrictFood presentees. | Double comparaison, meme style graphique. |
 | 4 | Synthese : "Meme les a-cotes sont reflechis." + recapitulatif prix (Tenders 6,99EUR, Frites classiques 2,99EUR, Frites PD 3,99EUR) + 📍 localisation + tagline | CTA + signature |

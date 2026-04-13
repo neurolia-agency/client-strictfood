@@ -41,7 +41,7 @@ Rejetee : l'olive evoque le "healthy generique" que le brief rejette expliciteme
 
 - **Nom** : Cuivre Braise
 - **OKLCH** : oklch(0.67 0.15 68)
-- **HEX** : #BF8522 (approx.)
+- **HEX** : #FABA43 (approx.)
 - **Usage** : Accent principal — CTAs, liens actifs, elements d'emphase, highlights sur les visuels food, bordures actives
 
 ### Variantes

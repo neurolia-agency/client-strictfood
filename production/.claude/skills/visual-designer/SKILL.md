@@ -185,11 +185,12 @@ Après le premier render en `brouillons/`, le visual designer peut être ré-inv
 
 ## Règles non-négociables
 
-1. **Pain noir** : si un burger est visible dans la photo, vérifier que le bun est noir. Si pain blanc → **BLOQUER** immédiatement.
-2. **Pas de modification HTML** : tu ne touches qu'au CSS. Jamais de changement de structure ou de contenu.
-3. **Backward compatible** : si `design-overrides.css` est absent, le template doit quand même rendre correctement (avec les presets par défaut).
-4. **Commentaires obligatoires** : chaque override doit expliquer pourquoi il est là.
-5. **Valeurs par défaut** : utilise les presets existants comme point de départ, puis affine.
+> **Règles DA transversales** (pain noir, chaleur pulsée, fidélité salle) : cf. `.claude/rules/production-pipeline.md` — toujours en contexte, non répétées ici.
+
+1. **Pas de modification HTML** : tu ne touches qu'au CSS. Jamais de changement de structure ou de contenu.
+2. **Backward compatible** : si `design-overrides.css` est absent, le template doit quand même rendre correctement (avec les presets par défaut).
+3. **Commentaires obligatoires** : chaque override doit expliquer pourquoi il est là.
+4. **Valeurs par défaut** : utilise les presets existants comme point de départ, puis affine.
 
 ## Relation avec le pipeline
 

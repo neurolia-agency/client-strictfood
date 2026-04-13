@@ -1,103 +1,108 @@
 # Brief Stories — S3 Mercredi (2026-03-26)
 
-> **Pilier du jour** : Le Plat / Confiance — Pas de post
-> **Objectif strategique** : IRL energie du rush + premiere apparition du STRICT MAX Poulet en compositing. Le MAX Poulet est le seul burger JAMAIS montre — cette story l'introduit dans le feed.
-> **Persona cible** : Sportifs + Tous
-> **Ref strategie** : Phase 1 §2.1 — "presenter chaque produit de la carte"
+> **Pilier du jour** : — (pas de post mercredi)
+> **Objectif strategique** : Journee 100% full-ia (3 stories IA, 0 template). Introduire 2 produits jamais couverts en story : Parmesan Myfitcheese (macro) et Cookie Proteine (atmo). Lifestyle street-art pour varier les decors.
+
+> **REGLE ABSOLUE** : Tous les chemins photo doivent pointer vers des fichiers existants.
+> **Templates** : `story-universal.html` (defaut), `story-sillon.html`, `story-sceau.html`, `story-feuillete-photo.html`, `story-feuillete-data.html`.
 
 ---
 
-## Story 1 — IRL : Rush du midi
+## Story 1 — Parmesan Myfitcheese macro
 
 | Champ | Valeur |
 |-------|--------|
-| Type | IRL |
-| Mode | `irl` |
-| Highlight | COULISSES |
-| Qui produit | Romain/Dorian (photo) + Pipeline (overlay) |
-| Template | `irl-story.html` |
+| Mode | full-ia |
+| Traitement | — |
+| Fond | ambre |
+| Highlight | NOS ARTISANS |
 | Mood | cuivre |
-| Image | hero |
-| Brand props | aucun |
+| Concept visuel | macro-fromage |
 
 ### Objectif
 
-Capturer l'energie du service au pic du midi. Le restaurant plein, les clients qui attendent, le mouvement — c'est la preuve sociale en direct. Le rush = la demande existe.
+Focus artisan Myfitcheese : macro extreme sur les miettes de parmesan proteine — fragments irreguliers, poudreux, dores au contact d'une surface chaude. On doit sentir le grain et la matiere. Pas de cheese pull (parmesan = dur, ne s'etire pas).
 
 ### Contenu
 
-Photo : `[A FOURNIR par Romain/Dorian — mercredi midi, pendant le rush]`
-Texte overlay : `Rush.`
-Position texte : bas
-Filtre : leger
-
-> **Cadrage souhaite** : Plan large, restaurant plein, file d'attente visible si possible. Mouvement, energie, flou de mouvement acceptable. Mur vegetal/neon en arriere-plan si angle le permet.
+| Champ | Valeur |
+|-------|--------|
+| Sujet | Parmesan Myfitcheese — macro extreme sur miettes de parmesan eparpillees sur surface ambre chaude, fragments irreguliers dores et poudreux, certains fondent legerement au contact de la chaleur, brillance grasse subtile, graines de sesame noir en contraste |
+| Produit | Parmesan Myfitcheese (ingredient artisan) |
+| Direction artistique | Macro 100mm f/2.8, eclairage rasant lateral chaud, fond ambre-terrazzo, profondeur 3mm, texture granuleuse ultra-detaillee, grain film doux, PAS de cheese pull, PAS de nappes fondues |
+| TEXT_LINE_1 | — |
+| TEXT_LINE_2 | — |
 
 ---
 
-## Story 2 — IRL : Remise du sac
+## Story 2 — Lifestyle street-art sac kraft
 
 | Champ | Valeur |
 |-------|--------|
-| Type | IRL |
-| Mode | `irl` |
+| Mode | full-ia |
+| Traitement | feuillete-photo |
+| Fond | — |
 | Highlight | — |
-| Qui produit | Romain/Dorian (photo) + Pipeline (overlay) |
-| Template | `irl-story.html` |
 | Mood | cuivre |
-| Image | hero |
-| Brand props | aucun |
+| Concept visuel | lifestyle-street-art |
 
 ### Objectif
 
-Le moment de la remise du sac au client — le geste final du service. Le sac StrictFood est visible, les mains se croisent au comptoir. Moment humain et commercial.
+Lifestyle urbain energique : un homme en veste ambre marchant devant un mur de briques couvert de graffitis colores, sac kraft noir StrictFood a la main. Contraste couleurs vives du mur vs noir du sac.
 
 ### Contenu
-
-Photo : `[A FOURNIR par Romain/Dorian — mercredi pendant le service]`
-Texte overlay : `Bonne degustation.`
-Position texte : bas
-Filtre : leger
-
-> **Cadrage souhaite** : Plan moyen au comptoir. Les deux mains (equipe + client) + sac StrictFood bien visible. Le logo sur le sac est un bonus.
-
----
-
-## Story 3 — Produit en situation : STRICT MAX Poulet au comptoir
 
 | Champ | Valeur |
 |-------|--------|
-| Type | Produit en situation |
-| Mode | `compositing-irl` |
-| Highlight | — |
-| Qui produit | Pipeline |
-| Template | `irl-story.html` (overlay post-compositing) |
+| Concept | lifestyle-street-art |
+| Photo reference | [ref Pinterest : "man amber jacket walking graffiti wall brick street candid photography paper bag"] |
+| Personnage | Homme ~30 ans, peau mate, barbe courte taillee, cheveux noirs courts |
+| Tenue | Veste bomber ambre (#FABA43), hoodie noir en dessous, jean slim anthracite, sneakers noires montantes |
+| Posture | En marche, foulee naturelle, bras droit tient le sac kraft noir |
+| Regard | Profil gauche, regard au loin |
+| Scene | Mur de briques avec graffiti colore (rouge, teal, jaune moutarde), trottoir beton, lumiere naturelle directe |
+| Sac kraft | oui |
+| Cadrage | Plein pied, legere contre-plongee |
+| TEXT_LINE_1 | — |
+| TEXT_LINE_2 | — |
+
+---
+
+## Story 3 — Cookie Proteine atmo-intime
+
+| Champ | Valeur |
+|-------|--------|
+| Mode | full-ia |
+| Traitement | — |
+| Fond | charbon |
+| Highlight | LA CARTE |
 | Mood | cuivre |
-| Image | hero |
-| Brand props | aucun |
+| Concept visuel | atmo-intime |
 
 ### Objectif
 
-PREMIERE APPARITION du STRICT MAX Poulet dans les stories. Le compositing pose le burger sur le comptoir reel du restaurant. Le contexte ancre le produit dans le lieu — on voit le burger au comptoir comme si on allait le prendre.
+Premiere apparition du Cookie Proteine en story. Ambiance "objet precieux" : un cookie croque pose sur fond sombre, eclaire par un spot unique. La texture craquee de la surface et l'interieur moelleux visible a la cassure sont le sujet.
 
 ### Contenu
 
-**compositing-irl** :
-Photo produit : `public/images/photos-references/produits-source/burgers-black/strict-max-poulet/strict-max-poulet-black-1.png`
-Photo lieu : `public/images/photos-references/contexte/salle-restaurant/accueil.jpeg`
-Intention compositing : `MAX Poulet pose sur le comptoir d'accueil, eclairage interieur naturel du restaurant. Plan moyen avec profondeur sur la salle en arriere-plan. Le burger est en vedette au premier plan, le comptoir et la vitrine donnent le contexte. Ambiance "pret a etre servi". Respecter les materiaux reels : comptoir blanc, vitrine noire.`
-
-Texte overlay : `—`
+| Champ | Valeur |
+|-------|--------|
+| Sujet | Cookie Proteine — cookie croque en deux, pose sur surface charbon sombre, spot unique venant d'en haut a droite, texture surface craquee visible, interieur moelleux pepites de chocolat, miettes eparpillees, obscurite totale autour, lumiere concentree |
+| Produit | Cookie Proteine |
+| Direction artistique | Macro 85mm f/2.0, spot unique directionnel (haut-droite), fond charbon profond, Rembrandt lighting, texture craquee ultra-detaillee, ombres dures, effet "bijou eclaire", grain cinematique |
+| TEXT_LINE_1 | — |
+| TEXT_LINE_2 | — |
 
 ---
 
 ## Contraintes
 
-- DA : 2 IRL authentiques + 1 compositing introduction produit
-- Mood : cuivre sur les 3 stories
-- Le compositing DOIT respecter la fidelite de la salle (carrelage blanc, comptoir blanc, vitrine noire — voir photos reference)
-- Le STRICT MAX Poulet a un PAIN NOIR — verifier visuellement apres compositing
-- Photos IRL : prises pendant le rush du mercredi midi
+- DA : Dark Food Premium — `story-universal.html` (stories 1, 3), `story-feuillete-photo.html` (story 2)
+- Mood : cuivre
+- **Fond** : ambre (story 1), — (story 2), charbon (story 3)
+- **Pain noir obligatoire** sur tous les visuels burger
+- **Chaleur pulsee** : jamais "grill", "grille", "barbecue"
+- Tagline fixe : `Le cheat meal <em>qui n'en est pas un</em>`
 
 ## Etape suivante
 

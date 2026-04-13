@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Oswald:wght@700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: {{WIDTH}}px; height: {{HEIGHT}}px;
+      overflow: hidden; position: relative; background: {{BG_COLOR}};
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Photo en fond */
+    .photo { position: absolute; inset: 0; z-index: 1; }
+    .photo img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* Gradient sombre pour contraste typo */
+    .gradient-overlay {
+      position: absolute; inset: 0; z-index: 2;
+      background: linear-gradient(to top,
+        rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.55) 35%,
+        rgba(0,0,0,0.20) 60%, transparent 100%);
+    }
+
+    .golden-edge {
+      position: absolute; inset: 8px;
+      border: 2.5px solid rgba(250,186,67,0.30);
+      border-radius: 4px; z-index: 15; pointer-events: none;
+    }
+
+    /* Typo géante sur l'image */
+    .headline-zone {
+      position: absolute;
+      top: {{HEADLINE_TOP}}px;
+      left: 65px; right: 65px;
+      z-index: 10;
+    }
+
+    .headline-text {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: {{HEADLINE_SIZE}}px;
+      color: #FABA43;
+      text-transform: uppercase;
+      line-height: 0.92;
+      letter-spacing: -2px;
+      transform: rotate(-0.5deg);
+      text-shadow:
+        0 0 50px rgba(0,0,0,0.70),
+        0 4px 20px rgba(0,0,0,0.50);
+    }
+
+    .headline-sub {
+      margin-top: 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 30px;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.35;
+      text-shadow: 0 2px 15px rgba(0,0,0,0.60);
+    }
+    .headline-sub strong { color: #FABA43; }
+
+    /* Bottom */
+    .bottom {
+      position: absolute; bottom: {{BOTTOM_Y}}px;
+      left: 0; right: 0; text-align: center; z-index: 12;
+    }
+    .tagline { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: {{TAGLINE_SIZE}}px; color: #fff; }
+    .tagline em { color: #FABA43; font-style: italic; }
+    .logo-container { margin-top: 14px; display: flex; justify-content: center; }
+    .logo-container img { width: 150px; opacity: 0.70; }
+
+    .tape-band {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 48px; background: #FABA43;
+      z-index: 20; display: {{TAPE_DISPLAY}};
+      align-items: center; overflow: hidden;
+    }
+    .tape-band-track {
+      white-space: nowrap; font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700; font-size: 16px; letter-spacing: 3px;
+      text-transform: uppercase; color: #141210;
+    }
+    .tape-band-track em { font-style: italic; color: #000; }
+
+    .grain {
+      position: absolute; inset: 0; z-index: 50;
+      pointer-events: none; opacity: 0.06; mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+      background-size: 256px;
+    }
+  </style>
+</head>
+<body>
+  <div class="photo"><img src="{{PHOTO_SRC}}" /></div>
+  <div class="gradient-overlay"></div>
+  <div class="golden-edge"></div>
+
+  <div class="headline-zone">
+    <div class="headline-text">{{HEADLINE}}</div>
+    <div class="headline-sub">{{HEADLINE_SUB}}</div>
+  </div>
+
+  <div class="bottom" style="display:{{BOTTOM_DISPLAY}}">
+    <div class="tagline">Le cheat meal <em>qui n'en est pas un</em></div>
+    <div class="logo-container"><img src="{{LOGO_SRC}}" alt="STRICT FOOD'S"></div>
+  </div>
+
+  <div class="tape-band">
+    <div class="tape-band-track">
+      LE CHEAT MEAL <em>QUI N'EN EST PAS UN</em> &nbsp;·&nbsp;
+      LE CHEAT MEAL <em>QUI N'EN EST PAS UN</em> &nbsp;·&nbsp;
+      LE CHEAT MEAL <em>QUI N'EN EST PAS UN</em> &nbsp;·&nbsp;
+      LE CHEAT MEAL <em>QUI N'EN EST PAS UN</em> &nbsp;·&nbsp;
+    </div>
+  </div>
+
+  <div class="grain"></div>
+</body>
+</html>

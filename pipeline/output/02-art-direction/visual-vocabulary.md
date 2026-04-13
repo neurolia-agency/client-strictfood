@@ -55,7 +55,7 @@
 
 | Terme | Valeur OKLCH | Valeur HEX | Usage |
 |-------|-------------|------------|-------|
-| "accent signature" | oklch(0.67 0.15 68) | #BF8522 | Cuivre Braise — CTAs, liens actifs, highlights, bordures d'emphase |
+| "accent signature" | oklch(0.67 0.15 68) | #FABA43 | Cuivre Braise — CTAs, liens actifs, highlights, bordures d'emphase |
 | "accent signature hover" | oklch(0.75 0.13 70) | #D4A44E | Cuivre Braise clair — hover, focus rings |
 | "accent signature active" | oklch(0.55 0.14 65) | #8E6215 | Cuivre Braise fonce — active, texte sur fond clair |
 | "accent secondaire" | oklch(0.42 0.10 22) | #7C3530 | Grenat Fume — accents craft, separateurs, hover states |

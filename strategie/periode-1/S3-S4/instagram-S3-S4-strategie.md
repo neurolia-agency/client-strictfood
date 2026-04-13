@@ -173,7 +173,7 @@ Pour le post artisan :
 
 **Direction creative :**
 
-Identique a S0-S2 : fond Charbon (#141210), typo Oswald pour les chiffres forts, Space Grotesk pour les labels, accents Cuivre Braise (#BF8522) et Feuille Grillee (#5C7858).
+Identique a S0-S2 : fond Charbon (#141210), typo Oswald pour les chiffres forts, Space Grotesk pour les labels, accents Cuivre Braise (#FABA43) et Feuille Grillee (#5C7858).
 
 **Nouveaux arguments nutrition a exploiter :**
 

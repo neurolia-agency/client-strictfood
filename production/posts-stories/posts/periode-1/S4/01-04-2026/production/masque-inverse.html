@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080">
+  <title>Masque Inverse — FALAFEL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 1080px;
+      height: 1350px;
+      /* Force 4:5 ratio for post */
+      overflow: hidden;
+      position: relative;
+      background: #000;
+    }
+
+    /* Photo de base plein cadre */
+    .photo {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 45%;
+      z-index: 1;
+    }
+
+    /* Couche ambre semi-transparente sur toute l'image */
+    .amber-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(250, 186, 67, 0.75);
+      z-index: 2;
+      mix-blend-mode: multiply;
+    }
+
+    /* Texte FALAFEL — découpe dans l'overlay ambre */
+    .text-mask {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* Le texte est un masque : là où il y a du texte, l'overlay ambre est retiré → la photo apparaît */
+      background: rgba(250, 186, 67, 0.80);
+      -webkit-mask-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"><text>FALAFEL</text></svg>');
+    }
+
+    /* Approche alternative : texte ambre solide + photo visible autour via composition */
+    .composition {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 5;
+    }
+
+    /* Le texte en ambre solide PAR-DESSUS la photo */
+    .falafel-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 220px;
+      letter-spacing: 8px;
+      line-height: 0.85;
+      color: #FABA43;
+      text-transform: uppercase;
+      text-align: center;
+      text-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.5),
+        0 0 60px rgba(250, 186, 67, 0.3);
+      /* L'opacité permet de voir la photo à travers légèrement */
+      opacity: 1.0;
+    }
+
+    /* Gradient bas pour lisibilité tagline */
+    .gradient-bottom {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 250px;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+      z-index: 8;
+    }
+
+    /* Tagline + logo en bas */
+    .bottom {
+      position: absolute;
+      bottom: 40px;
+      left: 0; right: 0;
+      z-index: 15;
+      text-align: center;
+    }
+
+    .tagline {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 32px;
+      color: #fff;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+    }
+
+    .tagline em {
+      color: #FABA43;
+      font-style: italic;
+    }
+
+    .logo {
+      margin-top: 10px;
+    }
+
+    .logo img {
+      width: 150px;
+      height: auto;
+      opacity: 0.75;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Photo de base -->
+  <img class="photo" src="/Users/dorian.gz/dev/Neurolia Agency/client-strictfood/production/posts-stories/posts/periode-1/S4/01-04-2026/brouillons/01-04-2026-falafel-hero-face.png" alt="">
+
+  <!-- Texte FALAFEL en ambre solide superposé -->
+  <div class="falafel-text">STRICT<br><span style="display:inline-block;margin-top:30px">FALAFEL</span></div>
+
+
+</body>
+</html>

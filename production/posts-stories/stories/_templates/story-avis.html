@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080">
+  <title>Story Avis — {{HEADER_TEXT}}</title>
+  <!--
+    STORY AVIS — Template avis Google StrictFood
+    Fond ambre + speech bubbles charbon + rappels de marque
+
+    CHAMPS :
+    HEADER_TEXT      : titre (défaut: "VOS RETOURS")
+    REVIEW_COUNT     : 1, 2 ou 3
+    Par avis (N = 1, 2, 3) :
+      AUTHOR_N       : nom auteur
+      INITIAL_N      : lettre avatar
+      META_N         : "X avis · Y photos"
+      AVATAR_COLOR_N : avatar-amber / avatar-grenat / avatar-feuille
+      TEXT_N         : texte avis (AVEC accents)
+      SCORES_N_SHOW  : flex / none
+      CUISINE_N, SERVICE_N, AMBIANCE_N : scores
+      REVIEW_N_SHOW  : block / none
+    TAGLINE          : Le cheat meal <em>qui n'en est pas un</em>
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Oswald:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_base/base.css">
+  <style>
+    /* ===== RESET base.css defaults ===== */
+    .gradient-top, .gradient-bottom, .gradient-left,
+    .accent-line, .zone-blend, .ambient-bottom,
+    .bg-image, .hero-image, .product-hero,
+    .content, .bottom-section { display: none !important; }
+
+    /* ===== BACKGROUND — Full ambre, warm contrast ===== */
+    body {
+      background:
+        radial-gradient(circle 500px at 45% 15%, rgba(240,208,96,0.45) 0%, transparent 55%),
+        radial-gradient(circle 350px at 85% 25%, rgba(237,190,68,0.35) 0%, transparent 50%),
+        radial-gradient(circle 400px at 10% 40%, rgba(229,165,32,0.30) 0%, transparent 50%),
+        radial-gradient(circle 450px at 60% 55%, rgba(250,186,67,0.20) 0%, transparent 55%),
+        radial-gradient(circle 350px at 30% 80%, rgba(250,186,67,0.25) 0%, transparent 50%),
+        radial-gradient(circle 300px at 90% 75%, rgba(160,100,20,0.20) 0%, transparent 45%),
+        linear-gradient(165deg, #B8841E 0%, #9A6B18 25%, #7A5412 55%, #5A3F0E 85%, #4D3509 100%);
+    }
+
+    /* ===== LIGHT RAYS (diagonal warm streaks) ===== */
+    .light-ray {
+      position: absolute;
+      background: linear-gradient(to bottom, transparent 0%, rgba(240,208,96,0.10) 30%, rgba(237,190,68,0.14) 50%, rgba(240,208,96,0.08) 70%, transparent 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+    .ray-1 { top: -200px; left: 150px; width: 180px; height: 1400px; transform: rotate(-22deg); }
+    .ray-2 { top: 200px; right: 50px; width: 120px; height: 1200px; transform: rotate(-18deg); opacity: 0.7; }
+    .ray-3 { top: 400px; left: 600px; width: 90px; height: 1000px; transform: rotate(-25deg); opacity: 0.5; }
+
+    /* ===== BOKEH CIRCLES (soft light depth) ===== */
+    .bokeh {
+      position: absolute;
+      border-radius: 50%;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .bokeh-1 { top: 350px; right: 80px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(240,208,96,0.18) 0%, transparent 70%); }
+    .bokeh-2 { top: 900px; left: -40px; width: 250px; height: 250px; background: radial-gradient(circle, rgba(237,190,68,0.14) 0%, transparent 65%); }
+    .bokeh-3 { top: 1500px; right: 200px; width: 180px; height: 180px; background: radial-gradient(circle, rgba(240,208,96,0.16) 0%, transparent 70%); }
+    .bokeh-4 { top: 100px; left: 350px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(255,220,120,0.12) 0%, transparent 65%); }
+    .bokeh-5 { top: 1200px; left: 700px; width: 160px; height: 160px; background: radial-gradient(circle, rgba(237,190,68,0.12) 0%, transparent 70%); }
+
+    /* ===== SVG DEFS (shared gradients + filters) ===== */
+    .svg-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+    /* ===== DECORATIVE STARS (behind header) ===== */
+    .deco-star {
+      position: absolute;
+      z-index: 3;
+      opacity: 0.85;
+    }
+    .deco-star-1 {
+      top: 175px;
+      left: 220px;
+      width: 155px;
+      height: 155px;
+      transform: rotate(-12deg);
+    }
+    .deco-star-2 {
+      top: 155px;
+      left: 430px;
+      width: 195px;
+      height: 195px;
+      transform: rotate(5deg);
+    }
+    .deco-star-3 {
+      top: 210px;
+      left: 680px;
+      width: 130px;
+      height: 130px;
+      transform: rotate(18deg);
+    }
+
+    /* ===== EMBER PARTICLES (bright on ambre bg) ===== */
+    .ember {
+      position: absolute;
+      border-radius: 50%;
+      background: #EDBE44;
+      z-index: 4;
+    }
+    .ember-1 { top: 458px; left: 920px; width: 7px; height: 7px; box-shadow: 0 0 14px 5px rgba(237,190,68,0.60); }
+    .ember-2 { top: 780px; right: 935px; width: 5px; height: 5px; box-shadow: 0 0 10px 4px rgba(237,190,68,0.50); }
+    .ember-3 { top: 1120px; left: 970px; width: 8px; height: 8px; box-shadow: 0 0 16px 6px rgba(237,190,68,0.55); }
+    .ember-4 { top: 1340px; left: 75px; width: 6px; height: 6px; box-shadow: 0 0 12px 4px rgba(237,190,68,0.45); }
+    .ember-5 { top: 620px; left: 50px; width: 4px; height: 4px; box-shadow: 0 0 10px 3px rgba(237,190,68,0.40); }
+    .ember-6 { top: 1500px; left: 700px; width: 5px; height: 5px; box-shadow: 0 0 12px 4px rgba(237,190,68,0.45); }
+
+    /* ===== ACCENT STRIPES (thin diagonal lines) ===== */
+    .accent-stripe {
+      position: absolute;
+      width: 3px;
+      background: linear-gradient(to bottom, transparent, rgba(237,190,68,0.40), transparent);
+      z-index: 3;
+      border-radius: 2px;
+    }
+    .stripe-1 { top: 430px; left: 48px; height: 120px; transform: rotate(-20deg); }
+    .stripe-2 { top: 1200px; right: 55px; height: 90px; transform: rotate(15deg); }
+    .stripe-3 { top: 850px; left: 35px; height: 70px; transform: rotate(-30deg); }
+
+    /* ===== TITLE HIGHLIGHT (disabled) ===== */
+    .title-highlight { display: none; }
+
+    /* ===== HEADER ZONE ===== */
+    .header-zone {
+      position: absolute;
+      top: 268px;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      text-align: center;
+      padding: 0 70px;
+    }
+
+    .header-label {
+      display: inline-block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      margin-bottom: 14px;
+      padding: 6px 22px;
+      background: rgba(16, 12, 8, 0.50);
+      border: 1.5px solid rgba(237,190,68,0.30);
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .header-title {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 88px;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      line-height: 1.0;
+      text-shadow:
+        0 0 20px rgba(0,0,0,0.30),
+        0 3px 15px rgba(0,0,0,0.45);
+      position: relative;
+      z-index: 6;
+    }
+
+    /* Google badge */
+    .google-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 18px;
+      padding: 10px 26px;
+      background: rgba(14,12,10,0.70);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 100px;
+    }
+    .google-badge .g-icon { width: 26px; height: 26px; flex-shrink: 0; }
+    .google-badge .g-icon svg { width: 26px; height: 26px; }
+    .google-badge .g-rating {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 30px;
+      color: #fff;
+    }
+    .google-badge .g-stars { display: flex; gap: 2px; }
+    .google-badge .g-count {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 19px;
+      color: rgba(255,255,255,0.45);
+    }
+    .star-sm { width: 18px; height: 18px; }
+
+    /* ===== SPEECH BUBBLES (charbon on ambre bg) ===== */
+    .bubble {
+      position: absolute;
+      z-index: 10;
+      background: rgba(16, 12, 8, 0.95);
+      border: 2.5px solid rgba(237, 190, 68, 0.38);
+      border-radius: 22px;
+      padding: 26px 30px;
+      /* Offset outline (shifted shadow) for 3D depth */
+      box-shadow:
+        7px 7px 0 rgba(250,186,67,0.14),
+        0 14px 50px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+
+    /* Inner ambient glow */
+    .bubble::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: 20px;
+      background: linear-gradient(135deg,
+        rgba(250,186,67,0.06) 0%, transparent 30%,
+        transparent 70%, rgba(250,186,67,0.03) 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Tail — rotated square technique (bigger) */
+    .bubble::before {
+      content: '';
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      background: rgba(16, 12, 8, 0.95);
+      transform: rotate(45deg);
+      z-index: -1;
+    }
+
+    /* Left bubble tail (top-left) */
+    .bubble-left::before {
+      top: -16px;
+      left: 50px;
+      border-left: 2.5px solid rgba(237,190,68,0.38);
+      border-top: 2.5px solid rgba(237,190,68,0.38);
+      border-right: none;
+      border-bottom: none;
+      border-radius: 5px 0 0 0;
+    }
+
+    /* Right bubble tail (top-right) */
+    .bubble-right::before {
+      top: -16px;
+      right: 50px;
+      border-right: 2.5px solid rgba(237,190,68,0.38);
+      border-top: 2.5px solid rgba(237,190,68,0.38);
+      border-left: none;
+      border-bottom: none;
+      border-radius: 0 5px 0 0;
+    }
+
+    /* ===== ACCENT MARKS between bubbles ===== */
+    .accent-mark {
+      position: absolute;
+      z-index: 5;
+      pointer-events: none;
+    }
+    /* Small cross marks */
+    .mark-cross {
+      width: 18px;
+      height: 18px;
+    }
+    .mark-cross::before, .mark-cross::after {
+      content: '';
+      position: absolute;
+      background: rgba(237,190,68,0.35);
+      border-radius: 1px;
+    }
+    .mark-cross::before { width: 18px; height: 3px; top: 7.5px; left: 0; }
+    .mark-cross::after { width: 3px; height: 18px; top: 0; left: 7.5px; }
+    /* Short dash marks */
+    .mark-dash {
+      width: 22px;
+      height: 3px;
+      background: rgba(237,190,68,0.30);
+      border-radius: 2px;
+    }
+    /* Positions */
+    .mark-1 { top: 785px; left: 930px; transform: rotate(25deg); }
+    .mark-2 { top: 795px; left: 960px; transform: rotate(-15deg); }
+    .mark-3 { top: 1078px; right: 120px; transform: rotate(35deg); }
+    .mark-4 { top: 1088px; right: 85px; transform: rotate(-20deg); }
+    .mark-5 { top: 475px; left: 910px; transform: rotate(12deg); }
+    .mark-6 { top: 1320px; left: 880px; transform: rotate(-30deg); }
+
+    /* ===== BUBBLE POSITIONS (cascade asymetrique) ===== */
+    .bubble-1 {
+      top: 545px;
+      left: 72px;
+      width: 815px;
+      transform: rotate(-1.2deg);
+    }
+    .bubble-2 {
+      top: 860px;
+      right: 72px;
+      left: auto;
+      width: 770px;
+      transform: rotate(0.8deg);
+    }
+    .bubble-3 {
+      top: 1150px;
+      left: 95px;
+      width: 790px;
+      transform: rotate(-0.5deg);
+    }
+
+    /* ===== BUBBLE INNER CONTENT ===== */
+    .bubble-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      color: #fff;
+    }
+    /* Different avatar colors per person */
+    .avatar-amber { background: linear-gradient(135deg, #FABA43, #8E6215); }
+    .avatar-grenat { background: linear-gradient(135deg, #A04035, #7C3530); }
+    .avatar-feuille { background: linear-gradient(135deg, #6B8A5E, #4A6340); }
+
+    .author-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 28px;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    .review-stars {
+      display: flex;
+      gap: 3px;
+      margin-top: 3px;
+    }
+    .review-stars .star-sm { width: 16px; height: 16px; }
+
+    .review-meta {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 18px;
+      color: rgba(255,255,255,0.40);
+      margin-top: 2px;
+    }
+
+    .bubble-text {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 27px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.92);
+      line-height: 1.45;
+      font-style: italic;
+      position: relative;
+      z-index: 1;
+    }
+
+    .bubble-scores {
+      display: flex;
+      gap: 18px;
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+      z-index: 1;
+    }
+
+    .score-item {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 19px;
+      color: rgba(255,255,255,0.55);
+    }
+    .score-item strong {
+      color: #EDBE44;
+      font-weight: 700;
+    }
+
+    /* ===== BRAND STICKER ===== */
+    .brand-sticker {
+      position: absolute;
+      top: 1365px;
+      right: 80px;
+      z-index: 12;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 28px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: #FABA43;
+      border: 3px solid rgba(250,186,67,0.60);
+      padding: 10px 28px;
+      transform: rotate(10deg);
+      background: rgba(14,12,10,0.50);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 0 25px rgba(250,186,67,0.10);
+    }
+
+    /* ===== LARGE QUOTE MARK (watermark — dark on ambre) ===== */
+    .deco-quote {
+      position: absolute;
+      font-family: 'DM Sans', serif;
+      font-weight: 700;
+      line-height: 1;
+      color: rgba(20,18,16,0.10);
+      z-index: 2;
+      pointer-events: none;
+      user-select: none;
+    }
+    .deco-quote-open { top: 430px; left: 65px; font-size: 280px; }
+    .deco-quote-close { top: 1100px; right: 65px; font-size: 220px; transform: rotate(180deg); }
+
+    /* ===== BRAND TEXTURE: Ultra-zoom burger icon ===== */
+    .brand-burger-xl {
+      position: absolute;
+      right: -100px;
+      top: 620px;
+      width: 750px;
+      height: 750px;
+      opacity: 0.12;
+      transform: rotate(18deg);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* ===== BRAND TEXTURE: Medium burger (left bleed) ===== */
+    .brand-burger-md {
+      position: absolute;
+      left: -80px;
+      top: 1280px;
+      width: 280px;
+      height: 280px;
+      opacity: 0.09;
+      transform: rotate(-25deg);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* ===== BRAND TEXTURE: Micro burger scatter ===== */
+    .brand-burger-sm {
+      position: absolute;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .brand-sm-1 { top: 448px; right: 25px; width: 60px; height: 60px; transform: rotate(-22deg); opacity: 0.13; }
+    .brand-sm-2 { top: 1050px; left: 18px; width: 45px; height: 45px; transform: rotate(28deg); opacity: 0.10; }
+    .brand-sm-3 { top: 1430px; left: 520px; width: 55px; height: 55px; transform: rotate(-10deg); opacity: 0.11; }
+    .brand-sm-4 { top: 755px; left: 12px; width: 38px; height: 38px; transform: rotate(38deg); opacity: 0.08; }
+
+    /* ===== BRAND TEXTURE: Tagline diagonal bands ===== */
+    .brand-tagline-band {
+      position: absolute;
+      left: -300px;
+      width: 2000px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      z-index: 2;
+      pointer-events: none;
+      user-select: none;
+    }
+    .brand-band-1 {
+      top: 1360px;
+      transform: rotate(-12deg);
+      font-size: 24px;
+      color: rgba(20, 18, 16, 0.10);
+    }
+    .brand-band-2 {
+      top: 1430px;
+      transform: rotate(-12deg);
+      font-size: 19px;
+      color: rgba(255, 255, 255, 0.06);
+      letter-spacing: 10px;
+    }
+
+    /* ===== BOTTOM ===== */
+    .story-bottom {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 10;
+      text-align: center;
+      padding: 0 70px 80px;
+    }
+    .story-bottom .tagline {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 38px;
+      color: #fff;
+      line-height: 1.3;
+    }
+    .story-bottom .tagline em {
+      color: #FABA43;
+      font-style: italic;
+    }
+    .story-bottom .logo-container {
+      margin-top: 14px;
+      display: flex;
+      justify-content: center;
+    }
+    .story-bottom .logo-container img {
+      width: 180px;
+      height: auto;
+      opacity: 0.80;
+    }
+
+    /* ===== BOTTOM DARKEN (for tagline readability) ===== */
+    .bottom-glow {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 400px;
+      background: linear-gradient(to top, rgba(20,18,16,0.55) 0%, rgba(20,18,16,0.20) 50%, transparent 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="grain-subtle">
+
+  <!-- SVG definitions (shared) -->
+  <svg class="svg-defs" aria-hidden="true">
+    <defs>
+      <linearGradient id="starGold" x1="0" y1="0" x2="0.3" y2="1">
+        <stop offset="0%" stop-color="#EDBE44"/>
+        <stop offset="45%" stop-color="#FABA43"/>
+        <stop offset="100%" stop-color="#8E6215"/>
+      </linearGradient>
+      <filter id="starGlow">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="3.5"/>
+        <feMerge>
+          <feMergeNode/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- LIGHT RAYS -->
+  <div class="light-ray ray-1"></div>
+  <div class="light-ray ray-2"></div>
+  <div class="light-ray ray-3"></div>
+
+  <!-- BOKEH CIRCLES -->
+  <div class="bokeh bokeh-1"></div>
+  <div class="bokeh bokeh-2"></div>
+  <div class="bokeh bokeh-3"></div>
+  <div class="bokeh bokeh-4"></div>
+  <div class="bokeh bokeh-5"></div>
+
+  <!-- DECORATIVE STARS (behind header) -->
+  <svg class="deco-star deco-star-1" viewBox="0 0 100 100" fill="none">
+    <path d="M50 0 L62 38 L100 38 L70 60 L80 100 L50 75 L20 100 L30 60 L0 38 L38 38 Z"
+          fill="url(#starGold)" filter="url(#starGlow)"/>
+  </svg>
+  <svg class="deco-star deco-star-2" viewBox="0 0 100 100" fill="none">
+    <path d="M50 0 L62 38 L100 38 L70 60 L80 100 L50 75 L20 100 L30 60 L0 38 L38 38 Z"
+          fill="url(#starGold)" filter="url(#starGlow)"/>
+  </svg>
+  <svg class="deco-star deco-star-3" viewBox="0 0 100 100" fill="none">
+    <path d="M50 0 L62 38 L100 38 L70 60 L80 100 L50 75 L20 100 L30 60 L0 38 L38 38 Z"
+          fill="url(#starGold)" filter="url(#starGlow)"/>
+  </svg>
+
+  <!-- EMBER PARTICLES -->
+  <div class="ember ember-1"></div>
+  <div class="ember ember-2"></div>
+  <div class="ember ember-3"></div>
+  <div class="ember ember-4"></div>
+  <div class="ember ember-5"></div>
+  <div class="ember ember-6"></div>
+
+  <!-- ACCENT STRIPES -->
+  <div class="accent-stripe stripe-1"></div>
+  <div class="accent-stripe stripe-2"></div>
+  <div class="accent-stripe stripe-3"></div>
+
+  <!-- DECORATIVE QUOTES (disabled) -->
+
+  <!-- TITLE HIGHLIGHT (brush stroke) -->
+  <div class="title-highlight"></div>
+
+  <!-- HEADER -->
+  <div class="header-zone">
+    <div class="header-label">Avis Google</div>
+    <div class="header-title">{{HEADER_TEXT}}</div>
+    <!-- Google badge removed -->
+  </div>
+
+  <!-- ===== SPEECH BUBBLES ===== -->
+
+  <!-- Bubble 1 (left, rotated -1.2deg) -->
+  <div class="bubble bubble-left bubble-1" style="display: {{REVIEW_1_SHOW}}">
+    <div class="bubble-header">
+      <div class="avatar {{AVATAR_COLOR_1}}"><span>{{INITIAL_1}}</span></div>
+      <div>
+        <div class="author-name">{{AUTHOR_1}}</div>
+        <div class="review-meta">{{META_1}}</div>
+        <div class="review-stars">
+          <svg class="star-sm" viewBox="0 0 24 24" fill="#FABA43"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star-sm" viewBox="0 0 24 24" fill="#FABA43"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star-sm" viewBox="0 0 24 24" fill="#FABA43"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star-sm" viewBox="0 0 24 24" fill="#FABA43"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star-sm" viewBox="0 0 24 24" fill="#FABA43"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="bubble-text">{{TEXT_1}}</div>
+    <div class="bubble-scores" style="display: {{SCORES_1_SHOW}}">
+      <span class="score-item">Cuisine : <strong>{{CUISINE_1}}</strong></span>
+      <span class="score-item">Service : <strong>{{SERVICE_1}}</strong></span>
+      <span class="score-item">Ambiance : <strong>{{AMBIANCE_1}}</strong></span>
+    </div>
+  </div>
+
+  <!-- Bubble 2 (right, rotated +0.8deg) -->
+  <div class="bubble bubble-right bubble-2" style="display: {{REVIEW_2_SHOW}}">
+    <div class="bubble-header">
+      <div class="avatar {{AVATAR_COLOR_2}}"><span>{{INITIAL_2}}</span></div>
+      <div>
+        <div class="author-name">{{AUTHOR_2}}</div>
+        <div class="review-meta">{{META_2}}</div>
+        <div class="review-stars">
+          <svg class="star-sm" viewBox="0 0 24 24" fill="#FABA43"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star-sm" viewBox="0 0 24 24" fill="#FABA43"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star-sm" viewBox="0 0 24 24" fill="#FABA43"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star-sm" viewBox="0 0 24 24" fill="#FABA43"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star-sm" viewBox="0 0 24 24" fill="#FABA43"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="bubble-text">{{TEXT_2}}</div>
+    <div class="bubble-scores" style="display: {{SCORES_2_SHOW}}">
+      <span class="score-item">Cuisine : <strong>{{CUISINE_2}}</strong></span>
+      <span class="score-item">Service : <strong>{{SERVICE_2}}</strong></span>
+      <span class="score-item">Ambiance : <strong>{{AMBIANCE_2}}</strong></span>
+    </div>
+  </div>
+
+  <!-- Bubble 3 (left, rotated -0.5deg) -->
+  <div class="bubble bubble-left bubble-3" style="display: {{REVIEW_3_SHOW}}">
+    <div class="bubble-header">
+      <div class="avatar {{AVATAR_COLOR_3}}"><span>{{INITIAL_3}}</span></div>
+      <div>
+        <div class="author-name">{{AUTHOR_3}}</div>
+        <div class="review-meta">{{META_3}}</div>
+        <div class="review-stars">
+          <svg class="star-sm" viewBox="0 0 24 24" fill="#FABA43"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star-sm" viewBox="0 0 24 24" fill="#FABA43"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star-sm" viewBox="0 0 24 24" fill="#FABA43"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star-sm" viewBox="0 0 24 24" fill="#FABA43"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star-sm" viewBox="0 0 24 24" fill="#FABA43"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="bubble-text">{{TEXT_3}}</div>
+    <div class="bubble-scores" style="display: {{SCORES_3_SHOW}}">
+      <span class="score-item">Cuisine : <strong>{{CUISINE_3}}</strong></span>
+      <span class="score-item">Service : <strong>{{SERVICE_3}}</strong></span>
+      <span class="score-item">Ambiance : <strong>{{AMBIANCE_3}}</strong></span>
+    </div>
+  </div>
+
+  <!-- ACCENT MARKS (between bubbles) -->
+  <div class="accent-mark mark-cross mark-1"></div>
+  <div class="accent-mark mark-dash mark-2"></div>
+  <div class="accent-mark mark-cross mark-3"></div>
+  <div class="accent-mark mark-dash mark-4"></div>
+  <div class="accent-mark mark-dash mark-5"></div>
+  <div class="accent-mark mark-cross mark-6"></div>
+
+  <!-- BRAND TEXTURE: Medium burger (bleeding left edge) -->
+  <svg class="brand-burger-md" viewBox="295 -2 62 57" fill="#EDBE44">
+    <path d="M301.14,27.2s23.15-7.06,48.17-6.88c9.57.07-2.47-22.65-27.13-20.12-.26.03-.53.07-.79.12-22.86,4.79-23.62,19.86-23.62,19.86,0,0-2.25,8.21,3.37,7.02Z"/>
+    <path d="M328.32,35.59c-17.57,3.75-2-2.84,15.01-3.21,8.42-.18,6.69-3.05-2.32-2.69-47.3,1.94.58-3.37,9.16-4.11,1.12-.1,2.05-2.69-1.21-2.84,0,0-29.98-.18-45.5,8-17.38,9.16,19.68.42,21.33,1.58,0,0-13.48,2.74-20.26,6.71-5.93,3.47,30.72-3.81,49.17-2.81,9,.49-3.71-5.25-25.38-.63Z"/>
+    <path d="M301.55,49.28c5.53,3.9,42.86,7.27,51.08-6.11,4.37-10.48-60.87-1.63-51.08,6.11Z"/>
+  </svg>
+
+  <!-- BRAND TEXTURE: Ultra-zoom burger (bleeding right edge, light fill) -->
+  <svg class="brand-burger-xl" viewBox="295 -2 62 57" fill="#EDBE44">
+    <path d="M301.14,27.2s23.15-7.06,48.17-6.88c9.57.07-2.47-22.65-27.13-20.12-.26.03-.53.07-.79.12-22.86,4.79-23.62,19.86-23.62,19.86,0,0-2.25,8.21,3.37,7.02Z"/>
+    <path d="M328.32,35.59c-17.57,3.75-2-2.84,15.01-3.21,8.42-.18,6.69-3.05-2.32-2.69-47.3,1.94.58-3.37,9.16-4.11,1.12-.1,2.05-2.69-1.21-2.84,0,0-29.98-.18-45.5,8-17.38,9.16,19.68.42,21.33,1.58,0,0-13.48,2.74-20.26,6.71-5.93,3.47,30.72-3.81,49.17-2.81,9,.49-3.71-5.25-25.38-.63Z"/>
+    <path d="M301.55,49.28c5.53,3.9,42.86,7.27,51.08-6.11,4.37-10.48-60.87-1.63-51.08,6.11Z"/>
+  </svg>
+
+  <!-- BRAND TEXTURE: Micro burgers -->
+  <svg class="brand-burger-sm brand-sm-1" viewBox="295 -2 62 57" fill="#141210">
+    <path d="M301.14,27.2s23.15-7.06,48.17-6.88c9.57.07-2.47-22.65-27.13-20.12-.26.03-.53.07-.79.12-22.86,4.79-23.62,19.86-23.62,19.86,0,0-2.25,8.21,3.37,7.02Z"/>
+    <path d="M328.32,35.59c-17.57,3.75-2-2.84,15.01-3.21,8.42-.18,6.69-3.05-2.32-2.69-47.3,1.94.58-3.37,9.16-4.11,1.12-.1,2.05-2.69-1.21-2.84,0,0-29.98-.18-45.5,8-17.38,9.16,19.68.42,21.33,1.58,0,0-13.48,2.74-20.26,6.71-5.93,3.47,30.72-3.81,49.17-2.81,9,.49-3.71-5.25-25.38-.63Z"/>
+    <path d="M301.55,49.28c5.53,3.9,42.86,7.27,51.08-6.11,4.37-10.48-60.87-1.63-51.08,6.11Z"/>
+  </svg>
+  <svg class="brand-burger-sm brand-sm-2" viewBox="295 -2 62 57" fill="#141210">
+    <path d="M301.14,27.2s23.15-7.06,48.17-6.88c9.57.07-2.47-22.65-27.13-20.12-.26.03-.53.07-.79.12-22.86,4.79-23.62,19.86-23.62,19.86,0,0-2.25,8.21,3.37,7.02Z"/>
+    <path d="M328.32,35.59c-17.57,3.75-2-2.84,15.01-3.21,8.42-.18,6.69-3.05-2.32-2.69-47.3,1.94.58-3.37,9.16-4.11,1.12-.1,2.05-2.69-1.21-2.84,0,0-29.98-.18-45.5,8-17.38,9.16,19.68.42,21.33,1.58,0,0-13.48,2.74-20.26,6.71-5.93,3.47,30.72-3.81,49.17-2.81,9,.49-3.71-5.25-25.38-.63Z"/>
+    <path d="M301.55,49.28c5.53,3.9,42.86,7.27,51.08-6.11,4.37-10.48-60.87-1.63-51.08,6.11Z"/>
+  </svg>
+  <svg class="brand-burger-sm brand-sm-3" viewBox="295 -2 62 57" fill="#141210">
+    <path d="M301.14,27.2s23.15-7.06,48.17-6.88c9.57.07-2.47-22.65-27.13-20.12-.26.03-.53.07-.79.12-22.86,4.79-23.62,19.86-23.62,19.86,0,0-2.25,8.21,3.37,7.02Z"/>
+    <path d="M328.32,35.59c-17.57,3.75-2-2.84,15.01-3.21,8.42-.18,6.69-3.05-2.32-2.69-47.3,1.94.58-3.37,9.16-4.11,1.12-.1,2.05-2.69-1.21-2.84,0,0-29.98-.18-45.5,8-17.38,9.16,19.68.42,21.33,1.58,0,0-13.48,2.74-20.26,6.71-5.93,3.47,30.72-3.81,49.17-2.81,9,.49-3.71-5.25-25.38-.63Z"/>
+    <path d="M301.55,49.28c5.53,3.9,42.86,7.27,51.08-6.11,4.37-10.48-60.87-1.63-51.08,6.11Z"/>
+  </svg>
+  <svg class="brand-burger-sm brand-sm-4" viewBox="295 -2 62 57" fill="#141210">
+    <path d="M301.14,27.2s23.15-7.06,48.17-6.88c9.57.07-2.47-22.65-27.13-20.12-.26.03-.53.07-.79.12-22.86,4.79-23.62,19.86-23.62,19.86,0,0-2.25,8.21,3.37,7.02Z"/>
+    <path d="M328.32,35.59c-17.57,3.75-2-2.84,15.01-3.21,8.42-.18,6.69-3.05-2.32-2.69-47.3,1.94.58-3.37,9.16-4.11,1.12-.1,2.05-2.69-1.21-2.84,0,0-29.98-.18-45.5,8-17.38,9.16,19.68.42,21.33,1.58,0,0-13.48,2.74-20.26,6.71-5.93,3.47,30.72-3.81,49.17-2.81,9,.49-3.71-5.25-25.38-.63Z"/>
+    <path d="M301.55,49.28c5.53,3.9,42.86,7.27,51.08-6.11,4.37-10.48-60.87-1.63-51.08,6.11Z"/>
+  </svg>
+
+  <!-- BRAND TEXTURE: Tagline diagonal bands -->
+  <div class="brand-tagline-band brand-band-1">LE CHEAT MEAL QUI N'EN EST PAS UN &ensp;&bull;&ensp; LE CHEAT MEAL QUI N'EN EST PAS UN &ensp;&bull;&ensp; LE CHEAT MEAL QUI N'EN EST PAS UN &ensp;&bull;&ensp; LE CHEAT MEAL QUI N'EN EST PAS UN</div>
+  <div class="brand-tagline-band brand-band-2">STRICT FOOD'S &ensp;&bull;&ensp; STRICT FOOD'S &ensp;&bull;&ensp; STRICT FOOD'S &ensp;&bull;&ensp; STRICT FOOD'S &ensp;&bull;&ensp; STRICT FOOD'S &ensp;&bull;&ensp; STRICT FOOD'S &ensp;&bull;&ensp; STRICT FOOD'S</div>
+
+  <!-- BOTTOM GLOW -->
+  <div class="bottom-glow"></div>
+
+  <!-- BOTTOM : tagline + logo -->
+  <div class="story-bottom">
+    <div class="tagline">{{TAGLINE}}</div>
+    <div class="logo-container">
+      <img src="_base/logo.svg" alt="STRICT FOOD'S">
+    </div>
+  </div>
+
+</body>
+</html>

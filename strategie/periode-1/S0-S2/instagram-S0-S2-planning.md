@@ -21,12 +21,12 @@ Durée estimée : 30-45 minutes pour le profil + 1-2h pour les covers Highlights
 - [ ] Catégorie : "Restaurant" ou "Restauration rapide"
 - [ ] Anciens posts archivés (recommandation : tout archiver)
 - [ ] 6 covers Highlights créées et publiées :
-  - [ ] LA CARTE (fond #141210 + texte "CARTE" en #BF8522, typo Oswald)
-  - [ ] NOS ARTISANS (fond #141210 + texte "ARTISANS" en #BF8522)
-  - [ ] COULISSES (fond #141210 + texte "COULISSES" en #BF8522)
-  - [ ] L'ÉQUIPE (fond #141210 + texte "TEAM" en #BF8522)
-  - [ ] AVIS (fond #141210 + icône étoile ou texte "AVIS" en #BF8522)
-  - [ ] NOUS TROUVER (fond #141210 + texte "VENIR" en #BF8522)
+  - [ ] LA CARTE (fond #141210 + texte "CARTE" en #FABA43, typo Oswald)
+  - [ ] NOS ARTISANS (fond #141210 + texte "ARTISANS" en #FABA43)
+  - [ ] COULISSES (fond #141210 + texte "COULISSES" en #FABA43)
+  - [ ] L'ÉQUIPE (fond #141210 + texte "TEAM" en #FABA43)
+  - [ ] AVIS (fond #141210 + icône étoile ou texte "AVIS" en #FABA43)
+  - [ ] NOUS TROUVER (fond #141210 + texte "VENIR" en #FABA43)
 - [ ] Highlight "LA CARTE" alimenté (stories des produits phares avec prix)
 - [ ] Highlight "NOUS TROUVER" alimenté (plan d'accès, photo façade, horaires)
 - [ ] Compte vérifié prêt à publier
@@ -99,7 +99,7 @@ Carrousel narratif "Du boucher à l'assiette". Chaque slide est une étape de la
 
 | Slide | Contenu | Photo source | Notes DA |
 |-------|---------|-------------|----------|
-| 1 (Cover) | Texte sur fond sombre : "De la Boucherie Labourde à ton assiette." | À créer (template) | Fond #141210, typo Oswald en blanc, sous-titre Space Grotesk en #BF8522. **Cette slide est l'image de grille** — elle doit être forte visuellement. |
+| 1 (Cover) | Texte sur fond sombre : "De la Boucherie Labourde à ton assiette." | À créer (template) | Fond #141210, typo Oswald en blanc, sous-titre Space Grotesk en #FABA43. **Cette slide est l'image de grille** — elle doit être forte visuellement. |
 | 2 | Viande crue sur planche, découpe artisanale | `2025-10-03_15-57-14_UTC_2.jpg` | Plans serrés, gants noirs, bois de planche visible |
 | 3 | Assemblage du burger, mains gantées, herbes | `2025-10-03_15-57-14_UTC_1.jpg` | Le geste de précision — montrer le soin |
 | 4 | Ajout verdure/finitions sur le burger | `2025-11-24_17-18-14_UTC.jpg` | Verdure fraîche, contraste vert sur fond sombre |
@@ -317,7 +317,7 @@ Premier post nutrition. Carrousel infographique comparant le STRICT Bœuf à un 
 
 | Slide | Contenu | Notes DA |
 |-------|---------|----------|
-| 1 (Cover) | "Ton burger vs notre burger." + silhouette des deux burgers | Fond #141210, typo Oswald blanc, accroche en #BF8522. Image de grille → doit être graphique et épurée. |
+| 1 (Cover) | "Ton burger vs notre burger." + silhouette des deux burgers | Fond #141210, typo Oswald blanc, accroche en #FABA43. Image de grille → doit être graphique et épurée. |
 | 2 | Côté gauche : "Burger classique" (800-1000 kcal, 25-30g prot, 45-55g lip). Côté droit : "STRICT Bœuf" (596 kcal, 53g prot, 21,5g lip). Barres visuelles de comparaison. | Cuivre Braisé pour StrictFood, gris pour le classique. Feuille Grillée (#5C7858) pour les indicateurs positifs. |
 | 3 | Focus sur les 3 différences clés : "1. Viande d'artisan, pas industrielle. 2. Cuit sans huile (chaleur pulsée). 3. Pain boulanger, pas bun industriel." | Icônes simples, texte Space Grotesk, fond sombre |
 | 4 | Conclusion : "596 kcal. 53g de protéines. Le cheat meal qui n'en est pas un." + 📍 localisation | Tagline en signature, CTA implicite |

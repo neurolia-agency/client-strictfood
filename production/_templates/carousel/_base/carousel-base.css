@@ -21,12 +21,12 @@ body {
 
 /* === Tokens === */
 :root {
-  --ambre: #E5A520;
+  --ambre: #FABA43;
   --charbon: #1a1714;
   --blanc: #f5f0e8;
   --blanc-pur: #fff;
 
-  --ambre-rgb: 229, 165, 32;
+  --ambre-rgb: 250, 186, 67;
   --charbon-rgb: 26, 23, 20;
   --blanc-rgb: 245, 240, 232;
 

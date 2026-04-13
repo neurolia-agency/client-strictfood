@@ -1,35 +1,50 @@
-# Prompt — Story 02 (irl-sublimation macro-croustillant)
+# Prompt — S3 Mardi Story 02
 
-## Mode
-`irl-sublimation` — GPT Images, 9:16
+> **Mode** : full-ia lifestyle
+> **Concept** : lifestyle-escalier (banc urbain adapte)
+> **Traitement** : sillon
+> **Produit en scene** : burger boeuf black bun + sac kraft noir
+> **Format** : 9:16 (1080×1920)
 
-## Concept visuel
-`macro-croustillant` — Micro-saison A (Macro & Texture)
+## Contraintes realisme appliquees
 
-## Photo source
-`public/images/photos-references/produits-source/burgers-black/strict-boeuf/strict-boeuf-macro.png`
+- Personnage ne regarde JAMAIS la camera
+- Pain NOIR sesame obligatoire sur le burger
+- Sac kraft NOIR matte, legerement froisse, PAS de logo (ajoute en etape 2)
+- Piece ambre obligatoire dans la tenue
+- Posture candid naturelle, pas posee
+- Peau naturelle : pores visibles, texture reelle, pas de retouche
+- Au moins 3 traits distinctifs sur la personne
 
-## Prompt sublimation
+## Prompt Combo-B
 
-Sublimate this extreme macro food photograph into hyper-detailed texture art. Push every surface toward maximum tactile detail. The beef steak's uniform golden-brown Maillard crust (oven-seared, NO grill marks, NO char lines) should look intensely crispy and caramelized — every micro-fissure, every fiber of meat visible. The finely grated parmesan dust (Myfitcheese) scattered on the hot steak surface — tiny powdery granules, some lightly golden where they contact the warm crust, others pale and chalky. The parmesan does NOT melt into strings or stretch — it remains as dry granular fragments. The thin delicate drizzle of yellow-orange pepper sauce catching warm light. The small round spoon-shaped lamb's lettuce (mache) leaves with visible vein texture. The charcoal black sesame bun fragment visible at the edge with artisanal imperfections — cracks in the crust, random uneven sesame seed distribution. Warm copper-amber tones on all reflections. Deep dramatic shadows. Pronounced cinematic film grain. Maintain exact product proportions and ingredients from the source photo — enhance lighting and texture contrast, do not modify the product. Full-frame portrait 9:16.
+```
+Street photography editorial of a young Mediterranean woman, approximately 26 years old, curly brown mid-length hair, tortoiseshell sunglasses pushed up on her head, small gold chain necklace, a tiny mole on her left cheekbone. She wears a cropped ambre-gold hoodie (#FABA43, the dominant color piece), wide-leg white cargo pants, chunky black platform sneakers. She sits on a modern metal public bench in a city square, one leg tucked underneath her, body turned 3/4 toward camera. Her right hand holds a burger at chin height — the burger has a pitch-black charcoal sesame bun densely covered in golden sesame seeds, with visible mâche leaves (small round green, NOT arugula) bursting out the sides, red onion rings peeking, and a thick beef steak with Maillard crust (NO grill marks). Her left hand rests on the bench beside a slightly crumpled matte black kraft paper take-away bag (NO logo, NO text on the bag — plain black kraft). Her gaze is directed LEFT, a half-smile as if someone is passing by — she does NOT look at the camera. Behind her: a vibrant yellow-painted wall with a large colorful mural/fresco (reds, teals, warm yellows), sunlit, casting sharp midday shadows. The bench sits on light grey stone pavement. Natural direct midday light, sharp shadows, warm tones. Dewy skin texture, visible pores on her forearms. Shot on 35mm f/2.0, ISO 400, street photography style, Kodak Portra 400 grain, slight contre-plongée. Full american shot framing. Aspect ratio: 9:16 vertical portrait.
+```
 
-## Audit realisme — macro-croustillant x STRICT Boeuf
+## Etape 2 — Logo insertion (apres generation)
 
-| # | Domaine | Severite | Verification |
-|---|---------|----------|--------------|
-| 1 | Materiaux | OK | Parmesan = miettes poudreuses (pas de cheese pull). Mache = petites feuilles rondes. Sauce = filet jaune-orange. |
-| 2 | Fidelite S1 | OK | "maintain exact product proportions and ingredients" present |
-| 3 | Preservation S2 | OK | Fond sombre preserve, pas de contexte ajoute |
-| 4 | Termes interdits | OK | Aucun terme interdit (grill marks, charred, brioche, white bun, cheese pull, arugula) |
-| 5 | Termes obligatoires | OK | "charcoal black sesame bun", "uniform golden-brown Maillard crust", "oven-seared" presents |
-| 6 | Cuisson | OK | "NO grill marks, NO char lines" explicite |
+Si le sac kraft est visible et face camera :
+```
+Edit this full-body street photograph. Print the exact white logo from the reference
+image onto the front face of the black kraft paper bag. The logo must appear as white
+ink printed directly on the matte black kraft surface, centered on the bag face, about
+55 percent of bag width. Reproduce the exact same typography, burger icon in the O,
+and spacing as shown in the reference logo. Keep the ENTIRE original image perfectly
+intact — full body framing, the background, the lighting. Change NOTHING except adding
+the logo on the bag. Maintain the original 9:16 vertical portrait format.
+```
 
-## Contraintes
-- Croute Maillard uniforme (chaleur pulsee) — PAS de grill marks
-- Parmesan = miettes poudreuses, pas de fromage fondu
-- Mache = petites feuilles rondes (pas roquette)
-- Pain noir visible doit rester NOIR
-- Pas de contexte ajoute, fond sombre
+Logo reference : `public/logo/strictfood-logo-white-reference.png`
 
-## Resolution
-4K
+## Sillon — Champs template
+
+| Placeholder | Valeur |
+|-------------|--------|
+| PRODUCT_NAME | PAUSE STRICT |
+| PRODUCT_INFO | Ton midi, en mieux |
+| SHOW_INFO | block |
+| MOOD_CLASS | mood-cuivre |
+| PHOTO_PRESET | photo-centre |
+| GRAIN | grain-subtle |
+| TAGLINE | Le cheat meal <em>qui n'en est pas un</em> |

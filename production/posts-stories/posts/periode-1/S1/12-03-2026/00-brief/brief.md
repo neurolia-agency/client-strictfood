@@ -26,7 +26,7 @@ Slug recette : `strict-boeuf`
 
 | Slide | Contenu | Notes DA |
 |-------|---------|----------|
-| 1 (Cover) | Texte sur fond sombre : "De la Boucherie Labourde à ton assiette." | Fond #141210, typo Oswald en blanc, sous-titre Space Grotesk en #BF8522. **Image de grille** — doit être forte visuellement. |
+| 1 (Cover) | Texte sur fond sombre : "De la Boucherie Labourde à ton assiette." | Fond #141210, typo Oswald en blanc, sous-titre Space Grotesk en #FABA43. **Image de grille** — doit être forte visuellement. |
 | 2 | Viande crue sur planche, découpe artisanale | Plans serrés, gants noirs, bois de planche visible |
 | 3 | Assemblage du burger, mains gantées, herbes | Le geste de précision — montrer le soin |
 | 4 | Ajout verdure/finitions sur le burger | Verdure fraîche, contraste vert sur fond sombre |

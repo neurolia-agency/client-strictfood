@@ -63,7 +63,7 @@ Image de fond : `aucune`
 
 ## Contraintes
 
-- DA : Dark Food Premium (fond Charbon #141210, accents Cuivre Braisé #BF8522)
+- DA : Dark Food Premium (fond Charbon #141210, accents Cuivre Braisé #FABA43)
 - Le teaser ne montre PAS les fondateurs — garder le suspense
 - Le wrap diversifie la perception de la carte (pas que des burgers)
 

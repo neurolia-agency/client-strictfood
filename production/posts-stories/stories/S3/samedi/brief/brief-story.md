@@ -1,101 +1,144 @@
 # Brief Stories — S3 Samedi (2026-03-29)
 
-> **Pilier du jour** : L'Equipe / Le Plat — Pas de post
-> **Objectif strategique** : Avant-dernier jour ouvert (dimanche aussi). Bookends IRL : ouverture matin + fin de service samedi. Clore avec un climax food porn full-ia : Tenders croustillant eclate (sommet de la micro-saison Macro & Texture).
-> **Persona cible** : Tous
-> **Ref strategie** : Phase 1 §4.1 — "humaniser la marque via les coulisses"
+> **Pilier du jour** : Les Benefices — Post S3-03 Zero huile (masque-inverse, ambre)
+> **Objectif strategique** : Completer le post Zero huile avec un visuel vapeur air fryer (sensation physique de la cuisson saine). Lifestyle rue energique. Fiche produit STRICT Vege (jamais eu de fiche story). Rappel samedi.
+
+> **REGLE ABSOLUE** : Tous les chemins photo doivent pointer vers des fichiers existants.
+> **Templates** : `story-universal.html` (defaut), `story-sillon.html`, `story-sceau.html`, `story-feuillete-photo.html`, `story-feuillete-data.html`.
 
 ---
 
-## Story 1 — IRL : Ouverture du matin
+## Story 1 — STRICT MAX Boeuf vapeur air fryer
 
 | Champ | Valeur |
 |-------|--------|
-| Type | IRL |
-| Mode | `irl` |
-| Highlight | — |
-| Qui produit | Romain/Dorian (photo) + Pipeline (overlay) |
-| Template | `irl-story.html` |
+| Mode | full-ia |
+| Traitement | — |
+| Fond | ambre |
+| Highlight | LA CARTE |
 | Mood | cuivre |
-| Image | hero |
-| Brand props | aucun |
+| Concept visuel | sensation-vapeur |
 
 ### Objectif
 
-Le restaurant vide, le calme avant la tempete. La lumiere matinale douce, les preparations silencieuses. Ce moment intime humanise la marque — on voit le travail avant que les clients n'arrivent.
+Complement post Zero huile : montrer visuellement ce que la cuisson chaleur pulsee produit. Vapeur epaisse qui s'echappe du STRICT MAX Boeuf fraichement sorti du air fryer. On voit la chaleur, on sent la fraicheur de la cuisson.
 
 ### Contenu
 
-Photo : `[A FOURNIR par Romain/Dorian — samedi matin tot, avant le service]`
-Texte overlay : `On ouvre.`
-Position texte : bas
-Filtre : leger
-
-> **Cadrage souhaite** : Plan large, restaurant vide et propre, lumiere matinale naturelle. Tables dressees, comptoir pret. Ambiance calme, anticipation.
+| Champ | Valeur |
+|-------|--------|
+| Sujet | STRICT MAX Boeuf — burger ferme vu de 3/4, vapeur epaisse qui s'echappe du chapeau et des cotes, croute Maillard uniforme sur le double steak visible entre les buns, graines sesame dorees brillantes sur bun noir, fond ambre incandescent, chaleur palpable |
+| Produit | STRICT MAX Boeuf — slug recette : `strict-max-boeuf` |
+| Direction artistique | 85mm f/2.0, eclairage backlit chaud + lateral, vapeur eclairee par l'arriere (glow ambre), fond ambre-cuir, profondeur courte, grain film doux, atmosphere thermique, NO middle bun, NO grill marks |
+| TEXT_LINE_1 | — |
+| TEXT_LINE_2 | — |
 
 ---
 
-## Story 2 — IRL : Fin de service
+## Story 2 — Lifestyle rue sac kraft
 
 | Champ | Valeur |
 |-------|--------|
-| Type | IRL |
-| Mode | `irl` |
+| Mode | full-ia |
+| Traitement | sceau |
+| Fond | — |
 | Highlight | — |
-| Qui produit | Romain/Dorian (photo) + Pipeline (overlay) |
-| Template | `irl-story.html` |
 | Mood | cuivre |
-| Image | hero |
-| Brand props | aucun |
+| Concept visuel | lifestyle-rue |
 
 ### Objectif
 
-Bookend de la story 1 — le meme restaurant apres le rush du samedi. Comptoir range, fin de journee, satisfaction du travail accompli. On enchaine demain dimanche.
+Lifestyle urbain dynamique : un homme en marche dans une rue pietonne ensoleillée, sac kraft noir StrictFood a la main. Energie du samedi, sortie restau. Traitement sceau avec cercle glassmorphism.
 
 ### Contenu
 
-Photo : `[A FOURNIR par Romain/Dorian — samedi fin de journee]`
-Texte overlay : `Samedi, check.`
-Position texte : bas
-Filtre : leger
+| Champ | Valeur |
+|-------|--------|
+| Concept | lifestyle-rue |
+| Photo reference | [ref Pinterest : "man walking pedestrian street sunny paper bag takeaway candid streetwear photography"] |
+| Personnage | Homme ~27 ans, peau claire, cheveux chatains ondules mi-longs, lunettes de soleil |
+| Tenue | Bomber ambre (#FABA43), t-shirt gris chine, bermuda cargo noir, sneakers blanches |
+| Posture | En marche, pas determine, sac kraft noir tenu en main gauche |
+| Regard | Droit devant, deporte gauche, lunettes cachent le regard |
+| Scene | Rue pietonne ensoleillée, facades ocre/jaune en arriere-plan flou, pavés, passants flous |
+| Sac kraft | oui |
+| Cadrage | Plein pied, legere contre-plongee |
+| TEXT_LINE_1 | — |
+| TEXT_LINE_2 | — |
 
-> **Cadrage souhaite** : Plan moyen, comptoir range/nettoye. Ambiance fin de journee. Dernier jour de la semaine — satisfaction visible dans le cadre (propre, ordonne, mission accomplie).
+#### Champs sceau
+
+| Champ | Valeur |
+|-------|--------|
+| SCEAU_NAME | STRICT<br>FOOD'S |
+| SCEAU_SUB | Ton samedi |
+| SCEAU_INFO | — |
 
 ---
 
-## Story 3 — Visuel IA : Tenders croustillant eclate
+## Story 3 — Fiche produit STRICT Vege
 
 | Champ | Valeur |
 |-------|--------|
-| Type | Visuel IA |
-| Mode | `full-ia` |
-| Highlight | — |
-| Qui produit | Pipeline |
-| Template | `irl-story.html` (overlay post-generation) |
+| Mode | template |
+| Traitement | — |
+| Fond | — |
+| Highlight | LA CARTE |
 | Mood | cuivre |
-| Image | hero |
-| Brand props | aucun |
+| Concept visuel | — |
 
 ### Objectif
 
-Climax de la micro-saison "Macro & Texture" — le crunch fige dans le temps. Un tender au moment exact ou la croute eclate, miettes en suspension, interieur tendre visible. C'est le shot impossible : la full-ia permet de capturer l'instant precis de la morsure.
+Fiche produit STRICT Vege Falafel : premiere fiche story dediee. Photo du falafel en fond, nom + kcal en overlay. Le vegetarien qui casse les codes.
 
 ### Contenu
 
-Sujet : `Gros plan sur des Tenders STRICT au moment exact ou la croute eclate. La morsure vient d'avoir lieu — la croute doree se brise, des miettes croustillantes sont en suspension dans l'air, l'interieur tendre et blanc du poulet est visible. Le contraste croute/interieur est maximal.`
-Direction artistique : `Fond charbon total. Eclairage backlit partiel venant de l'arriere — les miettes en suspension sont illuminees comme des particules de poussiere dans un rayon de soleil. Texture hyper-detaillee de la croute : chaque grain, chaque relief, chaque craquelure. L'interieur du tender est net et juteux. Format portrait 9:16. Style "instant fige haute vitesse".`
-Texte overlay : `—`
+| Champ | Valeur |
+|-------|--------|
+| Photo | `../public/images/photos-references/produits-source/burgers-black/strict-vege/strict-vege-main.png` |
+| TEXT_LINE_1 | STRICT VEGE |
+| TEXT_LINE_2 | 850 kcal · falafel |
+| PHOTO_PRESET | photo-centre |
+| INFO_POSITION | — |
+
+---
+
+## Story 4 — Rappel samedi
+
+| Champ | Valeur |
+|-------|--------|
+| Mode | template |
+| Traitement | — |
+| Fond | — |
+| Highlight | NOUS TROUVER |
+| Mood | cuivre |
+| Concept visuel | — |
+
+### Objectif
+
+Rappel de presence samedi : "SAMEDI = STRICT" + adresse complete. Photo deco salle en fond pour varier les angles.
+
+### Contenu
+
+| Champ | Valeur |
+|-------|--------|
+| Photo 1 | `../public/images/photos-references/contexte/salle-restaurant/déco-salle.jpeg` |
+| Photo 2 | — |
+| Accroche | SAMEDI = STRICT |
+| Mot accent | STRICT |
+| CTA type | adresse |
+| CTA valeur | 88 Chemin de la Roseraie, Perpignan |
 
 ---
 
 ## Contraintes
 
-- DA : 2 IRL bookends (ouverture + fermeture) + 1 full-ia climax
-- Mood : cuivre sur les 3 stories
-- Les 2 IRL forment une paire narrative (debut/fin de journee) — le meme lieu a deux moments differents
-- La full-ia Tenders est le shot le plus ambitieux de la semaine — qualite maximale
-- Micro-saison A : concept `macro-croustillant` pour la story 3
-- Full-ia : le tender doit avoir une croute doree (pas de pain noir ici — les tenders n'ont pas de bun)
+- DA : Dark Food Premium — `story-universal.html` (stories 1, 3, 4), `story-sceau.html` (story 2)
+- Mood : cuivre
+- **Fond** : ambre (story 1), — (stories 2, 3, 4)
+- **Pain noir obligatoire** sur tous les visuels burger
+- **Chaleur pulsee** : jamais "grill", "grille", "barbecue"
+- Tagline fixe : `Le cheat meal <em>qui n'en est pas un</em>`
 
 ## Etape suivante
 

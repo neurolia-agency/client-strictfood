@@ -80,7 +80,7 @@ Cinquieme post Macros du feed. Angle totalement inedit : on ne compare plus un p
 
 | Slide | Contenu | Notes DA |
 |-------|---------|----------|
-| 1 (Cover) | Badge "MERCREDI MACROS" en haut. Titre : "Compose ton repas." Sous-titre : "3 objectifs, 3 menus." | Fond #141210, badge en Cuivre Braise (#BF8522), titre Oswald blanc. Le badge "MERCREDI MACROS" est identique sur les 2 posts de la serie (template recurrent). |
+| 1 (Cover) | Badge "MERCREDI MACROS" en haut. Titre : "Compose ton repas." Sous-titre : "3 objectifs, 3 menus." | Fond #141210, badge en Cuivre Braise (#FABA43), titre Oswald blanc. Le badge "MERCREDI MACROS" est identique sur les 2 posts de la serie (template recurrent). |
 | 2 | **SECHE** : Wrap Poulet (598 kcal, 60,5g prot) + Boisson Zero (0 kcal) = **598 kcal, 60,5g prot. 10,99EUR.** Texte : "Repas complet sous 600 kcal. Oui, c'est possible." | Icone "flamme" pour la seche. Barres visuelles en Cuivre Braise. |
 | 3 | **EQUILIBRE** : STRICT Boeuf (596 kcal, 53g prot) + Frites classiques (199 kcal, 4g prot) + Boisson Zero = **795 kcal, 57g prot. 15,99EUR.** Texte : "Le repas complet a moins de 800 kcal." | Icone "balance" pour l'equilibre. Barres en Feuille Grillee (#5C7858). |
 | 4 | **PRISE DE MASSE** : STRICT MAX Poulet (946 kcal, 112g prot) + Frites PD (211 kcal, 3g prot) + Milkshake prot (215 kcal, 29g prot) = **1 372 kcal, 144g prot. 21,98EUR.** Texte : "144g de proteines en un seul repas. Sans shaker." + 📍 localisation | Icone "fleche vers le haut" pour la masse. Barres en Cuivre Braise. CTA + signature. |

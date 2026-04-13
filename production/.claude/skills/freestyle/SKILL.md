@@ -107,7 +107,7 @@ Si la description viole une contrainte → AVERTIR l'opérateur et proposer une 
 ### Étape 5 — Générer
 
 ```
-/nano-banana-pro --prompt "[prompt]" --filename "[date]-[description].png" --resolution 4K
+/nano-banana-pro --prompt "[prompt]" --filename "[date]-[description].png" --resolution 2K
 ```
 
 Ou Puppeteer pour template/irl.

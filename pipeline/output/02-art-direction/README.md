@@ -6,7 +6,7 @@
 
 | Aspect | Valeur |
 |--------|--------|
-| Couleur signature | Cuivre Braise — oklch(0.67 0.15 68) / #BF8522 |
+| Couleur signature | Cuivre Braise — oklch(0.67 0.15 68) / #FABA43 |
 | Couleur action | Cuivre Braise (meme que signature — CTA = accent principal) |
 | Couleur secondaire | Grenat Fume — oklch(0.42 0.10 22) / #7C3530 (accents craft/artisans) |
 | Accent nutrition | Feuille Grillee — oklch(0.52 0.06 145) / #5C7858 (badges sante uniquement) |
@@ -49,7 +49,7 @@ Athletic Precision = Space Grotesk bold + grille 12col + radius 12px + easing (0
 ```
 Backgrounds                  Accents                      Textes
 ───────────────              ───────────────              ───────────────
-#141210 Charbon              #BF8522 Cuivre Braise        #F5F0E8 Creme
+#141210 Charbon              #FABA43 Cuivre Braise        #F5F0E8 Creme
 #1E1B18 Ebene                #D4A44E Cuivre Braise clair  #E8E0D4 Ivoire
 #2A2622 Fumee                #8E6215 Cuivre Braise fonce  #B5AA98 Sable
 #3D3832 Cendre               #7C3530 Grenat Fume          #8A8070 Pierre

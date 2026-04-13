@@ -36,7 +36,7 @@ N/A — slide graphique. Si texture de fond, elle évoque un éclairage ambiant 
 ### Couleurs & Mood
 
 - **Palette dominante** : Charbon #141210 (fond), Crème #F5F0E8 (titre principal)
-- **Accent** : Cuivre Braisé #BF8522 pour le sous-titre ou un mot-clé accentué
+- **Accent** : Cuivre Braisé #FABA43 pour le sous-titre ou un mot-clé accentué
 - **Ambiance** : brut et affirmé — une promesse qui interpelle
 - **Référence DA** : fond Charbon pur, typo Crème, accent Cuivre Braisé
 
@@ -47,7 +47,7 @@ N/A — slide graphique. Si texture de fond, elle évoque un éclairage ambiant 
   - Titre : "De la Boucherie Labourde à ton assiette."
   - Sous-titre : "Swipe pour voir le parcours →"
 - **Typographie** : Oswald bold (titre), Space Grotesk medium (sous-titre)
-- **Couleur du texte** : Crème #F5F0E8 (titre), Cuivre Braisé #BF8522 (sous-titre)
+- **Couleur du texte** : Crème #F5F0E8 (titre), Cuivre Braisé #FABA43 (sous-titre)
 - **Placement** : titre centré verticalement (légèrement au-dessus du centre), sous-titre en dessous avec 24px de gap
 - **Taille relative** : titre dominant (grande taille, impact maximal), sous-titre secondaire (plus petit, guide le swipe)
 

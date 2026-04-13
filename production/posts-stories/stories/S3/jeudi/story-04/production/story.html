@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080">
+  <title>Story — Ton coach dit oui</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --amber: #FABA43;
+      --charbon: #1a1714;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 1080px;
+      height: 1920px;
+      background: var(--amber);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ===== PHOTO ZONE ===== */
+    .photo-zone {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1400px;
+      overflow: hidden;
+      z-index: 1;
+      background: var(--amber);
+    }
+    .photo-zone img {
+      width: 100%;
+      height: 1250px;
+      object-fit: cover;
+      object-position: 86% 50%;
+      transform: translateY(100px);
+      filter: brightness(1.10) saturate(1.05);
+    }
+
+    /* ===== BLUR TOP ===== */
+    .blur-top {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 350px;
+      z-index: 2;
+      background: linear-gradient(to bottom,
+        rgba(250,186,67, 1.0) 0%,
+        rgba(250,186,67, 0.85) 30%,
+        rgba(250,186,67, 0.45) 60%,
+        transparent 100%);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      mask-image: linear-gradient(to bottom, black 0%, black 35%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, black 0%, black 35%, transparent 100%);
+    }
+
+    /* ===== HEADLINE ===== */
+    .headline {
+      position: absolute;
+      top: 100px;
+      left: 70px; right: 70px;
+      z-index: 10;
+      text-align: center;
+    }
+    .headline h1 {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 105px;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+      line-height: 1.0;
+      margin: 0;
+      text-shadow:
+        0 2px 8px rgba(0,0,0,0.6),
+        0 4px 20px rgba(0,0,0,0.3),
+        0 0 60px rgba(0,0,0,0.2);
+    }
+    .headline h1 .accent {
+      color: var(--amber);
+      filter: brightness(1.2);
+    }
+
+    /* ===== SILLON — transparent au-dessus de l'arc, ambre en dessous ===== */
+    .sillon {
+      position: absolute;
+      top: 1170px;
+      left: 0; right: 0;
+      height: 120px;
+      z-index: 5;
+    }
+    .sillon svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* ===== ZONE AMBRE OPAQUE — couvre tout depuis le sillon jusqu'en bas ===== */
+    .amber-zone {
+      position: absolute;
+      top: 1170px;
+      left: 0; right: 0;
+      bottom: 0;
+      z-index: 6;
+      background: var(--amber);
+    }
+
+    /* ===== CONTENU AMBRE ===== */
+    .amber-content {
+      position: absolute;
+      top: 1280px;
+      left: 70px; right: 70px;
+      bottom: 210px;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .ouvert {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 90px;
+      text-transform: uppercase;
+      letter-spacing: 12px;
+      color: var(--charbon);
+      text-align: center;
+      line-height: 1.0;
+    }
+
+    .divider {
+      width: 80px;
+      height: 4px;
+      background: var(--charbon);
+      margin: 4px 0;
+    }
+
+    .hours {
+      display: flex;
+      justify-content: center;
+      gap: 100px;
+      margin-top: 8px;
+    }
+    .hours-col { text-align: center; }
+    .hours-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 26px;
+      color: rgba(26,23,20,0.50);
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .hours-value {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 52px;
+      color: var(--charbon);
+      letter-spacing: 1px;
+    }
+
+    /* ===== BOTTOM ===== */
+    .tagline-block {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 10;
+      text-align: center;
+      padding: 0 70px 80px;
+    }
+    .tagline {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 34px;
+      color: var(--charbon);
+      text-align: center;
+      line-height: 1.3;
+    }
+    .tagline em { color: #fff; font-style: italic; }
+    .logo-container { margin-top: 8px; }
+    .logo-container img {
+      width: 140px;
+      height: auto;
+      opacity: 0.45;
+      filter: brightness(0);
+    }
+
+    /* Grain */
+    body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 100;
+      pointer-events: none;
+      opacity: 0.025;
+      mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Photo zone -->
+  <div class="photo-zone">
+    <img src="/Users/dorian.gz/dev/Neurolia Agency/client-strictfood/2026-04-01-17-40-00-ubereats-cover-ambre-v3.png" alt="">
+  </div>
+
+  <!-- Blur top -->
+  <div class="blur-top"></div>
+
+  <!-- Headline -->
+  <div class="headline">
+    <h1>TON COACH<br>DIT <span class="accent">OUI</span></h1>
+  </div>
+
+  <!-- Sillon — arc dome (transparent au-dessus, ambre en dessous) -->
+  <div class="sillon">
+    <svg viewBox="0 0 1080 120" preserveAspectRatio="none">
+      <path d="M 0,120 L 0,60 Q 540,0 1080,60 L 1080,120 Z" fill="#FABA43"/>
+    </svg>
+  </div>
+
+  <!-- Zone ambre opaque — couvre tout depuis le sillon -->
+  <div class="amber-zone"></div>
+
+  <!-- Contenu ambre -->
+  <div class="amber-content">
+    <div class="ouvert">Ouvert</div>
+    <div class="divider"></div>
+    <div class="hours">
+      <div class="hours-col">
+        <div class="hours-label">Midi</div>
+        <div class="hours-value">11H–14H</div>
+      </div>
+      <div class="hours-col">
+        <div class="hours-label">Soir</div>
+        <div class="hours-value">18H–22H</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tagline + logo -->
+  <div class="tagline-block">
+    <div class="tagline">Le cheat meal <em>qui n'en est pas un</em></div>
+    <div class="logo-container">
+      <img src="/Users/dorian.gz/dev/Neurolia Agency/client-strictfood/production/posts-stories/stories/_templates/_base/logo.svg" alt="STRICT FOOD'S">
+    </div>
+  </div>
+
+</body>
+</html>

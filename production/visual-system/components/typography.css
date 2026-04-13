@@ -1,0 +1,144 @@
+/* ============================================
+   TYPOGRAPHY — Composants texte réutilisables
+   Headline, body, stat, label, data-row
+   ============================================ */
+
+/* --- LABEL (tag court : "BEST-SELLER", "NOUVEAU") --- */
+.label {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.label--accent {
+  color: var(--accent);
+}
+
+/* --- PRODUCT NAME (nom produit géant) --- */
+.product-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 90px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  line-height: 0.95;
+  color: var(--text-primary);
+  transform: rotate(var(--rotate-subtle));
+}
+
+.product-name--xl { font-size: 120px; }
+.product-name--md { font-size: 72px; }
+
+/* --- STAT HERO (chiffre énorme + unité) --- */
+.stat-hero {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.stat-hero__value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 160px;
+  color: var(--accent);
+  line-height: 1;
+  transform: rotate(var(--rotate-light));
+}
+
+.stat-hero__value--xl { font-size: 220px; }
+
+.stat-hero__unit {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+/* --- DATA ROW (infos en ligne : "596 kcal · 0% huile · Pain noir") --- */
+.data-row {
+  display: flex;
+  gap: var(--gap-md);
+  flex-wrap: wrap;
+}
+
+.data-row__item {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 20px;
+  color: var(--text-secondary);
+}
+
+.data-row__item strong {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.data-row__sep {
+  color: var(--text-muted);
+}
+
+/* --- BODY TEXT --- */
+.body-text {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 28px;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+.body-text strong {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.body-text u {
+  text-decoration-color: var(--accent);
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+/* --- HEADLINE (titre section) --- */
+.headline {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  line-height: 1.05;
+  color: var(--accent);
+  transform: rotate(var(--rotate-subtle));
+}
+
+.headline--xl { font-size: 100px; letter-spacing: 6px; }
+.headline--lg { font-size: 80px; letter-spacing: 5px; }
+.headline--md { font-size: 64px; letter-spacing: 4px; }
+.headline--sm { font-size: 48px; letter-spacing: 3px; }
+
+/* --- STATEMENT (typo massive, remplit l'écran) --- */
+.statement {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  line-height: 0.95;
+  color: var(--accent);
+  transform: rotate(var(--rotate-light));
+}
+
+.statement--mega  { font-size: 200px; }
+.statement--large { font-size: 150px; }
+.statement--mid   { font-size: 100px; }
+
+/* --- TEXT MINIMAL (1 ligne, stories éphémères) --- */
+.text-minimal {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 36px;
+  color: var(--text-primary);
+  text-align: center;
+  letter-spacing: 2px;
+}

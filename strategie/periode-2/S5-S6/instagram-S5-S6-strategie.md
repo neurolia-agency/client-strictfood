@@ -187,7 +187,7 @@ Reel 2 (S6-23) — Food prep dynamique :
 
 **Direction creative :**
 
-Identique aux blocs precedents : fond Charbon (#141210), typo Oswald pour les chiffres forts, Space Grotesk pour les labels, accents Cuivre Braise (#BF8522) et Feuille Grillee (#5C7858).
+Identique aux blocs precedents : fond Charbon (#141210), typo Oswald pour les chiffres forts, Space Grotesk pour les labels, accents Cuivre Braise (#FABA43) et Feuille Grillee (#5C7858).
 
 **Arguments nutrition a exploiter :**
 

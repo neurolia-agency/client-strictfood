@@ -1,106 +1,115 @@
 # Brief Stories — S3 Dimanche (2026-03-30)
 
-> **Pilier du jour** : Le Plat / Confiance — Pas de post
-> **Objectif strategique** : Dernier jour ouvert de la semaine (fermeture lundi). Sublimation MAX Boeuf vapeur + 2e compositing MAX Poulet (angle intime) + educatif pain noir. Mix food porn + education pour boucler la semaine.
-> **Persona cible** : Sportifs + Locavores
-> **Ref strategie** : Phase 1 §2.1 — "presenter chaque produit de la carte"
+> **Pilier du jour** : Les Benefices — Post S3-04 Carrousel "Le cheat meal est un mensonge"
+> **Objectif strategique** : Completer le carrousel avec un visuel golden hour STRICT Poulet (plaisir sans culpabilite), un upsell dessert tiramisu et un lifestyle sortie de resto pour clore la semaine.
+
+> **REGLE ABSOLUE** : Tous les chemins photo doivent pointer vers des fichiers existants.
+> **Templates** : `story-universal.html` (defaut), `story-sillon.html`, `story-sceau.html`, `story-feuillete-photo.html`, `story-feuillete-data.html`.
 
 ---
 
-## Story 1 — Produit DA : STRICT MAX Boeuf vapeur
+## Story 1 — STRICT Poulet golden hour
 
 | Champ | Valeur |
 |-------|--------|
-| Type | Produit DA |
-| Mode | `irl-sublimation` |
-| Highlight | — |
-| Qui produit | Pipeline |
-| Template | `irl-story.html` (overlay post-sublimation) |
-| Mood | grenat |
-| Image | hero |
-| Brand props | aucun |
-
-### Objectif
-
-Le STRICT MAX Boeuf dans son expression la plus intense — vapeur epaisse, chaleur du grill, doubles steaks en vedette. Le mood grenat marque l'intensite et la puissance du produit "MAX". La vapeur ajoutee cree l'impression de sortir du grill a l'instant.
-
-### Contenu
-
-Photo source : `public/images/photos-references/produits-source/burgers-black/strict-max-boeuf/strict-max-boeuf-eclate.png`
-Direction sublimation : `Vapeur epaisse ajoutee — fumee lente montante, chaleur palpable. Les doubles steaks sont le point focal — textures viande accentuees, Maillard prononcee. Tons grenat chauds (pas cuivre — grenat pour l'intensite MAX). Profondeur maximale des ombres. Grain film prononce. Full-frame 9:16.`
-Texte overlay : `—`
-
----
-
-## Story 2 — Produit en situation : STRICT MAX Poulet intime
-
-| Champ | Valeur |
-|-------|--------|
-| Type | Produit en situation |
-| Mode | `compositing-irl` |
-| Highlight | — |
-| Qui produit | Pipeline |
-| Template | `irl-story.html` (overlay post-compositing) |
+| Mode | full-ia |
+| Traitement | — |
+| Fond | ambre |
+| Highlight | LA CARTE |
 | Mood | cuivre |
-| Image | hero |
-| Brand props | aucun |
+| Concept visuel | atmo-golden |
 
 ### Objectif
 
-2e apparition du STRICT MAX Poulet cette semaine — angle radicalement different de mercredi. Ici : intime, spot unique, "objet precieux". Le comptoir est a peine visible, tout le focus est sur le burger. Si mercredi montrait le contexte (plan moyen, salle visible), dimanche montre le produit seul dans la lumiere.
+Clore la micro-saison Macro & Texture avec un visuel chaleureux : STRICT Poulet baigne dans une lumiere golden hour. Ambiance "le dimanche en or". Complement du carrousel (le plaisir sans culpabilite = un burger au soleil couchant).
 
 ### Contenu
-
-**compositing-irl** :
-Photo produit : `public/images/photos-references/produits-source/burgers-black/strict-max-poulet/strict-max-poulet-black.png`
-Photo lieu : `public/images/photos-references/contexte/salle-restaurant/accueil-crop-comptoir.jpeg`
-Intention compositing : `MAX Poulet eclaire par un spot unique directionnel, obscurite quasi-totale autour. Effet "objet precieux" — le burger brille dans le noir. Le comptoir est a peine devine en arriere-plan (crop serre). Focus total sur le produit, pas sur le lieu. Contraste fort : burger lumineux / fond sombre.`
-
-Texte overlay : `—`
-
----
-
-## Story 3 — Educatif : Pain noir ≠ pain brule
 
 | Champ | Valeur |
 |-------|--------|
-| Type | Educatif |
-| Mode | `template` |
-| Highlight | — |
-| Qui produit | Pipeline |
-| Template | `educatif.html` |
-| Mood | feuille |
-| Image | visible |
-| Brand props | aucun |
+| Sujet | STRICT Poulet — burger ferme vu de 3/4, lumiere golden hour chaude venant de la droite, ombres longues et douces, graines sesame dorees qui captent la lumiere, mache verte qui depasse legerement, miettes parmesan visibles, fond ambre incandescent avec texture kraft |
+| Produit | STRICT Poulet — slug recette : `strict-poulet` |
+| Direction artistique | 85mm f/1.8, eclairage golden hour lateral droit, fond ambre-sable, ombres chaudes allongees, atmosphere paisible et chaleureuse, grain film Kodak Gold, profondeur courte, sesame qui brille comme de l'or |
+| TEXT_LINE_1 | — |
+| TEXT_LINE_2 | — |
+
+---
+
+## Story 2 — Upsell Tiramisu Proteine
+
+| Champ | Valeur |
+|-------|--------|
+| Mode | template |
+| Traitement | — |
+| Fond | — |
+| Highlight | LA CARTE |
+| Mood | cuivre |
+| Concept visuel | — |
 
 ### Objectif
 
-Demystifier le pain noir — beaucoup de gens pensent que c'est du pain "brule" ou "colore". Cette story explique que c'est du charbon vegetal + sesame, fabrique par un artisan local (Pains du Soleil). Angle educatif nouveau (jamais couvert) qui cree un lien subtil avec l'artisan sans refaire un focus ingredient.
+Upsell dessert en complement du carrousel "cheat meal" : le tiramisu proteine est la preuve qu'on peut se faire plaisir sans compromis. Photo tiramisu existante en fond.
 
 ### Contenu
 
-Titre : `Pain noir ≠ pain <em>brule</em>`
-Chiffre cle : `100` + `% artisanal`
-Explication : `Notre pain noir est fabrique par Pains du Soleil, a Perpignan. Charbon vegetal + sesame noir. Plus de fibres, zero colorant artificiel.`
+| Champ | Valeur |
+|-------|--------|
+| Photo | `../public/images/photos-references/produits-source/desserts/tiramisu-proteine.png` |
+| TEXT_LINE_1 | TIRAMISU PROTEINE |
+| TEXT_LINE_2 | Le dessert sans culpabilite |
+| PHOTO_PRESET | photo-centre |
+| INFO_POSITION | — |
 
-Comparaison VS :
-- Strict Food's : `Charbon vegetal` `artisanal`
-- Classique : `Bun industriel` `conservateurs`
+---
 
-Image de fond : `public/images/photos-references/contexte/cuisine/air-fryers-pro.jpeg`
-Alignement photo : `—`
-Image produit : `aucune`
+## Story 3 — Lifestyle sortie resto burger poulet
+
+| Champ | Valeur |
+|-------|--------|
+| Mode | full-ia |
+| Traitement | sillon |
+| Fond | — |
+| Highlight | — |
+| Mood | cuivre |
+| Concept visuel | lifestyle-sortie |
+
+### Objectif
+
+Fermer la semaine avec un lifestyle "sortie de resto" : une femme en 3/4 dos qui s'eloigne en croquant dans un burger poulet black bun. Dimanche soir, satisfaction post-repas, devanture floue en arriere-plan.
+
+### Contenu
+
+| Champ | Valeur |
+|-------|--------|
+| Concept | lifestyle-sortie |
+| Photo reference | [ref Pinterest : "woman walking away restaurant burger hand 3/4 back candid evening photography"] |
+| Personnage | Femme ~30 ans, cheveux chatains ondules longs, silhouette elancee |
+| Tenue | Trench coat ambre (#FABA43), robe noire en dessous, bottines noires |
+| Posture | En marche, 3/4 dos, tete legerement tournee vers le burger en main droite |
+| Regard | Profil droit, regard vers le burger qu'elle s'apprete a croquer |
+| Scene | Trottoir devant un restaurant (devanture floue en arriere-plan), eclairage soir doux, lampadaires chauds |
+| Sac kraft | non (burger poulet black bun tenu en main droite, pain noir sesame visible, mache qui depasse) |
+| Cadrage | Plan americain, 3/4 dos |
+| TEXT_LINE_1 | — |
+| TEXT_LINE_2 | — |
+
+#### Champs sillon
+
+| Champ | Valeur |
+|-------|--------|
+| PRODUCT_NAME | DIMANCHE STRICT |
+| PRODUCT_INFO | Le plaisir sans compromis |
 
 ---
 
 ## Contraintes
 
-- DA : 1 sublimation grenat + 1 compositing cuivre + 1 template educatif feuille
-- 3 moods differents dans la journee — voulu : variete pour fermer la semaine
-- Le compositing est un ANGLE DIFFERENT de mercredi (intime vs contexte) — pas le meme rendu
-- Le MAX Boeuf en grenat et le MAX Poulet en cuivre creent une distinction visuelle entre les gammes
-- L'educatif pain noir doit etre factuel — verifier les claims avec la fiche artisan Pains du Soleil
-- Micro-saison A : concept `sensation-vapeur` (story 1) + `atmo-intime` (story 2)
+- DA : Dark Food Premium — `story-universal.html` (stories 1, 2), `story-sillon.html` (story 3)
+- Mood : cuivre
+- **Fond** : ambre (story 1), — (stories 2, 3)
+- **Pain noir obligatoire** sur tous les visuels burger
+- **Chaleur pulsee** : jamais "grill", "grille", "barbecue"
+- Tagline fixe : `Le cheat meal <em>qui n'en est pas un</em>`
 
 ## Etape suivante
 

@@ -1,0 +1,84 @@
+/* ============================================
+   TECH-FRAME — Traits géométriques aux coins
+   Lignes fines ambre, style technique/premium
+   ============================================ */
+
+.tech-frame {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Coin haut-gauche */
+.tech-frame::before {
+  content: '';
+  position: absolute;
+  top: 60px;
+  left: 40px;
+  width: 120px;
+  height: 80px;
+  border-top: 1.5px solid rgba(var(--ambre-rgb), 0.25);
+  border-left: 1.5px solid rgba(var(--ambre-rgb), 0.25);
+}
+
+/* Coin haut-droit */
+.tech-frame::after {
+  content: '';
+  position: absolute;
+  top: 60px;
+  right: 40px;
+  width: 120px;
+  height: 80px;
+  border-top: 1.5px solid rgba(var(--ambre-rgb), 0.20);
+  border-right: 1.5px solid rgba(var(--ambre-rgb), 0.20);
+}
+
+/* Lignes diagonales décoratives */
+.tech-line {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.tech-line--tl {
+  top: 45px;
+  left: 30px;
+  width: 200px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(var(--ambre-rgb), 0.20), transparent);
+  transform: rotate(-12deg);
+  transform-origin: left center;
+}
+
+.tech-line--tr {
+  top: 100px;
+  right: 20px;
+  width: 160px;
+  height: 1px;
+  background: linear-gradient(270deg, rgba(var(--ambre-rgb), 0.15), transparent);
+  transform: rotate(8deg);
+  transform-origin: right center;
+}
+
+.tech-line--bl {
+  bottom: 180px;
+  left: 50px;
+  width: 140px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(var(--ambre-rgb), 0.12), transparent);
+  transform: rotate(5deg);
+  transform-origin: left center;
+}
+
+/* Variante fond ambre → lignes charbon */
+.bg-ambre ~ .tech-frame::before,
+.bg-ambre ~ .tech-frame::after {
+  border-color: rgba(var(--charbon-rgb), 0.20);
+}
+
+.bg-ambre ~ .tech-line--tl,
+.bg-ambre ~ .tech-line--tr,
+.bg-ambre ~ .tech-line--bl {
+  background: linear-gradient(90deg, rgba(var(--charbon-rgb), 0.15), transparent);
+}

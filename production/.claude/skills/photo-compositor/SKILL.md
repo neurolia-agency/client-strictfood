@@ -1,13 +1,12 @@
 ---
 name: photo-compositor
+user-invocable: false
 description: >
-  Reference skill for photo compositing — integrating real product photos into
-  AI-generated or real lifestyle scenes. Covers the 5 compositing pillars (lighting,
-  shadows, perspective, edge integration, color unification), multi-image API parameters
-  (Gemini, OpenAI), BGSWAP workflow, dual-photo compositing, and quality checklists.
-  Consult this skill when compositing product photos into scenes.
-  Triggers on: "compositing", "photo compositing", "integrate product", "product in scene",
-  "multi-image", "background swap", "BGSWAP", "composite photo".
+  Référence compositing photo — intégration de photos produit réelles dans des scènes
+  IA ou réelles. 5 piliers (éclairage, ombres, perspective, bords, couleur),
+  paramètres API multi-image (Gemini, OpenAI), workflow BGSWAP, compositing dual-photo,
+  checklists qualité. Consulté automatiquement par image-prompt-engineer et nano-banana-pro
+  lors de tâches de compositing.
 ---
 
 # Photo Compositor
@@ -219,7 +218,7 @@ The product appears as if it was photographed in this exact scene.
 
 **Commande type :**
 ```
-/nano-banana-pro --resolution 4K \
+/nano-banana-pro --resolution 2K \
   --input-image [photo-produit-reelle] \
   --input-image [photo-contexte-optionnelle]
 ```

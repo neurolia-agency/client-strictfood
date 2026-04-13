@@ -1,0 +1,30 @@
+/* ============================================
+   LAYOUT POST — 1080 × 1350 (4:5)
+   Instagram Feed Post format
+   ============================================ */
+
+body {
+  width: 1080px;
+  height: 1350px;
+}
+
+/* Zone de contenu (pas de safe zone IG sur les posts) */
+.content-zone {
+  position: absolute;
+  top: var(--safe-margin);
+  left: var(--safe-margin);
+  right: var(--safe-margin);
+  bottom: calc(var(--safe-margin) + 70px); /* place pour tape-band */
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+}
+
+/* Zone tape-band en bas */
+.brand-zone {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+}

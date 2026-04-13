@@ -16,7 +16,7 @@ public/images/photos-references/
     └── carte/
 ```
 
-> **Chemin absolu local** : `/Users/dorian.gz/dev/Neurolia Nouveau/client-strictfood/public/images/photos-references/`
+> **Chemin relatif** : `../public/images/photos-references/`
 
 ---
 
@@ -376,6 +376,87 @@ Photos de contexte pour les piliers "La Cuisine", "Le Lieu", "Le Client". Utiles
 
 ---
 
+## PHOTOS BRUTES (IRL)
+
+Photos brutes prises en cuisine / comptoir, non retouchees, non detourees. Utilisables pour le mode `edit-ia`, stories IRL, templates, ou comme reference visuelle pour les prompts IA. Classees par categorie de produit.
+
+> **Dossier source** : `public/images/photos-brutes/`
+> **Chemin relatif** : `../public/images/photos-brutes/`
+
+### Catalogue complet
+
+| # | Fichier | Description | Tags | Bun | Utilisable |
+|---|---------|-------------|------|-----|------------|
+| 1 | `ingredients/ingredient1.jpeg` | Bol inox rempli de crumble speculoos / biscuit emietté, cuillere inox plantee dedans, plan de travail inox, arriere-plan flou sombre (cuisine pro) | ingredient, dessert, cuisine, preparation | n/a | n/a |
+| 2 | `produits-seuls/boissons/monster-ultra.jpeg` | Canette Monster Energy Ultra Zero Sucre (blanche), posee sur planche bois, arriere-plan cuisine flou, vue de face, eclairage naturel | boisson, comptoir | n/a | n/a |
+| 3 | `produits-seuls/burgers/burger-black-falafel.jpeg` | Burger falafel pain noir sesame, galette falafel panee doree visible, oignon rouge, mache, sauce blanche, pose sur comptoir granite mouchete, vue laterale, feuilles de mache depassent en bas | vege, falafel, comptoir | noir | direct |
+| 4 | `produits-seuls/burgers/burger-black-falafel-2.jpeg` | Burger falafel pain noir sesame, meme produit angle different, vue laterale face, galette falafel bien visible entre les buns, oignon rouge et mache, comptoir granite, bordure inox a droite | vege, falafel, comptoir | noir | direct |
+| 5 | `produits-seuls/burgers/burger-black-falafel-3.jpeg` | Burger falafel pain noir sesame, vue plongee legere (3/4 dessus), plus petit dans le cadre, quelques miettes de chou rouge autour, comptoir granite, eclairage froid | vege, falafel, comptoir | noir | direct |
+| 6 | `produits-seuls/burgers/burger-black-open-cooking.jpeg` | Burger pain noir sesame ouvert a plat — bun du haut retourne a cote du bun du bas, fromage fondu (parmesan emietté) visible sur le bun, vue top-down, comptoir granite, pas de garniture montee | boeuf, comptoir, ouvert, preparation | noir | direct |
+| 7 | `produits-seuls/burgers/burger-black-simple-boeuf.jpeg` | Burger simple boeuf pain noir sesame, vue 3/4 dessus (plongee), steak boeuf / oignon rouge / mache / sauce visibles entre les buns, comptoir granite, miettes de chou rouge autour | boeuf, comptoir | noir | direct |
+| 8 | `produits-seuls/burgers/burger-black-simple-boeuf-2.jpeg` | Burger simple boeuf pain noir sesame, vue plongee rapprochee, bun bien visible avec sesame dore, garniture entre les buns (oignon rouge, mache, steak), comptoir granite, miettes chou rouge eparpillees | boeuf, comptoir | noir | direct |
+| 9 | `produits-seuls/burgers/burger-black-simple-boeuf-3.jpeg` | Burger simple boeuf pain noir sesame, vue laterale face, steak boeuf visible avec croute Maillard, sauce jaune/moutarde, oignon rouge, mache, eclairage naturel lateral (lumiere fenetre a droite), comptoir granite, bordure inox | boeuf, comptoir | noir | direct |
+| 10 | `produits-seuls/burgers/burger-black-simple-poulet.jpeg` | Burger simple poulet pain noir sesame, vue 3/4 dessus, lamelles poulet roti dorees visibles, oignon rouge, mache, sauce, comptoir granite, quelques miettes chou rouge | poulet, comptoir | noir | direct |
+| 11 | `produits-seuls/burgers/burger-black-simple-poulet-2.jpeg` | Burger simple poulet pain noir sesame, vue laterale face, lamelles poulet roti bien visibles (dore/caramelise), sauce coulant legerement, mache, oignon rouge, comptoir granite, lumiere fenetre a droite | poulet, comptoir | noir | direct |
+| 12 | `produits-seuls/burgers/burger-black-simple-poulet-3.jpeg` | Burger simple poulet pain noir sesame, vue laterale face similaire a #11, angle legerement different, mache et oignon rouge visibles, comptoir granite | poulet, comptoir | noir | direct |
+| 13 | `produits-seuls/burgers/burger-black-simple-poulet-4.jpeg` | Burger simple poulet pain noir sesame, vue plongee 3/4, plus petit dans le cadre, garniture (poulet, mache, oignon) visible de cote, miettes chou rouge autour, comptoir granite | poulet, comptoir | noir | direct |
+| 14 | `produits-seuls/burgers/burger-black-simple-poulet-5.jpeg` | Burger simple poulet pain noir sesame, vue laterale face, lamelles poulet bien exposees avec morceaux dores, sauce, mache, oignon rouge, comptoir granite, lumiere laterale | poulet, comptoir | noir | direct |
+| 15 | `produits-seuls/burgers/burger-black-simple-poulet-6.jpeg` | Burger simple poulet pain noir sesame, vue laterale face rapprochee, gros morceaux de poulet roti caramelise debordant, oignon rouge, mache, bun bien ouvert montrant l'interieur, comptoir granite | poulet, comptoir, macro | noir | direct |
+| 16 | `produits-seuls/burgers/burger-black-simple-poulet7.jpeg` | Burger simple poulet pain noir sesame, vue laterale face, lamelles poulet dorees avec traces de caramelisation, sauce qui coule, mache verte, oignon rouge, comptoir granite | poulet, comptoir | noir | direct |
+| 17 | `produits-seuls/burgers/burger-black-simple-poulet-8.jpeg` | Burger simple poulet pain noir sesame, vue laterale face, bun ouvert large montrant le poulet dore, mache, eclairage froid, comptoir granite, bordure inox visible en haut | poulet, comptoir | noir | direct |
+| 18 | `produits-seuls/burgers/burger-black-simple-poulet-hand.jpeg` | Burger simple poulet pain noir sesame tenu en main (main feminine, ongles clairs), vue laterale face, poulet roti dore debordant, mache, oignon rouge, arriere-plan comptoir granite + inox, bouteille sauce visible en arriere-plan | poulet, main, comptoir | noir | direct |
+| 19 | `produits-seuls/burgers/burger-black-simple-poulet-hand-2.jpeg` | Burger simple poulet pain noir sesame tenu en main (main feminine, ongles clairs), vue laterale face variante 2, poulet roti dore et mache visibles, arriere-plan comptoir granite + inox, bouteille sauce jaune visible | poulet, main, comptoir | noir | direct |
+| 20 | `produits-seuls/burgers/burger-rose-double-boeuf.jpeg` | Burger double boeuf pain ROSE betterave sesame, deux steaks epais empiles, mache abondante depassant, vue laterale face, bun rose vif, comptoir inox, cuisine pro en arriere-plan | boeuf, double, comptoir, cuisine | rose | bun-swap |
+| 21 | `produits-seuls/burgers/burger-rose-double-boeuf-cut.jpeg` | Burger double boeuf pain ROSE betterave coupe en deux — cross-section visible montrant les 2 steaks, mache, sauce, mie rose, pose sur planche bois, vue laterale rapprochee, cuisine pro en arriere-plan | boeuf, double, coupe, comptoir | rose | bun-swap |
+| 22 | `produits-seuls/burgers/burger-rose-double-boeuf-cut-frites.jpeg` | Burger double boeuf pain ROSE betterave coupe en deux + frites patate douce au premier plan, cross-section steaks bien visibles, mache, planche bois, vue laterale, fond cuisine flou, eclairage chaud | boeuf, double, coupe, frites, comptoir | rose | bun-swap |
+| 23 | `produits-seuls/burgers/burger-rose-double-boeuf-frites1.jpeg` | Burger double boeuf pain ROSE betterave entier + frites classiques a cote, vue laterale face, double steak et mache debordent, bun rose vif avec sesame, comptoir inox, cuisine pro floue en arriere-plan | boeuf, double, frites, comptoir, cuisine | rose | bun-swap |
+| 24 | `produits-seuls/burgers/burger-rose-double-boeuf-frites2.jpeg` | Burger double boeuf pain ROSE betterave entier + frites classiques, vue laterale face variante 2, angle legerement different, meme composition que #23, eclairage similaire | boeuf, double, frites, comptoir, cuisine | rose | bun-swap |
+| 25 | `produits-seuls/burgers/burger-tenders.jpeg` | Burger tenders poulet dans petit pain brioché dore (PAS pain noir), tenders empiles avec sauce, mache, vue laterale face, pose sur table bois blond (salle restaurant), mur vegetal flou en arriere-plan, eclairage chaud | poulet, tenders, table, salle | blanc | bun-swap |
+| 26 | `produits-seuls/desserts/tiramisu.jpeg` | Tiramisu proteine dans pot plastique transparent, couches crumble speculoos + creme blanche visibles (coupe laterale), pose sur comptoir inox, main tatouee floue en arriere-plan, eclairage froid cuisine | dessert, tiramisu, comptoir, cuisine, preparation | n/a | n/a |
+| 27 | `produits-seuls/desserts/tiramisu-2.jpeg` | Tiramisu proteine dans pot plastique transparent, vue top-down, couche superieure crumble speculoos dore, un peu de creme blanche visible sur le bord, comptoir inox raye | dessert, tiramisu, comptoir, studio | n/a | n/a |
+| 28 | `produits-seuls/desserts/tiramisu-3.jpeg` | Tiramisu proteine dans pot plastique transparent, vue laterale gros plan, couches alternees crumble speculoos / creme blanche bien visibles en coupe, pot tenu incline par une main (gant), carrelage blanc en arriere-plan | dessert, tiramisu, main, cuisine, macro | n/a | n/a |
+| 29 | `produits-seuls/snacks/tenders.jpeg` | Tenders poulet (3-4 morceaux) sur planche bois, panure doree croustillante, un brin de mache en decoration, comptoir granite visible, vue plongee legere | snack, poulet, tenders, comptoir | n/a | n/a |
+| 30 | `produits-seuls/snacks/tenders-2.jpeg` | Tenders poulet (3-4 morceaux) sur planche bois, vue top-down, panure doree epaisse et croustillante, un brin de verdure, comptoir granite en peripherie | snack, poulet, tenders, comptoir, studio | n/a | n/a |
+| 31 | `produits-seuls/wraps/wrap-boeuf-cut.jpeg` | Wrap boeuf coupe en deux, tortilla blanche, interieur visible : morceaux boeuf + salade mesclun + chou rouge + sauce, pose sur planche bois, comptoir granite a cote | wrap, boeuf, coupe, comptoir | n/a | n/a |
+| 32 | `produits-seuls/wraps/wrap-boeuf-cut-2.jpeg` | Wrap boeuf coupe en deux, vue plongee 3/4, les deux moities ouvertes montrant l'interieur (boeuf emietté, mesclun, chou rouge, sauce), planche bois + comptoir granite | wrap, boeuf, coupe, comptoir | n/a | n/a |
+| 33 | `produits-seuls/wraps/wrap-boeuf-cut-3.jpeg` | Wrap boeuf ouvert en cornet, vue laterale, steak boeuf entier visible avec salade et sauce, tortilla blanche, comptoir granite | wrap, boeuf, coupe, comptoir | n/a | n/a |
+| 34 | `produits-seuls/wraps/wrap-boeuf-cut-4.jpeg` | Wrap boeuf ouvert type tacos, vue laterale, steak boeuf avec croute Maillard bien visible, salade, oignon rouge, sauce, tortilla blanche, comptoir granite | wrap, boeuf, coupe, comptoir, macro | n/a | n/a |
+| 35 | `produits-seuls/wraps/wrap-boeuf-cut-5.jpeg` | Wrap boeuf ouvert type tacos, vue laterale variante, steak boeuf visible avec salade et sauce, tortilla blanche, comptoir granite, bordure inox | wrap, boeuf, coupe, comptoir | n/a | n/a |
+| 36 | `produits-seuls/wraps/wrap-boeuf-cut-6.jpeg` | Wrap boeuf tenu en main (main feminine), ouvert type tacos, steak boeuf + salade + oignon rouge visibles, vue plongee, comptoir granite en arriere-plan | wrap, boeuf, coupe, main, comptoir | n/a | n/a |
+| 37 | `produits-seuls/wraps/wrap-closed.jpeg` | Wrap ferme/roule, tortilla blanche, vue plongee 3/4, pose sur planche bois, contenu non visible, comptoir granite a cote | wrap, comptoir, ferme | n/a | n/a |
+| 38 | `produits-seuls/wraps/wrap-closed2.jpeg` | Wrap ferme/roule, tortilla blanche, vue 3/4 portrait, pose sur planche bois en diagonale, contenu non visible, arriere-plan flou sombre | wrap, comptoir, ferme | n/a | n/a |
+| 39 | `produits-seuls/wraps/wrap-collection-cut.jpeg` | Collection de 3 wraps coupes (2 boeuf + 1 poulet), vus du dessus, poses sur planche bois, interieurs visibles avec garnitures differentes (boeuf mesclun / poulet dore), tenders visibles en haut du cadre | wrap, boeuf, poulet, coupe, comptoir, collection | n/a | n/a |
+| 40 | `produits-seuls/wraps/wrap-poulet-cut-hand.jpeg` | Wrap poulet ouvert tenu en main (gant noir), morceaux poulet dores et panure croustillante visibles, mache, sauce, vue de face, comptoir granite en arriere-plan | wrap, poulet, coupe, main, comptoir | n/a | n/a |
+| 41 | `produits-seuls/wraps/wrap-poulet-cut.jpeg` | Wrap poulet coupe en deux, tortilla blanche, les deux moities ouvertes montrant lamelles poulet roti + mache + sauce, planche bois + comptoir granite, bouteille sauce verte floue en arriere-plan | wrap, poulet, coupe, comptoir | n/a | n/a |
+
+### Statistiques photos brutes
+
+| Categorie | Nombre | Bun noir | Bun rose | Bun blanc | N/A |
+|-----------|--------|----------|----------|-----------|-----|
+| Burgers | 23 | 17 | 5 | 1 | 0 |
+| Wraps | 11 | 0 | 0 | 0 | 11 |
+| Desserts | 3 | 0 | 0 | 0 | 3 |
+| Snacks | 2 | 0 | 0 | 0 | 2 |
+| Boissons | 1 | 0 | 0 | 0 | 1 |
+| Ingredients | 1 | 0 | 0 | 0 | 1 |
+| **TOTAL** | **41** | **17** | **5** | **1** | **18** |
+
+### Legendes colonnes
+
+- **Bun** : `noir` = pain noir sesame conforme, `rose` = pain betterave (ancien), `blanc` = pain classique/brioche (ancien), `n/a` = pas un burger
+- **Utilisable** : `direct` = pain noir, pret a utiliser en production, `bun-swap` = pain non conforme, necessite conversion IA du bun en noir, `n/a` = pas un burger (pas de contrainte bun)
+
+### Notes pour l'input-mapper
+
+1. **Photos en main** (#18, #19, #36, #40) : ideales pour les concepts `human-grip`, `human-hold`, stories IRL authentiques
+2. **Photos coupees** (#21, #22, #31-36, #39, #41) : ideales pour les concepts `concept-coupe`, fiches produit, stories educatives montrant l'interieur
+3. **Burger ouvert en preparation** (#6) : ideal pour coulisses cuisine, pilier "La Cuisine"
+4. **Collection wraps** (#39) : ideal pour carrousel multi-produits ou story collection
+5. **Tiramisu en couches** (#28) : meilleure photo dessert pour macro/cross-section
+6. **Photos bun rose** (#20-24) : exploitables UNIQUEMENT apres bun-swap IA vers pain noir. La cross-section (#21, #22) est particulierement interessante car elle montre la structure interne du double boeuf
+7. **Burger tenders** (#25) : bun blanc/brioche, necessite bun-swap. Pris en salle (mur vegetal visible) — utilisable aussi comme photo contexte salle
+8. **Tenders seuls** (#29, #30) : pas de contrainte bun, directement utilisables pour fiches produit, focus ingredient
+
 ## GENERIQUE
 
 ### Hero v2
@@ -392,11 +473,12 @@ Photos de contexte pour les piliers "La Cuisine", "Le Lieu", "Le Client". Utiles
 |--------------|--------|-------|
 | `dark-bg/` | 15 | Photos DA fond sombre studio |
 | `produits-source/` | 31 | Photos produit multi-angles fond neutre |
-| `produits-source/burgers-black/` | 50+ | Variantes concept par burger (ouvert, éclaté, assemblage, main, croque, macro, coupe, lévitation) |
+| `produits-source/burgers-black/` | 50+ | Variantes concept par burger (ouvert, eclate, assemblage, main, croque, macro, coupe, levitation) |
 | `contexte/` | 14 | Photos contexte restaurant |
-| **Total** | **110+** | |
+| `photos-brutes/` | 41 | Photos IRL brutes cuisine/comptoir (17 bun noir direct, 6 bun-swap, 18 non-burger) |
+| **Total** | **150+** | |
 
-Tous les produits de la carte ont au moins une photo dans `produits-source/`. Les burgers black bun ont des variantes par concept visuel (8 concepts × 5 burgers) permettant une sélection ciblée selon le brief.
+Tous les produits de la carte ont au moins une photo dans `produits-source/`. Les burgers black bun ont des variantes par concept visuel (8 concepts x 5 burgers) permettant une selection ciblee selon le brief. Les photos brutes (41) ajoutent des angles IRL authentiques (main, coupe, preparation) utilisables en `edit-ia` et `template`.
 
 ---
 
@@ -580,3 +662,278 @@ Ces photos meritent d'etre copiees dans `photos-references/` si un shooting stud
 | S2, S6, S10 | contexte/salle-restaurant/salle1.jpeg | Salle avec logo |
 | S3, S7, S11 | contexte/salle-restaurant/accueil.jpeg | Comptoir/accueil |
 | S4, S8, S12 | contexte/salle-restaurant/salle3.jpeg | Salle angle alternatif |
+
+---
+
+## INDEX PAR USAGE
+
+### Photos utilisables en mode `template` et `irl` (authentiques, contexte reel)
+
+Photos montrant un contexte reel (cuisine, comptoir, main, salle, service). Filtrées depuis les photos brutes et le contenu Instagram.
+
+**Photos brutes — produits en contexte cuisine/comptoir :**
+
+- `public/images/photos-brutes/ingredients/ingredient1.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-falafel.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-falafel-2.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-falafel-3.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-open-cooking.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-simple-boeuf.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-simple-boeuf-2.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-simple-boeuf-3.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-simple-poulet.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-simple-poulet-2.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-simple-poulet-3.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-simple-poulet-4.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-simple-poulet-5.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-simple-poulet-6.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-simple-poulet7.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-simple-poulet-8.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-simple-poulet-hand.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-simple-poulet-hand-2.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-rose-double-boeuf.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-rose-double-boeuf-cut.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-rose-double-boeuf-cut-frites.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-rose-double-boeuf-frites1.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-rose-double-boeuf-frites2.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-tenders.jpeg`
+- `public/images/photos-brutes/produits-seuls/desserts/tiramisu.jpeg`
+- `public/images/photos-brutes/produits-seuls/desserts/tiramisu-2.jpeg`
+- `public/images/photos-brutes/produits-seuls/desserts/tiramisu-3.jpeg`
+- `public/images/photos-brutes/produits-seuls/snacks/tenders.jpeg`
+- `public/images/photos-brutes/produits-seuls/snacks/tenders-2.jpeg`
+- `public/images/photos-brutes/produits-seuls/wraps/wrap-boeuf-cut.jpeg`
+- `public/images/photos-brutes/produits-seuls/wraps/wrap-boeuf-cut-2.jpeg`
+- `public/images/photos-brutes/produits-seuls/wraps/wrap-boeuf-cut-3.jpeg`
+- `public/images/photos-brutes/produits-seuls/wraps/wrap-boeuf-cut-4.jpeg`
+- `public/images/photos-brutes/produits-seuls/wraps/wrap-boeuf-cut-5.jpeg`
+- `public/images/photos-brutes/produits-seuls/wraps/wrap-boeuf-cut-6.jpeg`
+- `public/images/photos-brutes/produits-seuls/wraps/wrap-closed.jpeg`
+- `public/images/photos-brutes/produits-seuls/wraps/wrap-closed2.jpeg`
+- `public/images/photos-brutes/produits-seuls/wraps/wrap-collection-cut.jpeg`
+- `public/images/photos-brutes/produits-seuls/wraps/wrap-poulet-cut-hand.jpeg`
+- `public/images/photos-brutes/produits-seuls/wraps/wrap-poulet-cut.jpeg`
+- `public/images/photos-brutes/produits-seuls/boissons/monster-ultra.jpeg`
+
+**Contenu Instagram — process cuisine :**
+
+- `public/contenu-instagram/2025-10-03_15-57-14_UTC_1.jpg` — decoupe viande crue, mains gantees
+- `public/contenu-instagram/2025-10-03_15-57-14_UTC_2.jpg` — decoupe viande crue, plongee
+- `public/contenu-instagram/2025-10-03_15-57-14_UTC_3.jpg` — assemblage burger poulet, main gantee
+- `public/contenu-instagram/2025-10-03_15-57-14_UTC_4.jpg` — assemblage burger poulet, toppings
+- `public/contenu-instagram/2025-10-03_15-57-14_UTC_5.jpg` — burger poulet fini, cuisine en fond
+- `public/contenu-instagram/2025-10-03_15-57-14_UTC_7.jpg` — parmesan emiette macro, geste finition
+- `public/contenu-instagram/2025-10-07_12-15-07_UTC_2.jpg` — cookies preparation, cuisine
+- `public/contenu-instagram/2025-10-07_12-15-07_UTC_6.jpg` — cookies saupoudrage, backstage
+- `public/contenu-instagram/2025-10-14_09-12-16_UTC_1.jpg` a `_UTC_16.jpg` — assemblage STRICT Boeuf step-by-step (16 photos)
+- `public/contenu-instagram/2025-11-24_17-18-14_UTC.jpg` — assemblage MAX Boeuf, main gantee
+
+**Contenu Instagram — produits finis en contexte restaurant :**
+
+- `public/contenu-instagram/2025-10-03_15-57-14_UTC_5.jpg` — burger poulet fini, ambiance cuisine
+- `public/contenu-instagram/2025-10-07_12-15-07_UTC_1.jpg` — cookies plateau
+- `public/contenu-instagram/2025-10-07_12-15-07_UTC_3.jpg` — cookie tenu main gantee, mur vegetal
+- `public/contenu-instagram/2025-10-07_12-15-07_UTC_4.jpg` — cookie oreo tenu main gantee, mur vegetal
+- `public/contenu-instagram/2025-10-07_12-15-07_UTC_5.jpg` — cookie chocolat tenu main gantee, mur vegetal
+- `public/contenu-instagram/2025-11-05_18-05-52_UTC.jpg` — tiramisu ambiance sombre
+- `public/contenu-instagram/2025-11-22_17-18-46_UTC_1.jpg` — STRICT MAX Boeuf hero, restaurant
+- `public/contenu-instagram/2025-11-22_17-18-46_UTC_2.jpg` — STRICT MAX Boeuf gros plan
+- `public/contenu-instagram/2025-11-26_17-43-44_UTC_1.jpg` — STRICT Poulet gros plan, restaurant
+- `public/contenu-instagram/2025-11-26_17-43-44_UTC_2.jpg` — STRICT Poulet face, ambiance table
+
+**Contenu Instagram — fondateurs / equipe / lifestyle :**
+
+- `public/contenu-instagram/2025-10-03_15-57-14_UTC_6.jpg` — fondateur biceps, comptoir, mur vegetal
+- `public/contenu-instagram/2025-10-08_09-21-14_UTC.jpg` — equipe salle restaurant
+- `public/contenu-instagram/2025-10-25_15-59-21_UTC.jpg` — selfie fondateurs, mur vegetal neon
+- `public/contenu-instagram/2025-11-02_17-14-03_UTC.jpg` — fondateurs Uber Eats, mur vegetal
+- `public/contenu-instagram/2025-11-30_19-15-58_UTC.jpg` — equipe salle de sport
+- `public/contenu-instagram/2025-12-17_16-52-44_UTC_2.jpg` — fondateur selfie, neon
+- `public/contenu-instagram/2025-12-17_16-52-44_UTC_3.jpg` — fondateur de dos, Gymshark
+- `public/contenu-instagram/2025-12-17_16-52-44_UTC_4.jpg` — fondateur unboxing Gymshark
+
+**Contenu Instagram — macros / wrap annote :**
+
+- `public/contenu-instagram/2025-11-20_17-34-35_UTC.jpg` — wrap tenu main gantee, annotations macros
+
+---
+
+### Photos de contexte (lieux, ambiance)
+
+Photos de lieux utilisables comme reference visuelle ou fond pour les templates.
+
+**Salle restaurant :**
+
+- `public/images/photos-references/contexte/salle-restaurant/accueil.jpeg`
+- `public/images/photos-references/contexte/salle-restaurant/salle1.jpeg`
+- `public/images/photos-references/contexte/salle-restaurant/salle2.jpeg`
+- `public/images/photos-references/contexte/salle-restaurant/salle3.jpeg`
+- `public/images/photos-references/contexte/salle-restaurant/salle4.jpeg`
+- `public/images/photos-references/contexte/salle-restaurant/deco-salle.jpeg`
+
+**Cuisine :**
+
+- `public/images/photos-references/contexte/cuisine/cuisine-full.jpeg`
+- `public/images/photos-references/contexte/cuisine/cuisine-full-2.jpeg`
+- `public/images/photos-references/contexte/cuisine/cuisine-full-3.jpeg`
+- `public/images/photos-references/contexte/cuisine/cuisine-tour.jpeg`
+- `public/images/photos-references/contexte/cuisine/air-fryers-pro.jpeg`
+
+**Exterieur :**
+
+- `public/images/photos-references/contexte/exterieur/devanture.jpeg`
+
+**Carte / table :**
+
+- `public/images/photos-references/contexte/carte/table-carte.jpeg`
+
+**Contenu Instagram utilisable comme fond :**
+
+- `public/contenu-instagram/2025-10-08_09-21-14_UTC.jpg` — salle restaurant, 3 personnes (recadrable)
+- `public/contenu-instagram/2025-10-25_15-59-21_UTC.jpg` — mur vegetal neon (fond branding)
+- `public/contenu-instagram/2025-11-02_17-14-03_UTC.jpg` — mur vegetal neon (fond branding)
+- `public/contenu-instagram/2025-10-14_09-12-16_UTC_14.jpg` — papier STRICT FOOD'S (fond comptoir)
+
+---
+
+### Photos produit pour edit-ia
+
+Photos de produits finis (burgers, wraps, desserts, snacks) sublimables en DA.
+
+**Burgers black bun — produits-source (fond noir studio) :**
+
+- `public/images/photos-references/produits-source/burgers-black/strict-boeuf/strict-boeuf.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-boeuf/simple-boeuf-black.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-boeuf/strict-boeuf-ouvert.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-boeuf/strict-boeuf-eclate.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-boeuf/strict-boeuf-assemblage.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-boeuf/strict-boeuf-assemblage-2.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-boeuf/strict-boeuf-assemblage-3.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-boeuf/strict-boeuf-main.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-boeuf/strict-boeuf-main-2.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-boeuf/strict-boeuf-macro.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-boeuf/strict-boeuf-levitation.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-max-boeuf/strict-max-boeuf-black-1.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-max-boeuf/strict-max-boeuf-black-contre-plongee.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-max-boeuf/strict-boeuf-ouvert.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-poulet/strict-poulet-black-1.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-poulet/strict-poulet-black-2.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-poulet/strict-poulet-ouvert.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-poulet/strict-poulet-assemblage.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-poulet/strict-poulet-main.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-poulet/strict-poulet-croque.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-poulet/strict-poulet-coupe.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-poulet/strict-poulet-macro.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-poulet/strict-poulet-macro-2.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-poulet/strict-poulet-levitation-2.jpeg`
+- `public/images/photos-references/produits-source/burgers-black/strict-poulet/burger-black-poulet-roti-eclate-dark-bg.jpg`
+- `public/images/photos-references/produits-source/burgers-black/strict-poulet/burger-black-poulet-roti-eclate-dark-bg-2.jpg`
+- `public/images/photos-references/produits-source/burgers-black/strict-poulet/burger-black-poulet-roti-eclate-dark-bg-3.jpg`
+- `public/images/photos-references/produits-source/burgers-black/strict-max-poulet/strict-max-poulet-black-1.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-max-poulet/strict-max-poulet-black.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-vege/burger-falafel-dark-bg.jpg`
+- `public/images/photos-references/produits-source/burgers-black/strict-vege/strict-vege-falafel-black-2.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-vege/strict-vege-ouvert.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-vege/strict-vege-ouvert-green.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-vege/strict-vege-eclate.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-vege/strict-vege-main.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-vege/strict-vege-croque.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-vege/strict-vege-coupe.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-vege/strict-vege-macro.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-vege/strict-vege-macro-2.png`
+- `public/images/photos-references/produits-source/burgers-black/strict-vege/strict-vege-levitation.png`
+
+**Burgers — dark-bg (fond sombre DA) :**
+
+- `public/images/photos-references/dark-bg/burger-simple-boeuf-dark-bg.png`
+- `public/images/photos-references/dark-bg/burger-simple-boeuf-dark-bg-2.png`
+- `public/images/photos-references/dark-bg/strict-boeuf-contre-plongee.png`
+- `public/images/photos-references/dark-bg/strict-boeuf-plongee.png`
+- `public/images/photos-references/dark-bg/burger-poulet-roti-dark-bg.jpg`
+- `public/images/photos-references/dark-bg/burger-falafel-dark-bg.jpg`
+- `public/images/photos-references/dark-bg/burger-double-boeuf-dark-bg.jpg`
+- `public/images/photos-references/dark-bg/burger-double-boeuf-dark-bg-2.webp`
+- `public/images/photos-references/dark-bg/burger-double-boeuf-dark-bg-bis.jpg`
+- `public/images/photos-references/dark-bg/burger-black-poulet-roti-eclate-dark-bg.jpg`
+- `public/images/photos-references/dark-bg/burger-black-poulet-roti-eclate-dark-bg-2.jpg`
+- `public/images/photos-references/dark-bg/burger-black-poulet-roti-eclate-dark-bg-3.jpg`
+- `public/images/photos-references/dark-bg/burger-tenders-dark-bg.jpg`
+- `public/images/photos-references/dark-bg/burger-tenders-poulet-dark-bg.png`
+
+**Photos brutes IRL — burgers bun noir (directement utilisables) :**
+
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-falafel.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-falafel-2.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-falafel-3.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-open-cooking.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-simple-boeuf.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-simple-boeuf-2.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-simple-boeuf-3.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-simple-poulet.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-simple-poulet-2.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-simple-poulet-3.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-simple-poulet-4.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-simple-poulet-5.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-simple-poulet-6.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-simple-poulet7.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-simple-poulet-8.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-simple-poulet-hand.jpeg`
+- `public/images/photos-brutes/produits-seuls/burgers/burger-black-simple-poulet-hand-2.jpeg`
+
+**Wraps :**
+
+- `public/images/photos-references/produits-source/strict-wrap-boeuf.png`
+- `public/images/photos-references/produits-source/strict-wrap-poulet.png`
+- `public/images/photos-brutes/produits-seuls/wraps/wrap-boeuf-cut.jpeg`
+- `public/images/photos-brutes/produits-seuls/wraps/wrap-boeuf-cut-2.jpeg`
+- `public/images/photos-brutes/produits-seuls/wraps/wrap-boeuf-cut-3.jpeg`
+- `public/images/photos-brutes/produits-seuls/wraps/wrap-boeuf-cut-4.jpeg`
+- `public/images/photos-brutes/produits-seuls/wraps/wrap-boeuf-cut-5.jpeg`
+- `public/images/photos-brutes/produits-seuls/wraps/wrap-boeuf-cut-6.jpeg`
+- `public/images/photos-brutes/produits-seuls/wraps/wrap-closed.jpeg`
+- `public/images/photos-brutes/produits-seuls/wraps/wrap-closed2.jpeg`
+- `public/images/photos-brutes/produits-seuls/wraps/wrap-collection-cut.jpeg`
+- `public/images/photos-brutes/produits-seuls/wraps/wrap-poulet-cut-hand.jpeg`
+- `public/images/photos-brutes/produits-seuls/wraps/wrap-poulet-cut.jpeg`
+
+**Desserts :**
+
+- `public/images/photos-references/produits-source/cookie-proteine.png`
+- `public/images/photos-references/produits-source/overnight-strict.png`
+- `public/images/photos-references/produits-source/tiramisu-proteine.png`
+- `public/images/photos-references/produits-source/milkshake-proteine.png`
+- `public/images/photos-brutes/produits-seuls/desserts/tiramisu.jpeg`
+- `public/images/photos-brutes/produits-seuls/desserts/tiramisu-2.jpeg`
+- `public/images/photos-brutes/produits-seuls/desserts/tiramisu-3.jpeg`
+
+**Snacks :**
+
+- `public/images/photos-references/produits-source/frites-classiques.png`
+- `public/images/photos-references/produits-source/frites-patates-douces.png`
+- `public/images/photos-references/produits-source/tenders-strict.png`
+- `public/images/photos-brutes/produits-seuls/snacks/tenders.jpeg`
+- `public/images/photos-brutes/produits-seuls/snacks/tenders-2.jpeg`
+
+**Boissons :**
+
+- `public/images/photos-references/produits-source/boisson-zero.png`
+- `public/images/photos-references/produits-source/boisson-energisante.png`
+- `public/images/photos-brutes/produits-seuls/boissons/monster-ultra.jpeg`
+
+---
+
+### Photos necessitant bun-swap (pain blanc/rose -> noir)
+
+Photos avec un bun non conforme (rose betterave ou blanc brioche) necessitant une conversion IA vers le pain noir sesame avant utilisation en production.
+
+**Bun rose (betterave) — 5 photos :**
+
+- `public/images/photos-brutes/produits-seuls/burgers/burger-rose-double-boeuf.jpeg` — double boeuf, vue laterale
+- `public/images/photos-brutes/produits-seuls/burgers/burger-rose-double-boeuf-cut.jpeg` — double boeuf coupe, cross-section
+- `public/images/photos-brutes/produits-seuls/burgers/burger-rose-double-boeuf-cut-frites.jpeg` — double boeuf coupe + frites patate douce
+- `public/images/photos-brutes/produits-seuls/burgers/burger-rose-double-boeuf-frites1.jpeg` — double boeuf entier + frites
+- `public/images/photos-brutes/produits-seuls/burgers/burger-rose-double-boeuf-frites2.jpeg` — double boeuf entier + frites, variante
+
+**Bun blanc (brioche) — 1 photo :**
+
+- `public/images/photos-brutes/produits-seuls/burgers/burger-tenders.jpeg` — burger tenders, salle restaurant (mur vegetal visible)

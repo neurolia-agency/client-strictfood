@@ -1,0 +1,72 @@
+/* ============================================
+   BACKGROUNDS — Fonds texturés (béton brut)
+   2 modes : charbon (standard) et ambre (impact)
+   ============================================ */
+
+/* --- FOND CHARBON --- */
+.bg-charbon {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: var(--charbon);
+  background-image:
+    /* Micro-fissures diagonales */
+    repeating-linear-gradient(
+      -35deg,
+      transparent,
+      transparent 80px,
+      rgba(var(--blanc-rgb), 0.008) 80px,
+      rgba(var(--blanc-rgb), 0.008) 81px
+    ),
+    /* Lueur ambre subtile */
+    radial-gradient(
+      ellipse at 45% 35%,
+      rgba(var(--ambre-rgb), 0.04) 0%,
+      transparent 55%
+    ),
+    /* Speckle béton */
+    radial-gradient(circle at 20% 70%, rgba(var(--blanc-rgb), 0.015) 0%, transparent 2%),
+    radial-gradient(circle at 75% 25%, rgba(var(--blanc-rgb), 0.012) 0%, transparent 3%),
+    radial-gradient(circle at 55% 85%, rgba(var(--blanc-rgb), 0.018) 0%, transparent 1.5%),
+    radial-gradient(circle at 30% 15%, rgba(var(--blanc-rgb), 0.01) 0%, transparent 2.5%),
+    /* Variation de ton */
+    radial-gradient(ellipse at 70% 60%, rgba(var(--blanc-rgb), 0.02) 0%, transparent 40%),
+    radial-gradient(ellipse at 25% 40%, rgba(var(--charbon-rgb), 0.3) 0%, transparent 35%);
+}
+
+/* --- FOND NOIR PUR (abysse) --- */
+.bg-noir {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: var(--noir);
+  background-image:
+    /* Lueur ambre très subtile */
+    radial-gradient(
+      ellipse at 50% 50%,
+      rgba(var(--ambre-rgb), 0.02) 0%,
+      transparent 60%
+    );
+}
+
+/* --- FOND AMBRE --- */
+.bg-ambre {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: var(--ambre);
+  background-image:
+    /* Micro-fissures charbon */
+    repeating-linear-gradient(
+      -35deg,
+      transparent,
+      transparent 60px,
+      rgba(var(--charbon-rgb), 0.03) 60px,
+      rgba(var(--charbon-rgb), 0.03) 61px
+    ),
+    /* Profondeur */
+    radial-gradient(ellipse at 40% 60%, rgba(var(--charbon-rgb), 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 30%, rgba(var(--blanc-rgb), 0.12) 0%, transparent 40%),
+    /* Lueur chaude en haut */
+    radial-gradient(ellipse at 50% 10%, rgba(var(--blanc-rgb), 0.08) 0%, transparent 40%);
+}

@@ -138,7 +138,218 @@ Le `text-depth-3` est le niveau par défaut pour les templates Dark Premium avec
 
 ---
 
-## 1. Produit Hero (`produit-hero.html`)
+## Story Universal (`story-universal.html`) — TEMPLATE PRINCIPAL
+
+> **Remplace tous les anciens templates.** Photo plein cadre + overlay minimal.
+> La photo EST la story. Le texte est un complement optionnel, jamais le sujet.
+
+### Cadre fixe
+
+| Zone | Position | Contenu |
+|------|----------|---------|
+| Photo plein cadre | absolute, 100% width/height | Image (irl-archive, full-ia, sublimation, compositing) |
+| Gradient haut | top, height 350px | Protection safe zone IG (discret) |
+| Gradient bas | bottom, height 550px | Protection texte + tagline |
+| Text zone | bottom 220px, centre | 2 lignes de texte optionnelles |
+| Bottom | bottom 0, padding safe-bottom | Tagline + logo |
+
+### Zones texte
+
+| Element | Typo | Max car | Max lignes | Optionnel ? |
+|---------|------|---------|------------|-------------|
+| `TEXT_LINE_1` | Oswald 72px bold uppercase | 22 | 1 | Oui — `SHOW_LINE_1` |
+| `TEXT_LINE_2` | Space Grotesk 34px accent | 30 | 1 | Oui — `SHOW_LINE_2` |
+| Divider | 50px accent gradient | — | — | Oui — `SHOW_DIVIDER` |
+| `TAGLINE` | Space Grotesk 36px | 40 | 1 | Non — toujours affiche |
+| Logo | 180px width | — | — | Non — toujours affiche |
+
+### Variantes de position
+
+| Classe | Position info | Quand |
+|--------|-------------|-------|
+| (par defaut) | Centre en bas (au-dessus de tagline) | Produit centre dans l'image |
+| `info-haut-gauche` | Haut gauche (top 280px) | Produit a droite |
+| `info-haut-centre` | Haut centre (top 280px) | Produit en bas |
+| `info-bas-gauche` | Bas gauche | Produit a droite |
+
+### Filtres IRL (photos reelles)
+
+| Classe | Filtre | Usage |
+|--------|--------|-------|
+| `filter-none` | Aucun | Images IA (deja traitees) |
+| `filter-leger` | brightness 1.05, sepia 0.06 | Default photos reelles |
+| `filter-moyen` | brightness 1.0, sepia 0.10 | Photo tres claire |
+| `filter-fort` | brightness 0.95, sepia 0.15 | Exterieur tres lumineux |
+
+### Exemples de contenu
+
+| Usage | TEXT_LINE_1 | TEXT_LINE_2 | INFO_POSITION |
+|-------|------------|------------|---------------|
+| Food porn pur | — (masque) | — (masque) | — |
+| Produit nomme | "STRICT BOEUF" | "946 kcal" | (defaut) |
+| Educatif | "53G PROTEINES" | "Ton shaker ne fait pas le poids" | info-haut-gauche |
+| Interactif | "QUEL EST TON STRICT ?" | — | (defaut) |
+| Fiche produit | "STRICT VEGE" | "850 kcal" | (defaut) |
+| Annonce | "MARDI-DIMANCHE" | "11h-14h / 18h-22h" | info-haut-centre |
+| IRL archive | "RUSH DU MIDI" | — | (defaut) |
+
+### Placeholders
+
+`{{BG_IMAGE_PATH}}`, `{{TEXT_LINE_1}}`, `{{TEXT_LINE_2}}`, `{{SHOW_TEXT}}`, `{{SHOW_LINE_1}}`, `{{SHOW_LINE_2}}`, `{{SHOW_DIVIDER}}`, `{{TAGLINE}}`, `{{MOOD_CLASS}}`, `{{PHOTO_PRESET}}`, `{{INFO_POSITION}}`, `{{IRL_FILTER}}`, `{{GRAIN}}`
+
+---
+
+## Fond de la photo (modes IA)
+
+Le **fond** est une dimension independante du traitement template. Il determine la palette du BACKGROUND dans l'image generee par `/image-prompt-engineer`. Pas de lien avec le template utilise.
+
+| Fond | Description | Modes concernes |
+|------|-----------|-----------------|
+| `ambre` | Surface ambre doree texturee (#FABA43), eclairage chaud | full-ia, compositing-ia, irl-sublimation |
+| `charbon` | Surface charbon sombre (#1a1714), eclairage contraste | full-ia, compositing-ia, irl-sublimation |
+| `ambre+charbon` | Fond ambre + accessoires charbon (papier kraft noir, ardoise) | full-ia, compositing-ia |
+| `charbon+ambre` | Fond charbon + accessoires ambre (serviette doree, sesame) | full-ia, compositing-ia |
+| `—` | Photo existante, pas de choix | irl-archive, template |
+
+---
+
+## Story Sillon (`story-sillon.html`)
+
+> Photo en haut (~65% du canvas) + arc dome + zone ambre en bas avec nom produit et macros.
+
+### Cadre fixe
+
+| Zone | Position | Contenu |
+|------|----------|---------|
+| Photo | absolute, top 0, height 1250px | Image (irl-archive, full-ia, sublimation, compositing) |
+| Gradient haut | top, height 300px | Protection safe zone IG |
+| Sillon (arc dome) | top 1170px, height 120px | SVG dome ambre — transition photo/zone brand |
+| Zone ambre | top 1250px → bottom | Fond #FABA43 + radial gradients profondeur |
+| Contenu ambre | top 1290px, bottom 220px | Nom produit + divider + macros (centre vertical) |
+| Tagline + logo | bottom, padding-bottom 80px | Fixe, charbon sur ambre |
+
+### Zones texte
+
+| Element | Typo | Max car | Optionnel ? |
+|---------|------|---------|-------------|
+| `PRODUCT_NAME` | Oswald 120px bold uppercase | 20 | Non |
+| `PRODUCT_INFO` | Space Grotesk 42px | 30 | Oui — `SHOW_INFO` |
+| `TAGLINE` | Space Grotesk 34px | 40 | Non — fixe |
+| Logo | 140px width, filter brightness(0) | — | Non |
+
+### Placeholders
+
+`{{BG_IMAGE_PATH}}`, `{{PRODUCT_NAME}}`, `{{PRODUCT_INFO}}`, `{{SHOW_INFO}}`, `{{TAGLINE}}`, `{{MOOD_CLASS}}`, `{{PHOTO_PRESET}}`, `{{GRAIN}}`
+
+---
+
+## Story Sceau (`story-sceau.html`)
+
+> Photo plein cadre + cercle glassmorphism semi-transparent avec arc dome interieur. Zone libre en dessous pour stickers IG natifs.
+
+### Cadre fixe
+
+| Zone | Position | Contenu |
+|------|----------|---------|
+| Photo | absolute, 100% plein cadre | Image |
+| Gradient haut | top, height 300px | Protection safe zone IG |
+| Gradient bas | bottom, height 500px | Protection tagline |
+| Sceau | top 380px, centre, 400x400px | Cercle blur + border ambre + contenu |
+| Tagline + logo | bottom, padding-bottom 80px | Fixe |
+
+### Sceau — contenu interne
+
+| Element | Typo | Max car |
+|---------|------|---------|
+| Arc dome SVG | 180x40px | — |
+| `SCEAU_NAME` | Oswald 58px bold | 12 (2 lignes possibles via `<br>`) |
+| `SCEAU_SUB` | Space Grotesk 22px | 20 |
+| `SCEAU_INFO` | DM Sans 20px | 15 (optionnel — `SHOW_SCEAU_INFO`) |
+
+### Placeholders
+
+`{{BG_IMAGE_PATH}}`, `{{SCEAU_NAME}}`, `{{SCEAU_SUB}}`, `{{SCEAU_INFO}}`, `{{SHOW_SCEAU_INFO}}`, `{{TAGLINE}}`, `{{MOOD_CLASS}}`, `{{PHOTO_PRESET}}`, `{{GRAIN}}`
+
+---
+
+## Story Feuillete Photo (`story-feuillete-photo.html`)
+
+> Photo plein cadre + bandeau dome ambre en haut. Utilise en sequence avec `feuillete-data`.
+
+### Cadre fixe
+
+| Zone | Position | Contenu |
+|------|----------|---------|
+| Photo | absolute, 100% plein cadre | Image food porn |
+| Dome ambre haut | top 0, height 90px | SVG dome ambre (fil rouge sequence) |
+| Gradient bas | bottom, height 400px | Protection tagline |
+| Tagline + logo | bottom, padding-bottom 80px | Fixe |
+
+### Zones texte
+
+Pas de texte specifique — seulement la tagline fixe. La photo parle seule.
+
+### Placeholders
+
+`{{BG_IMAGE_PATH}}`, `{{TAGLINE}}`, `{{MOOD_CLASS}}`, `{{PHOTO_PRESET}}`, `{{GRAIN}}`
+
+---
+
+## Story Feuillete Data (`story-feuillete-data.html`)
+
+> Fond charbon mesh + donnee geante. Pas de photo. Fermeture de sequence ou story informative.
+
+### Cadre fixe
+
+| Zone | Position | Contenu |
+|------|----------|---------|
+| Mesh gradient | absolute, plein cadre | Charbon + subtils radials ambre/grenat |
+| Dome ambre haut | top 0, height 90px | SVG dome ambre (fil rouge sequence) |
+| Contenu centre | flex column, centre vertical | Chiffre + unite + divider + infos |
+| Tagline + logo | bottom, padding-bottom 80px | Fixe |
+
+### Zones texte
+
+| Element | Typo | Max car | Optionnel ? |
+|---------|------|---------|-------------|
+| `DATA_NUMBER` | Oswald 280px bold | 6 | Non |
+| `DATA_UNIT` | Oswald 72px | 15 | Non |
+| `DATA_LINE_1` | Space Grotesk 32px | 25 | Non |
+| `DATA_LINE_2` | DM Sans 30px | 25 | Oui — `SHOW_LINE_2` |
+| `TAGLINE` | Space Grotesk 36px | 40 | Non — fixe |
+
+### Placeholders
+
+`{{DATA_NUMBER}}`, `{{DATA_UNIT}}`, `{{DATA_LINE_1}}`, `{{DATA_LINE_2}}`, `{{SHOW_LINE_2}}`, `{{TAGLINE}}`, `{{MOOD_CLASS}}`, `{{GRAIN}}`
+
+---
+
+## Recap limites de caracteres — Tous templates
+
+| Template | Zone | Max car |
+|----------|------|---------|
+| **story-universal** | TEXT_LINE_1 | 22 |
+| **story-universal** | TEXT_LINE_2 | 30 |
+| **story-sillon** | PRODUCT_NAME | 20 |
+| **story-sillon** | PRODUCT_INFO | 30 |
+| **story-sceau** | SCEAU_NAME | 12 |
+| **story-sceau** | SCEAU_SUB | 20 |
+| **story-sceau** | SCEAU_INFO | 15 |
+| **story-feuillete-data** | DATA_NUMBER | 6 |
+| **story-feuillete-data** | DATA_UNIT | 15 |
+| **story-feuillete-data** | DATA_LINE_1 | 25 |
+| **story-feuillete-data** | DATA_LINE_2 | 25 |
+| **tous** | TAGLINE | 40 | **FIXE : `Le cheat meal <em>qui n'en est pas un</em>`** |
+
+---
+
+## TEMPLATES DEPRECIES (legacy S1-S2)
+
+> Les templates ci-dessous sont deprecies depuis la v4. Ils restent dans `_templates/` pour ne pas casser les renders S1-S2 existants, mais ne doivent plus etre utilises pour les nouvelles stories.
+
+---
+
+## 1. Produit Hero (`produit-hero.html`) — DEPRECATED, remplace par story-universal
 
 > ⚠️ **Remplace l'ancien template `vitrine.html`.** Le produit est affiché en plein cadre (photo générée ou sublimée), avec des informations minimales en overlay. Pas de zone info séparée — l'image EST le contenu.
 
@@ -187,7 +398,7 @@ Le `text-depth-3` est le niveau par défaut pour les templates Dark Premium avec
 
 ---
 
-## 2. Éducatif (`educatif.html`)
+## 2. Educatif (`educatif.html`) — DEPRECATED, remplace par story-universal
 
 > Chiffre clé + explication + comparaison VS optionnelle. Photo BG à droite.
 
@@ -229,7 +440,7 @@ Le `text-depth-3` est le niveau par défaut pour les templates Dark Premium avec
 
 ---
 
-## 3. Interactif (`interactif.html`)
+## 3. Interactif (`interactif.html`) — DEPRECATED, remplace par story-universal
 
 > Question + zone sticker Instagram. Mode Single (1 photo) ou VS (2 produits).
 
@@ -258,7 +469,7 @@ Le `text-depth-3` est le niveau par défaut pour les templates Dark Premium avec
 
 ---
 
-## 4. Annonce (`annonce.html`)
+## 4. Annonce (`annonce.html`) — DEPRECATED, remplace par story-universal
 
 > Badge + headline + body + CTA. Tout centré. Photo BG full-screen dimmed.
 
@@ -286,7 +497,7 @@ Le `text-depth-3` est le niveau par défaut pour les templates Dark Premium avec
 
 ---
 
-## 5. IRL (`irl-story.html`)
+## 5. IRL (`irl-story.html`) — DEPRECATED, remplace par story-universal
 
 > Photo plein cadre + overlay DA minimal (logo + texte optionnel).
 
@@ -320,7 +531,7 @@ Le `text-depth-3` est le niveau par défaut pour les templates Dark Premium avec
 
 ---
 
-## 6. Process (`process.html`)
+## 6. Process (`process.html`) — DEPRECATED, remplace par story-universal
 
 > Avant/après ou étapes. Split vertical avec bande de séparation DA.
 
@@ -351,7 +562,15 @@ Le `text-depth-3` est le niveau par défaut pour les templates Dark Premium avec
 
 ---
 
-## Récap limites de caractères (quick reference)
+## Recap limites de caracteres (quick reference)
+
+| Template | Zone | Max car |
+|----------|------|---------|
+| **story-universal** | **TEXT_LINE_1** | **22** |
+| **story-universal** | **TEXT_LINE_2** | **30** |
+| **tous** | TAGLINE | 40 | **FIXE HTML : `Le cheat meal <em>qui n'en est pas un</em>`** |
+
+### Legacy (deprecated)
 
 | Template | Zone | Max car |
 |----------|------|---------|
@@ -359,14 +578,6 @@ Le `text-depth-3` est le niveau par défaut pour les templates Dark Premium avec
 | produit-hero | PRODUCT_INFO | 25 |
 | educatif | TITLE | 45 |
 | educatif | FACT_NUMBER | 4 |
-| educatif | FACT_UNIT | 25 |
-| educatif | EXPLANATION | 120 |
 | interactif | QUESTION | 50 |
-| interactif | PRODUCT_A/B_LABEL | 10 |
-| annonce | BADGE_TEXT | 20 |
 | annonce | HEADLINE | 30 |
-| annonce | BODY_TEXT | 120 |
-| annonce | CTA_TEXT | 25 |
 | irl | IRL_TEXT | 40 |
-| process | CAPTION | 35 |
-| **tous** | TAGLINE | 40 | **FIXE HTML : `Le cheat meal <em>qui n'en est pas un</em>` — JAMAIS en texte brut, JAMAIS de point final** |

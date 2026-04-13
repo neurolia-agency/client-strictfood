@@ -5,7 +5,7 @@
 | Element | Valeur |
 |---------|--------|
 | Logo | "STRICT FOOD'S" — deux mots, majuscules, typographie condensee bold (style Oswald). **Le second O de FOOD est remplace par une icone burger stylisee** : un cercle contenant 3 lignes ondulees horizontales (couches du burger) avec une base plate (bun du bas). L'apostrophe-S ('S) fait partie du nom de marque. |
-| Couleur logo | Cuivre Braise (#BF8522 / oklch(0.67 0.15 68)) sur fond sombre OU blanc sur fond sombre OU noir mat sur kraft clair |
+| Couleur logo | Cuivre Braise (#FABA43 / oklch(0.83 0.17 80)) sur fond sombre OU blanc sur fond sombre OU noir mat sur kraft clair |
 | Materiaux dominants | Papier kraft noir mat, carton recycle sombre, kraft naturel |
 | Finition | Toujours mat, jamais brillant ni plastifie |
 | Logo reference PNG (cuivre) | `public/logo/strictfood-logo-reference.png` (2200x608, Cuivre Braise sur Charbon) |
@@ -137,7 +137,7 @@ Le produit (burger, bowl, dessert) est **TOUJOURS le heros** du visuel :
 ### Coherence visuelle
 
 - Le logo est **toujours** en majuscules condensees bold (style Oswald)
-- La couleur sur fond sombre est **toujours** Cuivre Braise (#BF8522)
+- La couleur sur fond sombre est **toujours** Cuivre Braise (#FABA43)
 - La couleur sur fond kraft clair est **toujours** noir mat
 - Les materiaux sont **toujours** mat — jamais brillant, jamais plastifie, jamais laque
 - Les props doivent paraitre **utilises naturellement** (froisse, pose negligemment) — pas poses comme dans un catalogue

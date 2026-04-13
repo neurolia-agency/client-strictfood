@@ -19,9 +19,9 @@ Tu es l'orchestrateur du pipeline de production de stories Instagram StrictFood.
 
 | Mode | Pipeline | Distribution |
 |------|----------|:------------:|
-| `full-ia` (food) | Prompt -> Realism Audit -> Gemini 4K 9:16 -> template traitement | **40%** |
-| `full-ia` (lifestyle) | Pinterest search -> Analyse -> Adapt -> Prompt Combo-B -> Gemini 4K 9:16 -> logo insertion | **30%** |
-| `full-ia` (brand) | **Rappel-copywriter** -> Prompt -> Realism Audit -> Gemini 4K 9:16 -> template traitement | **30%** |
+| `full-ia` (food) | Prompt -> Realism Audit -> Gemini 2K 9:16 -> template traitement | **40%** |
+| `full-ia` (lifestyle) | Pinterest search -> Analyse -> Adapt -> Prompt Combo-B -> Gemini 2K 9:16 -> logo insertion | **30%** |
+| `full-ia` (brand) | **Rappel-copywriter** -> Prompt -> Realism Audit -> Gemini 2K 9:16 -> template traitement | **30%** |
 
 > **100% full-ia** — le mode `template` est deprecie pour les stories. Chaque story est un visuel IA unique.
 > **Modes supprimes** : `template` (stories), `irl-sublimation`, `compositing-irl`, `compositing-ia`, `scene-ia`, `irl-archive`. Si un brief contient un de ces modes -> STOP, informer l'operateur.
@@ -103,7 +103,7 @@ Le champ `Fond` du brief determine la palette du BACKGROUND dans l'image generee
 
 | Fond | Instruction pour le prompt |
 |------|---------------------------|
-| `ambre` | Surface/fond ambre dore texture (#E5A520), eclairage chaud |
+| `ambre` | Surface/fond ambre dore texture (#FABA43), eclairage chaud |
 | `charbon` | Surface/fond charbon sombre (#1a1714), eclairage contraste |
 | `ambre+charbon` | Fond ambre + accessoires charbon (papier kraft noir, ardoise, ustensiles sombres) |
 | `charbon+ambre` | Fond charbon + accessoires ambre (serviette doree, sauce visible, eclats sesame) |
@@ -166,7 +166,7 @@ Pour les stories de type `Brand` et `Rappel`. Deux agents interviennent en seque
     Output : direction creative complete (concept brand-*, angle, eclairage, composition)
 
 [3] Suivre le SOUS-PIPELINE FOOD standard :
-    Input Mapping -> Realism Audit PRE -> Prompt Combo-B -> Realism Audit POST -> Gemini 4K 9:16
+    Input Mapping -> Realism Audit PRE -> Prompt Combo-B -> Realism Audit POST -> Gemini 2K 9:16
 
 [4] Template traitement (overlay) :
     L'accroche est integree via le template HTML (TEXT_LINE_1/TEXT_LINE_2)

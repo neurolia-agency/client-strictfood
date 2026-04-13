@@ -1,732 +1,823 @@
-# Playbook Production Instagram — StrictFood
+# Playbook Production Instagram — StrictFood v5
 
-> Ce document te guide pas à pas en fonction de **ce que tu veux faire**.
-> Commence par la question qui correspond à ton besoin, suis les étapes.
+> Guide operateur. Chaque section repond a une intention : "Je veux faire X."
+> Les regles techniques sont dans `CLAUDE.md`. Ici, on suit les etapes.
 
 ---
 
-## Sommaire rapide
+## Navigation rapide
 
-| Je veux... | Aller à |
+| Je veux... | Section |
 |------------|---------|
-| Planifier une semaine de contenu | [1. Planifier une semaine](#1-planifier-une-semaine) |
-| Produire un post prévu au planning | [2. Produire un post](#2-produire-un-post) |
-| Produire les stories d'un jour/semaine | [3. Produire des stories](#3-produire-des-stories) |
-| Créer un post ou une story hors planning (idée spontanée) | [4. Production hors planning](#4-production-hors-planning) |
-| Comprendre les modes de création | [5. Les modes de création](#5-les-modes-de-création) |
-| Comprendre les types de stories | [6. Les types de stories](#6-les-types-de-stories) |
-| Comprendre les concepts visuels et le système de briques | [5.5 Concepts visuels et système de briques](#55-concepts-visuels-et-système-de-briques) |
-| Comprendre comment le système fonctionne | [7. Comprendre le système](#7-comprendre-le-système) |
+| Planifier une semaine | [1. Planifier](#1-planifier-une-semaine) |
+| Produire un post | [2. Produire un post](#2-produire-un-post) |
+| Produire les stories du jour | [3. Produire des stories](#3-produire-des-stories) |
+| Produire un carrousel | [4. Produire un carrousel](#4-produire-un-carrousel) |
+| Creer un visuel spontane (hors planning) | [5. Hors planning](#5-hors-planning) |
+| Comprendre les modes de creation | [6. Modes](#6-les-modes-de-creation) |
+| Comprendre les distributions | [7. Distributions](#7-distributions) |
+| Comprendre le systeme visuel | [8. Systeme visuel](#8-systeme-visuel) |
+| Comprendre l'architecture | [9. Architecture](#9-architecture) |
+| Verifier avant publication | [10. Checklists](#10-checklists) |
+| Chercher un terme | [Glossaire](#glossaire) |
 
 ---
 
 ## 1. Planifier une semaine
 
-> **Quand** : Chaque semaine, avant de créer les briefs.
-> **Durée** : 15-20 min avec Claude.
-> **Pourquoi** : Le planning décide de TOUT — piliers, modes, types de stories. Pas de décision à prendre post-planning.
+### Quand
 
-### Comment faire
+Avant chaque semaine de production. Obligatoire avant les briefs.
+
+### Etapes
 
 ```
-Créons le planning de la semaine S[X] (du [date] au [date]).
+Etape 0 — Regenerer l'historique
+    ↓
+Etape 1 — Creer le planning publications (2 posts + 2 carrousels/semaine)
+    ↓
+Etape 2 — Creer le planning stories (21 stories/semaine)
+    ↓
+Etape 3 — Valider les distributions
+    ↓
+Etape 4 — Rediger les briefs individuels
 ```
 
-Claude commence par **scanner les dossiers de production** pour régénérer l'historique (`_config/historique-production.md`). L'historique reflète exactement ce qui existe sur le disque :
-- Un post qui a un PNG dans `final/` = il existe
-- Un post dont le PNG est supprimé = il disparaît de l'historique
-- Même logique pour les stories (`story-NN/final/`)
+### Etape 0 — Regenerer l'historique
 
-Claude analyse ensuite **posts ET stories** ensemble (symbiose) : produits, piliers, modes en retard, puis propose un planning qui compense les manques et évite les doublons.
+**Obligatoire a chaque debut de semaine.** L'historique reflete ce qui existe sur le disque.
 
-### Ce que le planning décide
+```
+Lire production/_config/historique-production.md
+Scanner tous les dossiers posts + stories
+Reecrire le fichier avec les donnees fraiches
+```
 
-| Dimension | Décidé dans le planning | Tu n'as plus à y penser après |
-|-----------|------------------------|-------------------------------|
-| **Piliers** | Quel pilier pour chaque post | Distribution équilibrée sur le mois |
-| **Modes posts** | Quel mode pour chaque post | Variété garantie (jamais 2x le même consécutif) |
-| **Modes stories** | Quel mode pour chaque story | Mix IRL + sublimation + compositing + full-ia (plus de templates) |
-| **Types stories** | Quel type (fiche, éducatif, interactif...) | Alternance des familles visuelles |
-| **Symbiose** | Les stories complètent les posts, pas de doublon sujet/photo | Cohérence automatique |
-| **Anti-doublons** | Quels produits/piliers/modes sont en retard | Compensation basée sur l'historique |
-| **Photos IRL** | Quelles photos prendre cette semaine | Liste claire pour Romain/Dorian |
-| **Concepts visuels IRL** | Quels concepts assignés aux IRL et moments | Cohérence visuelle, inspiration, liberté créative |
+L'historique repond a : quels produits ont ete couverts, quels piliers, quels traitements, quelles photos utilisees. Il permet d'eviter les doublons.
 
-### Règles de distribution (appliquées automatiquement)
+### Etape 1 — Planning publications (2 posts + 2 carrousels)
 
-**Posts** :
-- Jamais 2 posts consécutifs avec le même mode
-- Au moins 3 modes différents par semaine
-- Au moins 3 piliers différents par semaine
+**2 posts simples + 2 carrousels par semaine = 4 publications.** Template : `_templates/planning-semaine.md`
 
-**Stories** :
-- Chaque jour a au moins 2 modes différents
-- **Au moins 2 stories non-template par jour** (IRL, sublimation, compositing ou full-ia)
-- **Au moins 2 IRL moments par jour** (photos réelles brutes ou sublimées)
-- **Max 1 produit hero par semaine**
-- **Max 1 éducatif par semaine**
-- Max 3 interactifs par semaine
+#### Posts simples (2/semaine)
 
-**Symbiose posts ↔ stories** :
-- Les jours de post, les stories complètent le post (produit hero, éducatif lié, IRL coulisses)
-- Un produit couvert en post ne refait pas une produit hero story la même semaine (sauf jour du post)
-- Les photos utilisées en post ne sont pas réutilisées en story la même semaine
+Pour chaque post, decider :
 
-### Les 5 piliers
+| Champ | Choix | Source |
+|-------|-------|--------|
+| **Pilier** | Le Produit, Les Benefices, La Marque | Distribution piliers |
+| **Traitement** | photo-pure, knockout-band, masque, masque-inverse, texture-fill, triptych | Distribution traitements |
+| **Fond** | ambre (+ ID variante) ou charbon | Distribution fonds |
+| **Produit** | Un des 8 produits ou sujet pilier | Historique (eviter doublons) |
+| **Concept visuel** | Un concept de `_config/concepts-visuels.md` | Varier vs semaines precedentes |
 
-| Pilier | Cible mois | Ce que c'est |
-|--------|------------|--------------|
-| **Le Plat** | 35% | Food porn premium, hero shots produits |
-| **La Cuisine** | 25% | Coulisses, process, fournisseurs |
-| **Les Macros** | 18% | Nutrition, éducation, comparaisons |
-| **L'Équipe** | 15% | Portraits, storytelling, humain |
-| **Le Quartier** | 7% | Communauté, local, partenaires |
+**Mode : tous les posts simples en planning sont `full-ia`.**
+
+#### Carrousels (2/semaine)
+
+Pour chaque carrousel, decider :
+
+| Champ | Choix | Source |
+|-------|-------|--------|
+| **Type** | 1 des 9 types | `_config/carousel-themes.md` |
+| **Famille** | A (texte), B (photo), C (panoramique) | Selon le type |
+| **Pilier** | Le Produit, Les Benefices, La Marque | Distribution piliers |
+| **Produit** | Produit principal du carrousel | Historique (eviter doublons) |
+| **Slides** | 3-5 (B/C) ou 4-10 (A) | Selon le type |
+| **Slug** | Theme educatif ou scene panoramique | `_config/carousel-themes.md` |
+
+**9 types :** Panoramique (C, 2-3/mois) · Zoom Progressif (B, 1-2/mois) · Texture/ASMR (B, 1/mois) · Educatif (A, 1/mois) · Construction (B, 0.5/mois) · Ingredient Spotlight (A, 0.5/mois) · Defile Gamme (B, 0.5/mois) · Process Cuisine (B, 0.5/mois) · Menu Objectif (A, 0.5/mois)
+
+### Etape 2 — Planning stories
+
+**21 stories par semaine (3 par jour).** Pour chaque story, decider :
+
+| Champ | Choix |
+|-------|-------|
+| **Mode** | `full-ia` (food ou lifestyle) ou `template` |
+| **Sous-type** | Food : concept visuel produit. Lifestyle : concept lifestyle. Template : educatif, interactif, annonce, fiche produit |
+| **Fond** (modes IA) | ambre, charbon, ambre+charbon, charbon+ambre |
+| **Traitement** (stories) | photo-pure, sillon, sceau, feuillete-photo, feuillete-data |
+| **Produit/Sujet** | Varier vs posts et stories adjacentes |
+
+### Etape 3 — Verifier les distributions
+
+Avant de valider, verifier :
+
+**Posts :**
+- [ ] ≥3 traitements differents sur les 4 posts
+- [ ] ≥3 piliers differents
+- [ ] Pas 2 consecutifs meme traitement
+- [ ] Max 1 triptych/quinzaine
+- [ ] ~65% fonds ambre / ~35% charbon
+
+**Stories :**
+- [ ] ~40% full-ia food (~8-9 stories)
+- [ ] ~30% full-ia lifestyle (~6-7 stories)
+- [ ] ~30% template (~6-7 stories)
+- [ ] ≥2 full-ia par jour
+- [ ] Max 3 interactifs/semaine
+- [ ] Max 1 educatif/semaine
+- [ ] Max 1 fiche produit/semaine
+- [ ] Fonds IA : ~50% ambre, ~25% charbon, ~15% ambre+charbon, ~10% charbon+ambre
+
+### Etape 4 — Briefs individuels
+
+**Posts** : 1 brief par post → `_templates/brief-v3.md`
+**Stories** : 1 brief par story → `_templates/brief-story.md`
+
+Chaque brief pointe vers des photos existantes (mode template) ou decrit le visuel a generer (mode full-ia). **Jamais de `[A FOURNIR]`.**
 
 ---
 
 ## 2. Produire un post
 
-> **Prérequis** : Le planning de la semaine est validé. Le mode est déjà décidé.
-
-### Étape par étape
-
-**2.1** Dis à Claude :
+### Commande
 
 ```
-Produis le post du [jour] [date].
+/instagram-producer DD-MM-YYYY
 ```
 
-ou directement :
+L'orchestrateur lit le brief, detecte le mode et execute le pipeline.
+
+### Pipeline full-ia (99% des posts en planning)
 
 ```
-/instagram-producer 24-03-2026
+[1] Brief lu → mode full-ia detecte
+         ↓
+[2] Art Direction
+    Skill : /social-media-art-director
+    Input : brief + recette produit
+    Output : production/art-direction.md
+         ↓
+[3] Input Mapping
+    Agent : input-mapper (Haiku)
+    Input : art-direction.md + recettes + photo-references
+    Output : production/input.md
+         ↓
+    🔒 Validation operateur
+         ↓
+[4] Realism Audit PRE-PROMPT
+    Skill : /realism-auditor
+    Lit : realism-auditor.md + recette + pipeline.md (termes interdits)
+    Extrait les contraintes specifiques concept x produit
+         ↓
+[5] Prompt Engineering
+    Skill : /image-prompt-engineer (Mode B, style Combo-B)
+    Output : production/prompt.md
+    Minimum 150-300 mots, narratif fluide, CAPS, negatifs inline
+         ↓
+[6] Realism Audit POST-PROMPT
+    Verifie : termes interdits absents, termes obligatoires presents,
+    physique coherente, proportions adaptees au produit
+         ↓
+    🔒 Validation operateur
+         ↓
+[7] Generation image
+    Skill : /nano-banana-pro
+    Resolution : TOUJOURS 2K
+    Pas de photo reference produit (produit decrit dans le prompt)
+         ↓
+[8] Image dans brouillons/
+         ↓
+    🔍 Verification operateur
+    Pain noir ? Ingredients corrects ? Pas de grill marks ?
+    Eclairage coherent ? Esthetique DA respectee ?
+         ↓
+    Si KO → iterations (modifier prompt, regenerer)
+    Si OK → "valide" → le visuel reste dans brouillons/
+         ↓
+[9] Caption
+    Skill : /caption-writer
+    Input : image validee (vision) + direction caption du brief
+    Output : production/caption.md
+         ↓
+[10] Publication sur Instagram (manuelle)
+         ↓
+[11] Archivage (via dashboard Neurolia)
+     PNG supprime, metadata texte conservee, historique mis a jour
 ```
 
-**2.2** Claude scanne l'historique (posts + stories), lit le planning, crée le brief v3 avec le mode déjà défini, et lance le pipeline adapté.
+### Pipeline template / carrousel
 
-**2.3** Ce que tu fournis dépend du mode (décidé au planning) :
+```
+Brief → /carousel-producer DD-MM-YYYY
+     → Recherche scientifique (/nutrition-researcher)
+     → Copywriting (carousel-copywriter agent)
+     → Template fill HTML
+     → Puppeteer 1080x1350
+     → brouillons/ → validation → caption → publication
+```
 
-| Mode | Ce que tu dois préparer |
-|------|------------------------|
-| `full-ia` | Rien de plus. Produit et slug suffisent. |
-| `irl-sublimation` | Fournir la photo réelle |
-| `compositing-irl` | Fournir 2 photos (produit + lieu) |
-| `compositing-ia` | Fournir la photo produit |
-| `template` | Valider les données des slides |
+### Resultat : structure du dossier post
 
-**2.4** Valide le checkpoint, puis vérifie le **brouillon** généré dans `brouillons/`.
-
-**2.5** Le premier visuel atterrit dans `brouillons/` — tu peux demander des modifications et itérer. Quand tu es satisfait, demande la promotion vers `final/`. C'est le PNG dans `final/` qui sera tracé dans l'historique et prêt à poster.
-
-**2.6** La caption est générée automatiquement **après** la promotion en `final/`.
+```
+posts-stories/posts/periode-[N]/S[X]/DD-MM-YYYY/
+├── brief/brief.md                     ← Le brief (template brief-v3)
+├── production/
+│   ├── art-direction.md               ← Direction creative
+│   ├── input.md                       ← Mapping photos + recettes
+│   ├── prompt.md                      ← Prompt final (style Combo-B)
+│   └── caption.md                     ← Caption generee apres validation
+└── brouillons/                        ← Visuels generes
+    ├── *.png                          ← Premier rendu + iterations
+    └── publication.md                 ← Metadata apres publication (PNG supprime)
+```
 
 ---
 
 ## 3. Produire des stories
 
-> **Prérequis** : Le planning de la semaine est validé. Les modes de chaque story sont déjà décidés.
-
-### Un jour ou toute la semaine
+### Commande
 
 ```
-/story-producer S3 lundi        # Un jour
-/story-producer S3              # Toute la semaine
+/story-producer SX jour        # Un jour specifique (3 stories)
+/story-producer SX             # Toute la semaine (21 stories)
 ```
 
-### Ce qui se passe selon le mode de la story
+### Pipeline full-ia food
 
-| Mode story | Ce que le pipeline fait |
-|------------|------------------------|
-| `template` | Copywriter → Data Mapper → Template HTML → Puppeteer → PNG |
-| `irl` | Photo brute → `irl-story.html` overlay DA minimal → Puppeteer → PNG |
-| `irl-sublimation` | Photo → Sublimation GPT Images (format 9:16) → PNG |
-| `compositing-irl` | 2 photos → Compositing GPT Images (format 9:16) → PNG |
-| `full-ia` | Prompt → Gemini (format 9:16) → PNG |
-
-> Les stories non-template (`irl-sublimation`, `compositing-irl`, `full-ia`) produisent une image plein cadre. Un overlay léger (logo + texte optionnel) est ajouté via `irl-story.html`.
-
-### Audit realisme obligatoire
-
-**AVANT toute génération IA** (modes `full-ia`, `compositing-ia`, `irl-sublimation`, `compositing-irl`) :
+Pour les stories produit (macro, concept, hero) :
 
 ```
-/realism-audit
+Brief story lu → mode full-ia food detecte
+         ↓
+[1] Lecture brief + verification concept visuel
+         ↓
+[2] Realism Audit pre-prompt (contraintes concept x produit)
+         ↓
+[3] Prompt Engineering (style Combo-B, format 9:16)
+         ↓
+[4] Realism Audit post-prompt
+         ↓
+    🔒 Validation operateur
+         ↓
+[5] Generation /nano-banana-pro 2K (9:16)
+         ↓
+[6] brouillons/story.png
+         ↓
+    🔍 Verification operateur
+         ↓
+[7] Logo insertion (Gemini edit, 2 etapes)
+    Etape 1 : generer le visuel SANS logo
+    Etape 2 : inserer logo via --reference-image public/logo/strictfood-logo-white-reference.png
+         ↓
+[8] Validation → caption → publication → archivage
 ```
 
-Le Realism Auditor vérifie les contraintes physiques du prompt (éclairage, proportions, physique des matériaux, matière de la nourriture). Il propose des ajustements AVANT la génération, puis audit à NOUVEAU le visuel généré APRÈS.
+### Pipeline full-ia lifestyle
 
-**Le mode `template` n'est PAS soumis à cet audit** (pas de génération IA).
+Les stories lifestyle avec personnage(s) + produit StrictFood :
 
-### Templates rigides
+```
+Brief story lu → mode full-ia lifestyle detecte
+         ↓
+[1] Recherche Pinterest automatisee
+    Mots-cles : "tenue [homme/femme] couleur vive [contexte]"
+    Filtrage : couleurs vives, posture naturelle, decor exploitable
+         ↓
+[2] Analyse photo Pinterest
+    Transcription : personnage, tenue (pieces, couleurs, matieres),
+    posture, decor (mur, sol, lumiere, elements)
+         ↓
+[3] Adaptation StrictFood
+    - 1 piece vestimentaire ambre (#FABA43) : bomber, hoodie, casquette, sac
+    - Produit StrictFood dans la scene : burger tenu, kraft bag, plateau
+    - Gaze : JAMAIS vers la camera → 3/4, profil, regard deporte
+    - Posture : en mouvement, pas posee
+    - Logo OBLIGATOIRE : sur papier emballage burger OU sur sac kraft dans la scene
+         ↓
+[4] Prompt Engineering (style Combo-B, 150-300 mots, format 9:16)
+    Le prompt decrit TOUT : personnage adapte + tenue + decor + produit + eclairage
+    Pas de photo Pinterest en input — inspiration textuelle uniquement
+         ↓
+[5] Realism Audit post-prompt
+         ↓
+    🔒 Validation operateur
+         ↓
+[6] Generation /nano-banana-pro 2K (9:16)
+         ↓
+[7] brouillons/ → verification → logo insertion si pas dans la scene
+         ↓
+[8] Validation → caption → publication → archivage
+```
 
-Chaque template a un **cadre fixe** avec des positions absolues et des **limites de caractères** par zone (voir `_templates/SPECS.md`). Le pipeline vérifie automatiquement avant le render :
-- Texte respecte la limite de caractères
-- Preset photo assigné (ex: `photo-centre`, `photo-droite`)
-- Force de gradient assignée (ex: `gradient-medium`, `gradient-strong`)
+### Pipeline template
 
-Si une violation est détectée, le pipeline s'arrête et demande une correction.
+Pour les stories educatif, interactif, annonce, fiche produit :
 
-### Tu valides au checkpoint, puis vérifies les **brouillons** dans `story-NN/brouillons/`. Quand tu es satisfait, demande la promotion vers `story-NN/final/`.
+```
+Brief story lu → mode template detecte
+         ↓
+[1] Story-copywriter (agent Sonnet)
+    Reecrit les textes bruts du brief en textes impactants
+         ↓
+[2] Story-data-mapper (agent Haiku)
+    Mappe les donnees vers les champs du template HTML
+         ↓
+    🔒 Validation operateur (donnees)
+         ↓
+[3] Template fill (story-universal.html ou traitement specifique)
+    + Puppeteer render 1080x1920
+         ↓
+[4] brouillons/ → verification → validation
+         ↓
+[5] Caption → publication → archivage
+```
+
+### Story Rappel (bonus #4)
+
+Story supplementaire publiee tous les 2 jours. Rappel que le restaurant existe + CTA.
+
+- **Visuel** : photo reelle du restaurant (mode template) OU fond ambre/charbon (mode full-ia)
+- **Texte** : hook de la banque de rotation + telephone/horaires/adresse
+- **Config** : `_config/story-rappel.md`
+- Ne remplace pas les 3 stories principales
+
+### Resultat : structure du dossier story
+
+```
+posts-stories/stories/S[X]/[jour]/
+├── brief/brief-story-01.md            ← 1 brief par story
+├── brief/brief-story-02.md
+├── brief/brief-story-03.md
+├── story-01/
+│   ├── production/data.md             ← Donnees mappees (template)
+│   ├── production/prompt.md           ← Prompt (full-ia)
+│   ├── production/caption.md          ← Caption
+│   └── brouillons/
+│       ├── story.png                  ← Visuel genere
+│       └── publication.md             ← Metadata apres publication
+├── story-02/
+│   └── ...
+└── story-03/
+    └── ...
+```
 
 ---
 
-## 4. Production hors planning
+## 4. Produire un carrousel
 
-> **Quand** : Tu as une idée spontanée, une action ponctuelle, une actualité, un contenu opportuniste.
-> **Principe** : Liberté totale. Aucune contrainte de mode ou de pilier. Tu décris ce que tu veux, Claude route vers le bon process.
-> **Dossier** : `posts-stories/posts/hors-planning/DD-MM-YYYY/` ou `stories/hors-planning/DD-MM-YYYY/`
+### 9 types, 3 familles
 
-### Process par mode — ce que tu dis, ce qui se passe
+| Famille | Types | Pipeline |
+|---------|-------|----------|
+| **A — Texte** | Educatif, Ingredient Spotlight, Menu Objectif | Recherche → Copywriting → Template HTML → Puppeteer |
+| **B — Photo** | Zoom Progressif, Texture/ASMR, Construction, Defile Gamme, Process Cuisine | Art Dir → Prompt × N slides → Gemini 2K (1080x1350) |
+| **C — Panoramique** | Panoramique | Prompt scene large → Gemini 2K (16:9) → `render-panoramic.js` |
 
-#### Mode `irl` (photo brute → story avec overlay)
+### Pipeline Famille A (texte) — `/carousel-producer DD-MM-YYYY`
 
 ```
-"J'ai une photo du rush de ce midi, fais-moi une story."
+Brief carrousel (Famille A, Thematique: slug)
+         ↓
+[1] Recherche scientifique
+    Skill : /nutrition-researcher
+    Sources : PubMed, Harvard, NEJM, OMS, EFSA
+    Output : production/carousel-research.md
+         ↓
+[2] Copywriting
+    Agent : carousel-copywriter (Sonnet)
+    Output : production/carousel-content.md
+         ↓
+    🔒 Validation operateur (contenu)
+         ↓
+[3] Template fill → Puppeteer render (1080x1350)
+         ↓
+[4] brouillons/ → verification → validation → caption
 ```
 
-| Étape | Ce qui se passe | Toi |
-|-------|----------------|-----|
-| 1 | Tu fournis la photo | Envoie le fichier ou le chemin |
-| 2 | Claude insère la photo dans `irl-story.html` (plein cadre) | — |
-| 3 | Overlay automatique : gradient bas + tagline + logo | — |
-| 4 | Puppeteer rend le PNG → `brouillons/story.png` | Tu vérifies |
-| 5 | Promotion → `final/story.png` | Tu valides |
+### Pipeline Famille B (photo)
 
-> **Pas de Realism Auditor** — c'est une photo réelle, pas d'IA.
-> **Le réel prime** : si la photo est bonne, on l'utilise telle quelle. Pas besoin qu'elle corresponde à un concept.
+```
+Brief carrousel photo (Famille B, Type: [zoom/texture/construction/gamme/process])
+         ↓
+[1] Definir le bloc de coherence (fond, eclairage, style camera)
+    Identique dans tous les prompts du carrousel
+         ↓
+[2] Pour chaque slide :
+    /image-prompt-engineer (bloc commun + description slide specifique)
+    /realism-auditor (audit pre/post-prompt)
+    /nano-banana-pro 2K (1080x1350, ratio 4:5)
+         ↓
+[3] N slides dans brouillons/ → verification coherence inter-slides
+         ↓
+[4] Validation → caption
+```
+
+### Pipeline Famille C (panoramique)
+
+```
+Brief carrousel panoramique (scene decrite en detail)
+         ↓
+[1] /image-prompt-engineer (scene large horizontale)
+    /realism-auditor
+         ↓
+[2] /nano-banana-pro 2K (format 16:9, scene etalee)
+         ↓
+[3] node _templates/carousel/render-panoramic.js --input image.png --slides [3|4]
+    Decoupe en N tranches de 1080x1350
+         ↓
+[4] N slides dans brouillons/ → verification raccords
+         ↓
+[5] Validation → caption
+```
+
+### Themes et references
+
+- **Famille A** : 31 themes educatifs dans `_config/carousel-themes.md`
+- **Famille B** : sequences par produit dans `_config/carousel-themes.md` (zoom, texture, construction, gamme)
+- **Famille C** : scenes panoramiques dans `_config/carousel-themes.md` (table, flat lay, comptoir, ambiance)
 
 ---
 
-#### Mode `irl-sublimation` (photo réelle sublimée par IA)
+## 5. Hors planning
+
+### Quand
+
+Idee spontanee, actualite, contenu opportuniste. Liberte totale sur le mode, le produit, le pilier.
+
+### Commande
 
 ```
-"J'ai cette photo du Strict Bœuf, sublime-la pour Instagram."
+/freestyle "description de ce que tu veux"
 ```
 
-| Étape | Ce qui se passe | Toi |
-|-------|----------------|-----|
-| 1 | Tu fournis la photo source | Envoie le fichier |
-| 2 | **[PRE]** `/realism-audit` mode sublimation → contraintes fidélité, préservation, lumière | Automatique |
-| 3 | Claude rédige le prompt de sublimation (enhance éclairage, contraste, saturation — PAS de transformation) | — |
-| 4 | **[POST]** `/realism-audit` → audit du prompt → corrections | Automatique |
-| 5 | GPT Images génère la version sublimée → `brouillons/` | Tu vérifies |
-| 6 | Si story : overlay via `irl-story.html` (tagline + logo) → render Puppeteer | Automatique |
-| 7 | Promotion → `final/` | Tu valides |
-| 8 | `/caption-writer` analyse l'image finale → `caption.md` | Automatique |
+Exemples :
+```
+/freestyle "Strict Boeuf qui flotte au-dessus d'un skateboard dans un skatepark sunset"
+/freestyle "Photo de la salle avec le burger sur le comptoir"
+/freestyle "Romain qui coupe la viande, photo prise ce midi"
+```
 
-> **Risques audités** : GPT qui réinvente l'environnement, déforme le produit, change les couleurs.
+### Modes disponibles hors planning
+
+| Mode | Quand l'utiliser | API |
+|------|-----------------|-----|
+| `full-ia` | Visuel invente de zero (food porn, lifestyle, concept creatif) | Gemini 2K |
+| `edit-ia` | Tu as une bonne photo de lieu et tu veux y integrer un produit/personnage | Gemini 2K (input-image) |
+| `template` | Story rapide avec texte + photo existante | Puppeteer |
+| `irl` | Romain vient de prendre une photo en cuisine/service | Puppeteer (overlay DA) |
+
+### Flux hors planning
+
+```
+/freestyle "description"
+         ↓
+[1] Le skill verifie la conformite DA :
+    Pain noir ? Pas de grill ? Ingredients fideles ? Visual system respecte ?
+         ↓
+[2] Choisit automatiquement le mode adapte
+         ↓
+[3] Genere le prompt (ou data mapping pour template)
+    Memes contraintes que le pipeline standard (Combo-B, realism audit)
+         ↓
+[4] Generation → brouillons/ → validation → caption → publication
+```
+
+### Dossier
+
+```
+posts-stories/posts/hors-planning/DD-MM-YYYY/     (posts)
+posts-stories/stories/hors-planning/DD-MM-YYYY/   (stories)
+```
+
+Le hors-planning n'affecte pas les compteurs de distribution du planning.
 
 ---
 
-#### Mode `compositing-irl` (2 photos réelles fusionnées)
+## 6. Les modes de creation
 
-```
-"J'ai une photo du burger et une photo du comptoir, fusionne-les."
-```
+### Vue d'ensemble
 
-| Étape | Ce qui se passe | Toi |
-|-------|----------------|-----|
-| 1 | Tu fournis 2 photos : produit + lieu | Envoie les 2 fichiers |
-| 2 | **[PRE]** `/realism-audit` mode compositing → analyse lumière croisée, échelle, perspective | Automatique |
-| 3 | Claude rédige le prompt de compositing (scale, ombres, edges, température couleur) | — |
-| 4 | **[POST]** `/realism-audit` → audit du prompt → corrections | Automatique |
-| 5 | GPT Images génère le compositing → `brouillons/` | Tu vérifies |
-| 6 | Si story : overlay via `irl-story.html` → render Puppeteer | Automatique |
-| 7 | Promotion → `final/` | Tu valides |
-| 8 | `/caption-writer` → `caption.md` | Automatique |
+| Mode | Ce que l'IA genere | Input image | Planning | Hors planning |
+|------|-------------------|-------------|----------|---------------|
+| **full-ia** | TOUT (produit + scene + fond) | Aucune | Oui | Oui |
+| **template** | Rien (HTML + Puppeteer) | Photo existante (optionnel) | Oui | Oui |
+| **edit-ia** | Produit/sujets ajoutes a une photo reelle | Photo de lieu | Non | Oui |
+| **irl** | Rien (overlay DA sur photo fraiche) | Photo fraiche | Non | Oui |
 
-> **Risques audités** : produit collé/flottant, échelle incohérente, lumière qui ne matche pas, absence d'ombres.
+### full-ia — Le mode principal
 
----
+Le produit et la scene sont **entierement decrits dans le prompt** a partir de la fiche recette et de la direction creative. Aucune photo en input.
 
-#### Mode `compositing-ia` (photo produit réelle + scène IA)
+**Sous-types :**
 
-```
-"Mets le Strict MAX Poulet dans une ambiance cuisine industrielle avec de la vapeur."
-```
+| Sous-type | Description | Exemple |
+|-----------|-------------|---------|
+| **Food hero** | Produit seul sur fond (ambre ou charbon), food porn | Strict Boeuf concept-main sur fond ambre-halo |
+| **Food concept** | Produit dans une mise en scene creative | Strict MAX Boeuf concept-eclate 9:16 |
+| **Lifestyle** | Personnage(s) + produit StrictFood dans un decor | Homme bomber ambre devant mur graffiti, kraft bag |
+| **Macro** | Extreme gros plan sur une zone du produit | Zone sauce + parmesan entre les 2 steaks du MAX |
+| **Scene** | Moment de service, comptoir, cuisine (100% genere) | Fist bump au comptoir, plateau avec burger et frites |
 
-| Étape | Ce qui se passe | Toi |
-|-------|----------------|-----|
-| 1 | Tu fournis la photo produit + tu décris l'ambiance voulue | Photo + description |
-| 2 | **[PRE]** `/realism-audit` → contraintes réalisme (8 domaines) | Automatique |
-| 3 | `/social-media-art-director` → direction créative de la scène | Automatique |
-| 4 | `input-mapper` → résolution photos + recette | Automatique |
-| 5 | `/image-prompt-engineer` → prompt détaillé | Automatique |
-| 6 | **[POST]** `/realism-audit` → audit + corrections | Automatique |
-| 7 | Gemini 4K génère le visuel → `brouillons/` | Tu vérifies |
-| 8 | Si story : overlay via `irl-story.html` → render Puppeteer | Automatique |
-| 9 | Promotion → `final/` | Tu valides |
-| 10 | `/caption-writer` → `caption.md` | Automatique |
+**Regle produit** : le produit est TOUJOURS decrit dans le prompt (jamais de photo reference). La fiche recette (`_recettes/[slug].md`) est la source de verite.
 
----
+**Regle lifestyle** : le process Pinterest automatise fournit l'inspiration visuelle (texture, tenue, decor). Les mots-cles incluent TOUJOURS "couleur" ou "couleur vive". Le logo StrictFood est OBLIGATOIRE (emballage burger ou sac kraft).
 
-#### Mode `scene-ia` (photo scène réelle + sujets IA)
+### edit-ia — Compositing sur photo reelle
 
-```
-"Prends la photo du comptoir et ajoute un client qui reçoit son sac StrictFood."
-```
+Une photo reelle en input. L'IA ajoute des elements sans modifier le decor.
 
-| Étape | Ce qui se passe | Toi |
-|-------|----------------|-----|
-| 1 | Tu fournis : photo de la scène + description des sujets + slug produit si burger visible | Photo scène + description + produit |
-| 2 | **[PRE]** `/realism-audit` mode scene-ia → analyse lumière/échelle/perspective de la scène + Bloc 1 "état servi" du produit | Automatique |
-| 3 | Claude rédige le prompt (sujets + placement + interactions + description du produit en **état servi**) | — |
-| 4 | Peut utiliser les briques human+food pour les personnes à générer | — |
-| 5 | **[POST]** `/realism-audit` → préservation scène, lumière, échelle, interaction, fidélité produit | Automatique |
-| 6 | Gemini **une seule image** (la photo scène) + prompt texte détaillé → `brouillons/` | Tu vérifies |
-| 7 | Si story : overlay via `irl-story.html` (tagline + logo) → render Puppeteer | Automatique |
-| 8 | Promotion → `final/` | Tu valides |
-| 9 | `/caption-writer` → `caption.md` | Automatique |
+- **Lieu reconnaissable** (salle StrictFood) → prompt MINIMAL
+- **Lieu generique** (parc, rue) → prompt ENRICHI
 
-> **La scène réelle est sacrée** : l'IA ajoute des sujets DANS le décor, elle ne modifie PAS le décor.
-> **PAS de photo référence studio** : les photos produit existantes (food porn, fond noir, éclairage dramatique) ne sont PAS fournies en input — elles produiraient un burger irréaliste sur une table. Le produit est décrit uniquement en texte via le Bloc 1 "état servi".
-> **Bloc 1 "état servi"** : mêmes ingrédients fidèles à la recette, mais décrits tels qu'ils apparaissent QUAND ON LES MANGE — légèrement compressé, dans le papier kraft, éclairé par les spots du restaurant, pas en mode photoshoot.
-> **Combinable avec human+food** : les personnes insérées suivent les briques (cadrage, moment, caméra).
-> **Fidélité salle StrictFood** : si la scène est l'intérieur du restaurant, les règles de fidélité salle s'appliquent.
+Reserve au hors-planning (necessite une bonne photo de contexte).
+
+### template — Rendu HTML
+
+Pas d'IA. Donnees mappees dans un template HTML, rendues par Puppeteer. Pour les stories educatif, interactif, annonce, fiche produit, et les carrousels.
+
+### irl — Photo fraiche
+
+Photo prise en live par Romain ou Dorian + overlay DA minimal. Reserve au hors-planning.
 
 ---
 
-#### Mode `full-ia` (l'IA génère tout — produit + scène + humain optionnel)
+## 7. Distributions
 
-```
-"Génère un visuel food porn du Strict Bœuf, concept macro-sauce, fond sombre."
-```
+### Publications — 4 par semaine (2 posts + 2 carrousels)
 
-ou avec un humain :
+#### Posts simples (2/semaine)
 
-```
-"Génère un human-tight × Strict MAX Poulet : cadrage-bouche, moment-croque, env-ciel-bleu, cam-portrait."
-```
+**Traitements (cible mensuelle) :**
 
-| Étape | Ce qui se passe | Toi |
-|-------|----------------|-----|
-| 1 | Tu décris ce que tu veux : produit, concept (ou briques humain+food), mood | Description libre ou briques |
-| 2 | **[PRE]** `/realism-audit` → contraintes réalisme (8 domaines + principes candid si humain) | Automatique |
-| 3 | `/social-media-art-director` → direction créative | Automatique |
-| 4 | `input-mapper` → résolution photos + recette (description ultra-fidèle du produit) | Automatique |
-| 5 | `/image-prompt-engineer` → prompt détaillé (+ composition briques si humain+food) | Automatique |
-| 6 | **[POST]** `/realism-audit` → audit complet + corrections (mains, sauce, éclairage, proportions, candid) | Automatique |
-| 7 | Gemini 4K (ou GPT Images si texte on-image) → `brouillons/` | Tu vérifies |
-| 8 | Si story : overlay via `irl-story.html` → render Puppeteer | Automatique |
-| 9 | Promotion → `final/` | Tu valides |
-| 10 | `/caption-writer` → `caption.md` | Automatique |
+| Traitement | Cible |
+|-----------|-------|
+| photo-pure | ~45% |
+| knockout-band | ~25% |
+| texture-fill | ~10% |
+| triptych | ~10% |
+| masque | ~5% |
+| masque-inverse | ~5% |
 
-> **Pour les concepts human+food** : le système de briques compose le prompt (cadrage × moment × environnement × caméra). Tu peux spécifier les briques ou laisser Claude choisir.
-> **Specs caméra obligatoires** : le prompt commence toujours par "Shot on Canon EOS R5, [focale] [ouverture], ISO [valeur]".
+**Fonds :** ambre ~65% / charbon ~35%
+**Mode :** tous en `full-ia`
 
----
+#### Carrousels (2/semaine = ~8/mois)
 
-#### Mode `template` (HTML → Puppeteer)
+| Type | Famille | Freq/mois | Pilier |
+|------|---------|-----------|--------|
+| Panoramique | C | 2-3 | Le Produit |
+| Zoom Progressif | B | 1-2 | Le Produit |
+| Texture/ASMR | B | 1 | Le Produit |
+| Educatif | A | 1 | Les Benefices |
+| Construction | B | 0.5 | Le Produit |
+| Ingredient Spotlight | A | 0.5 | Les Benefices |
+| Defile Gamme | B | 0.5 | Le Produit |
+| Process Cuisine | B | 0.5 | La Marque |
+| Menu Objectif | A | 0.5 | Les Benefices |
 
-```
-"Fais-moi une story produit hero du Strict Végé Falafel."
-```
+#### Piliers (posts + carrousels combines)
 
-| Étape | Ce qui se passe | Toi |
-|-------|----------------|-----|
-| 1 | Tu décris le contenu voulu (type de template, produit, angle) | Description |
-| 2 | `story-copywriter` → textes adaptés au format | Automatique |
-| 3 | `story-data-mapper` → données produit + presets photo/gradient | Automatique |
-| 4 | Template HTML rempli avec les données | Automatique |
-| 5 | Vérification limites caractères + presets | Automatique |
-| 6 | Puppeteer rend le PNG → `brouillons/story.png` | Tu vérifies |
-| 7 | Promotion → `final/story.png` | Tu valides |
-| 8 | `/caption-writer` → `caption.md` | Automatique |
+| Pilier | Cible | Ce qu'il couvre |
+|--------|-------|----------------|
+| Le Produit | 55% | Food porn, hero shots, concepts visuels, panoramiques, zoom, texture, construction |
+| Les Benefices | 35% | Nutrition, comparaisons, macros, educatifs, ingredient spotlight, menu objectif |
+| La Marque | 10% | Ponctuel : devanture, fondateur, process cuisine |
 
-> **Pas de Realism Auditor** — pas d'IA impliquée.
-> **Rappel** : max 1 éducatif/semaine, max 1 produit hero/semaine (même hors planning, ça compte).
+**Contraintes publications :**
+- Jamais 2 posts consecutifs meme traitement
+- ≥2 piliers differents/semaine (posts + carrousels)
+- Max 1 triptych/quinzaine
+- Pas 2 carrousels du meme type d'affilee
+- Alterner famille A et famille B/C dans la semaine (max 1 educatif/semaine)
 
----
+### Stories — 21 par semaine (3/jour)
 
-### Invoquer un agent directement
+**Modes :**
 
-| Tu veux... | Commande / Demande |
-|------------|-------------------|
-| Sublimer une photo | Demande une sublimation + fournis la photo |
-| Générer une caption | `/caption-writer` sur une image existante |
-| Créer une art direction | `/social-media-art-director` |
-| Écrire un prompt image | `/image-prompt-engineer` |
-| Rendre un template story | `/story-producer` sur un brief ponctuel |
-| Générer des variantes produit | Invoke l'agent `product-variant-generator` |
-| Auditer le réalisme d'un prompt | `/realism-audit` |
-| Générer une image directement | `/nano-banana-pro` avec le prompt |
+| Mode | Sous-type | Cible | Par semaine |
+|------|-----------|-------|-------------|
+| full-ia | food (produit, macro, concept) | **40%** | ~8-9 |
+| full-ia | lifestyle (personnage + produit) | **30%** | ~6-7 |
+| template | educatif, interactif, annonce, fiche | **30%** | ~6-7 |
 
-> **Liberté totale.** Le contenu apparaîtra dans l'historique au prochain scan. Aucune contrainte de distribution ne s'applique (sauf les caps éducatif/fiche qui restent à 1/sem même hors planning).
+**Fonds stories (modes IA) :** ambre ~50%, charbon ~25%, ambre+charbon ~15%, charbon+ambre ~10%
 
----
-
-## 5. Les modes de création
-
-> Les modes sont décidés **dans le planning**. Ce qui suit est une référence pour comprendre chaque mode.
-
-### Les 6 modes
-
-| Mode | En une phrase | Input | API | Output |
-|------|---------------|-------|-----|--------|
-| `full-ia` | L'IA imagine tout | Aucune photo | Gemini 4K | Image 100% IA |
-| `irl-sublimation` | Photo réelle embellie DA | 1 photo réelle | GPT Images | Photo retouchée |
-| `compositing-irl` | 2 photos réelles fusionnées | 2 photos réelles | GPT Images | Montage réaliste |
-| `compositing-ia` | Produit réel dans scène imaginée | 1 photo réelle | Gemini 4K | Photo dans scène IA |
-| `scene-ia` | Scène réelle + sujets IA | 1 photo scène | Gemini 4K | Sujets IA dans scène réelle |
-| `template` | Infographie / carrousel HTML | Données | Puppeteer | Slides PNG |
-
-### Quand chaque mode brille
-
-| Mode | Le plus efficace pour | Exemples |
-|------|----------------------|----------|
-| `full-ia` | Visuels food porn élaborés, nouveau produit sans photo, scènes impossibles | Hero shot burger vapeur dramatique, dessert lévitation |
-| `irl-sublimation` | Authenticité + qualité DA, contenu humain, coulisses, moments du quotidien | Romain qui assemble, arrivage ingrédients, portrait équipe, mains préparant la sauce |
-| `compositing-irl` | Produit immergé dans le lieu réel | Burger sur comptoir, tenders devant la devanture |
-| `compositing-ia` | Ambiance cinématique autour d'un vrai produit | Burger dans cuisine industrielle vapeur, extérieur nuit |
-| `scene-ia` | Scènes de vie dans le VRAI restaurant, animer des photos vides | Comptoir + remise sac, salle + clients qui mangent, devanture + client qui sort |
-| `template` | Données chiffrées, comparaisons, éducation | Carrousel macros, "nous vs classique", tips nutrition |
-
-### Distribution cible
-
-**Posts (mensuelle)** : full-ia 30% · irl-sublimation 25% · compositing-irl 20% · compositing-ia 15% · template 10%
-
-**Stories (hebdo)** : template 10% · irl 25% · sublimation 20% · compositing 15% · full-ia 15% · scene-ia 15%
+**Contraintes stories :**
+- ≥2 full-ia par jour
+- Max 3 interactifs/semaine
+- Max 1 educatif/semaine
+- Max 1 fiche produit/semaine
+- Max 7 lifestyle/semaine
 
 ---
 
-## 5.5 Concepts visuels et système de briques
+## 8. Systeme visuel
 
-> Reference : `_config/concepts-visuels.md`
+### Traitements posts (identite feed)
 
-### Bibliothèque de concepts visuels
+| Traitement | Description |
+|-----------|-------------|
+| **photo-pure** | Produit seul, zero overlay. Le food porn parle seul. |
+| **knockout-band** | Produit hero + bande dome identitaire (charbon sur ambre OU ambre sur charbon) |
+| **masque** | Typo geante revele le produit (lettres = fenetre sur la photo) |
+| **masque-inverse** | Texte ambre solide sur photo |
+| **texture-fill** | Lettres remplies par texture produit (sesame, Maillard) |
+| **triptych** | 3 posts = 1 visuel dans la grille Instagram |
 
-La file `_config/concepts-visuels.md` contient une **bibliothèque inspirante** de concepts food porn et moments humains pour StrictFood. Les concepts sont organisés par famille (macro & texture, action & énergie, atmosphère & lumière, moments & storytelling).
+### Traitements stories
 
-### Le système combinatoire de briques — Human + Food
+| Traitement | Template HTML | Description |
+|-----------|---------------|-------------|
+| **photo-pure** | `story-universal.html` | Photo plein cadre + overlay logo minimal |
+| **sillon** | `story-sillon.html` | Photo haut + arc dome + zone ambre bas |
+| **sceau** | `story-sceau.html` | Photo + cercle glassmorphism avec arc dome |
+| **feuillete-photo** | `story-feuillete-photo.html` | Split photo dominante + zone texte |
+| **feuillete-data** | `story-feuillete-data.html` | Split data dominante + zone photo |
 
-Pour les modes IA (`full-ia`, `compositing-ia`) et les moments IRL, StrictFood utilise un **système de briques visuelles** qui combine 4 dimensions :
+### Fonds
 
-1. **Cadrage** (12 options) : plan serré, portrait produit, full shot, overhead, plongée, contreplongée...
-2. **Moment** (10 options) : composition, consommation, préparation, partage, découverte...
-3. **Environnement** (12 options) : studio noir, comptoir, salle restaurant, parc, rue...
-4. **Caméra** (26 options) : style, lentille, profondeur, mouvement, éclairage...
+**32 variantes ambre** dans `_config/fonds-ambre.md` — surfaces, accessoires, effets lumiere, organiques, artistiques, premium. Chaque variante a un ID : `Fond: ambre-halo`.
 
-**= 12 × 10 × 12 × 26 = ~37,000 combinaisons uniques** pour garantir une diversité visuelle infinie.
+**Agent background-inventor** : invente de nouveaux fonds originaux quand on veut de la variete. Respecte la DA (palette ambre/charbon, materiaux physiques).
 
-### Concepts = inspiration, NOT rigidité
+### Concepts visuels
 
-**Pour les modes IRL** : Les concepts visuels sont un **pool d'inspiration** pour la planification. Ils aident à identifier les opportunités (moments à capturer, ambiances à chercher). **Mais si un moment réel est capturé et qu'il est bon, on l'utilise même s'il ne correspond à aucun concept**. Le réel prime toujours sur le planifié.
+60+ concepts dans `_config/concepts-visuels.md` :
+- **Cadrage** : macro, concept-ouvert, concept-eclate, concept-coupe, concept-main...
+- **Moment** : action-croque, sensation-goutte, sensation-vapeur...
+- **Environnement** : atmo-intime, atmo-neon, lifestyle-terrasse...
+- **Camera** : angles, focales, profondeurs de champ
 
-**Pour les modes IA** : Les briques sont des **leviers de variation** pour éviter la monotonie. Elles structurent les prompts et assurent que chaque image IA est visuellement unique.
-
-### Micro-saisons visuelles — Rotation hebdomadaire
-
-Chaque semaine, le planning assigne une **micro-saison visuelle** qui guide la teinte globale :
-
-| Semaine | Micro-saison | Caractère | Couleurs dominantes |
-|---------|--------------|-----------|-------------------|
-| A | Macro & Texture | Détail, intimité, minimalisme | Grains, fibres, contraste |
-| B | Action & Énergie | Mouvement, dynamisme, fluidité | Éclats, reflets, chaleur |
-| C | Atmosphère & Lumière | Ambiance, contemplation, cinéma | Shadows, halos, dorures |
-| D | Moments & Storytelling | Humanité, partage, émotions | Peau, expressions, connexion |
-
-La rotation ABCD se répète chaque mois. Elle n'est **pas rigide** — elle oriente, elle n'impose pas.
-
-### Application concrète
-
-- **Planning** : chaque story non-template reçoit un concept visuel optionnel (ex: "Macro Sesame Bun", "Action Bite Moment", "Atmosphere Warm Kitchen")
-- **Prompts IA** : les briques du concept nourrissent le prompt (cadrage, moment, environnement, caméra)
-- **Briefs IRL** : les concepts conseillent les moments à chercher, mais une bonne capture impromptue non-prévue prime toujours
-- **Cohérence feed** : sur une semaine, le mélange des 4 briques crée un feed dynamique et varié, jamais répétitif
-
-> **Important** : Les concepts visuels sont des **guides de intention**, pas des **contraintes inflexibles**. Ils existent pour inspirer et structurer, pas pour restreindre la créativité ou le réel.
+Les concepts sont de l'**inspiration**, pas des regles rigides.
 
 ---
 
-## 6. Les types de stories
+## 9. Architecture
 
-> Le type est décidé **dans le planning**, en même temps que le mode.
-
-### Type × Mode — Combinaisons possibles
-
-| Type | Modes possibles | Mode par défaut |
-|------|----------------|-----------------|
-| Produit Hero | template, irl-sublimation | template |
-| Éducatif | template | template |
-| Interactif | template | template |
-| Annonce | template, full-ia | template |
-| IRL | irl | irl |
-| Process | template (process.html) | template |
-| Séquence | template, irl-sublimation | template |
-| Produit DA | irl-sublimation, compositing-irl, compositing-ia, full-ia | irl-sublimation |
-| Produit en situation | compositing-irl, compositing-ia | compositing-irl |
-| Visuel IA | full-ia | full-ia |
-| Recap | — (semi-manuel) | — |
-
-### Templates HTML
-
-| Template | Types | Cadre |
-|----------|-------|-------|
-| `produit-hero.html` | Produit Hero | Plein cadre + info minimale |
-| `educatif.html` | Éducatif | Gros chiffre + explication + VS, positions Y fixes |
-| `interactif.html` | Interactif | Question + zone sticker, mode Single ou VS |
-| `annonce.html` | Annonce, Lieu | Centré, badge + headline + body + CTA |
-| `irl-story.html` | IRL + overlay stories visuelles | Photo plein cadre + overlay DA minimal |
-| `process.html` | Process | Split avant/après avec bande séparation DA |
-
-> Tous les templates ont des **cadres rigides** avec positions absolues et **limites de caractères** par zone. Voir `_templates/SPECS.md`.
-
-### Familles visuelles
-
-| Famille | Types / Modes | Fond |
-|---------|--------------|------|
-| **Dark Premium** | template (éducatif, interactif, annonce), irl | Charbon |
-| **Visuel plein cadre** | irl-sublimation, compositing-irl, compositing-ia, full-ia | Image plein cadre |
-
-### Fréquences
-
-| Type | Par semaine |
-|------|------------|
-| Produit Hero | **max 1** |
-| IRL | 4-5 |
-| Éducatif | **max 1** |
-| Interactif | 2-3 (max 3) |
-| Annonce | 1-2 |
-| Process | 0-1 |
-| Produit DA / en situation / Visuel IA | 3-5 |
-| Séquence | 0-1 |
-| Recap | 1 |
-
----
-
-## 7. Comprendre le système
-
-### Architecture globale
+### Flux global
 
 ```
-   HISTORIQUE                PLANNING SEMAINE
-   (scan disque)    ──→     (piliers + modes + types)
-        ↑                         │
-        │            ┌────────────┼────────────┐
-        │            ▼                         ▼
-        │       POSTS                     STORIES
-        │     (brief-v3.md)           (brief-story.md)
-        │       mode = X                 mode = X
-        │            │                         │
-        │            ▼                         ▼
-        │     /instagram-producer       /story-producer
-        │       route par mode            route par mode
-        │            │                         │
-        │       ┌────┼────┐              ┌─────┼─────┐
-        │       ▼    ▼    ▼              ▼     ▼     ▼
-        │     full  irl  comp          templ  irl   visual
-        │     -ia   sub  osit          ate    brut  (sub/comp/ia)
-        │       │    │    │              │     │     │
-        │       ▼    ▼    ▼              ▼     ▼     ▼
-        │     brouillons/*.png        story-NN/brouillons/story.png
-        │       │                         │
-        │    🔍 itérations             🔍 itérations
-        │       │                         │
-        │       ▼                         ▼
-        │     final/*.png             story-NN/final/story.png
-        │       │
-        │       ▼
-        │   /caption-writer
-        │       │
-        │       ▼
-        └── production/caption.md
+                    PLANNING
+                       │
+          ┌────────────┼────────────┐
+          ▼            ▼            ▼
+     POSTS (2)     STORIES (21)  CARROUSELS (2)
+     (full-ia)    (full-ia +     (A: Puppeteer
+                   template)      B: Gemini x N
+          │            │          C: Gemini + split)
+          ▼            ▼            │
+       Gemini      Gemini /         ▼
+        2K        Puppeteer    Gemini / Puppeteer
+          │            │            │
+          └────────────┼────────────┘
+                       ▼
+                  brouillons/
+                       │
+                       ▼
+               Validation operateur
+                       │
+                       ▼
+                Caption (/caption-writer)
+                       │
+                       ▼
+               Publication Instagram
+                       │
+                       ▼
+              Archivage (metadata texte)
 ```
 
-```
-           ┌─────────────────────────────────┐
-           │      HORS PLANNING              │
-           │  Liberté totale.                 │
-           │  Tout agent invocable à la carte.│
-           └──────────┬──────────────────────┘
-                      │
-              N'importe quel skill/agent
-              → posts-stories/[type]/hors-planning/DD-MM-YYYY/
-```
+### Skills et agents
 
-### Structure des dossiers (unifiée posts + stories)
+| Outil | Type | Role |
+|-------|------|------|
+| `/instagram-producer` | Skill | Orchestration posts |
+| `/story-producer` | Skill | Orchestration stories |
+| `/carousel-producer` | Skill | Orchestration carrousels |
+| `/freestyle` | Skill | Production hors planning cadree |
+| `/social-media-art-director` | Skill | Direction creative (posts full-ia) |
+| `/image-prompt-engineer` | Skill | Prompt style Combo-B (150-300 mots) |
+| `/nano-banana-pro` | Skill | Generation image Gemini 2K |
+| `/caption-writer` | Skill | Caption apres validation visuel |
+| `/realism-auditor` | Skill | Audit pre/post-prompt (obligatoire IA) |
+| `/nutrition-researcher` | Skill | Recherche scientifique (carrousels) |
+| `input-mapper` | Agent Haiku | Mapping produit → recettes |
+| `story-copywriter` | Agent Sonnet | Reecriture textes stories |
+| `story-data-mapper` | Agent Haiku | Mapping donnees → template HTML |
+| `carousel-copywriter` | Agent Sonnet | Contenu structure par slide |
+| `background-inventor` | Agent | Invention fonds creatifs DA |
 
-```
-production/posts-stories/
-├── posts/
-│   ├── periode-1/
-│   │   ├── planning-S1.md
-│   │   └── S1/
-│   │       └── 10-03-2026/           ← Post
-│   │           ├── brief/
-│   │           │   └── brief.md
-│   │           ├── production/
-│   │           │   ├── input.md
-│   │           │   ├── art-direction.md
-│   │           │   ├── prompt.md
-│   │           │   └── caption.md     ← Générée APRÈS promotion en final
-│   │           ├── brouillons/
-│   │           │   └── post.png       ← Premier rendu + itérations
-│   │           └── final/
-│   │               └── post.png       ← Visuel VALIDÉ, promu depuis brouillons/ — tracé dans l'historique
-│   └── hors-planning/
-│       └── DD-MM-YYYY/
-│           └── (même structure)
-└── stories/
-    ├── S1/
-    │   └── lundi/
-    │       ├── brief/
-    │       │   └── brief-story.md     ← Brief du jour
-    │       ├── story-01/
-    │       │   ├── production/
-    │       │   │   ├── data.md
-    │       │   │   └── story.html
-    │       │   ├── brouillons/
-    │       │   │   └── story.png      ← Premier render + itérations
-    │       │   └── final/
-    │       │       └── story.png      ← Visuel VALIDÉ, promu depuis brouillons/ — tracé dans l'historique
-    │       └── story-02/
-    │           └── (même structure)
-    └── hors-planning/
-        └── DD-MM-YYYY/
-            └── (même structure)
-```
+### Fichiers cles
 
-> **Flux brouillon → final** : le premier visuel va dans `brouillons/`. L'opérateur vérifie, demande des modifications si besoin (itérations dans `brouillons/`), puis valide la promotion vers `final/`. Seul un PNG dans `final/` est tracé dans l'historique.
-
-### Fichiers clés
-
-| Fichier | Rôle |
+| Fichier | Role |
 |---------|------|
-| `PLAYBOOK.md` | **Ce fichier** — point d'entrée, guide par intention |
-| `CLAUDE.md` | Statut pipeline + référence technique |
-| `_templates/planning-semaine.md` | Template planning (distribution + symbiose + historique) |
+| `CLAUDE.md` | Reference technique complete |
+| `PLAYBOOK.md` | Ce fichier (guide operateur) |
+| `_config/pipeline.md` | Configuration modes, DA, modeles |
+| `_config/historique-production.md` | Historique genere par scan |
+| `_config/photo-references.md` | Mapping produit → photos |
+| `_config/concepts-visuels.md` | 60+ concepts visuels |
+| `_config/fonds-ambre.md` | 32 variantes fonds ambre |
+| `_config/carousel-themes.md` | Taxonomie 9 types carrousels (3 familles) |
+| `_config/story-rappel.md` | Config story rappel bonus |
+| `_recettes/[slug].md` | Fiches recettes (8 produits) |
+| `_templates/planning-semaine.md` | Template planning |
 | `_templates/brief-v3.md` | Template brief post |
 | `_templates/brief-story.md` | Template brief story |
-| `_templates/SPECS.md` | **Spécifications templates** — limites caractères, presets photo, gradients |
-| `_config/pipeline.md` | Config modes, DA, modèles |
-| `_config/concepts-visuels.md` | **NOUVEAU** — Bibliothèque concepts visuels + système briques |
-| `_config/historique-production.md` | **GÉNÉRÉ par scan** — reflet du disque |
-| `_config/photo-references.md` | Catalogue photos existantes |
-| `_config/brand-props.md` | Accessoires marque |
-| `_recettes/[slug].md` | Fiches produit |
+| `_templates/brief-carousel.md` | Template brief carrousel texte (famille A) |
+| `_templates/brief-carousel-photo.md` | Template brief carrousel photo (famille B) |
+| `_templates/brief-carousel-panoramique.md` | Template brief carrousel panoramique (famille C) |
 
 ### Commandes
 
-| Commande | Ce qu'elle fait |
-|----------|----------------|
-| `/instagram-producer DD-MM-YYYY` | Produit un post (mode lu depuis le brief) |
-| `/story-producer S[X] [jour]` | Produit les stories d'un jour |
-| `/story-producer S[X]` | Produit toutes les stories de la semaine |
-| `/realism-audit` | Audit le realisme physique des prompts image (PRÉ et POST génération) |
-| `Régénère l'historique de production` | Scanne les dossiers et réécrit l'historique |
+| Commande | Action |
+|----------|--------|
+| `/instagram-producer DD-MM-YYYY` | Produire un post |
+| `/story-producer SX jour` | Produire les stories d'un jour |
+| `/story-producer SX` | Produire toute la semaine |
+| `/carousel-producer DD-MM-YYYY` | Produire un carrousel |
+| `/freestyle "description"` | Visuel hors planning |
 
 ---
 
-## Annexes
+## 10. Checklists
 
-### A. Checklist post
+### Checklist post
 
-- [ ] **⛔ Pain noir** : le burger a bien un bun NOIR (jamais blanc/doré)
-- [ ] Brouillon vérifié dans `brouillons/`
-- [ ] Image fidèle au produit
-- [ ] DA respectée
-- [ ] Pas d'artefacts IA
-- [ ] **/realism-audit** exécuté avant et après génération (PRE + POST)
-- [ ] Promu vers `final/` après validation
-- [ ] Caption générée (après promotion)
-- [ ] Caption mentionne "pain noir" (pas juste "pain" ou "bun")
-- [ ] Caption avec hook fort
-- [ ] Hashtags pertinents
-- [ ] Pas de doublon avec un post récent
-- [ ] PNG dans `final/` (pour le tracking historique)
+- [ ] **Pain noir** : le bun est NOIR (pas blanc, pas dore)
+- [ ] **Pas de grill** : pas de marques de grill (croute Maillard uniforme)
+- [ ] **Ingredients fideles** : mache (petites feuilles rondes), parmesan (miettes), sauce (jaune-orange), oignons rouges (tranches)
+- [ ] **Esthetique DA** : fond coherent, eclairage contraste, produit lumineux sur fond sombre
+- [ ] **Traitement** : le traitement visuel est correct (knockout-band, masque, etc.)
+- [ ] **Texte parasite** : pas de texte genere par l'IA dans l'image
+- [ ] **Caption** : generee par /caption-writer, pas de "grill"/"grille"/"barbecue"
+- [ ] **Format** : ratio correct (4:5, 1:1, 9:16)
 
-### B. Checklist story
+### Checklist story
 
-- [ ] **⛔ Pain noir** : le burger a bien un bun NOIR (jamais blanc/doré)
-- [ ] Brouillon vérifié dans `brouillons/`
-- [ ] Textes dans la zone safe Instagram
-- [ ] Textes respectent les limites de caractères (SPECS.md)
-- [ ] Preset photo et force gradient assignés
-- [ ] Pas de zone basse vide
-- [ ] Pas de doublon logo
-- [ ] Mix des familles visuelles sur la journée
-- [ ] **/realism-audit** exécuté (si mode IA)
-- [ ] Promu vers `story-NN/final/` après validation
-- [ ] PNG dans `story-NN/final/` (pour le tracking historique)
+- [ ] **Safe zones** : rien dans les 250px du haut ni les 80px du bas
+- [ ] **Logo en bas** : sous la tagline, pas en haut
+- [ ] **Tagline** : "Le cheat meal qui n'en est pas un" avec italique
+- [ ] **Pain noir** : si burger visible
+- [ ] **Lifestyle** : logo present (emballage ou kraft), regard PAS vers la camera
+- [ ] **Template** : texte lisible, contraste suffisant
+- [ ] **Zone basse** : pas de bande noire vide > 300px
 
-### C. Glossaire
+### Checklist carrousel
 
-| Terme | Définition |
-|-------|------------|
-| **Planning** | Document hebdomadaire qui décide piliers, modes et types pour chaque contenu |
-| **Mode** | Méthode de création visuelle (full-ia, irl-sublimation, compositing-irl, compositing-ia, template) |
-| **Pilier** | Catégorie éditoriale (Le Plat, La Cuisine, Les Macros, L'Équipe, Le Quartier) |
-| **Hors planning** | Contenu spontané créé en dehors du planning, sans contrainte de distribution |
-| **Symbiose** | Les posts et stories se complètent mutuellement, pas de doublon sujet/photo |
-| **Historique** | Fichier généré par scan des dossiers — reflète ce qui existe sur le disque |
-| **DA** | Direction Artistique "Dark Food Premium" |
-| **Template** | Modèle HTML paramétré, cadre rigide, rendu en image par Puppeteer |
-| **SPECS** | Spécifications des templates — limites caractères, presets photo, forces gradient |
-| **Sublimation** | Retouche IA d'une photo réelle pour aligner avec la DA |
-| **Compositing** | Fusion de 2 images en un montage réaliste |
-| **Dark Premium** | Famille visuelle : fond charbon, contenu informatif |
-| **Visuel plein cadre** | Story non-template : image générée/sublimée en 1080×1920 |
-| **Preset photo** | Classe CSS qui positionne la photo (photo-centre, photo-droite, etc.) |
-| **Force gradient** | Classe CSS qui contrôle l'opacité des overlays (gradient-light/medium/strong) |
-| **Concept visuel** | Guide inspirant d'une ambiance, moment ou style (ex: "Macro Sesame Texture", "Action Bite Moment") — vit dans `_config/concepts-visuels.md` |
-| **Brique** | Unité du système combinatoire : cadrage, moment, environnement ou caméra. Les briques se combinent pour créer des visuels uniques |
-| **Système combinatoire** | 4 dimensions de briques (12 × 10 × 12 × 26) qui génèrent ~37,000 combinaisons visuelles pour human+food |
-| **Micro-saison** | Rotation hebdomadaire (A/B/C/D) qui teinte la direction visuelle d'une semaine sans la figer |
-| **Realism Auditor** | Agent/Skill qui valide la physique et le realisme d'un prompt IA PRÉ et POST génération |
-| **Human+food** | Concept inclusif : la nourriture n'existe que consommée, préparée ou partagée par des humains. Photos et prompts mettent en avant la connexion humain-produit |
-| **Candid** | Photographie temoin invisible : capture spontanée, authentique, sans pose — humain naturel, produit héros, composition fragmentée |
-| **Moment IRL** | Capture authentique (pas posée, pas simulée) d'une instant réel : arrivage, préparation, consommation, partage |
-| **Témoin invisible** | Principe candid : photographe/caméra invisible, moment pas conscient de la capture — humanité vraie, vivante |
-| **Tagline** | `Le cheat meal <em>qui n'en est pas un</em>` — TOUJOURS HTML avec `<em>`, jamais texte brut, zéro point final |
+**Famille A (texte) :**
+- [ ] **Couverture** : texture SVG sesame, titre lisible, pas de numerotation
+- [ ] **Sources** : en 1 seule slide (avant-derniere)
+- [ ] **CTA** : derniere slide avec tagline + macros produit
+- [ ] **Coherence** : meme palette sur toutes les slides
+- [ ] **Chiffres** : pas de repetition titre ↔ fact-block
+
+**Famille B (photo) :**
+- [ ] **Coherence** : meme fond, meme eclairage, meme style sur toutes les slides
+- [ ] **Pain noir** : visible et correct sur chaque slide avec burger
+- [ ] **Pas de grill marks** : croute Maillard uniforme
+- [ ] **Pas de texte** dans les images generees
+- [ ] **Resolution** : 1080x1350 (4:5) par slide
+
+**Famille C (panoramique) :**
+- [ ] **Raccords** : pas de coupure sur un element important entre les slides
+- [ ] **Continuite** : fond/surface continu d'un bout a l'autre
+- [ ] **Pain noir** : sur tous les burgers visibles
+- [ ] **Pas de texte** dans l'image
+- [ ] **Resolution** : chaque slide 1080x1350 apres decoupe
 
 ---
 
-## Vision — Le pivot vers la food porn authentique
+## Glossaire
 
-### Le changement fondamental
-
-L'approche Instagram StrictFood a **pivoté** : de "fabrique de templates" vers **"feed vivant, viscéral, humain"**.
-
-```
-AVANT (ratio templates) :      APRÈS (ratio IRL + IA viscérale)
-50% templates              →    10% templates
-20% IRL                    →    30% IRL
-15% sublimation            →    25% sublimation
-10% compositing            →    15% compositing
-5% full-ia                 →    20% full-ia
-```
-
-### Philosophie nouvelle
-
-Le feed ne montre **pas des infographies ni des leçons de nutrition**. Il montre :
-
-1. **IRL moments** — Romain en action, arrivages, cuisine en direct, mains, textures réelles. Authentique. Imperfait.
-2. **Food porn viscérale** — Macro close-ups du pain noir sésame, frites dorées, sauce qui coule, bite marks, condensation, chaleur. Pas clinique. Pas aseptisé.
-3. **Human+food** — Les burgers existent pour être mangés. Les photos montrent des gens qui les mangent, les partagent, les découvrent. Pas juste "produit isolé".
-4. **Moments storytelling** — Une semaine n'est pas une suite de messages. C'est une histoire : lundi l'arrivage, mercredi la préparation, vendredi le partage.
-5. **Variété visuelle infinie** — Grâce aux briques combinatoires. Aucune deux images identiques. Le feed pulse d'énergie.
-
-### Quand les concepts visuels aident, quand ils ne doivent JAMAIS freiner
-
-Les concepts et briques existent pour :
-- **Inspirer** : "Et si on capturait un moment de préparation dans l'action, avec du flou cinématique ?"
-- **Structurer** : "Cette semaine, on joue sur l'atmosphère et la lumière"
-- **Garantir la variété** : "Pas 2 semaines d'affilée d'overhead shots"
-
-Mais **si** un moment IRL spontané est capturé et qu'il est bon — un Romain avec des mains pleines de jus qui regarde sa création avec fierté — **on l'utilise**. Le réel prime toujours sur le plan de production.
-
-### Contraintes sanitaires pour la variété
-
-Pour éviter la monotonie, le planning impose des **maxima stricts** :
-- **Max 1 produit hero/sem** (au lieu de 4-5) — sauf si tu veux vraiment montrer une variante
-- **Max 1 éducatif/sem** (au lieu de 2-3) — chiffres et macros, ça fatigue
-- **Min 2 stories non-template/jour** — force la créativité
-- **Min 2 IRL moments/jour** — enracine le feed dans la vraie vie
-
-Ces règles tuent la facilité du template. Elles garantissent que le feed **respire**, qu'il **vit**.
+| Terme | Definition |
+|-------|-----------|
+| **Pilier** | Categorie editoriale (Le Produit, Les Benefices, La Marque) |
+| **Traitement** | Style visuel du post dans le feed (photo-pure, knockout-band, masque, etc.) |
+| **Mode** | Methode de creation (full-ia, edit-ia, template, irl) |
+| **Fond** | Arriere-plan du visuel (ambre, charbon, variantes) |
+| **Concept visuel** | Idee de mise en scene (macro-sauce, concept-eclate, lifestyle-terrasse) |
+| **Brief** | Document decrivant le visuel a produire (1 brief = 1 post ou 1 story) |
+| **Planning** | Tableau semaine distribuant piliers, modes, traitements, produits |
+| **Brouillon** | Visuel genere, dans `brouillons/`, en attente de validation |
+| **Validation** | L'operateur confirme que le visuel est OK |
+| **Archivage** | PNG supprime apres publication, remplace par metadata texte |
+| **Historique** | Fichier markdown genere par scan des dossiers |
+| **Combo-B** | Style de prompt reference (150-300 mots, narratif, CAPS, negatifs inline) |
+| **Realism Audit** | Verification physique/logique du prompt avant generation |
+| **Hors planning** | Production spontanee via `/freestyle`, n'affecte pas les compteurs |
+| **DA** | Direction artistique (Dark Food Premium) |
+| **Chaleur pulsee** | Cuisson air fryer (JAMAIS "grill", "barbecue") |
+| **Pain noir** | Bun charbon sesame (JAMAIS pain blanc) |
+| **Tagline** | "Le cheat meal qui n'en est pas un" — fixe |
+| **Safe zone** | Zone IG (top 250px, bottom 80px, sides 65px) |
+| **Puppeteer** | Moteur HTML → PNG (stories 1080x1920, carrousels 1080x1350) |
+| **Gemini 2K** | API generation images (Nano Banana Pro) |
+| **Story Rappel** | Story bonus (#4) tous les 2 jours — rappel restaurant + CTA |
 
 ---
 
-Ce playbook est le reflet d'une **vision** : StrictFood sur Instagram n'est pas une marque qui parle à la caméra, c'est un **restaurant vivant** qu'on regarde travailler, créer, partager. Les concepts visuels et les briques sont des **outils de liberté**, pas des **cages de conformité**.
+## Regles absolues
 
-**Bonne prod.**
+S'appliquent a TOUT contenu, TOUS modes, TOUTES etapes :
+
+1. **Pain noir obligatoire** — Tous les burgers au pain noir sesame. Zero tolerance pain blanc.
+2. **Chaleur pulsee obligatoire** — Pas de grill. Tout au air fryer. JAMAIS "grill", "grille", "barbecue", "poele", "frit".
+3. **Produit decrit, jamais en photo** — Le produit est decrit dans le prompt depuis la recette. Pas de photo reference produit.
+4. **Prompt style Combo-B** — 150-300 mots, narratif fluide, CAPS, negatifs inline, verbes de mouvement.
+5. **Brouillon d'abord** — Le premier visuel va dans `brouillons/`. Jamais publie directement.
+6. **Caption apres validation** — Generee APRES validation du visuel, pas avant.
+7. **Fidelite salle restaurant** — Si l'interieur est visible, correspondre a la vraie salle.
+8. **Logo sur lifestyle** — Chaque visuel lifestyle DOIT montrer le logo (emballage ou kraft bag).
