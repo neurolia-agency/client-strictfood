@@ -139,18 +139,40 @@ const categories: Category[] = [
     tagline: "Zero sucre, zero compromis",
     products: [
       {
-        name: "Boisson Z\u00e9ro",
+        name: "Coca-Cola Sans Sucres",
         price: 2.0,
-        image: "/images/photos-references/produits-source/boissons/boisson-zero.png",
+        image: "/images/visuels/website/carte/boissons/coca-zero.webp",
         macros: { kcal: null, prot: null, gluc: null, lip: null },
-        description: "Coca, Fanta, Sprite, Ice Tea — version zero",
+        description: "Canette 33cl, zero calorie",
       },
       {
-        name: "Boisson \u00e9nergisante",
-        price: 2.99,
-        image: "/images/photos-references/produits-source/boissons/boisson-energisante.png",
+        name: "Lipton Ice Tea Framboise",
+        price: 2.0,
+        image: "/images/visuels/website/carte/boissons/lipton-framboise.webp",
         macros: { kcal: null, prot: null, gluc: null, lip: null },
-        description: "Monster, Red Bull — zero sucre",
+        description: "Canette 33cl, faible en calories",
+      },
+      {
+        name: "Schweppes Agrumes Zero",
+        price: 2.0,
+        image: "/images/visuels/website/carte/boissons/schweppes-zero.webp",
+        macros: { kcal: null, prot: null, gluc: null, lip: null },
+        description: "Canette 33cl, zero sucre",
+      },
+      {
+        name: "Monster Ultra",
+        price: 2.99,
+        image: "/images/visuels/website/carte/boissons/monster-ultra.webp",
+        macros: { kcal: null, prot: null, gluc: null, lip: null },
+        badge: "ENERGY",
+        description: "Canette 50cl, zero sucre",
+      },
+      {
+        name: "Cristaline",
+        price: 1.5,
+        image: "/images/visuels/website/carte/boissons/cristaline.webp",
+        macros: { kcal: null, prot: null, gluc: null, lip: null },
+        description: "Eau de source naturelle, 50cl",
       },
     ],
   },
@@ -380,12 +402,11 @@ function ProductCard({ product }: { product: Product }) {
   );
 }
 
-/* ─── Dessert Item Data ─── */
-const dessertItems = [
-  { name: "Cookie", detail: "26g prot\u2019" },
-  { name: "Tiramisu", detail: "fondant, z\u00e9ro remords" },
-  { name: "Overnight Oats", detail: "tient le corps" },
-  { name: "Milkshake", detail: "onctueusement strict" },
+/* ─── Dessert Sensory Keywords ─── */
+const dessertKeywords = [
+  { word: "Fondant", detail: "le go\u00fbt sans compromis" },
+  { word: "Prot\u00e9in\u00e9", detail: "tes macros respect\u00e9es" },
+  { word: "Fait maison", detail: "comme tout le reste" },
 ] as const;
 
 /* ─── BreathingDot ─── */
@@ -416,17 +437,17 @@ function BreathingDot({ delay, reduced }: { delay: number; reduced: boolean }) {
   );
 }
 
-/* ─── DessertName ─── */
-function DessertName({
+/* ─── SensoryKeyword ─── */
+function SensoryKeyword({
   item,
   index,
   reduced,
 }: {
-  item: (typeof dessertItems)[number];
+  item: (typeof dessertKeywords)[number];
   index: number;
   reduced: boolean;
 }) {
-  const nameVariant = {
+  const keywordVariant = {
     hidden: { opacity: 0, x: 40 },
     visible: {
       opacity: 1,
@@ -442,23 +463,21 @@ function DessertName({
   return (
     <motion.div
       className="group flex items-baseline gap-3"
-      variants={reduced ? undefined : nameVariant}
+      variants={reduced ? undefined : keywordVariant}
     >
-      {/* Index number */}
+      {/* Decorative dash */}
       <span
-        className="text-cuivre shrink-0"
+        className="bg-cuivre shrink-0"
         style={{
-          fontFamily: "var(--font-display)",
-          fontSize: "clamp(1.5rem, 2vw, 2rem)",
-          fontWeight: 400,
-          lineHeight: 1,
-          opacity: 0.35,
+          width: "1.5rem",
+          height: 2,
+          borderRadius: "var(--radius-pill)",
+          opacity: 0.4,
+          marginTop: "0.75em",
         }}
-      >
-        0{index + 1}
-      </span>
+      />
 
-      {/* Name + detail */}
+      {/* Keyword + detail */}
       <div className="flex flex-col">
         <span
           className="text-ivoire"
@@ -471,7 +490,7 @@ function DessertName({
             textTransform: "uppercase",
           }}
         >
-          {item.name}
+          {item.word}
         </span>
         <span
           className="text-pierre"
@@ -688,8 +707,8 @@ function DessertsComingSoon({ prefersReducedMotion }: { prefersReducedMotion: bo
               }}
               variants={reduced ? undefined : fadeUp}
             >
-              Fondant, onctueux, prot&eacute;in&eacute;. Quatre desserts faits
-              maison arrivent sur ta table.
+              On pr&eacute;pare quelque chose pour ta fin de repas.
+              Tu n&rsquo;es pas pr&ecirc;t.
             </motion.p>
 
             {/* Body paragraph */}
@@ -702,10 +721,10 @@ function DessertsComingSoon({ prefersReducedMotion }: { prefersReducedMotion: bo
               }}
               variants={reduced ? undefined : fadeUp}
             >
-              Cookie croustillant &agrave; 26g de prot&rsquo;. Tiramisu
-              fondant, sans remords. Overnight oats qui tiennent ton corps
-              autant que tes papilles. Tout est pr&ecirc;t dans nos cuisines.
-              Plus que quelques jours.
+              Prot&eacute;in&eacute;, fait maison, sans compromis sur le
+              go&ucirc;t. On applique au dessert la recette qui a tout
+              chang&eacute; c&ocirc;t&eacute; sal&eacute;. On ne te dit pas
+              quoi. Pas encore.
             </motion.p>
 
             {/* Progress bar */}
@@ -745,9 +764,9 @@ function DessertsComingSoon({ prefersReducedMotion }: { prefersReducedMotion: bo
             whileInView="visible"
             viewport={{ once: true, margin: "-60px" }}
           >
-            {dessertItems.map((item, i) => (
-              <DessertName
-                key={item.name}
+            {dessertKeywords.map((item, i) => (
+              <SensoryKeyword
+                key={item.word}
                 item={item}
                 index={i}
                 reduced={reduced}
@@ -778,7 +797,7 @@ function DessertsComingSoon({ prefersReducedMotion }: { prefersReducedMotion: bo
                 letterSpacing: "var(--letter-spacing-wide)",
               }}
             >
-              Arrive tr&egrave;s vite sur la carte
+              Patience, &ccedil;a mijote
             </span>
           </motion.div>
         </div>
