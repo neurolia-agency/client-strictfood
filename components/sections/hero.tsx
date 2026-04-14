@@ -138,11 +138,10 @@ export default function Hero() {
       >
         <Image
           src="/images/visuels/website/hero-strictfoods.webp"
-          alt="Burger StrictFood, pain brioche doré, viande grillée, ingrédients frais"
+          alt="Burger StrictFood au pain noir sésame, viande cuite à chaleur pulsée, ingrédients frais"
           fill
           priority
-          quality={100}
-          unoptimized
+          quality={85}
           className="object-cover object-[calc(50%-80px)_center]"
           sizes="100vw"
         />

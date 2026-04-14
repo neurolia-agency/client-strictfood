@@ -491,12 +491,14 @@ export default function LaPromesse() {
             className="flex items-center justify-center order-first overflow-visible"
             variants={fadeUp}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/images/visuels/website/section2.webp"
               alt="Burger StrictFood cuit à chaleur pulsée, steak juteux sans huile"
-              className="object-contain"
-              style={{ width: "100%", transform: "scale(1.5)" }}
+              width={800}
+              height={800}
+              className="object-contain w-full"
+              style={{ transform: "scale(1.5)" }}
+              sizes="(max-width: 1024px) 100vw, 45vw"
             />
           </motion.div>
         </motion.div>
@@ -564,12 +566,14 @@ export default function LaPromesse() {
             <div
               className="relative overflow-visible flex items-center justify-center"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src="/images/photos-references/produits-source/burgers-black/strict-poulet/poulet-eclate.webp"
                 alt="STRICT Poulet StrictFood vue éclatée avec macros affichées"
-                className="object-contain"
-                style={{ width: "100%", transform: "scale(1.01)" }}
+                width={800}
+                height={800}
+                className="object-contain w-full"
+                style={{ transform: "scale(1.01)" }}
+                sizes="(max-width: 1024px) 100vw, 62vw"
               />
 
               {/* 3 lentilles-loupes — positionnées sur les ingrédients */}

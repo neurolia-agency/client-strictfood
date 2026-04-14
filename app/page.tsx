@@ -1,8 +1,12 @@
+import dynamic from "next/dynamic";
 import Hero from "@/components/sections/hero";
-import LaPromesse from "@/components/sections/la-promesse";
-import NosArtisans from "@/components/sections/nos-artisans";
-import Experience from "@/components/sections/experience";
-import AvisConfiance from "@/components/sections/avis-confiance";
+
+const LaPromesse = dynamic(() => import("@/components/sections/la-promesse"));
+const NosArtisans = dynamic(() => import("@/components/sections/nos-artisans"));
+const Experience = dynamic(() => import("@/components/sections/experience"));
+const AvisConfiance = dynamic(
+  () => import("@/components/sections/avis-confiance")
+);
 
 export default function Home() {
   return (

@@ -380,6 +380,413 @@ function ProductCard({ product }: { product: Product }) {
   );
 }
 
+/* ─── Dessert Item Data ─── */
+const dessertItems = [
+  { name: "Cookie", detail: "26g prot\u2019" },
+  { name: "Tiramisu", detail: "fondant, z\u00e9ro remords" },
+  { name: "Overnight Oats", detail: "tient le corps" },
+  { name: "Milkshake", detail: "onctueusement strict" },
+] as const;
+
+/* ─── BreathingDot ─── */
+function BreathingDot({ delay, reduced }: { delay: number; reduced: boolean }) {
+  return (
+    <motion.span
+      className="inline-block rounded-full bg-cuivre"
+      style={{ width: 6, height: 6 }}
+      animate={
+        reduced
+          ? undefined
+          : {
+              opacity: [0.3, 0.8, 0.3],
+              scale: [0.85, 1.15, 0.85],
+            }
+      }
+      transition={
+        reduced
+          ? undefined
+          : {
+              duration: 2.4,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay,
+            }
+      }
+    />
+  );
+}
+
+/* ─── DessertName ─── */
+function DessertName({
+  item,
+  index,
+  reduced,
+}: {
+  item: (typeof dessertItems)[number];
+  index: number;
+  reduced: boolean;
+}) {
+  const nameVariant = {
+    hidden: { opacity: 0, x: 40 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.6,
+        ease: EASE,
+        delay: 0.15 * index,
+      },
+    },
+  };
+
+  return (
+    <motion.div
+      className="group flex items-baseline gap-3"
+      variants={reduced ? undefined : nameVariant}
+    >
+      {/* Index number */}
+      <span
+        className="text-cuivre shrink-0"
+        style={{
+          fontFamily: "var(--font-display)",
+          fontSize: "clamp(1.5rem, 2vw, 2rem)",
+          fontWeight: 400,
+          lineHeight: 1,
+          opacity: 0.35,
+        }}
+      >
+        0{index + 1}
+      </span>
+
+      {/* Name + detail */}
+      <div className="flex flex-col">
+        <span
+          className="text-ivoire"
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(1.75rem, 3vw + 0.5rem, 3rem)",
+            fontWeight: 500,
+            lineHeight: 1.1,
+            letterSpacing: "var(--letter-spacing-tight)",
+            textTransform: "uppercase",
+          }}
+        >
+          {item.name}
+        </span>
+        <span
+          className="text-pierre"
+          style={{
+            fontFamily: "var(--font-body)",
+            fontSize: "var(--font-size-small)",
+            lineHeight: 1.4,
+            marginTop: "0.25rem",
+          }}
+        >
+          {item.detail}
+        </span>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ─── ProgressBar ─── */
+function ProgressBar({ reduced }: { reduced: boolean }) {
+  return (
+    <div className="flex flex-col gap-2">
+      <div className="flex items-center justify-between">
+        <span
+          className="text-pierre"
+          style={{
+            fontFamily: "var(--font-heading)",
+            fontSize: "var(--font-size-caption)",
+            letterSpacing: "var(--letter-spacing-wide)",
+            textTransform: "uppercase",
+          }}
+        >
+          Progression
+        </span>
+        <span
+          className="text-cuivre"
+          style={{
+            fontFamily: "var(--font-heading)",
+            fontSize: "var(--font-size-caption)",
+            fontWeight: 600,
+          }}
+        >
+          90%
+        </span>
+      </div>
+      <div
+        className="relative overflow-hidden"
+        style={{
+          height: 3,
+          borderRadius: "var(--radius-pill)",
+          backgroundColor: "oklch(0.30 0.01 55 / 0.3)",
+        }}
+      >
+        <motion.div
+          className="absolute inset-y-0 left-0 bg-cuivre"
+          style={{ borderRadius: "var(--radius-pill)" }}
+          initial={reduced ? { width: "90%" } : { width: "0%" }}
+          whileInView={reduced ? undefined : { width: "90%" }}
+          viewport={{ once: true }}
+          transition={
+            reduced
+              ? undefined
+              : {
+                  duration: 1.6,
+                  ease: EASE,
+                  delay: 0.5,
+                }
+          }
+        />
+        {/* Shimmer on progress bar */}
+        {!reduced && (
+          <motion.div
+            className="absolute inset-y-0 pointer-events-none"
+            style={{
+              width: "30%",
+              background:
+                "linear-gradient(90deg, transparent, oklch(0.96 0.012 85 / 0.15), transparent)",
+            }}
+            animate={{ x: ["-30%", "300%"] }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "linear",
+              repeatDelay: 1.5,
+            }}
+          />
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ─── DessertsComingSoon ─── */
+function DessertsComingSoon({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
+  const reduced = prefersReducedMotion;
+
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: { staggerChildren: 0.12 },
+    },
+  };
+
+  const leftVariants = {
+    hidden: { opacity: 0, y: 32 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: EASE },
+    },
+  };
+
+  return (
+    <motion.section
+      className="relative overflow-hidden"
+      initial={reduced ? undefined : "hidden"}
+      whileInView="visible"
+      viewport={{ once: true, margin: "-80px" }}
+      variants={reduced ? undefined : containerVariants}
+      style={{
+        marginTop: "clamp(3rem, 5vw, 5rem)",
+        borderRadius: "var(--radius-large)",
+        border: "1px solid oklch(0.67 0.15 68 / 0.1)",
+        background:
+          "linear-gradient(160deg, oklch(0.18 0.01 60) 0%, oklch(0.15 0.012 65) 60%, oklch(0.16 0.008 55) 100%)",
+      }}
+    >
+      {/* Radial glow — top-left */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          top: "-30%",
+          left: "-15%",
+          width: "60%",
+          height: "100%",
+          background:
+            "radial-gradient(ellipse at center, oklch(0.67 0.15 68 / 0.035), transparent 65%)",
+        }}
+      />
+      {/* Radial glow — bottom-right */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          bottom: "-40%",
+          right: "-10%",
+          width: "45%",
+          height: "100%",
+          background:
+            "radial-gradient(ellipse at center, oklch(0.42 0.10 22 / 0.04), transparent 60%)",
+        }}
+      />
+
+      {/* Content grid */}
+      <div
+        className="relative grid grid-cols-1 lg:grid-cols-2"
+        style={{ gap: 0 }}
+      >
+        {/* Left column: copy */}
+        <div
+          className="flex flex-col justify-center"
+          style={{
+            padding: "clamp(2rem, 5vw, 4rem)",
+            paddingRight: "clamp(1.5rem, 3vw, 3rem)",
+          }}
+        >
+          <motion.div
+            className="flex flex-col"
+            style={{ gap: "clamp(1.25rem, 2vw, 1.75rem)" }}
+            variants={reduced ? undefined : leftVariants}
+          >
+            {/* Badge */}
+            <motion.span
+              className="self-start text-cuivre"
+              style={{
+                padding: "0.3rem 1rem",
+                borderRadius: "var(--radius-pill)",
+                border: "1px solid oklch(0.67 0.15 68 / 0.25)",
+                backgroundColor: "oklch(0.67 0.15 68 / 0.06)",
+                fontFamily: "var(--font-heading)",
+                fontWeight: 700,
+                fontSize: "0.6875rem",
+                letterSpacing: "var(--letter-spacing-uppercase)",
+              }}
+              variants={reduced ? undefined : fadeUp}
+            >
+              EN PR&Eacute;PARATION
+            </motion.span>
+
+            {/* Headline */}
+            <motion.h3
+              className="text-ivoire"
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(2rem, 4vw + 0.5rem, 3.25rem)",
+                fontWeight: 600,
+                lineHeight: 1.05,
+                letterSpacing: "var(--letter-spacing-tight)",
+                textTransform: "uppercase",
+              }}
+              variants={reduced ? undefined : fadeUp}
+            >
+              Le sucre passe{" "}
+              <br className="hidden sm:block" />
+              en mode{" "}
+              <span className="text-cuivre">STRICT</span>
+            </motion.h3>
+
+            {/* Subheadline */}
+            <motion.p
+              className="text-sable"
+              style={{
+                fontSize: "var(--font-size-body-lg)",
+                lineHeight: "var(--line-height-relaxed)",
+                maxWidth: "32rem",
+              }}
+              variants={reduced ? undefined : fadeUp}
+            >
+              Fondant, onctueux, prot&eacute;in&eacute;. Quatre desserts faits
+              maison arrivent sur ta table.
+            </motion.p>
+
+            {/* Body paragraph */}
+            <motion.p
+              className="text-pierre"
+              style={{
+                fontSize: "var(--font-size-body)",
+                lineHeight: "var(--line-height-relaxed)",
+                maxWidth: "30rem",
+              }}
+              variants={reduced ? undefined : fadeUp}
+            >
+              Cookie croustillant &agrave; 26g de prot&rsquo;. Tiramisu
+              fondant, sans remords. Overnight oats qui tiennent ton corps
+              autant que tes papilles. Tout est pr&ecirc;t dans nos cuisines.
+              Plus que quelques jours.
+            </motion.p>
+
+            {/* Progress bar */}
+            <motion.div
+              style={{ maxWidth: "16rem", marginTop: "0.5rem" }}
+              variants={reduced ? undefined : fadeUp}
+            >
+              <ProgressBar reduced={reduced} />
+            </motion.div>
+          </motion.div>
+        </div>
+
+        {/* Right column: dessert names */}
+        <div
+          className="flex flex-col justify-center border-t lg:border-t-0"
+          style={{
+            padding: "clamp(2rem, 5vw, 4rem)",
+            paddingLeft: "clamp(1.5rem, 3vw, 3rem)",
+            borderColor: "oklch(0.30 0.01 55 / 0.1)",
+          }}
+        >
+          {/* Separator visible on large screens only */}
+          <div
+            className="absolute top-[10%] bottom-[10%] hidden lg:block"
+            style={{
+              left: "50%",
+              width: 1,
+              background:
+                "linear-gradient(to bottom, transparent, oklch(0.67 0.15 68 / 0.15), transparent)",
+            }}
+          />
+
+          <motion.div
+            className="flex flex-col"
+            style={{ gap: "clamp(1.5rem, 2.5vw, 2rem)" }}
+            initial={reduced ? undefined : "hidden"}
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+          >
+            {dessertItems.map((item, i) => (
+              <DessertName
+                key={item.name}
+                item={item}
+                index={i}
+                reduced={reduced}
+              />
+            ))}
+          </motion.div>
+
+          {/* Breathing dots + CTA */}
+          <motion.div
+            className="flex items-center gap-4"
+            style={{ marginTop: "clamp(2rem, 3vw, 3rem)" }}
+            variants={reduced ? undefined : fadeUp}
+            initial={reduced ? undefined : "hidden"}
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <div className="flex items-center gap-1.5">
+              <BreathingDot delay={0} reduced={reduced} />
+              <BreathingDot delay={0.4} reduced={reduced} />
+              <BreathingDot delay={0.8} reduced={reduced} />
+            </div>
+            <span
+              className="text-pierre"
+              style={{
+                fontFamily: "var(--font-heading)",
+                fontSize: "var(--font-size-small)",
+                fontWeight: 500,
+                letterSpacing: "var(--letter-spacing-wide)",
+              }}
+            >
+              Arrive tr&egrave;s vite sur la carte
+            </span>
+          </motion.div>
+        </div>
+      </div>
+    </motion.section>
+  );
+}
+
 /* ─── Main Component ─── */
 export default function CarteMenu() {
   const [activeCategory, setActiveCategory] = useState("burgers");
@@ -521,8 +928,7 @@ export default function CarteMenu() {
       >
         <nav ref={navRef} className="container-custom">
           <div
-            className="flex gap-1.5 overflow-x-auto py-3"
-            style={{ scrollbarWidth: "none" }}
+            className="flex gap-1.5 overflow-x-auto py-3 scrollbar-hide"
           >
             {categories.map((cat) => {
               const isActive = activeCategory === cat.id;
@@ -537,7 +943,8 @@ export default function CarteMenu() {
                       : "text-sable hover:bg-[oklch(0.67_0.15_68_/_0.12)] hover:text-cuivre"
                   }`}
                   style={{
-                    padding: "0.5rem 1.25rem",
+                    padding: "0.625rem 1.25rem",
+                    minHeight: "2.75rem",
                     borderRadius: "var(--radius-pill)",
                     fontFamily: "var(--font-heading)",
                     fontWeight: isActive ? 700 : 500,
@@ -623,100 +1030,7 @@ export default function CarteMenu() {
         </div>
 
         {/* ── Desserts — Coming Soon ── */}
-        <motion.div
-          className="relative overflow-hidden"
-          initial={prefersReducedMotion ? undefined : "hidden"}
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-          variants={prefersReducedMotion ? undefined : fadeUp}
-          style={{
-            marginTop: "clamp(3rem, 5vw, 5rem)",
-            padding: "clamp(2rem, 4vw, 3.5rem)",
-            borderRadius: "var(--radius-large)",
-            border: "1px solid oklch(0.67 0.15 68 / 0.15)",
-            background:
-              "linear-gradient(135deg, oklch(0.18 0.008 60) 0%, oklch(0.16 0.012 65) 100%)",
-          }}
-        >
-          {/* Subtle cuivre glow — top-right */}
-          <div
-            className="absolute pointer-events-none"
-            style={{
-              top: "-40%",
-              right: "-10%",
-              width: "50%",
-              height: "120%",
-              background:
-                "radial-gradient(ellipse at center, oklch(0.67 0.15 68 / 0.04), transparent 70%)",
-            }}
-          />
-
-          <div className="relative flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex flex-col gap-3">
-              <div className="flex items-center gap-3">
-                <h2
-                  className="text-ivoire"
-                  style={{
-                    fontFamily: "var(--font-heading)",
-                    fontSize: "var(--font-size-h3)",
-                    fontWeight: 700,
-                  }}
-                >
-                  Desserts
-                </h2>
-                <span
-                  className="text-cuivre"
-                  style={{
-                    padding: "0.2rem 0.75rem",
-                    borderRadius: "var(--radius-pill)",
-                    border: "1px solid oklch(0.67 0.15 68 / 0.3)",
-                    backgroundColor: "oklch(0.67 0.15 68 / 0.08)",
-                    fontFamily: "var(--font-heading)",
-                    fontWeight: 700,
-                    fontSize: "0.6875rem",
-                    letterSpacing: "var(--letter-spacing-uppercase)",
-                  }}
-                >
-                  BIENT&Ocirc;T
-                </span>
-              </div>
-              <p
-                className="text-sable max-w-[36rem]"
-                style={{
-                  fontSize: "var(--font-size-body)",
-                  lineHeight: "var(--line-height-relaxed)",
-                }}
-              >
-                Cookies, overnight oats, tiramisu — tout fait maison, tout
-                protein&eacute;. Le dessert qui respecte tes macros, sans
-                sacrifier le plaisir.
-              </p>
-            </div>
-
-            <div
-              className="bg-cuivre shrink-0 hidden sm:block"
-              style={{
-                width: "2px",
-                height: "3.5rem",
-                borderRadius: "var(--radius-pill)",
-                opacity: 0.15,
-              }}
-            />
-
-            <p
-              className="text-pierre shrink-0"
-              style={{
-                fontFamily: "var(--font-heading)",
-                fontSize: "var(--font-size-small)",
-                fontWeight: 500,
-                letterSpacing: "var(--letter-spacing-wide)",
-                whiteSpace: "nowrap",
-              }}
-            >
-              Arrive tr&egrave;s vite sur la carte
-            </p>
-          </div>
-        </motion.div>
+        <DessertsComingSoon prefersReducedMotion={!!prefersReducedMotion} />
       </div>
 
       {/* ── Bottom CTA ── */}

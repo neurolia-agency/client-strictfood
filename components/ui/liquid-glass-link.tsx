@@ -118,21 +118,6 @@ export default function LiquidGlassLink({
         {/* Content */}
         <span style={{ position: "relative", zIndex: 10 }}>{children}</span>
       </a>
-
-      <style jsx>{`
-        .liquid-glass-link:hover {
-          background: rgba(255, 255, 255, 0.12) !important;
-          border-color: rgba(255, 255, 255, 0.2) !important;
-          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22),
-            0 4px 12px rgba(0, 0, 0, 0.3) !important;
-        }
-        .liquid-glass-link:focus-visible {
-          outline: none;
-          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15),
-            0 2px 8px rgba(0, 0, 0, 0.25),
-            0 0 0 2px var(--color-cuivre) !important;
-        }
-      `}</style>
     </>
   );
 }
