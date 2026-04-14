@@ -137,7 +137,7 @@ export default function Hero() {
         animate="visible"
       >
         <Image
-          src="/images/visuels/website/hero-strictfoods.webp"
+          src="/images/visuels/website/cover-site.jpg"
           alt="Burger StrictFood au pain noir sésame, viande cuite à chaleur pulsée, ingrédients frais"
           fill
           priority
