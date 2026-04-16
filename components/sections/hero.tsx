@@ -137,11 +137,11 @@ export default function Hero() {
         animate="visible"
       >
         <Image
-          src="/images/visuels/website/cover-site.jpg"
+          src="/images/visuels/website/cover-site.webp"
           alt="Burger StrictFood au pain noir sésame, viande cuite à chaleur pulsée, ingrédients frais"
           fill
           priority
-          quality={85}
+          unoptimized
           className="object-cover object-[calc(50%-80px)_center]"
           sizes="100vw"
         />

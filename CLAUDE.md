@@ -138,7 +138,7 @@ public/images/                # Photos references (dark-bg, produits-source, con
 
 | URL | Root dir |
 |-----|----------|
-| strictfood-strategie.vercel.app | `/` (site principal) |
+| strictfood.vercel.app | `/` (site principal) |
 | devis-strictfood.vercel.app | `formulaires/` |
 | plateforme-marque-strictfood.vercel.app | `formulaires/formulaire-plateforme/` |
 
