@@ -436,7 +436,7 @@ export default function LaPromesse() {
   return (
     <section
       id="promesse"
-      className="relative z-10 section-padding overflow-visible"
+      className="relative z-10 section-padding overflow-x-hidden lg:overflow-visible"
       style={{
         background: `
           radial-gradient(ellipse 100% 60% at 50% 0%, oklch(0.67 0.15 68 / 0.15) 0%, transparent 50%),
