@@ -88,7 +88,8 @@ export default function Hero() {
             style={{ fontSize: "var(--font-size-body-lg)" }}
             variants={prefersReducedMotion ? undefined : fadeUp}
           >
-            Le vrai goût du fast-food, la graisse en moins.
+            Le vrai goût du fast-food,<br />
+            la graisse en moins.
           </motion.p>
 
           <motion.div
