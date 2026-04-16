@@ -474,7 +474,7 @@ export default function LaPromesse() {
           {...motionProps}
         >
           {/* Texte */}
-          <motion.div className="flex flex-col gap-5 lg:pl-21" variants={fadeUp}>
+          <motion.div className="relative z-10 flex flex-col gap-5 lg:pl-21" variants={fadeUp}>
             <h3>
               Cuit à chaleur pulsée.
               <br />
