@@ -266,11 +266,14 @@
     @apply border-border outline-ring/50;
   }
 
+  html, body {
+    overflow-x: hidden;
+  }
+
   body {
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-body);
     line-height: var(--line-height-relaxed);
-    overflow-x: hidden;
   }
 
   h1 {
