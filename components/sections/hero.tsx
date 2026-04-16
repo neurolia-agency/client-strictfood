@@ -50,7 +50,7 @@ export default function Hero() {
   const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "3%"]);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-charbon">
+    <section ref={sectionRef} className="relative w-full overflow-hidden bg-charbon">
       <div
         className="container-custom relative z-10 flex min-h-[100dvh] flex-col justify-center items-start"
         style={{
@@ -142,7 +142,7 @@ export default function Hero() {
           fill
           priority
           unoptimized
-          className="object-cover object-[calc(50%-80px)_center]"
+          className="object-cover object-center"
           sizes="100vw"
         />
       </motion.div>
