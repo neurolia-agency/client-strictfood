@@ -270,6 +270,7 @@
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-body);
     line-height: var(--line-height-relaxed);
+    overflow-x: hidden;
   }
 
   h1 {

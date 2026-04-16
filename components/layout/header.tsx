@@ -66,11 +66,10 @@ export default function Header() {
           href="tel:+33611745944"
           className="hidden lg:inline-flex items-center gap-2 bg-primary text-primary-foreground transition-[filter] hover:brightness-110"
           style={{
-            padding: "var(--button-padding)",
+            padding: "0.5rem 1.5rem",
             borderRadius: "var(--radius-pill)",
             fontSize: "var(--font-size-body)",
             fontWeight: "var(--font-weight-semibold)",
-            minHeight: "var(--button-min-height)",
             transitionDuration: "var(--duration-fast)",
             transitionTimingFunction: "ease",
           }}
