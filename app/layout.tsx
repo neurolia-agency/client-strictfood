@@ -49,7 +49,7 @@ export default function RootLayout({
       <body className="antialiased">
         <SmoothScrollProvider>
           <Header />
-          <main id="main-content" className="overflow-x-hidden">{children}</main>
+          <main id="main-content">{children}</main>
           <Footer />
         </SmoothScrollProvider>
       </body>

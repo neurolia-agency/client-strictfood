@@ -834,12 +834,15 @@ export default function CarteMenu() {
     return () => observer.disconnect();
   }, []);
 
-  /* Scroll active pill into view on mobile */
+  /* Scroll active pill into view on mobile — horizontal only, no vertical side-effect */
   useEffect(() => {
     const btn = navRef.current?.querySelector(
       `[data-cat="${activeCategory}"]`
     ) as HTMLElement | null;
-    btn?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    const scroller = btn?.parentElement;
+    if (!btn || !scroller) return;
+    const target = btn.offsetLeft - scroller.offsetWidth / 2 + btn.offsetWidth / 2;
+    scroller.scrollTo({ left: target, behavior: "smooth" });
   }, [activeCategory]);
 
   const scrollToCategory = useCallback((id: string) => {
