@@ -8,6 +8,7 @@
 
 | Page | URL | Root dir | Statut |
 |------|-----|----------|--------|
+| **Site principal** | **https://strictfoods.com** | `/` | **Actif** |
 | Devis | https://devis-strictfood-one.vercel.app | `formulaires/` | Actif |
 | Plateforme de Marque | https://plateforme-marque-strictfood-eight.vercel.app | `formulaires/formulaire-plateforme/` | Actif |
 | Stratégie Instagram | https://strictfood-instagram.vercel.app/instagram.html | `strategie/` | Actif |
